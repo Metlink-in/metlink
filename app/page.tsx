@@ -120,41 +120,35 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Right — floating stat cards */}
-            <div className="relative hidden lg:flex justify-center items-center h-96">
-              {/* Center glow */}
-              <div className="absolute w-48 h-48 rounded-full" style={{ background: 'radial-gradient(circle, #1A1A1A, transparent)' }} />
-
-              {[
-                { label: 'Performance Ads', value: '500%', sub: 'ROI Delivered', pos: 'top-0 left-8' },
-                { label: 'AI & Automation', value: '10x', sub: 'Faster Workflows', pos: 'top-8 right-0' },
-                { label: 'Software Built', value: '150+', sub: 'Live Projects', pos: 'bottom-0 left-16' },
-                { label: 'Client Retention', value: '94%', sub: 'Stay Long-Term', pos: 'bottom-8 right-8' },
-              ].map((card, i) => (
-                <div key={card.label}
-                  className="absolute p-5 rounded-2xl"
-                  style={{
-                    [card.pos.split(' ')[0]]: card.pos.includes('top') ? (card.pos.includes('8') ? '2rem' : '0') : (card.pos.includes('8') ? '2rem' : '0'),
-                    [card.pos.split(' ')[1] as 'left' | 'right']: card.pos.includes('left') ? (card.pos.includes('16') ? '4rem' : '2rem') : '0',
-                    background: 'rgba(14,12,6,0.95)',
-                    border: '1px solid #1A1A1A',
-                    backdropFilter: 'blur(12px)',
-                    boxShadow: "none",
-                    animation: `float ${3 + i * 0.5}s ease-in-out infinite`,
-                    animationDelay: `${i * 0.4}s`,
-                    position: 'absolute',
-                    top: ['0', '2rem', 'auto', 'auto'][i],
-                    bottom: ['auto', 'auto', '0', '2rem'][i],
-                    left: ['2rem', 'auto', '4rem', 'auto'][i],
-                    right: ['auto', '0', 'auto', '2rem'][i],
-                  }}>
-                  <p className="text-[10px] font-bold text-[#525252] uppercase tracking-widest mb-1">{card.label}</p>
-                  <p className="text-3xl font-black" style={{
-                    color: '#FACC15',
-                  }}>{card.value}</p>
-                  <p className="text-xs text-[#A3A3A3] mt-0.5">{card.sub}</p>
+            {/* Right — stat grid */}
+            <div className="hidden lg:grid grid-cols-2 gap-4 relative">
+              <div className="absolute inset-0 bg-gradient-to-tr from-[#1A1A1A]/0 via-[#1A1A1A]/20 to-[#1A1A1A]/0 rounded-[40px] pointer-events-none" />
+              
+              <div className="flex flex-col gap-4 mt-12 w-full max-w-[240px] justify-self-end">
+                <div className="p-6 rounded-2xl transition-transform hover:-translate-y-1 bg-[#0A0A0A] border border-[#1A1A1A]">
+                  <p className="text-[10px] font-bold text-[#525252] uppercase tracking-widest mb-2">Performance Ads</p>
+                  <p className="text-4xl font-black text-[#FACC15]">500%</p>
+                  <p className="text-xs text-[#A3A3A3] mt-1 font-medium">ROI Delivered</p>
                 </div>
-              ))}
+                <div className="p-6 rounded-2xl transition-transform hover:-translate-y-1 bg-[#0A0A0A] border border-[#1A1A1A]">
+                  <p className="text-[10px] font-bold text-[#525252] uppercase tracking-widest mb-2">Software Built</p>
+                  <p className="text-4xl font-black text-[#FACC15]">150+</p>
+                  <p className="text-xs text-[#A3A3A3] mt-1 font-medium">Live Projects</p>
+                </div>
+              </div>
+
+              <div className="flex flex-col gap-4 w-full max-w-[240px]">
+                <div className="p-6 rounded-2xl transition-transform hover:-translate-y-1 bg-[#0A0A0A] border border-[#1A1A1A]">
+                  <p className="text-[10px] font-bold text-[#525252] uppercase tracking-widest mb-2">AI & Automation</p>
+                  <p className="text-4xl font-black text-[#FACC15]">10x</p>
+                  <p className="text-xs text-[#A3A3A3] mt-1 font-medium">Faster Workflows</p>
+                </div>
+                <div className="p-6 rounded-2xl transition-transform hover:-translate-y-1 bg-[#0A0A0A] border border-[#1A1A1A]">
+                  <p className="text-[10px] font-bold text-[#525252] uppercase tracking-widest mb-2">Client Retention</p>
+                  <p className="text-4xl font-black text-[#FACC15]">94%</p>
+                  <p className="text-xs text-[#A3A3A3] mt-1 font-medium">Stay Long-Term</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
