@@ -1,0 +1,30 @@
+<svg width="32" height="32" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="outerRing" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+      <stop stopColor="#FACC15" />
+      <stop offset="0.45" stopColor="#FACC15" />
+      <stop offset="1" stopColor="#7A5010" />
+    </linearGradient>
+    <linearGradient id="monogram" x1="18" y1="25" x2="75" y2="75" gradientUnits="userSpaceOnUse">
+      <stop stopColor="#FDE68A" />
+      <stop offset="0.4" stopColor="#FACC15" />
+      <stop offset="1" stopColor="#92600A" />
+    </linearGradient>
+  </defs>
+  <circle cx="50" cy="50" r="48" fill="#0A0A0A" stroke="url(#outerRing)" strokeWidth="4" />
+  <path
+    d="M18 70 L18 32 L36 54 L50 32 L64 54 L64 32"
+    stroke="url(#monogram)"
+    strokeWidth="8"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    fill="none"
+  />
+  <path
+    d="M64 70 L82 70"
+    stroke="url(#monogram)"
+    strokeWidth="8"
+    strokeLinecap="round"
+    fill="none"
+  />
+</svg>
