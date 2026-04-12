@@ -2,8 +2,9 @@
 
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
-import { ArrowRight, CheckCircle, ChevronRight } from 'lucide-react';
+import { ArrowRight, CheckCircle, ChevronRight, Zap } from 'lucide-react';
 import { serviceCategories } from '@/lib/services-data';
+import { FadeIn, StaggerChildren, StaggerItem } from '@/components/fade-in';
 
 /* ─── Animated counter ─── */
 function Counter({ target, suffix = '' }: { target: number; suffix?: string }) {
@@ -51,286 +52,234 @@ const whyUs = [
   { title: 'Global + Local', desc: 'International-grade execution with deep understanding of local markets.', icon: '🌏' },
 ];
 
-// Gold divider line
-function GoldDivider() {
-  return (
-    <div className="flex items-center gap-3 my-2">
-      <div className="h-px flex-1" style={{ background: 'linear-gradient(90deg, transparent, #1A1A1A, transparent)' }} />
-    </div>
-  );
-}
-
 export default function HomePage() {
   return (
-    <div className="w-full overflow-x-hidden" style={{ background: '#000000' }}>
+    <div className="w-full overflow-x-hidden bg-black pb-20">
 
       {/* ─── HERO ─── */}
-      <section className="relative min-h-screen flex items-center" style={{ background: '#000000' }}>
-        {/* Subtle radial glow */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] rounded-full"
-            style={{ background: 'radial-gradient(ellipse, #1A1A1A 0%, transparent 70%)' }} />
-          {/* Grid */}
-          <div className="absolute inset-0 opacity-[0.025]"
+      <section className="relative min-h-screen flex items-center bg-black overflow-hidden pt-20">
+        <div className="absolute inset-0 pointer-events-none opacity-[0.03]"
             style={{ backgroundImage: 'linear-gradient(#1A1A1A 1px, transparent 1px), linear-gradient(90deg, #1A1A1A 1px, transparent 1px)', backgroundSize: '80px 80px' }} />
-        </div>
+        
+        {/* Subtle yellow ambient backglow */}
+        <div className="absolute top-0 right-[20%] w-[500px] h-[500px] bg-[#FACC15] blur-[160px] opacity-[0.03] pointer-events-none" />
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10 py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10 py-16">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
+            
             {/* Left — copy */}
-            <div>
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold mb-8"
-                style={{ background: '#1A1A1A', border: '1px solid #1A1A1A', color: '#FACC15', letterSpacing: '0.08em' }}>
+            <FadeIn>
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold mb-8 border border-[#1A1A1A] bg-[#0A0A0A] text-[#FACC15] tracking-[0.08em] shadow-[0_0_20px_rgba(250,204,21,0.05)]">
                 ✦ AI Marketing & Development Agency
               </div>
 
-              <h1 className="font-black leading-[1.02] text-[#FFFFFF] mb-6">
+              <h1 className="font-black leading-[1.05] text-white mb-6">
                 <span className="block text-5xl md:text-6xl lg:text-7xl">We Build</span>
-                <span className="block text-5xl md:text-6xl lg:text-7xl" style={{
-                  color: '#FACC15',
-                }}>AI-Powered</span>
+                <span className="block text-5xl md:text-6xl lg:text-7xl text-[#FACC15] my-1" style={{ textShadow: '0 0 40px rgba(250,204,21,0.2)' }}>
+                  AI-Powered
+                </span>
                 <span className="block text-5xl md:text-6xl lg:text-7xl">Growth Machines</span>
               </h1>
 
-              <p className="text-lg text-[#A3A3A3] leading-relaxed mb-8 max-w-xl">
+              <p className="text-lg text-[#A3A3A3] leading-relaxed mb-10 max-w-xl">
                 From digital marketing to custom AI systems — MetLink delivers end-to-end digital transformation that drives real, compounding revenue growth.
               </p>
 
               <div className="flex flex-wrap gap-4">
                 <Link href="/services"
-                  className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl font-semibold text-sm transition-all hover:opacity-90 shadow-xl"
-                  style={{ background: '#FACC15', color: '#000000', boxShadow: "none" }}>
-                  Explore Services <ArrowRight className="w-4 h-4" />
+                  className="group inline-flex items-center gap-2 px-8 py-4 rounded-xl font-bold text-sm bg-[#FACC15] text-black transition-all hover:scale-105 shadow-[0_0_30px_rgba(250,204,21,0.15)] hover:shadow-[0_0_40px_rgba(250,204,21,0.3)]">
+                  Explore Services <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Link>
                 <Link href="/portfolio"
-                  className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl font-semibold text-sm transition-all hover:bg-white/5"
-                  style={{ border: '1px solid #1A1A1A', color: '#E5E5E5' }}>
+                  className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold text-sm border border-[#1A1A1A] text-[#E5E5E5] transition-all hover:bg-white/5 hover:border-[#FACC15]/30">
                   ▷ View Our Work
                 </Link>
               </div>
 
               {/* Proof dots */}
-              <div className="flex flex-wrap gap-6 mt-10">
+              <StaggerChildren className="flex flex-wrap gap-8 mt-14">
                 {[['150+', 'Projects'], ['80+', 'Clients'], ['5+', 'Years'], ['$10M+', 'Generated']].map(([v, l]) => (
-                  <div key={l}>
-                    <p className="text-2xl font-black" style={{ color: '#FACC15' }}>{v}</p>
-                    <p className="text-xs text-[#525252] uppercase tracking-wider">{l}</p>
-                  </div>
+                  <StaggerItem key={l}>
+                    <p className="text-3xl font-black text-[#FACC15]">{v}</p>
+                    <p className="text-xs text-[#737373] uppercase tracking-widest mt-1 font-semibold">{l}</p>
+                  </StaggerItem>
                 ))}
-              </div>
-            </div>
+              </StaggerChildren>
+            </FadeIn>
 
             {/* Right — stat grid */}
-            <div className="hidden lg:grid grid-cols-2 gap-4 relative">
-              <div className="absolute inset-0 bg-gradient-to-tr from-[#1A1A1A]/0 via-[#1A1A1A]/20 to-[#1A1A1A]/0 rounded-[40px] pointer-events-none" />
+            <FadeIn delay={0.2} y={50} className="hidden lg:grid grid-cols-2 gap-5 relative group">
+              <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-[#FACC15]/5 to-transparent rounded-[40px] pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
               
-              <div className="flex flex-col gap-4 mt-12 w-full max-w-[240px] justify-self-end">
-                <div className="p-6 rounded-2xl transition-transform hover:-translate-y-1 bg-[#0A0A0A] border border-[#1A1A1A]">
-                  <p className="text-[10px] font-bold text-[#525252] uppercase tracking-widest mb-2">Performance Ads</p>
-                  <p className="text-4xl font-black text-[#FACC15]">500%</p>
-                  <p className="text-xs text-[#A3A3A3] mt-1 font-medium">ROI Delivered</p>
+              <div className="flex flex-col gap-5 mt-16 w-full max-w-[260px] justify-self-end">
+                <div className="p-7 rounded-2xl bg-[#0A0A0A] border border-[#1A1A1A] hover:border-[#FACC15]/40 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_10px_40px_rgba(250,204,21,0.05)]">
+                  <p className="text-[10px] font-bold text-[#737373] uppercase tracking-widest mb-3">Performance Ads</p>
+                  <p className="text-5xl font-black text-[#FACC15]">500%</p>
+                  <p className="text-sm text-[#A3A3A3] mt-2 font-medium">Average ROI Delivered</p>
                 </div>
-                <div className="p-6 rounded-2xl transition-transform hover:-translate-y-1 bg-[#0A0A0A] border border-[#1A1A1A]">
-                  <p className="text-[10px] font-bold text-[#525252] uppercase tracking-widest mb-2">Software Built</p>
-                  <p className="text-4xl font-black text-[#FACC15]">150+</p>
-                  <p className="text-xs text-[#A3A3A3] mt-1 font-medium">Live Projects</p>
+                <div className="p-7 rounded-2xl bg-[#0A0A0A] border border-[#1A1A1A] hover:border-[#FACC15]/40 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_10px_40px_rgba(250,204,21,0.05)]">
+                  <p className="text-[10px] font-bold text-[#737373] uppercase tracking-widest mb-3">Software Built</p>
+                  <p className="text-5xl font-black text-[#FACC15]">150+</p>
+                  <p className="text-sm text-[#A3A3A3] mt-2 font-medium">Live Deployed Projects</p>
                 </div>
               </div>
 
-              <div className="flex flex-col gap-4 w-full max-w-[240px]">
-                <div className="p-6 rounded-2xl transition-transform hover:-translate-y-1 bg-[#0A0A0A] border border-[#1A1A1A]">
-                  <p className="text-[10px] font-bold text-[#525252] uppercase tracking-widest mb-2">AI & Automation</p>
-                  <p className="text-4xl font-black text-[#FACC15]">10x</p>
-                  <p className="text-xs text-[#A3A3A3] mt-1 font-medium">Faster Workflows</p>
+              <div className="flex flex-col gap-5 w-full max-w-[260px]">
+                <div className="p-7 rounded-2xl bg-[#0A0A0A] border border-[#1A1A1A] hover:border-[#FACC15]/40 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_10px_40px_rgba(250,204,21,0.05)]">
+                  <p className="text-[10px] font-bold text-[#737373] uppercase tracking-widest mb-3">AI & Automation</p>
+                  <p className="text-5xl font-black text-[#FACC15]">10x</p>
+                  <p className="text-sm text-[#A3A3A3] mt-2 font-medium">Faster Internal Workflows</p>
                 </div>
-                <div className="p-6 rounded-2xl transition-transform hover:-translate-y-1 bg-[#0A0A0A] border border-[#1A1A1A]">
-                  <p className="text-[10px] font-bold text-[#525252] uppercase tracking-widest mb-2">Client Retention</p>
-                  <p className="text-4xl font-black text-[#FACC15]">94%</p>
-                  <p className="text-xs text-[#A3A3A3] mt-1 font-medium">Stay Long-Term</p>
+                <div className="p-7 rounded-2xl bg-[#0A0A0A] border border-[#1A1A1A] hover:border-[#FACC15]/40 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_10px_40px_rgba(250,204,21,0.05)]">
+                  <p className="text-[10px] font-bold text-[#737373] uppercase tracking-widest mb-3">Client Retention</p>
+                  <p className="text-5xl font-black text-[#FACC15]">94%</p>
+                  <p className="text-sm text-[#A3A3A3] mt-2 font-medium">Stay Long-Term Partners</p>
                 </div>
               </div>
-            </div>
+            </FadeIn>
           </div>
         </div>
       </section>
 
       {/* ─── CLIENT MARQUEE ─── */}
-      <section className="py-8 overflow-hidden" style={{ background: '#000000', borderTop: '1px solid #1A1A1A', borderBottom: '1px solid #1A1A1A' }}>
+      <section className="py-10 overflow-hidden bg-black border-y border-[#1A1A1A]">
         <div className="flex animate-marquee gap-0">
-          {[...clients, ...clients].map((c, i) => (
-            <div key={i} className="flex-shrink-0 flex items-center gap-3 px-10"
-              style={{ borderRight: '1px solid #1A1A1A' }}>
-              <span className="w-1.5 h-1.5 rounded-full" style={{ background: '#1A1A1A' }} />
-              <span className="text-sm font-semibold tracking-wider" style={{ color: '#404040' }}>{c}</span>
+          {[...clients, ...clients, ...clients].map((c, i) => (
+            <div key={i} className="flex-shrink-0 flex items-center gap-3 px-12 border-r border-[#1A1A1A]">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#1A1A1A]" />
+              <span className="text-sm font-bold tracking-wider text-[#525252]">{c}</span>
             </div>
           ))}
         </div>
       </section>
 
       {/* ─── IMPACT STATS ─── */}
-      <section className="py-24" style={{ background: '#000000' }}>
+      <section className="py-32 bg-black">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-14">
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-amber-400 mb-3">By the Numbers</p>
-            <h2 className="text-4xl md:text-5xl font-black text-[#FFFFFF]">Results That Speak for Themselves</h2>
-          </div>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+          <FadeIn className="text-center mb-16">
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#FACC15] mb-4">By the Numbers</p>
+            <h2 className="text-4xl md:text-5xl font-black text-white">Results That Speak for Themselves</h2>
+          </FadeIn>
+          <StaggerChildren className="grid grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               { value: 150, suffix: '+', label: 'Projects Delivered', sub: 'Across 16 service lines' },
               { value: 10, suffix: 'M+', label: 'Revenue Generated', sub: 'For our clients' },
               { value: 80, suffix: '+', label: 'Happy Clients', sub: 'Across 15+ countries' },
               { value: 94, suffix: '%', label: 'Retention Rate', sub: 'Stay with us long-term' },
             ].map((s) => (
-              <div key={s.label} className="text-center py-8 px-6 rounded-2xl"
-                style={{ background: '#1A1A1A', border: '1px solid #1A1A1A' }}>
-                <p className="text-5xl font-black mb-2" style={{
-                  color: '#FACC15',
-                }}>
-                  <Counter target={s.value} suffix={s.suffix} />
-                </p>
-                <p className="font-bold text-[#FFFFFF] text-sm mb-1">{s.label}</p>
-                <p className="text-xs text-[#525252]">{s.sub}</p>
-              </div>
+              <StaggerItem key={s.label}>
+                <div className="text-center py-10 px-6 rounded-2xl bg-[#0A0A0A] border border-[#1A1A1A] hover:border-[#FACC15]/30 transition-colors">
+                  <p className="text-5xl font-black text-[#FACC15] mb-3">
+                    <Counter target={s.value} suffix={s.suffix} />
+                  </p>
+                  <p className="font-bold text-white text-base mb-1">{s.label}</p>
+                  <p className="text-sm text-[#737373]">{s.sub}</p>
+                </div>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerChildren>
         </div>
       </section>
 
       {/* ─── SERVICES ─── */}
-      <section className="py-24" style={{ background: '#000000' }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
+      <section className="py-32 bg-black relative">
+        <div className="absolute top-1/2 left-0 w-[500px] h-[500px] bg-[#FACC15] blur-[200px] opacity-[0.02] pointer-events-none -translate-y-1/2" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <FadeIn className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
             <div>
-              <p className="text-xs font-bold uppercase tracking-[0.2em] text-amber-400 mb-3">What We Do</p>
-              <h2 className="text-4xl md:text-5xl font-black text-[#FFFFFF]">Four Pillars.<br />One Agency.</h2>
+              <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#FACC15] mb-4 flex items-center gap-2">
+                <Zap className="w-4 h-4" /> What We Do
+              </p>
+              <h2 className="text-4xl md:text-5xl font-black text-white">Four Pillars.<br />One Agency.</h2>
             </div>
             <Link href="/services"
-              className="flex-shrink-0 inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm transition-all hover:opacity-90"
-              style={{ background: '#1A1A1A', border: '1px solid #1A1A1A', color: '#FACC15' }}>
+              className="flex-shrink-0 inline-flex items-center gap-2 px-7 py-3.5 rounded-xl font-bold text-sm border border-[#FACC15]/20 text-[#FACC15] hover:bg-[#FACC15]/10 transition-colors">
               All Services <ArrowRight className="w-4 h-4" />
             </Link>
-          </div>
+          </FadeIn>
 
-          <div className="grid md:grid-cols-2 gap-6">
-            {serviceCategories.map((cat, i) => (
-              <Link key={cat.slug} href={`/services/${cat.slug}`}
-                className="group p-8 rounded-2xl transition-all duration-300 hover:-translate-y-1"
-                style={{
-                  background: '#0A0A0A',
-                  border: '1px solid #1A1A1A',
-                  boxShadow: "none",
-                }}>
-                <div className="flex items-start justify-between mb-5">
-                  <div>
-                    <span className="text-4xl mb-3 block group-hover:scale-110 transition-transform">{cat.icon}</span>
-                    <p className="text-xs font-bold uppercase tracking-widest text-amber-400">{cat.name}</p>
-                    <h3 className="text-xl font-black text-[#FFFFFF] mt-1">{cat.tagline}</h3>
+          <StaggerChildren className="grid md:grid-cols-2 gap-6">
+            {serviceCategories.map((cat) => (
+              <StaggerItem key={cat.slug}>
+                <Link href={`/services/${cat.slug}`}
+                  className="group block p-10 rounded-3xl bg-[#0A0A0A] border border-[#1A1A1A] hover:border-[#FACC15]/40 hover:-translate-y-2 transition-all duration-300">
+                  <div className="flex items-start justify-between mb-6">
+                    <div>
+                      <span className="text-4xl mb-4 block group-hover:scale-110 transition-transform origin-left">{cat.icon}</span>
+                      <p className="text-xs font-bold uppercase tracking-widest text-[#FACC15]">{cat.name}</p>
+                      <h3 className="text-2xl font-black text-white mt-1.5">{cat.tagline}</h3>
+                    </div>
+                    <div className="w-10 h-10 rounded-full bg-[#1A1A1A] group-hover:bg-[#FACC15] flex items-center justify-center transition-colors">
+                      <ChevronRight className="w-5 h-5 text-[#737373] group-hover:text-black transition-colors" />
+                    </div>
                   </div>
-                  <ChevronRight className="w-5 h-5 text-[#404040] group-hover:text-amber-400 group-hover:translate-x-1 transition-all mt-1" />
-                </div>
-                <p className="text-sm text-[#737373] leading-relaxed mb-5">{cat.description}</p>
-                <div className="flex flex-wrap gap-2">
-                  {cat.services.map((svc) => (
-                    <span key={svc.slug} className="px-3 py-1 rounded-full text-xs font-medium"
-                      style={{ background: '#1A1A1A', border: '1px solid #1A1A1A', color: '#A3A3A3' }}>
-                      {svc.name}
-                    </span>
-                  ))}
-                </div>
-              </Link>
+                  <p className="text-base text-[#A3A3A3] leading-relaxed mb-8">{cat.description}</p>
+                  <div className="flex flex-wrap gap-2">
+                    {cat.services.map((svc) => (
+                      <span key={svc.slug} className="px-4 py-1.5 rounded-full text-xs font-semibold bg-[#1A1A1A] text-[#A3A3A3] border border-transparent group-hover:border-[#FACC15]/10 transition-colors">
+                        {svc.name}
+                      </span>
+                    ))}
+                  </div>
+                </Link>
+              </StaggerItem>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ─── INDUSTRIES ─── */}
-      <section className="py-24" style={{ background: '#000000' }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-14">
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-amber-400 mb-3">Who We Serve</p>
-            <h2 className="text-4xl md:text-5xl font-black text-[#FFFFFF]">Built for Every Industry</h2>
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-            {industries.map((ind, i) => (
-              <div key={ind.name}
-                className="group p-6 rounded-xl text-center transition-all duration-300 hover:-translate-y-1 cursor-default"
-                style={{ background: '#1A1A1A', border: '1px solid #1A1A1A' }}
-                >
-                <span className="text-3xl mb-3 block group-hover:scale-110 transition-transform">{ind.icon}</span>
-                <p className="text-sm font-semibold text-[#E5E5E5]">{ind.name}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ─── TECH STACK ─── */}
-      <section className="py-16" style={{ background: '#000000', borderTop: '1px solid #1A1A1A', borderBottom: '1px solid #1A1A1A' }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#525252] mb-8">Technologies We Master</p>
-          <div className="flex flex-wrap justify-center gap-3">
-            {techStack.map((t) => (
-              <span key={t} className="px-5 py-2.5 rounded-xl text-sm font-semibold transition-all hover:border-amber-400/30 hover:text-[#FFFFFF]"
-                style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid #1A1A1A', color: '#A3A3A3' }}>
-                {t}
-              </span>
-            ))}
-          </div>
+          </StaggerChildren>
         </div>
       </section>
 
       {/* ─── WHY US ─── */}
-      <section className="py-24" style={{ background: '#000000' }}>
+      <section className="py-32 bg-black border-t border-[#1A1A1A]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-14">
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-amber-400 mb-3">Why MetLink</p>
-            <h2 className="text-4xl md:text-5xl font-black text-[#FFFFFF]">What Sets Us Apart</h2>
-            <p className="text-[#737373] mt-4 max-w-2xl mx-auto">
+          <FadeIn className="text-center mb-16">
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#FACC15] mb-4">Why MetLink</p>
+            <h2 className="text-4xl md:text-5xl font-black text-white">What Sets Us Apart</h2>
+            <p className="text-[#A3A3A3] mt-5 max-w-2xl mx-auto text-lg">
               There are hundreds of agencies. Here is why the fastest-growing businesses choose MetLink.
             </p>
-          </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {whyUs.map((item, i) => (
-              <div key={item.title}
-                className="group p-7 rounded-2xl transition-all duration-300 hover:-translate-y-1"
-                style={{ background: '#0A0A0A', border: '1px solid #1A1A1A' }}>
-                <div className="w-11 h-11 rounded-xl flex items-center justify-center text-2xl mb-5 group-hover:scale-110 transition-transform"
-                  style={{ background: '#1A1A1A', border: '1px solid #1A1A1A' }}>
-                  {item.icon}
+          </FadeIn>
+          <StaggerChildren className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {whyUs.map((item) => (
+              <StaggerItem key={item.title}>
+                <div className="group p-8 rounded-2xl bg-[#0A0A0A] border border-[#1A1A1A] hover:border-[#FACC15]/30 transition-all duration-300">
+                  <div className="w-12 h-12 rounded-xl bg-[#1A1A1A] group-hover:bg-[#FACC15]/10 border border-[#1A1A1A] group-hover:border-[#FACC15]/20 flex items-center justify-center text-2xl mb-6 transition-colors">
+                    {item.icon}
+                  </div>
+                  <h3 className="font-bold text-lg text-white mb-3 tracking-wide">{item.title}</h3>
+                  <p className="text-sm text-[#737373] leading-loose">{item.desc}</p>
                 </div>
-                <h3 className="font-bold text-[#FFFFFF] mb-2">{item.title}</h3>
-                <p className="text-sm text-[#737373] leading-relaxed">{item.desc}</p>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerChildren>
         </div>
       </section>
 
       {/* ─── FINAL CTA ─── */}
-      <section className="py-24 relative overflow-hidden" style={{ background: '#000000' }}>
+      <section className="py-40 relative overflow-hidden bg-black text-center border-t border-[#1A1A1A]">
         <div className="absolute inset-0 pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse at 50% 50%, #1A1A1A, transparent 70%)' }} />
-        <div className="max-w-3xl mx-auto px-4 text-center relative z-10">
-          <p className="text-xs font-bold uppercase tracking-[0.2em] text-amber-400 mb-4">Ready to Grow?</p>
-          <h2 className="text-4xl md:text-6xl font-black text-[#FFFFFF] mb-6 leading-tight">
+          style={{ background: 'radial-gradient(ellipse at 50% 100%, #1A1A1A, transparent 60%)' }} />
+        
+        <FadeIn className="max-w-3xl mx-auto px-4 relative z-10">
+          <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#FACC15] mb-6 inline-flex items-center gap-2 border border-[#FACC15]/20 px-4 py-1.5 rounded-full bg-[#FACC15]/5">
+            <span className="w-2 h-2 rounded-full bg-[#FACC15] animate-pulse" /> Ready to Grow?
+          </p>
+          <h2 className="text-5xl md:text-7xl font-black text-white mb-8 leading-[1.1]">
             Let's Build Something<br />Extraordinary
           </h2>
-          <p className="text-[#A3A3A3] mb-10 text-lg max-w-xl mx-auto">
+          <p className="text-[#A3A3A3] mb-12 text-lg max-w-xl mx-auto">
             Book a free 30-min strategy call. No commitments, no sales pressure — just clarity on what would drive the most growth for your business.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-5 justify-center">
             <Link href="/contact"
-              className="inline-flex items-center justify-center gap-2 px-9 py-4 rounded-xl font-bold text-base transition-all hover:opacity-90 shadow-xl"
-              style={{ background: '#FACC15', color: '#000000', boxShadow: "none" }}>
-              Book Free Strategy Call <ArrowRight className="w-5 h-5" />
+              className="group inline-flex items-center justify-center gap-2 px-10 py-5 rounded-xl font-black text-base bg-[#FACC15] text-black transition-transform hover:scale-105 shadow-[0_0_30px_rgba(250,204,21,0.15)]">
+              Book Strategy Call <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Link>
             <Link href="/portfolio"
-              className="inline-flex items-center justify-center gap-2 px-9 py-4 rounded-xl font-semibold text-base transition-all hover:bg-white/5"
-              style={{ border: '1px solid #1A1A1A', color: '#E5E5E5' }}>
+              className="inline-flex items-center justify-center gap-2 px-10 py-5 rounded-xl font-bold text-base border border-[#1A1A1A] text-[#E5E5E5] transition-all hover:bg-white/5 hover:border-[#FACC15]/30">
               See Our Work First
             </Link>
           </div>
-        </div>
+        </FadeIn>
       </section>
     </div>
   );
