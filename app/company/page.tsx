@@ -49,7 +49,7 @@ export default function CompanyPage() {
           </div>
           <h1 className="text-5xl md:text-7xl font-black text-[#FFFFFF] mb-6 leading-tight">
             We Are{' '}
-            <span style={{ background: '#FACC15', color: '#FACC15' }}>
+            <span style={{ color: '#FACC15' }}>
               MetLink
             </span>
           </h1>
@@ -74,7 +74,7 @@ export default function CompanyPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
           {[['5+','Years'],['80+','Clients'],['150+','Projects'],['40+','Team']].map(([v,l]) => (
             <div key={l}>
-              <p className="text-4xl font-black" style={{ background: '#FACC15', color: '#FACC15' }}>{v}</p>
+              <p className="text-4xl font-black" style={{ color: '#FACC15' }}>{v}</p>
               <p className="text-sm text-[#525252] mt-1 uppercase tracking-wider">{l}</p>
             </div>
           ))}

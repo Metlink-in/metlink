@@ -53,7 +53,6 @@ export function Footer() {
               <MetLinkLogoFooter />
               <div>
                 <p className="font-black text-lg tracking-wide" style={{
-                  background: '#FACC15',
                   color: '#FACC15',
                 }}>METLINK</p>
                 <p className="text-xs text-[#525252] tracking-widest uppercase">AI Agency</p>

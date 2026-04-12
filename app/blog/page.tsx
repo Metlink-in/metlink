@@ -26,7 +26,7 @@ export default function BlogPage() {
           </div>
           <h1 className="text-5xl md:text-7xl font-black text-[#FFFFFF] mb-6 leading-tight">
             The MetLink{' '}
-            <span style={{ background: '#FACC15', color: '#FACC15' }}>Blog</span>
+            <span style={{ color: '#FACC15' }}>Blog</span>
           </h1>
           <p className="text-xl text-[#A3A3A3] max-w-3xl mx-auto">
             Actionable insights on AI, marketing, software, and creative strategy — from the team that builds it every day.

@@ -23,7 +23,7 @@ export default function ServicesPage() {
           </div>
           <h1 className="text-5xl md:text-7xl font-black text-[#FFFFFF] mb-6 leading-tight">
             Our{' '}
-            <span style={{ background: '#FACC15', color: '#FACC15' }}>
+            <span style={{ color: '#FACC15' }}>
               Services
             </span>
           </h1>

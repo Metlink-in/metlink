@@ -111,7 +111,6 @@ export function Header() {
                 <span
                   className="font-black text-lg tracking-wide"
                   style={{
-                    background: '#FACC15',
                     color: '#FACC15',
                   }}
                 >

@@ -45,7 +45,7 @@ export default function ContactPage() {
           </div>
           <h1 className="text-5xl md:text-7xl font-black text-[#FFFFFF] mb-6 leading-tight">
             Let's{' '}
-            <span style={{ background: '#FACC15', color: '#FACC15' }}>
+            <span style={{ color: '#FACC15' }}>
               Build Together
             </span>
           </h1>

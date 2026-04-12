@@ -87,7 +87,6 @@ export default function HomePage() {
               <h1 className="font-black leading-[1.02] text-[#FFFFFF] mb-6">
                 <span className="block text-5xl md:text-6xl lg:text-7xl">We Build</span>
                 <span className="block text-5xl md:text-6xl lg:text-7xl" style={{
-                  background: '#FACC15',
                   color: '#FACC15',
                 }}>AI-Powered</span>
                 <span className="block text-5xl md:text-6xl lg:text-7xl">Growth Machines</span>
@@ -151,7 +150,6 @@ export default function HomePage() {
                   }}>
                   <p className="text-[10px] font-bold text-[#525252] uppercase tracking-widest mb-1">{card.label}</p>
                   <p className="text-3xl font-black" style={{
-                    background: '#FACC15',
                     color: '#FACC15',
                   }}>{card.value}</p>
                   <p className="text-xs text-[#A3A3A3] mt-0.5">{card.sub}</p>
@@ -192,7 +190,6 @@ export default function HomePage() {
               <div key={s.label} className="text-center py-8 px-6 rounded-2xl"
                 style={{ background: '#1A1A1A', border: '1px solid #1A1A1A' }}>
                 <p className="text-5xl font-black mb-2" style={{
-                  background: '#FACC15',
                   color: '#FACC15',
                 }}>
                   <Counter target={s.value} suffix={s.suffix} />
