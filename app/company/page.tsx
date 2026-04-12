@@ -32,37 +32,37 @@ const milestones = [
 
 export default function CompanyPage() {
   return (
-    <div className="w-full overflow-x-hidden" style={{ background: '#080808' }}>
+    <div className="w-full overflow-x-hidden" style={{ background: '#000000' }}>
 
       {/* Hero */}
       <section className="relative py-32 overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] rounded-full"
-            style={{ background: 'radial-gradient(ellipse, rgba(212,168,67,0.06), transparent 70%)' }} />
+            style={{ background: 'radial-gradient(ellipse, #1A1A1A, transparent 70%)' }} />
           <div className="absolute inset-0 opacity-[0.02]"
-            style={{ backgroundImage: 'linear-gradient(rgba(212,168,67,0.8) 1px,transparent 1px),linear-gradient(90deg,rgba(212,168,67,0.8) 1px,transparent 1px)', backgroundSize: '80px 80px' }} />
+            style={{ backgroundImage: 'linear-gradient(#1A1A1A 1px,transparent 1px),linear-gradient(90deg,#1A1A1A 1px,transparent 1px)', backgroundSize: '80px 80px' }} />
         </div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold mb-6"
-            style={{ background: 'rgba(212,168,67,0.08)', border: '1px solid rgba(212,168,67,0.2)', color: '#D4A843', letterSpacing: '0.08em' }}>
+            style={{ background: '#1A1A1A', border: '1px solid #1A1A1A', color: '#FACC15', letterSpacing: '0.08em' }}>
             About Us
           </div>
-          <h1 className="text-5xl md:text-7xl font-black text-[#F5EDD8] mb-6 leading-tight">
+          <h1 className="text-5xl md:text-7xl font-black text-[#FFFFFF] mb-6 leading-tight">
             We Are{' '}
-            <span style={{ background: 'linear-gradient(135deg, #F0C855, #D4A843, #A37820)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+            <span style={{ background: '#FACC15', color: '#FACC15' }}>
               MetLink
             </span>
           </h1>
-          <p className="text-xl text-[#9A8F7A] max-w-3xl mx-auto mb-10 leading-relaxed">
+          <p className="text-xl text-[#A3A3A3] max-w-3xl mx-auto mb-10 leading-relaxed">
             An AI-first marketing and development agency — founded on the belief that every business deserves access to world-class technology, creativity, and strategic thinking.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
             <Link href="/contact" className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl font-semibold text-sm transition-all hover:opacity-90 shadow-xl"
-              style={{ background: 'linear-gradient(135deg, #D4A843, #A37820)', color: '#080808', boxShadow: '0 8px 32px rgba(212,168,67,0.25)' }}>
+              style={{ background: '#FACC15', color: '#000000', boxShadow: "none" }}>
               Work With Us <ArrowRight className="w-4 h-4" />
             </Link>
             <Link href="/portfolio" className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl font-semibold text-sm transition-all hover:bg-white/5"
-              style={{ border: '1px solid rgba(212,168,67,0.25)', color: '#C8B99A' }}>
+              style={{ border: '1px solid #1A1A1A', color: '#E5E5E5' }}>
               View Our Work
             </Link>
           </div>
@@ -70,25 +70,25 @@ export default function CompanyPage() {
       </section>
 
       {/* Stats */}
-      <section className="py-12" style={{ background: '#060606', borderTop: '1px solid rgba(212,168,67,0.08)', borderBottom: '1px solid rgba(212,168,67,0.08)' }}>
+      <section className="py-12" style={{ background: '#000000', borderTop: '1px solid #1A1A1A', borderBottom: '1px solid #1A1A1A' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
           {[['5+','Years'],['80+','Clients'],['150+','Projects'],['40+','Team']].map(([v,l]) => (
             <div key={l}>
-              <p className="text-4xl font-black" style={{ background: 'linear-gradient(135deg, #F0C855, #D4A843)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>{v}</p>
-              <p className="text-sm text-[#6A5F4A] mt-1 uppercase tracking-wider">{l}</p>
+              <p className="text-4xl font-black" style={{ background: '#FACC15', color: '#FACC15' }}>{v}</p>
+              <p className="text-sm text-[#525252] mt-1 uppercase tracking-wider">{l}</p>
             </div>
           ))}
         </div>
       </section>
 
       {/* Mission & Vision */}
-      <section className="py-24" style={{ background: '#080808' }}>
+      <section className="py-24" style={{ background: '#000000' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
               <p className="text-xs font-bold uppercase tracking-[0.2em] text-amber-400 mb-3">Who We Are</p>
-              <h2 className="text-4xl md:text-5xl font-black text-[#F5EDD8] mb-6">About MetLink</h2>
-              <div className="space-y-4 text-[#9A8F7A] leading-relaxed">
+              <h2 className="text-4xl md:text-5xl font-black text-[#FFFFFF] mb-6">About MetLink</h2>
+              <div className="space-y-4 text-[#A3A3A3] leading-relaxed">
                 <p>MetLink was founded with a single conviction: that the gap between ambitious businesses and world-class digital execution doesn't have to exist.</p>
                 <p>We're a full-service AI marketing and development agency — combining the strategic horsepower of a top-tier marketing firm with the technical depth of a software studio. We don't do cookie-cutter. Every engagement is custom-built around your goals.</p>
                 <p>From brand identity to machine learning systems, from performance ads to enterprise software — we handle the full stack of what it takes to grow a modern digital business.</p>
@@ -102,10 +102,10 @@ export default function CompanyPage() {
                 { icon: '🤝', title: 'Our Promise', desc: 'Transparent pricing, honest communication, and zero-compromise quality on every single project.' },
               ].map((item) => (
                 <div key={item.title} className="p-6 rounded-2xl transition-all hover:-translate-y-0.5"
-                  style={{ background: 'rgba(212,168,67,0.03)', border: '1px solid rgba(212,168,67,0.10)' }}>
+                  style={{ background: '#1A1A1A', border: '1px solid #1A1A1A' }}>
                   <span className="text-3xl mb-3 block">{item.icon}</span>
-                  <h3 className="font-bold text-[#F5EDD8] mb-2 text-sm">{item.title}</h3>
-                  <p className="text-xs text-[#7A6F5A] leading-relaxed">{item.desc}</p>
+                  <h3 className="font-bold text-[#FFFFFF] mb-2 text-sm">{item.title}</h3>
+                  <p className="text-xs text-[#737373] leading-relaxed">{item.desc}</p>
                 </div>
               ))}
             </div>
@@ -114,24 +114,24 @@ export default function CompanyPage() {
       </section>
 
       {/* Values */}
-      <section className="py-24" style={{ background: '#060606' }}>
+      <section className="py-24" style={{ background: '#000000' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-amber-400 mb-3">Our Differentiators</p>
-            <h2 className="text-4xl md:text-5xl font-black text-[#F5EDD8]">Why Choose MetLink?</h2>
+            <h2 className="text-4xl md:text-5xl font-black text-[#FFFFFF]">Why Choose MetLink?</h2>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {values.map((v) => {
               const Icon = v.icon;
               return (
                 <div key={v.title} className="group p-7 rounded-2xl transition-all duration-300 hover:-translate-y-1"
-                  style={{ background: 'rgba(10,8,4,0.8)', border: '1px solid rgba(212,168,67,0.08)' }}>
+                  style={{ background: '#0A0A0A', border: '1px solid #1A1A1A' }}>
                   <div className="w-11 h-11 rounded-xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform"
-                    style={{ background: 'rgba(212,168,67,0.08)', border: '1px solid rgba(212,168,67,0.15)' }}>
+                    style={{ background: '#1A1A1A', border: '1px solid #1A1A1A' }}>
                     <Icon className="w-5 h-5 text-amber-400" />
                   </div>
-                  <h3 className="font-bold text-[#F5EDD8] mb-2">{v.title}</h3>
-                  <p className="text-sm text-[#7A6F5A] leading-relaxed">{v.desc}</p>
+                  <h3 className="font-bold text-[#FFFFFF] mb-2">{v.title}</h3>
+                  <p className="text-sm text-[#737373] leading-relaxed">{v.desc}</p>
                 </div>
               );
             })}
@@ -140,27 +140,27 @@ export default function CompanyPage() {
       </section>
 
       {/* Timeline */}
-      <section className="py-24" style={{ background: '#080808' }}>
+      <section className="py-24" style={{ background: '#000000' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-amber-400 mb-3">Our Journey</p>
-            <h2 className="text-4xl md:text-5xl font-black text-[#F5EDD8]">How We Got Here</h2>
+            <h2 className="text-4xl md:text-5xl font-black text-[#FFFFFF]">How We Got Here</h2>
           </div>
           <div className="relative max-w-3xl mx-auto">
-            <div className="absolute left-6 top-0 bottom-0 w-px" style={{ background: 'linear-gradient(to bottom, rgba(212,168,67,0.4), rgba(212,168,67,0.1))' }} />
+            <div className="absolute left-6 top-0 bottom-0 w-px" style={{ background: 'linear-gradient(to bottom, #1A1A1A, #1A1A1A)' }} />
             <div className="space-y-10">
               {milestones.map((m) => (
                 <div key={m.year} className="relative flex gap-8 pl-16">
                   <div className="absolute left-0 w-12 h-12 rounded-full flex items-center justify-center text-xs font-black flex-shrink-0 shadow-lg"
-                    style={{ background: 'linear-gradient(135deg, #D4A843, #A37820)', color: '#080808', boxShadow: '0 4px 16px rgba(212,168,67,0.30)' }}>
+                    style={{ background: '#FACC15', color: '#000000', boxShadow: "none" }}>
                     {m.year.slice(2)}
                   </div>
                   <div className="pb-4">
                     <div className="flex items-center gap-3 mb-2">
                       <span className="text-xs font-bold text-amber-400">{m.year}</span>
-                      <h3 className="font-bold text-[#F5EDD8]">{m.event}</h3>
+                      <h3 className="font-bold text-[#FFFFFF]">{m.event}</h3>
                     </div>
-                    <p className="text-sm text-[#7A6F5A] leading-relaxed">{m.desc}</p>
+                    <p className="text-sm text-[#737373] leading-relaxed">{m.desc}</p>
                   </div>
                 </div>
               ))}
@@ -170,23 +170,23 @@ export default function CompanyPage() {
       </section>
 
       {/* Team */}
-      <section className="py-24" style={{ background: '#060606' }}>
+      <section className="py-24" style={{ background: '#000000' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-amber-400 mb-3">The People</p>
-            <h2 className="text-4xl md:text-5xl font-black text-[#F5EDD8]">Meet the Leadership</h2>
+            <h2 className="text-4xl md:text-5xl font-black text-[#FFFFFF]">Meet the Leadership</h2>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {team.map((member) => (
               <div key={member.name} className="group p-8 rounded-2xl text-center transition-all duration-300 hover:-translate-y-1"
-                style={{ background: 'rgba(10,8,4,0.8)', border: '1px solid rgba(212,168,67,0.08)' }}>
+                style={{ background: '#0A0A0A', border: '1px solid #1A1A1A' }}>
                 <div className="w-20 h-20 mx-auto mb-4 rounded-2xl flex items-center justify-center text-4xl shadow-xl group-hover:scale-105 transition-transform"
-                  style={{ background: 'linear-gradient(135deg, #D4A843, #A37820)', boxShadow: '0 8px 24px rgba(212,168,67,0.25)' }}>
+                  style={{ background: '#FACC15', boxShadow: "none" }}>
                   {member.emoji}
                 </div>
-                <h3 className="font-bold text-[#F5EDD8] text-lg mb-1">{member.name}</h3>
+                <h3 className="font-bold text-[#FFFFFF] text-lg mb-1">{member.name}</h3>
                 <p className="text-amber-400 text-sm font-medium mb-1">{member.role}</p>
-                <p className="text-[#6A5F4A] text-xs">{member.specialty}</p>
+                <p className="text-[#525252] text-xs">{member.specialty}</p>
               </div>
             ))}
           </div>
@@ -194,18 +194,18 @@ export default function CompanyPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-24 relative overflow-hidden" style={{ background: '#080808' }}>
-        <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse at 50% 50%, rgba(212,168,67,0.05), transparent 70%)' }} />
+      <section className="py-24 relative overflow-hidden" style={{ background: '#000000' }}>
+        <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse at 50% 50%, #1A1A1A, transparent 70%)' }} />
         <div className="max-w-3xl mx-auto px-4 text-center relative z-10">
-          <h2 className="text-4xl font-black text-[#F5EDD8] mb-4">Ready to Grow With Us?</h2>
-          <p className="text-[#9A8F7A] mb-8 text-lg">Whether you're a startup or an enterprise, we're the growth partner you've been looking for.</p>
+          <h2 className="text-4xl font-black text-[#FFFFFF] mb-4">Ready to Grow With Us?</h2>
+          <p className="text-[#A3A3A3] mb-8 text-lg">Whether you're a startup or an enterprise, we're the growth partner you've been looking for.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/contact" className="inline-flex items-center justify-center gap-2 px-9 py-4 rounded-xl font-bold hover:opacity-90 transition-opacity shadow-xl"
-              style={{ background: 'linear-gradient(135deg, #D4A843, #A37820)', color: '#080808', boxShadow: '0 8px 32px rgba(212,168,67,0.25)' }}>
+              style={{ background: '#FACC15', color: '#000000', boxShadow: "none" }}>
               Start the Conversation <ArrowRight className="w-5 h-5" />
             </Link>
             <Link href="/services" className="inline-flex items-center justify-center gap-2 px-9 py-4 rounded-xl font-semibold hover:bg-white/5 transition-all"
-              style={{ border: '1px solid rgba(212,168,67,0.20)', color: '#C8B99A' }}>
+              style={{ border: '1px solid #1A1A1A', color: '#E5E5E5' }}>
               Explore Services
             </Link>
           </div>

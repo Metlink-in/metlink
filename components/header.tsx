@@ -11,13 +11,13 @@ function MetLinkLogo({ size = 38 }: { size?: number }) {
     <svg width={size} height={size} viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient id="outerRing" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#F0C855" />
-          <stop offset="0.45" stopColor="#D4A843" />
+          <stop stopColor="#FACC15" />
+          <stop offset="0.45" stopColor="#FACC15" />
           <stop offset="1" stopColor="#7A5010" />
         </linearGradient>
         <linearGradient id="monogram" x1="18" y1="25" x2="75" y2="75" gradientUnits="userSpaceOnUse">
           <stop stopColor="#FDE68A" />
-          <stop offset="0.4" stopColor="#D4A843" />
+          <stop offset="0.4" stopColor="#FACC15" />
           <stop offset="1" stopColor="#92600A" />
         </linearGradient>
       </defs>
@@ -89,7 +89,7 @@ export function Header() {
   }, []);
 
   const navLink =
-    'px-4 py-2 rounded-lg text-sm font-medium text-[#C8B99A] hover:text-[#F5EDD8] hover:bg-white/5 transition-all duration-200';
+    'px-4 py-2 rounded-lg text-sm font-medium text-[#E5E5E5] hover:text-[#FFFFFF] hover:bg-white/5 transition-all duration-200';
 
   return (
     <>
@@ -99,7 +99,7 @@ export function Header() {
             ? 'backdrop-blur-xl border-b shadow-lg shadow-black/40'
             : 'bg-transparent'
         }`}
-        style={scrolled ? { background: 'rgba(8,8,8,0.92)', borderBottomColor: 'rgba(212,168,67,0.12)' } : {}}
+        style={scrolled ? { background: 'rgba(8,8,8,0.92)', borderBottomColor: '#1A1A1A' } : {}}
       >
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
@@ -111,15 +111,13 @@ export function Header() {
                 <span
                   className="font-black text-lg tracking-wide"
                   style={{
-                    background: 'linear-gradient(135deg, #F0C855 0%, #D4A843 45%, #92600A 100%)',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                    backgroundClip: 'text',
+                    background: '#FACC15',
+                    color: '#FACC15',
                   }}
                 >
                   METLINK
                 </span>
-                <p className="text-[10px] text-[#9A8F7A] tracking-widest uppercase leading-none">AI Agency</p>
+                <p className="text-[10px] text-[#A3A3A3] tracking-widest uppercase leading-none">AI Agency</p>
               </div>
             </Link>
 
@@ -141,7 +139,7 @@ export function Header() {
                 {servicesOpen && (
                   <div
                     className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-[780px] rounded-2xl shadow-2xl shadow-black/70 p-6 grid grid-cols-4 gap-5 animate-slideInDown"
-                    style={{ background: 'rgba(10,10,10,0.97)', border: '1px solid rgba(212,168,67,0.15)', backdropFilter: 'blur(24px)' }}
+                    style={{ background: 'rgba(10,10,10,0.97)', border: '1px solid #1A1A1A', backdropFilter: 'blur(24px)' }}
                     onMouseLeave={() => setServicesOpen(false)}
                   >
                     {serviceCategories.map((cat) => (
@@ -159,10 +157,10 @@ export function Header() {
                             <li key={svc.slug}>
                               <Link
                                 href={`/services/${cat.slug}/${svc.slug}`}
-                                className="group/item flex items-center gap-1.5 text-xs text-[#7A6F5A] hover:text-[#F5EDD8] py-1 px-2 rounded-lg hover:bg-white/5 transition-all"
+                                className="group/item flex items-center gap-1.5 text-xs text-[#737373] hover:text-[#FFFFFF] py-1 px-2 rounded-lg hover:bg-white/5 transition-all"
                                 onClick={() => setServicesOpen(false)}
                               >
-                                <ArrowRight className="w-3 h-3 text-[#4A4030] group-hover/item:text-amber-400 transition-colors flex-shrink-0" />
+                                <ArrowRight className="w-3 h-3 text-[#404040] group-hover/item:text-amber-400 transition-colors flex-shrink-0" />
                                 {svc.name}
                               </Link>
                             </li>
@@ -171,8 +169,8 @@ export function Header() {
                       </div>
                     ))}
                     {/* Bottom bar */}
-                    <div className="col-span-4 pt-4 flex items-center justify-between" style={{ borderTop: '1px solid rgba(212,168,67,0.10)' }}>
-                      <p className="text-xs text-[#6A5F4A]">Not sure what you need?</p>
+                    <div className="col-span-4 pt-4 flex items-center justify-between" style={{ borderTop: '1px solid #1A1A1A' }}>
+                      <p className="text-xs text-[#525252]">Not sure what you need?</p>
                       <Link href="/contact" onClick={() => setServicesOpen(false)}
                         className="text-xs text-amber-400 hover:text-amber-300 font-medium flex items-center gap-1 transition-colors">
                         Talk to our experts <ArrowRight className="w-3 h-3" />
@@ -190,16 +188,16 @@ export function Header() {
             {/* ── Desktop CTA ── */}
             <div className="hidden md:flex items-center gap-3">
               <button onClick={() => setShowPopup(true)}
-                className="flex items-center gap-1.5 text-sm text-[#9A8F7A] hover:text-[#F5EDD8] transition-colors">
+                className="flex items-center gap-1.5 text-sm text-[#A3A3A3] hover:text-[#FFFFFF] transition-colors">
                 <Zap className="w-3.5 h-3.5 text-amber-400" />
                 Become a Client
               </button>
               <Link href="/contact"
                 className="px-5 py-2 rounded-xl text-sm font-semibold transition-all hover:opacity-90 shadow-lg"
                 style={{
-                  background: 'linear-gradient(135deg, #D4A843 0%, #A37820 100%)',
-                  color: '#080808',
-                  boxShadow: '0 4px 20px rgba(212,168,67,0.25)',
+                  background: '#FACC15',
+                  color: '#000000',
+                  boxShadow: "none",
                 }}>
                 Contact Us
               </Link>
@@ -215,11 +213,11 @@ export function Header() {
           {/* ── Mobile menu ── */}
           {mobileOpen && (
             <div className="md:hidden pb-6 pt-2 space-y-0.5 mt-1 animate-slideInDown"
-              style={{ borderTop: '1px solid rgba(212,168,67,0.10)' }}>
-              <Link href="/" className="block px-4 py-2.5 text-sm text-[#C8B99A] hover:text-[#F5EDD8] hover:bg-white/5 rounded-lg transition-colors" onClick={() => setMobileOpen(false)}>Home</Link>
+              style={{ borderTop: '1px solid #1A1A1A' }}>
+              <Link href="/" className="block px-4 py-2.5 text-sm text-[#E5E5E5] hover:text-[#FFFFFF] hover:bg-white/5 rounded-lg transition-colors" onClick={() => setMobileOpen(false)}>Home</Link>
 
               <div className="px-4 pt-3 pb-1">
-                <p className="text-xs font-bold text-[#6A5F4A] uppercase tracking-wider">Services</p>
+                <p className="text-xs font-bold text-[#525252] uppercase tracking-wider">Services</p>
               </div>
               {serviceCategories.map((cat) => (
                 <div key={cat.slug}>
@@ -230,7 +228,7 @@ export function Header() {
                   </Link>
                   {cat.services.map((svc) => (
                     <Link key={svc.slug} href={`/services/${cat.slug}/${svc.slug}`}
-                      className="block px-10 py-0.5 text-sm text-[#7A6F5A] hover:text-[#F5EDD8] transition-colors"
+                      className="block px-10 py-0.5 text-sm text-[#737373] hover:text-[#FFFFFF] transition-colors"
                       onClick={() => setMobileOpen(false)}>
                       {svc.name}
                     </Link>
@@ -238,20 +236,20 @@ export function Header() {
                 </div>
               ))}
 
-              <Link href="/company" className="block px-4 py-2.5 text-sm text-[#C8B99A] hover:text-[#F5EDD8] hover:bg-white/5 rounded-lg transition-colors" onClick={() => setMobileOpen(false)}>Company</Link>
-              <Link href="/portfolio" className="block px-4 py-2.5 text-sm text-[#C8B99A] hover:text-[#F5EDD8] hover:bg-white/5 rounded-lg transition-colors" onClick={() => setMobileOpen(false)}>Portfolio</Link>
-              <Link href="/blog" className="block px-4 py-2.5 text-sm text-[#C8B99A] hover:text-[#F5EDD8] hover:bg-white/5 rounded-lg transition-colors" onClick={() => setMobileOpen(false)}>Blog</Link>
+              <Link href="/company" className="block px-4 py-2.5 text-sm text-[#E5E5E5] hover:text-[#FFFFFF] hover:bg-white/5 rounded-lg transition-colors" onClick={() => setMobileOpen(false)}>Company</Link>
+              <Link href="/portfolio" className="block px-4 py-2.5 text-sm text-[#E5E5E5] hover:text-[#FFFFFF] hover:bg-white/5 rounded-lg transition-colors" onClick={() => setMobileOpen(false)}>Portfolio</Link>
+              <Link href="/blog" className="block px-4 py-2.5 text-sm text-[#E5E5E5] hover:text-[#FFFFFF] hover:bg-white/5 rounded-lg transition-colors" onClick={() => setMobileOpen(false)}>Blog</Link>
 
               <div className="px-4 pt-3 space-y-2">
                 <Link href="/contact"
                   className="block text-center py-3 rounded-xl text-sm font-bold"
-                  style={{ background: 'linear-gradient(135deg, #D4A843, #A37820)', color: '#080808' }}
+                  style={{ background: '#FACC15', color: '#000000' }}
                   onClick={() => setMobileOpen(false)}>
                   Contact Us
                 </Link>
                 <button onClick={() => { setShowPopup(true); setMobileOpen(false); }}
-                  className="w-full text-center py-3 rounded-xl text-sm text-[#9A8F7A] hover:text-[#F5EDD8] hover:bg-white/5 transition-colors"
-                  style={{ border: '1px solid rgba(212,168,67,0.20)' }}>
+                  className="w-full text-center py-3 rounded-xl text-sm text-[#A3A3A3] hover:text-[#FFFFFF] hover:bg-white/5 transition-colors"
+                  style={{ border: '1px solid #1A1A1A' }}>
                   Become a Client
                 </button>
               </div>
@@ -279,26 +277,26 @@ function PopupFormInline({ onClose }: { onClose: () => void }) {
     <div className="fixed inset-0 z-[100] flex items-center justify-center px-4">
       <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={onClose} />
       <div className="relative w-full max-w-md rounded-2xl overflow-hidden animate-fadeInScale shadow-2xl shadow-black/60"
-        style={{ background: '#0F0F0F', border: '1px solid rgba(212,168,67,0.20)' }}>
-        <div className="h-0.5 w-full" style={{ background: 'linear-gradient(90deg, #D4A843, #F0C855, #A37820)' }} />
-        <button onClick={onClose} className="absolute top-4 right-4 text-[#7A6F5A] hover:text-[#F5EDD8] transition-colors">
+        style={{ background: '#0F0F0F', border: '1px solid #1A1A1A' }}>
+        <div className="h-0.5 w-full" style={{ background: '#FACC15' }} />
+        <button onClick={onClose} className="absolute top-4 right-4 text-[#737373] hover:text-[#FFFFFF] transition-colors">
           <X className="w-5 h-5" />
         </button>
         <div className="p-8">
           {submitted ? (
             <div className="text-center py-6">
-              <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4" style={{ background: 'rgba(212,168,67,0.1)' }}>
+              <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4" style={{ background: '#1A1A1A' }}>
                 <Zap className="w-8 h-8 text-amber-400" />
               </div>
-              <h3 className="text-xl font-bold text-[#F5EDD8] mb-2">You are in!</h3>
-              <p className="text-[#9A8F7A] text-sm">Our team will reach out within 24 hours.</p>
+              <h3 className="text-xl font-bold text-[#FFFFFF] mb-2">You are in!</h3>
+              <p className="text-[#A3A3A3] text-sm">Our team will reach out within 24 hours.</p>
             </div>
           ) : (
             <>
               <div className="text-center mb-6">
                 <MetLinkLogo size={48} />
-                <h2 className="text-2xl font-bold text-[#F5EDD8] mt-3 mb-1">Become a Client</h2>
-                <p className="text-[#9A8F7A] text-sm">Start building something great together.</p>
+                <h2 className="text-2xl font-bold text-[#FFFFFF] mt-3 mb-1">Become a Client</h2>
+                <p className="text-[#A3A3A3] text-sm">Start building something great together.</p>
               </div>
               <form onSubmit={handleSubmit} className="space-y-4">
                 {(['name', 'company', 'email'] as const).map((field) => (
@@ -306,13 +304,13 @@ function PopupFormInline({ onClose }: { onClose: () => void }) {
                     onChange={(e) => setForm((p) => ({ ...p, [field]: e.target.value }))}
                     placeholder={field === 'name' ? 'Full Name' : field === 'company' ? 'Company / Project' : 'Work Email'}
                     required
-                    className="w-full px-4 py-3 rounded-xl text-[#F5EDD8] placeholder:text-[#5A5045] text-sm focus:outline-none transition-colors"
-                    style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(212,168,67,0.15)' }}
+                    className="w-full px-4 py-3 rounded-xl text-[#FFFFFF] placeholder:text-[#5A5045] text-sm focus:outline-none transition-colors"
+                    style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid #1A1A1A' }}
                   />
                 ))}
                 <button type="submit"
                   className="w-full py-3 rounded-xl font-bold text-sm transition-opacity hover:opacity-90"
-                  style={{ background: 'linear-gradient(135deg, #D4A843, #A37820)', color: '#080808' }}>
+                  style={{ background: '#FACC15', color: '#000000' }}>
                   Submit & Get Started
                 </button>
               </form>

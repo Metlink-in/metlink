@@ -29,7 +29,7 @@ export const serviceCategories: ServiceCategory[] = [
     colorClass: 'text-amber-400',
     gradientFrom: 'from-amber-500',
     gradientTo: 'to-yellow-600',
-    bgGlow: 'rgba(212,168,67,0.15)',
+    bgGlow: '#1A1A1A',
     tagline: 'Data-Driven Growth at Scale',
     description:
       'Comprehensive digital marketing strategies that drive measurable growth, establish brand authority, and convert audiences into loyal customers.',

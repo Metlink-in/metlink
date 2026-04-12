@@ -9,10 +9,10 @@ function MetLinkLogoFooter() {
     <svg width="42" height="42" viewBox="0 0 100 100" fill="none">
       <defs>
         <linearGradient id="fRing" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#F0C855" /><stop offset="0.45" stopColor="#D4A843" /><stop offset="1" stopColor="#7A5010" />
+          <stop stopColor="#FACC15" /><stop offset="0.45" stopColor="#FACC15" /><stop offset="1" stopColor="#7A5010" />
         </linearGradient>
         <linearGradient id="fMono" x1="18" y1="25" x2="75" y2="75" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#FDE68A" /><stop offset="0.4" stopColor="#D4A843" /><stop offset="1" stopColor="#92600A" />
+          <stop stopColor="#FDE68A" /><stop offset="0.4" stopColor="#FACC15" /><stop offset="1" stopColor="#92600A" />
         </linearGradient>
       </defs>
       <circle cx="50" cy="50" r="48" fill="#0A0A0A" stroke="url(#fRing)" strokeWidth="2.5" />
@@ -26,18 +26,18 @@ function MetLinkLogoFooter() {
 
 export function Footer() {
   return (
-    <footer style={{ background: '#060606', borderTop: '1px solid rgba(212,168,67,0.12)' }}>
+    <footer style={{ background: '#000000', borderTop: '1px solid #1A1A1A' }}>
       {/* Referral CTA strip */}
-      <div className="py-12" style={{ background: 'linear-gradient(135deg, rgba(212,168,67,0.08) 0%, rgba(160,116,32,0.06) 100%)', borderBottom: '1px solid rgba(212,168,67,0.10)' }}>
+      <div className="py-12" style={{ background: 'linear-gradient(135deg, #1A1A1A 0%, rgba(160,116,32,0.06) 100%)', borderBottom: '1px solid #1A1A1A' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
           <div>
             <p className="text-xs font-bold uppercase tracking-widest text-amber-400 mb-1">Referral Program</p>
-            <h3 className="text-2xl font-black text-[#F5EDD8]">Refer a Client — Earn 10% Commission</h3>
-            <p className="text-[#9A8F7A] text-sm mt-1">Know a business that needs AI, marketing, or software help? We reward every successful referral.</p>
+            <h3 className="text-2xl font-black text-[#FFFFFF]">Refer a Client — Earn 10% Commission</h3>
+            <p className="text-[#A3A3A3] text-sm mt-1">Know a business that needs AI, marketing, or software help? We reward every successful referral.</p>
           </div>
           <Link href="/contact"
             className="flex-shrink-0 flex items-center gap-2 px-7 py-3 rounded-xl font-bold text-sm hover:opacity-90 transition-opacity"
-            style={{ background: 'linear-gradient(135deg, #D4A843, #A37820)', color: '#080808', boxShadow: '0 4px 20px rgba(212,168,67,0.2)' }}>
+            style={{ background: '#FACC15', color: '#000000', boxShadow: "none" }}>
             Refer Now <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
@@ -53,25 +53,25 @@ export function Footer() {
               <MetLinkLogoFooter />
               <div>
                 <p className="font-black text-lg tracking-wide" style={{
-                  background: 'linear-gradient(135deg, #F0C855, #D4A843, #92600A)',
-                  WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
+                  background: '#FACC15',
+                  color: '#FACC15',
                 }}>METLINK</p>
-                <p className="text-xs text-[#6A5F4A] tracking-widest uppercase">AI Agency</p>
+                <p className="text-xs text-[#525252] tracking-widest uppercase">AI Agency</p>
               </div>
             </div>
-            <p className="text-[#7A6F5A] text-sm leading-relaxed mb-6 max-w-xs">
+            <p className="text-[#737373] text-sm leading-relaxed mb-6 max-w-xs">
               An AI-first marketing and development agency driving measurable growth for ambitious businesses worldwide.
             </p>
             {/* Newsletter */}
             <div>
-              <p className="text-xs font-bold text-[#6A5F4A] uppercase tracking-wider mb-3">Newsletter</p>
+              <p className="text-xs font-bold text-[#525252] uppercase tracking-wider mb-3">Newsletter</p>
               <form onSubmit={(e) => e.preventDefault()} className="flex gap-2">
                 <input type="email" placeholder="your@email.com"
-                  className="flex-1 px-3 py-2.5 rounded-xl text-[#F5EDD8] placeholder:text-[#4A4030] text-sm focus:outline-none"
-                  style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(212,168,67,0.15)' }}
+                  className="flex-1 px-3 py-2.5 rounded-xl text-[#FFFFFF] placeholder:text-[#404040] text-sm focus:outline-none"
+                  style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid #1A1A1A' }}
                 />
                 <button type="submit" className="p-2.5 rounded-xl transition-opacity hover:opacity-90"
-                  style={{ background: 'linear-gradient(135deg, #D4A843, #A37820)', color: '#080808' }}>
+                  style={{ background: '#FACC15', color: '#000000' }}>
                   <Mail className="w-4 h-4" />
                 </button>
               </form>
@@ -89,7 +89,7 @@ export function Footer() {
                 {cat.services.map((svc) => (
                   <li key={svc.slug}>
                     <Link href={`/services/${cat.slug}/${svc.slug}`}
-                      className="text-sm text-[#6A5F4A] hover:text-[#F5EDD8] transition-colors">
+                      className="text-sm text-[#525252] hover:text-[#FFFFFF] transition-colors">
                       {svc.name}
                     </Link>
                   </li>
@@ -101,13 +101,13 @@ export function Footer() {
       </div>
 
       {/* Bottom bar */}
-      <div style={{ borderTop: '1px solid rgba(212,168,67,0.08)' }}>
+      <div style={{ borderTop: '1px solid #1A1A1A' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-[#4A4030]">© {new Date().getFullYear()} MetLink. All rights reserved.</p>
+          <p className="text-xs text-[#404040]">© {new Date().getFullYear()} MetLink. All rights reserved.</p>
           <div className="flex items-center gap-6">
             {['Portfolio', 'Company', 'Blog', 'Contact'].map((item) => (
               <Link key={item} href={`/${item.toLowerCase()}`}
-                className="text-xs text-[#4A4030] hover:text-[#9A8F7A] transition-colors">
+                className="text-xs text-[#404040] hover:text-[#A3A3A3] transition-colors">
                 {item}
               </Link>
             ))}
