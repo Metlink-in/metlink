@@ -12,18 +12,29 @@ import './globals.css';
 const geist = Geist({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'MetLink — AI Marketing & Development Agency',
-  description:
-    'MetLink is a full-service AI marketing & development agency delivering digital marketing, creative media, AI automation, and custom software solutions that drive real business growth.',
-  generator: 'MetLink',
-  icons: {
-    icon: [
-      { url: '/icon-light-32x32.png', media: '(prefers-color-scheme: light)' },
-      { url: '/icon-dark-32x32.png', media: '(prefers-color-scheme: dark)' },
-      { url: '/icon.svg', type: 'image/svg+xml' },
-    ],
-    apple: '/apple-icon.png',
+  title: {
+    default: 'MetLink — AI Marketing & Development Agency',
+    template: '%s | MetLink',
   },
+  description:
+    'MetLink is a full-service AI marketing & development agency — digital marketing, creative media, AI automation, and custom software that drives measurable revenue growth.',
+  keywords: ['AI agency', 'digital marketing', 'software development', 'AI automation', 'performance marketing', 'MetLink'],
+  authors: [{ name: 'MetLink' }],
+  creator: 'MetLink',
+  openGraph: {
+    type: 'website',
+    locale: 'en_IN',
+    url: 'https://metlink.in',
+    siteName: 'MetLink',
+    title: 'MetLink — AI Marketing & Development Agency',
+    description: 'AI-powered marketing, creative media, and software development for ambitious businesses.',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'MetLink — AI Marketing & Development Agency',
+    description: 'AI-powered marketing, creative media, and software development.',
+  },
+  robots: { index: true, follow: true },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

@@ -1,115 +1,95 @@
 'use client';
 
 import Link from 'next/link';
-import { Github, Linkedin, Twitter, Mail, ArrowRight, MapPin, Phone } from 'lucide-react';
+import { ArrowRight, Mail } from 'lucide-react';
 import { serviceCategories } from '@/lib/services-data';
 
-export function Footer() {
-  const year = new Date().getFullYear();
-
+function MetLinkLogoFooter() {
   return (
-    <footer className="w-full bg-zinc-950 border-t border-white/5">
-      {/* Referral / End-page CTA */}
-      <div className="border-b border-white/5">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="relative rounded-2xl overflow-hidden border border-white/10 p-10 md:p-16 text-center bg-gradient-to-br from-blue-600/10 via-purple-600/5 to-cyan-600/10">
-            <div className="absolute inset-0 pointer-events-none">
-              <div className="absolute top-0 right-0 w-72 h-72 bg-blue-600/10 rounded-full blur-3xl" />
-              <div className="absolute bottom-0 left-0 w-72 h-72 bg-purple-600/10 rounded-full blur-3xl" />
-            </div>
-            <div className="relative z-10 max-w-2xl mx-auto">
-              <p className="text-xs font-semibold text-blue-400 uppercase tracking-widest mb-3">
-                Referral Program
-              </p>
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-                Know Someone Who Needs Us?
-              </h2>
-              <p className="text-foreground/60 mb-8 text-lg">
-                Refer a business to MetLink and earn rewards. Every great partnership starts with a single introduction.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center gap-2 px-8 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold hover:opacity-90 transition-opacity shadow-lg shadow-blue-600/20"
-                >
-                  Make an Introduction <ArrowRight className="w-4 h-4" />
-                </Link>
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center gap-2 px-8 py-3 rounded-xl border border-white/10 text-foreground/70 hover:text-foreground hover:border-white/20 transition-all"
-                >
-                  Learn About Rewards
-                </Link>
-              </div>
-            </div>
+    <svg width="42" height="42" viewBox="0 0 100 100" fill="none">
+      <defs>
+        <linearGradient id="fRing" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#F0C855" /><stop offset="0.45" stopColor="#D4A843" /><stop offset="1" stopColor="#7A5010" />
+        </linearGradient>
+        <linearGradient id="fMono" x1="18" y1="25" x2="75" y2="75" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#FDE68A" /><stop offset="0.4" stopColor="#D4A843" /><stop offset="1" stopColor="#92600A" />
+        </linearGradient>
+      </defs>
+      <circle cx="50" cy="50" r="48" fill="#0A0A0A" stroke="url(#fRing)" strokeWidth="2.5" />
+      <circle cx="50" cy="50" r="42" fill="none" stroke="url(#fRing)" strokeWidth="0.6" strokeOpacity="0.35" />
+      <path d="M18 70 L18 32 L36 54 L50 32 L64 54 L64 32" stroke="url(#fMono)" strokeWidth="5.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+      <path d="M64 70 L82 70" stroke="url(#fMono)" strokeWidth="5.5" strokeLinecap="round" fill="none" />
+      <text x="50" y="90" textAnchor="middle" fill="url(#fRing)" fontSize="9" fontWeight="700" letterSpacing="3" fontFamily="system-ui, sans-serif">METLINK</text>
+    </svg>
+  );
+}
+
+export function Footer() {
+  return (
+    <footer style={{ background: '#060606', borderTop: '1px solid rgba(212,168,67,0.12)' }}>
+      {/* Referral CTA strip */}
+      <div className="py-12" style={{ background: 'linear-gradient(135deg, rgba(212,168,67,0.08) 0%, rgba(160,116,32,0.06) 100%)', borderBottom: '1px solid rgba(212,168,67,0.10)' }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+          <div>
+            <p className="text-xs font-bold uppercase tracking-widest text-amber-400 mb-1">Referral Program</p>
+            <h3 className="text-2xl font-black text-[#F5EDD8]">Refer a Client — Earn 10% Commission</h3>
+            <p className="text-[#9A8F7A] text-sm mt-1">Know a business that needs AI, marketing, or software help? We reward every successful referral.</p>
           </div>
+          <Link href="/contact"
+            className="flex-shrink-0 flex items-center gap-2 px-7 py-3 rounded-xl font-bold text-sm hover:opacity-90 transition-opacity"
+            style={{ background: 'linear-gradient(135deg, #D4A843, #A37820)', color: '#080808', boxShadow: '0 4px 20px rgba(212,168,67,0.2)' }}>
+            Refer Now <ArrowRight className="w-4 h-4" />
+          </Link>
         </div>
       </div>
 
       {/* Main footer */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-10 mb-16">
+        <div className="grid lg:grid-cols-5 gap-12">
+
           {/* Brand */}
           <div className="lg:col-span-2">
-            <Link href="/" className="flex items-center gap-2.5 mb-4 group w-fit">
-              <div className="w-9 h-9 bg-gradient-to-br from-blue-600 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
-                <span className="text-white text-sm font-black">ML</span>
+            <div className="flex items-center gap-3 mb-5">
+              <MetLinkLogoFooter />
+              <div>
+                <p className="font-black text-lg tracking-wide" style={{
+                  background: 'linear-gradient(135deg, #F0C855, #D4A843, #92600A)',
+                  WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
+                }}>METLINK</p>
+                <p className="text-xs text-[#6A5F4A] tracking-widest uppercase">AI Agency</p>
               </div>
-              <span className="font-bold text-lg bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                MetLink
-              </span>
-            </Link>
-            <p className="text-foreground/50 text-sm leading-relaxed mb-6 max-w-xs">
-              AI Marketing & Development Agency — helping businesses grow through intelligent automation, creative media, and custom software.
-            </p>
-
-            {/* Contact info */}
-            <div className="space-y-2 mb-6">
-              <a href="mailto:hello@metlink.in" className="flex items-center gap-2 text-sm text-foreground/50 hover:text-blue-400 transition-colors">
-                <Mail className="w-3.5 h-3.5" /> hello@metlink.in
-              </a>
-              <a href="tel:+911234567890" className="flex items-center gap-2 text-sm text-foreground/50 hover:text-blue-400 transition-colors">
-                <Phone className="w-3.5 h-3.5" /> +91 (123) 456-7890
-              </a>
-              <p className="flex items-center gap-2 text-sm text-foreground/50">
-                <MapPin className="w-3.5 h-3.5" /> Mumbai, India
-              </p>
             </div>
-
-            {/* Social */}
-            <div className="flex gap-3">
-              {[
-                { Icon: Github, href: '#', label: 'GitHub' },
-                { Icon: Linkedin, href: '#', label: 'LinkedIn' },
-                { Icon: Twitter, href: '#', label: 'Twitter' },
-                { Icon: Mail, href: 'mailto:hello@metlink.in', label: 'Email' },
-              ].map(({ Icon, href, label }) => (
-                <a
-                  key={label}
-                  href={href}
-                  aria-label={label}
-                  className="w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-foreground/50 hover:text-blue-400 hover:border-blue-500/30 transition-all"
-                >
-                  <Icon className="w-4 h-4" />
-                </a>
-              ))}
+            <p className="text-[#7A6F5A] text-sm leading-relaxed mb-6 max-w-xs">
+              An AI-first marketing and development agency driving measurable growth for ambitious businesses worldwide.
+            </p>
+            {/* Newsletter */}
+            <div>
+              <p className="text-xs font-bold text-[#6A5F4A] uppercase tracking-wider mb-3">Newsletter</p>
+              <form onSubmit={(e) => e.preventDefault()} className="flex gap-2">
+                <input type="email" placeholder="your@email.com"
+                  className="flex-1 px-3 py-2.5 rounded-xl text-[#F5EDD8] placeholder:text-[#4A4030] text-sm focus:outline-none"
+                  style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(212,168,67,0.15)' }}
+                />
+                <button type="submit" className="p-2.5 rounded-xl transition-opacity hover:opacity-90"
+                  style={{ background: 'linear-gradient(135deg, #D4A843, #A37820)', color: '#080808' }}>
+                  <Mail className="w-4 h-4" />
+                </button>
+              </form>
             </div>
           </div>
 
-          {/* Services links */}
+          {/* Services columns */}
           {serviceCategories.map((cat) => (
             <div key={cat.slug}>
-              <h4 className={`text-xs font-bold uppercase tracking-wider mb-4 ${cat.colorClass}`}>
-                {cat.name}
-              </h4>
+              <Link href={`/services/${cat.slug}`}
+                className="text-xs font-bold uppercase tracking-widest text-amber-400 hover:text-amber-300 transition-colors mb-4 block">
+                {cat.icon} {cat.name}
+              </Link>
               <ul className="space-y-2">
                 {cat.services.map((svc) => (
                   <li key={svc.slug}>
-                    <Link
-                      href={`/services/${cat.slug}/${svc.slug}`}
-                      className="text-xs text-foreground/50 hover:text-foreground transition-colors flex items-center gap-1 group"
-                    >
-                      <ArrowRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity text-blue-400" />
+                    <Link href={`/services/${cat.slug}/${svc.slug}`}
+                      className="text-sm text-[#6A5F4A] hover:text-[#F5EDD8] transition-colors">
                       {svc.name}
                     </Link>
                   </li>
@@ -118,41 +98,18 @@ export function Footer() {
             </div>
           ))}
         </div>
+      </div>
 
-        {/* Newsletter */}
-        <div className="border-t border-white/5 pt-10 mb-10">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-            <div>
-              <h4 className="font-semibold text-foreground mb-1">Stay in the loop</h4>
-              <p className="text-sm text-foreground/50">Get insights on AI, marketing & software delivered monthly.</p>
-            </div>
-            <form
-              onSubmit={(e) => e.preventDefault()}
-              className="flex gap-2 w-full max-w-sm"
-            >
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="flex-1 px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-foreground placeholder:text-foreground/30 text-sm focus:outline-none focus:border-blue-500/50 transition-colors"
-              />
-              <button
-                type="submit"
-                className="px-5 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium transition-colors flex-shrink-0"
-              >
-                Subscribe
-              </button>
-            </form>
-          </div>
-        </div>
-
-        {/* Bottom bar */}
-        <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-foreground/40">
-          <p>© {year} MetLink. All rights reserved. Built with precision for growth.</p>
-          <div className="flex gap-6">
-            {['Privacy Policy', 'Terms of Service', 'Cookie Policy'].map((item) => (
-              <a key={item} href="#" className="hover:text-foreground/70 transition-colors">
+      {/* Bottom bar */}
+      <div style={{ borderTop: '1px solid rgba(212,168,67,0.08)' }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-xs text-[#4A4030]">© {new Date().getFullYear()} MetLink. All rights reserved.</p>
+          <div className="flex items-center gap-6">
+            {['Portfolio', 'Company', 'Blog', 'Contact'].map((item) => (
+              <Link key={item} href={`/${item.toLowerCase()}`}
+                className="text-xs text-[#4A4030] hover:text-[#9A8F7A] transition-colors">
                 {item}
-              </a>
+              </Link>
             ))}
           </div>
         </div>

@@ -1,0 +1,40 @@
+﻿node.exe : [baseline-brows
+er-mapping] The data in 
+this module is over two 
+months old.  To ensure 
+accurate Baseline data, 
+please update: `npm i base
+line-browser-mapping@lates
+t -D`
+At line:1 char:1
++ & "C:\Program 
+Files\nodejs/node.exe" 
+"C:\Program 
+Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo        
+      : NotSpecified: ([  
+  baseline-brows...ping   
+ @latest -D`:String) [    
+], RemoteException
+    + FullyQualifiedError 
+   Id : NativeCommandErr  
+  or
+ 
+Attention: Next.js now collects completely anonymous telemetry regarding usage.
+This information is used to shape Next.js' roadmap and prioritize features.
+You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+https://nextjs.org/telemetry
+
+   Γû▓ Next.js 16.0.10 (Turbopack)
+
+   Creating an optimized production build ...
+[baseline-browser-mapping]
+ The data in this module 
+is over two months old.  
+To ensure accurate 
+Baseline data, please 
+update: `npm i baseline-br
+owser-mapping@latest -D`

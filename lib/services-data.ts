@@ -26,10 +26,10 @@ export const serviceCategories: ServiceCategory[] = [
     name: 'Digital Marketing',
     slug: 'digital-marketing',
     icon: '📊',
-    colorClass: 'text-blue-400',
-    gradientFrom: 'from-blue-600',
-    gradientTo: 'to-cyan-500',
-    bgGlow: 'rgba(37,99,235,0.15)',
+    colorClass: 'text-amber-400',
+    gradientFrom: 'from-amber-500',
+    gradientTo: 'to-yellow-600',
+    bgGlow: 'rgba(212,168,67,0.15)',
     tagline: 'Data-Driven Growth at Scale',
     description:
       'Comprehensive digital marketing strategies that drive measurable growth, establish brand authority, and convert audiences into loyal customers.',
@@ -99,7 +99,7 @@ export const serviceCategories: ServiceCategory[] = [
         slug: 'seo',
         tagline: 'Rank Higher. Get Found. Convert More.',
         description:
-          'Comprehensive SEO strategies covering all aspects of search visibility — from technical health to content strategy — to drive sustainable organic growth.',
+          'Comprehensive SEO strategies covering all aspects of search visibility to drive sustainable organic growth and qualified traffic.',
         icon: '🔍',
         features: [
           'Keyword research & optimization',
@@ -110,7 +110,6 @@ export const serviceCategories: ServiceCategory[] = [
           'Local citations & geo-targeting',
           'Website speed optimization',
           'Schema markup implementation',
-          'Crawlability & indexability fixes',
         ],
         subFeatures: [
           { title: 'SEO Types', items: ['On-Page SEO', 'Off-Page SEO', 'Technical SEO', 'Local SEO'] },
@@ -122,10 +121,10 @@ export const serviceCategories: ServiceCategory[] = [
     name: 'Creative Media',
     slug: 'creative-media',
     icon: '🎨',
-    colorClass: 'text-purple-400',
-    gradientFrom: 'from-purple-600',
-    gradientTo: 'to-pink-500',
-    bgGlow: 'rgba(124,58,237,0.15)',
+    colorClass: 'text-yellow-400',
+    gradientFrom: 'from-yellow-500',
+    gradientTo: 'to-amber-600',
+    bgGlow: 'rgba(200,148,20,0.15)',
     tagline: 'Visuals That Stop Scrolling',
     description:
       'World-class creative production — from brand identity to high-volume video content — that captivates audiences and drives real business results.',
@@ -152,7 +151,7 @@ export const serviceCategories: ServiceCategory[] = [
         slug: 'brand-identity',
         tagline: 'Your Brand. Unmistakable.',
         description:
-          'Comprehensive brand identity systems that create lasting impressions and communicate your core values consistently across every single touchpoint.',
+          'Comprehensive brand identity systems that create lasting impressions and communicate your core values consistently across every touchpoint.',
         icon: '✨',
         features: [
           'Logo design & brand marks',
@@ -208,13 +207,13 @@ export const serviceCategories: ServiceCategory[] = [
     name: 'AI & Automation',
     slug: 'ai-automation',
     icon: '🤖',
-    colorClass: 'text-cyan-400',
-    gradientFrom: 'from-cyan-500',
-    gradientTo: 'to-blue-600',
-    bgGlow: 'rgba(8,145,178,0.15)',
+    colorClass: 'text-amber-300',
+    gradientFrom: 'from-amber-400',
+    gradientTo: 'to-yellow-500',
+    bgGlow: 'rgba(240,200,80,0.12)',
     tagline: 'Intelligent Systems. Infinite Scale.',
     description:
-      'Cutting-edge AI and automation solutions that transform operations, reduce costs, and unlock unprecedented business intelligence and competitive advantage.',
+      'Cutting-edge AI and automation solutions that transform operations, reduce costs, and unlock unprecedented business intelligence.',
     services: [
       {
         name: 'AI Development & Integration',
@@ -239,7 +238,7 @@ export const serviceCategories: ServiceCategory[] = [
         slug: 'data-science',
         tagline: 'Data Into Decisions. Insights Into Revenue.',
         description:
-          'Transform raw data into actionable business intelligence through advanced analytics, predictive modeling, and beautiful BI dashboards that guide strategy.',
+          'Transform raw data into actionable business intelligence through advanced analytics, predictive modeling, and BI dashboards.',
         icon: '📈',
         features: [
           'Predictive forecasting models',
@@ -256,7 +255,7 @@ export const serviceCategories: ServiceCategory[] = [
         slug: 'machine-learning',
         tagline: 'Systems That Learn. Businesses That Grow.',
         description:
-          'End-to-end ML solutions from data preparation to production deployment — including advanced generative AI, RAG systems, and MLOps pipelines.',
+          'End-to-end ML solutions from data preparation to production deployment — including generative AI, RAG systems, and MLOps pipelines.',
         icon: '⚙️',
         features: [
           'Data preprocessing & feature engineering',
@@ -274,7 +273,7 @@ export const serviceCategories: ServiceCategory[] = [
         slug: 'nlp-conversational',
         tagline: 'Language That Scales. Conversations That Convert.',
         description:
-          'Advanced natural language processing and conversational AI systems that understand, analyze, and generate human language — powering smarter automation.',
+          'Advanced natural language processing and conversational AI systems that understand, analyze, and generate human language at scale.',
         icon: '💬',
         features: [
           'Advanced chatbot development',
@@ -293,20 +292,20 @@ export const serviceCategories: ServiceCategory[] = [
     name: 'Software Development',
     slug: 'software-development',
     icon: '💻',
-    colorClass: 'text-emerald-400',
-    gradientFrom: 'from-emerald-600',
-    gradientTo: 'to-teal-500',
-    bgGlow: 'rgba(5,150,105,0.15)',
+    colorClass: 'text-yellow-500',
+    gradientFrom: 'from-yellow-600',
+    gradientTo: 'to-amber-500',
+    bgGlow: 'rgba(163,120,32,0.15)',
     tagline: 'Code That Scales. Systems That Last.',
     description:
-      'End-to-end custom software development — from web and mobile applications to enterprise systems and cloud infrastructure — built to scale with your business.',
+      'End-to-end custom software development — from web and mobile applications to enterprise systems and cloud infrastructure — built to scale.',
     services: [
       {
         name: 'Application Development',
         slug: 'app-development',
         tagline: 'Web. Mobile. Enterprise. Delivered.',
         description:
-          'Custom application development across all platforms — web, mobile, and enterprise — built with modern tech stacks that perform and scale flawlessly.',
+          'Custom application development across all platforms — web, mobile, and enterprise — built with modern tech stacks that perform and scale.',
         icon: '📱',
         features: [
           'Web application development',
@@ -323,7 +322,7 @@ export const serviceCategories: ServiceCategory[] = [
         slug: 'cloud-api',
         tagline: 'Scalable Infrastructure. Seamless Integrations.',
         description:
-          'Robust cloud infrastructure and API development ensuring your systems scale effortlessly, integrate seamlessly, and run with maximum reliability.',
+          'Robust cloud infrastructure and API development ensuring your systems scale effortlessly and integrate seamlessly.',
         icon: '☁️',
         features: [
           'Cloud infrastructure setup (AWS, GCP, Azure)',
@@ -340,7 +339,7 @@ export const serviceCategories: ServiceCategory[] = [
         slug: 'ai-software-integration',
         tagline: 'Where Intelligence Meets Software.',
         description:
-          'Seamlessly integrate AI capabilities into existing software platforms, creating intelligent systems that automate workflows and optimize every process.',
+          'Seamlessly integrate AI capabilities into existing software platforms, creating intelligent systems that automate and optimize every process.',
         icon: '🔗',
         features: [
           'AI-powered SaaS product development',
@@ -380,10 +379,7 @@ export function getCategoryBySlug(slug: string): ServiceCategory | undefined {
   return serviceCategories.find((c) => c.slug === slug);
 }
 
-export function getServiceBySlug(
-  categorySlug: string,
-  serviceSlug: string
-): ServiceItem | undefined {
+export function getServiceBySlug(categorySlug: string, serviceSlug: string): ServiceItem | undefined {
   const category = getCategoryBySlug(categorySlug);
   return category?.services.find((s) => s.slug === serviceSlug);
 }

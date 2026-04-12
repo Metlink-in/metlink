@@ -1,158 +1,119 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { X, Zap, CheckCircle } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { X, Zap } from 'lucide-react';
+
+function MetLinkLogoSm() {
+  return (
+    <svg width="44" height="44" viewBox="0 0 100 100" fill="none">
+      <defs>
+        <linearGradient id="pRing" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#F0C855"/><stop offset="0.45" stopColor="#D4A843"/><stop offset="1" stopColor="#7A5010"/>
+        </linearGradient>
+        <linearGradient id="pMono" x1="18" y1="25" x2="75" y2="75" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#FDE68A"/><stop offset="0.4" stopColor="#D4A843"/><stop offset="1" stopColor="#92600A"/>
+        </linearGradient>
+      </defs>
+      <circle cx="50" cy="50" r="48" fill="#0A0A0A" stroke="url(#pRing)" strokeWidth="2.5"/>
+      <path d="M18 70 L18 32 L36 54 L50 32 L64 54 L64 32" stroke="url(#pMono)" strokeWidth="5.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+      <path d="M64 70 L82 70" stroke="url(#pMono)" strokeWidth="5.5" strokeLinecap="round" fill="none"/>
+      <text x="50" y="90" textAnchor="middle" fill="url(#pRing)" fontSize="9" fontWeight="700" letterSpacing="3" fontFamily="system-ui,sans-serif">METLINK</text>
+    </svg>
+  );
+}
 
 export function PopupForm() {
-  const [isVisible, setIsVisible] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [form, setForm] = useState({ name: '', company: '', email: '' });
-  const [isDismissed, setIsDismissed] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [form, setForm] = useState({ name: '', company: '', email: '', service: '' });
 
   useEffect(() => {
-    // Show popup after 8 seconds if not already dismissed in this session
-    if (typeof window !== 'undefined') {
-      const dismissed = sessionStorage.getItem('popup_dismissed');
-      if (dismissed) return;
-    }
+    if (sessionStorage.getItem('ml_popup')) return;
+    const t = setTimeout(() => setOpen(true), 8000);
+    return () => clearTimeout(t);
+  }, []);
 
-    const timer = setTimeout(() => {
-      if (!isDismissed) setIsVisible(true);
-    }, 8000);
-
-    return () => clearTimeout(timer);
-  }, [isDismissed]);
-
-  const handleDismiss = () => {
-    setIsVisible(false);
-    setIsDismissed(true);
-    sessionStorage.setItem('popup_dismissed', '1');
+  const close = () => {
+    sessionStorage.setItem('ml_popup', '1');
+    setOpen(false);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitted(true);
-    setTimeout(() => {
-      setIsVisible(false);
-      setIsDismissed(true);
-      sessionStorage.setItem('popup_dismissed', '1');
-    }, 2500);
+    setSubmitted(true);
+    setTimeout(close, 2800);
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  };
-
-  if (!isVisible) return null;
+  if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center px-4">
-      {/* Backdrop */}
-      <div
-        className="absolute inset-0 bg-black/60 backdrop-blur-sm"
-        onClick={handleDismiss}
-      />
+    <div className="fixed inset-0 z-[200] flex items-center justify-center px-4">
+      <div className="absolute inset-0 bg-black/75 backdrop-blur-sm" onClick={close} />
+      <div className="relative w-full max-w-md rounded-2xl overflow-hidden shadow-2xl shadow-black/70 animate-fadeInScale"
+        style={{ background: '#0C0C0C', border: '1px solid rgba(212,168,67,0.25)' }}>
+        {/* Gold top line */}
+        <div className="h-0.5" style={{ background: 'linear-gradient(90deg, transparent, #D4A843, #F0C855, #D4A843, transparent)' }} />
 
-      {/* Modal */}
-      <div className="relative w-full max-w-md rounded-2xl border border-white/10 bg-zinc-900 shadow-2xl shadow-black/60 overflow-hidden animate-fadeInScale">
-        {/* Gradient top bar */}
-        <div className="h-1 w-full bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-500" />
-
-        {/* Close button */}
-        <button
-          onClick={handleDismiss}
-          className="absolute top-4 right-4 z-10 text-foreground/50 hover:text-foreground transition-colors"
-        >
+        <button onClick={close} className="absolute top-4 right-4 z-10 transition-colors"
+          style={{ color: '#6A5F4A' }} onMouseEnter={e => (e.currentTarget.style.color='#F5EDD8')}
+          onMouseLeave={e => (e.currentTarget.style.color='#6A5F4A')}>
           <X className="w-5 h-5" />
         </button>
 
         <div className="p-8">
-          {isSubmitted ? (
-            <div className="text-center py-6 animate-slideInUp">
-              <div className="w-16 h-16 bg-green-500/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <CheckCircle className="w-8 h-8 text-green-500" />
+          {submitted ? (
+            <div className="text-center py-8">
+              <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-5"
+                style={{ background: 'rgba(212,168,67,0.1)', border: '1px solid rgba(212,168,67,0.25)' }}>
+                <Zap className="w-8 h-8 text-amber-400" />
               </div>
-              <h3 className="text-xl font-bold text-foreground mb-2">You're in!</h3>
-              <p className="text-foreground/60 text-sm">
-                Our team will reach out within 24 hours to discuss your project.
-              </p>
+              <h3 className="text-2xl font-black text-[#F5EDD8] mb-2">You are in!</h3>
+              <p className="text-[#9A8F7A] text-sm">Our team will reach out within 24 hours.</p>
             </div>
           ) : (
             <>
-              {/* Header */}
-              <div className="text-center mb-6">
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 mb-4">
-                  <Zap className="w-3.5 h-3.5 text-blue-400" />
-                  <span className="text-xs font-semibold text-blue-400">Limited Spots Available</span>
-                </div>
-                <h2 className="text-2xl font-bold text-foreground mb-2">
-                  Ready to Grow with{' '}
-                  <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                    MetLink?
-                  </span>
-                </h2>
-                <p className="text-foreground/60 text-sm">
-                  Tell us a bit about yourself and we'll reach out to start the conversation.
-                </p>
+              <div className="text-center mb-7">
+                <div className="flex justify-center mb-4"><MetLinkLogoSm /></div>
+                <p className="text-xs font-bold uppercase tracking-[0.2em] text-amber-400 mb-2">Limited Spots Available</p>
+                <h2 className="text-2xl font-black text-[#F5EDD8] mb-1">Become a MetLink Client</h2>
+                <p className="text-[#9A8F7A] text-sm">Join 80+ businesses growing with AI-powered strategy.</p>
               </div>
 
-              {/* Form */}
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div>
-                  <label className="block text-xs font-medium text-foreground/70 mb-1.5">
-                    Full Name *
-                  </label>
-                  <input
-                    type="text"
-                    name="name"
-                    value={form.name}
-                    onChange={handleChange}
-                    placeholder="John Smith"
-                    required
-                    className="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-foreground placeholder:text-foreground/30 text-sm focus:outline-none focus:border-blue-500/50 transition-colors"
+              <form onSubmit={handleSubmit} className="space-y-3">
+                {[
+                  { name: 'name', placeholder: 'Full Name', type: 'text' },
+                  { name: 'company', placeholder: 'Company / Project Name', type: 'text' },
+                  { name: 'email', placeholder: 'Work Email Address', type: 'email' },
+                ] .map((f) => (
+                  <input key={f.name} type={f.type} name={f.name}
+                    value={form[f.name as keyof typeof form]}
+                    onChange={e => setForm(p => ({ ...p, [f.name]: e.target.value }))}
+                    placeholder={f.placeholder} required
+                    className="w-full px-4 py-3 rounded-xl text-sm text-[#F5EDD8] placeholder:text-[#4A4030] focus:outline-none transition-colors"
+                    style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(212,168,67,0.15)' }}
+                    onFocus={e => (e.currentTarget.style.borderColor = 'rgba(212,168,67,0.40)')}
+                    onBlur={e => (e.currentTarget.style.borderColor = 'rgba(212,168,67,0.15)')}
                   />
-                </div>
-                <div>
-                  <label className="block text-xs font-medium text-foreground/70 mb-1.5">
-                    Company / Project *
-                  </label>
-                  <input
-                    type="text"
-                    name="company"
-                    value={form.company}
-                    onChange={handleChange}
-                    placeholder="Acme Corp"
-                    required
-                    className="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-foreground placeholder:text-foreground/30 text-sm focus:outline-none focus:border-blue-500/50 transition-colors"
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs font-medium text-foreground/70 mb-1.5">
-                    Work Email *
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={form.email}
-                    onChange={handleChange}
-                    placeholder="john@acmecorp.com"
-                    required
-                    className="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-foreground placeholder:text-foreground/30 text-sm focus:outline-none focus:border-blue-500/50 transition-colors"
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  className="w-full py-3 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold text-sm hover:opacity-90 transition-opacity shadow-lg shadow-blue-600/20 flex items-center justify-center gap-2"
-                >
-                  <Zap className="w-4 h-4" />
-                  Become a Client
+                ))}
+                <select name="service" value={form.service}
+                  onChange={e => setForm(p => ({ ...p, service: e.target.value }))}
+                  className="w-full px-4 py-3 rounded-xl text-sm focus:outline-none appearance-none"
+                  style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(212,168,67,0.15)', color: form.service ? '#F5EDD8' : '#4A4030' }}>
+                  <option value="" style={{ background: '#0C0C0C' }}>Select a Service (optional)</option>
+                  {['Digital Marketing', 'Performance Marketing', 'AI Development', 'Software Development', 'Brand Identity', 'SEO', 'Business Automation', 'Other'].map(s => (
+                    <option key={s} value={s} style={{ background: '#0C0C0C', color: '#F5EDD8' }}>{s}</option>
+                  ))}
+                </select>
+                <button type="submit"
+                  className="w-full py-3.5 rounded-xl font-bold text-sm transition-opacity hover:opacity-90 mt-1"
+                  style={{ background: 'linear-gradient(135deg, #D4A843 0%, #A37820 100%)', color: '#080808', boxShadow: '0 4px 20px rgba(212,168,67,0.25)' }}>
+                  Submit & Get Started →
                 </button>
-
-                <p className="text-center text-xs text-foreground/40">
-                  No spam. No commitments. Just a conversation.
-                </p>
               </form>
+
+              <p className="text-center text-xs mt-4" style={{ color: '#3A3026' }}>
+                No spam. We respond within 24 hours.
+              </p>
             </>
           )}
         </div>
