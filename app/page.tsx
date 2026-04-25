@@ -202,41 +202,67 @@ export default function HomePage() {
       </section>
 
       {/* ─── INTEGRATIONS ─── */}
-      <section className="py-20 sm:py-24 relative overflow-hidden border-y"
-        style={{ borderColor: 'rgba(30,41,59,0.5)' }}>
+      <section className="relative overflow-hidden" style={{ background: '#06090f' }}>
+        {/* Center radial glow matching reference */}
         <div className="absolute inset-0 pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse at 50% 50%, rgba(6,182,212,0.03), transparent 70%)' }} />
+          style={{ background: 'radial-gradient(ellipse 60% 80% at 50% 100%, rgba(14,60,110,0.55) 0%, rgba(6,9,15,0) 70%)' }} />
 
-        <div className="max-w-7xl mx-auto px-4 text-center mb-12 relative z-10">
-          <p className="text-[10px] font-black uppercase tracking-[0.4em]" style={{ color: '#475569' }}>
-            Integrations & AI Stack
+        <div className="relative z-10 max-w-7xl mx-auto px-6 py-16 sm:py-20 flex flex-col items-center gap-12">
+          {/* Label */}
+          <p className="text-[10px] font-medium uppercase tracking-[0.5em]" style={{ color: '#475569', letterSpacing: '0.45em' }}>
+            Integrations
           </p>
-        </div>
 
-        <div className="relative">
-          <div className="absolute inset-y-0 left-0 w-40 z-10 pointer-events-none"
-            style={{ background: 'linear-gradient(to right, #030712, transparent)' }} />
-          <div className="absolute inset-y-0 right-0 w-40 z-10 pointer-events-none"
-            style={{ background: 'linear-gradient(to left, #030712, transparent)' }} />
+          {/* Logo row */}
+          <div className="w-full flex flex-wrap items-center justify-center gap-x-12 gap-y-8 sm:gap-x-16">
+            {/* Google Drive */}
+            <div className="flex items-center gap-3 opacity-70 hover:opacity-100 transition-opacity duration-300">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/1/12/Google_Drive_icon_%282020%29.svg"
+                alt="Google Drive" className="h-8 w-8 object-contain" />
+            </div>
 
-          <div className="animate-marquee flex items-center gap-16 py-2" style={{ width: 'max-content' }}>
-            {[...Array(4)].map((_, i) => (
-              <div key={i} className="flex items-center gap-16 px-8">
-                {[
-                  { src: 'https://upload.wikimedia.org/wikipedia/commons/4/4d/OpenAI_Logo.svg', alt: 'OpenAI', cls: 'h-5 invert', text: '' },
-                  { src: 'https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/anthropic.svg', alt: 'Claude', cls: 'h-4', text: 'Claude', filter: 'invert(58%) sepia(43%) saturate(548%) hue-rotate(334deg) brightness(91%) contrast(88%)' },
-                  { src: 'https://upload.wikimedia.org/wikipedia/commons/e/e0/Make.com_logo.svg', alt: 'Make', cls: 'h-4', text: '' },
-                  { src: 'https://upload.wikimedia.org/wikipedia/commons/a/ad/Logo_Google_Sheets.svg', alt: 'Google Sheets', cls: 'h-5', text: 'Sheets' },
-                  { src: 'https://upload.wikimedia.org/wikipedia/commons/1/12/Google_Drive_icon_%282020%29.svg', alt: 'Google Drive', cls: 'h-5', text: 'Drive' },
-                  { src: 'https://upload.wikimedia.org/wikipedia/commons/4/45/Notion_app_logo.png', alt: 'Notion', cls: 'h-5', text: 'Notion' },
-                ].map((logo) => (
-                  <div key={logo.alt} className="flex items-center gap-2 grayscale opacity-25 hover:opacity-100 hover:grayscale-0 transition-all duration-500">
-                    <img src={logo.src} alt={logo.alt} className={logo.cls} style={logo.filter ? { filter: logo.filter } : {}} />
-                    {logo.text && <span className="text-base font-bold" style={{ color: '#E2E8F0' }}>{logo.text}</span>}
-                  </div>
-                ))}
-              </div>
-            ))}
+            {/* Notion */}
+            <div className="flex items-center gap-3 opacity-70 hover:opacity-100 transition-opacity duration-300">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/4/45/Notion_app_logo.png"
+                alt="Notion" className="h-7 w-7 object-contain rounded-md" style={{ filter: 'invert(1)' }} />
+              <span className="text-lg font-semibold" style={{ color: '#E2E8F0', letterSpacing: '-0.01em' }}>Notion</span>
+            </div>
+
+            {/* Klaviyo — text logo */}
+            <div className="flex items-center opacity-70 hover:opacity-100 transition-opacity duration-300">
+              <span className="text-xl font-bold tracking-tight" style={{ color: '#E2E8F0' }}>klaviyo</span>
+            </div>
+
+            {/* OpenAI */}
+            <div className="flex items-center gap-3 opacity-70 hover:opacity-100 transition-opacity duration-300">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/4/4d/OpenAI_Logo.svg"
+                alt="OpenAI" className="h-6 object-contain" style={{ filter: 'invert(1)' }} />
+            </div>
+
+            {/* Claude / Anthropic */}
+            <div className="flex items-center gap-2.5 opacity-70 hover:opacity-100 transition-opacity duration-300">
+              {/* Anthropic star SVG */}
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                <path d="M12 2L13.8 8.2L20 10L13.8 11.8L12 18L10.2 11.8L4 10L10.2 8.2L12 2Z" fill="#D97757" />
+              </svg>
+              <span className="text-xl font-semibold" style={{ color: '#E2E8F0' }}>Claude</span>
+            </div>
+
+            {/* Make / Integromat */}
+            <div className="flex items-center gap-2.5 opacity-70 hover:opacity-100 transition-opacity duration-300">
+              {/* Make logo: three circles connected */}
+              <svg width="32" height="20" viewBox="0 0 40 24" fill="none">
+                <circle cx="8"  cy="12" r="6" stroke="#E2E8F0" strokeWidth="2" fill="none" />
+                <circle cx="20" cy="12" r="6" stroke="#E2E8F0" strokeWidth="2" fill="none" />
+                <circle cx="32" cy="12" r="6" stroke="#E2E8F0" strokeWidth="2" fill="none" />
+              </svg>
+              <span className="text-lg font-bold italic" style={{ color: '#E2E8F0' }}>make</span>
+            </div>
+
+            {/* LangChain */}
+            <div className="flex items-center opacity-70 hover:opacity-100 transition-opacity duration-300">
+              <span className="text-lg font-semibold" style={{ color: '#E2E8F0' }}>LangChain</span>
+            </div>
           </div>
         </div>
       </section>
