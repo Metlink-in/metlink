@@ -50,7 +50,7 @@ export default function OurProductPage() {
 
         {/* Headline */}
         <h1
-          className="text-5xl sm:text-6xl md:text-7xl font-black tracking-tight leading-none mb-6"
+          className="text-5xl sm:text-6xl md:text-7xl font-black tracking-tight leading-tight mb-6 pb-2"
           style={{
             background: 'linear-gradient(135deg,#ccd6f6 30%,#64FFDA 70%,#007BFF 100%)',
             WebkitBackgroundClip: 'text',

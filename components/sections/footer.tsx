@@ -28,33 +28,32 @@ export function Footer() {
   return (
     <footer style={{ background: '#0A192F', borderTop: '1px solid #233554' }}>
       {/* Main footer */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
-        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-5 gap-8 sm:gap-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-12 lg:gap-8">
 
           {/* Brand */}
-          <div className="col-span-2 sm:col-span-2 lg:col-span-2">
-            <div className="flex items-center gap-3 mb-4 sm:mb-5">
-              <MetLinkLogoFooter />
-              <div>
-                <p className="font-black text-lg tracking-wide" style={{
-                  color: '#64FFDA',
-                }}>METLINK</p>
-                <p className="text-xs text-[#8892B0] tracking-widest uppercase">AI Agency</p>
-              </div>
-            </div>
-            <p className="text-[#8892B0] text-sm leading-relaxed mb-5 sm:mb-6 max-w-xs">
-              An AI-first marketing and development agency driving measurable growth for ambitious businesses worldwide.
-            </p>
-            {/* Newsletter */}
+          <div className="col-span-1 sm:col-span-2 lg:col-span-2 flex flex-col gap-8">
             <div>
-              <p className="text-xs font-bold text-[#8892B0] uppercase tracking-wider mb-3">Newsletter</p>
-              <form onSubmit={(e) => e.preventDefault()} className="flex gap-2">
-                <input type="email" placeholder="your@email.com"
-                  className="flex-1 min-w-0 px-3 py-2.5 rounded-xl text-[#ccd6f6] placeholder:text-[#233554] text-sm focus:outline-none"
-                  style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid #233554' }}
+              <div className="flex items-center gap-3 mb-4">
+                <MetLinkLogoFooter />
+                <div>
+                  <p className="font-black text-xl tracking-tight text-[#64FFDA]">METLINK</p>
+                  <p className="text-[10px] text-[#8892B0]/60 tracking-[0.2em] uppercase font-bold">AI Agency</p>
+                </div>
+              </div>
+              <p className="text-[#8892B0] text-sm leading-relaxed max-w-xs">
+                Empowering ambitious businesses with AI-first marketing and high-performance software development.
+              </p>
+            </div>
+
+            {/* Newsletter */}
+            <div className="max-w-sm">
+              <p className="text-xs font-bold text-[#ccd6f6] uppercase tracking-widest mb-4">Stay Updated</p>
+              <form onSubmit={(e) => e.preventDefault()} className="relative group">
+                <input type="email" placeholder="Enter your email"
+                  className="w-full pl-4 pr-14 py-3.5 rounded-xl bg-[#112240] border border-[#233554] text-[#ccd6f6] placeholder:text-[#8892B0]/40 text-sm focus:outline-none focus:border-[#64FFDA]/50 transition-all shadow-inner"
                 />
-                <button type="submit" className="p-2.5 rounded-xl transition-opacity hover:opacity-90 flex-shrink-0"
-                  style={{ background: '#007BFF', color: '#FFFFFF' }}>
+                <button type="submit" className="absolute right-1.5 top-1.5 bottom-1.5 px-3 rounded-lg bg-[#007BFF] text-white hover:bg-[#007BFF]/90 transition-colors shadow-lg">
                   <Mail className="w-4 h-4" />
                 </button>
               </form>
@@ -90,13 +89,15 @@ export function Footer() {
       </div>
 
       {/* Bottom bar */}
-      <div style={{ borderTop: '1px solid #233554' }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 sm:py-6 flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 text-center sm:text-left">
-          <p className="text-xs text-[#233554]">&copy; {new Date().getFullYear()} MetLink. All rights reserved.</p>
-          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
+      <div className="border-t border-[#233554]/50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col md:flex-row items-center justify-between gap-6">
+          <p className="text-xs text-[#8892B0]/40 font-medium">
+            &copy; {new Date().getFullYear()} MetLink. All rights reserved.
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-8">
             {['Portfolio', 'Company', 'Blog', 'Contact'].map((item) => (
               <Link key={item} href={`/${item.toLowerCase()}`}
-                className="text-xs text-[#233554] hover:text-[#8892B0] transition-colors">
+                className="text-xs font-semibold text-[#8892B0]/60 hover:text-[#64FFDA] transition-colors tracking-wide">
                 {item}
               </Link>
             ))}

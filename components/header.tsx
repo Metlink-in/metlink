@@ -72,6 +72,13 @@ export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
+  }, []);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10);
@@ -88,6 +95,21 @@ export function Header() {
     return () => document.removeEventListener('mousedown', handleClick);
   }, []);
 
+  const handleMouseEnter = () => {
+    if (window.innerWidth >= 768) {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+      setServicesOpen(true);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    if (window.innerWidth >= 768) {
+      timeoutRef.current = setTimeout(() => {
+        setServicesOpen(false);
+      }, 200);
+    }
+  };
+
   const navLink =
     'px-4 py-2 rounded-lg text-sm font-medium text-[#ccd6f6] hover:text-[#ccd6f6] hover:bg-white/5 transition-all duration-200';
 
@@ -95,12 +117,19 @@ export function Header() {
     <>
       <header
         className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
-          scrolled
+          scrolled || servicesOpen
             ? 'backdrop-blur-xl border-b shadow-lg shadow-black/40'
             : 'bg-transparent'
         }`}
-        style={scrolled ? { background: 'rgba(8,8,8,0.92)', borderBottomColor: '#233554' } : {}}
+        style={(scrolled || servicesOpen) ? { background: 'rgba(8,8,8,0.92)', borderBottomColor: '#233554' } : {}}
       >
+        {/* Backdrop for mega menu */}
+        {servicesOpen && (
+          <div 
+            className="fixed inset-0 top-16 bg-black/40 backdrop-blur-[2px] transition-opacity duration-300 z-[-1]"
+            onClick={() => setServicesOpen(false)}
+          />
+        )}
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
 
@@ -125,60 +154,73 @@ export function Header() {
               <Link href="/" className={navLink}>Home</Link>
 
               {/* Services mega dropdown */}
-              <div ref={dropdownRef} className="relative">
+              <div 
+                ref={dropdownRef} 
+                className="relative"
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+              >
                 <button
-                  className={`${navLink} flex items-center gap-1`}
-                  onClick={() => setServicesOpen((v) => !v)}
-                  onMouseEnter={() => setServicesOpen(true)}
+                  className={`${navLink} flex items-center gap-1 cursor-default`}
+                  onClick={() => {
+                    if (window.innerWidth < 768) setServicesOpen((v) => !v);
+                  }}
                 >
                   Services
-                  <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${servicesOpen ? 'rotate-180' : ''}`} />
+                  <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${servicesOpen ? 'rotate-180' : ''}`} />
                 </button>
 
                 {servicesOpen && (
                   <div
-                    className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-[780px] rounded-2xl shadow-2xl shadow-black/70 p-6 grid grid-cols-4 gap-5 animate-slideInDown"
-                    style={{ background: 'rgba(10,10,10,0.97)', border: '1px solid #233554', backdropFilter: 'blur(24px)' }}
-                    onMouseLeave={() => setServicesOpen(false)}
+                    className="fixed top-[64px] inset-x-0 w-screen shadow-2xl shadow-black/80 animate-slideInDown overflow-hidden pt-1"
+                    style={{ 
+                      background: 'rgba(8,8,8,0.98)', 
+                      borderBottom: '1px solid #233554', 
+                      backdropFilter: 'blur(32px)' 
+                    }}
+                    onMouseLeave={handleMouseLeave}
                   >
-                    {serviceCategories.map((cat) => (
-                      <div key={cat.slug}>
-                        <Link
-                          href={`/services/${cat.slug}`}
-                          className={`block text-xs font-bold uppercase tracking-wider mb-3 px-2 py-1.5 rounded-lg border transition-colors ${catColors[cat.slug] || 'text-[#64FFDA]'}`}
-                          onClick={() => setServicesOpen(false)}
-                        >
-                          <span className="mr-1.5 inline-block align-middle">
-                            {cat.slug === 'digital-marketing' && <Megaphone className="w-3.5 h-3.5" />}
-                            {cat.slug === 'creative-media' && <Palette className="w-3.5 h-3.5" />}
-                            {cat.slug === 'ai-automation' && <Bot className="w-3.5 h-3.5" />}
-                            {cat.slug === 'software-development' && <Code className="w-3.5 h-3.5" />}
-                          </span>
-                          {cat.name}
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 grid grid-cols-4 gap-10">
+                      {serviceCategories.map((cat) => (
+                        <div key={cat.slug} className="space-y-6">
+                          <Link
+                            href={`/services/${cat.slug}`}
+                            className={`flex items-center gap-2.5 text-sm font-bold uppercase tracking-widest transition-all hover:translate-x-1 ${catColors[cat.slug]?.split(' ')[0] || 'text-[#64FFDA]'}`}
+                            onClick={() => setServicesOpen(false)}
+                          >
+                            {cat.slug === 'digital-marketing' && <Megaphone className="w-4 h-4" />}
+                            {cat.slug === 'creative-media' && <Palette className="w-4 h-4" />}
+                            {cat.slug === 'ai-automation' && <Bot className="w-4 h-4" />}
+                            {cat.slug === 'software-development' && <Code className="w-4 h-4" />}
+                            {cat.name}
+                          </Link>
+                          <ul className="space-y-3">
+                            {cat.services.map((svc) => (
+                              <li key={svc.slug}>
+                                <Link
+                                  href={`/services/${cat.slug}/${svc.slug}`}
+                                  className="group/item flex items-center gap-2 text-sm text-[#8892B0] hover:text-[#ccd6f6] transition-all"
+                                  onClick={() => setServicesOpen(false)}
+                                >
+                                  <ArrowRight className="w-3.5 h-3.5 text-[#233554] group-hover/item:text-[#007BFF] group-hover/item:translate-x-0.5 transition-all flex-shrink-0" />
+                                  {svc.name}
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
+                      {/* Bottom bar */}
+                      <div className="col-span-4 mt-4 pt-8 flex items-center justify-between border-t border-[#233554]">
+                        <div className="flex items-center gap-2">
+                          <span className="w-2 h-2 rounded-full bg-[#64FFDA] animate-pulse" />
+                          <p className="text-sm text-[#8892B0]">Custom solutions for unique business challenges</p>
+                        </div>
+                        <Link href="/contact" onClick={() => setServicesOpen(false)}
+                          className="group px-6 py-2.5 rounded-xl bg-[#64FFDA]/5 border border-[#64FFDA]/20 text-sm text-[#64FFDA] hover:bg-[#64FFDA]/10 font-bold flex items-center gap-2 transition-all">
+                          Talk to our experts <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                         </Link>
-                        <ul className="space-y-1">
-                          {cat.services.map((svc) => (
-                            <li key={svc.slug}>
-                              <Link
-                                href={`/services/${cat.slug}/${svc.slug}`}
-                                className="group/item flex items-center gap-1.5 text-xs text-[#8892B0] hover:text-[#ccd6f6] py-1 px-2 rounded-lg hover:bg-white/5 transition-all"
-                                onClick={() => setServicesOpen(false)}
-                              >
-                                <ArrowRight className="w-3 h-3 text-[#233554] group-hover/item:text-[#007BFF] transition-colors flex-shrink-0" />
-                                {svc.name}
-                              </Link>
-                            </li>
-                          ))}
-                        </ul>
                       </div>
-                    ))}
-                    {/* Bottom bar */}
-                    <div className="col-span-4 pt-4 flex items-center justify-between" style={{ borderTop: '1px solid #233554' }}>
-                      <p className="text-xs text-[#8892B0]">Not sure what you need?</p>
-                      <Link href="/contact" onClick={() => setServicesOpen(false)}
-                        className="text-xs text-[#64FFDA] hover:text-[#64FFDA] font-medium flex items-center gap-1 transition-colors">
-                        Talk to our experts <ArrowRight className="w-3 h-3" />
-                      </Link>
                     </div>
                   </div>
                 )}
