@@ -7,6 +7,7 @@ import { Footer } from '@/components/sections/footer';
 import { ScrollToTop } from '@/components/scroll-to-top';
 import { ChatBot } from '@/components/chatbot';
 import { PopupForm } from '@/components/popup-form';
+import { IntroAnimation } from '@/components/intro-animation';
 import './globals.css';
 
 const dmSans = DM_Sans({ subsets: ['latin'], variable: '--font-dm-sans' });
@@ -49,6 +50,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${dmSans.variable} ${manrope.variable}`}>
       <body className="font-sans antialiased">
+        <IntroAnimation />
         <Header />
         <main className="pt-14">{children}</main>
         <Footer />

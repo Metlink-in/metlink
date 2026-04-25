@@ -2,10 +2,11 @@
 
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
-import { ArrowRight, CheckCircle, ChevronRight, Zap, LinkIcon, Cpu, BarChart, Clock, Target, Globe, Megaphone, Palette, Bot, Code, Brain, Sparkles, Network, Shield, Layers, Activity } from 'lucide-react';
+import { ArrowRight, LinkIcon, Clock, Target, Megaphone, Palette, Bot, Code, Brain, Sparkles, Layers, Activity, ChevronDown } from 'lucide-react';
 import { serviceCategories } from '@/lib/services-data';
-import { FadeIn, StaggerChildren, StaggerItem } from '@/components/fade-in';
-import { NeuralNet, AIOrb } from '@/components/neural-net';
+import { FadeIn } from '@/components/fade-in';
+import { NeuralNet } from '@/components/neural-net';
+import { SplineRobot } from '@/components/spline-robot';
 
 /* ─── Animated counter ─── */
 function Counter({ target, suffix = '' }: { target: number; suffix?: string }) {
@@ -29,29 +30,22 @@ function Counter({ target, suffix = '' }: { target: number; suffix?: string }) {
   return <span ref={ref}>{count}{suffix}</span>;
 }
 
-/* ─── Typing text animation ─── */
+/* ─── Typing text ─── */
 function TypingText({ words }: { words: string[] }) {
-  const [idx, setIdx] = useState(0);
+  const [idx, setIdx]             = useState(0);
   const [displayed, setDisplayed] = useState('');
-  const [deleting, setDeleting] = useState(false);
+  const [deleting, setDeleting]   = useState(false);
 
   useEffect(() => {
     const word = words[idx];
-    const speed = deleting ? 40 : 80;
+    const speed = deleting ? 35 : 75;
     const timeout = setTimeout(() => {
       if (!deleting) {
-        if (displayed.length < word.length) {
-          setDisplayed(word.slice(0, displayed.length + 1));
-        } else {
-          setTimeout(() => setDeleting(true), 1800);
-        }
+        if (displayed.length < word.length) setDisplayed(word.slice(0, displayed.length + 1));
+        else setTimeout(() => setDeleting(true), 2000);
       } else {
-        if (displayed.length > 0) {
-          setDisplayed(displayed.slice(0, -1));
-        } else {
-          setDeleting(false);
-          setIdx((i) => (i + 1) % words.length);
-        }
+        if (displayed.length > 0) setDisplayed(displayed.slice(0, -1));
+        else { setDeleting(false); setIdx((i) => (i + 1) % words.length); }
       }
     }, speed);
     return () => clearTimeout(timeout);
@@ -60,207 +54,184 @@ function TypingText({ words }: { words: string[] }) {
   return (
     <span className="gradient-text-cyan">
       {displayed}
-      <span className="animate-pulse text-[#06B6D4]">|</span>
+      <span className="text-[#06B6D4] opacity-80">|</span>
     </span>
   );
 }
 
 const whyUs = [
-  { title: 'End-to-End AI Partner', desc: 'Strategy, design, AI development, and deployment — one accountable team that owns your results.', icon: <LinkIcon className="w-5 h-5" /> },
-  { title: 'AI-First Execution', desc: 'Every project integrates cutting-edge AI to achieve 10x results at a fraction of traditional cost.', icon: <Brain className="w-5 h-5" /> },
-  { title: 'Real-Time Insights', desc: 'Weekly reports, live KPI dashboards, and zero ambiguity on where your investment performs.', icon: <Activity className="w-5 h-5" /> },
-  { title: 'Ship in 7 Days', desc: 'No months-long discovery. First working AI deliverables in your hands within one week.', icon: <Clock className="w-5 h-5" /> },
-  { title: 'Measurable ROI', desc: 'We define success metrics upfront and are fully accountable to every one of them.', icon: <Target className="w-5 h-5" /> },
-  { title: 'Scalable Systems', desc: 'AI systems built to grow — from 10 to 10 million users without re-architecting.', icon: <Layers className="w-5 h-5" /> },
+  { title: 'End-to-End AI Partner',  desc: 'Strategy, design, development, and deployment — one accountable team.', icon: <LinkIcon className="w-4 h-4" /> },
+  { title: 'AI-First Execution',     desc: 'Every project integrates cutting-edge AI to deliver 10x results.', icon: <Brain className="w-4 h-4" /> },
+  { title: 'Real-Time Insights',     desc: 'Live KPI dashboards and zero ambiguity on where your investment performs.', icon: <Activity className="w-4 h-4" /> },
+  { title: 'Ship in 7 Days',         desc: 'No lengthy discovery. First working deliverables within one week.', icon: <Clock className="w-4 h-4" /> },
+  { title: 'Measurable ROI',         desc: 'We define success metrics upfront and are accountable to every one.', icon: <Target className="w-4 h-4" /> },
+  { title: 'Scalable Systems',       desc: 'Built to grow from 10 to 10 million users without re-architecting.', icon: <Layers className="w-4 h-4" /> },
 ];
 
 const catIcons: Record<string, React.ReactNode> = {
-  'digital-marketing': <Megaphone className="w-6 h-6" />,
-  'creative-media': <Palette className="w-6 h-6" />,
-  'ai-automation': <Bot className="w-6 h-6" />,
-  'software-development': <Code className="w-6 h-6" />,
+  'digital-marketing':   <Megaphone className="w-5 h-5" />,
+  'creative-media':      <Palette   className="w-5 h-5" />,
+  'ai-automation':       <Bot       className="w-5 h-5" />,
+  'software-development':<Code      className="w-5 h-5" />,
 };
 
-const catColors: Record<string, { accent: string; glow: string; border: string }> = {
-  'digital-marketing':  { accent: '#06B6D4', glow: 'rgba(6,182,212,0.15)',   border: 'rgba(6,182,212,0.3)' },
-  'creative-media':     { accent: '#A78BFA', glow: 'rgba(167,139,250,0.15)', border: 'rgba(167,139,250,0.3)' },
-  'ai-automation':      { accent: '#34D399', glow: 'rgba(52,211,153,0.15)',  border: 'rgba(52,211,153,0.3)' },
-  'software-development':{ accent: '#F472B6', glow: 'rgba(244,114,182,0.15)', border: 'rgba(244,114,182,0.3)' },
+const catColors: Record<string, { accent: string; glow: string }> = {
+  'digital-marketing':   { accent: '#06B6D4', glow: 'rgba(6,182,212,0.08)'   },
+  'creative-media':      { accent: '#A78BFA', glow: 'rgba(167,139,250,0.08)' },
+  'ai-automation':       { accent: '#34D399', glow: 'rgba(52,211,153,0.08)'  },
+  'software-development':{ accent: '#F472B6', glow: 'rgba(244,114,182,0.08)' },
 };
+
+const caps = [
+  { name: 'GPT-4o & o3',         label: 'OpenAI',        color: '#10B981' },
+  { name: 'Claude 3.5 Sonnet',   label: 'Anthropic',     color: '#D97757' },
+  { name: 'Gemini 2.5 Flash',    label: 'Google',        color: '#3B82F6' },
+  { name: 'LangChain + RAG',     label: 'Orchestration', color: '#8B5CF6' },
+  { name: 'Pinecone / Weaviate', label: 'Vector DBs',    color: '#06B6D4' },
+  { name: 'HuggingFace',         label: 'Open Source',   color: '#F97316' },
+  { name: 'AWS / GCP / Azure',   label: 'Cloud Infra',   color: '#EF4444' },
+  { name: 'MLflow + W&B',        label: 'MLOps',         color: '#A78BFA' },
+  { name: 'LlamaIndex',          label: 'Retrieval',     color: '#34D399' },
+  { name: 'Docker + Kubernetes', label: 'Infra',         color: '#60A5FA' },
+  { name: 'FastAPI + Next.js',   label: 'Stack',         color: '#F472B6' },
+  { name: 'Supabase + PgVector', label: 'Data',          color: '#FBBF24' },
+];
 
 export default function HomePage() {
   return (
-    <div className="w-full overflow-x-hidden bg-[#030712] pb-20">
+    <div className="w-full overflow-x-hidden bg-[#030712]">
 
-      {/* ─── HERO ─── */}
-      <section className="relative min-h-screen flex items-center overflow-hidden pt-14 sm:pt-16">
-        {/* Neural network canvas bg */}
-        <div className="absolute inset-0 pointer-events-none">
-          <NeuralNet className="w-full h-full opacity-60" />
+      {/* ═══════════════════════════════
+          HERO — split: text left, robot right
+      ═══════════════════════════════ */}
+      <section className="relative min-h-screen flex flex-col justify-center overflow-hidden pt-20 pb-16">
+
+        {/* Neural net bg — left half only on lg, full on mobile */}
+        <div className="absolute inset-0 pointer-events-none opacity-35">
+          <NeuralNet className="w-full h-full" />
         </div>
 
-        {/* Grid */}
-        <div className="absolute inset-0 grid-bg pointer-events-none opacity-50" />
+        {/* Grid overlay */}
+        <div className="absolute inset-0 grid-bg pointer-events-none opacity-25" />
 
         {/* Ambient glows */}
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] pointer-events-none"
-          style={{ background: 'radial-gradient(circle, rgba(139,92,246,0.08) 0%, transparent 70%)' }} />
-        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] pointer-events-none"
-          style={{ background: 'radial-gradient(circle, rgba(6,182,212,0.06) 0%, transparent 70%)' }} />
+        <div className="absolute top-0 left-0 w-[700px] h-[600px] pointer-events-none"
+          style={{ background: 'radial-gradient(ellipse at 0% 20%, rgba(139,92,246,0.10) 0%, transparent 60%)' }} />
+        <div className="absolute bottom-0 right-0 w-[600px] h-[500px] pointer-events-none"
+          style={{ background: 'radial-gradient(ellipse at 100% 100%, rgba(6,182,212,0.07) 0%, transparent 60%)' }} />
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10 py-12 sm:py-16">
-          <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-6 lg:gap-4 items-center min-h-[calc(100vh-140px)]">
 
-            {/* Left */}
-            <FadeIn>
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold mb-6 sm:mb-8 border tracking-[0.08em] animate-border-glow"
-                style={{ background: 'rgba(6,182,212,0.05)', borderColor: 'rgba(6,182,212,0.3)', color: '#06B6D4' }}>
-                <span className="w-2 h-2 rounded-full bg-[#06B6D4] animate-pulse" />
+            {/* ── LEFT: text content ── */}
+            <FadeIn className="flex flex-col items-center lg:items-start text-center lg:text-left order-2 lg:order-1 py-8 lg:py-0">
+
+              {/* Badge */}
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-[11px] font-semibold mb-8 border tracking-[0.1em]"
+                style={{ background: 'rgba(6,182,212,0.05)', borderColor: 'rgba(6,182,212,0.2)', color: '#06B6D4' }}>
+                <span className="w-1.5 h-1.5 rounded-full bg-[#06B6D4] animate-pulse" />
                 AI Marketing & Development Agency
               </div>
 
-              <h1 className="font-black leading-[1.05] text-white mb-5 sm:mb-6">
+              {/* Main headline */}
+              <h1 className="font-black text-white leading-[1.02] tracking-tight mb-8">
                 <span className="block">We Build</span>
-                <span className="block my-1 min-h-[1.1em]">
-                  <TypingText words={['AI Automation', 'Neural Systems', 'Smart Agents', 'ML Pipelines', 'Growth Machines']} />
+                <span className="block min-h-[1.1em]">
+                  <TypingText words={['AI Automation', 'Neural Systems', 'Smart Agents', 'ML Pipelines']} />
                 </span>
                 <span className="block">That Scale</span>
               </h1>
 
-              <p className="text-base sm:text-lg leading-relaxed mb-8 sm:mb-10 max-w-xl"
-                style={{ color: '#94A3B8' }}>
-                From custom AI models to autonomous marketing systems — MetLink engineers
-                end-to-end digital transformation that drives compounding, measurable revenue.
-              </p>
-
-              <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4">
-                <Link href="/services"
-                  className="group inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-black text-sm text-[#030712] transition-all hover:brightness-110 active:scale-95 glow-cyan"
-                  style={{ background: 'linear-gradient(135deg, #06B6D4, #8B5CF6)' }}>
+              {/* CTAs */}
+              <div className="flex flex-col sm:flex-row items-center lg:items-start gap-4 mb-14">
+                <Link href="/contact"
+                  className="group inline-flex items-center gap-2.5 px-8 py-4 rounded-full font-bold text-sm text-[#030712] transition-all hover:brightness-110 active:scale-95"
+                  style={{ background: 'linear-gradient(135deg, #06B6D4 0%, #8B5CF6 100%)', boxShadow: '0 0 40px rgba(6,182,212,0.25)' }}>
                   <Sparkles className="w-4 h-4" />
-                  Explore AI Services <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  Start Building with AI
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
                 </Link>
                 <Link href="/portfolio"
-                  className="inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl font-semibold text-sm border transition-all hover:bg-white/5"
-                  style={{ borderColor: '#1E293B', color: '#E2E8F0' }}>
-                  View Our Work
+                  className="inline-flex items-center gap-2 px-7 py-4 rounded-full font-semibold text-sm transition-all hover:bg-white/5"
+                  style={{ border: '1px solid rgba(255,255,255,0.1)', color: '#94A3B8' }}>
+                  See Our Work
                 </Link>
               </div>
 
-              <StaggerChildren className="flex flex-wrap items-center gap-x-10 gap-y-6 mt-12 sm:mt-16">
+              {/* Inline stats */}
+              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-x-8 gap-y-5">
                 {[
-                  ['150+', 'Projects', 'Delivered'],
-                  ['80+', 'Clients', 'Globally'],
-                  ['5+', 'Years', 'Experience'],
-                  ['$10M+', 'Revenue', 'Generated'],
-                ].map(([v, l, sub]) => (
-                  <StaggerItem key={l} className="group/stat">
-                    <div className="flex flex-col">
-                      <p className="text-3xl sm:text-4xl font-black gradient-text-cyan transition-transform group-hover/stat:scale-110 origin-left">{v}</p>
-                      <p className="text-[10px] font-black text-white/90 uppercase tracking-[0.2em] mt-2 mb-0.5">{l}</p>
-                      <p className="text-[10px] uppercase tracking-widest opacity-40" style={{ color: '#64748B' }}>{sub}</p>
+                  ['150+', 'Projects'],
+                  ['80+',  'Clients'],
+                  ['$10M+','Revenue'],
+                  ['94%',  'Retention'],
+                ].map(([val, lbl], i) => (
+                  <div key={lbl} className="flex items-center gap-4">
+                    {i > 0 && <span className="hidden sm:block w-px h-5" style={{ background: 'rgba(255,255,255,0.08)' }} />}
+                    <div>
+                      <p className="text-xl font-black gradient-text-cyan leading-none">{val}</p>
+                      <p className="text-[10px] uppercase tracking-widest mt-1" style={{ color: '#475569' }}>{lbl}</p>
                     </div>
-                  </StaggerItem>
+                  </div>
                 ))}
-              </StaggerChildren>
+              </div>
             </FadeIn>
 
-            {/* Right — AI Orb + stat cards */}
-            <FadeIn delay={0.2} y={50} className="hidden lg:flex flex-col items-center gap-6 relative">
-              {/* Orb */}
-              <div className="animate-float">
-                <AIOrb size={340} />
-              </div>
-
-              {/* Floating stat cards around orb */}
-              <div className="absolute top-0 right-0 p-5 rounded-2xl glass animate-border-glow"
-                style={{ border: '1px solid rgba(6,182,212,0.2)' }}>
-                <p className="text-[9px] font-bold uppercase tracking-widest mb-2" style={{ color: '#64748B' }}>AI Models Deployed</p>
-                <p className="text-3xl font-black" style={{ color: '#06B6D4' }}>500%</p>
-                <p className="text-xs mt-1" style={{ color: '#64748B' }}>Average ROI</p>
-              </div>
-
-              <div className="absolute bottom-4 left-0 p-5 rounded-2xl glass"
-                style={{ border: '1px solid rgba(139,92,246,0.2)' }}>
-                <p className="text-[9px] font-bold uppercase tracking-widest mb-2" style={{ color: '#64748B' }}>Automation Rate</p>
-                <p className="text-3xl font-black" style={{ color: '#8B5CF6' }}>10x</p>
-                <p className="text-xs mt-1" style={{ color: '#64748B' }}>Faster Workflows</p>
-              </div>
-
-              <div className="absolute top-1/2 -left-4 p-4 rounded-xl glass"
-                style={{ border: '1px solid rgba(52,211,153,0.2)', transform: 'translateY(-50%)' }}>
-                <p className="text-[9px] font-bold uppercase tracking-widest mb-1" style={{ color: '#64748B' }}>Retention</p>
-                <p className="text-2xl font-black" style={{ color: '#34D399' }}>94%</p>
-              </div>
+            {/* ── RIGHT: Spline robot ── */}
+            <FadeIn delay={0.25} className="order-1 lg:order-2 relative h-[42vh] sm:h-[52vh] lg:h-[calc(100vh-140px)] lg:max-h-[780px]">
+              <SplineRobot />
             </FadeIn>
           </div>
         </div>
 
-        {/* Bottom fade */}
-        <div className="absolute bottom-0 inset-x-0 h-32 pointer-events-none"
-          style={{ background: 'linear-gradient(to top, #030712, transparent)' }} />
+        {/* Scroll hint */}
+        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce opacity-30">
+          <ChevronDown className="w-4 h-4" style={{ color: '#06B6D4' }} />
+        </div>
       </section>
 
-      {/* ─── INTEGRATIONS ─── */}
+      {/* ═══════════════════════════════
+          INTEGRATIONS — marquee
+      ═══════════════════════════════ */}
       <section className="relative overflow-hidden py-16 sm:py-20" style={{ background: '#06090f' }}>
-        {/* Center radial glow */}
         <div className="absolute inset-0 pointer-events-none"
           style={{ background: 'radial-gradient(ellipse 70% 90% at 50% 100%, rgba(14,60,110,0.6) 0%, rgba(6,9,15,0) 70%)' }} />
 
-        {/* Label */}
         <div className="relative z-10 text-center mb-12">
-          <p className="text-[10px] font-medium uppercase" style={{ color: '#475569', letterSpacing: '0.45em' }}>
+          <p className="text-[10px] font-medium uppercase" style={{ color: '#334155', letterSpacing: '0.45em' }}>
             Integrations
           </p>
         </div>
 
-        {/* Continuous marquee */}
         <div className="relative">
-          {/* Left fade */}
           <div className="absolute inset-y-0 left-0 w-32 sm:w-48 z-10 pointer-events-none"
-            style={{ background: 'linear-gradient(to right, #06090f 0%, transparent 100%)' }} />
-          {/* Right fade */}
+            style={{ background: 'linear-gradient(to right, #06090f, transparent)' }} />
           <div className="absolute inset-y-0 right-0 w-32 sm:w-48 z-10 pointer-events-none"
-            style={{ background: 'linear-gradient(to left, #06090f 0%, transparent 100%)' }} />
+            style={{ background: 'linear-gradient(to left, #06090f, transparent)' }} />
 
-          <div className="animate-marquee flex items-center" style={{ width: 'max-content', gap: '0' }}>
+          <div className="animate-marquee flex items-center" style={{ width: 'max-content' }}>
             {[0, 1, 2, 3].map((copy) => (
-              <div key={copy} className="flex items-center" style={{ gap: '0' }}>
-
-                {/* Google Drive */}
-                <div className="flex items-center mx-12 sm:mx-16 opacity-60 hover:opacity-100 transition-opacity duration-300 shrink-0">
-                  <img src="https://upload.wikimedia.org/wikipedia/commons/1/12/Google_Drive_icon_%282020%29.svg"
-                    alt="Google Drive" style={{ height: 36, width: 36, objectFit: 'contain' }} />
+              <div key={copy} className="flex items-center">
+                <div className="flex items-center mx-12 sm:mx-16 opacity-55 hover:opacity-100 transition-opacity duration-300 shrink-0">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/1/12/Google_Drive_icon_%282020%29.svg" alt="Google Drive" style={{ height: 36, width: 36, objectFit: 'contain' }} />
                 </div>
-
-                {/* Notion */}
-                <div className="flex items-center gap-3 mx-12 sm:mx-16 opacity-60 hover:opacity-100 transition-opacity duration-300 shrink-0">
-                  <img src="https://upload.wikimedia.org/wikipedia/commons/4/45/Notion_app_logo.png"
-                    alt="Notion" style={{ height: 32, width: 32, objectFit: 'contain', filter: 'invert(1)', borderRadius: 6 }} />
-                  <span className="text-xl font-semibold" style={{ color: '#E2E8F0', letterSpacing: '-0.01em' }}>Notion</span>
+                <div className="flex items-center gap-3 mx-12 sm:mx-16 opacity-55 hover:opacity-100 transition-opacity duration-300 shrink-0">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/4/45/Notion_app_logo.png" alt="Notion" style={{ height: 32, width: 32, objectFit: 'contain', filter: 'invert(1)', borderRadius: 6 }} />
+                  <span className="text-xl font-semibold" style={{ color: '#E2E8F0' }}>Notion</span>
                 </div>
-
-                {/* Klaviyo */}
-                <div className="flex items-center mx-12 sm:mx-16 opacity-60 hover:opacity-100 transition-opacity duration-300 shrink-0">
+                <div className="flex items-center mx-12 sm:mx-16 opacity-55 hover:opacity-100 transition-opacity duration-300 shrink-0">
                   <span className="text-2xl font-bold tracking-tight" style={{ color: '#E2E8F0' }}>klaviyo</span>
                 </div>
-
-                {/* OpenAI */}
-                <div className="flex items-center mx-12 sm:mx-16 opacity-60 hover:opacity-100 transition-opacity duration-300 shrink-0">
-                  <img src="https://upload.wikimedia.org/wikipedia/commons/4/4d/OpenAI_Logo.svg"
-                    alt="OpenAI" style={{ height: 26, objectFit: 'contain', filter: 'invert(1)' }} />
+                <div className="flex items-center mx-12 sm:mx-16 opacity-55 hover:opacity-100 transition-opacity duration-300 shrink-0">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/4/4d/OpenAI_Logo.svg" alt="OpenAI" style={{ height: 26, objectFit: 'contain', filter: 'invert(1)' }} />
                 </div>
-
-                {/* Claude */}
-                <div className="flex items-center gap-2.5 mx-12 sm:mx-16 opacity-60 hover:opacity-100 transition-opacity duration-300 shrink-0">
+                <div className="flex items-center gap-2.5 mx-12 sm:mx-16 opacity-55 hover:opacity-100 transition-opacity duration-300 shrink-0">
                   <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
                     <path d="M12 2L13.8 8.2L20 10L13.8 11.8L12 18L10.2 11.8L4 10L10.2 8.2L12 2Z" fill="#D97757" />
                   </svg>
                   <span className="text-2xl font-semibold" style={{ color: '#E2E8F0' }}>Claude</span>
                 </div>
-
-                {/* Make */}
-                <div className="flex items-center gap-3 mx-12 sm:mx-16 opacity-60 hover:opacity-100 transition-opacity duration-300 shrink-0">
+                <div className="flex items-center gap-3 mx-12 sm:mx-16 opacity-55 hover:opacity-100 transition-opacity duration-300 shrink-0">
                   <svg width="38" height="22" viewBox="0 0 40 24" fill="none">
                     <circle cx="8"  cy="12" r="6" stroke="#E2E8F0" strokeWidth="1.8" fill="none" />
                     <circle cx="20" cy="12" r="6" stroke="#E2E8F0" strokeWidth="1.8" fill="none" />
@@ -268,293 +239,343 @@ export default function HomePage() {
                   </svg>
                   <span className="text-xl font-bold italic" style={{ color: '#E2E8F0' }}>make</span>
                 </div>
-
-                {/* LangChain */}
-                <div className="flex items-center mx-12 sm:mx-16 opacity-60 hover:opacity-100 transition-opacity duration-300 shrink-0">
+                <div className="flex items-center mx-12 sm:mx-16 opacity-55 hover:opacity-100 transition-opacity duration-300 shrink-0">
                   <span className="text-xl font-semibold" style={{ color: '#E2E8F0' }}>LangChain</span>
                 </div>
-
-                {/* Pinecone */}
-                <div className="flex items-center mx-12 sm:mx-16 opacity-60 hover:opacity-100 transition-opacity duration-300 shrink-0">
+                <div className="flex items-center mx-12 sm:mx-16 opacity-55 hover:opacity-100 transition-opacity duration-300 shrink-0">
                   <span className="text-xl font-semibold" style={{ color: '#E2E8F0' }}>Pinecone</span>
                 </div>
-
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ─── IMPACT STATS ─── */}
-      <section className="py-16 sm:py-24 lg:py-32 relative">
-        <div className="absolute inset-0 grid-bg opacity-20 pointer-events-none" />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <FadeIn className="text-center mb-10 sm:mb-16">
-            <p className="text-xs font-bold uppercase tracking-[0.2em] mb-3 sm:mb-4" style={{ color: '#06B6D4' }}>
-              By the Numbers
-            </p>
-            <h2 className="font-black text-white">Results That Speak for Themselves</h2>
+      {/* ═══════════════════════════════
+          STATS — cinematic numbers
+      ═══════════════════════════════ */}
+      <section className="py-24 sm:py-32 relative">
+        <div className="absolute inset-0 grid-bg opacity-15 pointer-events-none" />
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <FadeIn className="text-center mb-16">
+            <p className="text-xs font-bold uppercase tracking-[0.3em] mb-4" style={{ color: '#06B6D4' }}>Impact</p>
+            <h2 className="font-black text-white">Numbers That Matter</h2>
           </FadeIn>
 
-          <StaggerChildren className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+          <div className="grid grid-cols-2 lg:grid-cols-4">
             {[
-              { value: 150, suffix: '+', label: 'Projects Delivered', sub: 'Across 16 service lines', color: '#06B6D4' },
-              { value: 10, suffix: 'M+', label: 'Revenue Generated', sub: 'For our clients', color: '#8B5CF6' },
-              { value: 80, suffix: '+', label: 'Happy Clients', sub: 'Across 15+ countries', color: '#34D399' },
-              { value: 94, suffix: '%', label: 'Retention Rate', sub: 'Stay with us long-term', color: '#F472B6' },
-            ].map((s) => (
-              <StaggerItem key={s.label}>
-                <div className="group text-center py-8 sm:py-10 px-4 sm:px-6 rounded-2xl glass card-3d transition-all duration-300 hover:shadow-lg cursor-default"
-                  style={{ border: '1px solid rgba(30,41,59,0.8)' }}
-                  onMouseEnter={(e) => {
-                    (e.currentTarget as HTMLElement).style.borderColor = s.color + '40';
-                    (e.currentTarget as HTMLElement).style.boxShadow = `0 0 30px ${s.color}15`;
-                  }}
-                  onMouseLeave={(e) => {
-                    (e.currentTarget as HTMLElement).style.borderColor = 'rgba(30,41,59,0.8)';
-                    (e.currentTarget as HTMLElement).style.boxShadow = '';
-                  }}>
-                  <p className="text-3xl sm:text-5xl font-black mb-2 sm:mb-3 transition-transform group-hover:scale-110"
-                    style={{ color: s.color }}>
+              { value: 150, suffix: '+',  label: 'Projects Delivered', color: '#06B6D4' },
+              { value: 10,  suffix: 'M+', label: 'Revenue Generated',  color: '#8B5CF6' },
+              { value: 80,  suffix: '+',  label: 'Happy Clients',       color: '#34D399' },
+              { value: 94,  suffix: '%',  label: 'Retention Rate',      color: '#F472B6' },
+            ].map((s, i) => (
+              <FadeIn key={s.label} delay={i * 0.1}>
+                <div className="group text-center px-6 py-12 cursor-default"
+                  style={{ borderLeft: i > 0 ? '1px solid rgba(255,255,255,0.05)' : 'none' }}>
+                  <p className="text-5xl sm:text-7xl font-black mb-3 transition-all duration-300 group-hover:scale-105 origin-bottom tabular-nums"
+                    style={{ color: s.color, textShadow: `0 0 60px ${s.color}25` }}>
                     <Counter target={s.value} suffix={s.suffix} />
                   </p>
-                  <p className="font-bold text-white text-sm sm:text-base mb-1">{s.label}</p>
-                  <p className="text-xs sm:text-sm" style={{ color: '#64748B' }}>{s.sub}</p>
+                  <p className="text-xs uppercase tracking-[0.2em]" style={{ color: '#475569' }}>{s.label}</p>
                 </div>
-              </StaggerItem>
+              </FadeIn>
             ))}
-          </StaggerChildren>
+          </div>
         </div>
       </section>
 
-      {/* ─── SERVICES ─── */}
-      <section className="py-16 sm:py-24 lg:py-32 relative">
+      {/* ═══════════════════════════════
+          SERVICES — editorial list
+      ═══════════════════════════════ */}
+      <section className="py-24 sm:py-32 relative" style={{ borderTop: '1px solid rgba(255,255,255,0.04)' }}>
         <div className="absolute inset-0 pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse at 30% 50%, rgba(139,92,246,0.04), transparent 60%)' }} />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <FadeIn className="flex flex-col md:flex-row md:items-end justify-between gap-5 sm:gap-6 mb-10 sm:mb-16">
+          style={{ background: 'radial-gradient(ellipse at 15% 60%, rgba(139,92,246,0.05), transparent 55%)' }} />
+
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <FadeIn className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-20">
             <div>
-              <p className="text-xs font-bold uppercase tracking-[0.2em] mb-3 sm:mb-4 flex items-center gap-2" style={{ color: '#06B6D4' }}>
-                <Zap className="w-4 h-4" /> What We Build
-              </p>
-              <h2 className="font-black text-white">Four Pillars.<br />One AI-First Agency.</h2>
+              <p className="text-xs font-bold uppercase tracking-[0.3em] mb-4" style={{ color: '#06B6D4' }}>Services</p>
+              <h2 className="font-black text-white leading-tight">What We Build</h2>
             </div>
             <Link href="/services"
-              className="flex-shrink-0 inline-flex items-center gap-2 px-7 py-3.5 rounded-xl font-bold text-sm border transition-all hover:bg-white/5"
-              style={{ borderColor: 'rgba(6,182,212,0.2)', color: '#06B6D4' }}>
-              All Services <ArrowRight className="w-4 h-4" />
+              className="flex-shrink-0 inline-flex items-center gap-2 text-sm font-semibold transition-all hover:gap-3"
+              style={{ color: '#475569' }}
+              onMouseEnter={(e) => (e.currentTarget as HTMLElement).style.color = '#E2E8F0'}
+              onMouseLeave={(e) => (e.currentTarget as HTMLElement).style.color = '#475569'}>
+              View all services <ArrowRight className="w-4 h-4" />
             </Link>
           </FadeIn>
 
-          <StaggerChildren className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-            {serviceCategories.map((cat) => {
-              const c = catColors[cat.slug] || { accent: '#06B6D4', glow: 'rgba(6,182,212,0.1)', border: 'rgba(6,182,212,0.3)' };
+          <div>
+            {serviceCategories.map((cat, i) => {
+              const c = catColors[cat.slug] || { accent: '#06B6D4', glow: 'rgba(6,182,212,0.08)' };
               return (
-                <StaggerItem key={cat.slug}>
-                  <Link href={`/services/${cat.slug}`}
-                    className="group block h-full p-8 sm:p-10 rounded-[2rem] glass relative overflow-hidden transition-all duration-500 card-3d"
-                    style={{ border: '1px solid rgba(30,41,59,0.8)' }}
-                    onMouseEnter={(e) => {
-                      const el = e.currentTarget as HTMLElement;
-                      el.style.borderColor = c.border;
-                      el.style.boxShadow = `0 20px 60px ${c.glow}`;
-                    }}
-                    onMouseLeave={(e) => {
-                      const el = e.currentTarget as HTMLElement;
-                      el.style.borderColor = 'rgba(30,41,59,0.8)';
-                      el.style.boxShadow = '';
-                    }}>
+                <FadeIn key={cat.slug} delay={i * 0.07}>
+                  <Link
+                    href={`/services/${cat.slug}`}
+                    className="group relative flex flex-col sm:flex-row sm:items-center gap-6 sm:gap-10 lg:gap-16 py-10 sm:py-12 transition-all duration-300 hover:pl-3"
+                    style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}>
 
-                    {/* Glow orb */}
-                    <div className="absolute top-0 right-0 w-48 h-48 rounded-full translate-x-16 -translate-y-16 opacity-0 group-hover:opacity-100 transition-all duration-700 pointer-events-none"
-                      style={{ background: `radial-gradient(circle, ${c.glow}, transparent 70%)` }} />
+                    {/* Left accent */}
+                    <div className="absolute left-0 top-6 bottom-6 w-0 group-hover:w-[2px] transition-all duration-400 rounded-full"
+                      style={{ background: c.accent }} />
 
-                    {/* Circuit decoration */}
-                    <div className="absolute bottom-0 right-0 w-32 h-24 opacity-10 group-hover:opacity-30 transition-opacity">
-                      <svg viewBox="0 0 128 96" fill="none">
-                        <path d="M128 0 L80 0 L80 32 L48 32 L48 96" stroke={c.accent} strokeWidth="1" />
-                        <circle cx="80" cy="32" r="3" fill={c.accent} />
-                        <circle cx="48" cy="32" r="3" fill={c.accent} />
-                      </svg>
+                    {/* Index number */}
+                    <span className="hidden lg:block flex-shrink-0 text-5xl font-black tabular-nums leading-none select-none transition-all duration-300 w-20 text-right"
+                      style={{ color: c.accent, opacity: 0.15 }}
+                      onMouseEnter={(e) => (e.currentTarget as HTMLElement).style.opacity = '0.4'}
+                      onMouseLeave={(e) => (e.currentTarget as HTMLElement).style.opacity = '0.15'}>
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
+
+                    {/* Icon + category name */}
+                    <div className="flex sm:flex-col items-center sm:items-start gap-3 sm:w-40 flex-shrink-0">
+                      <div className="w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300 group-hover:scale-105"
+                        style={{ background: c.glow, border: `1px solid ${c.accent}20`, color: c.accent }}>
+                        {catIcons[cat.slug]}
+                      </div>
+                      <p className="text-[10px] font-black uppercase tracking-[0.25em]" style={{ color: c.accent }}>{cat.name}</p>
                     </div>
 
-                    <div className="relative z-10 flex flex-col h-full">
-                      <div className="flex items-start justify-between mb-8">
-                        <div className="w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:scale-110"
-                          style={{ background: `${c.accent}15`, border: `1px solid ${c.accent}30`, color: c.accent }}>
-                          {catIcons[cat.slug]}
-                        </div>
-                        <div className="w-10 h-10 rounded-full border flex items-center justify-center transition-all group-hover:scale-110"
-                          style={{ borderColor: 'rgba(30,41,59,0.8)', color: '#475569' }}
-                          onMouseEnter={(e) => {
-                            (e.currentTarget as HTMLElement).style.background = c.accent;
-                            (e.currentTarget as HTMLElement).style.borderColor = c.accent;
-                            (e.currentTarget as HTMLElement).style.color = '#030712';
-                          }}
-                          onMouseLeave={(e) => {
-                            (e.currentTarget as HTMLElement).style.background = '';
-                            (e.currentTarget as HTMLElement).style.borderColor = 'rgba(30,41,59,0.8)';
-                            (e.currentTarget as HTMLElement).style.color = '#475569';
-                          }}>
-                          <ChevronRight className="w-5 h-5" />
-                        </div>
-                      </div>
-
-                      <div className="flex-1">
-                        <p className="text-[10px] font-black uppercase tracking-[0.25em] mb-3" style={{ color: c.accent }}>{cat.name}</p>
-                        <h3 className="text-2xl sm:text-3xl font-black text-white mb-4 leading-tight">{cat.tagline}</h3>
-                        <p className="text-sm sm:text-base leading-relaxed mb-10 opacity-60 group-hover:opacity-90 transition-opacity"
-                          style={{ color: '#94A3B8' }}>
-                          {cat.description}
-                        </p>
-                      </div>
-
-                      <div className="flex flex-wrap gap-2 pt-6" style={{ borderTop: '1px solid rgba(30,41,59,0.5)' }}>
+                    {/* Content */}
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-xl sm:text-2xl lg:text-3xl font-black text-white mb-3 leading-tight">{cat.tagline}</h3>
+                      <p className="text-sm leading-relaxed mb-5 max-w-lg" style={{ color: '#475569' }}>{cat.description}</p>
+                      <div className="flex flex-wrap gap-2">
                         {cat.services.map((svc) => (
                           <span key={svc.slug}
-                            className="px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-wider transition-all"
-                            style={{ background: 'rgba(15,23,42,0.8)', color: '#475569', border: '1px solid rgba(30,41,59,0.8)' }}
+                            className="px-3.5 py-1.5 rounded-full text-[11px] font-medium transition-all duration-200"
+                            style={{ color: '#475569', border: '1px solid rgba(255,255,255,0.06)' }}
                             onMouseEnter={(e) => {
                               (e.currentTarget as HTMLElement).style.color = c.accent;
-                              (e.currentTarget as HTMLElement).style.borderColor = `${c.accent}40`;
+                              (e.currentTarget as HTMLElement).style.borderColor = `${c.accent}30`;
+                              (e.currentTarget as HTMLElement).style.background = `${c.accent}08`;
                             }}
                             onMouseLeave={(e) => {
                               (e.currentTarget as HTMLElement).style.color = '#475569';
-                              (e.currentTarget as HTMLElement).style.borderColor = 'rgba(30,41,59,0.8)';
+                              (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.06)';
+                              (e.currentTarget as HTMLElement).style.background = '';
                             }}>
                             {svc.name}
                           </span>
                         ))}
                       </div>
                     </div>
+
+                    {/* Arrow */}
+                    <div className="hidden sm:block flex-shrink-0 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-2 group-hover:translate-x-0">
+                      <div className="w-10 h-10 rounded-full flex items-center justify-center"
+                        style={{ background: `${c.accent}15`, color: c.accent }}>
+                        <ArrowRight className="w-4 h-4" />
+                      </div>
+                    </div>
                   </Link>
-                </StaggerItem>
+                </FadeIn>
               );
             })}
-          </StaggerChildren>
+            <div style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }} />
+          </div>
         </div>
       </section>
 
-      {/* ─── AI CAPABILITIES STRIP ─── */}
-      <section className="py-16 sm:py-20 border-y relative overflow-hidden"
-        style={{ borderColor: 'rgba(30,41,59,0.5)' }}>
+      {/* ═══════════════════════════════
+          HOW WE WORK — 3 steps
+      ═══════════════════════════════ */}
+      <section className="py-24 sm:py-32 relative overflow-hidden" style={{ borderTop: '1px solid rgba(255,255,255,0.04)' }}>
         <div className="absolute inset-0 pointer-events-none"
-          style={{ background: 'linear-gradient(135deg, rgba(6,182,212,0.03) 0%, rgba(139,92,246,0.03) 100%)' }} />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <FadeIn className="text-center mb-12">
-            <p className="text-xs font-bold uppercase tracking-[0.2em] mb-3" style={{ color: '#8B5CF6' }}>AI Capabilities</p>
-            <h2 className="font-black text-white">Powered by the Latest Models</h2>
+          style={{ background: 'radial-gradient(ellipse at 80% 50%, rgba(6,182,212,0.04), transparent 55%)' }} />
+
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <FadeIn className="text-center mb-20">
+            <p className="text-xs font-bold uppercase tracking-[0.3em] mb-4" style={{ color: '#8B5CF6' }}>Process</p>
+            <h2 className="font-black text-white">How We Work</h2>
           </FadeIn>
-          <StaggerChildren className="grid grid-cols-2 md:grid-cols-4 gap-4">
+
+          <div className="grid md:grid-cols-3 gap-0">
             {[
-              { name: 'GPT-4o & o3', label: 'OpenAI', color: '#10B981' },
-              { name: 'Claude 3.5 Sonnet', label: 'Anthropic', color: '#F59E0B' },
-              { name: 'Gemini 2.5 Flash', label: 'Google', color: '#3B82F6' },
-              { name: 'LangChain + RAG', label: 'Orchestration', color: '#8B5CF6' },
-              { name: 'Pinecone / Weaviate', label: 'Vector DBs', color: '#06B6D4' },
-              { name: 'HuggingFace', label: 'Open Source', color: '#F97316' },
-              { name: 'AWS / GCP / Azure', label: 'Cloud Infra', color: '#EF4444' },
-              { name: 'MLflow + Weights & Biases', label: 'MLOps', color: '#A78BFA' },
-            ].map((cap) => (
-              <StaggerItem key={cap.name}>
-                <div className="group p-4 sm:p-5 rounded-xl glass transition-all duration-300 cursor-default"
-                  style={{ border: '1px solid rgba(30,41,59,0.6)' }}
-                  onMouseEnter={(e) => {
-                    (e.currentTarget as HTMLElement).style.borderColor = `${cap.color}40`;
-                    (e.currentTarget as HTMLElement).style.boxShadow = `0 0 20px ${cap.color}15`;
-                  }}
-                  onMouseLeave={(e) => {
-                    (e.currentTarget as HTMLElement).style.borderColor = 'rgba(30,41,59,0.6)';
-                    (e.currentTarget as HTMLElement).style.boxShadow = '';
-                  }}>
-                  <div className="w-2 h-2 rounded-full mb-3" style={{ background: cap.color, boxShadow: `0 0 8px ${cap.color}` }} />
-                  <p className="text-sm font-bold text-white mb-1">{cap.name}</p>
-                  <p className="text-[10px] uppercase tracking-wider" style={{ color: '#475569' }}>{cap.label}</p>
-                </div>
-              </StaggerItem>
-            ))}
-          </StaggerChildren>
-        </div>
-      </section>
+              {
+                num: '01',
+                title: 'Discover & Define',
+                desc: 'We start with a deep-dive strategy session — mapping your goals, data, and existing systems to identify where AI creates the biggest leverage.',
+                color: '#06B6D4',
+              },
+              {
+                num: '02',
+                title: 'Build & Integrate',
+                desc: 'Our team ships working AI systems in days, not months. Every build is modular, tested, and integrated directly into your stack.',
+                color: '#8B5CF6',
+              },
+              {
+                num: '03',
+                title: 'Scale & Optimize',
+                desc: 'We monitor, retrain, and evolve your systems continuously — so performance compounds over time, not decays.',
+                color: '#34D399',
+              },
+            ].map((step, i) => (
+              <FadeIn key={step.num} delay={i * 0.1}>
+                <div className="group relative p-8 sm:p-10 transition-all duration-300"
+                  style={{ borderLeft: i > 0 ? '1px solid rgba(255,255,255,0.05)' : 'none' }}>
 
-      {/* ─── WHY US ─── */}
-      <section className="py-16 sm:py-24 lg:py-32 border-t relative"
-        style={{ borderColor: 'rgba(30,41,59,0.5)' }}>
-        <div className="absolute inset-0 pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse at 70% 50%, rgba(6,182,212,0.03), transparent 60%)' }} />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <FadeIn className="text-center mb-10 sm:mb-16">
-            <p className="text-xs font-bold uppercase tracking-[0.2em] mb-3 sm:mb-4" style={{ color: '#06B6D4' }}>Why MetLink</p>
-            <h2 className="font-black text-white">What Sets Us Apart</h2>
-            <p className="mt-4 sm:mt-5 max-w-2xl mx-auto text-base sm:text-lg" style={{ color: '#64748B' }}>
-              There are hundreds of agencies. Here is why the fastest-growing businesses choose MetLink.
-            </p>
-          </FadeIn>
-
-          <StaggerChildren className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-            {whyUs.map((item, i) => (
-              <StaggerItem key={item.title}>
-                <div className="group p-6 sm:p-8 rounded-2xl glass transition-all duration-300 card-3d cursor-default"
-                  style={{ border: '1px solid rgba(30,41,59,0.8)' }}
-                  onMouseEnter={(e) => {
-                    (e.currentTarget as HTMLElement).style.borderColor = 'rgba(6,182,212,0.2)';
-                    (e.currentTarget as HTMLElement).style.boxShadow = '0 10px 40px rgba(6,182,212,0.05)';
-                  }}
-                  onMouseLeave={(e) => {
-                    (e.currentTarget as HTMLElement).style.borderColor = 'rgba(30,41,59,0.8)';
-                    (e.currentTarget as HTMLElement).style.boxShadow = '';
-                  }}>
-                  <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-5 sm:mb-6 transition-all group-hover:scale-110"
-                    style={{ background: 'rgba(6,182,212,0.08)', border: '1px solid rgba(6,182,212,0.15)', color: '#06B6D4' }}>
-                    {item.icon}
+                  {/* Large background number */}
+                  <div className="absolute top-6 right-6 text-8xl font-black select-none pointer-events-none"
+                    style={{ color: step.color, opacity: 0.06, lineHeight: 1 }}>
+                    {step.num}
                   </div>
-                  <h3 className="font-bold text-base sm:text-lg text-white mb-2 sm:mb-3 tracking-wide">{item.title}</h3>
-                  <p className="text-sm leading-loose" style={{ color: '#64748B' }}>{item.desc}</p>
+
+                  <div className="relative z-10">
+                    {/* Step pill */}
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest mb-6"
+                      style={{ background: `${step.color}10`, color: step.color, border: `1px solid ${step.color}20` }}>
+                      Step {step.num}
+                    </div>
+
+                    <h3 className="text-xl sm:text-2xl font-black text-white mb-4 leading-tight">{step.title}</h3>
+                    <p className="text-sm leading-relaxed" style={{ color: '#64748B' }}>{step.desc}</p>
+
+                    {/* Bottom accent line */}
+                    <div className="mt-8 h-px w-0 group-hover:w-full transition-all duration-500 rounded-full"
+                      style={{ background: `linear-gradient(to right, ${step.color}, transparent)` }} />
+                  </div>
                 </div>
-              </StaggerItem>
+              </FadeIn>
             ))}
-          </StaggerChildren>
+          </div>
         </div>
       </section>
 
-      {/* ─── FINAL CTA ─── */}
-      <section className="py-20 sm:py-32 lg:py-40 relative overflow-hidden text-center border-t"
-        style={{ borderColor: 'rgba(30,41,59,0.5)' }}>
-        {/* BG network */}
-        <div className="absolute inset-0 pointer-events-none opacity-30">
+      {/* ═══════════════════════════════
+          AI STACK — flowing pills
+      ═══════════════════════════════ */}
+      <section className="py-24 sm:py-32 relative" style={{ borderTop: '1px solid rgba(255,255,255,0.04)' }}>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="grid lg:grid-cols-5 gap-12 lg:gap-20 items-center">
+
+            <FadeIn className="lg:col-span-2">
+              <p className="text-xs font-bold uppercase tracking-[0.3em] mb-4" style={{ color: '#8B5CF6' }}>AI Stack</p>
+              <h2 className="font-black text-white mb-5 leading-tight">Powered by<br />the Best Models</h2>
+              <p className="text-sm leading-relaxed mb-8" style={{ color: '#475569' }}>
+                We integrate frontier LLMs, vector databases, and production MLOps tooling to build AI systems that actually work at scale.
+              </p>
+              <Link href="/services/ai-automation"
+                className="inline-flex items-center gap-2 text-sm font-semibold transition-all hover:gap-3"
+                style={{ color: '#8B5CF6' }}>
+                Explore AI services <ArrowRight className="w-4 h-4" />
+              </Link>
+            </FadeIn>
+
+            <FadeIn delay={0.15} className="lg:col-span-3">
+              <div className="flex flex-wrap gap-2.5">
+                {caps.map((cap) => (
+                  <span key={cap.name}
+                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-medium cursor-default transition-all duration-200 select-none"
+                    style={{ border: `1px solid ${cap.color}20`, color: '#64748B', background: `${cap.color}05` }}
+                    onMouseEnter={(e) => {
+                      const el = e.currentTarget as HTMLElement;
+                      el.style.color = cap.color;
+                      el.style.borderColor = `${cap.color}45`;
+                      el.style.background = `${cap.color}10`;
+                      el.style.transform = 'translateY(-2px)';
+                    }}
+                    onMouseLeave={(e) => {
+                      const el = e.currentTarget as HTMLElement;
+                      el.style.color = '#64748B';
+                      el.style.borderColor = `${cap.color}20`;
+                      el.style.background = `${cap.color}05`;
+                      el.style.transform = '';
+                    }}>
+                    <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: cap.color, boxShadow: `0 0 5px ${cap.color}` }} />
+                    {cap.name}
+                    <span className="text-[10px] opacity-40 font-normal">{cap.label}</span>
+                  </span>
+                ))}
+              </div>
+            </FadeIn>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════
+          WHY US — divider list
+      ═══════════════════════════════ */}
+      <section className="py-24 sm:py-32 relative" style={{ borderTop: '1px solid rgba(255,255,255,0.04)' }}>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+
+          <div className="grid lg:grid-cols-5 gap-12 lg:gap-20">
+            <FadeIn className="lg:col-span-2">
+              <p className="text-xs font-bold uppercase tracking-[0.3em] mb-4" style={{ color: '#06B6D4' }}>Why MetLink</p>
+              <h2 className="font-black text-white leading-tight">What Sets<br />Us Apart</h2>
+            </FadeIn>
+
+            <div className="lg:col-span-3 grid sm:grid-cols-2 gap-x-10">
+              {whyUs.map((item, i) => (
+                <FadeIn key={item.title} delay={i * 0.06}>
+                  <div className="group py-7 transition-all duration-300"
+                    style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}>
+                    <div className="flex items-start gap-4">
+                      <div className="flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center mt-0.5 transition-all duration-300 group-hover:scale-110"
+                        style={{ background: 'rgba(6,182,212,0.08)', color: '#06B6D4' }}>
+                        {item.icon}
+                      </div>
+                      <div>
+                        <h3 className="font-bold text-white mb-1.5 text-sm">{item.title}</h3>
+                        <p className="text-sm leading-relaxed" style={{ color: '#475569' }}>{item.desc}</p>
+                      </div>
+                    </div>
+                  </div>
+                </FadeIn>
+              ))}
+              <div className="col-span-2" style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }} />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════
+          CTA — full-bleed dramatic
+      ═══════════════════════════════ */}
+      <section className="relative py-32 sm:py-40 overflow-hidden text-center">
+        {/* Animated neural bg */}
+        <div className="absolute inset-0 pointer-events-none opacity-20">
           <NeuralNet />
         </div>
-        <div className="absolute inset-0 pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse at 50% 100%, rgba(139,92,246,0.08), transparent 60%)' }} />
 
-        <FadeIn className="max-w-3xl mx-auto px-4 relative z-10">
-          <div className="inline-flex items-center gap-2 border px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-[0.15em] mb-5 sm:mb-6"
-            style={{ borderColor: 'rgba(6,182,212,0.2)', color: '#06B6D4', background: 'rgba(6,182,212,0.05)' }}>
-            <span className="w-2 h-2 rounded-full bg-[#06B6D4] animate-pulse" />
-            Ready to Deploy AI?
-          </div>
-          <h2 className="font-black text-white mb-6 sm:mb-8 leading-[1.1]">
-            Let&apos;s Build Something<br />
-            <span className="gradient-text-cyan">Extraordinary</span>
-          </h2>
-          <p className="mb-8 sm:mb-12 text-base sm:text-lg max-w-xl mx-auto" style={{ color: '#64748B' }}>
-            Book a free 30-min AI strategy call. No commitments, no sales pressure —
-            just clarity on what AI would drive the most growth for your business.
+        {/* Gradient overlay */}
+        <div className="absolute inset-0 pointer-events-none"
+          style={{ background: 'radial-gradient(ellipse 80% 80% at 50% 50%, rgba(139,92,246,0.1) 0%, rgba(6,182,212,0.05) 50%, transparent 80%)' }} />
+
+        {/* Top border glow */}
+        <div className="absolute top-0 inset-x-0 h-px"
+          style={{ background: 'linear-gradient(to right, transparent, rgba(6,182,212,0.4), rgba(139,92,246,0.4), transparent)' }} />
+
+        <FadeIn className="relative z-10 max-w-3xl mx-auto px-4">
+          <p className="text-xs font-bold uppercase tracking-[0.3em] mb-6" style={{ color: '#06B6D4' }}>
+            Let&apos;s Build Together
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 sm:gap-5 justify-center">
+          <h2 className="font-black text-white mb-6 leading-[1.05]">
+            Ready to Scale<br />
+            <span className="gradient-text-cyan">with AI?</span>
+          </h2>
+          <p className="text-base sm:text-lg mb-12 max-w-md mx-auto" style={{ color: '#475569' }}>
+            Book a free 30-min strategy call. No commitments — just clarity on what AI can do for your business.
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link href="/contact"
-              className="group inline-flex items-center justify-center gap-3 px-10 py-5 rounded-xl font-black text-sm sm:text-base text-[#030712] transition-all hover:brightness-110 active:scale-95 glow-cyan"
-              style={{ background: 'linear-gradient(135deg, #06B6D4, #8B5CF6)' }}>
-              Book AI Strategy Call <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              className="group inline-flex items-center gap-2.5 px-9 py-5 rounded-full font-bold text-sm text-[#030712] transition-all hover:brightness-110 active:scale-95"
+              style={{ background: 'linear-gradient(135deg, #06B6D4 0%, #8B5CF6 100%)', boxShadow: '0 0 50px rgba(6,182,212,0.2)' }}>
+              Book AI Strategy Call
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
             </Link>
             <Link href="/portfolio"
-              className="inline-flex items-center justify-center gap-2 px-8 sm:px-10 py-4 sm:py-5 rounded-xl font-bold text-sm sm:text-base border transition-all hover:bg-white/5"
-              style={{ borderColor: 'rgba(30,41,59,0.8)', color: '#E2E8F0' }}>
-              See Our Work First
+              className="inline-flex items-center gap-2 px-7 py-5 rounded-full font-semibold text-sm transition-all hover:bg-white/5"
+              style={{ border: '1px solid rgba(255,255,255,0.08)', color: '#64748B' }}
+              onMouseEnter={(e) => (e.currentTarget as HTMLElement).style.color = '#E2E8F0'}
+              onMouseLeave={(e) => (e.currentTarget as HTMLElement).style.color = '#64748B'}>
+              View Our Work
             </Link>
           </div>
         </FadeIn>
       </section>
+
     </div>
   );
 }
