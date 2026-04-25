@@ -182,6 +182,7 @@ export function Header() {
               <Link href="/company" className={navLink}>Company</Link>
               <Link href="/portfolio" className={navLink}>Portfolio</Link>
               <Link href="/blog" className={navLink}>Blog</Link>
+              <Link href="/our-product" className={navLink}>Our Product</Link>
             </div>
 
             {/* ── Desktop CTA ── */}
@@ -238,6 +239,7 @@ export function Header() {
               <Link href="/company" className="block px-4 py-2.5 text-sm text-[#E5E5E5] hover:text-[#FFFFFF] hover:bg-white/5 rounded-lg transition-colors" onClick={() => setMobileOpen(false)}>Company</Link>
               <Link href="/portfolio" className="block px-4 py-2.5 text-sm text-[#E5E5E5] hover:text-[#FFFFFF] hover:bg-white/5 rounded-lg transition-colors" onClick={() => setMobileOpen(false)}>Portfolio</Link>
               <Link href="/blog" className="block px-4 py-2.5 text-sm text-[#E5E5E5] hover:text-[#FFFFFF] hover:bg-white/5 rounded-lg transition-colors" onClick={() => setMobileOpen(false)}>Blog</Link>
+              <Link href="/our-product" className="block px-4 py-2.5 text-sm text-[#E5E5E5] hover:text-[#FFFFFF] hover:bg-white/5 rounded-lg transition-colors" onClick={() => setMobileOpen(false)}>Our Product</Link>
 
               <div className="px-4 pt-3 space-y-2">
                 <Link href="/contact"

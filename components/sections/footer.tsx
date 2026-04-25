@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { ArrowRight, Mail } from 'lucide-react';
+import { Mail } from 'lucide-react';
 import { serviceCategories } from '@/lib/services-data';
 
 function MetLinkLogoFooter() {
@@ -27,29 +27,13 @@ function MetLinkLogoFooter() {
 export function Footer() {
   return (
     <footer style={{ background: '#000000', borderTop: '1px solid #1A1A1A' }}>
-      {/* Referral CTA strip */}
-      <div className="py-12" style={{ background: 'linear-gradient(135deg, #1A1A1A 0%, rgba(160,116,32,0.06) 100%)', borderBottom: '1px solid #1A1A1A' }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
-          <div>
-            <p className="text-xs font-bold uppercase tracking-widest text-amber-400 mb-1">Referral Program</p>
-            <h3 className="text-2xl font-black text-[#FFFFFF]">Refer a Client — Earn 10% Commission</h3>
-            <p className="text-[#A3A3A3] text-sm mt-1">Know a business that needs AI, marketing, or software help? We reward every successful referral.</p>
-          </div>
-          <Link href="/contact"
-            className="flex-shrink-0 flex items-center gap-2 px-7 py-3 rounded-xl font-bold text-sm hover:opacity-90 transition-opacity"
-            style={{ background: '#FACC15', color: '#000000', boxShadow: "none" }}>
-            Refer Now <ArrowRight className="w-4 h-4" />
-          </Link>
-        </div>
-      </div>
-
       {/* Main footer */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid lg:grid-cols-5 gap-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-5 gap-8 sm:gap-12">
 
           {/* Brand */}
-          <div className="lg:col-span-2">
-            <div className="flex items-center gap-3 mb-5">
+          <div className="col-span-2 sm:col-span-2 lg:col-span-2">
+            <div className="flex items-center gap-3 mb-4 sm:mb-5">
               <MetLinkLogoFooter />
               <div>
                 <p className="font-black text-lg tracking-wide" style={{
@@ -58,7 +42,7 @@ export function Footer() {
                 <p className="text-xs text-[#525252] tracking-widest uppercase">AI Agency</p>
               </div>
             </div>
-            <p className="text-[#737373] text-sm leading-relaxed mb-6 max-w-xs">
+            <p className="text-[#737373] text-sm leading-relaxed mb-5 sm:mb-6 max-w-xs">
               An AI-first marketing and development agency driving measurable growth for ambitious businesses worldwide.
             </p>
             {/* Newsletter */}
@@ -66,10 +50,10 @@ export function Footer() {
               <p className="text-xs font-bold text-[#525252] uppercase tracking-wider mb-3">Newsletter</p>
               <form onSubmit={(e) => e.preventDefault()} className="flex gap-2">
                 <input type="email" placeholder="your@email.com"
-                  className="flex-1 px-3 py-2.5 rounded-xl text-[#FFFFFF] placeholder:text-[#404040] text-sm focus:outline-none"
+                  className="flex-1 min-w-0 px-3 py-2.5 rounded-xl text-[#FFFFFF] placeholder:text-[#404040] text-sm focus:outline-none"
                   style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid #1A1A1A' }}
                 />
-                <button type="submit" className="p-2.5 rounded-xl transition-opacity hover:opacity-90"
+                <button type="submit" className="p-2.5 rounded-xl transition-opacity hover:opacity-90 flex-shrink-0"
                   style={{ background: '#FACC15', color: '#000000' }}>
                   <Mail className="w-4 h-4" />
                 </button>
@@ -81,14 +65,14 @@ export function Footer() {
           {serviceCategories.map((cat) => (
             <div key={cat.slug}>
               <Link href={`/services/${cat.slug}`}
-                className="text-xs font-bold uppercase tracking-widest text-amber-400 hover:text-amber-300 transition-colors mb-4 block">
+                className="text-xs font-bold uppercase tracking-widest text-amber-400 hover:text-amber-300 transition-colors mb-3 sm:mb-4 block">
                 {cat.icon} {cat.name}
               </Link>
-              <ul className="space-y-2">
+              <ul className="space-y-1.5 sm:space-y-2">
                 {cat.services.map((svc) => (
                   <li key={svc.slug}>
                     <Link href={`/services/${cat.slug}/${svc.slug}`}
-                      className="text-sm text-[#525252] hover:text-[#FFFFFF] transition-colors">
+                      className="text-xs sm:text-sm text-[#525252] hover:text-[#FFFFFF] transition-colors">
                       {svc.name}
                     </Link>
                   </li>
@@ -101,9 +85,9 @@ export function Footer() {
 
       {/* Bottom bar */}
       <div style={{ borderTop: '1px solid #1A1A1A' }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-[#404040]">© {new Date().getFullYear()} MetLink. All rights reserved.</p>
-          <div className="flex items-center gap-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 sm:py-6 flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 text-center sm:text-left">
+          <p className="text-xs text-[#404040]">&copy; {new Date().getFullYear()} MetLink. All rights reserved.</p>
+          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
             {['Portfolio', 'Company', 'Blog', 'Contact'].map((item) => (
               <Link key={item} href={`/${item.toLowerCase()}`}
                 className="text-xs text-[#404040] hover:text-[#A3A3A3] transition-colors">
