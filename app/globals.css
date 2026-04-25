@@ -116,7 +116,7 @@ nav button, nav a { min-height: unset; min-width: unset; }
 .animate-fadeInScale  { animation: fadeInScale 0.3s cubic-bezier(0.16,1,0.3,1) forwards; }
 .animate-slideInUp    { animation: slideInUp 0.3s cubic-bezier(0.16,1,0.3,1) forwards; }
 .animate-slideInDown  { animation: slideInDown 0.25s cubic-bezier(0.16,1,0.3,1) forwards; }
-.animate-marquee      { display: flex; animation: marquee 28s linear infinite; will-change: transform; }
+.animate-marquee      { display: flex; animation: marquee 36s linear infinite; will-change: transform; }
 .animate-float        { animation: float 4s ease-in-out infinite; }
 .animate-pulse-glow   { animation: pulseGlow 3s ease-in-out infinite; }
 .animate-rotate-slow  { animation: rotateSlow 12s linear infinite; }

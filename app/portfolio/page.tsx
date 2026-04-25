@@ -8,35 +8,35 @@ const filters = ['All', 'Software + AI', 'Digital Marketing', 'Creative Media', 
 
 export default function PortfolioPage() {
   return (
-    <div className="w-full overflow-x-hidden" style={{ background: '#0A192F' }}>
+    <div className="w-full overflow-x-hidden relative" style={{ background: '#030712' }}>
 
       {/* Hero */}
       <section className="relative py-32 overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] rounded-full"
-            style={{ background: 'radial-gradient(ellipse, #233554, transparent 70%)' }} />
+            style={{ background: 'radial-gradient(ellipse 80% 60% at 50% 0%, rgba(6,182,212,0.06) 0%, rgba(139,92,246,0.04) 50%, transparent 100%)' }} />
           <div className="absolute inset-0 opacity-[0.02]"
-            style={{ backgroundImage: 'linear-gradient(#233554 1px,transparent 1px),linear-gradient(90deg,#233554 1px,transparent 1px)', backgroundSize: '80px 80px' }} />
+            style={{ backgroundImage: 'linear-gradient(rgba(6,182,212,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(6,182,212,0.04) 1px,transparent 1px)', backgroundSize: '80px 80px' }} />
         </div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold mb-6"
-            style={{ background: '#233554', border: '1px solid #233554', color: '#64FFDA', letterSpacing: '0.08em' }}>
+            style={{ background: '#1E293B', border: '1px solid #1E293B', color: '#06B6D4', letterSpacing: '0.08em' }}>
             Our Work
           </div>
-          <h1 className="text-5xl md:text-7xl font-black text-[#ccd6f6] mb-6 leading-tight">
+          <h1 className="text-5xl md:text-7xl font-black text-[#E2E8F0] mb-6 leading-tight">
             Built to{' '}
-            <span style={{ color: '#64FFDA' }}>
+            <span style={{ color: '#06B6D4' }}>
               Perform
             </span>
           </h1>
-          <p className="text-xl text-[#8892B0] max-w-3xl mx-auto mb-10">
+          <p className="text-xl text-[#64748B] max-w-3xl mx-auto mb-10">
             Real projects. Real results. Explore our portfolio of AI systems, software solutions, marketing campaigns, and brand transformations.
           </p>
           <div className="flex flex-wrap gap-3 justify-center">
             {filters.map((filter) => (
               <button key={filter}
-                className="px-6 py-2.5 rounded-full text-[11px] font-black uppercase tracking-[0.15em] transition-all border border-[#233554] bg-[#112240] text-[#8892B0] hover:border-[#64FFDA] hover:text-[#64FFDA]"
-                style={filter === 'All' ? { background: 'rgba(100,255,218,0.05)', borderColor: 'rgba(100,255,218,0.3)', color: '#64FFDA' } : {}}
+                className="px-6 py-2.5 rounded-full text-[11px] font-black uppercase tracking-[0.15em] transition-all border border-[#1E293B] bg-[#0F172A] text-[#64748B] hover:border-[#06B6D4] hover:text-[#06B6D4]"
+                style={filter === 'All' ? { background: 'rgba(100,255,218,0.05)', borderColor: 'rgba(100,255,218,0.3)', color: '#06B6D4' } : {}}
               >
                 {filter}
               </button>
@@ -52,13 +52,13 @@ export default function PortfolioPage() {
             {projects.map((project, i) => (
               <Link key={project.slug} href={`/portfolio/${project.slug}`}
                 className="group relative rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1.5 flex flex-col"
-                style={{ background: '#112240', border: '1px solid #233554', boxShadow: "none" }}>
+                style={{ background: '#0F172A', border: '1px solid #1E293B', boxShadow: "none" }}>
 
                 {/* Project visual */}
                 <div className={`h-44 bg-gradient-to-br ${project.gradientFrom} ${project.gradientTo} relative overflow-hidden flex-shrink-0`}>
-                  <div className="absolute inset-0 bg-[#0A192F]/30" />
+                  <div className="absolute inset-0 bg-[#030712]/30" />
                   <div className="absolute inset-0 flex flex-col justify-between p-5">
-                    <span className="self-start px-3 py-1 rounded-full text-xs font-semibold bg-[#0A192F]/40 text-[#ccd6f6] backdrop-blur-sm">
+                    <span className="self-start px-3 py-1 rounded-full text-xs font-semibold bg-[#030712]/40 text-[#E2E8F0] backdrop-blur-sm">
                       {project.category}
                     </span>
                     <div>
@@ -69,7 +69,7 @@ export default function PortfolioPage() {
                   {/* Hover overlay */}
                   <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity" style={{ background: 'rgba(0,0,0,0.5)' }}>
                     <div className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold"
-                      style={{ background: '#64FFDA', color: '#0A192F' }}>
+                      style={{ background: 'linear-gradient(135deg, #06B6D4, #8B5CF6)', color: '#030712' }}>
                       <ExternalLink className="w-4 h-4" /> View Case Study
                     </div>
                   </div>
@@ -78,30 +78,30 @@ export default function PortfolioPage() {
                 {/* Info */}
                 <div className="p-5 flex flex-col flex-1">
                   <div className="flex items-center justify-between mb-3">
-                    <span className="text-xs text-[#8892B0]">{project.client}</span>
-                    <span className="text-xs text-[#8892B0]">{project.date}</span>
+                    <span className="text-xs text-[#64748B]">{project.client}</span>
+                    <span className="text-xs text-[#64748B]">{project.date}</span>
                   </div>
-                  <p className="text-sm text-[#8892B0] leading-relaxed mb-4 line-clamp-2 flex-1">{project.description}</p>
+                  <p className="text-sm text-[#64748B] leading-relaxed mb-4 line-clamp-2 flex-1">{project.description}</p>
 
                   {/* Results chips */}
                   <div className="grid grid-cols-2 gap-3 mb-6">
                     {project.results.slice(0, 2).map((r) => (
-                      <div key={r} className="px-4 py-3 rounded-xl bg-[#0A192F] border border-[#233554] group-hover:border-[#64FFDA]/20 transition-all">
+                      <div key={r} className="px-4 py-3 rounded-xl bg-[#030712] border border-[#1E293B] group-hover:border-[#06B6D4]/20 transition-all">
                         <p className={`text-sm font-black ${project.colorClass} mb-0.5 tracking-tight`}>{r.split(' ').slice(0,2).join(' ')}</p>
-                        <p className="text-[10px] text-[#8892B0] font-medium uppercase tracking-widest">{r.split(' ').slice(2).join(' ')}</p>
+                        <p className="text-[10px] text-[#64748B] font-medium uppercase tracking-widest">{r.split(' ').slice(2).join(' ')}</p>
                       </div>
                     ))}
                   </div>
 
                   {/* Tech tags */}
-                  <div className="flex flex-wrap gap-2 pt-5 border-t border-[#233554]/50">
+                  <div className="flex flex-wrap gap-2 pt-5 border-t border-[#1E293B]/50">
                     {project.tech.slice(0, 3).map((t) => (
-                      <span key={t} className="px-2.5 py-1 rounded-md text-[9px] font-black uppercase tracking-wider bg-white/5 text-[#8892B0] border border-white/5">
+                      <span key={t} className="px-2.5 py-1 rounded-md text-[9px] font-black uppercase tracking-wider bg-white/5 text-[#64748B] border border-white/5">
                         {t}
                       </span>
                     ))}
                     {project.tech.length > 3 && (
-                      <span className="px-2 py-1 text-[9px] font-black text-[#233554] bg-[#233554]/10 rounded-md">+{project.tech.length - 3}</span>
+                      <span className="px-2 py-1 text-[9px] font-black text-[#1E293B] bg-[#1E293B]/10 rounded-md">+{project.tech.length - 3}</span>
                     )}
                   </div>
                 </div>
@@ -112,25 +112,25 @@ export default function PortfolioPage() {
       </section>
 
       {/* Stats strip */}
-      <section className="py-14" style={{ background: '#0A192F', borderTop: '1px solid #233554', borderBottom: '1px solid #233554' }}>
+      <section className="py-14" style={{ background: '#030712', borderTop: '1px solid #1E293B', borderBottom: '1px solid #1E293B' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
           {[['150+','Projects Delivered'],['$10M+','Revenue Generated'],['80+','Happy Clients'],['98%','Satisfaction Rate']].map(([v,l]) => (
             <div key={l}>
-              <p className="text-4xl font-black" style={{ color: '#64FFDA' }}>{v}</p>
-              <p className="text-xs text-[#233554] mt-1 uppercase tracking-wider">{l}</p>
+              <p className="text-4xl font-black" style={{ color: '#06B6D4' }}>{v}</p>
+              <p className="text-xs text-[#1E293B] mt-1 uppercase tracking-wider">{l}</p>
             </div>
           ))}
         </div>
       </section>
 
       {/* CTA */}
-      <section className="py-24" style={{ background: '#0A192F' }}>
+      <section className="py-24" style={{ background: '#030712' }}>
         <div className="max-w-3xl mx-auto px-4 text-center">
-          <h2 className="text-4xl font-black text-[#ccd6f6] mb-4">Want Results Like These?</h2>
-          <p className="text-[#8892B0] mb-8 text-lg">Let's discuss your project and build the next success story together.</p>
+          <h2 className="text-4xl font-black text-[#E2E8F0] mb-4">Want Results Like These?</h2>
+          <p className="text-[#64748B] mb-8 text-lg">Let's discuss your project and build the next success story together.</p>
           <Link href="/contact"
             className="inline-flex items-center gap-2 px-9 py-4 rounded-xl font-bold hover:opacity-90 transition-opacity shadow-xl"
-            style={{ background: '#64FFDA', color: '#0A192F', boxShadow: "none" }}>
+            style={{ background: 'linear-gradient(135deg, #06B6D4, #8B5CF6)', color: '#030712', boxShadow: "none" }}>
             Start Your Project <ArrowRight className="w-5 h-5" />
           </Link>
         </div>

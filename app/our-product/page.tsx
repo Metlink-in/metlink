@@ -8,14 +8,14 @@ export const metadata: Metadata = {
 
 export default function OurProductPage() {
   return (
-    <main className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-[#0A192F]">
+    <main className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-[#030712]">
       {/* Radial glow backdrop */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            'radial-gradient(ellipse 70% 55% at 50% 45%, rgba(100,255,218,0.10) 0%, transparent 70%)',
+            'radial-gradient(ellipse 70% 55% at 50% 45%, rgba(6,182,212,0.10) 0%, transparent 70%)',
         }}
       />
 
@@ -25,7 +25,7 @@ export default function OurProductPage() {
         className="pointer-events-none absolute inset-0 opacity-[0.04]"
         style={{
           backgroundImage:
-            'linear-gradient(to right,#64FFDA 1px,transparent 1px),linear-gradient(to bottom,#64FFDA 1px,transparent 1px)',
+            'linear-gradient(rgba(6,182,212,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(6,182,212,0.04) 1px,transparent 1px)',
           backgroundSize: '60px 60px',
         }}
       />
@@ -36,14 +36,14 @@ export default function OurProductPage() {
         <div
           className="mb-8 inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-widest"
           style={{
-            background: 'rgba(100,255,218,0.08)',
-            border: '1px solid rgba(100,255,218,0.25)',
-            color: '#64FFDA',
+            background: 'rgba(6,182,212,0.08)',
+            border: '1px solid rgba(6,182,212,0.25)',
+            color: '#06B6D4',
           }}
         >
           <span
             className="inline-block w-1.5 h-1.5 rounded-full animate-pulse"
-            style={{ background: '#64FFDA' }}
+            style={{ background: '#06B6D4' }}
           />
           In Development
         </div>
@@ -52,7 +52,7 @@ export default function OurProductPage() {
         <h1
           className="text-5xl sm:text-6xl md:text-7xl font-black tracking-tight leading-tight mb-6 pb-2"
           style={{
-            background: 'linear-gradient(135deg,#ccd6f6 30%,#64FFDA 70%,#007BFF 100%)',
+            background: 'linear-gradient(135deg, #E2E8F0 20%, #06B6D4 60%, #8B5CF6 100%)',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
           }}
@@ -61,7 +61,7 @@ export default function OurProductPage() {
         </h1>
 
         {/* Sub-headline */}
-        <p className="text-lg md:text-xl text-[#8892B0] leading-relaxed mb-10 max-w-xl">
+        <p className="text-lg md:text-xl text-[#64748B] leading-relaxed mb-10 max-w-xl">
           We are crafting something extraordinary. Our next-generation AI product is being built to
           transform the way businesses grow — stay tuned for the reveal.
         </p>
@@ -73,7 +73,7 @@ export default function OurProductPage() {
               key={delay}
               className="inline-block w-2 h-2 rounded-full animate-bounce"
               style={{
-                background: '#64FFDA',
+                background: '#06B6D4',
                 animationDelay: `${delay}ms`,
               }}
             />
@@ -85,18 +85,18 @@ export default function OurProductPage() {
           href="/contact"
           className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl text-sm font-bold transition-all hover:opacity-90 shadow-lg"
           style={{
-            background: '#64FFDA',
-            color: '#0A192F',
-            boxShadow: '0 0 32px rgba(100,255,218,0.25)',
+            background: '#06B6D4',
+            color: '#030712',
+            boxShadow: '0 0 32px rgba(6,182,212,0.25)',
           }}
         >
           Get Notified at Launch
         </a>
 
         {/* Footer note */}
-        <p className="mt-8 text-xs text-[#8892B0]">
+        <p className="mt-8 text-xs text-[#64748B]">
           Have questions?{' '}
-          <a href="/contact" className="text-[#64FFDA] hover:text-[#64FFDA] transition-colors">
+          <a href="/contact" className="text-[#06B6D4] hover:text-[#06B6D4] transition-colors">
             Contact the MetLink team
           </a>
         </p>
