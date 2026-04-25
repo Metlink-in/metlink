@@ -35,10 +35,9 @@ export default function PortfolioPage() {
           <div className="flex flex-wrap gap-3 justify-center">
             {filters.map((filter) => (
               <button key={filter}
-                className="px-5 py-2 rounded-xl text-sm font-medium transition-all"
-                style={filter === 'All'
-                  ? { background: '#233554', border: '1px solid #233554', color: '#64FFDA' }
-                  : { background: 'transparent', border: '1px solid rgba(255,255,255,0.07)', color: '#8892B0' }}>
+                className="px-6 py-2.5 rounded-full text-[11px] font-black uppercase tracking-[0.15em] transition-all border border-[#233554] bg-[#112240] text-[#8892B0] hover:border-[#64FFDA] hover:text-[#64FFDA]"
+                style={filter === 'All' ? { background: 'rgba(100,255,218,0.05)', borderColor: 'rgba(100,255,218,0.3)', color: '#64FFDA' } : {}}
+              >
                 {filter}
               </button>
             ))}
@@ -85,26 +84,24 @@ export default function PortfolioPage() {
                   <p className="text-sm text-[#8892B0] leading-relaxed mb-4 line-clamp-2 flex-1">{project.description}</p>
 
                   {/* Results chips */}
-                  <div className="grid grid-cols-2 gap-2 mb-4">
+                  <div className="grid grid-cols-2 gap-3 mb-6">
                     {project.results.slice(0, 2).map((r) => (
-                      <div key={r} className="px-3 py-2 rounded-lg"
-                        style={{ background: '#233554', border: '1px solid #233554' }}>
-                        <p className={`text-xs font-bold ${project.colorClass}`}>{r.split(' ').slice(0,2).join(' ')}</p>
-                        <p className="text-xs text-[#233554] truncate">{r.split(' ').slice(2).join(' ')}</p>
+                      <div key={r} className="px-4 py-3 rounded-xl bg-[#0A192F] border border-[#233554] group-hover:border-[#64FFDA]/20 transition-all">
+                        <p className={`text-sm font-black ${project.colorClass} mb-0.5 tracking-tight`}>{r.split(' ').slice(0,2).join(' ')}</p>
+                        <p className="text-[10px] text-[#8892B0] font-medium uppercase tracking-widest">{r.split(' ').slice(2).join(' ')}</p>
                       </div>
                     ))}
                   </div>
 
                   {/* Tech tags */}
-                  <div className="flex flex-wrap gap-1.5">
-                    {project.tech.slice(0, 4).map((t) => (
-                      <span key={t} className="px-2 py-0.5 rounded text-xs"
-                        style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)', color: '#5A5045' }}>
+                  <div className="flex flex-wrap gap-2 pt-5 border-t border-[#233554]/50">
+                    {project.tech.slice(0, 3).map((t) => (
+                      <span key={t} className="px-2.5 py-1 rounded-md text-[9px] font-black uppercase tracking-wider bg-white/5 text-[#8892B0] border border-white/5">
                         {t}
                       </span>
                     ))}
-                    {project.tech.length > 4 && (
-                      <span className="px-2 py-0.5 rounded text-xs" style={{ color: '#233554' }}>+{project.tech.length - 4}</span>
+                    {project.tech.length > 3 && (
+                      <span className="px-2 py-1 text-[9px] font-black text-[#233554] bg-[#233554]/10 rounded-md">+{project.tech.length - 3}</span>
                     )}
                   </div>
                 </div>

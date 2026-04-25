@@ -50,7 +50,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={`${dmSans.variable} ${manrope.variable}`}>
       <body className="font-sans antialiased">
         <Header />
-        <main className="pt-16">{children}</main>
+        <main className="pt-14">{children}</main>
         <Footer />
         <ScrollToTop />
         <ChatBot />

@@ -135,18 +135,19 @@ export default function BlogPage() {
       </section>
 
       {/* Newsletter CTA */}
-      <section className="py-24" style={{ background: '#0A192F', borderTop: '1px solid #233554' }}>
-        <div className="max-w-2xl mx-auto px-4 text-center">
-          <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#64FFDA] mb-3">Never Miss an Insight</p>
-          <h2 className="text-4xl font-black text-[#ccd6f6] mb-4">Subscribe to the Newsletter</h2>
-          <p className="text-[#8892B0] mb-8">Get our best articles on AI, marketing, and software — once a month, no spam.</p>
-          <form onSubmit={(e) => e.preventDefault()} className="flex gap-3 max-w-md mx-auto">
+      <section className="py-24 sm:py-32" style={{ background: '#0A192F', borderTop: '1px solid #233554' }}>
+        <div className="max-w-3xl mx-auto px-4 text-center">
+          <p className="text-[10px] font-black uppercase tracking-[0.25em] text-[#64FFDA] mb-4">Never Miss an Insight</p>
+          <h2 className="text-4xl sm:text-5xl font-black text-white mb-6 tracking-tight">Subscribe to the <span className="text-[#64FFDA]">Insights</span></h2>
+          <p className="text-[#8892B0] mb-12 text-lg font-medium">Get our best articles on AI, marketing, and software — once a month.</p>
+          <form onSubmit={(e) => e.preventDefault()} className="flex flex-col sm:flex-row gap-4 max-w-xl mx-auto">
             <input type="email" placeholder="your@email.com"
-              className="flex-1 px-4 py-3 rounded-xl text-sm text-[#ccd6f6] placeholder:text-[#233554] focus:outline-none"
+              className="flex-1 px-6 py-4 rounded-2xl text-sm text-white placeholder:text-white/10 focus:outline-none transition-all focus:border-[#64FFDA]/50"
               style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid #233554' }} />
-            <button type="submit" className="px-6 py-3 rounded-xl font-semibold text-sm hover:opacity-90 transition-opacity flex-shrink-0"
+            <button type="submit" className="px-8 py-4 rounded-2xl font-black text-sm uppercase tracking-widest hover:scale-105 active:scale-95 transition-all shadow-xl shadow-[#64FFDA]/10"
               style={{ background: '#64FFDA', color: '#0A192F' }}>Subscribe</button>
           </form>
+          <p className="text-[10px] text-[#8892B0]/30 mt-8 font-black uppercase tracking-widest">No Spam &bull; Monthly Recap &bull; Unsubscribe Anytime</p>
         </div>
       </section>
     </div>

@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
-import { Mail, Phone, MapPin, Clock, Send, CheckCircle, ArrowRight, MessageCircle } from 'lucide-react';
+import { Mail, Phone, MapPin, Clock, Send, CheckCircle, ArrowRight, MessageCircle, Zap, Target, Bot } from 'lucide-react';
 
 const services = ['Digital Marketing','Performance Marketing','SEO','Social Media','Brand Identity','Video Production','Web Development','Mobile App','AI Development','Business Automation','Data Science','Other'];
 const budgets = ['< ₹1L','₹1L – ₹5L','₹5L – ₹20L','₹20L – ₹50L','₹50L+'];
@@ -27,6 +27,8 @@ export default function ContactPage() {
     color: '#ccd6f6',
   };
 
+  const labelStyle = "block text-[10px] font-black uppercase tracking-[0.2em] text-[#64FFDA] mb-3 opacity-80";
+
   return (
     <div className="w-full overflow-x-hidden" style={{ background: '#0A192F' }}>
 
@@ -39,18 +41,16 @@ export default function ContactPage() {
             style={{ backgroundImage: 'linear-gradient(#233554 1px, transparent 1px), linear-gradient(90deg, #233554 1px, transparent 1px)', backgroundSize: '80px 80px' }} />
         </div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold mb-6"
-            style={{ background: '#233554', border: '1px solid #233554', color: '#64FFDA', letterSpacing: '0.08em' }}>
+          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-[10px] font-black uppercase tracking-[0.2em] mb-8"
+            style={{ background: 'rgba(100,255,218,0.05)', border: '1px solid rgba(100,255,218,0.2)', color: '#64FFDA' }}>
             <MessageCircle className="w-3.5 h-3.5" /> Get In Touch
           </div>
-          <h1 className="text-5xl md:text-7xl font-black text-[#ccd6f6] mb-6 leading-tight">
-            Let's{' '}
-            <span style={{ color: '#64FFDA' }}>
-              Build Together
-            </span>
+          <h1 className="text-5xl sm:text-7xl md:text-8xl font-black text-white mb-8 tracking-tight leading-[1.05]">
+            Let&apos;s <br className="sm:hidden" />
+            <span className="text-[#64FFDA]">Build Together</span>
           </h1>
-          <p className="text-xl text-[#8892B0] max-w-2xl mx-auto">
-            Have a project in mind? Share your goals and we'll craft a custom strategy to reach them.
+          <p className="text-lg sm:text-xl text-[#8892B0] max-w-2xl mx-auto leading-relaxed">
+            Have a project in mind? Share your goals and we&apos;ll craft a custom strategy to reach them.
           </p>
         </div>
       </section>
@@ -88,35 +88,36 @@ export default function ContactPage() {
 
             {/* Left — trust */}
             <div className="lg:col-span-2">
-              <p className="text-xs font-bold uppercase tracking-[0.15em] text-[#64FFDA] mb-3">Why Work With Us</p>
-              <h2 className="text-3xl font-black text-[#ccd6f6] mb-6">The Partner You've Been Looking For</h2>
-              <div className="space-y-4 mb-10">
+            <div className="lg:col-span-2">
+              <p className="text-[10px] font-black uppercase tracking-[0.2em] text-[#64FFDA] mb-4">Why Work With Us</p>
+              <h2 className="text-3xl sm:text-4xl font-black text-white mb-8 tracking-tight">The Partner You&apos;ve Been Looking For</h2>
+              <div className="space-y-4 mb-12">
                 {[
-                  { icon: '', t: 'Fast Turnaround', d: 'First deliverables in 7 days or less.' },
-                  { icon: '', t: 'Data-Driven Results', d: 'Every strategy backed by analytics and real KPIs.' },
-                  { icon: '', t: 'AI-Powered Execution', d: 'We leverage cutting-edge AI to deliver 10x results.' },
-                  { icon: '', t: 'Dedicated Account Manager', d: 'One point of contact. Always responsive.' },
-                  { icon: '', t: 'NDA & Confidentiality', d: 'Your ideas and data are always protected.' },
+                  { icon: <Zap className="w-4 h-4 text-[#64FFDA]" />, t: 'Fast Turnaround', d: 'First deliverables in 7 days or less.' },
+                  { icon: <Target className="w-4 h-4 text-[#64FFDA]" />, t: 'Data-Driven Results', d: 'Every strategy backed by analytics and real KPIs.' },
+                  { icon: <Bot className="w-4 h-4 text-[#64FFDA]" />, t: 'AI-Powered Execution', d: 'We leverage cutting-edge AI to deliver 10x results.' },
+                  { icon: <CheckCircle className="w-4 h-4 text-[#64FFDA]" />, t: 'NDA & Confidentiality', d: 'Your ideas and data are always protected.' },
                 ].map(({ icon, t, d }) => (
-                  <div key={t} className="flex items-start gap-4 p-4 rounded-xl transition-all"
-                    style={{ background: '#233554', border: '1px solid #233554' }}>
-                    <span className="text-xl flex-shrink-0">{icon}</span>
+                  <div key={t} className="flex items-start gap-5 p-5 rounded-2xl transition-all border border-[#233554] bg-[#112240] hover:border-[#64FFDA]/30">
+                    <div className="w-10 h-10 rounded-xl bg-[#0A192F] flex items-center justify-center shrink-0 border border-[#233554]">
+                      {icon}
+                    </div>
                     <div>
-                      <p className="font-semibold text-[#ccd6f6] text-sm mb-0.5">{t}</p>
-                      <p className="text-xs text-[#8892B0]">{d}</p>
+                      <p className="font-bold text-white text-sm mb-1">{t}</p>
+                      <p className="text-xs text-[#8892B0] leading-relaxed">{d}</p>
                     </div>
                   </div>
                 ))}
               </div>
-              <div className="p-5 rounded-xl" style={{ background: '#233554', border: '1px solid #233554' }}>
-                <p className="text-xs text-[#8892B0] uppercase tracking-wider mb-3">Trusted By Industries</p>
+              <div className="p-6 rounded-2xl border border-[#233554] bg-[#112240]/50">
+                <p className="text-[10px] text-[#8892B0] font-black uppercase tracking-[0.2em] mb-4 opacity-60">Trusted By Industries</p>
                 <div className="flex flex-wrap gap-2">
                   {['FinTech','Healthcare','E-Commerce','SaaS','Real Estate','Startups'].map(tag => (
-                    <span key={tag} className="px-3 py-1 rounded-full text-xs"
-                      style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid #233554', color: '#8892B0' }}>{tag}</span>
+                    <span key={tag} className="px-3.5 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-wider bg-[#0A192F] text-[#8892B0] border border-[#233554]">{tag}</span>
                   ))}
                 </div>
               </div>
+            </div>
             </div>
 
             {/* Right — form */}
@@ -141,72 +142,68 @@ export default function ContactPage() {
                     </div>
                   ) : (
                     <>
-                      <h2 className="text-2xl font-black text-[#ccd6f6] mb-1">Tell Us About Your Project</h2>
-                      <p className="text-[#8892B0] text-sm mb-8">Fill in the details and we'll respond shortly.</p>
-                      <form onSubmit={handleSubmit} className="space-y-4">
-                        <div className="grid sm:grid-cols-2 gap-4">
+                      <h2 className="text-2xl font-black text-white mb-2 tracking-tight">Project Inquiry</h2>
+                      <p className="text-[#8892B0] text-sm mb-10 font-medium">Brief us on your goals and we&apos;ll build the strategy.</p>
+                      <form onSubmit={handleSubmit} className="space-y-6">
+                        <div className="grid sm:grid-cols-2 gap-6">
                           <div>
-                            <label className="block text-xs font-semibold text-[#8892B0] mb-2">Full Name *</label>
+                            <label className={labelStyle}>Full Name</label>
                             <input type="text" name="name" value={form.name} onChange={handleChange} placeholder="John Smith" required
-                              className="w-full px-4 py-3 rounded-xl text-sm focus:outline-none placeholder:text-[#233554]"
-                              style={inputStyle}
-                              onFocus={e => (e.currentTarget.style.borderColor='#233554')}
-                              onBlur={e => (e.currentTarget.style.borderColor='#233554')} />
+                              className="w-full px-5 py-3.5 rounded-xl text-sm focus:outline-none placeholder:text-white/10 transition-all focus:border-[#64FFDA]/50"
+                              style={inputStyle} />
                           </div>
                           <div>
-                            <label className="block text-xs font-semibold text-[#8892B0] mb-2">Company</label>
+                            <label className={labelStyle}>Company</label>
                             <input type="text" name="company" value={form.company} onChange={handleChange} placeholder="Acme Corp"
-                              className="w-full px-4 py-3 rounded-xl text-sm focus:outline-none placeholder:text-[#233554]"
-                              style={inputStyle}
-                              onFocus={e => (e.currentTarget.style.borderColor='#233554')}
-                              onBlur={e => (e.currentTarget.style.borderColor='#233554')} />
+                              className="w-full px-5 py-3.5 rounded-xl text-sm focus:outline-none placeholder:text-white/10 transition-all focus:border-[#64FFDA]/50"
+                              style={inputStyle} />
                           </div>
                         </div>
                         <div>
-                          <label className="block text-xs font-semibold text-[#8892B0] mb-2">Work Email *</label>
+                          <label className={labelStyle}>Work Email</label>
                           <input type="email" name="email" value={form.email} onChange={handleChange} placeholder="you@company.com" required
-                            className="w-full px-4 py-3 rounded-xl text-sm focus:outline-none placeholder:text-[#233554]"
-                            style={inputStyle}
-                            onFocus={e => (e.currentTarget.style.borderColor='#233554')}
-                            onBlur={e => (e.currentTarget.style.borderColor='#233554')} />
+                            className="w-full px-5 py-3.5 rounded-xl text-sm focus:outline-none placeholder:text-white/10 transition-all focus:border-[#64FFDA]/50"
+                            style={inputStyle} />
                         </div>
-                        <div className="grid sm:grid-cols-2 gap-4">
+                        <div className="grid sm:grid-cols-2 gap-6">
                           <div>
-                            <label className="block text-xs font-semibold text-[#8892B0] mb-2">Service Needed</label>
-                            <select name="service" value={form.service} onChange={handleChange}
-                              className="w-full px-4 py-3 rounded-xl text-sm focus:outline-none appearance-none"
-                              style={{ ...inputStyle, color: form.service ? '#ccd6f6' : '#233554' }}>
-                              <option value="" style={{ background:'#112240' }}>Select a service...</option>
-                              {services.map(s => <option key={s} value={s} style={{ background:'#112240',color:'#ccd6f6' }}>{s}</option>)}
-                            </select>
+                            <label className={labelStyle}>Service Needed</label>
+                            <div className="relative">
+                              <select name="service" value={form.service} onChange={handleChange}
+                                className="w-full px-5 py-3.5 rounded-xl text-sm focus:outline-none appearance-none cursor-pointer transition-all focus:border-[#64FFDA]/50"
+                                style={{ ...inputStyle, color: form.service ? '#ccd6f6' : 'rgba(255,255,255,0.1)' }}>
+                                <option value="" style={{ background:'#112240' }}>Select a service...</option>
+                                {services.map(s => <option key={s} value={s} style={{ background:'#112240',color:'#ccd6f6' }}>{s}</option>)}
+                              </select>
+                            </div>
                           </div>
                           <div>
-                            <label className="block text-xs font-semibold text-[#8892B0] mb-2">Budget Range</label>
-                            <select name="budget" value={form.budget} onChange={handleChange}
-                              className="w-full px-4 py-3 rounded-xl text-sm focus:outline-none appearance-none"
-                              style={{ ...inputStyle, color: form.budget ? '#ccd6f6' : '#233554' }}>
-                              <option value="" style={{ background:'#112240' }}>Select budget...</option>
-                              {budgets.map(b => <option key={b} value={b} style={{ background:'#112240',color:'#ccd6f6' }}>{b}</option>)}
-                            </select>
+                            <label className={labelStyle}>Budget Range</label>
+                            <div className="relative">
+                              <select name="budget" value={form.budget} onChange={handleChange}
+                                className="w-full px-5 py-3.5 rounded-xl text-sm focus:outline-none appearance-none cursor-pointer transition-all focus:border-[#64FFDA]/50"
+                                style={{ ...inputStyle, color: form.budget ? '#ccd6f6' : 'rgba(255,255,255,0.1)' }}>
+                                <option value="" style={{ background:'#112240' }}>Select budget...</option>
+                                {budgets.map(b => <option key={b} value={b} style={{ background:'#112240',color:'#ccd6f6' }}>{b}</option>)}
+                              </select>
+                            </div>
                           </div>
                         </div>
                         <div>
-                          <label className="block text-xs font-semibold text-[#8892B0] mb-2">Tell Us About Your Project *</label>
+                          <label className={labelStyle}>Project Details</label>
                           <textarea name="message" value={form.message} onChange={handleChange} rows={5}
                             placeholder="Describe your goals, challenges, and what success looks like..." required
-                            className="w-full px-4 py-3 rounded-xl text-sm focus:outline-none placeholder:text-[#233554] resize-none"
-                            style={inputStyle}
-                            onFocus={e => (e.currentTarget.style.borderColor='#233554')}
-                            onBlur={e => (e.currentTarget.style.borderColor='#233554')} />
+                            className="w-full px-5 py-4 rounded-xl text-sm focus:outline-none placeholder:text-white/10 resize-none transition-all focus:border-[#64FFDA]/50"
+                            style={inputStyle} />
                         </div>
                         <button type="submit" disabled={loading}
-                          className="w-full py-4 rounded-xl font-bold text-sm transition-opacity hover:opacity-90 disabled:opacity-60 flex items-center justify-center gap-2"
-                          style={{ background: '#64FFDA', color: '#0A192F', boxShadow: "none" }}>
+                          className="w-full py-4 rounded-xl font-black text-sm tracking-[0.1em] uppercase transition-all hover:brightness-110 active:scale-[0.98] disabled:opacity-60 flex items-center justify-center gap-3 shadow-xl shadow-teal-900/20"
+                          style={{ background: '#64FFDA', color: '#0A192F' }}>
                           {loading
-                            ? <span className="flex items-center gap-2"><span className="w-4 h-4 border-2 border-black/30 border-t-black rounded-full animate-spin" />Sending...</span>
-                            : <><Send className="w-4 h-4" /> Send Message — We Reply in 2 Hours</>}
+                            ? <span className="flex items-center gap-3"><span className="w-4 h-4 border-2 border-[#0A192F]/30 border-t-[#0A192F] rounded-full animate-spin" />Sending...</span>
+                            : <><Send className="w-4 h-4" /> Send Inquiry</>}
                         </button>
-                        <p className="text-center text-xs" style={{ color: '#3A3026' }}>By submitting, you agree to our Privacy Policy. No spam, ever.</p>
+                        <p className="text-center text-[10px] text-[#8892B0] font-bold uppercase tracking-widest opacity-40">Privacy Protected &bull; No Spam Guaranteed</p>
                       </form>
                     </>
                   )}

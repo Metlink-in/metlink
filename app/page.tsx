@@ -57,7 +57,7 @@ export default function HomePage() {
     <div className="w-full overflow-x-hidden bg-[#0A192F] pb-20">
 
       {/* ─── HERO ─── */}
-      <section className="relative min-h-screen flex items-center bg-[#0A192F] overflow-hidden pt-16 sm:pt-20">
+      <section className="relative min-h-screen flex items-center bg-[#0A192F] overflow-hidden pt-14 sm:pt-16">
         <div className="absolute inset-0 pointer-events-none opacity-[0.03]"
             style={{ backgroundImage: 'linear-gradient(#233554 1px, transparent 1px), linear-gradient(90deg, #233554 1px, transparent 1px)', backgroundSize: '60px 60px' }} />
         
@@ -75,7 +75,7 @@ export default function HomePage() {
 
               <h1 className="font-black leading-[1.05] text-white mb-5 sm:mb-6">
                 <span className="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl">We Build</span>
-                <span className="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-[#64FFDA] my-1" style={{ textShadow: '0 0 40px rgba(100,255,218,0.2)' }}>
+                <span className="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-[#64FFDA] my-1">
                   AI-Powered
                 </span>
                 <span className="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl">Growth Machines</span>
@@ -87,7 +87,7 @@ export default function HomePage() {
 
               <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4">
                 <Link href="/services"
-                  className="group inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl font-bold text-sm bg-[#007BFF] text-white transition-all hover:scale-105 shadow-[0_0_30px_rgba(0,123,255,0.25)] hover:shadow-[0_0_40px_rgba(0,123,255,0.4)]">
+                  className="group inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-black text-sm bg-[#007BFF] text-white transition-all hover:brightness-110 active:scale-95 shadow-lg shadow-blue-900/20">
                   Explore Services <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Link>
                 <Link href="/portfolio"
@@ -97,11 +97,19 @@ export default function HomePage() {
               </div>
 
               {/* Proof dots */}
-              <StaggerChildren className="flex flex-wrap gap-5 sm:gap-8 mt-10 sm:mt-14">
-                {[['150+', 'Projects'], ['80+', 'Clients'], ['5+', 'Years'], ['$10M+', 'Generated']].map(([v, l]) => (
-                  <StaggerItem key={l}>
-                    <p className="text-2xl sm:text-3xl font-black text-[#64FFDA]">{v}</p>
-                    <p className="text-xs text-[#8892B0] uppercase tracking-widest mt-1 font-semibold">{l}</p>
+              <StaggerChildren className="flex flex-wrap items-center gap-x-12 gap-y-6 mt-12 sm:mt-16">
+                {[
+                  ['150+', 'Projects', 'Completed'], 
+                  ['80+', 'Clients', 'Globally'], 
+                  ['5+', 'Years', 'Experience'], 
+                  ['$10M+', 'Generated', 'For Clients']
+                ].map(([v, l, sub]) => (
+                  <StaggerItem key={l} className="group/stat">
+                    <div className="flex flex-col">
+                      <p className="text-3xl sm:text-4xl font-black text-[#64FFDA] transition-transform group-hover/stat:scale-110 origin-left">{v}</p>
+                      <p className="text-[10px] font-black text-white/90 uppercase tracking-[0.2em] mt-2 mb-0.5">{l}</p>
+                      <p className="text-[10px] text-[#8892B0] uppercase tracking-widest opacity-60">{sub}</p>
+                    </div>
                   </StaggerItem>
                 ))}
               </StaggerChildren>
@@ -142,12 +150,14 @@ export default function HomePage() {
       </section>
 
       {/* ─── CLIENT MARQUEE ─── */}
-      <section className="py-8 sm:py-10 overflow-hidden bg-[#0A192F] border-y border-[#233554]">
-        <div className="animate-marquee gap-0" style={{ display: 'flex', width: 'max-content' }}>
-          {[...clients, ...clients, ...clients].map((c, i) => (
-            <div key={i} className="flex-shrink-0 flex items-center gap-3 px-12 border-r border-[#233554]">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#233554]" />
-              <span className="text-sm font-bold tracking-wider text-[#8892B0]">{c}</span>
+      <section className="py-10 sm:py-12 overflow-hidden bg-[#0A192F] border-y border-[#233554]/50 relative">
+        <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-[#0A192F] to-transparent z-10" />
+        <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-[#0A192F] to-transparent z-10" />
+        <div className="animate-marquee flex items-center" style={{ width: 'max-content' }}>
+          {[...clients, ...clients, ...clients, ...clients].map((c, i) => (
+            <div key={i} className="flex-shrink-0 flex items-center gap-3 px-16">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#64FFDA]/30" />
+              <span className="text-xs font-black tracking-[0.3em] uppercase text-[#8892B0]/40 hover:text-[#64FFDA]/60 transition-colors cursor-default">{c}</span>
             </div>
           ))}
         </div>
@@ -198,33 +208,39 @@ export default function HomePage() {
             </Link>
           </FadeIn>
 
-          <StaggerChildren className="grid sm:grid-cols-2 gap-5 sm:gap-6">
+          <StaggerChildren className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
             {serviceCategories.map((cat) => (
               <StaggerItem key={cat.slug}>
                 <Link href={`/services/${cat.slug}`}
-                  className="group block p-6 sm:p-10 rounded-3xl bg-[#112240] border border-[#233554] hover:border-[#64FFDA]/40 hover:-translate-y-2 transition-all duration-300">
-                  <div className="flex items-start justify-between mb-5 sm:mb-6">
-                    <div>
-                      <span className="text-3xl sm:text-4xl mb-3 sm:mb-4 block group-hover:scale-110 transition-transform origin-left">
-                        {cat.slug === 'digital-marketing' && <Megaphone className="w-8 h-8 sm:w-10 sm:h-10 text-[#64FFDA]" />}
-                        {cat.slug === 'creative-media' && <Palette className="w-8 h-8 sm:w-10 sm:h-10 text-[#64FFDA]" />}
-                        {cat.slug === 'ai-automation' && <Bot className="w-8 h-8 sm:w-10 sm:h-10 text-[#64FFDA]" />}
-                        {cat.slug === 'software-development' && <Code className="w-8 h-8 sm:w-10 sm:h-10 text-[#64FFDA]" />}
-                      </span>
-                      <p className="text-xs font-bold uppercase tracking-widest text-[#64FFDA]">{cat.name}</p>
-                      <h3 className="text-xl sm:text-2xl font-black text-white mt-1.5">{cat.tagline}</h3>
+                  className="group block h-full p-8 sm:p-12 rounded-[2rem] bg-[#112240] border border-[#233554] hover:border-[#64FFDA]/40 transition-all duration-500 relative overflow-hidden">
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-[#64FFDA]/5 blur-3xl rounded-full translate-x-10 -translate-y-10 group-hover:bg-[#64FFDA]/10 transition-all" />
+                  
+                  <div className="relative z-10 flex flex-col h-full">
+                    <div className="flex items-start justify-between mb-8">
+                      <div className="w-14 h-14 rounded-2xl bg-[#0A192F] border border-[#233554] flex items-center justify-center group-hover:border-[#64FFDA]/30 group-hover:shadow-[0_0_20px_rgba(100,255,218,0.1)] transition-all">
+                        {cat.slug === 'digital-marketing' && <Megaphone className="w-6 h-6 text-[#64FFDA]" />}
+                        {cat.slug === 'creative-media' && <Palette className="w-6 h-6 text-[#64FFDA]" />}
+                        {cat.slug === 'ai-automation' && <Bot className="w-6 h-6 text-[#64FFDA]" />}
+                        {cat.slug === 'software-development' && <Code className="w-6 h-6 text-[#64FFDA]" />}
+                      </div>
+                      <div className="w-10 h-10 rounded-full bg-[#0A192F] border border-[#233554] group-hover:bg-[#64FFDA] flex items-center justify-center transition-all">
+                        <ChevronRight className="w-5 h-5 text-[#8892B0] group-hover:text-[#0A192F]" />
+                      </div>
                     </div>
-                    <div className="w-10 h-10 rounded-full bg-[#233554] group-hover:bg-[#64FFDA] flex items-center justify-center transition-colors flex-shrink-0">
-                      <ChevronRight className="w-5 h-5 text-[#8892B0] group-hover:text-[#0A192F] transition-colors" />
+
+                    <div className="flex-1">
+                      <p className="text-[10px] font-black uppercase tracking-[0.25em] text-[#64FFDA] mb-3">{cat.name}</p>
+                      <h3 className="text-2xl sm:text-3xl font-black text-white mb-4 leading-tight">{cat.tagline}</h3>
+                      <p className="text-sm sm:text-base text-[#8892B0] leading-relaxed mb-10 opacity-80 group-hover:opacity-100 transition-opacity">{cat.description}</p>
                     </div>
-                  </div>
-                  <p className="text-sm sm:text-base text-[#8892B0] leading-relaxed mb-6 sm:mb-8">{cat.description}</p>
-                  <div className="flex flex-wrap gap-2">
-                    {cat.services.map((svc) => (
-                      <span key={svc.slug} className="px-3 sm:px-4 py-1.5 rounded-full text-xs font-semibold bg-[#233554] text-[#8892B0] border border-transparent group-hover:border-[#64FFDA]/10 transition-colors">
-                        {svc.name}
-                      </span>
-                    ))}
+
+                    <div className="flex flex-wrap gap-2 pt-6 border-t border-[#233554]/50">
+                      {cat.services.map((svc) => (
+                        <span key={svc.slug} className="px-3 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-wider bg-[#0A192F] text-[#8892B0]/70 border border-[#233554] group-hover:border-[#64FFDA]/20 group-hover:text-[#64FFDA]/80 transition-all">
+                          {svc.name}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                 </Link>
               </StaggerItem>
@@ -276,7 +292,7 @@ export default function HomePage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 sm:gap-5 justify-center">
             <Link href="/contact"
-              className="group inline-flex items-center justify-center gap-2 px-8 sm:px-10 py-4 sm:py-5 rounded-xl font-black text-sm sm:text-base bg-[#007BFF] text-white transition-transform hover:scale-105 shadow-[0_0_30px_rgba(0,123,255,0.3)]">
+              className="group inline-flex items-center justify-center gap-3 px-10 py-5 rounded-xl font-black text-sm sm:text-base bg-[#007BFF] text-white transition-all hover:brightness-110 active:scale-95 shadow-xl shadow-blue-900/30">
               Book Strategy Call <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Link>
             <Link href="/portfolio"

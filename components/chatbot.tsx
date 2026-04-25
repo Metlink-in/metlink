@@ -55,7 +55,7 @@ export function ChatBot() {
       {/* Toggle button */}
       <button
         onClick={() => setOpen((v) => !v)}
-        className="fixed bottom-6 right-6 z-50 rounded-2xl flex items-center justify-center shadow-[0_0_50px_rgba(100,255,218,0.2)] transition-all duration-500 hover:scale-110 active:scale-95 group overflow-hidden"
+        className="fixed bottom-6 right-6 z-50 rounded-2xl flex items-center justify-center shadow-xl shadow-teal-900/20 transition-all duration-500 hover:scale-110 active:scale-95 group overflow-hidden"
         style={{
           width: 56, height: 56,
           background: 'linear-gradient(135deg, #64FFDA 0%, #007BFF 100%)',

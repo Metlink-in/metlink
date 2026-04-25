@@ -126,16 +126,16 @@ export function Header() {
         {/* Backdrop for mega menu */}
         {servicesOpen && (
           <div 
-            className="fixed inset-0 top-16 bg-black/40 backdrop-blur-[2px] transition-opacity duration-300 z-[-1]"
+            className="fixed inset-0 top-14 bg-black/40 backdrop-blur-[2px] transition-opacity duration-300 z-[-1]"
             onClick={() => setServicesOpen(false)}
           />
         )}
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
+          <div className="flex items-center justify-between h-14">
 
             {/* ── Logo ── */}
             <Link href="/" className="flex items-center gap-3 group">
-              <MetLinkLogo size={38} />
+              <MetLinkLogo size={32} />
               <div className="hidden sm:block">
                 <span
                   className="font-black text-lg tracking-wide"
@@ -172,7 +172,7 @@ export function Header() {
 
                 {servicesOpen && (
                   <div
-                    className="fixed top-[64px] inset-x-0 w-screen shadow-2xl shadow-black/80 animate-slideInDown overflow-hidden pt-1"
+                    className="fixed top-[56px] inset-x-0 w-screen shadow-2xl shadow-black/80 animate-slideInDown overflow-hidden pt-1"
                     style={{ 
                       background: 'rgba(8,8,8,0.98)', 
                       borderBottom: '1px solid #233554', 
@@ -336,37 +336,67 @@ function PopupFormInline({ onClose }: { onClose: () => void }) {
         <button onClick={onClose} className="absolute top-4 right-4 text-[#8892B0] hover:text-[#ccd6f6] transition-colors">
           <X className="w-5 h-5" />
         </button>
-        <div className="p-8">
+        <div className="p-8 sm:p-10">
           {submitted ? (
-            <div className="text-center py-6">
-              <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4" style={{ background: '#233554' }}>
-                <Zap className="w-8 h-8 text-[#64FFDA]" />
+            <div className="text-center py-10 animate-fadeInScale">
+              <div className="w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-2xl" 
+                style={{ background: 'linear-gradient(135deg, #64FFDA 0%, #007BFF 100%)' }}>
+                <Zap className="w-10 h-10 text-[#0A192F]" />
               </div>
-              <h3 className="text-xl font-bold text-[#ccd6f6] mb-2">You are in!</h3>
-              <p className="text-[#8892B0] text-sm">Our team will reach out within 24 hours.</p>
+              <h3 className="text-2xl font-black text-white mb-2">Request Received!</h3>
+              <p className="text-[#8892B0] text-sm max-w-[240px] mx-auto">Our strategy team will reach out to you within 24 hours.</p>
             </div>
           ) : (
             <>
-              <div className="text-center mb-6">
-                <MetLinkLogo size={48} />
-                <h2 className="text-2xl font-bold text-[#ccd6f6] mt-3 mb-1">Become a Client</h2>
-                <p className="text-[#8892B0] text-sm">Start building something great together.</p>
+              <div className="text-center mb-10">
+                <div className="inline-block mb-6 relative">
+                  <div className="absolute inset-0 bg-[#64FFDA]/20 blur-xl rounded-full" />
+                  <MetLinkLogo size={64} />
+                </div>
+                
+                <p className="text-[10px] font-black text-[#64FFDA] tracking-[0.3em] uppercase mb-3">
+                  Limited Spots Available
+                </p>
+                
+                <h2 className="text-4xl sm:text-5xl font-black text-white leading-[1.1] mb-4 tracking-tight">
+                  Become a <br/>MetLink Client
+                </h2>
+                
+                <p className="text-[#8892B0] text-sm font-medium">
+                  Join 80+ businesses growing with AI-powered strategy.
+                </p>
               </div>
+
               <form onSubmit={handleSubmit} className="space-y-4">
-                {(['name', 'company', 'email'] as const).map((field) => (
-                  <input key={field} type={field === 'email' ? 'email' : 'text'} name={field} value={form[field]}
-                    onChange={(e) => setForm((p) => ({ ...p, [field]: e.target.value }))}
-                    placeholder={field === 'name' ? 'Full Name' : field === 'company' ? 'Company / Project' : 'Work Email'}
-                    required
-                    className="w-full px-4 py-3 rounded-xl text-[#ccd6f6] placeholder:text-[#5A5045] text-sm focus:outline-none transition-colors"
-                    style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid #233554' }}
+                <div className="space-y-3">
+                  <input type="text" placeholder="Full Name" required
+                    className="w-full px-5 py-4 rounded-xl bg-[#0d1b2a]/50 border border-[#233554] text-white placeholder:text-[#8892B0]/30 text-sm focus:outline-none focus:border-[#64FFDA]/50 transition-all"
                   />
-                ))}
+                  <input type="text" placeholder="Company / Project Name" required
+                    className="w-full px-5 py-4 rounded-xl bg-[#0d1b2a]/50 border border-[#233554] text-white placeholder:text-[#8892B0]/30 text-sm focus:outline-none focus:border-[#64FFDA]/50 transition-all"
+                  />
+                  <input type="email" placeholder="Work Email Address" required
+                    className="w-full px-5 py-4 rounded-xl bg-[#0d1b2a]/50 border border-[#233554] text-white placeholder:text-[#8892B0]/30 text-sm focus:outline-none focus:border-[#64FFDA]/50 transition-all"
+                  />
+                  <select 
+                    className="w-full px-5 py-4 rounded-xl bg-[#0d1b2a]/50 border border-[#233554] text-[#8892B0]/60 text-sm focus:outline-none focus:border-[#64FFDA]/50 transition-all appearance-none cursor-pointer"
+                  >
+                    <option value="">Select a Service (optional)</option>
+                    <option value="marketing">Digital Marketing</option>
+                    <option value="ai">AI & Automation</option>
+                    <option value="dev">Software Development</option>
+                  </select>
+                </div>
+
                 <button type="submit"
-                  className="w-full py-3 rounded-xl font-bold text-sm transition-opacity hover:opacity-90"
+                  className="w-full py-4 mt-4 rounded-xl font-black text-sm tracking-widest uppercase transition-all hover:brightness-110 active:scale-[0.98] shadow-xl shadow-teal-900/20"
                   style={{ background: '#64FFDA', color: '#0A192F' }}>
-                  Submit & Get Started
+                  Submit & Get Started →
                 </button>
+                
+                <p className="text-center text-[10px] text-[#8892B0]/40 font-medium mt-6">
+                  No spam. We respond within 24 hours.
+                </p>
               </form>
             </>
           )}
