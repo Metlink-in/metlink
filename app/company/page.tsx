@@ -13,12 +13,12 @@ const values = [
 ];
 
 const team = [
-  { name: 'Aryan Shah', role: 'Founder & CEO', specialty: 'AI Strategy & Business Development', emoji: '👨‍💼' },
-  { name: 'Priya Nair', role: 'CTO & Lead Architect', specialty: 'AI Systems & Cloud Infrastructure', emoji: '👩‍💻' },
-  { name: 'Rahul Mehta', role: 'Head of Engineering', specialty: 'Full-Stack & Backend Systems', emoji: '👨‍🔧' },
-  { name: 'Neha Kapoor', role: 'Creative Director', specialty: 'Brand Identity & UI/UX Design', emoji: '👩‍🎨' },
-  { name: 'Vikram Patel', role: 'Performance Marketing Lead', specialty: 'Paid Media & Growth Strategy', emoji: '📊' },
-  { name: 'Aisha Khan', role: 'AI/ML Engineer', specialty: 'Machine Learning & NLP', emoji: '🧠' },
+  { name: 'Aryan Shah', role: 'Founder & CEO', specialty: 'AI Strategy & Business Development', emoji: '‍' },
+  { name: 'Priya Nair', role: 'CTO & Lead Architect', specialty: 'AI Systems & Cloud Infrastructure', emoji: '‍' },
+  { name: 'Rahul Mehta', role: 'Head of Engineering', specialty: 'Full-Stack & Backend Systems', emoji: '‍' },
+  { name: 'Neha Kapoor', role: 'Creative Director', specialty: 'Brand Identity & UI/UX Design', emoji: '‍' },
+  { name: 'Vikram Patel', role: 'Performance Marketing Lead', specialty: 'Paid Media & Growth Strategy', emoji: '' },
+  { name: 'Aisha Khan', role: 'AI/ML Engineer', specialty: 'Machine Learning & NLP', emoji: '' },
 ];
 
 const milestones = [
@@ -96,10 +96,10 @@ export default function CompanyPage() {
             </div>
             <div className="grid grid-cols-2 gap-4">
               {[
-                { icon: '🎯', title: 'Our Mission', desc: 'To empower businesses with AI-powered marketing and technology that creates lasting competitive advantages.' },
-                { icon: '🔭', title: 'Our Vision', desc: 'To become the most trusted AI marketing and development partner for ambitious businesses worldwide.' },
-                { icon: '💡', title: 'Our Approach', desc: 'Data-first strategy, creative excellence, and ruthless focus on metrics that actually move the needle.' },
-                { icon: '🤝', title: 'Our Promise', desc: 'Transparent pricing, honest communication, and zero-compromise quality on every single project.' },
+                { icon: '', title: 'Our Mission', desc: 'To empower businesses with AI-powered marketing and technology that creates lasting competitive advantages.' },
+                { icon: '', title: 'Our Vision', desc: 'To become the most trusted AI marketing and development partner for ambitious businesses worldwide.' },
+                { icon: '', title: 'Our Approach', desc: 'Data-first strategy, creative excellence, and ruthless focus on metrics that actually move the needle.' },
+                { icon: '', title: 'Our Promise', desc: 'Transparent pricing, honest communication, and zero-compromise quality on every single project.' },
               ].map((item) => (
                 <div key={item.title} className="p-6 rounded-2xl transition-all hover:-translate-y-0.5"
                   style={{ background: '#233554', border: '1px solid #233554' }}>

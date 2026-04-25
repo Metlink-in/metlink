@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Mail } from 'lucide-react';
+import { Mail, Megaphone, Palette, Bot, Code } from 'lucide-react';
 import { serviceCategories } from '@/lib/services-data';
 
 function MetLinkLogoFooter() {
@@ -66,7 +66,13 @@ export function Footer() {
             <div key={cat.slug}>
               <Link href={`/services/${cat.slug}`}
                 className="text-xs font-bold uppercase tracking-widest text-[#64FFDA] hover:text-[#64FFDA] transition-colors mb-3 sm:mb-4 block">
-                {cat.icon} {cat.name}
+                <span className="mr-2 inline-block align-middle">
+                  {cat.slug === 'digital-marketing' && <Megaphone className="w-3.5 h-3.5" />}
+                  {cat.slug === 'creative-media' && <Palette className="w-3.5 h-3.5" />}
+                  {cat.slug === 'ai-automation' && <Bot className="w-3.5 h-3.5" />}
+                  {cat.slug === 'software-development' && <Code className="w-3.5 h-3.5" />}
+                </span>
+                {cat.name}
               </Link>
               <ul className="space-y-1.5 sm:space-y-2">
                 {cat.services.map((svc) => (

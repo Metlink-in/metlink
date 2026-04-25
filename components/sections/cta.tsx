@@ -72,9 +72,9 @@ export function CTA() {
           {/* Floating elements */}
           <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
-              { icon: '⚡', title: 'Fast Delivery', desc: 'Quick turnaround without compromising quality' },
-              { icon: '🛡️', title: 'Secure & Reliable', desc: 'Enterprise-grade security for your peace of mind' },
-              { icon: '📈', title: 'Scalable Solutions', desc: 'Grow your business with our scalable tech' },
+              { icon: '', title: 'Fast Delivery', desc: 'Quick turnaround without compromising quality' },
+              { icon: '', title: 'Secure & Reliable', desc: 'Enterprise-grade security for your peace of mind' },
+              { icon: '', title: 'Scalable Solutions', desc: 'Grow your business with our scalable tech' },
             ].map((item, idx) => (
               <div
                 key={idx}

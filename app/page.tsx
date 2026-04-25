@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
-import { ArrowRight, CheckCircle, ChevronRight, Zap } from 'lucide-react';
+import { ArrowRight, CheckCircle, ChevronRight, Zap, LinkIcon, Cpu, BarChart, Clock, Target, Globe, Megaphone, Palette, Bot, Code } from 'lucide-react';
 import { serviceCategories } from '@/lib/services-data';
 import { FadeIn, StaggerChildren, StaggerItem } from '@/components/fade-in';
 
@@ -31,25 +31,25 @@ function Counter({ target, suffix = '' }: { target: number; suffix?: string }) {
 const clients = ['TechCorp', 'FinanceHub', 'GrowthLab', 'MedCare', 'RetailPro', 'DataVault', 'CloudBase', 'InnovateCo', 'ScaleUp', 'Nexus AI'];
 
 const industries = [
-  { name: 'FinTech & Banking', icon: '🏦' },
-  { name: 'Healthcare', icon: '🏥' },
-  { name: 'E-Commerce', icon: '🛒' },
-  { name: 'SaaS & Tech', icon: '💡' },
-  { name: 'Real Estate', icon: '🏗️' },
-  { name: 'Education', icon: '🎓' },
-  { name: 'Logistics', icon: '🚚' },
-  { name: 'Manufacturing', icon: '⚙️' },
+  { name: 'FinTech & Banking', icon: '' },
+  { name: 'Healthcare', icon: '' },
+  { name: 'E-Commerce', icon: '' },
+  { name: 'SaaS & Tech', icon: '' },
+  { name: 'Real Estate', icon: '' },
+  { name: 'Education', icon: '' },
+  { name: 'Logistics', icon: '' },
+  { name: 'Manufacturing', icon: '' },
 ];
 
 const techStack = ['Next.js', 'Python', 'GPT-4', 'TensorFlow', 'React Native', 'AWS', 'Vercel', 'Figma', 'Meta Ads', 'Google Ads', 'LangChain', 'Pinecone'];
 
 const whyUs = [
-  { title: 'End-to-End Partner', desc: 'Strategy, design, development, and marketing — all from one accountable team.', icon: '🔗' },
-  { title: 'AI-First Execution', desc: 'Every project integrates AI to achieve 10x results at a fraction of traditional cost.', icon: '🤖' },
-  { title: 'Radical Transparency', desc: 'Weekly reports, real KPIs, and zero ambiguity on where your investment goes.', icon: '📊' },
-  { title: 'Starts in 7 Days', desc: 'No months-long discovery phases. First deliverables within one week.', icon: '⚡' },
-  { title: 'Results Guarantee', desc: 'We define success metrics upfront and are held accountable to each one.', icon: '🎯' },
-  { title: 'Global + Local', desc: 'International-grade execution with deep understanding of local markets.', icon: '🌏' },
+  { title: 'End-to-End Partner', desc: 'Strategy, design, development, and marketing — all from one accountable team.', icon: <LinkIcon className="w-6 h-6 text-[#64FFDA]" /> },
+  { title: 'AI-First Execution', desc: 'Every project integrates AI to achieve 10x results at a fraction of traditional cost.', icon: <Cpu className="w-6 h-6 text-[#64FFDA]" /> },
+  { title: 'Radical Transparency', desc: 'Weekly reports, real KPIs, and zero ambiguity on where your investment goes.', icon: <BarChart className="w-6 h-6 text-[#64FFDA]" /> },
+  { title: 'Starts in 7 Days', desc: 'No months-long discovery phases. First deliverables within one week.', icon: <Clock className="w-6 h-6 text-[#64FFDA]" /> },
+  { title: 'Results Guarantee', desc: 'We define success metrics upfront and are held accountable to each one.', icon: <Target className="w-6 h-6 text-[#64FFDA]" /> },
+  { title: 'Global + Local', desc: 'International-grade execution with deep understanding of local markets.', icon: <Globe className="w-6 h-6 text-[#64FFDA]" /> },
 ];
 
 export default function HomePage() {
@@ -70,7 +70,7 @@ export default function HomePage() {
             {/* Left — copy */}
             <FadeIn>
               <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 rounded-full text-xs font-semibold mb-6 sm:mb-8 border border-[#233554] bg-[#112240] text-[#64FFDA] tracking-[0.08em] shadow-[0_0_20px_rgba(100,255,218,0.05)]">
-                ✦ AI Marketing & Development Agency
+                 Marketing & Development Agency
               </div>
 
               <h1 className="font-black leading-[1.05] text-white mb-5 sm:mb-6">
@@ -92,7 +92,7 @@ export default function HomePage() {
                 </Link>
                 <Link href="/portfolio"
                   className="inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl font-semibold text-sm border border-[#233554] text-[#ccd6f6] transition-all hover:bg-white/5 hover:border-[#64FFDA]/30">
-                  ▷ View Our Work
+                  View Our Work
                 </Link>
               </div>
 
@@ -205,7 +205,12 @@ export default function HomePage() {
                   className="group block p-6 sm:p-10 rounded-3xl bg-[#112240] border border-[#233554] hover:border-[#64FFDA]/40 hover:-translate-y-2 transition-all duration-300">
                   <div className="flex items-start justify-between mb-5 sm:mb-6">
                     <div>
-                      <span className="text-3xl sm:text-4xl mb-3 sm:mb-4 block group-hover:scale-110 transition-transform origin-left">{cat.icon}</span>
+                      <span className="text-3xl sm:text-4xl mb-3 sm:mb-4 block group-hover:scale-110 transition-transform origin-left">
+                        {cat.slug === 'digital-marketing' && <Megaphone className="w-8 h-8 sm:w-10 sm:h-10 text-[#64FFDA]" />}
+                        {cat.slug === 'creative-media' && <Palette className="w-8 h-8 sm:w-10 sm:h-10 text-[#64FFDA]" />}
+                        {cat.slug === 'ai-automation' && <Bot className="w-8 h-8 sm:w-10 sm:h-10 text-[#64FFDA]" />}
+                        {cat.slug === 'software-development' && <Code className="w-8 h-8 sm:w-10 sm:h-10 text-[#64FFDA]" />}
+                      </span>
                       <p className="text-xs font-bold uppercase tracking-widest text-[#64FFDA]">{cat.name}</p>
                       <h3 className="text-xl sm:text-2xl font-black text-white mt-1.5">{cat.tagline}</h3>
                     </div>

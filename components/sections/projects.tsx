@@ -19,7 +19,7 @@ const projects = [
     category: 'Mobile Development',
     description: 'Secure banking app with advanced security features.',
     tech: ['React Native', 'Firebase', 'Stripe API'],
-    stats: ['100K+ Downloads', '$50M+ Processed', '4.8★ Rating'],
+    stats: ['100K+ Downloads', '$50M+ Processed', '4.8 Rating'],
   },
   {
     id: 3,

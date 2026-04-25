@@ -92,11 +92,11 @@ export default function ContactPage() {
               <h2 className="text-3xl font-black text-[#ccd6f6] mb-6">The Partner You've Been Looking For</h2>
               <div className="space-y-4 mb-10">
                 {[
-                  { icon: '⚡', t: 'Fast Turnaround', d: 'First deliverables in 7 days or less.' },
-                  { icon: '📊', t: 'Data-Driven Results', d: 'Every strategy backed by analytics and real KPIs.' },
-                  { icon: '🤖', t: 'AI-Powered Execution', d: 'We leverage cutting-edge AI to deliver 10x results.' },
-                  { icon: '🤝', t: 'Dedicated Account Manager', d: 'One point of contact. Always responsive.' },
-                  { icon: '🔒', t: 'NDA & Confidentiality', d: 'Your ideas and data are always protected.' },
+                  { icon: '', t: 'Fast Turnaround', d: 'First deliverables in 7 days or less.' },
+                  { icon: '', t: 'Data-Driven Results', d: 'Every strategy backed by analytics and real KPIs.' },
+                  { icon: '', t: 'AI-Powered Execution', d: 'We leverage cutting-edge AI to deliver 10x results.' },
+                  { icon: '', t: 'Dedicated Account Manager', d: 'One point of contact. Always responsive.' },
+                  { icon: '', t: 'NDA & Confidentiality', d: 'Your ideas and data are always protected.' },
                 ].map(({ icon, t, d }) => (
                   <div key={t} className="flex items-start gap-4 p-4 rounded-xl transition-all"
                     style={{ background: '#233554', border: '1px solid #233554' }}>

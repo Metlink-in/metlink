@@ -45,7 +45,7 @@ export default function NotFound() {
         {/* Animated floating elements */}
         <div className="mt-16">
           <div className="inline-block animate-float">
-            <div className="text-6xl opacity-50">🚀</div>
+            <div className="text-6xl opacity-50"></div>
           </div>
         </div>
       </div>

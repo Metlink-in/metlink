@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Metadata, Viewport } from 'next';
-import { Geist } from 'next/font/google';
+import { DM_Sans, Manrope } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/next';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/sections/footer';
@@ -9,11 +9,12 @@ import { ChatBot } from '@/components/chatbot';
 import { PopupForm } from '@/components/popup-form';
 import './globals.css';
 
-const geist = Geist({ subsets: ['latin'] });
+const dmSans = DM_Sans({ subsets: ['latin'], variable: '--font-dm-sans' });
+const manrope = Manrope({ subsets: ['latin'], variable: '--font-manrope' });
 
 export const metadata: Metadata = {
   title: {
-    default: 'MetLink — AI Marketing & Development Agency',
+    default: 'MetLink — Marketing & Development Agency',
     template: '%s | MetLink',
   },
   description:
@@ -26,12 +27,12 @@ export const metadata: Metadata = {
     locale: 'en_IN',
     url: 'https://metlink.in',
     siteName: 'MetLink',
-    title: 'MetLink — AI Marketing & Development Agency',
+    title: 'MetLink — Marketing & Development Agency',
     description: 'AI-powered marketing, creative media, and software development for ambitious businesses.',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'MetLink — AI Marketing & Development Agency',
+    title: 'MetLink — Marketing & Development Agency',
     description: 'AI-powered marketing, creative media, and software development.',
   },
   robots: { index: true, follow: true },
@@ -46,8 +47,8 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body className={`${geist.className} antialiased`}>
+    <html lang="en" className={`${dmSans.variable} ${manrope.variable}`}>
+      <body className="font-sans antialiased">
         <Header />
         <main className="pt-16">{children}</main>
         <Footer />

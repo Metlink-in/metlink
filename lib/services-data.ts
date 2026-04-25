@@ -25,7 +25,7 @@ export const serviceCategories: ServiceCategory[] = [
   {
     name: 'Digital Marketing',
     slug: 'digital-marketing',
-    icon: '📊',
+    icon: '',
     colorClass: 'text-amber-400',
     gradientFrom: 'from-amber-500',
     gradientTo: 'to-yellow-600',
@@ -40,7 +40,7 @@ export const serviceCategories: ServiceCategory[] = [
         tagline: 'Build Authority. Lead Your Industry.',
         description:
           'We craft compelling personal brands that position executives and founders as industry authorities and thought leaders across all major platforms.',
-        icon: '👤',
+        icon: '',
         features: [
           'LinkedIn profile management & optimization',
           'Twitter/X thought leadership content',
@@ -61,7 +61,7 @@ export const serviceCategories: ServiceCategory[] = [
         tagline: 'Every Rupee Accountable. Every Ad Optimized.',
         description:
           'Data-driven paid advertising campaigns across all major platforms, engineered for maximum ROI, conversion rate, and measurable business impact.',
-        icon: '🎯',
+        icon: '',
         features: [
           'Meta Ads (Facebook + Instagram)',
           'Google Ads (Search / Display / YouTube)',
@@ -81,7 +81,7 @@ export const serviceCategories: ServiceCategory[] = [
         tagline: 'Always On. Always Engaging.',
         description:
           'Full-service social media management including content creation, 24/7 community management, and brand monitoring across all major platforms.',
-        icon: '📱',
+        icon: '',
         features: [
           'Content creation & scheduling',
           'Platform-specific format optimization',
@@ -100,7 +100,7 @@ export const serviceCategories: ServiceCategory[] = [
         tagline: 'Rank Higher. Get Found. Convert More.',
         description:
           'Comprehensive SEO strategies covering all aspects of search visibility to drive sustainable organic growth and qualified traffic.',
-        icon: '🔍',
+        icon: '',
         features: [
           'Keyword research & optimization',
           'Content structure & strategy',
@@ -120,7 +120,7 @@ export const serviceCategories: ServiceCategory[] = [
   {
     name: 'Creative Media',
     slug: 'creative-media',
-    icon: '🎨',
+    icon: '',
     colorClass: 'text-yellow-400',
     gradientFrom: 'from-yellow-500',
     gradientTo: 'to-amber-600',
@@ -135,7 +135,7 @@ export const serviceCategories: ServiceCategory[] = [
         tagline: 'High-Volume. High-Impact. Fast.',
         description:
           'AI-powered video production at scale, delivering platform-optimized creatives and UGC-style content that performs across every advertising channel.',
-        icon: '🎬',
+        icon: '',
         features: [
           'AI-generated video ads',
           'Large-scale creative variations',
@@ -152,7 +152,7 @@ export const serviceCategories: ServiceCategory[] = [
         tagline: 'Your Brand. Unmistakable.',
         description:
           'Comprehensive brand identity systems that create lasting impressions and communicate your core values consistently across every touchpoint.',
-        icon: '✨',
+        icon: '',
         features: [
           'Logo design & brand marks',
           'Brand color systems & palettes',
@@ -169,7 +169,7 @@ export const serviceCategories: ServiceCategory[] = [
         tagline: 'Design That Moves. Content That Sells.',
         description:
           'On-demand design support and motion graphics animation that brings your brand to life across social media, advertising, and every digital format.',
-        icon: '🖼️',
+        icon: '',
         features: [
           'On-demand design support',
           'Brand asset management',
@@ -186,7 +186,7 @@ export const serviceCategories: ServiceCategory[] = [
         tagline: 'Beautiful. Fast. Conversion-Optimized.',
         description:
           'End-to-end website development and UI/UX design that delivers exceptional user experiences, drives conversions, and represents your brand perfectly.',
-        icon: '💻',
+        icon: '',
         features: [
           'Custom web design',
           'Full-stack development',
@@ -206,7 +206,7 @@ export const serviceCategories: ServiceCategory[] = [
   {
     name: 'AI & Automation',
     slug: 'ai-automation',
-    icon: '🤖',
+    icon: '',
     colorClass: 'text-amber-300',
     gradientFrom: 'from-amber-400',
     gradientTo: 'to-yellow-500',
@@ -221,7 +221,7 @@ export const serviceCategories: ServiceCategory[] = [
         tagline: 'Custom AI. Real Results.',
         description:
           'Build and deploy custom AI models, LLM integrations, and intelligent systems that automate complex tasks and deliver actionable insights at scale.',
-        icon: '🧠',
+        icon: '',
         features: [
           'Custom AI model development',
           'LLM integrations (GPT-4, Claude, Gemini)',
@@ -239,7 +239,7 @@ export const serviceCategories: ServiceCategory[] = [
         tagline: 'Data Into Decisions. Insights Into Revenue.',
         description:
           'Transform raw data into actionable business intelligence through advanced analytics, predictive modeling, and BI dashboards.',
-        icon: '📈',
+        icon: '',
         features: [
           'Predictive forecasting models',
           'Data mining & ETL pipelines',
@@ -256,7 +256,7 @@ export const serviceCategories: ServiceCategory[] = [
         tagline: 'Systems That Learn. Businesses That Grow.',
         description:
           'End-to-end ML solutions from data preparation to production deployment — including generative AI, RAG systems, and MLOps pipelines.',
-        icon: '⚙️',
+        icon: '',
         features: [
           'Data preprocessing & feature engineering',
           'Model training & hyperparameter tuning',
@@ -274,7 +274,7 @@ export const serviceCategories: ServiceCategory[] = [
         tagline: 'Language That Scales. Conversations That Convert.',
         description:
           'Advanced natural language processing and conversational AI systems that understand, analyze, and generate human language at scale.',
-        icon: '💬',
+        icon: '',
         features: [
           'Advanced chatbot development',
           'Text classification & routing',
@@ -291,7 +291,7 @@ export const serviceCategories: ServiceCategory[] = [
   {
     name: 'Software Development',
     slug: 'software-development',
-    icon: '💻',
+    icon: '',
     colorClass: 'text-yellow-500',
     gradientFrom: 'from-yellow-600',
     gradientTo: 'to-amber-500',
@@ -306,7 +306,7 @@ export const serviceCategories: ServiceCategory[] = [
         tagline: 'Web. Mobile. Enterprise. Delivered.',
         description:
           'Custom application development across all platforms — web, mobile, and enterprise — built with modern tech stacks that perform and scale.',
-        icon: '📱',
+        icon: '',
         features: [
           'Web application development',
           'Mobile app development (iOS & Android)',
@@ -323,7 +323,7 @@ export const serviceCategories: ServiceCategory[] = [
         tagline: 'Scalable Infrastructure. Seamless Integrations.',
         description:
           'Robust cloud infrastructure and API development ensuring your systems scale effortlessly and integrate seamlessly.',
-        icon: '☁️',
+        icon: '',
         features: [
           'Cloud infrastructure setup (AWS, GCP, Azure)',
           'API design, development & documentation',
@@ -340,7 +340,7 @@ export const serviceCategories: ServiceCategory[] = [
         tagline: 'Where Intelligence Meets Software.',
         description:
           'Seamlessly integrate AI capabilities into existing software platforms, creating intelligent systems that automate and optimize every process.',
-        icon: '🔗',
+        icon: '',
         features: [
           'AI-powered SaaS product development',
           'Intelligent automation systems',
@@ -357,7 +357,7 @@ export const serviceCategories: ServiceCategory[] = [
         tagline: 'Automate Everything. Focus on What Matters.',
         description:
           'Comprehensive business automation solutions that streamline operations, eliminate repetitive manual work, and accelerate organizational growth.',
-        icon: '⚡',
+        icon: '',
         features: [
           'Marketing automation systems',
           'Sales automation & CRM integration',
