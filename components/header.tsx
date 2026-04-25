@@ -2,222 +2,157 @@
 
 import Link from 'next/link';
 import { useState, useEffect, useRef } from 'react';
-import { Menu, X, ChevronDown, ArrowRight, Zap, Megaphone, Palette, Bot, Code } from 'lucide-react';
+import { Menu, X, ChevronDown, ArrowRight, Zap, Megaphone, Palette, Bot, Code, Brain } from 'lucide-react';
 import { serviceCategories } from '@/lib/services-data';
 
-/* ── Inline SVG Logo (mimics the circular ML gold badge) ── */
 function MetLinkLogo({ size = 38 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient id="outerRing" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#64FFDA" />
-          <stop offset="0.45" stopColor="#64FFDA" />
-          <stop offset="1" stopColor="#112240" />
+          <stop stopColor="#06B6D4" />
+          <stop offset="0.5" stopColor="#8B5CF6" />
+          <stop offset="1" stopColor="#06B6D4" />
         </linearGradient>
         <linearGradient id="monogram" x1="18" y1="25" x2="75" y2="75" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#007BFF" />
-          <stop offset="0.4" stopColor="#64FFDA" />
-          <stop offset="1" stopColor="#007BFF" />
+          <stop stopColor="#06B6D4" />
+          <stop offset="0.5" stopColor="#8B5CF6" />
+          <stop offset="1" stopColor="#06B6D4" />
         </linearGradient>
       </defs>
-      {/* Outer circle */}
-      <circle cx="50" cy="50" r="48" fill="#112240" stroke="url(#outerRing)" strokeWidth="2.5" />
-      {/* Inner ring accent */}
-      <circle cx="50" cy="50" r="42" fill="none" stroke="url(#outerRing)" strokeWidth="0.6" strokeOpacity="0.4" />
-      {/* M path — angled peaks */}
-      <path
-        d="M18 70 L18 32 L36 54 L50 32 L64 54 L64 32"
-        stroke="url(#monogram)"
-        strokeWidth="5.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        fill="none"
-      />
-      {/* L path extending from M bottom-right */}
-      <path
-        d="M64 70 L82 70"
-        stroke="url(#monogram)"
-        strokeWidth="5.5"
-        strokeLinecap="round"
-        fill="none"
-      />
-      {/* METLINK text */}
-      <text
-        x="50"
-        y="90"
-        textAnchor="middle"
-        fill="url(#outerRing)"
-        fontSize="9"
-        fontWeight="700"
-        letterSpacing="3"
-        fontFamily="system-ui, -apple-system, sans-serif"
-      >
-        METLINK
-      </text>
+      <circle cx="50" cy="50" r="48" fill="#0F172A" stroke="url(#outerRing)" strokeWidth="2" />
+      <circle cx="50" cy="50" r="42" fill="none" stroke="url(#outerRing)" strokeWidth="0.5" strokeOpacity="0.3" />
+      <path d="M18 70 L18 32 L36 54 L50 32 L64 54 L64 32"
+        stroke="url(#monogram)" strokeWidth="5.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+      <path d="M64 70 L82 70"
+        stroke="url(#monogram)" strokeWidth="5.5" strokeLinecap="round" fill="none" />
+      <text x="50" y="90" textAnchor="middle" fill="url(#outerRing)" fontSize="9" fontWeight="700"
+        letterSpacing="3" fontFamily="system-ui, -apple-system, sans-serif">METLINK</text>
     </svg>
   );
 }
 
-const catColors: Record<string, string> = {
-  'digital-marketing': 'text-[#64FFDA] border-[#64FFDA]/25 hover:bg-[#64FFDA]/5',
-  'creative-media': 'text-[#64FFDA] border-yellow-500/25 hover:bg-yellow-500/5',
-  'ai-automation': 'text-[#64FFDA] border-amber-400/25 hover:bg-amber-400/5',
-  'software-development': 'text-[#64FFDA] border-yellow-600/25 hover:bg-yellow-600/5',
+const catAccents: Record<string, string> = {
+  'digital-marketing':   '#06B6D4',
+  'creative-media':      '#A78BFA',
+  'ai-automation':       '#34D399',
+  'software-development':'#F472B6',
 };
 
 export function Header() {
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [mobileOpen, setMobileOpen]   = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  const [showPopup, setShowPopup] = useState(false);
+  const [scrolled, setScrolled]       = useState(false);
+  const [showPopup, setShowPopup]     = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const timeoutRef  = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => () => { if (timeoutRef.current) clearTimeout(timeoutRef.current); }, []);
 
   useEffect(() => {
-    return () => {
-      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    const fn = () => setScrolled(window.scrollY > 10);
+    window.addEventListener('scroll', fn);
+    return () => window.removeEventListener('scroll', fn);
+  }, []);
+
+  useEffect(() => {
+    const fn = (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) setServicesOpen(false);
     };
+    document.addEventListener('mousedown', fn);
+    return () => document.removeEventListener('mousedown', fn);
   }, []);
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 10);
-    window.addEventListener('scroll', onScroll);
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+  const openDropdown  = () => { if (window.innerWidth >= 768) { if (timeoutRef.current) clearTimeout(timeoutRef.current); setServicesOpen(true); } };
+  const closeDropdown = () => { if (window.innerWidth >= 768) { timeoutRef.current = setTimeout(() => setServicesOpen(false), 200); } };
 
-  useEffect(() => {
-    const handleClick = (e: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node))
-        setServicesOpen(false);
-    };
-    document.addEventListener('mousedown', handleClick);
-    return () => document.removeEventListener('mousedown', handleClick);
-  }, []);
-
-  const handleMouseEnter = () => {
-    if (window.innerWidth >= 768) {
-      if (timeoutRef.current) clearTimeout(timeoutRef.current);
-      setServicesOpen(true);
-    }
-  };
-
-  const handleMouseLeave = () => {
-    if (window.innerWidth >= 768) {
-      timeoutRef.current = setTimeout(() => {
-        setServicesOpen(false);
-      }, 200);
-    }
-  };
-
-  const navLink =
-    'px-4 py-2 rounded-lg text-sm font-medium text-[#ccd6f6] hover:text-[#ccd6f6] hover:bg-white/5 transition-all duration-200';
+  const navLink = 'px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:bg-white/5';
 
   return (
     <>
       <header
-        className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
-          scrolled || servicesOpen
-            ? 'backdrop-blur-xl border-b shadow-lg shadow-black/40'
-            : 'bg-transparent'
-        }`}
-        style={(scrolled || servicesOpen) ? { background: 'rgba(8,8,8,0.92)', borderBottomColor: '#233554' } : {}}
+        className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${scrolled || servicesOpen ? 'backdrop-blur-xl border-b shadow-lg shadow-black/60' : 'bg-transparent'}`}
+        style={(scrolled || servicesOpen) ? { background: 'rgba(3,7,18,0.92)', borderBottomColor: 'rgba(30,41,59,0.8)' } : {}}
       >
-        {/* Backdrop for mega menu */}
         {servicesOpen && (
-          <div 
-            className="fixed inset-0 top-14 bg-black/40 backdrop-blur-[2px] transition-opacity duration-300 z-[-1]"
-            onClick={() => setServicesOpen(false)}
-          />
+          <div className="fixed inset-0 top-14 bg-black/50 backdrop-blur-[2px] z-[-1]" onClick={() => setServicesOpen(false)} />
         )}
+
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-14">
 
-            {/* ── Logo ── */}
+            {/* Logo */}
             <Link href="/" className="flex items-center gap-3 group">
               <MetLinkLogo size={32} />
               <div className="hidden sm:block">
-                <span
-                  className="font-black text-lg tracking-wide"
-                  style={{
-                    color: '#64FFDA',
-                  }}
-                >
-                  METLINK
-                </span>
-                <p className="text-[10px] text-[#8892B0] tracking-widest uppercase leading-none">AI Agency</p>
+                <span className="font-black text-lg tracking-wide" style={{ color: '#06B6D4' }}>METLINK</span>
+                <p className="text-[10px] tracking-widest uppercase leading-none" style={{ color: '#475569' }}>AI Agency</p>
               </div>
             </Link>
 
-            {/* ── Desktop nav ── */}
+            {/* Desktop nav */}
             <div className="hidden md:flex items-center gap-1">
-              <Link href="/" className={navLink}>Home</Link>
+              <Link href="/" className={navLink} style={{ color: '#94A3B8' }}>Home</Link>
 
-              {/* Services mega dropdown */}
-              <div 
-                ref={dropdownRef} 
-                className="relative"
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
-              >
+              <div ref={dropdownRef} className="relative" onMouseEnter={openDropdown} onMouseLeave={closeDropdown}>
                 <button
                   className={`${navLink} flex items-center gap-1 cursor-default`}
-                  onClick={() => {
-                    if (window.innerWidth < 768) setServicesOpen((v) => !v);
-                  }}
+                  style={{ color: '#94A3B8' }}
+                  onClick={() => { if (window.innerWidth < 768) setServicesOpen((v) => !v); }}
                 >
                   Services
-                  <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${servicesOpen ? 'rotate-180' : ''}`} />
+                  <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${servicesOpen ? 'rotate-180' : ''}`} style={{ color: '#06B6D4' }} />
                 </button>
 
                 {servicesOpen && (
                   <div
-                    className="fixed top-[56px] inset-x-0 w-screen shadow-2xl shadow-black/80 animate-slideInDown overflow-hidden pt-1"
-                    style={{ 
-                      background: 'rgba(8,8,8,0.98)', 
-                      borderBottom: '1px solid #233554', 
-                      backdropFilter: 'blur(32px)' 
-                    }}
-                    onMouseLeave={handleMouseLeave}
+                    className="fixed top-[56px] inset-x-0 w-screen shadow-2xl shadow-black/90 animate-slideInDown overflow-hidden pt-1"
+                    style={{ background: 'rgba(3,7,18,0.98)', borderBottom: '1px solid rgba(30,41,59,0.8)', backdropFilter: 'blur(32px)' }}
+                    onMouseLeave={closeDropdown}
                   >
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 grid grid-cols-4 gap-10">
-                      {serviceCategories.map((cat) => (
-                        <div key={cat.slug} className="space-y-6">
-                          <Link
-                            href={`/services/${cat.slug}`}
-                            className={`flex items-center gap-2.5 text-sm font-bold uppercase tracking-widest transition-all hover:translate-x-1 ${catColors[cat.slug]?.split(' ')[0] || 'text-[#64FFDA]'}`}
-                            onClick={() => setServicesOpen(false)}
-                          >
-                            {cat.slug === 'digital-marketing' && <Megaphone className="w-4 h-4" />}
-                            {cat.slug === 'creative-media' && <Palette className="w-4 h-4" />}
-                            {cat.slug === 'ai-automation' && <Bot className="w-4 h-4" />}
-                            {cat.slug === 'software-development' && <Code className="w-4 h-4" />}
-                            {cat.name}
-                          </Link>
-                          <ul className="space-y-3">
-                            {cat.services.map((svc) => (
-                              <li key={svc.slug}>
-                                <Link
-                                  href={`/services/${cat.slug}/${svc.slug}`}
-                                  className="group/item flex items-center gap-2 text-sm text-[#8892B0] hover:text-[#ccd6f6] transition-all"
-                                  onClick={() => setServicesOpen(false)}
-                                >
-                                  <ArrowRight className="w-3.5 h-3.5 text-[#233554] group-hover/item:text-[#007BFF] group-hover/item:translate-x-0.5 transition-all flex-shrink-0" />
-                                  {svc.name}
-                                </Link>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      ))}
-                      {/* Bottom bar */}
-                      <div className="col-span-4 mt-4 pt-8 flex items-center justify-between border-t border-[#233554]">
+                      {serviceCategories.map((cat) => {
+                        const accent = catAccents[cat.slug] || '#06B6D4';
+                        return (
+                          <div key={cat.slug} className="space-y-5">
+                            <Link href={`/services/${cat.slug}`}
+                              className="flex items-center gap-2.5 text-sm font-bold uppercase tracking-widest transition-all hover:translate-x-1"
+                              style={{ color: accent }}
+                              onClick={() => setServicesOpen(false)}>
+                              {cat.slug === 'digital-marketing'   && <Megaphone className="w-4 h-4" />}
+                              {cat.slug === 'creative-media'       && <Palette   className="w-4 h-4" />}
+                              {cat.slug === 'ai-automation'        && <Bot       className="w-4 h-4" />}
+                              {cat.slug === 'software-development' && <Code      className="w-4 h-4" />}
+                              {cat.name}
+                            </Link>
+                            <ul className="space-y-3">
+                              {cat.services.map((svc) => (
+                                <li key={svc.slug}>
+                                  <Link href={`/services/${cat.slug}/${svc.slug}`}
+                                    className="group/item flex items-center gap-2 text-sm transition-all"
+                                    style={{ color: '#64748B' }}
+                                    onMouseEnter={(e) => (e.currentTarget as HTMLElement).style.color = '#E2E8F0'}
+                                    onMouseLeave={(e) => (e.currentTarget as HTMLElement).style.color = '#64748B'}
+                                    onClick={() => setServicesOpen(false)}>
+                                    <ArrowRight className="w-3.5 h-3.5 flex-shrink-0 opacity-0 group-hover/item:opacity-100 -translate-x-2 group-hover/item:translate-x-0 transition-all"
+                                      style={{ color: accent }} />
+                                    {svc.name}
+                                  </Link>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        );
+                      })}
+
+                      <div className="col-span-4 mt-4 pt-8 flex items-center justify-between" style={{ borderTop: '1px solid rgba(30,41,59,0.8)' }}>
                         <div className="flex items-center gap-2">
-                          <span className="w-2 h-2 rounded-full bg-[#64FFDA] animate-pulse" />
-                          <p className="text-sm text-[#8892B0]">Custom solutions for unique business challenges</p>
+                          <span className="w-2 h-2 rounded-full bg-[#06B6D4] animate-pulse" />
+                          <p className="text-sm" style={{ color: '#64748B' }}>Custom AI solutions for unique business challenges</p>
                         </div>
                         <Link href="/contact" onClick={() => setServicesOpen(false)}
-                          className="group px-6 py-2.5 rounded-xl bg-[#64FFDA]/5 border border-[#64FFDA]/20 text-sm text-[#64FFDA] hover:bg-[#64FFDA]/10 font-bold flex items-center gap-2 transition-all">
+                          className="group px-6 py-2.5 rounded-xl text-sm font-bold flex items-center gap-2 transition-all hover:brightness-110"
+                          style={{ background: 'rgba(6,182,212,0.08)', border: '1px solid rgba(6,182,212,0.2)', color: '#06B6D4' }}>
                           Talk to our experts <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                         </Link>
                       </div>
@@ -226,84 +161,91 @@ export function Header() {
                 )}
               </div>
 
-              <Link href="/company" className={navLink}>Company</Link>
-              <Link href="/portfolio" className={navLink}>Portfolio</Link>
-              <Link href="/blog" className={navLink}>Blog</Link>
-              <Link href="/our-product" className={navLink}>Our Product</Link>
+              {['Company', 'Portfolio', 'Blog', 'Our Product'].map((label) => (
+                <Link key={label} href={`/${label.toLowerCase().replace(' ', '-')}`} className={navLink} style={{ color: '#94A3B8' }}
+                  onMouseEnter={(e) => (e.currentTarget as HTMLElement).style.color = '#E2E8F0'}
+                  onMouseLeave={(e) => (e.currentTarget as HTMLElement).style.color = '#94A3B8'}>
+                  {label}
+                </Link>
+              ))}
             </div>
 
-            {/* ── Desktop CTA ── */}
+            {/* Desktop CTA */}
             <div className="hidden md:flex items-center gap-3">
               <button onClick={() => setShowPopup(true)}
-                className="flex items-center gap-1.5 text-sm text-[#8892B0] hover:text-[#ccd6f6] transition-colors">
-                <Zap className="w-3.5 h-3.5 text-[#64FFDA]" />
+                className="flex items-center gap-1.5 text-sm transition-colors"
+                style={{ color: '#64748B' }}
+                onMouseEnter={(e) => (e.currentTarget as HTMLElement).style.color = '#E2E8F0'}
+                onMouseLeave={(e) => (e.currentTarget as HTMLElement).style.color = '#64748B'}>
+                <Brain className="w-3.5 h-3.5" style={{ color: '#06B6D4' }} />
                 Become a Client
               </button>
               <Link href="/contact"
-                className="px-5 py-2 rounded-xl text-sm font-semibold transition-all hover:scale-105 shadow-[0_0_20px_rgba(0,123,255,0.3)]"
-                style={{
-                  background: '#007BFF',
-                  color: '#FFFFFF',
-                  boxShadow: "none",
-                }}>
+                className="px-5 py-2 rounded-xl text-sm font-semibold text-[#030712] transition-all hover:brightness-110"
+                style={{ background: 'linear-gradient(135deg, #06B6D4, #8B5CF6)' }}>
                 Contact Us
               </Link>
             </div>
 
-            {/* ── Mobile hamburger ── */}
+            {/* Mobile hamburger */}
             <button onClick={() => setMobileOpen((v) => !v)}
-              className="md:hidden p-2 rounded-lg hover:bg-white/5 transition-colors" aria-label="Toggle menu">
+              className="md:hidden p-2 rounded-lg transition-colors hover:bg-white/5" aria-label="Toggle menu"
+              style={{ color: '#94A3B8' }}>
               {mobileOpen ? <X size={22} /> : <Menu size={22} />}
             </button>
           </div>
 
-          {/* ── Mobile menu ── */}
+          {/* Mobile menu */}
           {mobileOpen && (
             <div className="md:hidden pb-6 pt-2 space-y-0.5 mt-1 animate-slideInDown"
-              style={{ borderTop: '1px solid #233554' }}>
-              <Link href="/" className="block px-4 py-2.5 text-sm text-[#ccd6f6] hover:text-[#ccd6f6] hover:bg-white/5 rounded-lg transition-colors" onClick={() => setMobileOpen(false)}>Home</Link>
+              style={{ borderTop: '1px solid rgba(30,41,59,0.8)' }}>
+              <Link href="/" className="block px-4 py-2.5 text-sm rounded-lg transition-colors hover:bg-white/5"
+                style={{ color: '#94A3B8' }} onClick={() => setMobileOpen(false)}>Home</Link>
 
               <div className="px-4 pt-3 pb-1">
-                <p className="text-xs font-bold text-[#8892B0] uppercase tracking-wider">Services</p>
+                <p className="text-xs font-bold uppercase tracking-wider" style={{ color: '#475569' }}>Services</p>
               </div>
-              {serviceCategories.map((cat) => (
-                <div key={cat.slug}>
-                  <Link href={`/services/${cat.slug}`}
-                    className={`block px-6 py-1.5 text-sm font-semibold rounded-lg ${catColors[cat.slug]?.split(' ')[0] || 'text-[#64FFDA]'}`}
-                    onClick={() => setMobileOpen(false)}>
-                    <span className="mr-2 inline-block align-middle">
-                      {cat.slug === 'digital-marketing' && <Megaphone className="w-4 h-4" />}
-                      {cat.slug === 'creative-media' && <Palette className="w-4 h-4" />}
-                      {cat.slug === 'ai-automation' && <Bot className="w-4 h-4" />}
-                      {cat.slug === 'software-development' && <Code className="w-4 h-4" />}
-                    </span>
-                    {cat.name}
-                  </Link>
-                  {cat.services.map((svc) => (
-                    <Link key={svc.slug} href={`/services/${cat.slug}/${svc.slug}`}
-                      className="block px-10 py-0.5 text-sm text-[#8892B0] hover:text-[#ccd6f6] transition-colors"
+              {serviceCategories.map((cat) => {
+                const accent = catAccents[cat.slug] || '#06B6D4';
+                return (
+                  <div key={cat.slug}>
+                    <Link href={`/services/${cat.slug}`}
+                      className="block px-6 py-1.5 text-sm font-semibold rounded-lg"
+                      style={{ color: accent }}
                       onClick={() => setMobileOpen(false)}>
-                      {svc.name}
+                      {cat.name}
                     </Link>
-                  ))}
-                </div>
-              ))}
+                    {cat.services.map((svc) => (
+                      <Link key={svc.slug} href={`/services/${cat.slug}/${svc.slug}`}
+                        className="block px-10 py-0.5 text-sm transition-colors hover:text-white"
+                        style={{ color: '#64748B' }}
+                        onClick={() => setMobileOpen(false)}>
+                        {svc.name}
+                      </Link>
+                    ))}
+                  </div>
+                );
+              })}
 
-              <Link href="/company" className="block px-4 py-2.5 text-sm text-[#ccd6f6] hover:text-[#ccd6f6] hover:bg-white/5 rounded-lg transition-colors" onClick={() => setMobileOpen(false)}>Company</Link>
-              <Link href="/portfolio" className="block px-4 py-2.5 text-sm text-[#ccd6f6] hover:text-[#ccd6f6] hover:bg-white/5 rounded-lg transition-colors" onClick={() => setMobileOpen(false)}>Portfolio</Link>
-              <Link href="/blog" className="block px-4 py-2.5 text-sm text-[#ccd6f6] hover:text-[#ccd6f6] hover:bg-white/5 rounded-lg transition-colors" onClick={() => setMobileOpen(false)}>Blog</Link>
-              <Link href="/our-product" className="block px-4 py-2.5 text-sm text-[#ccd6f6] hover:text-[#ccd6f6] hover:bg-white/5 rounded-lg transition-colors" onClick={() => setMobileOpen(false)}>Our Product</Link>
+              {['Company', 'Portfolio', 'Blog', 'Our Product'].map((label) => (
+                <Link key={label} href={`/${label.toLowerCase().replace(' ', '-')}`}
+                  className="block px-4 py-2.5 text-sm rounded-lg transition-colors hover:bg-white/5"
+                  style={{ color: '#94A3B8' }}
+                  onClick={() => setMobileOpen(false)}>
+                  {label}
+                </Link>
+              ))}
 
               <div className="px-4 pt-3 space-y-2">
                 <Link href="/contact"
-                  className="block text-center py-3 rounded-xl text-sm font-bold"
-                  style={{ background: '#64FFDA', color: '#0A192F' }}
+                  className="block text-center py-3 rounded-xl text-sm font-bold text-[#030712]"
+                  style={{ background: 'linear-gradient(135deg, #06B6D4, #8B5CF6)' }}
                   onClick={() => setMobileOpen(false)}>
                   Contact Us
                 </Link>
                 <button onClick={() => { setShowPopup(true); setMobileOpen(false); }}
-                  className="w-full text-center py-3 rounded-xl text-sm text-[#8892B0] hover:text-[#ccd6f6] hover:bg-white/5 transition-colors"
-                  style={{ border: '1px solid #233554' }}>
+                  className="w-full text-center py-3 rounded-xl text-sm transition-colors hover:bg-white/5"
+                  style={{ color: '#64748B', border: '1px solid rgba(30,41,59,0.8)' }}>
                   Become a Client
                 </button>
               </div>
@@ -319,7 +261,6 @@ export function Header() {
 
 function PopupFormInline({ onClose }: { onClose: () => void }) {
   const [submitted, setSubmitted] = useState(false);
-  const [form, setForm] = useState({ name: '', company: '', email: '' });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -329,72 +270,68 @@ function PopupFormInline({ onClose }: { onClose: () => void }) {
 
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center px-4">
-      <div className="absolute inset-0 bg-[#0A192F]/70 backdrop-blur-sm" onClick={onClose} />
-      <div className="relative w-full max-w-md rounded-2xl overflow-hidden animate-fadeInScale shadow-2xl shadow-black/60"
-        style={{ background: '#112240', border: '1px solid #233554' }}>
-        <div className="h-0.5 w-full" style={{ background: '#64FFDA' }} />
-        <button onClick={onClose} className="absolute top-4 right-4 text-[#8892B0] hover:text-[#ccd6f6] transition-colors">
+      <div className="absolute inset-0 bg-[#030712]/80 backdrop-blur-sm" onClick={onClose} />
+      <div className="relative w-full max-w-md rounded-2xl overflow-hidden animate-fadeInScale shadow-2xl shadow-black/80"
+        style={{ background: '#0F172A', border: '1px solid rgba(30,41,59,0.8)' }}>
+        <div className="h-0.5 w-full" style={{ background: 'linear-gradient(90deg, #06B6D4, #8B5CF6)' }} />
+        <button onClick={onClose} className="absolute top-4 right-4 transition-colors hover:text-white"
+          style={{ color: '#64748B' }}>
           <X className="w-5 h-5" />
         </button>
         <div className="p-8 sm:p-10">
           {submitted ? (
             <div className="text-center py-10 animate-fadeInScale">
-              <div className="w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-2xl" 
-                style={{ background: 'linear-gradient(135deg, #64FFDA 0%, #007BFF 100%)' }}>
-                <Zap className="w-10 h-10 text-[#0A192F]" />
+              <div className="w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-6"
+                style={{ background: 'linear-gradient(135deg, #06B6D4, #8B5CF6)' }}>
+                <Zap className="w-10 h-10 text-[#030712]" />
               </div>
               <h3 className="text-2xl font-black text-white mb-2">Request Received!</h3>
-              <p className="text-[#8892B0] text-sm max-w-[240px] mx-auto">Our strategy team will reach out to you within 24 hours.</p>
+              <p className="text-sm max-w-[240px] mx-auto" style={{ color: '#64748B' }}>
+                Our AI strategy team will reach out within 24 hours.
+              </p>
             </div>
           ) : (
             <>
               <div className="text-center mb-10">
                 <div className="inline-block mb-6 relative">
-                  <div className="absolute inset-0 bg-[#64FFDA]/20 blur-xl rounded-full" />
+                  <div className="absolute inset-0 rounded-full blur-xl" style={{ background: 'rgba(6,182,212,0.2)' }} />
                   <MetLinkLogo size={64} />
                 </div>
-                
-                <p className="text-[10px] font-black text-[#64FFDA] tracking-[0.3em] uppercase mb-3">
+                <p className="text-[10px] font-black tracking-[0.3em] uppercase mb-3" style={{ color: '#06B6D4' }}>
                   Limited Spots Available
                 </p>
-                
                 <h2 className="text-4xl sm:text-5xl font-black text-white leading-[1.1] mb-4 tracking-tight">
-                  Become a <br/>MetLink Client
+                  Become a<br />MetLink Client
                 </h2>
-                
-                <p className="text-[#8892B0] text-sm font-medium">
+                <p className="text-sm font-medium" style={{ color: '#64748B' }}>
                   Join 80+ businesses growing with AI-powered strategy.
                 </p>
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="space-y-3">
-                  <input type="text" placeholder="Full Name" required
-                    className="w-full px-5 py-4 rounded-xl bg-[#0d1b2a]/50 border border-[#233554] text-white placeholder:text-[#8892B0]/30 text-sm focus:outline-none focus:border-[#64FFDA]/50 transition-all"
-                  />
-                  <input type="text" placeholder="Company / Project Name" required
-                    className="w-full px-5 py-4 rounded-xl bg-[#0d1b2a]/50 border border-[#233554] text-white placeholder:text-[#8892B0]/30 text-sm focus:outline-none focus:border-[#64FFDA]/50 transition-all"
-                  />
-                  <input type="email" placeholder="Work Email Address" required
-                    className="w-full px-5 py-4 rounded-xl bg-[#0d1b2a]/50 border border-[#233554] text-white placeholder:text-[#8892B0]/30 text-sm focus:outline-none focus:border-[#64FFDA]/50 transition-all"
-                  />
-                  <select 
-                    className="w-full px-5 py-4 rounded-xl bg-[#0d1b2a]/50 border border-[#233554] text-[#8892B0]/60 text-sm focus:outline-none focus:border-[#64FFDA]/50 transition-all appearance-none cursor-pointer"
-                  >
+                  {['Full Name', 'Company / Project Name', 'Work Email Address'].map((ph, i) => (
+                    <input key={ph} type={i === 2 ? 'email' : 'text'} placeholder={ph} required
+                      className="w-full px-5 py-4 rounded-xl text-white text-sm focus:outline-none transition-all"
+                      style={{ background: 'rgba(3,7,18,0.5)', border: '1px solid rgba(30,41,59,0.8)', color: '#E2E8F0' }}
+                      onFocus={(e) => (e.currentTarget.style.borderColor = 'rgba(6,182,212,0.5)')}
+                      onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(30,41,59,0.8)')} />
+                  ))}
+                  <select className="w-full px-5 py-4 rounded-xl text-sm focus:outline-none transition-all appearance-none cursor-pointer"
+                    style={{ background: 'rgba(3,7,18,0.5)', border: '1px solid rgba(30,41,59,0.8)', color: '#64748B' }}>
                     <option value="">Select a Service (optional)</option>
-                    <option value="marketing">Digital Marketing</option>
                     <option value="ai">AI & Automation</option>
                     <option value="dev">Software Development</option>
+                    <option value="marketing">Digital Marketing</option>
+                    <option value="creative">Creative Media</option>
                   </select>
                 </div>
-
                 <button type="submit"
-                  className="w-full py-4 mt-4 rounded-xl font-black text-sm tracking-widest uppercase transition-all hover:brightness-110 active:scale-[0.98] shadow-xl shadow-teal-900/20"
-                  style={{ background: '#64FFDA', color: '#0A192F' }}>
+                  className="w-full py-4 mt-4 rounded-xl font-black text-sm tracking-widest uppercase transition-all hover:brightness-110 active:scale-[0.98] text-[#030712]"
+                  style={{ background: 'linear-gradient(135deg, #06B6D4, #8B5CF6)' }}>
                   Submit & Get Started →
                 </button>
-                
-                <p className="text-center text-[10px] text-[#8892B0]/40 font-medium mt-6">
+                <p className="text-center text-[10px] font-medium mt-6" style={{ color: 'rgba(100,116,139,0.4)' }}>
                   No spam. We respond within 24 hours.
                 </p>
               </form>
