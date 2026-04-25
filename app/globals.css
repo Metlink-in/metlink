@@ -2,13 +2,15 @@
 
 /* ── Design tokens ── */
 :root {
-  --background: #000000;
-  --foreground: #ffffff;
-  --primary: #FACC15;
-  --primary-foreground: #000000;
-  --muted: #1A1A1A;
-  --muted-foreground: #A3A3A3;
-  --border: #1A1A1A;
+  --background: #0A192F;
+  --foreground: #ccd6f6;
+  --primary: #64FFDA;
+  --primary-foreground: #0A192F;
+  --muted: #112240;
+  --muted-foreground: #8892B0;
+  --border: #233554;
+  --secondary: #007BFF;
+  --accent: #7C3AED;
 }
 
 /* ── Base reset & mobile-first foundation ── */
