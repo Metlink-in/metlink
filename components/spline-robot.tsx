@@ -36,7 +36,7 @@ export function SplineRobot() {
         </div>
       )}
 
-      {/* Spline iframe — pushed up by 22% so robot fills upper frame */}
+      {/* Spline iframe — shifted up so robot head/torso fills the frame */}
       {mounted && (
         <iframe
           src="https://my.spline.design/nexbotrobotcharacterconceptforpersonaluse-8qufREQIuBJIm1u6FEapS6rB/"
@@ -46,9 +46,9 @@ export function SplineRobot() {
           style={{
             position: 'absolute',
             left: 0, right: 0,
-            top: '-22%',
+            top: '-28%',
             width: '100%',
-            height: '144%',
+            height: '156%',
             border: 'none',
             background: 'transparent',
             opacity: loaded ? 1 : 0,

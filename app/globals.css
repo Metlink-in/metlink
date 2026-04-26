@@ -112,6 +112,35 @@ nav button, nav a { min-height: unset; min-width: unset; }
   50%       { opacity: 0; }
 }
 
+@keyframes blob {
+  0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; transform: translate(0, 0) scale(1); }
+  33%       { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; transform: translate(20px, -15px) scale(1.05); }
+  66%       { border-radius: 50% 60% 30% 60% / 30% 50% 70% 40%; transform: translate(-10px, 10px) scale(0.97); }
+}
+
+@keyframes ping {
+  75%, 100% { transform: scale(2); opacity: 0; }
+}
+
+@keyframes ripple {
+  0%   { transform: scale(0.8); opacity: 1; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+
+@keyframes flicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
+  20%, 22%, 24%, 55% { opacity: 0.4; }
+}
+
+@keyframes glitch {
+  0%   { transform: translate(0); }
+  20%  { transform: translate(-2px, 2px); }
+  40%  { transform: translate(-2px, -2px); }
+  60%  { transform: translate(2px, 2px); }
+  80%  { transform: translate(2px, -2px); }
+  100% { transform: translate(0); }
+}
+
 /* ── Animation classes ── */
 .animate-fadeInScale  { animation: fadeInScale 0.3s cubic-bezier(0.16,1,0.3,1) forwards; }
 .animate-slideInUp    { animation: slideInUp 0.3s cubic-bezier(0.16,1,0.3,1) forwards; }
@@ -122,6 +151,11 @@ nav button, nav a { min-height: unset; min-width: unset; }
 .animate-rotate-slow  { animation: rotateSlow 12s linear infinite; }
 .animate-gradient     { background-size: 200% 200%; animation: gradientShift 4s ease infinite; }
 .animate-border-glow  { animation: borderGlow 3s ease-in-out infinite; }
+.animate-blob         { animation: blob 8s ease-in-out infinite; }
+.animate-ping         { animation: ping 1s cubic-bezier(0,0,0.2,1) infinite; }
+.animate-ripple       { animation: ripple 1.5s ease-out infinite; }
+.animate-flicker      { animation: flicker 4s ease-in-out infinite; }
+.animate-glitch       { animation: glitch 0.5s steps(2) infinite; }
 
 /* ── Gradient text ── */
 .gradient-text-cyan {
