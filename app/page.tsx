@@ -102,90 +102,93 @@ export default function HomePage() {
     <div className="w-full overflow-x-hidden bg-[#030712]">
 
       {/* ═══════════════════════════════
-          HERO — split: text left, robot right
+          HERO — split: text left · robot right
+          Mobile: robot top, text below
       ═══════════════════════════════ */}
-      <section className="relative min-h-screen flex flex-col justify-center overflow-hidden pt-20 pb-16">
+      <section className="relative overflow-hidden" style={{ minHeight: '100svh' }}>
 
-        {/* Neural net bg — left half only on lg, full on mobile */}
-        <div className="absolute inset-0 pointer-events-none opacity-35">
+        {/* Neural net bg */}
+        <div className="absolute inset-0 pointer-events-none opacity-30">
           <NeuralNet className="w-full h-full" />
         </div>
-
-        {/* Grid overlay */}
-        <div className="absolute inset-0 grid-bg pointer-events-none opacity-25" />
+        <div className="absolute inset-0 grid-bg pointer-events-none opacity-20" />
 
         {/* Ambient glows */}
-        <div className="absolute top-0 left-0 w-[700px] h-[600px] pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse at 0% 20%, rgba(139,92,246,0.10) 0%, transparent 60%)' }} />
+        <div className="absolute top-0 left-0 w-[600px] h-[500px] pointer-events-none"
+          style={{ background: 'radial-gradient(ellipse at 0% 20%, rgba(139,92,246,0.09) 0%, transparent 60%)' }} />
         <div className="absolute bottom-0 right-0 w-[600px] h-[500px] pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse at 100% 100%, rgba(6,182,212,0.07) 0%, transparent 60%)' }} />
+          style={{ background: 'radial-gradient(ellipse at 100% 100%, rgba(6,182,212,0.06) 0%, transparent 60%)' }} />
 
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-6 lg:gap-4 items-center min-h-[calc(100vh-140px)]">
+        {/* ── LAYOUT: flex-col on mobile → flex-row on desktop ── */}
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8
+                        flex flex-col lg:flex-row lg:items-center pt-14">
 
-            {/* ── LEFT: text content ── */}
-            <FadeIn className="flex flex-col items-center lg:items-start text-center lg:text-left order-2 lg:order-1 py-8 lg:py-0">
+          {/* ── ROBOT — top on mobile (order-1), right on desktop (order-2) ── */}
+          <FadeIn delay={0.1} className="order-1 lg:order-2 w-full lg:w-1/2 flex-shrink-0
+                                         h-[54vw] sm:h-[46vh] md:h-[50vh] lg:h-screen lg:max-h-[820px] relative">
+            <SplineRobot />
+          </FadeIn>
 
-              {/* Badge */}
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-[11px] font-semibold mb-8 border tracking-[0.1em]"
-                style={{ background: 'rgba(6,182,212,0.05)', borderColor: 'rgba(6,182,212,0.2)', color: '#06B6D4' }}>
-                <span className="w-1.5 h-1.5 rounded-full bg-[#06B6D4] animate-pulse" />
-                AI Marketing & Development Agency
-              </div>
+          {/* ── TEXT — below robot on mobile (order-2), left on desktop (order-1) ── */}
+          <FadeIn className="order-2 lg:order-1 w-full lg:w-1/2
+                             flex flex-col items-center lg:items-start
+                             text-center lg:text-left
+                             pt-4 sm:pt-6 pb-20 lg:pb-28 lg:pt-0 lg:min-h-screen lg:justify-center">
 
-              {/* Main headline */}
-              <h1 className="font-black text-white leading-[1.02] tracking-tight mb-8">
-                <span className="block">We Build</span>
-                <span className="block min-h-[1.1em]">
-                  <TypingText words={['AI Automation', 'Neural Systems', 'Smart Agents', 'ML Pipelines']} />
-                </span>
-                <span className="block">That Scale</span>
-              </h1>
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-[11px] font-semibold mb-5 sm:mb-7 border tracking-[0.1em]"
+              style={{ background: 'rgba(6,182,212,0.05)', borderColor: 'rgba(6,182,212,0.2)', color: '#06B6D4' }}>
+              <span className="w-1.5 h-1.5 rounded-full bg-[#06B6D4] animate-pulse" />
+              AI Marketing & Development Agency
+            </div>
 
-              {/* CTAs */}
-              <div className="flex flex-col sm:flex-row items-center lg:items-start gap-4 mb-14">
-                <Link href="/contact"
-                  className="group inline-flex items-center gap-2.5 px-8 py-4 rounded-full font-bold text-sm text-[#030712] transition-all hover:brightness-110 active:scale-95"
-                  style={{ background: 'linear-gradient(135deg, #06B6D4 0%, #8B5CF6 100%)', boxShadow: '0 0 40px rgba(6,182,212,0.25)' }}>
-                  <Sparkles className="w-4 h-4" />
-                  Start Building with AI
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
-                </Link>
-                <Link href="/portfolio"
-                  className="inline-flex items-center gap-2 px-7 py-4 rounded-full font-semibold text-sm transition-all hover:bg-white/5"
-                  style={{ border: '1px solid rgba(255,255,255,0.1)', color: '#94A3B8' }}>
-                  See Our Work
-                </Link>
-              </div>
+            {/* Headline */}
+            <h1 className="font-black text-white leading-[1.02] tracking-tight mb-5 sm:mb-7">
+              <span className="block">We Build</span>
+              <span className="block min-h-[1.1em]">
+                <TypingText words={['AI Automation', 'Neural Systems', 'Smart Agents', 'ML Pipelines']} />
+              </span>
+              <span className="block">That Scale</span>
+            </h1>
 
-              {/* Inline stats */}
-              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-x-8 gap-y-5">
-                {[
-                  ['150+', 'Projects'],
-                  ['80+',  'Clients'],
-                  ['$10M+','Revenue'],
-                  ['94%',  'Retention'],
-                ].map(([val, lbl], i) => (
-                  <div key={lbl} className="flex items-center gap-4">
-                    {i > 0 && <span className="hidden sm:block w-px h-5" style={{ background: 'rgba(255,255,255,0.08)' }} />}
-                    <div>
-                      <p className="text-xl font-black gradient-text-cyan leading-none">{val}</p>
-                      <p className="text-[10px] uppercase tracking-widest mt-1" style={{ color: '#475569' }}>{lbl}</p>
-                    </div>
+            {/* CTAs */}
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 mb-8 sm:mb-10 w-full sm:w-auto">
+              <Link href="/contact"
+                className="group inline-flex items-center justify-center gap-2.5 px-7 py-4 rounded-full font-bold text-sm text-[#030712] transition-all hover:brightness-110 active:scale-95"
+                style={{ background: 'linear-gradient(135deg, #06B6D4 0%, #8B5CF6 100%)', boxShadow: '0 0 36px rgba(6,182,212,0.22)' }}>
+                <Sparkles className="w-4 h-4" />
+                Start Building with AI
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+              </Link>
+              <Link href="/portfolio"
+                className="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full font-semibold text-sm transition-all hover:bg-white/5"
+                style={{ border: '1px solid rgba(255,255,255,0.1)', color: '#94A3B8' }}>
+                See Our Work
+              </Link>
+            </div>
+
+            {/* Stats — 2-col grid on mobile, row on sm+ */}
+            <div className="grid grid-cols-2 sm:flex sm:flex-wrap sm:items-center sm:justify-center lg:justify-start gap-x-6 gap-y-5 sm:gap-x-8 w-full sm:w-auto">
+              {[
+                ['150+', 'Projects'],
+                ['80+',  'Clients'],
+                ['$10M+','Revenue'],
+                ['94%',  'Retention'],
+              ].map(([val, lbl], i) => (
+                <div key={lbl} className="flex items-center gap-3 sm:gap-4">
+                  {i > 0 && <span className="hidden sm:block w-px h-5 flex-shrink-0" style={{ background: 'rgba(255,255,255,0.08)' }} />}
+                  <div>
+                    <p className="text-lg sm:text-xl font-black gradient-text-cyan leading-none">{val}</p>
+                    <p className="text-[10px] uppercase tracking-widest mt-1" style={{ color: '#475569' }}>{lbl}</p>
                   </div>
-                ))}
-              </div>
-            </FadeIn>
-
-            {/* ── RIGHT: Spline robot ── */}
-            <FadeIn delay={0.25} className="order-1 lg:order-2 relative h-[42vh] sm:h-[52vh] lg:h-[calc(100vh-140px)] lg:max-h-[780px]">
-              <SplineRobot />
-            </FadeIn>
-          </div>
+                </div>
+              ))}
+            </div>
+          </FadeIn>
         </div>
 
         {/* Scroll hint */}
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce opacity-30">
+        <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex flex-col items-center animate-bounce opacity-25">
           <ChevronDown className="w-4 h-4" style={{ color: '#06B6D4' }} />
         </div>
       </section>

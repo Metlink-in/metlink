@@ -12,120 +12,69 @@ export function SplineRobot() {
   }, []);
 
   return (
-    <div
-      style={{
-        position: 'relative',
-        width: '100%',
-        height: '100%',
-        minHeight: 480,
-        overflow: 'hidden',
-      }}
-    >
-      {/* Soft glow behind robot */}
+    <div style={{ position: 'relative', width: '100%', height: '100%', overflow: 'hidden' }}>
+      {/* Soft glow */}
       <div
         style={{
-          position: 'absolute',
-          inset: 0,
-          pointerEvents: 'none',
-          zIndex: 1,
-          background:
-            'radial-gradient(ellipse 70% 65% at 50% 45%, rgba(6,182,212,0.07) 0%, rgba(139,92,246,0.04) 40%, transparent 70%)',
+          position: 'absolute', inset: 0, zIndex: 1, pointerEvents: 'none',
+          background: 'radial-gradient(ellipse 65% 60% at 50% 40%, rgba(6,182,212,0.07) 0%, rgba(139,92,246,0.04) 45%, transparent 70%)',
         }}
       />
 
-      {/* Loading skeleton */}
+      {/* Loading rings */}
       {!loaded && (
-        <div
-          style={{
-            position: 'absolute',
-            inset: 0,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            zIndex: 2,
-          }}
-        >
-          <div style={{ position: 'relative', width: 120, height: 120 }}>
+        <div style={{ position: 'absolute', inset: 0, zIndex: 2, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div style={{ position: 'relative', width: 100, height: 100 }}>
             {[0, 1, 2].map((i) => (
-              <div
-                key={i}
-                style={{
-                  position: 'absolute',
-                  inset: i * 16,
-                  borderRadius: '50%',
-                  border: `1px solid rgba(6,182,212,${0.25 - i * 0.07})`,
-                  animation: `rspinA ${3 + i * 1.2}s linear infinite ${i % 2 === 0 ? '' : 'reverse'}`,
-                }}
-              />
+              <div key={i} style={{
+                position: 'absolute', inset: i * 14, borderRadius: '50%',
+                border: `1px solid rgba(6,182,212,${0.22 - i * 0.06})`,
+                animation: `rspinA ${2.8 + i * 1.1}s linear infinite ${i % 2 ? 'reverse' : ''}`,
+              }} />
             ))}
-            <div
-              style={{
-                position: 'absolute',
-                inset: 48,
-                borderRadius: '50%',
-                background: 'radial-gradient(circle, rgba(6,182,212,0.2), transparent)',
-                animation: 'rpulseA 2s ease-in-out infinite',
-              }}
-            />
           </div>
         </div>
       )}
 
-      {/* Spline iframe — shifted up so robot fills the frame, not the bottom */}
+      {/* Spline iframe — pushed up by 22% so robot fills upper frame */}
       {mounted && (
         <iframe
           src="https://my.spline.design/nexbotrobotcharacterconceptforpersonaluse-8qufREQIuBJIm1u6FEapS6rB/"
           title="MetLink AI Robot"
           allow="autoplay"
+          onLoad={() => setLoaded(true)}
           style={{
             position: 'absolute',
-            left: 0,
-            right: 0,
-            /* Extend above and below to allow upward shift without gaps */
-            top: '-12%',
+            left: 0, right: 0,
+            top: '-22%',
             width: '100%',
-            height: '124%',
+            height: '144%',
             border: 'none',
             background: 'transparent',
             opacity: loaded ? 1 : 0,
             transition: 'opacity 1s ease',
             zIndex: 3,
           }}
-          onLoad={() => setLoaded(true)}
         />
       )}
 
-      {/* Bottom fade — blends feet into page bg */}
-      <div
-        style={{
-          position: 'absolute',
-          bottom: 0,
-          left: 0,
-          right: 0,
-          height: 100,
-          background: 'linear-gradient(to top, #030712 30%, transparent)',
-          pointerEvents: 'none',
-          zIndex: 5,
-        }}
-      />
+      {/* Bottom gradient — hides feet, blends to page */}
+      <div style={{
+        position: 'absolute', bottom: 0, left: 0, right: 0, height: 130,
+        background: 'linear-gradient(to top, #030712 35%, transparent)',
+        pointerEvents: 'none', zIndex: 5,
+      }} />
 
-      {/* Cover the "Built with Spline" watermark (bottom-right of iframe) */}
-      <div
-        style={{
-          position: 'absolute',
-          bottom: 0,
-          right: 0,
-          width: 220,
-          height: 52,
-          background: '#030712',
-          zIndex: 6,
-          pointerEvents: 'none',
-        }}
-      />
+      {/* Watermark cover */}
+      <div style={{
+        position: 'absolute', bottom: 0, right: 0,
+        width: 230, height: 56,
+        background: '#030712',
+        pointerEvents: 'none', zIndex: 6,
+      }} />
 
       <style>{`
-        @keyframes rspinA { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-        @keyframes rpulseA { 0%,100% { opacity:0.4; transform:scale(1); } 50% { opacity:0.9; transform:scale(1.1); } }
+        @keyframes rspinA { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
       `}</style>
     </div>
   );
