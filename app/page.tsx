@@ -427,8 +427,8 @@ export default function HomePage() {
                 </div>
 
                 {/* Headline */}
-                <h2 className="font-black text-white leading-[1.05] mb-5"
-                  style={{ fontSize: 'clamp(2.2rem, 5vw, 4rem)', fontFamily: PF }}>
+                <h2 className="font-black leading-[1.05] mb-5"
+                  style={{ fontSize: 'clamp(2.2rem, 5vw, 4rem)', fontFamily: PF, color: '#FAF5F0' }}>
                   Ready to scale with{' '}
                   <em style={{ fontStyle: 'italic', color: '#E8612A' }}>AI?</em>
                 </h2>
