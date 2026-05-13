@@ -4,11 +4,9 @@ import Link from 'next/link';
 import { ArrowRight, Star, TrendingUp, Code2, Brain, Megaphone, Palette, CheckCircle, Sparkles } from 'lucide-react';
 import { FadeIn, StaggerChildren, StaggerItem } from '@/components/fade-in';
 
-/* ── Section background alternation ── */
-const A = '#FAF9F6';   /* warm cream */
-const B = '#FFFFFF';   /* white */
+const A = '#FAF9F6';
+const B = '#FFFFFF';
 
-/* ── Subtle wave divider ── */
 function Wave({ from, to, flip = false }: { from: string; to: string; flip?: boolean }) {
   return (
     <div style={{ background: from, lineHeight: 0, fontSize: 0 }}>
@@ -20,7 +18,6 @@ function Wave({ from, to, flip = false }: { from: string; to: string; flip?: boo
   );
 }
 
-/* ── Data ── */
 const services = [
   { icon: Brain,     label: 'AI & Automation',     desc: 'Intelligent systems that learn, adapt, and drive revenue on autopilot.',               color: '#C84B30', num: '01' },
   { icon: Code2,     label: 'Software Development', desc: 'Production-grade platforms built fast with modern, maintainable code.',                  color: '#2563EB', num: '02' },
@@ -73,20 +70,68 @@ export default function HomePage() {
     <div className="w-full overflow-x-hidden" style={{ background: A }}>
 
       {/* ══════════════════════════════════
-          HERO
+          HERO — centered layout
       ══════════════════════════════════ */}
       <section className="relative overflow-hidden" style={{
-        background: 'linear-gradient(160deg, #FFF9F7 0%, #FAF6F0 50%, #F5EEE4 100%)',
-        minHeight: '92vh',
+        background: 'linear-gradient(135deg, #FFF5F0 0%, #FAF6F0 45%, #F5EEE4 100%)',
+        minHeight: '100vh',
       }}>
-        {/* Subtle warm glow */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[600px] pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse, rgba(200,75,48,0.07) 0%, transparent 65%)', filter: 'blur(80px)' }} />
+        {/* Warm glow — top right */}
+        <div className="absolute -top-20 right-0 w-[700px] h-[700px] pointer-events-none"
+          style={{ background: 'radial-gradient(ellipse, rgba(200,75,48,0.10) 0%, transparent 65%)', filter: 'blur(80px)' }} />
+        {/* Secondary subtle glow — bottom left */}
+        <div className="absolute bottom-0 -left-20 w-[500px] h-[500px] pointer-events-none"
+          style={{ background: 'radial-gradient(ellipse, rgba(232,97,42,0.06) 0%, transparent 65%)', filter: 'blur(80px)' }} />
         {/* Noise texture */}
         <div className="absolute inset-0 pointer-events-none opacity-[0.025]"
           style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E\")" }} />
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 sm:pt-32 pb-24">
+        {/* ── Floating testimonial card — TOP RIGHT, desktop only ── */}
+        <div className="absolute top-[18%] right-[4%] w-[265px] hidden lg:block animate-float"
+          style={{ zIndex: 20, animationDelay: '0.4s', transform: 'rotate(2deg)' }}>
+          <div className="p-5 rounded-2xl" style={{
+            background: '#FFFFFF',
+            border: '1px solid #E5DDD5',
+            boxShadow: '0 20px 60px rgba(0,0,0,0.12), 0 4px 16px rgba(0,0,0,0.06)',
+          }}>
+            <div className="flex gap-0.5 mb-2.5">
+              {[0,1,2,3,4].map(i => <Star key={i} className="w-3.5 h-3.5 fill-current" style={{ color: '#FBBF24' }} />)}
+            </div>
+            <p className="text-sm font-medium leading-relaxed mb-3" style={{ color: '#1C1410' }}>
+              &ldquo;MetLink shipped our AI agent in{' '}
+              <strong style={{ color: '#1C1410' }}>6 days.</strong>{' '}
+              Revenue up 38%.&rdquo;
+            </p>
+            <div className="flex items-center gap-2.5 pt-3" style={{ borderTop: '1px solid #F0EBE3' }}>
+              <div className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-black text-white flex-shrink-0"
+                style={{ background: '#C84B30' }}>SK</div>
+              <div>
+                <p className="text-xs font-bold" style={{ color: '#1C1410' }}>Sarah K.</p>
+                <p className="text-[11px]" style={{ color: '#ADA09A' }}>Series B SaaS</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* ── Floating LIVE DEPLOY card — BOTTOM LEFT, desktop only ── */}
+        <div className="absolute bottom-[16%] left-[4%] w-[168px] hidden lg:block animate-float"
+          style={{ zIndex: 20, animationDelay: '1s' }}>
+          <div className="p-4 rounded-2xl" style={{
+            background: '#1C1410',
+            border: '1px solid rgba(255,255,255,0.08)',
+            boxShadow: '0 20px 60px rgba(0,0,0,0.18)',
+          }}>
+            <div className="flex items-center gap-1.5 mb-2">
+              <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+              <p className="text-[9px] font-black uppercase tracking-[0.2em]" style={{ color: 'rgba(255,255,255,0.5)' }}>Live Deploy</p>
+            </div>
+            <p className="text-3xl font-black leading-none mb-1" style={{ color: '#FFFFFF' }}>7 days</p>
+            <p className="text-[11px]" style={{ color: 'rgba(255,255,255,0.45)' }}>avg. time to ship</p>
+          </div>
+        </div>
+
+        {/* ── Main centered content ── */}
+        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 sm:pt-36 pb-28 text-center flex flex-col items-center">
 
           {/* Badge */}
           <FadeIn>
@@ -99,105 +144,75 @@ export default function HomePage() {
 
           {/* Headline */}
           <FadeIn delay={0.08}>
-            <h1 className="font-black leading-[1.0] tracking-tight mb-6 max-w-4xl" style={{ color: '#1C1410' }}>
+            <h1 className="font-black leading-[1.05] tracking-tight mb-6" style={{ color: '#1C1410' }}>
               We build{' '}
               <em style={{
                 fontFamily: 'var(--font-playfair)',
                 fontStyle: 'italic',
                 fontWeight: 700,
                 color: '#C84B30',
-              }}>
-                AI automation
-              </em>
+              }}>AI automation</em>
               {' '}that actually{' '}
               <span className="relative inline-block">
                 scales.
-                <span className="absolute -bottom-1 left-0 right-0 h-1 rounded-full" style={{ background: 'linear-gradient(90deg, #C84B30, #E8612A)' }} />
+                <span className="absolute -bottom-1 left-0 right-0 h-[3px] rounded-full"
+                  style={{ background: 'linear-gradient(90deg, #C84B30, #E8612A)' }} />
               </span>
             </h1>
           </FadeIn>
 
-          {/* Sub */}
+          {/* Subtitle */}
           <FadeIn delay={0.14}>
-            <p className="text-lg sm:text-xl mb-10 max-w-xl leading-relaxed" style={{ color: '#72645A' }}>
-              Full-service agency combining AI, software, and marketing to grow your business — measurable results from week one.
+            <p className="text-lg sm:text-xl mb-10 max-w-2xl leading-relaxed" style={{ color: '#72645A' }}>
+              Strategy, design, and engineering — one team shipping production AI systems for ambitious brands. From idea to live product in days.
             </p>
           </FadeIn>
 
           {/* CTA buttons */}
           <FadeIn delay={0.2}>
-            <div className="flex flex-wrap gap-3 mb-14">
+            <div className="flex flex-wrap gap-3 justify-center">
               <Link href="/contact"
-                className="group inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-bold text-sm text-white transition-all hover:brightness-95 active:scale-95"
-                style={{ background: '#C84B30', boxShadow: '0 4px 20px rgba(200,75,48,0.3)' }}>
+                className="group inline-flex items-center gap-2 px-8 py-4 rounded-full font-bold text-sm text-white transition-all hover:brightness-95 active:scale-95"
+                style={{ background: '#C84B30', boxShadow: '0 4px 24px rgba(200,75,48,0.35)' }}>
                 <Sparkles className="w-4 h-4" />
-                Get a Free Proposal
+                Start building with AI
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
               </Link>
               <Link href="/portfolio"
-                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-semibold text-sm transition-all hover:bg-black/5"
-                style={{ border: '1px solid #E5DDD5', color: '#72645A', background: 'rgba(255,255,255,0.8)' }}>
-                See Our Work
+                className="inline-flex items-center gap-2 px-7 py-4 rounded-full font-semibold text-sm transition-all hover:bg-black/5"
+                style={{ border: '1px solid #D5CCBF', color: '#72645A', background: 'rgba(255,255,255,0.8)' }}>
+                See our work
               </Link>
             </div>
           </FadeIn>
-
-          {/* Stats row */}
-          <FadeIn delay={0.26}>
-            <div className="flex flex-wrap items-center gap-x-8 gap-y-4">
-              {[['450+','Projects Done'],['250+','Global Clients'],['94%','Retention Rate'],['7 days','First Delivery']].map(([val, lbl], i) => (
-                <div key={lbl} className="flex items-center gap-3">
-                  {i > 0 && <span className="hidden sm:block w-px h-5" style={{ background: '#E5DDD5' }} />}
-                  <div>
-                    <p className="text-xl font-black leading-none" style={{ color: '#C84B30' }}>{val}</p>
-                    <p className="text-xs uppercase tracking-widest mt-0.5" style={{ color: '#ADA09A' }}>{lbl}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </FadeIn>
-        </div>
-
-        {/* Floating review card — desktop only */}
-        <div className="absolute bottom-[18%] right-[6%] w-[260px] hidden lg:block animate-float"
-          style={{ zIndex: 20, animationDelay: '0.3s' }}>
-          <div className="p-5 rounded-2xl" style={{ background: '#FFFFFF', border: '1px solid #E5DDD5', boxShadow: '0 16px 48px rgba(0,0,0,0.10)' }}>
-            <div className="flex gap-0.5 mb-3">
-              {[0,1,2,3,4].map(i => <Star key={i} className="w-3.5 h-3.5 fill-current" style={{ color: '#FBBF24' }} />)}
-            </div>
-            <p className="text-sm font-medium leading-relaxed mb-3" style={{ color: '#1C1410' }}>
-              &ldquo;MetLink shipped our AI agent in 6 days. Revenue up 38%.&rdquo;
-            </p>
-            <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-black text-white flex-shrink-0"
-                style={{ background: '#C84B30' }}>SK</div>
-              <div>
-                <p className="text-xs font-bold" style={{ color: '#1C1410' }}>Sarah K.</p>
-                <p className="text-[11px]" style={{ color: '#ADA09A' }}>CEO, FinEdge Capital</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Floating stat card — desktop only */}
-        <div className="absolute bottom-[32%] right-[6%] w-[160px] hidden lg:block animate-float"
-          style={{ zIndex: 20, animationDelay: '1.2s', transform: 'translateX(120px)' }}>
-          <div className="p-4 rounded-2xl text-center" style={{ background: '#FFFFFF', border: '1px solid #E5DDD5', boxShadow: '0 12px 36px rgba(0,0,0,0.08)' }}>
-            <div className="flex items-center justify-center gap-1.5 mb-1">
-              <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-              <p className="text-[10px] font-bold uppercase tracking-widest" style={{ color: '#ADA09A' }}>Live</p>
-            </div>
-            <p className="text-3xl font-black" style={{ color: '#1C1410' }}>450+</p>
-            <p className="text-xs" style={{ color: '#ADA09A' }}>Projects Shipped</p>
-          </div>
         </div>
       </section>
-      <Wave from="transparent" to={B} />
 
       {/* ══════════════════════════════════
-          INTEGRATIONS  (B)
+          STATS STRIP
       ══════════════════════════════════ */}
-      <section className="relative overflow-hidden py-16 sm:py-20" style={{ background: B }}>
+      <section style={{ background: B, borderTop: '1px solid #E5DDD5', borderBottom: '1px solid #E5DDD5' }}>
+        <StaggerChildren className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+          {[
+            ['150+', 'Projects'],
+            ['80+',  'Clients'],
+            ['$10M+','Revenue'],
+            ['94%',  'Retention'],
+          ].map(([val, lbl]) => (
+            <StaggerItem key={lbl}>
+              <p className="text-4xl font-black mb-1 leading-none" style={{ color: '#1C1410' }}>{val}</p>
+              <p className="text-[11px] uppercase tracking-[0.22em] font-bold mt-1.5" style={{ color: '#ADA09A' }}>{lbl}</p>
+            </StaggerItem>
+          ))}
+        </StaggerChildren>
+      </section>
+
+      <Wave from={B} to={A} flip />
+
+      {/* ══════════════════════════════════
+          INTEGRATIONS  (A)
+      ══════════════════════════════════ */}
+      <section className="relative overflow-hidden py-16 sm:py-20" style={{ background: A }}>
         <FadeIn className="text-center mb-12 px-4">
           <p className="text-[10px] font-black uppercase tracking-[0.45em] mb-3" style={{ color: '#ADA09A' }}>Powered By</p>
           <h2 className="text-2xl sm:text-3xl font-black mb-3" style={{ color: '#1C1410' }}>
@@ -210,18 +225,17 @@ export default function HomePage() {
 
         <div className="relative space-y-3">
           <div className="absolute inset-y-0 left-0 w-28 sm:w-44 z-10 pointer-events-none"
-            style={{ background: `linear-gradient(to right, ${B}, transparent)` }} />
+            style={{ background: `linear-gradient(to right, ${A}, transparent)` }} />
           <div className="absolute inset-y-0 right-0 w-28 sm:w-44 z-10 pointer-events-none"
-            style={{ background: `linear-gradient(to left, ${B}, transparent)` }} />
+            style={{ background: `linear-gradient(to left, ${A}, transparent)` }} />
 
-          {/* Row 1 */}
           <div className="animate-marquee flex items-center" style={{ width: 'max-content' }}>
             {[0,1,2,3].map(copy => (
               <div key={copy} className="flex items-center gap-3 pr-3">
                 {integrations.slice(0, 6).map(item => (
                   <div key={item.label}
-                    className="flex items-center gap-2.5 px-5 py-2.5 rounded-full whitespace-nowrap shrink-0 transition-all hover:shadow-sm"
-                    style={{ background: '#FAF9F6', border: '1px solid #E5DDD5' }}>
+                    className="flex items-center gap-2.5 px-5 py-2.5 rounded-full whitespace-nowrap shrink-0"
+                    style={{ background: B, border: '1px solid #E5DDD5' }}>
                     <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: item.color }} />
                     <span className="text-sm font-semibold" style={{ color: '#72645A' }}>{item.label}</span>
                   </div>
@@ -230,14 +244,13 @@ export default function HomePage() {
             ))}
           </div>
 
-          {/* Row 2 — reverse */}
           <div className="flex items-center" style={{ width: 'max-content', animation: 'marquee 32s linear infinite reverse' }}>
             {[0,1,2,3].map(copy => (
               <div key={copy} className="flex items-center gap-3 pr-3">
                 {integrations.slice(6).map(item => (
                   <div key={item.label}
-                    className="flex items-center gap-2.5 px-5 py-2.5 rounded-full whitespace-nowrap shrink-0 transition-all hover:shadow-sm"
-                    style={{ background: '#FAF9F6', border: '1px solid #E5DDD5' }}>
+                    className="flex items-center gap-2.5 px-5 py-2.5 rounded-full whitespace-nowrap shrink-0"
+                    style={{ background: B, border: '1px solid #E5DDD5' }}>
                     <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: item.color }} />
                     <span className="text-sm font-semibold" style={{ color: '#72645A' }}>{item.label}</span>
                   </div>
@@ -247,12 +260,12 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-      <Wave from={B} to={A} flip />
+      <Wave from={A} to={B} />
 
       {/* ══════════════════════════════════
-          WHAT WE DO  (A)
+          WHAT WE DO  (B)
       ══════════════════════════════════ */}
-      <section className="relative py-24 sm:py-32" style={{ background: A }}>
+      <section className="relative py-24 sm:py-32" style={{ background: B }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeIn className="text-center mb-16">
             <p className="text-[10px] font-black uppercase tracking-[0.4em] mb-4" style={{ color: '#C84B30' }}>What We Do</p>
@@ -270,8 +283,8 @@ export default function HomePage() {
               const Icon = s.icon;
               return (
                 <StaggerItem key={s.label}>
-                  <div className="group relative flex flex-col h-full p-7 rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lg"
-                    style={{ background: '#FFFFFF', border: '1px solid #E5DDD5' }}
+                  <div className="group relative flex flex-col h-full p-7 rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1.5"
+                    style={{ background: A, border: '1px solid #E5DDD5' }}
                     onMouseEnter={e => {
                       (e.currentTarget as HTMLElement).style.borderColor = `${s.color}50`;
                       (e.currentTarget as HTMLElement).style.boxShadow = `0 12px 40px rgba(0,0,0,0.08), 0 0 0 1px ${s.color}30`;
@@ -297,21 +310,19 @@ export default function HomePage() {
 
           <FadeIn delay={0.2} className="text-center mt-10">
             <Link href="/services"
-              className="inline-flex items-center gap-2 text-sm font-bold transition-colors"
-              style={{ color: '#C84B30' }}
-              onMouseEnter={e => (e.currentTarget as HTMLElement).style.opacity = '0.8'}
-              onMouseLeave={e => (e.currentTarget as HTMLElement).style.opacity = '1'}>
+              className="inline-flex items-center gap-2 text-sm font-bold transition-colors hover:opacity-75"
+              style={{ color: '#C84B30' }}>
               View all services <ArrowRight className="w-4 h-4" />
             </Link>
           </FadeIn>
         </div>
       </section>
-      <Wave from={A} to={B} />
+      <Wave from={B} to={A} flip />
 
       {/* ══════════════════════════════════
-          OUR CLIENTS  (B)
+          OUR CLIENTS  (A)
       ══════════════════════════════════ */}
-      <section className="relative py-24 sm:py-32 overflow-hidden" style={{ background: B }}>
+      <section className="relative py-24 sm:py-32 overflow-hidden" style={{ background: A }}>
         <FadeIn className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-16">
           <p className="text-[10px] font-black uppercase tracking-[0.4em] mb-4" style={{ color: '#C84B30' }}>Our Clients</p>
           <h2 className="font-black mb-4" style={{ color: '#1C1410' }}>
@@ -325,18 +336,17 @@ export default function HomePage() {
 
         <div className="relative space-y-3 mb-14">
           <div className="absolute inset-y-0 left-0 w-24 sm:w-40 z-10 pointer-events-none"
-            style={{ background: `linear-gradient(to right, ${B}, transparent)` }} />
+            style={{ background: `linear-gradient(to right, ${A}, transparent)` }} />
           <div className="absolute inset-y-0 right-0 w-24 sm:w-40 z-10 pointer-events-none"
-            style={{ background: `linear-gradient(to left, ${B}, transparent)` }} />
+            style={{ background: `linear-gradient(to left, ${A}, transparent)` }} />
 
-          {/* Row 1 */}
           <div className="animate-marquee flex items-center" style={{ width: 'max-content' }}>
             {[0,1,2,3].map(copy => (
               <div key={copy} className="flex items-center gap-3 pr-3">
                 {clientsRow1.map(name => (
                   <div key={name}
                     className="flex items-center justify-center px-6 py-3.5 rounded-xl whitespace-nowrap shrink-0"
-                    style={{ background: '#FAF9F6', border: '1px solid #E5DDD5', minWidth: 140 }}>
+                    style={{ background: B, border: '1px solid #E5DDD5', minWidth: 140 }}>
                     <span className="text-sm font-black tracking-wide" style={{ color: '#ADA09A' }}>{name}</span>
                   </div>
                 ))}
@@ -344,14 +354,13 @@ export default function HomePage() {
             ))}
           </div>
 
-          {/* Row 2 — reverse */}
           <div className="flex items-center" style={{ width: 'max-content', animation: 'marquee 40s linear infinite reverse' }}>
             {[0,1,2,3].map(copy => (
               <div key={copy} className="flex items-center gap-3 pr-3">
                 {clientsRow2.map(name => (
                   <div key={name}
                     className="flex items-center justify-center px-6 py-3.5 rounded-xl whitespace-nowrap shrink-0"
-                    style={{ background: '#FAF9F6', border: '1px solid #E5DDD5', minWidth: 140 }}>
+                    style={{ background: B, border: '1px solid #E5DDD5', minWidth: 140 }}>
                     <span className="text-sm font-black tracking-wide" style={{ color: '#ADA09A' }}>{name}</span>
                   </div>
                 ))}
@@ -364,18 +373,18 @@ export default function HomePage() {
           {['FinTech','Healthcare','E-Commerce','SaaS','Real Estate','Logistics','EdTech','Manufacturing'].map(tag => (
             <span key={tag}
               className="px-4 py-2 rounded-full text-[11px] font-bold uppercase tracking-wider cursor-default transition-all hover:border-orange-200 hover:text-[#C84B30]"
-              style={{ background: '#FAF9F6', border: '1px solid #E5DDD5', color: '#ADA09A' }}>
+              style={{ background: B, border: '1px solid #E5DDD5', color: '#ADA09A' }}>
               {tag}
             </span>
           ))}
         </FadeIn>
       </section>
-      <Wave from={B} to={A} flip />
+      <Wave from={A} to={B} />
 
       {/* ══════════════════════════════════
-          SUCCESS STORIES  (A)
+          SUCCESS STORIES  (B)
       ══════════════════════════════════ */}
-      <section className="relative py-24 sm:py-32" style={{ background: A }}>
+      <section className="relative py-24 sm:py-32" style={{ background: B }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeIn className="text-center mb-16">
             <p className="text-[10px] font-black uppercase tracking-[0.4em] mb-4" style={{ color: '#16A34A' }}>Success Stories</p>
@@ -392,7 +401,7 @@ export default function HomePage() {
             {testimonials.map(t => (
               <StaggerItem key={t.name}>
                 <div className="group relative flex flex-col h-full p-8 rounded-3xl transition-all duration-300 hover:-translate-y-1.5"
-                  style={{ background: '#FFFFFF', border: '1px solid #E5DDD5', boxShadow: '0 2px 16px rgba(0,0,0,0.04)' }}
+                  style={{ background: A, border: '1px solid #E5DDD5', boxShadow: '0 2px 16px rgba(0,0,0,0.04)' }}
                   onMouseEnter={e => {
                     (e.currentTarget as HTMLElement).style.borderColor = `${t.color}40`;
                     (e.currentTarget as HTMLElement).style.boxShadow = `0 16px 48px rgba(0,0,0,0.08)`;
@@ -438,12 +447,12 @@ export default function HomePage() {
           </StaggerChildren>
         </div>
       </section>
-      <Wave from={A} to={B} />
+      <Wave from={B} to={A} flip />
 
       {/* ══════════════════════════════════
-          TECH STACK  (B)
+          TECH STACK  (A)
       ══════════════════════════════════ */}
-      <section className="relative py-24 sm:py-32" style={{ background: B }}>
+      <section className="relative py-24 sm:py-32" style={{ background: A }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row gap-16 lg:gap-20">
 
@@ -463,8 +472,8 @@ export default function HomePage() {
                   { icon: <Megaphone className="w-4 h-4" />, label: 'Digital Marketing',    color: '#16A34A' },
                   { icon: <Palette className="w-4 h-4" />,   label: 'Creative & Media',     color: '#D97706' },
                 ].map(s => (
-                  <div key={s.label} className="flex items-center gap-3 p-3.5 rounded-xl transition-all hover:shadow-sm"
-                    style={{ background: '#FAF9F6', border: '1px solid #E5DDD5' }}>
+                  <div key={s.label} className="flex items-center gap-3 p-3.5 rounded-xl"
+                    style={{ background: B, border: '1px solid #E5DDD5' }}>
                     <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
                       style={{ background: `${s.color}12`, color: s.color }}>{s.icon}</div>
                     <p className="text-sm font-semibold flex-1" style={{ color: '#1C1410' }}>{s.label}</p>
@@ -478,15 +487,13 @@ export default function HomePage() {
               {techStack.map((group, gi) => (
                 <FadeIn key={group.category} delay={gi * 0.08}>
                   <div className="relative p-6 rounded-2xl h-full transition-all hover:-translate-y-1"
-                    style={{ background: '#FAF9F6', border: `1px solid ${group.color}20` }}
+                    style={{ background: B, border: `1px solid ${group.color}20` }}
                     onMouseEnter={e => {
                       (e.currentTarget as HTMLElement).style.borderColor = `${group.color}50`;
-                      (e.currentTarget as HTMLElement).style.background = '#FFFFFF';
                       (e.currentTarget as HTMLElement).style.boxShadow = '0 8px 32px rgba(0,0,0,0.06)';
                     }}
                     onMouseLeave={e => {
                       (e.currentTarget as HTMLElement).style.borderColor = `${group.color}20`;
-                      (e.currentTarget as HTMLElement).style.background = '#FAF9F6';
                       (e.currentTarget as HTMLElement).style.boxShadow = 'none';
                     }}>
                     <div className="flex items-center gap-2 mb-4">
@@ -497,7 +504,7 @@ export default function HomePage() {
                       {group.items.map(item => (
                         <span key={item}
                           className="px-3 py-1.5 rounded-lg text-xs font-semibold cursor-default transition-all"
-                          style={{ background: '#FFFFFF', border: '1px solid #E5DDD5', color: '#72645A' }}
+                          style={{ background: A, border: '1px solid #E5DDD5', color: '#72645A' }}
                           onMouseEnter={e => {
                             (e.currentTarget as HTMLElement).style.color = group.color;
                             (e.currentTarget as HTMLElement).style.borderColor = `${group.color}40`;
@@ -506,7 +513,7 @@ export default function HomePage() {
                           onMouseLeave={e => {
                             (e.currentTarget as HTMLElement).style.color = '#72645A';
                             (e.currentTarget as HTMLElement).style.borderColor = '#E5DDD5';
-                            (e.currentTarget as HTMLElement).style.background = '#FFFFFF';
+                            (e.currentTarget as HTMLElement).style.background = A;
                           }}>
                           {item}
                         </span>
@@ -519,29 +526,30 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-      <Wave from={B} to={A} flip />
+      <Wave from={A} to={B} />
 
       {/* ══════════════════════════════════
-          CTA BANNER  (A)
+          CTA BANNER  (B → dark card)
       ══════════════════════════════════ */}
-      <section className="relative py-20 sm:py-28" style={{ background: A }}>
+      <section className="relative py-20 sm:py-28" style={{ background: B }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeIn>
             <div className="relative rounded-3xl overflow-hidden flex flex-col lg:flex-row"
               style={{
                 background: 'linear-gradient(135deg, #1C1410 0%, #2D1A12 50%, #1C1410 100%)',
-                boxShadow: '0 32px 80px rgba(0,0,0,0.15)',
+                boxShadow: '0 32px 80px rgba(0,0,0,0.18)',
               }}>
-              {/* Warm glow */}
+              {/* Warm glow left */}
               <div className="absolute top-0 left-0 w-[500px] h-[500px] rounded-full pointer-events-none"
-                style={{ background: 'radial-gradient(circle, rgba(200,75,48,0.2) 0%, transparent 65%)', filter: 'blur(80px)', transform: 'translate(-30%,-40%)' }} />
+                style={{ background: 'radial-gradient(circle, rgba(200,75,48,0.22) 0%, transparent 65%)', filter: 'blur(80px)', transform: 'translate(-30%,-40%)' }} />
+              {/* Warm glow right */}
               <div className="absolute bottom-0 right-0 w-80 h-80 rounded-full pointer-events-none"
                 style={{ background: 'radial-gradient(circle, rgba(232,97,42,0.15) 0%, transparent 65%)', filter: 'blur(60px)', transform: 'translate(30%,30%)' }} />
 
               {/* LEFT */}
               <div className="relative z-10 flex-1 p-10 sm:p-14 lg:p-16 flex flex-col justify-center">
                 <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-[11px] font-bold mb-7 self-start"
-                  style={{ background: 'rgba(200,75,48,0.15)', border: '1px solid rgba(200,75,48,0.3)', color: '#E8612A' }}>
+                  style={{ background: 'rgba(200,75,48,0.18)', border: '1px solid rgba(200,75,48,0.35)', color: '#E8612A' }}>
                   <span className="w-1.5 h-1.5 rounded-full bg-[#E8612A] animate-pulse" />
                   Limited Spots — 2025
                 </div>
@@ -551,19 +559,19 @@ export default function HomePage() {
                     Results
                   </em>
                 </h2>
-                <p className="text-base max-w-md mb-8 leading-relaxed" style={{ color: 'rgba(255,255,255,0.6)' }}>
+                <p className="text-base max-w-md mb-8 leading-relaxed" style={{ color: 'rgba(255,255,255,0.58)' }}>
                   Partner with a team that ships fast, communicates clearly, and drives measurable ROI — starting week one.
                 </p>
                 <div className="flex flex-wrap gap-3">
                   <Link href="/contact"
                     className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-black text-sm text-white transition-all hover:brightness-110 active:scale-95"
-                    style={{ background: '#C84B30', boxShadow: '0 0 32px rgba(200,75,48,0.4)' }}>
+                    style={{ background: '#C84B30', boxShadow: '0 0 32px rgba(200,75,48,0.45)' }}>
                     <Sparkles className="w-4 h-4" />
                     Become a Client
                   </Link>
                   <Link href="/portfolio"
-                    className="inline-flex items-center gap-2 px-7 py-4 rounded-full font-semibold text-sm transition-all"
-                    style={{ border: '1px solid rgba(255,255,255,0.12)', color: 'rgba(255,255,255,0.6)' }}
+                    className="inline-flex items-center gap-2 px-7 py-4 rounded-full font-semibold text-sm transition-all hover:border-white/25"
+                    style={{ border: '1px solid rgba(255,255,255,0.14)', color: 'rgba(255,255,255,0.6)' }}
                     onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = '#FFFFFF'}
                     onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.6)'}>
                     See Our Work <ArrowRight className="w-4 h-4" />
@@ -571,9 +579,9 @@ export default function HomePage() {
                 </div>
               </div>
 
-              {/* RIGHT — stats */}
+              {/* RIGHT — stat cards 2×2 */}
               <div className="relative z-10 lg:w-[42%] flex-shrink-0 flex flex-col justify-center p-10 sm:p-12 lg:p-14">
-                <div className="grid grid-cols-2 gap-4 mb-5">
+                <div className="grid grid-cols-2 gap-3.5 mb-6">
                   {[
                     { val: '450+', label: 'Projects Shipped',     color: '#C84B30' },
                     { val: '250+', label: 'Happy Clients',         color: '#2563EB' },
@@ -581,17 +589,17 @@ export default function HomePage() {
                     { val: '98%',  label: 'Client Retention',      color: '#D97706' },
                   ].map(s => (
                     <div key={s.label} className="p-5 rounded-2xl"
-                      style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.08)' }}>
-                      <p className="text-2xl font-black leading-none mb-1.5" style={{ color: s.color }}>{s.val}</p>
-                      <p className="text-[11px] leading-snug" style={{ color: 'rgba(255,255,255,0.45)' }}>{s.label}</p>
+                      style={{ background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.10)' }}>
+                      <p className="text-2xl font-black leading-none mb-2" style={{ color: s.color }}>{s.val}</p>
+                      <p className="text-[11px] leading-snug font-medium" style={{ color: 'rgba(255,255,255,0.48)' }}>{s.label}</p>
                     </div>
                   ))}
                 </div>
                 <div className="flex flex-col gap-2.5">
                   {['NDA signed before we begin', 'Zero long-term lock-in', 'First deliverables in 7 days'].map(point => (
-                    <div key={point} className="flex items-center gap-2">
+                    <div key={point} className="flex items-center gap-2.5">
                       <CheckCircle className="w-3.5 h-3.5 flex-shrink-0" style={{ color: '#C84B30' }} />
-                      <p className="text-xs font-medium" style={{ color: 'rgba(255,255,255,0.5)' }}>{point}</p>
+                      <p className="text-xs font-medium" style={{ color: 'rgba(255,255,255,0.52)' }}>{point}</p>
                     </div>
                   ))}
                 </div>
