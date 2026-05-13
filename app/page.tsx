@@ -120,7 +120,7 @@ export default function HomePage() {
         </div>
 
         {/* ── Main centered content ── */}
-        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 sm:pt-36 pb-28 text-center flex flex-col items-center">
+        <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 sm:pt-36 pb-28 text-center flex flex-col items-center">
 
           {/* Badge */}
           <FadeIn>
@@ -133,20 +133,15 @@ export default function HomePage() {
 
           {/* Headline */}
           <FadeIn delay={0.08}>
-            <h1 className="font-black leading-[1.05] tracking-tight mb-6" style={{ color: '#1C1410', fontSize: 'clamp(2.4rem, 5vw, 4.2rem)' }}>
-              We build{' '}
-              <em style={{
+            <h1 className="font-black leading-[1.0] mb-6"
+              style={{
+                color: '#1C1410',
                 fontFamily: 'var(--font-playfair)',
-                fontStyle: 'italic',
-                fontWeight: 700,
-                color: '#C84B30',
-              }}>AI automation</em>
-              {' '}that actually{' '}
-              <span className="relative inline-block">
-                scales.
-                <span className="absolute -bottom-1 left-0 right-0 h-[3px] rounded-full"
-                  style={{ background: 'linear-gradient(90deg, #C84B30, #E8612A)' }} />
-              </span>
+                fontSize: 'clamp(2.6rem, 5.8vw, 5.2rem)',
+              }}>
+              We build{' '}
+              <span style={{ color: '#C84B30' }}>AI automation</span>
+              {' '}that actually scales.
             </h1>
           </FadeIn>
 
@@ -189,7 +184,7 @@ export default function HomePage() {
             ['94%',  'Retention'],
           ].map(([val, lbl]) => (
             <StaggerItem key={lbl}>
-              <p className="text-4xl font-black mb-1 leading-none" style={{ color: '#1C1410' }}>{val}</p>
+              <p className="text-4xl font-black mb-1 leading-none" style={{ color: '#1C1410', fontFamily: 'var(--font-playfair)' }}>{val}</p>
               <p className="text-[11px] uppercase tracking-[0.22em] font-bold mt-1.5" style={{ color: '#ADA09A' }}>{lbl}</p>
             </StaggerItem>
           ))}
