@@ -145,6 +145,11 @@ nav button, nav a { min-height: unset; min-width: unset; }
   100% { transform: translate(0); }
 }
 
+@keyframes scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
 /* ── Animation classes ── */
 .animate-fadeInScale  { animation: fadeInScale 0.3s cubic-bezier(0.16,1,0.3,1) forwards; }
 .animate-slideInUp    { animation: slideInUp 0.3s cubic-bezier(0.16,1,0.3,1) forwards; }

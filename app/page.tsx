@@ -1,112 +1,128 @@
 'use client';
 
 import Link from 'next/link';
-import { ArrowRight, Star, TrendingUp, Code2, Brain, Megaphone, Palette, CheckCircle, Sparkles } from 'lucide-react';
+import { ArrowRight, Star, Sparkles } from 'lucide-react';
 import { FadeIn, StaggerChildren, StaggerItem } from '@/components/fade-in';
 
-const A = '#FAF9F6';
-const B = '#FFFFFF';
-
-function Wave({ from, to, flip = false }: { from: string; to: string; flip?: boolean }) {
-  return (
-    <div style={{ background: from, lineHeight: 0, fontSize: 0 }}>
-      <svg viewBox="0 0 1440 48" preserveAspectRatio="none"
-        style={{ width: '100%', height: 48, display: 'block', transform: flip ? 'scaleX(-1)' : undefined }}>
-        <path d="M0,48 L0,22 C360,48 1080,0 1440,22 L1440,48 Z" fill={to} />
-      </svg>
-    </div>
-  );
-}
-
-const services = [
-  { icon: Brain,     label: 'AI & Automation',     desc: 'Intelligent systems that learn, adapt, and drive revenue on autopilot.',               color: '#C84B30', num: '01' },
-  { icon: Code2,     label: 'Software Development', desc: 'Production-grade platforms built fast with modern, maintainable code.',                  color: '#2563EB', num: '02' },
-  { icon: Megaphone, label: 'Digital Marketing',    desc: 'Data-driven campaigns that bring measurable growth and proven ROI.',                     color: '#16A34A', num: '03' },
-  { icon: Palette,   label: 'Creative & Media',     desc: 'Brand stories told through stunning visual design and world-class media.',               color: '#D97706', num: '04' },
-];
+const CR = '#FAF9F6';   // cream bg
+const WH = '#FFFFFF';   // white
+const DK = '#1C1410';   // dark text
+const MU = '#72645A';   // muted
+const LM = '#ADA09A';   // light muted
+const BD = '#E5DDD5';   // border
+const AC = '#C84B30';   // radish accent
 
 const integrations = [
-  { label: 'OpenAI',       color: '#10B981' },
-  { label: 'Claude AI',    color: '#D97706' },
-  { label: 'Google Drive', color: '#4285F4' },
-  { label: 'Notion',       color: '#1C1410' },
-  { label: 'Klaviyo',      color: '#F59E0B' },
-  { label: 'Make',         color: '#A855F7' },
-  { label: 'LangChain',    color: '#C84B30' },
-  { label: 'Pinecone',     color: '#16A34A' },
-  { label: 'Shopify',      color: '#95BF47' },
-  { label: 'HubSpot',      color: '#F97316' },
-  { label: 'Zapier',       color: '#FF4A00' },
-  { label: 'Supabase',     color: '#3ECF8E' },
+  { label: 'OpenAI',      dot: '#10B981' },
+  { label: 'Anthropic',   dot: '#D97706' },
+  { label: 'Notion',      dot: '#1C1410' },
+  { label: 'Klaviyo',     dot: '#F59E0B' },
+  { label: 'LangChain',   dot: '#C84B30' },
+  { label: 'Pinecone',    dot: '#16A34A' },
+  { label: 'Make',        dot: '#A855F7' },
+  { label: 'Supabase',    dot: '#3ECF8E' },
+  { label: 'Vercel',      dot: '#1C1410' },
+  { label: 'HuggingFace', dot: '#F97316' },
+  { label: 'Stripe',      dot: '#6366F1' },
+  { label: 'Zapier',      dot: '#FF4A00' },
 ];
 
-const clientsRow1 = ['TechVista', 'FinEdge Capital', 'BuildSmart', 'NovaMed Health', 'SwiftCart', 'DataPulse', 'GreenLeaf Agro'];
-const clientsRow2 = ['AeroVault', 'PrimeLogic', 'NextScale', 'FlowBase', 'UrbanMove', 'CloudSync', 'BoldBrand'];
-
-const testimonials = [
+const services = [
   {
-    quote: "MetLink's AI automation completely transformed our lead pipeline. We went from 50 to 400 qualified leads per month without increasing ad spend.",
-    name: 'Rohan Mehta', role: 'CEO', company: 'FinEdge Capital', stars: 5, color: '#C84B30', result: '8× Lead Growth',
+    num: '01', color: '#C84B30',
+    title: 'Digital Marketing',
+    tagline: 'Data-driven growth at scale.',
+    desc: 'Performance marketing, SEO, and brand strategy that turns audiences into customers.',
+    bullets: ['Performance Marketing', 'SEO & Content', 'Personal Branding', 'Social Media'],
   },
   {
-    quote: "Their software team delivered a production-grade platform in just 3 weeks. Blown away by the code quality and how seamlessly they integrated with our stack.",
-    name: 'Priya Sharma', role: 'CTO', company: 'SwiftCart Commerce', stars: 5, color: '#2563EB', result: '3 Weeks to Launch',
+    num: '02', color: '#D97706',
+    title: 'Creative Media',
+    tagline: 'Visuals that stop the scroll.',
+    desc: 'World-class production — brand identity to high-volume video — built to convert.',
+    bullets: ['Brand Identity', 'Video & UGC', 'Motion Design', 'Web & UI/UX'],
   },
   {
-    quote: "The AI chatbot they built handles 70% of our support tickets automatically. Our team now focuses on high-value work. ROI was positive in the first month.",
-    name: 'Arjun Singh', role: 'Head of Operations', company: 'NovaMed Health', stars: 5, color: '#16A34A', result: '70% Automation',
+    num: '03', color: '#16A34A',
+    title: 'AI & Automation',
+    tagline: 'Intelligent systems. Infinite scale.',
+    desc: 'Cutting-edge AI that transforms operations and unlocks business intelligence.',
+    bullets: ['AI Integration', 'Data Science', 'Machine Learning', 'Conversational AI'],
+  },
+  {
+    num: '04', color: '#2563EB',
+    title: 'Software Development',
+    tagline: 'Code that scales. Systems that last.',
+    desc: 'End-to-end product engineering — web, mobile, and cloud — built to grow.',
+    bullets: ['Web & Mobile Apps', 'Cloud & APIs', 'AI Integration', 'Automation'],
   },
 ];
 
-const techStack = [
-  { category: 'AI / ML',      color: '#C84B30', items: ['GPT-4o', 'Claude 3.7', 'Gemini 2.5', 'LangChain', 'LlamaIndex', 'HuggingFace'] },
-  { category: 'Frontend',     color: '#2563EB', items: ['Next.js 15', 'React 19', 'TypeScript', 'Tailwind', 'Framer Motion', 'Three.js'] },
-  { category: 'Backend',      color: '#16A34A', items: ['FastAPI', 'Node.js', 'Python', 'GraphQL', 'WebSockets', 'Redis'] },
-  { category: 'Cloud & Data', color: '#D97706', items: ['AWS', 'GCP', 'Vercel', 'Supabase', 'Pinecone', 'PostgreSQL'] },
+const steps = [
+  {
+    num: '01',
+    title: 'Discover & Define',
+    desc: 'Deep-dive strategy session. We map your goals, data, and systems to find where AI creates leverage.',
+  },
+  {
+    num: '02',
+    title: 'Build & Integrate',
+    desc: 'We ship working AI systems in days, not months. Modular, tested, integrated into your stack.',
+  },
+  {
+    num: '03',
+    title: 'Scale & Optimize',
+    desc: 'We monitor, retrain, and evolve continuously — performance compounds over time.',
+  },
 ];
+
+const stack = [
+  { name: 'GPT-4o & o3',   cat: 'OpenAI',        color: '#10B981' },
+  { name: 'Claude 3.5',    cat: 'Anthropic',     color: '#D97706' },
+  { name: 'Gemini 2.5',    cat: 'Google',        color: '#4285F4' },
+  { name: 'LangChain',     cat: 'Orchestration', color: '#C84B30' },
+  { name: 'Pinecone',      cat: 'Vector DB',     color: '#16A34A' },
+  { name: 'HuggingFace',   cat: 'Open Source',   color: '#F97316' },
+  { name: 'AWS / GCP',     cat: 'Cloud Infra',   color: '#F59E0B' },
+  { name: 'MLflow',        cat: 'MLOps',         color: '#A855F7' },
+  { name: 'LlamaIndex',    cat: 'Retrieval',     color: '#6366F1' },
+  { name: 'Kubernetes',    cat: 'Infra',         color: '#326CE5' },
+  { name: 'FastAPI + Next',cat: 'Stack',         color: '#3ECF8E' },
+  { name: 'Supabase',      cat: 'Data',          color: '#3ECF8E' },
+];
+
+const whyUs = [
+  { title: 'End-to-End Partner',  desc: 'Strategy, design, dev, and deployment — one accountable team.' },
+  { title: 'AI-First Execution',  desc: 'Every project integrates cutting-edge AI to deliver 10× results.' },
+  { title: 'Real-Time Insights',  desc: 'Live KPI dashboards. Zero ambiguity on performance.' },
+  { title: 'Ship in 7 Days',      desc: 'No lengthy discovery. First working deliverables in one week.' },
+  { title: 'Measurable ROI',      desc: 'We define success metrics upfront and own every one.' },
+  { title: 'Scalable Systems',    desc: 'Built to grow from 10 to 10 million users without re-architecting.' },
+];
+
+const PF = 'var(--font-playfair)';
+const headingSize = 'clamp(1.8rem, 3.5vw, 2.8rem)';
 
 export default function HomePage() {
   return (
-    <div className="w-full overflow-x-hidden" style={{ background: A }}>
+    <div className="w-full overflow-x-hidden" style={{ background: CR }}>
 
-      {/* ══════════════════════════════════
-          HERO — centered layout
-      ══════════════════════════════════ */}
-      <section className="relative overflow-hidden" style={{
+      {/* ══════════════════════════════════════
+          HERO
+      ══════════════════════════════════════ */}
+      <section id="hero" className="relative overflow-hidden" style={{
         background: 'linear-gradient(110deg, #EDBEAA 0%, #FAF0EA 35%, #EAF3EE 65%, #C2D8D2 100%)',
         minHeight: '100vh',
       }}>
-        {/* Subtle noise texture */}
+        {/* Noise */}
         <div className="absolute inset-0 pointer-events-none opacity-[0.025]"
           style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E\")" }} />
 
-        {/* ── Floating testimonial card — TOP RIGHT, desktop only ── */}
-        <div className="absolute top-[18%] right-[4%] w-[265px] hidden lg:block animate-float"
-          style={{ zIndex: 20, animationDelay: '0.4s', transform: 'rotate(2deg)' }}>
-          <div className="p-5 rounded-2xl" style={{
-            background: '#FFFFFF',
-            border: '1px solid #E5DDD5',
-            boxShadow: '0 20px 60px rgba(0,0,0,0.12), 0 4px 16px rgba(0,0,0,0.06)',
-          }}>
-            <div className="flex gap-0.5 mb-2.5">
-              {[0,1,2,3,4].map(i => <Star key={i} className="w-3.5 h-3.5 fill-current" style={{ color: '#FBBF24' }} />)}
-            </div>
-            <p className="text-sm font-medium leading-relaxed mb-3" style={{ color: '#1C1410' }}>
-              &ldquo;MetLink shipped our AI agent in{' '}
-              <strong style={{ color: '#1C1410' }}>6 days.</strong>{' '}
-              Revenue up 38%.&rdquo;
-            </p>
-            <p className="text-[11px] pt-3 mt-1" style={{ borderTop: '1px solid #F0EBE3', color: '#ADA09A' }}>
-              &mdash; Sarah K. &nbsp;&middot;&nbsp; Series B SaaS
-            </p>
-          </div>
-        </div>
-
-        {/* ── Floating LIVE DEPLOY card — BOTTOM LEFT, desktop only ── */}
-        <div className="absolute bottom-[16%] left-[4%] w-[168px] hidden lg:block animate-float"
-          style={{ zIndex: 20, animationDelay: '1s' }}>
+        {/* Floating LIVE DEPLOY — bottom-left, desktop only */}
+        <div className="absolute bottom-[18%] left-[4%] hidden lg:block animate-float"
+          style={{ zIndex: 20, animationDelay: '1s', width: 168 }}>
           <div className="p-4 rounded-2xl" style={{
-            background: '#1C1410',
+            background: DK,
             border: '1px solid rgba(255,255,255,0.08)',
             boxShadow: '0 20px 60px rgba(0,0,0,0.18)',
           }}>
@@ -114,18 +130,38 @@ export default function HomePage() {
               <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
               <p className="text-[9px] font-black uppercase tracking-[0.2em]" style={{ color: 'rgba(255,255,255,0.5)' }}>Live Deploy</p>
             </div>
-            <p className="text-3xl font-black leading-none mb-1" style={{ color: '#FFFFFF' }}>7 days</p>
+            <p className="text-3xl font-black leading-none mb-1" style={{ color: WH, fontFamily: PF }}>7 days</p>
             <p className="text-[11px]" style={{ color: 'rgba(255,255,255,0.45)' }}>avg. time to ship</p>
           </div>
         </div>
 
-        {/* ── Main centered content ── */}
-        <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 sm:pt-36 pb-28 text-center flex flex-col items-center">
+        {/* Floating testimonial card — top-right, desktop only */}
+        <div className="absolute top-[14%] right-[4%] w-[260px] hidden lg:block animate-float"
+          style={{ zIndex: 20, animationDelay: '0.4s', transform: 'rotate(2deg)' }}>
+          <div className="p-5 rounded-2xl" style={{
+            background: WH,
+            border: `1px solid ${BD}`,
+            boxShadow: '0 20px 60px rgba(0,0,0,0.10)',
+          }}>
+            <div className="flex gap-0.5 mb-2.5">
+              {[0,1,2,3,4].map(i => <Star key={i} className="w-3 h-3 fill-current" style={{ color: '#FBBF24' }} />)}
+            </div>
+            <p className="text-sm leading-relaxed mb-3" style={{ color: DK }}>
+              &ldquo;MetLink shipped our AI agent in <strong>6 days</strong>. Revenue up 38%.&rdquo;
+            </p>
+            <p className="text-[11px] pt-3" style={{ borderTop: `1px solid #F0EBE3`, color: LM }}>
+              &mdash; Sarah K, Series B SaaS
+            </p>
+          </div>
+        </div>
 
-          {/* Badge */}
+        {/* Main content */}
+        <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 sm:pt-36 pb-16 text-center flex flex-col items-center">
+
+          {/* Agency badge */}
           <FadeIn>
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-8 text-sm font-semibold"
-              style={{ background: '#FFFFFF', border: '1px solid #E5DDD5', color: '#72645A', boxShadow: '0 1px 8px rgba(0,0,0,0.06)' }}>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-8 text-sm font-medium"
+              style={{ background: WH, border: `1px solid ${BD}`, color: MU, boxShadow: '0 1px 8px rgba(0,0,0,0.06)' }}>
               <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
               AI Marketing &amp; Development Agency
             </div>
@@ -135,388 +171,240 @@ export default function HomePage() {
           <FadeIn delay={0.08}>
             <h1 className="font-black leading-[1.0] mb-6"
               style={{
-                color: '#1C1410',
-                fontFamily: 'var(--font-playfair)',
-                fontSize: 'clamp(2.6rem, 5.8vw, 5.2rem)',
+                color: DK,
+                fontFamily: PF,
+                fontSize: 'clamp(2.8rem, 6vw, 5.4rem)',
               }}>
               We build{' '}
-              <span style={{ color: '#C84B30' }}>AI automation</span>
+              <em style={{ fontStyle: 'italic', color: AC }}>AI automation</em>
               {' '}that actually scales.
             </h1>
           </FadeIn>
 
-          {/* Subtitle */}
+          {/* Subtext */}
           <FadeIn delay={0.14}>
-            <p className="text-lg sm:text-xl mb-10 max-w-2xl leading-relaxed" style={{ color: '#72645A' }}>
+            <p className="text-lg sm:text-xl mb-10 max-w-2xl leading-relaxed" style={{ color: MU }}>
               Strategy, design, and engineering — one team shipping production AI systems for ambitious brands. From idea to live product in days.
             </p>
           </FadeIn>
 
-          {/* CTA buttons */}
+          {/* CTAs */}
           <FadeIn delay={0.2}>
             <div className="flex flex-wrap gap-3 justify-center">
               <Link href="/contact"
                 className="group inline-flex items-center gap-2 px-8 py-4 rounded-full font-bold text-sm text-white transition-all hover:brightness-95 active:scale-95"
-                style={{ background: '#C84B30', boxShadow: '0 4px 24px rgba(200,75,48,0.35)' }}>
+                style={{ background: AC, boxShadow: '0 4px 24px rgba(200,75,48,0.30)' }}>
                 <Sparkles className="w-4 h-4" />
                 Start building with AI
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
               </Link>
-              <Link href="/portfolio"
-                className="inline-flex items-center gap-2 px-7 py-4 rounded-full font-semibold text-sm transition-all hover:bg-black/5"
-                style={{ border: '1px solid #D5CCBF', color: '#72645A', background: 'rgba(255,255,255,0.8)' }}>
+              <Link href="/services"
+                className="inline-flex items-center px-7 py-4 rounded-full font-semibold text-sm transition-all hover:bg-black/5"
+                style={{ border: `1px solid rgba(28,20,16,0.18)`, color: DK, background: 'rgba(255,255,255,0.70)' }}>
                 See our work
               </Link>
             </div>
           </FadeIn>
         </div>
-      </section>
 
-      {/* ══════════════════════════════════
-          STATS STRIP
-      ══════════════════════════════════ */}
-      <section style={{ background: B, borderTop: '1px solid #E5DDD5', borderBottom: '1px solid #E5DDD5' }}>
-        <StaggerChildren className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+        {/* Stats row — inside hero */}
+        <StaggerChildren className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 grid grid-cols-2 lg:grid-cols-4 gap-8 text-center relative z-10">
           {[
             ['150+', 'Projects'],
             ['80+',  'Clients'],
             ['$10M+','Revenue'],
             ['94%',  'Retention'],
           ].map(([val, lbl]) => (
-            <StaggerItem key={lbl}>
-              <p className="text-4xl font-black mb-1 leading-none" style={{ color: '#1C1410', fontFamily: 'var(--font-playfair)' }}>{val}</p>
-              <p className="text-[11px] uppercase tracking-[0.22em] font-bold mt-1.5" style={{ color: '#ADA09A' }}>{lbl}</p>
+            <StaggerItem key={lbl} className="flex flex-col items-center">
+              <p className="font-black leading-none mb-1.5"
+                style={{ color: DK, fontFamily: PF, fontSize: 'clamp(2rem, 3.5vw, 3rem)' }}>{val}</p>
+              <p className="text-[10px] uppercase tracking-[0.25em] font-bold" style={{ color: LM }}>{lbl}</p>
             </StaggerItem>
           ))}
         </StaggerChildren>
       </section>
 
-      <Wave from={B} to={A} flip />
-
-      {/* ══════════════════════════════════
-          INTEGRATIONS  (A)
-      ══════════════════════════════════ */}
-      <section className="relative overflow-hidden py-16 sm:py-20" style={{ background: A }}>
-        <FadeIn className="text-center mb-12 px-4">
-          <p className="text-[10px] font-black uppercase tracking-[0.45em] mb-3" style={{ color: '#ADA09A' }}>Powered By</p>
-          <h2 className="text-2xl sm:text-3xl font-black mb-3" style={{ color: '#1C1410' }}>
-            Integrations That <span className="gradient-text-cyan">Drive Results</span>
-          </h2>
-          <p className="text-sm max-w-md mx-auto" style={{ color: '#72645A' }}>
-            We plug into the tools your business already uses — and supercharge them with AI.
-          </p>
+      {/* ══════════════════════════════════════
+          INTEGRATIONS MARQUEE
+      ══════════════════════════════════════ */}
+      <section className="py-12 sm:py-14 overflow-hidden" style={{ background: WH, borderTop: `1px solid ${BD}`, borderBottom: `1px solid ${BD}` }}>
+        <FadeIn className="text-center mb-6 px-4">
+          <p className="text-[10px] font-bold uppercase tracking-[0.45em]" style={{ color: LM }}>Integrations &amp; partners</p>
         </FadeIn>
-
-        <div className="relative space-y-3">
-          <div className="absolute inset-y-0 left-0 w-28 sm:w-44 z-10 pointer-events-none"
-            style={{ background: `linear-gradient(to right, ${A}, transparent)` }} />
-          <div className="absolute inset-y-0 right-0 w-28 sm:w-44 z-10 pointer-events-none"
-            style={{ background: `linear-gradient(to left, ${A}, transparent)` }} />
-
-          <div className="animate-marquee flex items-center" style={{ width: 'max-content' }}>
-            {[0,1,2,3].map(copy => (
-              <div key={copy} className="flex items-center gap-3 pr-3">
-                {integrations.slice(0, 6).map(item => (
-                  <div key={item.label}
-                    className="flex items-center gap-2.5 px-5 py-2.5 rounded-full whitespace-nowrap shrink-0"
-                    style={{ background: B, border: '1px solid #E5DDD5' }}>
-                    <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: item.color }} />
-                    <span className="text-sm font-semibold" style={{ color: '#72645A' }}>{item.label}</span>
-                  </div>
-                ))}
-              </div>
-            ))}
-          </div>
-
-          <div className="flex items-center" style={{ width: 'max-content', animation: 'marquee 32s linear infinite reverse' }}>
-            {[0,1,2,3].map(copy => (
-              <div key={copy} className="flex items-center gap-3 pr-3">
-                {integrations.slice(6).map(item => (
-                  <div key={item.label}
-                    className="flex items-center gap-2.5 px-5 py-2.5 rounded-full whitespace-nowrap shrink-0"
-                    style={{ background: B, border: '1px solid #E5DDD5' }}>
-                    <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: item.color }} />
-                    <span className="text-sm font-semibold" style={{ color: '#72645A' }}>{item.label}</span>
-                  </div>
-                ))}
-              </div>
-            ))}
+        <div className="relative">
+          {/* Fade edges */}
+          <div className="absolute inset-y-0 left-0 w-20 sm:w-36 z-10 pointer-events-none"
+            style={{ background: `linear-gradient(to right, ${WH}, transparent)` }} />
+          <div className="absolute inset-y-0 right-0 w-20 sm:w-36 z-10 pointer-events-none"
+            style={{ background: `linear-gradient(to left, ${WH}, transparent)` }} />
+          {/* Single row, duplicated for seamless loop */}
+          <div style={{ overflow: 'hidden' }}>
+            <div style={{ display: 'flex', width: 'max-content', animation: 'scroll 28s linear infinite' }}>
+              {[...integrations, ...integrations].map((item, i) => (
+                <div key={i}
+                  className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full shrink-0 mx-2"
+                  style={{ background: CR, border: `1px solid ${BD}` }}>
+                  <span className="w-2 h-2 rounded-full" style={{ background: item.dot }} />
+                  <span className="text-sm font-semibold whitespace-nowrap" style={{ color: MU }}>{item.label}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
-      <Wave from={A} to={B} />
 
-      {/* ══════════════════════════════════
-          WHAT WE DO  (B)
-      ══════════════════════════════════ */}
-      <section className="relative py-24 sm:py-32" style={{ background: B }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <FadeIn className="text-center mb-16">
-            <p className="text-[10px] font-black uppercase tracking-[0.4em] mb-4" style={{ color: '#C84B30' }}>What We Do</p>
-            <h2 className="font-black mb-4" style={{ color: '#1C1410' }}>
-              End-to-End{' '}
-              <em style={{ fontFamily: 'var(--font-playfair)', fontStyle: 'italic', color: '#C84B30' }}>AI Services</em>
-            </h2>
-            <p className="max-w-xl mx-auto text-base" style={{ color: '#72645A' }}>
-              From intelligent automation to world-class software — we deliver across every discipline.
-            </p>
-          </FadeIn>
+      {/* ══════════════════════════════════════
+          SERVICES
+      ══════════════════════════════════════ */}
+      <section id="services" className="py-20 sm:py-28" style={{ background: CR }}>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
-          <StaggerChildren className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {services.map(s => {
-              const Icon = s.icon;
-              return (
-                <StaggerItem key={s.label}>
-                  <div className="group relative flex flex-col h-full p-7 rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1.5"
-                    style={{ background: A, border: '1px solid #E5DDD5' }}
-                    onMouseEnter={e => {
-                      (e.currentTarget as HTMLElement).style.borderColor = `${s.color}50`;
-                      (e.currentTarget as HTMLElement).style.boxShadow = `0 12px 40px rgba(0,0,0,0.08), 0 0 0 1px ${s.color}30`;
-                    }}
-                    onMouseLeave={e => {
-                      (e.currentTarget as HTMLElement).style.borderColor = '#E5DDD5';
-                      (e.currentTarget as HTMLElement).style.boxShadow = 'none';
-                    }}>
-                    <div className="absolute top-0 left-0 right-0 h-0.5"
-                      style={{ background: `linear-gradient(to right, transparent, ${s.color}80, transparent)` }} />
-                    <p className="text-[11px] font-black mb-5 tracking-widest" style={{ color: `${s.color}60` }}>{s.num}</p>
-                    <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-5"
-                      style={{ background: `${s.color}12`, color: s.color }}>
-                      <Icon className="w-6 h-6" />
-                    </div>
-                    <h3 className="text-base font-black mb-3" style={{ color: '#1C1410' }}>{s.label}</h3>
-                    <p className="text-sm leading-relaxed flex-1" style={{ color: '#72645A' }}>{s.desc}</p>
-                  </div>
-                </StaggerItem>
-              );
-            })}
-          </StaggerChildren>
-
-          <FadeIn delay={0.2} className="text-center mt-10">
+          <FadeIn className="flex flex-wrap items-end justify-between gap-4 mb-14">
+            <div>
+              <p className="text-[10px] font-bold uppercase tracking-[0.45em] mb-3" style={{ color: AC }}>Services</p>
+              <h2 className="font-black leading-[1.05]" style={{ color: DK, fontFamily: PF, fontSize: headingSize }}>
+                What we <em style={{ fontStyle: 'italic', color: AC }}>build</em> for clients.
+              </h2>
+            </div>
             <Link href="/services"
-              className="inline-flex items-center gap-2 text-sm font-bold transition-colors hover:opacity-75"
-              style={{ color: '#C84B30' }}>
+              className="inline-flex items-center gap-1.5 text-sm font-semibold transition-opacity hover:opacity-60"
+              style={{ color: DK }}>
               View all services <ArrowRight className="w-4 h-4" />
             </Link>
           </FadeIn>
-        </div>
-      </section>
-      <Wave from={B} to={A} flip />
 
-      {/* ══════════════════════════════════
-          OUR CLIENTS  (A)
-      ══════════════════════════════════ */}
-      <section className="relative py-24 sm:py-32 overflow-hidden" style={{ background: A }}>
-        <FadeIn className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-16">
-          <p className="text-[10px] font-black uppercase tracking-[0.4em] mb-4" style={{ color: '#C84B30' }}>Our Clients</p>
-          <h2 className="font-black mb-4" style={{ color: '#1C1410' }}>
-            Trusted by{' '}
-            <em style={{ fontFamily: 'var(--font-playfair)', fontStyle: 'italic', color: '#C84B30' }}>250+ Businesses</em>
-          </h2>
-          <p className="max-w-lg mx-auto text-base" style={{ color: '#72645A' }}>
-            From fast-growing startups to established enterprises — they chose MetLink to scale.
-          </p>
-        </FadeIn>
-
-        <div className="relative space-y-3 mb-14">
-          <div className="absolute inset-y-0 left-0 w-24 sm:w-40 z-10 pointer-events-none"
-            style={{ background: `linear-gradient(to right, ${A}, transparent)` }} />
-          <div className="absolute inset-y-0 right-0 w-24 sm:w-40 z-10 pointer-events-none"
-            style={{ background: `linear-gradient(to left, ${A}, transparent)` }} />
-
-          <div className="animate-marquee flex items-center" style={{ width: 'max-content' }}>
-            {[0,1,2,3].map(copy => (
-              <div key={copy} className="flex items-center gap-3 pr-3">
-                {clientsRow1.map(name => (
-                  <div key={name}
-                    className="flex items-center justify-center px-6 py-3.5 rounded-xl whitespace-nowrap shrink-0"
-                    style={{ background: B, border: '1px solid #E5DDD5', minWidth: 140 }}>
-                    <span className="text-sm font-black tracking-wide" style={{ color: '#ADA09A' }}>{name}</span>
-                  </div>
-                ))}
-              </div>
-            ))}
-          </div>
-
-          <div className="flex items-center" style={{ width: 'max-content', animation: 'marquee 40s linear infinite reverse' }}>
-            {[0,1,2,3].map(copy => (
-              <div key={copy} className="flex items-center gap-3 pr-3">
-                {clientsRow2.map(name => (
-                  <div key={name}
-                    className="flex items-center justify-center px-6 py-3.5 rounded-xl whitespace-nowrap shrink-0"
-                    style={{ background: B, border: '1px solid #E5DDD5', minWidth: 140 }}>
-                    <span className="text-sm font-black tracking-wide" style={{ color: '#ADA09A' }}>{name}</span>
-                  </div>
-                ))}
-              </div>
+          {/* 4 cards in a grid — separated by 1px border lines */}
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4" style={{ border: `1px solid ${BD}` }}>
+            {services.map((s, i) => (
+              <FadeIn key={s.num} delay={i * 0.07}>
+                <div className="flex flex-col p-8 h-full transition-colors hover:bg-white"
+                  style={{
+                    borderRight: i < 3 ? `1px solid ${BD}` : undefined,
+                    borderBottom: `1px solid ${BD}`,
+                  }}>
+                  <p className="text-xs font-bold mb-5 tracking-widest" style={{ color: LM }}>{s.num}</p>
+                  <h3 className="text-lg font-black mb-1.5" style={{ color: DK, fontFamily: PF }}>{s.title}</h3>
+                  <p className="text-sm font-semibold mb-4" style={{ color: s.color }}>{s.tagline}</p>
+                  <p className="text-sm leading-relaxed mb-6" style={{ color: MU }}>{s.desc}</p>
+                  <ul className="mt-auto space-y-2">
+                    {s.bullets.map(b => (
+                      <li key={b} className="flex items-center gap-2 text-[13px]" style={{ color: MU }}>
+                        <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: s.color }} />
+                        {b}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </FadeIn>
             ))}
           </div>
         </div>
-
-        <FadeIn className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap justify-center gap-2.5">
-          {['FinTech','Healthcare','E-Commerce','SaaS','Real Estate','Logistics','EdTech','Manufacturing'].map(tag => (
-            <span key={tag}
-              className="px-4 py-2 rounded-full text-[11px] font-bold uppercase tracking-wider cursor-default transition-all hover:border-orange-200 hover:text-[#C84B30]"
-              style={{ background: B, border: '1px solid #E5DDD5', color: '#ADA09A' }}>
-              {tag}
-            </span>
-          ))}
-        </FadeIn>
       </section>
-      <Wave from={A} to={B} />
 
-      {/* ══════════════════════════════════
-          SUCCESS STORIES  (B)
-      ══════════════════════════════════ */}
-      <section className="relative py-24 sm:py-32" style={{ background: B }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <FadeIn className="text-center mb-16">
-            <p className="text-[10px] font-black uppercase tracking-[0.4em] mb-4" style={{ color: '#16A34A' }}>Success Stories</p>
-            <h2 className="font-black mb-4" style={{ color: '#1C1410' }}>
-              What Our Clients{' '}
-              <em style={{ fontFamily: 'var(--font-playfair)', fontStyle: 'italic', color: '#C84B30' }}>Say</em>
+      {/* ══════════════════════════════════════
+          PROCESS
+      ══════════════════════════════════════ */}
+      <section id="process" className="py-20 sm:py-28" style={{ background: WH, borderTop: `1px solid ${BD}`, borderBottom: `1px solid ${BD}` }}>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+          <FadeIn className="mb-14">
+            <p className="text-[10px] font-bold uppercase tracking-[0.45em] mb-3" style={{ color: AC }}>Process</p>
+            <h2 className="font-black leading-[1.05]" style={{ color: DK, fontFamily: PF, fontSize: headingSize }}>
+              How we <em style={{ fontStyle: 'italic', color: AC }}>work</em>.
             </h2>
-            <p className="max-w-xl mx-auto text-base" style={{ color: '#72645A' }}>
-              Real words from real people who chose MetLink to grow their business.
-            </p>
           </FadeIn>
 
-          <StaggerChildren className="grid md:grid-cols-3 gap-6">
-            {testimonials.map(t => (
+          <div className="grid md:grid-cols-3 gap-10 lg:gap-16">
+            {steps.map((step, i) => (
+              <FadeIn key={step.num} delay={i * 0.1}>
+                <div>
+                  <div className="flex items-center gap-3 mb-6">
+                    <span className="text-xs font-bold" style={{ color: LM }}>{step.num}</span>
+                    <div className="flex-1 h-px" style={{ background: BD }} />
+                  </div>
+                  <h3 className="text-xl font-black mb-3" style={{ color: DK, fontFamily: PF }}>{step.title}</h3>
+                  <p className="text-sm leading-relaxed" style={{ color: MU }}>{step.desc}</p>
+                </div>
+              </FadeIn>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════
+          AI STACK
+      ══════════════════════════════════════ */}
+      <section id="stack" className="py-20 sm:py-28" style={{ background: CR }}>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+          <FadeIn className="mb-10 max-w-xl">
+            <p className="text-[10px] font-bold uppercase tracking-[0.45em] mb-3" style={{ color: AC }}>AI Stack</p>
+            <h2 className="font-black leading-[1.05] mb-4" style={{ color: DK, fontFamily: PF, fontSize: headingSize }}>
+              Powered by the <em style={{ fontStyle: 'italic', color: AC }}>best</em> models.
+            </h2>
+            <p className="text-base leading-relaxed mb-5" style={{ color: MU }}>
+              Frontier LLMs, vector databases, and production MLOps tooling. We build AI systems that actually work at scale.
+            </p>
+            <Link href="/contact"
+              className="inline-flex items-center gap-1.5 text-sm font-semibold transition-opacity hover:opacity-60"
+              style={{ color: AC }}>
+              Explore AI services <ArrowRight className="w-4 h-4" />
+            </Link>
+          </FadeIn>
+
+          <StaggerChildren className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+            {stack.map(t => (
               <StaggerItem key={t.name}>
-                <div className="group relative flex flex-col h-full p-8 rounded-3xl transition-all duration-300 hover:-translate-y-1.5"
-                  style={{ background: A, border: '1px solid #E5DDD5', boxShadow: '0 2px 16px rgba(0,0,0,0.04)' }}
-                  onMouseEnter={e => {
-                    (e.currentTarget as HTMLElement).style.borderColor = `${t.color}40`;
-                    (e.currentTarget as HTMLElement).style.boxShadow = `0 16px 48px rgba(0,0,0,0.08)`;
-                  }}
-                  onMouseLeave={e => {
-                    (e.currentTarget as HTMLElement).style.borderColor = '#E5DDD5';
-                    (e.currentTarget as HTMLElement).style.boxShadow = '0 2px 16px rgba(0,0,0,0.04)';
-                  }}>
-                  <div className="absolute top-0 left-6 right-6 h-0.5 rounded-full"
-                    style={{ background: `linear-gradient(to right, transparent, ${t.color}70, transparent)` }} />
-                  <div className="absolute top-3 right-5 text-[6rem] font-black leading-none select-none pointer-events-none"
-                    style={{ color: `${t.color}08`, fontFamily: 'Georgia, serif', lineHeight: 1 }}>&ldquo;</div>
-
-                  <div className="flex items-center justify-between mb-5 relative z-10">
-                    <div className="flex gap-0.5">
-                      {Array(t.stars).fill(0).map((_, i) => (
-                        <Star key={i} className="w-3.5 h-3.5 fill-current" style={{ color: '#FBBF24' }} />
-                      ))}
-                    </div>
-                    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-wider"
-                      style={{ background: `${t.color}10`, color: t.color, border: `1px solid ${t.color}25` }}>
-                      <TrendingUp className="w-3 h-3" /> {t.result}
-                    </div>
-                  </div>
-
-                  <p className="text-[0.9rem] leading-relaxed mb-7 flex-1 relative z-10" style={{ color: '#72645A' }}>
-                    &ldquo;{t.quote}&rdquo;
-                  </p>
-
-                  <div className="flex items-center gap-3 pt-5" style={{ borderTop: '1px solid #F0EBE3' }}>
-                    <div className="w-10 h-10 rounded-full flex items-center justify-center text-xs font-black text-white flex-shrink-0"
-                      style={{ background: t.color }}>
-                      {t.name.split(' ').map(n => n[0]).join('')}
-                    </div>
-                    <div>
-                      <p className="text-sm font-bold" style={{ color: '#1C1410' }}>{t.name}</p>
-                      <p className="text-xs" style={{ color: '#ADA09A' }}>{t.role}, {t.company}</p>
-                    </div>
-                  </div>
+                <div className="flex flex-col gap-0.5 p-4 rounded-xl transition-all hover:-translate-y-0.5"
+                  style={{ background: WH, border: `1px solid ${BD}` }}>
+                  <p className="text-[13px] font-black" style={{ color: DK }}>{t.name}</p>
+                  <p className="text-[11px] font-semibold" style={{ color: t.color }}>{t.cat}</p>
                 </div>
               </StaggerItem>
             ))}
           </StaggerChildren>
         </div>
       </section>
-      <Wave from={B} to={A} flip />
 
-      {/* ══════════════════════════════════
-          TECH STACK  (A)
-      ══════════════════════════════════ */}
-      <section className="relative py-24 sm:py-32" style={{ background: A }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col lg:flex-row gap-16 lg:gap-20">
+      {/* ══════════════════════════════════════
+          WHY METLINK
+      ══════════════════════════════════════ */}
+      <section className="py-20 sm:py-28" style={{ background: WH, borderTop: `1px solid ${BD}` }}>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
-            <FadeIn className="lg:w-[36%] flex flex-col justify-start">
-              <p className="text-[10px] font-black uppercase tracking-[0.4em] mb-4" style={{ color: '#D97706' }}>Tech Stack</p>
-              <h2 className="font-black mb-5" style={{ color: '#1C1410' }}>
-                Powered by the{' '}
-                <em style={{ fontFamily: 'var(--font-playfair)', fontStyle: 'italic', color: '#C84B30' }}>Best Tools</em>
-              </h2>
-              <p className="text-base leading-relaxed mb-10" style={{ color: '#72645A' }}>
-                Every tool we choose is battle-tested in production, selected for performance and long-term reliability.
-              </p>
-              <div className="space-y-3">
-                {[
-                  { icon: <Brain className="w-4 h-4" />,     label: 'AI & Automation',     color: '#C84B30' },
-                  { icon: <Code2 className="w-4 h-4" />,     label: 'Software Development', color: '#2563EB' },
-                  { icon: <Megaphone className="w-4 h-4" />, label: 'Digital Marketing',    color: '#16A34A' },
-                  { icon: <Palette className="w-4 h-4" />,   label: 'Creative & Media',     color: '#D97706' },
-                ].map(s => (
-                  <div key={s.label} className="flex items-center gap-3 p-3.5 rounded-xl"
-                    style={{ background: B, border: '1px solid #E5DDD5' }}>
-                    <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
-                      style={{ background: `${s.color}12`, color: s.color }}>{s.icon}</div>
-                    <p className="text-sm font-semibold flex-1" style={{ color: '#1C1410' }}>{s.label}</p>
-                    <CheckCircle className="w-4 h-4 flex-shrink-0" style={{ color: s.color }} />
-                  </div>
-                ))}
-              </div>
-            </FadeIn>
+          <FadeIn className="mb-14">
+            <p className="text-[10px] font-bold uppercase tracking-[0.45em] mb-3" style={{ color: AC }}>Why MetLink</p>
+            <h2 className="font-black leading-[1.05]" style={{ color: DK, fontFamily: PF, fontSize: headingSize }}>
+              What sets us <em style={{ fontStyle: 'italic', color: AC }}>apart</em>.
+            </h2>
+          </FadeIn>
 
-            <div className="flex-1 grid sm:grid-cols-2 gap-4 content-start">
-              {techStack.map((group, gi) => (
-                <FadeIn key={group.category} delay={gi * 0.08}>
-                  <div className="relative p-6 rounded-2xl h-full transition-all hover:-translate-y-1"
-                    style={{ background: B, border: `1px solid ${group.color}20` }}
-                    onMouseEnter={e => {
-                      (e.currentTarget as HTMLElement).style.borderColor = `${group.color}50`;
-                      (e.currentTarget as HTMLElement).style.boxShadow = '0 8px 32px rgba(0,0,0,0.06)';
-                    }}
-                    onMouseLeave={e => {
-                      (e.currentTarget as HTMLElement).style.borderColor = `${group.color}20`;
-                      (e.currentTarget as HTMLElement).style.boxShadow = 'none';
-                    }}>
-                    <div className="flex items-center gap-2 mb-4">
-                      <div className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: group.color }} />
-                      <p className="text-[10px] font-black uppercase tracking-[0.2em]" style={{ color: group.color }}>{group.category}</p>
-                    </div>
-                    <div className="flex flex-wrap gap-2">
-                      {group.items.map(item => (
-                        <span key={item}
-                          className="px-3 py-1.5 rounded-lg text-xs font-semibold cursor-default transition-all"
-                          style={{ background: A, border: '1px solid #E5DDD5', color: '#72645A' }}
-                          onMouseEnter={e => {
-                            (e.currentTarget as HTMLElement).style.color = group.color;
-                            (e.currentTarget as HTMLElement).style.borderColor = `${group.color}40`;
-                            (e.currentTarget as HTMLElement).style.background = `${group.color}08`;
-                          }}
-                          onMouseLeave={e => {
-                            (e.currentTarget as HTMLElement).style.color = '#72645A';
-                            (e.currentTarget as HTMLElement).style.borderColor = '#E5DDD5';
-                            (e.currentTarget as HTMLElement).style.background = A;
-                          }}>
-                          {item}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </FadeIn>
-              ))}
-            </div>
+          <div style={{ border: `1px solid ${BD}` }}>
+          <StaggerChildren className="grid sm:grid-cols-2 lg:grid-cols-3 gap-0">
+            {whyUs.map((item, i) => (
+              <StaggerItem key={item.title}>
+                <div className="p-8 transition-colors hover:bg-[#FAF9F6]"
+                  style={{
+                    borderRight: [0,1,3,4].includes(i) ? `1px solid ${BD}` : undefined,
+                    borderBottom: i < 3 ? `1px solid ${BD}` : undefined,
+                    background: WH,
+                  }}>
+                  <p className="text-xs font-bold mb-3" style={{ color: LM }}>0{i + 1}</p>
+                  <h3 className="text-base font-black mb-2" style={{ color: DK }}>{item.title}</h3>
+                  <p className="text-sm leading-relaxed" style={{ color: MU }}>{item.desc}</p>
+                </div>
+              </StaggerItem>
+            ))}
+          </StaggerChildren>
           </div>
         </div>
       </section>
-      <Wave from={A} to={B} />
 
-      {/* ══════════════════════════════════
-          CTA BANNER
-      ══════════════════════════════════ */}
-      <section className="relative py-16 sm:py-24" style={{ background: A }}>
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* ══════════════════════════════════════
+          CTA
+      ══════════════════════════════════════ */}
+      <section id="contact" className="py-16 sm:py-24" style={{ background: CR }}>
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeIn>
             <div className="relative rounded-[28px] overflow-hidden text-center px-8 sm:px-16 py-16 sm:py-20"
               style={{
@@ -524,11 +412,9 @@ export default function HomePage() {
                 boxShadow: '0 40px 100px rgba(0,0,0,0.28)',
                 border: '1px solid rgba(255,255,255,0.06)',
               }}>
-
-              {/* Large radish glow — right */}
+              {/* Glows */}
               <div className="absolute -top-20 -right-20 w-[560px] h-[560px] pointer-events-none"
                 style={{ background: 'radial-gradient(circle, rgba(200,75,48,0.55) 0%, rgba(200,75,48,0.18) 40%, transparent 70%)', filter: 'blur(60px)' }} />
-              {/* Subtle teal glow — bottom left */}
               <div className="absolute -bottom-20 -left-20 w-[380px] h-[380px] pointer-events-none"
                 style={{ background: 'radial-gradient(circle, rgba(20,60,45,0.7) 0%, transparent 65%)', filter: 'blur(80px)' }} />
 
@@ -542,12 +428,12 @@ export default function HomePage() {
 
                 {/* Headline */}
                 <h2 className="font-black text-white leading-[1.05] mb-5"
-                  style={{ fontSize: 'clamp(2.2rem, 5vw, 4rem)', fontFamily: 'var(--font-playfair)' }}>
+                  style={{ fontSize: 'clamp(2.2rem, 5vw, 4rem)', fontFamily: PF }}>
                   Ready to scale with{' '}
                   <em style={{ fontStyle: 'italic', color: '#E8612A' }}>AI?</em>
                 </h2>
 
-                {/* Subtitle */}
+                {/* Subtext */}
                 <p className="text-base sm:text-lg mb-10 max-w-xl leading-relaxed"
                   style={{ color: 'rgba(255,255,255,0.52)' }}>
                   Book a free 30-min strategy call. No commitments — just clarity on what AI can do for your business.
@@ -555,15 +441,15 @@ export default function HomePage() {
 
                 {/* Buttons */}
                 <div className="flex flex-wrap gap-3 justify-center">
-                  <Link href="/contact"
+                  <a href="mailto:hello@metlink.ai"
                     className="group inline-flex items-center gap-2 px-8 py-4 rounded-full font-bold text-sm text-white transition-all hover:brightness-110 active:scale-95"
-                    style={{ background: '#C84B30', boxShadow: '0 0 40px rgba(200,75,48,0.5)' }}>
+                    style={{ background: AC, boxShadow: '0 0 40px rgba(200,75,48,0.5)' }}>
                     Book your strategy call
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
-                  </Link>
+                  </a>
                   <Link href="/services"
-                    className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold text-sm transition-all hover:border-white/30"
-                    style={{ border: '1px solid rgba(255,255,255,0.22)', color: 'rgba(255,255,255,0.75)', background: 'transparent' }}>
+                    className="inline-flex items-center px-8 py-4 rounded-full font-semibold text-sm transition-all hover:border-white/30"
+                    style={{ border: '1px solid rgba(255,255,255,0.22)', color: 'rgba(255,255,255,0.75)' }}>
                     See services
                   </Link>
                 </div>
