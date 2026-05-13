@@ -178,13 +178,17 @@ export function Header() {
                 )}
               </div>
 
-              {[['Company', '/company'], ['Portfolio', '/portfolio'], ['Blog', '/blog']].map(([label, href]) => (
+              {[['Company', '/company'], ['Portfolio', '/portfolio'], ['Blog', '/blog'], ['Product', '/product']].map(([label, href]) => (
                 <Link key={label} href={href}
                   className="px-3.5 py-2 rounded-xl text-sm font-medium transition-all hover:bg-black/5"
                   style={{ color: '#72645A' }}
                   onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = '#1C1410'}
                   onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = '#72645A'}>
                   {label}
+                  {label === 'Product' && (
+                    <span className="ml-1.5 px-1.5 py-0.5 rounded text-[9px] font-black uppercase tracking-wider align-middle"
+                      style={{ background: '#FEF1EE', color: '#C84B30' }}>Soon</span>
+                  )}
                 </Link>
               ))}
             </div>
@@ -247,12 +251,16 @@ export function Header() {
                   );
                 })}
 
-                {[['Company', '/company'], ['Portfolio', '/portfolio'], ['Blog', '/blog']].map(([label, href]) => (
+                {[['Company', '/company'], ['Portfolio', '/portfolio'], ['Blog', '/blog'], ['Product', '/product']].map(([label, href]) => (
                   <Link key={label} href={href}
-                    className="block px-3 py-2.5 text-sm rounded-xl hover:bg-black/5 font-medium"
+                    className="flex items-center gap-2 px-3 py-2.5 text-sm rounded-xl hover:bg-black/5 font-medium"
                     style={{ color: '#72645A' }}
                     onClick={() => setMobileOpen(false)}>
                     {label}
+                    {label === 'Product' && (
+                      <span className="px-1.5 py-0.5 rounded text-[9px] font-black uppercase tracking-wider"
+                        style={{ background: '#FEF1EE', color: '#C84B30' }}>Soon</span>
+                    )}
                   </Link>
                 ))}
 
