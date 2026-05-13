@@ -1,0 +1,13 @@
+<svg width="220" height="190" viewBox="0 0 220 190" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Left navy M-half (pentagon with diagonal right edge) -->
+  <path d="M 12,12 L 12,178 L 68,178 L 68,100 L 106,12 Z" fill="#192540"/>
+  <!-- Right blue arch M-half (horseshoe arch) -->
+  <path d="M 113,178 L 113,64 C 111,-6 210,-6 208,64 L 208,178 L 162,178 L 162,64 C 162,38 130,38 130,64 L 130,178 Z" fill="#2B80F0"/>
+  <!-- Connector line (white) -->
+  <line x1="113" y1="61" x2="82" y2="100" stroke="white" stroke-width="7" stroke-linecap="round"/>
+  <!-- Upper connector: white ring + navy dot -->
+  <circle cx="113" cy="61" r="15" fill="white"/>
+  <circle cx="113" cy="61" r="9"  fill="#192540"/>
+  <!-- Lower connector dot -->
+  <circle cx="82"  cy="100" r="9" fill="#192540"/>
+</svg>

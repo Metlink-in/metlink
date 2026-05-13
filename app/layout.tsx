@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Metadata, Viewport } from 'next';
-import { DM_Sans, Manrope } from 'next/font/google';
+import { Syne, Plus_Jakarta_Sans, Playfair_Display } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/next';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/sections/footer';
@@ -10,12 +10,29 @@ import { PopupForm } from '@/components/popup-form';
 import { IntroAnimation } from '@/components/intro-animation';
 import './globals.css';
 
-const dmSans = DM_Sans({ subsets: ['latin'], variable: '--font-dm-sans' });
-const manrope = Manrope({ subsets: ['latin'], variable: '--font-manrope' });
+const syne = Syne({
+  subsets: ['latin'],
+  variable: '--font-syne',
+  weight: ['400', '500', '600', '700', '800'],
+  display: 'swap',
+});
+const jakarta = Plus_Jakarta_Sans({
+  subsets: ['latin'],
+  variable: '--font-jakarta',
+  weight: ['300', '400', '500', '600', '700', '800'],
+  display: 'swap',
+});
+const playfair = Playfair_Display({
+  subsets: ['latin'],
+  variable: '--font-playfair',
+  weight: ['400', '500', '600', '700', '800'],
+  style: ['normal', 'italic'],
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   title: {
-    default: 'MetLink — Marketing & Development Agency',
+    default: 'MetLink — AI Marketing & Development Agency',
     template: '%s | MetLink',
   },
   description:
@@ -28,12 +45,12 @@ export const metadata: Metadata = {
     locale: 'en_IN',
     url: 'https://metlink.in',
     siteName: 'MetLink',
-    title: 'MetLink — Marketing & Development Agency',
+    title: 'MetLink — AI Marketing & Development Agency',
     description: 'AI-powered marketing, creative media, and software development for ambitious businesses.',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'MetLink — Marketing & Development Agency',
+    title: 'MetLink — AI Marketing & Development Agency',
     description: 'AI-powered marketing, creative media, and software development.',
   },
   robots: { index: true, follow: true },
@@ -43,16 +60,16 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   maximumScale: 5,
-  themeColor: '#030712',
+  themeColor: '#FAF9F6',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${dmSans.variable} ${manrope.variable}`}>
+    <html lang="en" className={`${syne.variable} ${jakarta.variable} ${playfair.variable}`}>
       <body className="font-sans antialiased">
         <IntroAnimation />
         <Header />
-        <main className="pt-14">{children}</main>
+        <main className="pt-16">{children}</main>
         <Footer />
         <ScrollToTop />
         <ChatBot />

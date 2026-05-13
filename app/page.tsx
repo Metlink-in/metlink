@@ -1,566 +1,604 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect, useRef, useState } from 'react';
-import { ArrowRight, LinkIcon, Clock, Target, Megaphone, Palette, Bot, Code, Brain, Sparkles, Layers, Activity, ChevronDown } from 'lucide-react';
-import { serviceCategories } from '@/lib/services-data';
-import { FadeIn } from '@/components/fade-in';
-import { AuroraBg } from '@/components/aurora-bg';
-import { HeroSphere } from '@/components/hero-sphere';
+import { ArrowRight, Star, TrendingUp, Code2, Brain, Megaphone, Palette, CheckCircle, Sparkles } from 'lucide-react';
+import { FadeIn, StaggerChildren, StaggerItem } from '@/components/fade-in';
 
-/* ─── Animated counter ─── */
-function Counter({ target, suffix = '' }: { target: number; suffix?: string }) {
-  const [count, setCount] = useState(0);
-  const ref = useRef<HTMLSpanElement>(null);
-  useEffect(() => {
-    const obs = new IntersectionObserver(([e]) => {
-      if (!e.isIntersecting) return;
-      obs.disconnect();
-      let start = 0;
-      const step = target / 60;
-      const t = setInterval(() => {
-        start += step;
-        if (start >= target) { setCount(target); clearInterval(t); }
-        else setCount(Math.floor(start));
-      }, 22);
-    });
-    if (ref.current) obs.observe(ref.current);
-    return () => obs.disconnect();
-  }, [target]);
-  return <span ref={ref}>{count}{suffix}</span>;
-}
+/* ── Section background alternation ── */
+const A = '#FAF9F6';   /* warm cream */
+const B = '#FFFFFF';   /* white */
 
-/* ─── Typing text ─── */
-function TypingText({ words }: { words: string[] }) {
-  const [idx, setIdx]             = useState(0);
-  const [displayed, setDisplayed] = useState('');
-  const [deleting, setDeleting]   = useState(false);
-
-  useEffect(() => {
-    const word = words[idx];
-    const speed = deleting ? 35 : 75;
-    const timeout = setTimeout(() => {
-      if (!deleting) {
-        if (displayed.length < word.length) setDisplayed(word.slice(0, displayed.length + 1));
-        else setTimeout(() => setDeleting(true), 2000);
-      } else {
-        if (displayed.length > 0) setDisplayed(displayed.slice(0, -1));
-        else { setDeleting(false); setIdx((i) => (i + 1) % words.length); }
-      }
-    }, speed);
-    return () => clearTimeout(timeout);
-  }, [displayed, deleting, idx, words]);
-
+/* ── Subtle wave divider ── */
+function Wave({ from, to, flip = false }: { from: string; to: string; flip?: boolean }) {
   return (
-    <span className="gradient-text-cyan">
-      {displayed}
-      <span className="text-[#06B6D4] opacity-80">|</span>
-    </span>
+    <div style={{ background: from, lineHeight: 0, fontSize: 0 }}>
+      <svg viewBox="0 0 1440 48" preserveAspectRatio="none"
+        style={{ width: '100%', height: 48, display: 'block', transform: flip ? 'scaleX(-1)' : undefined }}>
+        <path d="M0,48 L0,22 C360,48 1080,0 1440,22 L1440,48 Z" fill={to} />
+      </svg>
+    </div>
   );
 }
 
-const whyUs = [
-  { title: 'End-to-End AI Partner',  desc: 'Strategy, design, development, and deployment — one accountable team.', icon: <LinkIcon className="w-4 h-4" /> },
-  { title: 'AI-First Execution',     desc: 'Every project integrates cutting-edge AI to deliver 10x results.', icon: <Brain className="w-4 h-4" /> },
-  { title: 'Real-Time Insights',     desc: 'Live KPI dashboards and zero ambiguity on where your investment performs.', icon: <Activity className="w-4 h-4" /> },
-  { title: 'Ship in 7 Days',         desc: 'No lengthy discovery. First working deliverables within one week.', icon: <Clock className="w-4 h-4" /> },
-  { title: 'Measurable ROI',         desc: 'We define success metrics upfront and are accountable to every one.', icon: <Target className="w-4 h-4" /> },
-  { title: 'Scalable Systems',       desc: 'Built to grow from 10 to 10 million users without re-architecting.', icon: <Layers className="w-4 h-4" /> },
+/* ── Data ── */
+const services = [
+  { icon: Brain,     label: 'AI & Automation',     desc: 'Intelligent systems that learn, adapt, and drive revenue on autopilot.',               color: '#C84B30', num: '01' },
+  { icon: Code2,     label: 'Software Development', desc: 'Production-grade platforms built fast with modern, maintainable code.',                  color: '#2563EB', num: '02' },
+  { icon: Megaphone, label: 'Digital Marketing',    desc: 'Data-driven campaigns that bring measurable growth and proven ROI.',                     color: '#16A34A', num: '03' },
+  { icon: Palette,   label: 'Creative & Media',     desc: 'Brand stories told through stunning visual design and world-class media.',               color: '#D97706', num: '04' },
 ];
 
-const catIcons: Record<string, React.ReactNode> = {
-  'digital-marketing':   <Megaphone className="w-5 h-5" />,
-  'creative-media':      <Palette   className="w-5 h-5" />,
-  'ai-automation':       <Bot       className="w-5 h-5" />,
-  'software-development':<Code      className="w-5 h-5" />,
-};
+const integrations = [
+  { label: 'OpenAI',       color: '#10B981' },
+  { label: 'Claude AI',    color: '#D97706' },
+  { label: 'Google Drive', color: '#4285F4' },
+  { label: 'Notion',       color: '#1C1410' },
+  { label: 'Klaviyo',      color: '#F59E0B' },
+  { label: 'Make',         color: '#A855F7' },
+  { label: 'LangChain',    color: '#C84B30' },
+  { label: 'Pinecone',     color: '#16A34A' },
+  { label: 'Shopify',      color: '#95BF47' },
+  { label: 'HubSpot',      color: '#F97316' },
+  { label: 'Zapier',       color: '#FF4A00' },
+  { label: 'Supabase',     color: '#3ECF8E' },
+];
 
-const catColors: Record<string, { accent: string; glow: string }> = {
-  'digital-marketing':   { accent: '#06B6D4', glow: 'rgba(6,182,212,0.08)'   },
-  'creative-media':      { accent: '#A78BFA', glow: 'rgba(167,139,250,0.08)' },
-  'ai-automation':       { accent: '#34D399', glow: 'rgba(52,211,153,0.08)'  },
-  'software-development':{ accent: '#F472B6', glow: 'rgba(244,114,182,0.08)' },
-};
+const clientsRow1 = ['TechVista', 'FinEdge Capital', 'BuildSmart', 'NovaMed Health', 'SwiftCart', 'DataPulse', 'GreenLeaf Agro'];
+const clientsRow2 = ['AeroVault', 'PrimeLogic', 'NextScale', 'FlowBase', 'UrbanMove', 'CloudSync', 'BoldBrand'];
 
-const caps = [
-  { name: 'GPT-4o & o3',         label: 'OpenAI',        color: '#10B981' },
-  { name: 'Claude 3.5 Sonnet',   label: 'Anthropic',     color: '#D97757' },
-  { name: 'Gemini 2.5 Flash',    label: 'Google',        color: '#3B82F6' },
-  { name: 'LangChain + RAG',     label: 'Orchestration', color: '#8B5CF6' },
-  { name: 'Pinecone / Weaviate', label: 'Vector DBs',    color: '#06B6D4' },
-  { name: 'HuggingFace',         label: 'Open Source',   color: '#F97316' },
-  { name: 'AWS / GCP / Azure',   label: 'Cloud Infra',   color: '#EF4444' },
-  { name: 'MLflow + W&B',        label: 'MLOps',         color: '#A78BFA' },
-  { name: 'LlamaIndex',          label: 'Retrieval',     color: '#34D399' },
-  { name: 'Docker + Kubernetes', label: 'Infra',         color: '#60A5FA' },
-  { name: 'FastAPI + Next.js',   label: 'Stack',         color: '#F472B6' },
-  { name: 'Supabase + PgVector', label: 'Data',          color: '#FBBF24' },
+const testimonials = [
+  {
+    quote: "MetLink's AI automation completely transformed our lead pipeline. We went from 50 to 400 qualified leads per month without increasing ad spend.",
+    name: 'Rohan Mehta', role: 'CEO', company: 'FinEdge Capital', stars: 5, color: '#C84B30', result: '8× Lead Growth',
+  },
+  {
+    quote: "Their software team delivered a production-grade platform in just 3 weeks. Blown away by the code quality and how seamlessly they integrated with our stack.",
+    name: 'Priya Sharma', role: 'CTO', company: 'SwiftCart Commerce', stars: 5, color: '#2563EB', result: '3 Weeks to Launch',
+  },
+  {
+    quote: "The AI chatbot they built handles 70% of our support tickets automatically. Our team now focuses on high-value work. ROI was positive in the first month.",
+    name: 'Arjun Singh', role: 'Head of Operations', company: 'NovaMed Health', stars: 5, color: '#16A34A', result: '70% Automation',
+  },
+];
+
+const techStack = [
+  { category: 'AI / ML',      color: '#C84B30', items: ['GPT-4o', 'Claude 3.7', 'Gemini 2.5', 'LangChain', 'LlamaIndex', 'HuggingFace'] },
+  { category: 'Frontend',     color: '#2563EB', items: ['Next.js 15', 'React 19', 'TypeScript', 'Tailwind', 'Framer Motion', 'Three.js'] },
+  { category: 'Backend',      color: '#16A34A', items: ['FastAPI', 'Node.js', 'Python', 'GraphQL', 'WebSockets', 'Redis'] },
+  { category: 'Cloud & Data', color: '#D97706', items: ['AWS', 'GCP', 'Vercel', 'Supabase', 'Pinecone', 'PostgreSQL'] },
 ];
 
 export default function HomePage() {
   return (
-    <div className="w-full overflow-x-hidden bg-[#030712]">
+    <div className="w-full overflow-x-hidden" style={{ background: A }}>
 
-      {/* ═══════════════════════════════════
-          HERO — text left · 3D sphere right
-      ═══════════════════════════════════ */}
-      <section className="relative min-h-screen flex flex-col overflow-hidden">
+      {/* ══════════════════════════════════
+          HERO
+      ══════════════════════════════════ */}
+      <section className="relative overflow-hidden" style={{
+        background: 'linear-gradient(160deg, #FFF9F7 0%, #FAF6F0 50%, #F5EEE4 100%)',
+        minHeight: '92vh',
+      }}>
+        {/* Subtle warm glow */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[600px] pointer-events-none"
+          style={{ background: 'radial-gradient(ellipse, rgba(200,75,48,0.07) 0%, transparent 65%)', filter: 'blur(80px)' }} />
+        {/* Noise texture */}
+        <div className="absolute inset-0 pointer-events-none opacity-[0.025]"
+          style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E\")" }} />
 
-        {/* Full-section aurora background */}
-        <AuroraBg />
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 sm:pt-32 pb-24">
 
-        {/* Header spacer */}
-        <div className="h-14 shrink-0" />
-
-        {/* Content row */}
-        <div className="relative z-10 flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8
-                        flex flex-col lg:flex-row lg:items-center">
-
-          {/* LEFT — text */}
-          <FadeIn className="order-2 lg:order-1 w-full lg:w-1/2
-                             flex flex-col items-center lg:items-start text-center lg:text-left
-                             pt-4 pb-20 lg:py-0">
-
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-[11px] font-semibold mb-6 border tracking-[0.12em]"
-              style={{ background: 'rgba(6,182,212,0.07)', borderColor: 'rgba(6,182,212,0.25)', color: '#06B6D4' }}>
-              <span className="w-1.5 h-1.5 rounded-full bg-[#06B6D4] animate-pulse" />
-              AI Marketing & Development Agency
+          {/* Badge */}
+          <FadeIn>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-8 text-sm font-semibold"
+              style={{ background: '#FFFFFF', border: '1px solid #E5DDD5', color: '#72645A', boxShadow: '0 1px 8px rgba(0,0,0,0.06)' }}>
+              <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+              AI Marketing &amp; Development Agency
             </div>
+          </FadeIn>
 
-            <h1 className="font-black text-white leading-[1.02] tracking-tight mb-6">
-              <span className="block">We Build</span>
-              <span className="block min-h-[1.1em]">
-                <TypingText words={['AI Automation', 'Neural Systems', 'Smart Agents', 'ML Pipelines']} />
+          {/* Headline */}
+          <FadeIn delay={0.08}>
+            <h1 className="font-black leading-[1.0] tracking-tight mb-6 max-w-4xl" style={{ color: '#1C1410' }}>
+              We build{' '}
+              <em style={{
+                fontFamily: 'var(--font-playfair)',
+                fontStyle: 'italic',
+                fontWeight: 700,
+                color: '#C84B30',
+              }}>
+                AI automation
+              </em>
+              {' '}that actually{' '}
+              <span className="relative inline-block">
+                scales.
+                <span className="absolute -bottom-1 left-0 right-0 h-1 rounded-full" style={{ background: 'linear-gradient(90deg, #C84B30, #E8612A)' }} />
               </span>
-              <span className="block">That Scale</span>
             </h1>
+          </FadeIn>
 
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 mb-10 w-full sm:w-auto">
+          {/* Sub */}
+          <FadeIn delay={0.14}>
+            <p className="text-lg sm:text-xl mb-10 max-w-xl leading-relaxed" style={{ color: '#72645A' }}>
+              Full-service agency combining AI, software, and marketing to grow your business — measurable results from week one.
+            </p>
+          </FadeIn>
+
+          {/* CTA buttons */}
+          <FadeIn delay={0.2}>
+            <div className="flex flex-wrap gap-3 mb-14">
               <Link href="/contact"
-                className="group inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full font-bold text-sm text-[#030712] transition-all hover:brightness-110 active:scale-95"
-                style={{ background: 'linear-gradient(135deg, #06B6D4 0%, #8B5CF6 100%)', boxShadow: '0 0 40px rgba(6,182,212,0.28)' }}>
+                className="group inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-bold text-sm text-white transition-all hover:brightness-95 active:scale-95"
+                style={{ background: '#C84B30', boxShadow: '0 4px 20px rgba(200,75,48,0.3)' }}>
                 <Sparkles className="w-4 h-4" />
-                Start Building with AI
+                Get a Free Proposal
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
               </Link>
               <Link href="/portfolio"
-                className="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full font-semibold text-sm transition-all hover:bg-white/5"
-                style={{ border: '1px solid rgba(255,255,255,0.12)', color: '#94A3B8' }}>
+                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-semibold text-sm transition-all hover:bg-black/5"
+                style={{ border: '1px solid #E5DDD5', color: '#72645A', background: 'rgba(255,255,255,0.8)' }}>
                 See Our Work
               </Link>
             </div>
+          </FadeIn>
 
-            <div className="grid grid-cols-2 sm:flex sm:flex-wrap sm:items-center sm:justify-center lg:justify-start gap-x-8 gap-y-5">
-              {[
-                ['150+', 'Projects'],
-                ['80+',  'Clients'],
-                ['$10M+','Revenue'],
-                ['94%',  'Retention'],
-              ].map(([val, lbl], i) => (
+          {/* Stats row */}
+          <FadeIn delay={0.26}>
+            <div className="flex flex-wrap items-center gap-x-8 gap-y-4">
+              {[['450+','Projects Done'],['250+','Global Clients'],['94%','Retention Rate'],['7 days','First Delivery']].map(([val, lbl], i) => (
                 <div key={lbl} className="flex items-center gap-3">
-                  {i > 0 && <span className="hidden sm:block w-px h-5 shrink-0" style={{ background: 'rgba(255,255,255,0.08)' }} />}
+                  {i > 0 && <span className="hidden sm:block w-px h-5" style={{ background: '#E5DDD5' }} />}
                   <div>
-                    <p className="text-xl font-black gradient-text-cyan leading-none">{val}</p>
-                    <p className="text-[10px] uppercase tracking-widest mt-1" style={{ color: '#475569' }}>{lbl}</p>
+                    <p className="text-xl font-black leading-none" style={{ color: '#C84B30' }}>{val}</p>
+                    <p className="text-xs uppercase tracking-widest mt-0.5" style={{ color: '#ADA09A' }}>{lbl}</p>
                   </div>
                 </div>
               ))}
             </div>
           </FadeIn>
-
-          {/* RIGHT — interactive 3D neural sphere */}
-          <FadeIn delay={0.15}
-            className="order-1 lg:order-2 w-full lg:w-1/2 shrink-0
-                       h-[80vw] sm:h-[60vw] md:h-[55vh] lg:h-[calc(100vh-56px)] lg:max-h-[780px]">
-            <HeroSphere />
-          </FadeIn>
         </div>
 
-        {/* Scroll hint */}
-        <div className="absolute bottom-5 left-1/2 -translate-x-1/2 z-10 animate-bounce opacity-25">
-          <ChevronDown className="w-4 h-4" style={{ color: '#06B6D4' }} />
+        {/* Floating review card — desktop only */}
+        <div className="absolute bottom-[18%] right-[6%] w-[260px] hidden lg:block animate-float"
+          style={{ zIndex: 20, animationDelay: '0.3s' }}>
+          <div className="p-5 rounded-2xl" style={{ background: '#FFFFFF', border: '1px solid #E5DDD5', boxShadow: '0 16px 48px rgba(0,0,0,0.10)' }}>
+            <div className="flex gap-0.5 mb-3">
+              {[0,1,2,3,4].map(i => <Star key={i} className="w-3.5 h-3.5 fill-current" style={{ color: '#FBBF24' }} />)}
+            </div>
+            <p className="text-sm font-medium leading-relaxed mb-3" style={{ color: '#1C1410' }}>
+              &ldquo;MetLink shipped our AI agent in 6 days. Revenue up 38%.&rdquo;
+            </p>
+            <div className="flex items-center gap-2.5">
+              <div className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-black text-white flex-shrink-0"
+                style={{ background: '#C84B30' }}>SK</div>
+              <div>
+                <p className="text-xs font-bold" style={{ color: '#1C1410' }}>Sarah K.</p>
+                <p className="text-[11px]" style={{ color: '#ADA09A' }}>CEO, FinEdge Capital</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Floating stat card — desktop only */}
+        <div className="absolute bottom-[32%] right-[6%] w-[160px] hidden lg:block animate-float"
+          style={{ zIndex: 20, animationDelay: '1.2s', transform: 'translateX(120px)' }}>
+          <div className="p-4 rounded-2xl text-center" style={{ background: '#FFFFFF', border: '1px solid #E5DDD5', boxShadow: '0 12px 36px rgba(0,0,0,0.08)' }}>
+            <div className="flex items-center justify-center gap-1.5 mb-1">
+              <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+              <p className="text-[10px] font-bold uppercase tracking-widest" style={{ color: '#ADA09A' }}>Live</p>
+            </div>
+            <p className="text-3xl font-black" style={{ color: '#1C1410' }}>450+</p>
+            <p className="text-xs" style={{ color: '#ADA09A' }}>Projects Shipped</p>
+          </div>
         </div>
       </section>
+      <Wave from="transparent" to={B} />
 
-      {/* ═══════════════════════════════
-          INTEGRATIONS — marquee
-      ═══════════════════════════════ */}
-      <section className="relative overflow-hidden py-16 sm:py-20" style={{ background: '#06090f' }}>
-        <div className="absolute inset-0 pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse 70% 90% at 50% 100%, rgba(14,60,110,0.6) 0%, rgba(6,9,15,0) 70%)' }} />
-
-        <div className="relative z-10 text-center mb-12">
-          <p className="text-[10px] font-medium uppercase" style={{ color: '#334155', letterSpacing: '0.45em' }}>
-            Integrations
+      {/* ══════════════════════════════════
+          INTEGRATIONS  (B)
+      ══════════════════════════════════ */}
+      <section className="relative overflow-hidden py-16 sm:py-20" style={{ background: B }}>
+        <FadeIn className="text-center mb-12 px-4">
+          <p className="text-[10px] font-black uppercase tracking-[0.45em] mb-3" style={{ color: '#ADA09A' }}>Powered By</p>
+          <h2 className="text-2xl sm:text-3xl font-black mb-3" style={{ color: '#1C1410' }}>
+            Integrations That <span className="gradient-text-cyan">Drive Results</span>
+          </h2>
+          <p className="text-sm max-w-md mx-auto" style={{ color: '#72645A' }}>
+            We plug into the tools your business already uses — and supercharge them with AI.
           </p>
-        </div>
+        </FadeIn>
 
-        <div className="relative">
-          <div className="absolute inset-y-0 left-0 w-32 sm:w-48 z-10 pointer-events-none"
-            style={{ background: 'linear-gradient(to right, #06090f, transparent)' }} />
-          <div className="absolute inset-y-0 right-0 w-32 sm:w-48 z-10 pointer-events-none"
-            style={{ background: 'linear-gradient(to left, #06090f, transparent)' }} />
+        <div className="relative space-y-3">
+          <div className="absolute inset-y-0 left-0 w-28 sm:w-44 z-10 pointer-events-none"
+            style={{ background: `linear-gradient(to right, ${B}, transparent)` }} />
+          <div className="absolute inset-y-0 right-0 w-28 sm:w-44 z-10 pointer-events-none"
+            style={{ background: `linear-gradient(to left, ${B}, transparent)` }} />
 
+          {/* Row 1 */}
           <div className="animate-marquee flex items-center" style={{ width: 'max-content' }}>
-            {[0, 1, 2, 3].map((copy) => (
-              <div key={copy} className="flex items-center">
-                <div className="flex items-center mx-12 sm:mx-16 opacity-55 hover:opacity-100 transition-opacity duration-300 shrink-0">
-                  <img src="https://upload.wikimedia.org/wikipedia/commons/1/12/Google_Drive_icon_%282020%29.svg" alt="Google Drive" style={{ height: 36, width: 36, objectFit: 'contain' }} />
-                </div>
-                <div className="flex items-center gap-3 mx-12 sm:mx-16 opacity-55 hover:opacity-100 transition-opacity duration-300 shrink-0">
-                  <img src="https://upload.wikimedia.org/wikipedia/commons/4/45/Notion_app_logo.png" alt="Notion" style={{ height: 32, width: 32, objectFit: 'contain', filter: 'invert(1)', borderRadius: 6 }} />
-                  <span className="text-xl font-semibold" style={{ color: '#E2E8F0' }}>Notion</span>
-                </div>
-                <div className="flex items-center mx-12 sm:mx-16 opacity-55 hover:opacity-100 transition-opacity duration-300 shrink-0">
-                  <span className="text-2xl font-bold tracking-tight" style={{ color: '#E2E8F0' }}>klaviyo</span>
-                </div>
-                <div className="flex items-center mx-12 sm:mx-16 opacity-55 hover:opacity-100 transition-opacity duration-300 shrink-0">
-                  <img src="https://upload.wikimedia.org/wikipedia/commons/4/4d/OpenAI_Logo.svg" alt="OpenAI" style={{ height: 26, objectFit: 'contain', filter: 'invert(1)' }} />
-                </div>
-                <div className="flex items-center gap-2.5 mx-12 sm:mx-16 opacity-55 hover:opacity-100 transition-opacity duration-300 shrink-0">
-                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
-                    <path d="M12 2L13.8 8.2L20 10L13.8 11.8L12 18L10.2 11.8L4 10L10.2 8.2L12 2Z" fill="#D97757" />
-                  </svg>
-                  <span className="text-2xl font-semibold" style={{ color: '#E2E8F0' }}>Claude</span>
-                </div>
-                <div className="flex items-center gap-3 mx-12 sm:mx-16 opacity-55 hover:opacity-100 transition-opacity duration-300 shrink-0">
-                  <svg width="38" height="22" viewBox="0 0 40 24" fill="none">
-                    <circle cx="8"  cy="12" r="6" stroke="#E2E8F0" strokeWidth="1.8" fill="none" />
-                    <circle cx="20" cy="12" r="6" stroke="#E2E8F0" strokeWidth="1.8" fill="none" />
-                    <circle cx="32" cy="12" r="6" stroke="#E2E8F0" strokeWidth="1.8" fill="none" />
-                  </svg>
-                  <span className="text-xl font-bold italic" style={{ color: '#E2E8F0' }}>make</span>
-                </div>
-                <div className="flex items-center mx-12 sm:mx-16 opacity-55 hover:opacity-100 transition-opacity duration-300 shrink-0">
-                  <span className="text-xl font-semibold" style={{ color: '#E2E8F0' }}>LangChain</span>
-                </div>
-                <div className="flex items-center mx-12 sm:mx-16 opacity-55 hover:opacity-100 transition-opacity duration-300 shrink-0">
-                  <span className="text-xl font-semibold" style={{ color: '#E2E8F0' }}>Pinecone</span>
-                </div>
+            {[0,1,2,3].map(copy => (
+              <div key={copy} className="flex items-center gap-3 pr-3">
+                {integrations.slice(0, 6).map(item => (
+                  <div key={item.label}
+                    className="flex items-center gap-2.5 px-5 py-2.5 rounded-full whitespace-nowrap shrink-0 transition-all hover:shadow-sm"
+                    style={{ background: '#FAF9F6', border: '1px solid #E5DDD5' }}>
+                    <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: item.color }} />
+                    <span className="text-sm font-semibold" style={{ color: '#72645A' }}>{item.label}</span>
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
+
+          {/* Row 2 — reverse */}
+          <div className="flex items-center" style={{ width: 'max-content', animation: 'marquee 32s linear infinite reverse' }}>
+            {[0,1,2,3].map(copy => (
+              <div key={copy} className="flex items-center gap-3 pr-3">
+                {integrations.slice(6).map(item => (
+                  <div key={item.label}
+                    className="flex items-center gap-2.5 px-5 py-2.5 rounded-full whitespace-nowrap shrink-0 transition-all hover:shadow-sm"
+                    style={{ background: '#FAF9F6', border: '1px solid #E5DDD5' }}>
+                    <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: item.color }} />
+                    <span className="text-sm font-semibold" style={{ color: '#72645A' }}>{item.label}</span>
+                  </div>
+                ))}
               </div>
             ))}
           </div>
         </div>
       </section>
+      <Wave from={B} to={A} flip />
 
-      {/* ═══════════════════════════════
-          STATS — cinematic numbers
-      ═══════════════════════════════ */}
-      <section className="py-24 sm:py-32 relative">
-        <div className="absolute inset-0 grid-bg opacity-15 pointer-events-none" />
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      {/* ══════════════════════════════════
+          WHAT WE DO  (A)
+      ══════════════════════════════════ */}
+      <section className="relative py-24 sm:py-32" style={{ background: A }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeIn className="text-center mb-16">
-            <p className="text-xs font-bold uppercase tracking-[0.3em] mb-4" style={{ color: '#06B6D4' }}>Impact</p>
-            <h2 className="font-black text-white">Numbers That Matter</h2>
+            <p className="text-[10px] font-black uppercase tracking-[0.4em] mb-4" style={{ color: '#C84B30' }}>What We Do</p>
+            <h2 className="font-black mb-4" style={{ color: '#1C1410' }}>
+              End-to-End{' '}
+              <em style={{ fontFamily: 'var(--font-playfair)', fontStyle: 'italic', color: '#C84B30' }}>AI Services</em>
+            </h2>
+            <p className="max-w-xl mx-auto text-base" style={{ color: '#72645A' }}>
+              From intelligent automation to world-class software — we deliver across every discipline.
+            </p>
           </FadeIn>
 
-          <div className="grid grid-cols-2 lg:grid-cols-4">
-            {[
-              { value: 150, suffix: '+',  label: 'Projects Delivered', color: '#06B6D4' },
-              { value: 10,  suffix: 'M+', label: 'Revenue Generated',  color: '#8B5CF6' },
-              { value: 80,  suffix: '+',  label: 'Happy Clients',       color: '#34D399' },
-              { value: 94,  suffix: '%',  label: 'Retention Rate',      color: '#F472B6' },
-            ].map((s, i) => (
-              <FadeIn key={s.label} delay={i * 0.1}>
-                <div className="group text-center px-6 py-12 cursor-default"
-                  style={{ borderLeft: i > 0 ? '1px solid rgba(255,255,255,0.05)' : 'none' }}>
-                  <p className="text-5xl sm:text-7xl font-black mb-3 transition-all duration-300 group-hover:scale-105 origin-bottom tabular-nums"
-                    style={{ color: s.color, textShadow: `0 0 60px ${s.color}25` }}>
-                    <Counter target={s.value} suffix={s.suffix} />
-                  </p>
-                  <p className="text-xs uppercase tracking-[0.2em]" style={{ color: '#475569' }}>{s.label}</p>
-                </div>
-              </FadeIn>
-            ))}
-          </div>
-        </div>
-      </section>
+          <StaggerChildren className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {services.map(s => {
+              const Icon = s.icon;
+              return (
+                <StaggerItem key={s.label}>
+                  <div className="group relative flex flex-col h-full p-7 rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lg"
+                    style={{ background: '#FFFFFF', border: '1px solid #E5DDD5' }}
+                    onMouseEnter={e => {
+                      (e.currentTarget as HTMLElement).style.borderColor = `${s.color}50`;
+                      (e.currentTarget as HTMLElement).style.boxShadow = `0 12px 40px rgba(0,0,0,0.08), 0 0 0 1px ${s.color}30`;
+                    }}
+                    onMouseLeave={e => {
+                      (e.currentTarget as HTMLElement).style.borderColor = '#E5DDD5';
+                      (e.currentTarget as HTMLElement).style.boxShadow = 'none';
+                    }}>
+                    <div className="absolute top-0 left-0 right-0 h-0.5"
+                      style={{ background: `linear-gradient(to right, transparent, ${s.color}80, transparent)` }} />
+                    <p className="text-[11px] font-black mb-5 tracking-widest" style={{ color: `${s.color}60` }}>{s.num}</p>
+                    <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-5"
+                      style={{ background: `${s.color}12`, color: s.color }}>
+                      <Icon className="w-6 h-6" />
+                    </div>
+                    <h3 className="text-base font-black mb-3" style={{ color: '#1C1410' }}>{s.label}</h3>
+                    <p className="text-sm leading-relaxed flex-1" style={{ color: '#72645A' }}>{s.desc}</p>
+                  </div>
+                </StaggerItem>
+              );
+            })}
+          </StaggerChildren>
 
-      {/* ═══════════════════════════════
-          SERVICES — editorial list
-      ═══════════════════════════════ */}
-      <section className="py-24 sm:py-32 relative" style={{ borderTop: '1px solid rgba(255,255,255,0.04)' }}>
-        <div className="absolute inset-0 pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse at 15% 60%, rgba(139,92,246,0.05), transparent 55%)' }} />
-
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <FadeIn className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-20">
-            <div>
-              <p className="text-xs font-bold uppercase tracking-[0.3em] mb-4" style={{ color: '#06B6D4' }}>Services</p>
-              <h2 className="font-black text-white leading-tight">What We Build</h2>
-            </div>
+          <FadeIn delay={0.2} className="text-center mt-10">
             <Link href="/services"
-              className="flex-shrink-0 inline-flex items-center gap-2 text-sm font-semibold transition-all hover:gap-3"
-              style={{ color: '#475569' }}
-              onMouseEnter={(e) => (e.currentTarget as HTMLElement).style.color = '#E2E8F0'}
-              onMouseLeave={(e) => (e.currentTarget as HTMLElement).style.color = '#475569'}>
+              className="inline-flex items-center gap-2 text-sm font-bold transition-colors"
+              style={{ color: '#C84B30' }}
+              onMouseEnter={e => (e.currentTarget as HTMLElement).style.opacity = '0.8'}
+              onMouseLeave={e => (e.currentTarget as HTMLElement).style.opacity = '1'}>
               View all services <ArrowRight className="w-4 h-4" />
             </Link>
           </FadeIn>
-
-          <div>
-            {serviceCategories.map((cat, i) => {
-              const c = catColors[cat.slug] || { accent: '#06B6D4', glow: 'rgba(6,182,212,0.08)' };
-              return (
-                <FadeIn key={cat.slug} delay={i * 0.07}>
-                  <Link
-                    href={`/services/${cat.slug}`}
-                    className="group relative flex flex-col sm:flex-row sm:items-center gap-6 sm:gap-10 lg:gap-16 py-10 sm:py-12 transition-all duration-300 hover:pl-3"
-                    style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}>
-
-                    {/* Left accent */}
-                    <div className="absolute left-0 top-6 bottom-6 w-0 group-hover:w-[2px] transition-all duration-400 rounded-full"
-                      style={{ background: c.accent }} />
-
-                    {/* Index number */}
-                    <span className="hidden lg:block flex-shrink-0 text-5xl font-black tabular-nums leading-none select-none transition-all duration-300 w-20 text-right"
-                      style={{ color: c.accent, opacity: 0.15 }}
-                      onMouseEnter={(e) => (e.currentTarget as HTMLElement).style.opacity = '0.4'}
-                      onMouseLeave={(e) => (e.currentTarget as HTMLElement).style.opacity = '0.15'}>
-                      {String(i + 1).padStart(2, '0')}
-                    </span>
-
-                    {/* Icon + category name */}
-                    <div className="flex sm:flex-col items-center sm:items-start gap-3 sm:w-40 flex-shrink-0">
-                      <div className="w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300 group-hover:scale-105"
-                        style={{ background: c.glow, border: `1px solid ${c.accent}20`, color: c.accent }}>
-                        {catIcons[cat.slug]}
-                      </div>
-                      <p className="text-[10px] font-black uppercase tracking-[0.25em]" style={{ color: c.accent }}>{cat.name}</p>
-                    </div>
-
-                    {/* Content */}
-                    <div className="flex-1 min-w-0">
-                      <h3 className="text-xl sm:text-2xl lg:text-3xl font-black text-white mb-3 leading-tight">{cat.tagline}</h3>
-                      <p className="text-sm leading-relaxed mb-5 max-w-lg" style={{ color: '#475569' }}>{cat.description}</p>
-                      <div className="flex flex-wrap gap-2">
-                        {cat.services.map((svc) => (
-                          <span key={svc.slug}
-                            className="px-3.5 py-1.5 rounded-full text-[11px] font-medium transition-all duration-200"
-                            style={{ color: '#475569', border: '1px solid rgba(255,255,255,0.06)' }}
-                            onMouseEnter={(e) => {
-                              (e.currentTarget as HTMLElement).style.color = c.accent;
-                              (e.currentTarget as HTMLElement).style.borderColor = `${c.accent}30`;
-                              (e.currentTarget as HTMLElement).style.background = `${c.accent}08`;
-                            }}
-                            onMouseLeave={(e) => {
-                              (e.currentTarget as HTMLElement).style.color = '#475569';
-                              (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.06)';
-                              (e.currentTarget as HTMLElement).style.background = '';
-                            }}>
-                            {svc.name}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Arrow */}
-                    <div className="hidden sm:block flex-shrink-0 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-2 group-hover:translate-x-0">
-                      <div className="w-10 h-10 rounded-full flex items-center justify-center"
-                        style={{ background: `${c.accent}15`, color: c.accent }}>
-                        <ArrowRight className="w-4 h-4" />
-                      </div>
-                    </div>
-                  </Link>
-                </FadeIn>
-              );
-            })}
-            <div style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }} />
-          </div>
         </div>
       </section>
+      <Wave from={A} to={B} />
 
-      {/* ═══════════════════════════════
-          HOW WE WORK — 3 steps
-      ═══════════════════════════════ */}
-      <section className="py-24 sm:py-32 relative overflow-hidden" style={{ borderTop: '1px solid rgba(255,255,255,0.04)' }}>
-        <div className="absolute inset-0 pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse at 80% 50%, rgba(6,182,212,0.04), transparent 55%)' }} />
+      {/* ══════════════════════════════════
+          OUR CLIENTS  (B)
+      ══════════════════════════════════ */}
+      <section className="relative py-24 sm:py-32 overflow-hidden" style={{ background: B }}>
+        <FadeIn className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-16">
+          <p className="text-[10px] font-black uppercase tracking-[0.4em] mb-4" style={{ color: '#C84B30' }}>Our Clients</p>
+          <h2 className="font-black mb-4" style={{ color: '#1C1410' }}>
+            Trusted by{' '}
+            <em style={{ fontFamily: 'var(--font-playfair)', fontStyle: 'italic', color: '#C84B30' }}>250+ Businesses</em>
+          </h2>
+          <p className="max-w-lg mx-auto text-base" style={{ color: '#72645A' }}>
+            From fast-growing startups to established enterprises — they chose MetLink to scale.
+          </p>
+        </FadeIn>
 
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <FadeIn className="text-center mb-20">
-            <p className="text-xs font-bold uppercase tracking-[0.3em] mb-4" style={{ color: '#8B5CF6' }}>Process</p>
-            <h2 className="font-black text-white">How We Work</h2>
-          </FadeIn>
+        <div className="relative space-y-3 mb-14">
+          <div className="absolute inset-y-0 left-0 w-24 sm:w-40 z-10 pointer-events-none"
+            style={{ background: `linear-gradient(to right, ${B}, transparent)` }} />
+          <div className="absolute inset-y-0 right-0 w-24 sm:w-40 z-10 pointer-events-none"
+            style={{ background: `linear-gradient(to left, ${B}, transparent)` }} />
 
-          <div className="grid md:grid-cols-3 gap-0">
-            {[
-              {
-                num: '01',
-                title: 'Discover & Define',
-                desc: 'We start with a deep-dive strategy session — mapping your goals, data, and existing systems to identify where AI creates the biggest leverage.',
-                color: '#06B6D4',
-              },
-              {
-                num: '02',
-                title: 'Build & Integrate',
-                desc: 'Our team ships working AI systems in days, not months. Every build is modular, tested, and integrated directly into your stack.',
-                color: '#8B5CF6',
-              },
-              {
-                num: '03',
-                title: 'Scale & Optimize',
-                desc: 'We monitor, retrain, and evolve your systems continuously — so performance compounds over time, not decays.',
-                color: '#34D399',
-              },
-            ].map((step, i) => (
-              <FadeIn key={step.num} delay={i * 0.1}>
-                <div className="group relative p-8 sm:p-10 transition-all duration-300"
-                  style={{ borderLeft: i > 0 ? '1px solid rgba(255,255,255,0.05)' : 'none' }}>
-
-                  {/* Large background number */}
-                  <div className="absolute top-6 right-6 text-8xl font-black select-none pointer-events-none"
-                    style={{ color: step.color, opacity: 0.06, lineHeight: 1 }}>
-                    {step.num}
+          {/* Row 1 */}
+          <div className="animate-marquee flex items-center" style={{ width: 'max-content' }}>
+            {[0,1,2,3].map(copy => (
+              <div key={copy} className="flex items-center gap-3 pr-3">
+                {clientsRow1.map(name => (
+                  <div key={name}
+                    className="flex items-center justify-center px-6 py-3.5 rounded-xl whitespace-nowrap shrink-0"
+                    style={{ background: '#FAF9F6', border: '1px solid #E5DDD5', minWidth: 140 }}>
+                    <span className="text-sm font-black tracking-wide" style={{ color: '#ADA09A' }}>{name}</span>
                   </div>
+                ))}
+              </div>
+            ))}
+          </div>
 
-                  <div className="relative z-10">
-                    {/* Step pill */}
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest mb-6"
-                      style={{ background: `${step.color}10`, color: step.color, border: `1px solid ${step.color}20` }}>
-                      Step {step.num}
-                    </div>
-
-                    <h3 className="text-xl sm:text-2xl font-black text-white mb-4 leading-tight">{step.title}</h3>
-                    <p className="text-sm leading-relaxed" style={{ color: '#64748B' }}>{step.desc}</p>
-
-                    {/* Bottom accent line */}
-                    <div className="mt-8 h-px w-0 group-hover:w-full transition-all duration-500 rounded-full"
-                      style={{ background: `linear-gradient(to right, ${step.color}, transparent)` }} />
+          {/* Row 2 — reverse */}
+          <div className="flex items-center" style={{ width: 'max-content', animation: 'marquee 40s linear infinite reverse' }}>
+            {[0,1,2,3].map(copy => (
+              <div key={copy} className="flex items-center gap-3 pr-3">
+                {clientsRow2.map(name => (
+                  <div key={name}
+                    className="flex items-center justify-center px-6 py-3.5 rounded-xl whitespace-nowrap shrink-0"
+                    style={{ background: '#FAF9F6', border: '1px solid #E5DDD5', minWidth: 140 }}>
+                    <span className="text-sm font-black tracking-wide" style={{ color: '#ADA09A' }}>{name}</span>
                   </div>
-                </div>
-              </FadeIn>
+                ))}
+              </div>
             ))}
           </div>
         </div>
+
+        <FadeIn className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap justify-center gap-2.5">
+          {['FinTech','Healthcare','E-Commerce','SaaS','Real Estate','Logistics','EdTech','Manufacturing'].map(tag => (
+            <span key={tag}
+              className="px-4 py-2 rounded-full text-[11px] font-bold uppercase tracking-wider cursor-default transition-all hover:border-orange-200 hover:text-[#C84B30]"
+              style={{ background: '#FAF9F6', border: '1px solid #E5DDD5', color: '#ADA09A' }}>
+              {tag}
+            </span>
+          ))}
+        </FadeIn>
       </section>
+      <Wave from={B} to={A} flip />
 
-      {/* ═══════════════════════════════
-          AI STACK — flowing pills
-      ═══════════════════════════════ */}
-      <section className="py-24 sm:py-32 relative" style={{ borderTop: '1px solid rgba(255,255,255,0.04)' }}>
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid lg:grid-cols-5 gap-12 lg:gap-20 items-center">
+      {/* ══════════════════════════════════
+          SUCCESS STORIES  (A)
+      ══════════════════════════════════ */}
+      <section className="relative py-24 sm:py-32" style={{ background: A }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <FadeIn className="text-center mb-16">
+            <p className="text-[10px] font-black uppercase tracking-[0.4em] mb-4" style={{ color: '#16A34A' }}>Success Stories</p>
+            <h2 className="font-black mb-4" style={{ color: '#1C1410' }}>
+              What Our Clients{' '}
+              <em style={{ fontFamily: 'var(--font-playfair)', fontStyle: 'italic', color: '#C84B30' }}>Say</em>
+            </h2>
+            <p className="max-w-xl mx-auto text-base" style={{ color: '#72645A' }}>
+              Real words from real people who chose MetLink to grow their business.
+            </p>
+          </FadeIn>
 
-            <FadeIn className="lg:col-span-2">
-              <p className="text-xs font-bold uppercase tracking-[0.3em] mb-4" style={{ color: '#8B5CF6' }}>AI Stack</p>
-              <h2 className="font-black text-white mb-5 leading-tight">Powered by<br />the Best Models</h2>
-              <p className="text-sm leading-relaxed mb-8" style={{ color: '#475569' }}>
-                We integrate frontier LLMs, vector databases, and production MLOps tooling to build AI systems that actually work at scale.
+          <StaggerChildren className="grid md:grid-cols-3 gap-6">
+            {testimonials.map(t => (
+              <StaggerItem key={t.name}>
+                <div className="group relative flex flex-col h-full p-8 rounded-3xl transition-all duration-300 hover:-translate-y-1.5"
+                  style={{ background: '#FFFFFF', border: '1px solid #E5DDD5', boxShadow: '0 2px 16px rgba(0,0,0,0.04)' }}
+                  onMouseEnter={e => {
+                    (e.currentTarget as HTMLElement).style.borderColor = `${t.color}40`;
+                    (e.currentTarget as HTMLElement).style.boxShadow = `0 16px 48px rgba(0,0,0,0.08)`;
+                  }}
+                  onMouseLeave={e => {
+                    (e.currentTarget as HTMLElement).style.borderColor = '#E5DDD5';
+                    (e.currentTarget as HTMLElement).style.boxShadow = '0 2px 16px rgba(0,0,0,0.04)';
+                  }}>
+                  <div className="absolute top-0 left-6 right-6 h-0.5 rounded-full"
+                    style={{ background: `linear-gradient(to right, transparent, ${t.color}70, transparent)` }} />
+                  <div className="absolute top-3 right-5 text-[6rem] font-black leading-none select-none pointer-events-none"
+                    style={{ color: `${t.color}08`, fontFamily: 'Georgia, serif', lineHeight: 1 }}>&ldquo;</div>
+
+                  <div className="flex items-center justify-between mb-5 relative z-10">
+                    <div className="flex gap-0.5">
+                      {Array(t.stars).fill(0).map((_, i) => (
+                        <Star key={i} className="w-3.5 h-3.5 fill-current" style={{ color: '#FBBF24' }} />
+                      ))}
+                    </div>
+                    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-wider"
+                      style={{ background: `${t.color}10`, color: t.color, border: `1px solid ${t.color}25` }}>
+                      <TrendingUp className="w-3 h-3" /> {t.result}
+                    </div>
+                  </div>
+
+                  <p className="text-[0.9rem] leading-relaxed mb-7 flex-1 relative z-10" style={{ color: '#72645A' }}>
+                    &ldquo;{t.quote}&rdquo;
+                  </p>
+
+                  <div className="flex items-center gap-3 pt-5" style={{ borderTop: '1px solid #F0EBE3' }}>
+                    <div className="w-10 h-10 rounded-full flex items-center justify-center text-xs font-black text-white flex-shrink-0"
+                      style={{ background: t.color }}>
+                      {t.name.split(' ').map(n => n[0]).join('')}
+                    </div>
+                    <div>
+                      <p className="text-sm font-bold" style={{ color: '#1C1410' }}>{t.name}</p>
+                      <p className="text-xs" style={{ color: '#ADA09A' }}>{t.role}, {t.company}</p>
+                    </div>
+                  </div>
+                </div>
+              </StaggerItem>
+            ))}
+          </StaggerChildren>
+        </div>
+      </section>
+      <Wave from={A} to={B} />
+
+      {/* ══════════════════════════════════
+          TECH STACK  (B)
+      ══════════════════════════════════ */}
+      <section className="relative py-24 sm:py-32" style={{ background: B }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col lg:flex-row gap-16 lg:gap-20">
+
+            <FadeIn className="lg:w-[36%] flex flex-col justify-start">
+              <p className="text-[10px] font-black uppercase tracking-[0.4em] mb-4" style={{ color: '#D97706' }}>Tech Stack</p>
+              <h2 className="font-black mb-5" style={{ color: '#1C1410' }}>
+                Powered by the{' '}
+                <em style={{ fontFamily: 'var(--font-playfair)', fontStyle: 'italic', color: '#C84B30' }}>Best Tools</em>
+              </h2>
+              <p className="text-base leading-relaxed mb-10" style={{ color: '#72645A' }}>
+                Every tool we choose is battle-tested in production, selected for performance and long-term reliability.
               </p>
-              <Link href="/services/ai-automation"
-                className="inline-flex items-center gap-2 text-sm font-semibold transition-all hover:gap-3"
-                style={{ color: '#8B5CF6' }}>
-                Explore AI services <ArrowRight className="w-4 h-4" />
-              </Link>
-            </FadeIn>
-
-            <FadeIn delay={0.15} className="lg:col-span-3">
-              <div className="flex flex-wrap gap-2.5">
-                {caps.map((cap) => (
-                  <span key={cap.name}
-                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-medium cursor-default transition-all duration-200 select-none"
-                    style={{ border: `1px solid ${cap.color}20`, color: '#64748B', background: `${cap.color}05` }}
-                    onMouseEnter={(e) => {
-                      const el = e.currentTarget as HTMLElement;
-                      el.style.color = cap.color;
-                      el.style.borderColor = `${cap.color}45`;
-                      el.style.background = `${cap.color}10`;
-                      el.style.transform = 'translateY(-2px)';
-                    }}
-                    onMouseLeave={(e) => {
-                      const el = e.currentTarget as HTMLElement;
-                      el.style.color = '#64748B';
-                      el.style.borderColor = `${cap.color}20`;
-                      el.style.background = `${cap.color}05`;
-                      el.style.transform = '';
-                    }}>
-                    <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: cap.color, boxShadow: `0 0 5px ${cap.color}` }} />
-                    {cap.name}
-                    <span className="text-[10px] opacity-40 font-normal">{cap.label}</span>
-                  </span>
+              <div className="space-y-3">
+                {[
+                  { icon: <Brain className="w-4 h-4" />,     label: 'AI & Automation',     color: '#C84B30' },
+                  { icon: <Code2 className="w-4 h-4" />,     label: 'Software Development', color: '#2563EB' },
+                  { icon: <Megaphone className="w-4 h-4" />, label: 'Digital Marketing',    color: '#16A34A' },
+                  { icon: <Palette className="w-4 h-4" />,   label: 'Creative & Media',     color: '#D97706' },
+                ].map(s => (
+                  <div key={s.label} className="flex items-center gap-3 p-3.5 rounded-xl transition-all hover:shadow-sm"
+                    style={{ background: '#FAF9F6', border: '1px solid #E5DDD5' }}>
+                    <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
+                      style={{ background: `${s.color}12`, color: s.color }}>{s.icon}</div>
+                    <p className="text-sm font-semibold flex-1" style={{ color: '#1C1410' }}>{s.label}</p>
+                    <CheckCircle className="w-4 h-4 flex-shrink-0" style={{ color: s.color }} />
+                  </div>
                 ))}
               </div>
             </FadeIn>
-          </div>
-        </div>
-      </section>
 
-      {/* ═══════════════════════════════
-          WHY US — divider list
-      ═══════════════════════════════ */}
-      <section className="py-24 sm:py-32 relative" style={{ borderTop: '1px solid rgba(255,255,255,0.04)' }}>
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-
-          <div className="grid lg:grid-cols-5 gap-12 lg:gap-20">
-            <FadeIn className="lg:col-span-2">
-              <p className="text-xs font-bold uppercase tracking-[0.3em] mb-4" style={{ color: '#06B6D4' }}>Why MetLink</p>
-              <h2 className="font-black text-white leading-tight">What Sets<br />Us Apart</h2>
-            </FadeIn>
-
-            <div className="lg:col-span-3 grid sm:grid-cols-2 gap-x-10">
-              {whyUs.map((item, i) => (
-                <FadeIn key={item.title} delay={i * 0.06}>
-                  <div className="group py-7 transition-all duration-300"
-                    style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}>
-                    <div className="flex items-start gap-4">
-                      <div className="flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center mt-0.5 transition-all duration-300 group-hover:scale-110"
-                        style={{ background: 'rgba(6,182,212,0.08)', color: '#06B6D4' }}>
-                        {item.icon}
-                      </div>
-                      <div>
-                        <h3 className="font-bold text-white mb-1.5 text-sm">{item.title}</h3>
-                        <p className="text-sm leading-relaxed" style={{ color: '#475569' }}>{item.desc}</p>
-                      </div>
+            <div className="flex-1 grid sm:grid-cols-2 gap-4 content-start">
+              {techStack.map((group, gi) => (
+                <FadeIn key={group.category} delay={gi * 0.08}>
+                  <div className="relative p-6 rounded-2xl h-full transition-all hover:-translate-y-1"
+                    style={{ background: '#FAF9F6', border: `1px solid ${group.color}20` }}
+                    onMouseEnter={e => {
+                      (e.currentTarget as HTMLElement).style.borderColor = `${group.color}50`;
+                      (e.currentTarget as HTMLElement).style.background = '#FFFFFF';
+                      (e.currentTarget as HTMLElement).style.boxShadow = '0 8px 32px rgba(0,0,0,0.06)';
+                    }}
+                    onMouseLeave={e => {
+                      (e.currentTarget as HTMLElement).style.borderColor = `${group.color}20`;
+                      (e.currentTarget as HTMLElement).style.background = '#FAF9F6';
+                      (e.currentTarget as HTMLElement).style.boxShadow = 'none';
+                    }}>
+                    <div className="flex items-center gap-2 mb-4">
+                      <div className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: group.color }} />
+                      <p className="text-[10px] font-black uppercase tracking-[0.2em]" style={{ color: group.color }}>{group.category}</p>
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      {group.items.map(item => (
+                        <span key={item}
+                          className="px-3 py-1.5 rounded-lg text-xs font-semibold cursor-default transition-all"
+                          style={{ background: '#FFFFFF', border: '1px solid #E5DDD5', color: '#72645A' }}
+                          onMouseEnter={e => {
+                            (e.currentTarget as HTMLElement).style.color = group.color;
+                            (e.currentTarget as HTMLElement).style.borderColor = `${group.color}40`;
+                            (e.currentTarget as HTMLElement).style.background = `${group.color}08`;
+                          }}
+                          onMouseLeave={e => {
+                            (e.currentTarget as HTMLElement).style.color = '#72645A';
+                            (e.currentTarget as HTMLElement).style.borderColor = '#E5DDD5';
+                            (e.currentTarget as HTMLElement).style.background = '#FFFFFF';
+                          }}>
+                          {item}
+                        </span>
+                      ))}
                     </div>
                   </div>
                 </FadeIn>
               ))}
-              <div className="col-span-2" style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }} />
             </div>
           </div>
         </div>
       </section>
+      <Wave from={B} to={A} flip />
 
-      {/* ═══════════════════════════════
-          CTA — full-bleed dramatic
-      ═══════════════════════════════ */}
-      <section className="relative py-32 sm:py-40 overflow-hidden text-center">
-        {/* Gradient overlay */}
-        <div className="absolute inset-0 pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse 80% 80% at 50% 50%, rgba(139,92,246,0.1) 0%, rgba(6,182,212,0.05) 50%, transparent 80%)' }} />
+      {/* ══════════════════════════════════
+          CTA BANNER  (A)
+      ══════════════════════════════════ */}
+      <section className="relative py-20 sm:py-28" style={{ background: A }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <FadeIn>
+            <div className="relative rounded-3xl overflow-hidden flex flex-col lg:flex-row"
+              style={{
+                background: 'linear-gradient(135deg, #1C1410 0%, #2D1A12 50%, #1C1410 100%)',
+                boxShadow: '0 32px 80px rgba(0,0,0,0.15)',
+              }}>
+              {/* Warm glow */}
+              <div className="absolute top-0 left-0 w-[500px] h-[500px] rounded-full pointer-events-none"
+                style={{ background: 'radial-gradient(circle, rgba(200,75,48,0.2) 0%, transparent 65%)', filter: 'blur(80px)', transform: 'translate(-30%,-40%)' }} />
+              <div className="absolute bottom-0 right-0 w-80 h-80 rounded-full pointer-events-none"
+                style={{ background: 'radial-gradient(circle, rgba(232,97,42,0.15) 0%, transparent 65%)', filter: 'blur(60px)', transform: 'translate(30%,30%)' }} />
 
-        {/* Top border glow */}
-        <div className="absolute top-0 inset-x-0 h-px"
-          style={{ background: 'linear-gradient(to right, transparent, rgba(6,182,212,0.4), rgba(139,92,246,0.4), transparent)' }} />
+              {/* LEFT */}
+              <div className="relative z-10 flex-1 p-10 sm:p-14 lg:p-16 flex flex-col justify-center">
+                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-[11px] font-bold mb-7 self-start"
+                  style={{ background: 'rgba(200,75,48,0.15)', border: '1px solid rgba(200,75,48,0.3)', color: '#E8612A' }}>
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#E8612A] animate-pulse" />
+                  Limited Spots — 2025
+                </div>
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white leading-[1.08] mb-5">
+                  Let&apos;s Turn Ideas Into{' '}
+                  <em style={{ fontFamily: 'var(--font-playfair)', fontStyle: 'italic', color: '#E8612A' }}>
+                    Results
+                  </em>
+                </h2>
+                <p className="text-base max-w-md mb-8 leading-relaxed" style={{ color: 'rgba(255,255,255,0.6)' }}>
+                  Partner with a team that ships fast, communicates clearly, and drives measurable ROI — starting week one.
+                </p>
+                <div className="flex flex-wrap gap-3">
+                  <Link href="/contact"
+                    className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-black text-sm text-white transition-all hover:brightness-110 active:scale-95"
+                    style={{ background: '#C84B30', boxShadow: '0 0 32px rgba(200,75,48,0.4)' }}>
+                    <Sparkles className="w-4 h-4" />
+                    Become a Client
+                  </Link>
+                  <Link href="/portfolio"
+                    className="inline-flex items-center gap-2 px-7 py-4 rounded-full font-semibold text-sm transition-all"
+                    style={{ border: '1px solid rgba(255,255,255,0.12)', color: 'rgba(255,255,255,0.6)' }}
+                    onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = '#FFFFFF'}
+                    onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.6)'}>
+                    See Our Work <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </div>
+              </div>
 
-        <FadeIn className="relative z-10 max-w-3xl mx-auto px-4">
-          <p className="text-xs font-bold uppercase tracking-[0.3em] mb-6" style={{ color: '#06B6D4' }}>
-            Let&apos;s Build Together
-          </p>
-          <h2 className="font-black text-white mb-6 leading-[1.05]">
-            Ready to Scale<br />
-            <span className="gradient-text-cyan">with AI?</span>
-          </h2>
-          <p className="text-base sm:text-lg mb-12 max-w-md mx-auto" style={{ color: '#475569' }}>
-            Book a free 30-min strategy call. No commitments — just clarity on what AI can do for your business.
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link href="/contact"
-              className="group inline-flex items-center gap-2.5 px-9 py-5 rounded-full font-bold text-sm text-[#030712] transition-all hover:brightness-110 active:scale-95"
-              style={{ background: 'linear-gradient(135deg, #06B6D4 0%, #8B5CF6 100%)', boxShadow: '0 0 50px rgba(6,182,212,0.2)' }}>
-              Book AI Strategy Call
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
-            </Link>
-            <Link href="/portfolio"
-              className="inline-flex items-center gap-2 px-7 py-5 rounded-full font-semibold text-sm transition-all hover:bg-white/5"
-              style={{ border: '1px solid rgba(255,255,255,0.08)', color: '#64748B' }}
-              onMouseEnter={(e) => (e.currentTarget as HTMLElement).style.color = '#E2E8F0'}
-              onMouseLeave={(e) => (e.currentTarget as HTMLElement).style.color = '#64748B'}>
-              View Our Work
-            </Link>
-          </div>
-        </FadeIn>
+              {/* RIGHT — stats */}
+              <div className="relative z-10 lg:w-[42%] flex-shrink-0 flex flex-col justify-center p-10 sm:p-12 lg:p-14">
+                <div className="grid grid-cols-2 gap-4 mb-5">
+                  {[
+                    { val: '450+', label: 'Projects Shipped',     color: '#C84B30' },
+                    { val: '250+', label: 'Happy Clients',         color: '#2563EB' },
+                    { val: '7d',   label: 'First Build Delivered', color: '#16A34A' },
+                    { val: '98%',  label: 'Client Retention',      color: '#D97706' },
+                  ].map(s => (
+                    <div key={s.label} className="p-5 rounded-2xl"
+                      style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.08)' }}>
+                      <p className="text-2xl font-black leading-none mb-1.5" style={{ color: s.color }}>{s.val}</p>
+                      <p className="text-[11px] leading-snug" style={{ color: 'rgba(255,255,255,0.45)' }}>{s.label}</p>
+                    </div>
+                  ))}
+                </div>
+                <div className="flex flex-col gap-2.5">
+                  {['NDA signed before we begin', 'Zero long-term lock-in', 'First deliverables in 7 days'].map(point => (
+                    <div key={point} className="flex items-center gap-2">
+                      <CheckCircle className="w-3.5 h-3.5 flex-shrink-0" style={{ color: '#C84B30' }} />
+                      <p className="text-xs font-medium" style={{ color: 'rgba(255,255,255,0.5)' }}>{point}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </FadeIn>
+        </div>
       </section>
 
     </div>

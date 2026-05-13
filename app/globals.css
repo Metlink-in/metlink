@@ -1,18 +1,22 @@
 @import "tailwindcss";
 
-/* ── Design tokens — AI Dark Theme ── */
+/* ── Design tokens — Warm Light Theme ── */
 :root {
-  --background: #030712;
-  --foreground: #E2E8F0;
-  --primary: #06B6D4;
-  --primary-foreground: #030712;
-  --muted: #0F172A;
-  --muted-foreground: #64748B;
-  --border: #1E293B;
-  --secondary: #8B5CF6;
-  --accent: #0EA5E9;
-  --font-sans: var(--font-dm-sans), system-ui, sans-serif;
-  --font-heading: var(--font-manrope), system-ui, sans-serif;
+  --background: #FAF9F6;
+  --surface: #FFFFFF;
+  --surface-alt: #F3EFE8;
+  --foreground: #1C1410;
+  --muted: #72645A;
+  --muted-light: #ADA09A;
+  --border: #E5DDD5;
+  --border-light: #F0EBE3;
+  --primary: #C84B30;
+  --primary-foreground: #FFFFFF;
+  --primary-light: #FEF1EE;
+  --primary-dark: #A83E27;
+  --font-sans: var(--font-jakarta), system-ui, sans-serif;
+  --font-heading: var(--font-syne), system-ui, sans-serif;
+  --font-serif: var(--font-playfair), Georgia, serif;
 }
 
 /* ── Base reset ── */
@@ -84,7 +88,7 @@ nav button, nav a { min-height: unset; min-width: unset; }
 
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
-  50%       { transform: translateY(-12px); }
+  50%       { transform: translateY(-10px); }
 }
 
 @keyframes shimmer {
@@ -93,8 +97,8 @@ nav button, nav a { min-height: unset; min-width: unset; }
 }
 
 @keyframes borderGlow {
-  0%, 100% { border-color: rgba(6,182,212,0.3); box-shadow: 0 0 10px rgba(6,182,212,0.1); }
-  50%       { border-color: rgba(139,92,246,0.5); box-shadow: 0 0 20px rgba(139,92,246,0.2); }
+  0%, 100% { border-color: rgba(200,75,48,0.3); box-shadow: 0 0 10px rgba(200,75,48,0.1); }
+  50%       { border-color: rgba(232,97,42,0.5); box-shadow: 0 0 20px rgba(232,97,42,0.2); }
 }
 
 @keyframes scanline {
@@ -157,9 +161,9 @@ nav button, nav a { min-height: unset; min-width: unset; }
 .animate-flicker      { animation: flicker 4s ease-in-out infinite; }
 .animate-glitch       { animation: glitch 0.5s steps(2) infinite; }
 
-/* ── Gradient text ── */
+/* ── Gradient text — radish accent ── */
 .gradient-text-cyan {
-  background: linear-gradient(135deg, #06B6D4, #8B5CF6, #06B6D4);
+  background: linear-gradient(135deg, #C84B30 0%, #E8612A 50%, #C84B30 100%);
   background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -167,14 +171,14 @@ nav button, nav a { min-height: unset; min-width: unset; }
   animation: shimmer 3s linear infinite;
 }
 
-.gradient-text-purple {
-  background: linear-gradient(135deg, #8B5CF6, #06B6D4);
+.gradient-text-accent {
+  background: linear-gradient(135deg, #C84B30, #E8612A);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-/* ── Glowing border effect ── */
+/* ── Glow border effect ── */
 .glow-border {
   position: relative;
 }
@@ -183,7 +187,7 @@ nav button, nav a { min-height: unset; min-width: unset; }
   position: absolute;
   inset: -1px;
   border-radius: inherit;
-  background: linear-gradient(135deg, rgba(6,182,212,0.5), rgba(139,92,246,0.5));
+  background: linear-gradient(135deg, rgba(200,75,48,0.4), rgba(232,97,42,0.4));
   z-index: -1;
   opacity: 0;
   transition: opacity 0.3s ease;
@@ -199,30 +203,38 @@ nav button, nav a { min-height: unset; min-width: unset; }
   transform: perspective(1000px) rotateX(-3deg) rotateY(3deg) translateZ(10px);
 }
 
-/* ── Grid lines background ── */
+/* ── Grid lines background (subtle for light theme) ── */
 .grid-bg {
   background-image:
-    linear-gradient(rgba(6,182,212,0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(6,182,212,0.04) 1px, transparent 1px);
+    linear-gradient(rgba(200,75,48,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(200,75,48,0.04) 1px, transparent 1px);
   background-size: 60px 60px;
 }
 
-/* ── Neon glow utilities ── */
-.glow-cyan  { box-shadow: 0 0 20px rgba(6,182,212,0.3), 0 0 60px rgba(6,182,212,0.1); }
-.glow-purple { box-shadow: 0 0 20px rgba(139,92,246,0.3), 0 0 60px rgba(139,92,246,0.1); }
-.text-glow-cyan { text-shadow: 0 0 20px rgba(6,182,212,0.5); }
+/* ── Glow utilities ── */
+.glow-accent  { box-shadow: 0 0 20px rgba(200,75,48,0.2), 0 0 60px rgba(200,75,48,0.08); }
+.text-glow-accent { text-shadow: 0 0 20px rgba(200,75,48,0.4); }
 
-/* ── Scrollbar ── */
+/* ── Scrollbar — light theme ── */
 ::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: #0F172A; }
-::-webkit-scrollbar-thumb { background: #1E293B; border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: rgba(6,182,212,0.3); }
+::-webkit-scrollbar-track { background: #F3EFE8; }
+::-webkit-scrollbar-thumb { background: #D5CCBF; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(200,75,48,0.4); }
 
 /* ── Typography ── */
-h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); }
-h1 { font-size: clamp(2rem, 8vw, 4.5rem); line-height: 1.05; }
-h2 { font-size: clamp(1.6rem, 5vw, 3.25rem); line-height: 1.1; }
-h3 { font-size: clamp(1.1rem, 3vw, 1.75rem); line-height: 1.2; }
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  letter-spacing: -0.025em;
+  color: var(--foreground);
+}
+h1 { font-size: clamp(2.6rem, 9vw, 5.5rem);  line-height: 0.97; font-weight: 800; }
+h2 { font-size: clamp(1.9rem, 5.5vw, 3.75rem); line-height: 1.02; font-weight: 700; }
+h3 { font-size: clamp(1.1rem, 2.5vw, 1.5rem);  line-height: 1.2;  font-weight: 600; }
+
+p, li, span, a, button, input, textarea, select {
+  font-family: var(--font-sans);
+  letter-spacing: -0.01em;
+}
 
 /* ── Mobile chatbot sizing ── */
 @media (max-width: 480px) {
@@ -234,23 +246,23 @@ h3 { font-size: clamp(1.1rem, 3vw, 1.75rem); line-height: 1.2; }
   }
 }
 
+/* ── Glass card ── */
+.glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(229, 221, 213, 0.8);
+}
+
+/* ── Utility ── */
+.overflow-x-hidden { overflow-x: hidden !important; }
+
 /* ── Noise texture overlay ── */
 .noise::after {
   content: '';
   position: absolute;
   inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.015'/%3E%3C/svg%3E");
   pointer-events: none;
   z-index: 0;
 }
-
-/* ── Glass card ── */
-.glass {
-  background: rgba(15, 23, 42, 0.6);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(30, 41, 59, 0.8);
-}
-
-/* ── Utility ── */
-.overflow-x-hidden { overflow-x: hidden !important; }

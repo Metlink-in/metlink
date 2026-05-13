@@ -1,16 +1,17 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { X, Sparkles, CheckCircle } from 'lucide-react';
+import { X, CheckCircle, TrendingUp, Shield, Clock, Star, Zap } from 'lucide-react';
 
 export function PopupForm() {
   const [open, setOpen]           = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  const [form, setForm]           = useState({ name: '', company: '', email: '', service: '' });
+  const [form, setForm]           = useState({ name: '', email: '', phone: '', budget: '', message: '' });
+  const [loading, setLoading]     = useState(false);
 
   useEffect(() => {
     if (sessionStorage.getItem('ml_popup')) return;
-    const t = setTimeout(() => setOpen(true), 9000);
+    const t = setTimeout(() => setOpen(true), 10000);
     return () => clearTimeout(t);
   }, []);
 
@@ -18,128 +19,187 @@ export function PopupForm() {
 
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(close, 2800);
+    setLoading(true);
+    setTimeout(() => { setLoading(false); setSubmitted(true); setTimeout(close, 3000); }, 1400);
   };
 
   if (!open) return null;
 
+  const inputCls = "w-full px-4 py-3 rounded-xl text-sm focus:outline-none transition-all";
+  const inputStyle = { background: '#FAF9F6', border: '1px solid #E5DDD5', color: '#1C1410' };
+
   return (
-    <div className="fixed inset-0 z-[200] flex items-center justify-center px-4">
+    <div className="fixed inset-0 z-[200] flex items-center justify-center px-4" role="dialog" aria-modal="true">
       {/* Backdrop */}
-      <div
-        className="absolute inset-0 backdrop-blur-sm animate-fadeInScale"
-        style={{ background: 'rgba(3,7,18,0.75)' }}
-        onClick={close}
-      />
+      <div className="absolute inset-0 animate-fadeInScale"
+        style={{ background: 'rgba(28,20,16,0.5)', backdropFilter: 'blur(6px)' }}
+        onClick={close} />
 
-      {/* Card */}
-      <div
-        className="relative w-full max-w-md rounded-2xl overflow-hidden shadow-2xl animate-slideInUp"
-        style={{
-          background: '#0F172A',
-          border: '1px solid rgba(30,41,59,0.8)',
-          boxShadow: '0 40px 100px rgba(0,0,0,0.8), 0 0 0 1px rgba(6,182,212,0.06)',
-        }}
-      >
-        {/* Top gradient bar */}
-        <div style={{ height: 2, background: 'linear-gradient(90deg, #06B6D4, #8B5CF6, #06B6D4)' }} />
+      {/* Modal */}
+      <div className="relative w-full max-w-3xl rounded-2xl overflow-hidden shadow-2xl animate-slideInUp flex flex-col md:flex-row"
+        style={{ maxHeight: '92vh', background: '#FFFFFF', border: '1px solid #E5DDD5', boxShadow: '0 32px 80px rgba(0,0,0,0.15)' }}>
 
-        {/* Close */}
-        <button onClick={close}
-          className="absolute top-4 right-4 z-10 p-1.5 rounded-lg transition-all hover:bg-white/10"
-          style={{ color: '#475569' }}>
-          <X className="w-4 h-4" />
-        </button>
+        {/* ── LEFT PANEL ── */}
+        <div className="relative md:w-[42%] flex-shrink-0 p-8 flex flex-col justify-between overflow-hidden"
+          style={{ background: 'linear-gradient(160deg, #1C1410 0%, #2D1A12 60%, #1C1410 100%)' }}>
 
-        <div className="p-8">
-          {submitted ? (
-            /* Success state */
-            <div className="text-center py-8 animate-fadeInScale">
-              <div className="w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-6"
-                style={{ background: 'linear-gradient(135deg, #06B6D4, #8B5CF6)', boxShadow: '0 0 40px rgba(6,182,212,0.3)' }}>
-                <CheckCircle className="w-10 h-10 text-[#030712]" />
-              </div>
-              <h3 className="text-2xl font-black text-white mb-2">You&apos;re In!</h3>
-              <p className="text-sm" style={{ color: '#64748B' }}>
-                Our AI strategy team will reach out within 24 hours.
-              </p>
+          {/* BG glow */}
+          <div className="absolute top-0 left-0 w-64 h-64 rounded-full pointer-events-none"
+            style={{ background: 'radial-gradient(circle, rgba(200,75,48,0.2) 0%, transparent 70%)', filter: 'blur(40px)', transform: 'translate(-30%,-30%)' }} />
+          <div className="absolute bottom-0 right-0 w-48 h-48 rounded-full pointer-events-none"
+            style={{ background: 'radial-gradient(circle, rgba(232,97,42,0.15) 0%, transparent 70%)', filter: 'blur(40px)', transform: 'translate(30%,30%)' }} />
+
+          <div className="relative z-10">
+            {/* Logo mark */}
+            <div className="w-10 h-10 rounded-xl flex items-center justify-center mb-6"
+              style={{ background: 'linear-gradient(135deg, #192540, #2B80F0)' }}>
+              <svg width="28" height="24" viewBox="0 0 112 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M 4,92 L 4,6 L 30,6 L 50,54 L 50,92 Z" fill="rgba(255,255,255,0.95)" />
+                <path d="M 60,92 L 60,48 C 60,6 108,6 108,48 L 108,92 Z" fill="rgba(255,255,255,0.65)" />
+                <line x1="60" y1="46" x2="44" y2="66" stroke="rgba(255,255,255,0.9)" strokeWidth="4.5" strokeLinecap="round" />
+                <circle cx="60" cy="46" r="9"   fill="rgba(255,255,255,0.25)" />
+                <circle cx="60" cy="46" r="5.5" fill="white" />
+                <circle cx="44" cy="66" r="5.5" fill="rgba(255,255,255,0.9)" />
+              </svg>
             </div>
-          ) : (
-            <>
-              {/* Header */}
-              <div className="text-center mb-7">
-                {/* Icon */}
-                <div className="w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-5"
-                  style={{ background: 'linear-gradient(135deg, rgba(6,182,212,0.15), rgba(139,92,246,0.15))', border: '1px solid rgba(6,182,212,0.2)' }}>
-                  <Sparkles className="w-6 h-6" style={{ color: '#06B6D4' }} />
+
+            <p className="text-[10px] font-black uppercase tracking-[0.35em] mb-3" style={{ color: '#E8612A' }}>
+              Limited Spots Available
+            </p>
+            <h2 className="text-2xl font-black text-white leading-tight mb-3">
+              Schedule Your<br />
+              <em style={{ fontFamily: 'var(--font-playfair)', fontStyle: 'italic', color: '#E8612A' }}>
+                Success Story
+              </em>
+            </h2>
+            <p className="text-sm leading-relaxed mb-8" style={{ color: 'rgba(255,255,255,0.45)' }}>
+              Join 250+ businesses growing with AI-powered marketing and development.
+            </p>
+
+            {/* Trust points */}
+            <div className="space-y-3">
+              {[
+                { icon: <TrendingUp className="w-3.5 h-3.5" />, text: 'Average 70% revenue growth',  color: '#16A34A' },
+                { icon: <Clock className="w-3.5 h-3.5" />,      text: 'First deliverables in 7 days', color: '#C84B30' },
+                { icon: <Shield className="w-3.5 h-3.5" />,     text: 'NDA signed before we begin',   color: '#2563EB' },
+                { icon: <Zap className="w-3.5 h-3.5" />,        text: 'AI-powered execution',         color: '#D97706' },
+              ].map(p => (
+                <div key={p.text} className="flex items-center gap-3">
+                  <div className="w-6 h-6 rounded-md flex items-center justify-center flex-shrink-0"
+                    style={{ background: `${p.color}20`, color: p.color }}>
+                    {p.icon}
+                  </div>
+                  <p className="text-xs font-medium" style={{ color: 'rgba(255,255,255,0.55)' }}>{p.text}</p>
                 </div>
-                <p className="text-[10px] font-black uppercase tracking-[0.3em] mb-2" style={{ color: '#06B6D4' }}>
-                  Limited Spots Available
-                </p>
-                <h2 className="text-2xl font-black text-white mb-2">Become a MetLink Client</h2>
-                <p className="text-sm" style={{ color: '#475569' }}>
-                  Join 80+ businesses growing with AI-powered strategy.
-                </p>
+              ))}
+            </div>
+          </div>
+
+          {/* Social proof */}
+          <div className="relative z-10 mt-8 pt-6" style={{ borderTop: '1px solid rgba(255,255,255,0.08)' }}>
+            <div className="flex gap-0.5 mb-2">
+              {[0,1,2,3,4].map(i => <Star key={i} className="w-3.5 h-3.5 fill-current" style={{ color: '#FBBF24' }} />)}
+            </div>
+            <p className="text-xs italic leading-relaxed" style={{ color: 'rgba(255,255,255,0.5)' }}>
+              &quot;MetLink delivered in half the time and doubled our ROI.&quot;
+            </p>
+            <p className="text-[10px] font-bold mt-1.5" style={{ color: 'rgba(255,255,255,0.3)' }}>— Rohan M., CEO at FinEdge</p>
+          </div>
+        </div>
+
+        {/* ── RIGHT PANEL — form ── */}
+        <div className="flex-1 relative flex flex-col overflow-y-auto" style={{ background: '#FFFFFF' }}>
+          {/* Top accent */}
+          <div className="h-1 flex-shrink-0" style={{ background: 'linear-gradient(90deg, #C84B30, #E8612A, #C84B30)' }} />
+
+          <button onClick={close}
+            className="absolute top-4 right-4 z-20 p-1.5 rounded-lg transition-all hover:bg-black/5"
+            style={{ color: '#ADA09A' }} aria-label="Close">
+            <X className="w-4 h-4" />
+          </button>
+
+          <div className="p-8 flex-1 flex flex-col justify-center">
+            {submitted ? (
+              <div className="text-center py-10 animate-fadeInScale">
+                <div className="w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-5"
+                  style={{ background: 'linear-gradient(135deg, #C84B30, #E8612A)', boxShadow: '0 0 32px rgba(200,75,48,0.25)' }}>
+                  <CheckCircle className="w-10 h-10 text-white" />
+                </div>
+                <h3 className="text-2xl font-black mb-2" style={{ color: '#1C1410' }}>You&apos;re In!</h3>
+                <p className="text-sm" style={{ color: '#72645A' }}>Our strategy team will reach out within 24 hours.</p>
               </div>
+            ) : (
+              <>
+                <div className="mb-7">
+                  <h3 className="text-xl font-black mb-1" style={{ color: '#1C1410' }}>Get My Free Proposal 🚀</h3>
+                  <p className="text-sm" style={{ color: '#72645A' }}>Complete the form and we&apos;ll validate your idea now.</p>
+                </div>
 
-              {/* Form */}
-              <form onSubmit={handleSubmit} className="space-y-3">
-                {[
-                  { name: 'name',    placeholder: 'Full Name',              type: 'text'  },
-                  { name: 'company', placeholder: 'Company / Project Name', type: 'text'  },
-                  { name: 'email',   placeholder: 'Work Email Address',     type: 'email' },
-                ].map((f) => (
-                  <input
-                    key={f.name}
-                    type={f.type}
-                    name={f.name}
-                    value={form[f.name as keyof typeof form]}
-                    onChange={e => setForm(p => ({ ...p, [f.name]: e.target.value }))}
-                    placeholder={f.placeholder}
-                    required
-                    className="w-full px-4 py-3 rounded-xl text-sm text-white focus:outline-none transition-all"
-                    style={{
-                      background: 'rgba(255,255,255,0.03)',
-                      border: '1px solid rgba(30,41,59,0.8)',
-                    }}
-                    onFocus={e => (e.currentTarget.style.borderColor = 'rgba(6,182,212,0.4)')}
-                    onBlur={e  => (e.currentTarget.style.borderColor = 'rgba(30,41,59,0.8)')}
-                  />
-                ))}
+                <form onSubmit={handleSubmit} className="space-y-3.5">
+                  <input type="text" placeholder="Full Name *" required value={form.name}
+                    onChange={e => setForm(p => ({ ...p, name: e.target.value }))}
+                    className={inputCls} style={inputStyle}
+                    onFocus={e => (e.currentTarget.style.borderColor = 'rgba(200,75,48,0.45)')}
+                    onBlur={e => (e.currentTarget.style.borderColor = '#E5DDD5')} />
 
-                <select
-                  name="service"
-                  value={form.service}
-                  onChange={e => setForm(p => ({ ...p, service: e.target.value }))}
-                  className="w-full px-4 py-3 rounded-xl text-sm focus:outline-none appearance-none cursor-pointer transition-all"
-                  style={{
-                    background: 'rgba(255,255,255,0.03)',
-                    border: '1px solid rgba(30,41,59,0.8)',
-                    color: form.service ? '#E2E8F0' : '#475569',
-                  }}
-                  onFocus={e => (e.currentTarget.style.borderColor = 'rgba(6,182,212,0.4)')}
-                  onBlur={e  => (e.currentTarget.style.borderColor = 'rgba(30,41,59,0.8)')}
-                >
-                  <option value="" style={{ background: '#0F172A', color: '#64748B' }}>Select a Service (optional)</option>
-                  {['Digital Marketing', 'Performance Marketing', 'AI Development', 'Software Development', 'Brand Identity', 'SEO', 'Business Automation', 'Other'].map(s => (
-                    <option key={s} value={s} style={{ background: '#0F172A', color: '#E2E8F0' }}>{s}</option>
-                  ))}
-                </select>
+                  <input type="email" placeholder="Email Address *" required value={form.email}
+                    onChange={e => setForm(p => ({ ...p, email: e.target.value }))}
+                    className={inputCls} style={inputStyle}
+                    onFocus={e => (e.currentTarget.style.borderColor = 'rgba(200,75,48,0.45)')}
+                    onBlur={e => (e.currentTarget.style.borderColor = '#E5DDD5')} />
 
-                <button
-                  type="submit"
-                  className="w-full py-3.5 rounded-xl font-bold text-sm transition-all hover:brightness-110 active:scale-[0.98] text-[#030712]"
-                  style={{ background: 'linear-gradient(135deg, #06B6D4, #8B5CF6)', boxShadow: '0 0 30px rgba(6,182,212,0.2)' }}>
-                  Submit &amp; Get Started →
-                </button>
-              </form>
+                  <div className="flex gap-2">
+                    <div className="flex items-center gap-2 px-3 py-3 rounded-xl text-sm flex-shrink-0 whitespace-nowrap"
+                      style={{ ...inputStyle, color: '#72645A' }}>
+                      🇮🇳 +91
+                    </div>
+                    <input type="tel" placeholder="Phone number" value={form.phone}
+                      onChange={e => setForm(p => ({ ...p, phone: e.target.value }))}
+                      className={`${inputCls} flex-1`} style={inputStyle}
+                      onFocus={e => (e.currentTarget.style.borderColor = 'rgba(200,75,48,0.45)')}
+                      onBlur={e => (e.currentTarget.style.borderColor = '#E5DDD5')} />
+                  </div>
 
-              <p className="text-center text-[10px] mt-4" style={{ color: '#1E293B' }}>
-                No spam. We respond within 24 hours.
-              </p>
-            </>
-          )}
+                  <select value={form.budget}
+                    onChange={e => setForm(p => ({ ...p, budget: e.target.value }))}
+                    className={`${inputCls} appearance-none cursor-pointer`}
+                    style={{ ...inputStyle, color: form.budget ? '#1C1410' : '#ADA09A' }}
+                    onFocus={e => (e.currentTarget.style.borderColor = 'rgba(200,75,48,0.45)')}
+                    onBlur={e => (e.currentTarget.style.borderColor = '#E5DDD5')}>
+                    <option value="" style={{ background: '#FAF9F6', color: '#ADA09A' }}>Select a Budget Range</option>
+                    {['< ₹1 Lakh','₹1L – ₹5L','₹5L – ₹20L','₹20L – ₹50L','₹50L+'].map(b => (
+                      <option key={b} value={b} style={{ background: '#FAF9F6', color: '#1C1410' }}>{b}</option>
+                    ))}
+                  </select>
+
+                  <textarea rows={3}
+                    placeholder="Please share any information that will help us provide an accurate estimate. *"
+                    required value={form.message}
+                    onChange={e => setForm(p => ({ ...p, message: e.target.value }))}
+                    className={`${inputCls} resize-none`} style={inputStyle}
+                    onFocus={e => (e.currentTarget.style.borderColor = 'rgba(200,75,48,0.45)')}
+                    onBlur={e => (e.currentTarget.style.borderColor = '#E5DDD5')} />
+
+                  <label className="flex items-center gap-3 cursor-pointer group select-none">
+                    <input type="checkbox" className="w-4 h-4 rounded cursor-pointer accent-[#C84B30]" />
+                    <span className="text-xs transition-colors" style={{ color: '#ADA09A' }}>Send me a copy of NDA</span>
+                  </label>
+
+                  <button type="submit" disabled={loading}
+                    className="w-full py-3.5 rounded-xl font-black text-sm uppercase tracking-[0.08em] transition-all hover:brightness-95 active:scale-[0.98] disabled:opacity-60 flex items-center justify-center gap-2 text-white"
+                    style={{ background: '#C84B30', boxShadow: '0 4px 16px rgba(200,75,48,0.25)' }}>
+                    {loading
+                      ? <><span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />Submitting...</>
+                      : 'Submit'}
+                  </button>
+
+                  <p className="text-center text-[10px] font-bold" style={{ color: '#C84B30' }}>
+                    ✓ Your idea is 100% protected by our Non Disclosure Agreement.
+                  </p>
+                </form>
+              </>
+            )}
+          </div>
         </div>
       </div>
     </div>

@@ -17,9 +17,9 @@ export function ScrollToTop() {
       className="fixed bottom-24 right-6 z-40 w-10 h-10 rounded-full flex items-center justify-center
                  transition-all duration-300 hover:scale-110 hover:brightness-110 active:scale-95 animate-fadeInScale"
       style={{
-        background: 'linear-gradient(135deg, #06B6D4, #8B5CF6)',
-        boxShadow: '0 0 20px rgba(6,182,212,0.3)',
-        color: '#030712',
+        background: '#C84B30',
+        boxShadow: '0 4px 16px rgba(200,75,48,0.35)',
+        color: '#FFFFFF',
       }}
       aria-label="Scroll to top"
     >

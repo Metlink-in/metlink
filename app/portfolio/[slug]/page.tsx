@@ -12,117 +12,142 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
   const project = getProjectBySlug(slug);
   if (!project) notFound();
 
-  // Find related projects (filter by category, exclude current, take 2)
   const relatedProjects = projects.filter((p) => p.slug !== slug && p.category === project.category).slice(0, 2);
   const fallbackProjects = projects.filter((p) => p.slug !== slug).slice(0, 2);
   const displayedRelated = relatedProjects.length > 0 ? relatedProjects : fallbackProjects;
 
   return (
-    <div className="w-full overflow-x-hidden relative" style={{ background: '#030712' }}>
+    <div className="w-full overflow-x-hidden" style={{ background: '#FAF9F6' }}>
 
       {/* Hero */}
-      <section className="relative pt-32 pb-20 overflow-hidden">
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute inset-0 opacity-[0.06]" style={{ background: `linear-gradient(135deg, #000, #06B6D4)` }} />
-          <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full blur-3xl opacity-20"
-            style={{ background: 'radial-gradient(circle, #06B6D4, transparent)' }} />
-        </div>
+      <section className="relative pt-32 pb-20 overflow-hidden"
+        style={{ background: 'linear-gradient(160deg, #FFF9F7 0%, #FAF6F0 50%, #F5EEE4 100%)' }}>
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full pointer-events-none blur-3xl opacity-30"
+          style={{ background: 'radial-gradient(circle, rgba(200,75,48,0.12), transparent)' }} />
 
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="flex items-center gap-2 text-xs text-[#64748B] mb-8 overflow-x-auto whitespace-nowrap pb-2">
-            <Link href="/" className="hover:text-[#E2E8F0] transition-colors">Home</Link>
+          <div className="flex items-center gap-2 text-xs mb-8 overflow-x-auto whitespace-nowrap pb-2" style={{ color: '#ADA09A' }}>
+            <Link href="/" className="hover:text-[#C84B30] transition-colors">Home</Link>
             <ChevronRight className="w-3 h-3" />
-            <Link href="/portfolio" className="hover:text-[#E2E8F0] transition-colors">Portfolio</Link>
+            <Link href="/portfolio" className="hover:text-[#C84B30] transition-colors">Portfolio</Link>
             <ChevronRight className="w-3 h-3" />
-            <span className="text-[#06B6D4] font-medium">{project.title}</span>
+            <span style={{ color: '#C84B30' }}>{project.title}</span>
           </div>
 
-          <h1 className="text-4xl md:text-6xl font-black text-[#E2E8F0] mb-6 leading-tight">{project.title}</h1>
-          <p className="text-xl text-[#64748B] mb-10 max-w-3xl leading-relaxed">{project.description}</p>
+          <h1 className="font-black mb-6 leading-tight" style={{ color: '#1C1410' }}>{project.title}</h1>
+          <p className="text-xl mb-10 max-w-3xl leading-relaxed" style={{ color: '#72645A' }}>{project.description}</p>
 
-          <div className="grid sm:grid-cols-3 gap-4 pt-8" style={{ borderTop: '1px solid #1E293B' }}>
+          <div className="grid sm:grid-cols-3 gap-4 pt-8" style={{ borderTop: '1px solid #E5DDD5' }}>
             <div>
-              <p className="text-xs text-[#64748B] uppercase tracking-wider mb-1">Client</p>
-              <p className="font-bold text-[#E2E8F0]">{project.client}</p>
+              <p className="text-xs uppercase tracking-wider mb-1" style={{ color: '#ADA09A' }}>Client</p>
+              <p className="font-bold" style={{ color: '#1C1410' }}>{project.client}</p>
             </div>
             <div>
-              <p className="text-xs text-[#64748B] uppercase tracking-wider mb-1">Category</p>
-              <p className="font-bold text-[#E2E8F0]">{project.category}</p>
+              <p className="text-xs uppercase tracking-wider mb-1" style={{ color: '#ADA09A' }}>Category</p>
+              <p className="font-bold" style={{ color: '#1C1410' }}>{project.category}</p>
             </div>
             <div>
-              <p className="text-xs text-[#64748B] uppercase tracking-wider mb-1">Date Completed</p>
-              <p className="font-bold text-[#06B6D4]">{project.date}</p>
+              <p className="text-xs uppercase tracking-wider mb-1" style={{ color: '#ADA09A' }}>Date Completed</p>
+              <p className="font-bold" style={{ color: '#C84B30' }}>{project.date}</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Main Content Split */}
-      <section className="py-20" style={{ background: '#030712', borderTop: '1px solid #1E293B' }}>
+      {/* Main Content */}
+      <section className="py-20" style={{ background: '#FFFFFF', borderTop: '1px solid #E5DDD5' }}>
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-3 gap-16">
 
-            {/* Left: Challenge & Solution */}
+            {/* Challenge & Solution */}
             <div className="md:col-span-2 space-y-16">
               <div>
-                <h2 className="text-3xl font-black text-[#E2E8F0] mb-6">The Challenge</h2>
-                <div className="p-8 rounded-3xl" style={{ background: '#030712', border: '1px solid #1E293B' }}>
-                  <p className="text-[#64748B] leading-relaxed text-lg">{project.problem}</p>
+                <h2 className="text-3xl font-black mb-6" style={{ color: '#1C1410' }}>The Challenge</h2>
+                <div className="p-8 rounded-3xl" style={{ background: '#FAF9F6', border: '1px solid #E5DDD5' }}>
+                  <p className="leading-relaxed text-lg" style={{ color: '#72645A' }}>{project.problem}</p>
                 </div>
               </div>
 
               <div>
-                <h2 className="text-3xl font-black text-[#E2E8F0] mb-6">Our Solution</h2>
-                <div className="p-8 rounded-3xl" style={{ background: '#1E293B', border: '1px solid #1E293B' }}>
-                  <p className="text-[#E2E8F0] leading-relaxed text-lg">{project.solution}</p>
+                <h2 className="text-3xl font-black mb-6" style={{ color: '#1C1410' }}>Our Solution</h2>
+                <div className="p-8 rounded-3xl" style={{ background: '#FEF1EE', border: '1px solid rgba(200,75,48,0.15)' }}>
+                  <p className="leading-relaxed text-lg" style={{ color: '#1C1410' }}>{project.solution}</p>
                 </div>
               </div>
             </div>
 
-            {/* Right: Results & Tech */}
+            {/* Results & Tech */}
             <div className="space-y-12">
               <div>
-                <h3 className="text-lg font-bold text-[#E2E8F0] mb-5 flex items-center gap-2">
-                  <span className="text-[#06B6D4]"><Play className="w-4 h-4 fill-current content-end shrink-0" /></span> Key Results
+                <h3 className="text-lg font-bold mb-5 flex items-center gap-2" style={{ color: '#1C1410' }}>
+                  <span style={{ color: '#C84B30' }}><Play className="w-4 h-4 fill-current shrink-0" /></span> Key Results
                 </h3>
                 <div className="space-y-3">
                   {project.results.map((res) => (
                     <div key={res} className="p-4 rounded-xl flex items-start gap-3"
-                      style={{ background: '#030712', border: '1px solid #1E293B' }}>
-                      <CheckCircle className="w-5 h-5 text-[#06B6D4] shrink-0 mt-0.5" />
-                      <p className="text-sm font-semibold text-[#E2E8F0]">{res}</p>
+                      style={{ background: '#FAF9F6', border: '1px solid #E5DDD5' }}>
+                      <CheckCircle className="w-5 h-5 shrink-0 mt-0.5" style={{ color: '#C84B30' }} />
+                      <p className="text-sm font-semibold" style={{ color: '#1C1410' }}>{res}</p>
                     </div>
                   ))}
                 </div>
               </div>
 
               <div>
-                <h3 className="text-lg font-bold text-[#E2E8F0] mb-5 flex items-center gap-2">
-                  <span className="text-[#06B6D4]"><Code2 className="w-4 h-4 fill-current shrink-0" /></span> Technologies Used
+                <h3 className="text-lg font-bold mb-5 flex items-center gap-2" style={{ color: '#1C1410' }}>
+                  <span style={{ color: '#C84B30' }}><Code2 className="w-4 h-4 shrink-0" /></span> Technologies Used
                 </h3>
                 <div className="flex flex-wrap gap-2">
                   {project.tech.map((t) => (
                     <span key={t} className="px-3 py-1.5 rounded-lg text-xs font-semibold"
-                      style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid #1E293B', color: '#06B6D4' }}>
+                      style={{ background: '#FAF9F6', border: '1px solid #E5DDD5', color: '#72645A' }}>
                       {t}
                     </span>
                   ))}
                 </div>
               </div>
             </div>
-
           </div>
         </div>
       </section>
 
+      {/* Related Projects */}
+      {displayedRelated.length > 0 && (
+        <section className="py-24" style={{ background: '#FAF9F6', borderTop: '1px solid #E5DDD5' }}>
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 className="text-3xl font-black mb-10 text-center" style={{ color: '#1C1410' }}>More Projects</h2>
+            <div className="grid sm:grid-cols-2 gap-6">
+              {displayedRelated.map((p) => (
+                <Link key={p.slug} href={`/portfolio/${p.slug}`}
+                  className="group rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
+                  style={{ background: '#FFFFFF', border: '1px solid #E5DDD5' }}>
+                  <div className={`h-32 bg-gradient-to-br ${p.gradientFrom} ${p.gradientTo} relative`}>
+                    <div className="absolute inset-0 bg-black/15" />
+                    <div className="absolute bottom-3 left-4">
+                      <span className="px-3 py-1 rounded-full text-xs font-semibold bg-black/25 text-white backdrop-blur-sm">{p.category}</span>
+                    </div>
+                  </div>
+                  <div className="p-5">
+                    <h3 className="font-bold mb-2 group-hover:text-[#C84B30] transition-colors" style={{ color: '#1C1410' }}>{p.title}</h3>
+                    <p className="text-sm line-clamp-2" style={{ color: '#72645A' }}>{p.description}</p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* CTA */}
-      <section className="py-24" style={{ background: '#030712', borderTop: '1px solid #1E293B' }}>
-        <div className="max-w-3xl mx-auto px-4 text-center">
-          <h2 className="text-4xl font-black text-[#E2E8F0] mb-4">Let's build your success story</h2>
-          <p className="text-[#64748B] mb-8 text-lg">We deliver measurable impact through AI, code, and creative strategy.</p>
+      <section className="py-24" style={{ background: '#FFFFFF', borderTop: '1px solid #E5DDD5' }}>
+        <div className="absolute inset-0 pointer-events-none"
+          style={{ background: 'radial-gradient(ellipse at 50% 50%, rgba(200,75,48,0.04), transparent 65%)' }} />
+        <div className="max-w-3xl mx-auto px-4 text-center relative z-10">
+          <h2 className="font-black mb-4" style={{ color: '#1C1410' }}>Let&apos;s build your success story</h2>
+          <p className="mb-8 text-lg" style={{ color: '#72645A' }}>We deliver measurable impact through AI, code, and creative strategy.</p>
           <Link href="/contact"
-            className="inline-flex items-center gap-2 px-9 py-4 rounded-xl font-bold hover:opacity-90 transition-opacity shadow-xl"
-            style={{ background: 'linear-gradient(135deg, #06B6D4, #8B5CF6)', color: '#030712', boxShadow: "none" }}>
+            className="inline-flex items-center gap-2 px-9 py-4 rounded-full font-bold text-sm text-white transition-all hover:brightness-95 active:scale-95"
+            style={{ background: '#C84B30', boxShadow: '0 4px 20px rgba(200,75,48,0.3)' }}>
             Start Your Project <ArrowRight className="w-5 h-5" />
           </Link>
         </div>
