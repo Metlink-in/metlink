@@ -518,79 +518,59 @@ export default function HomePage() {
       <Wave from={A} to={B} />
 
       {/* ══════════════════════════════════
-          CTA BANNER  (B → dark card)
+          CTA BANNER
       ══════════════════════════════════ */}
-      <section className="relative py-20 sm:py-28" style={{ background: B }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative py-16 sm:py-24" style={{ background: A }}>
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeIn>
-            <div className="relative rounded-3xl overflow-hidden flex flex-col lg:flex-row"
+            <div className="relative rounded-[28px] overflow-hidden text-center px-8 sm:px-16 py-16 sm:py-20"
               style={{
-                background: 'linear-gradient(135deg, #1C1410 0%, #2D1A12 50%, #1C1410 100%)',
-                boxShadow: '0 32px 80px rgba(0,0,0,0.18)',
+                background: '#110E09',
+                boxShadow: '0 40px 100px rgba(0,0,0,0.28)',
+                border: '1px solid rgba(255,255,255,0.06)',
               }}>
-              {/* Warm glow left */}
-              <div className="absolute top-0 left-0 w-[500px] h-[500px] rounded-full pointer-events-none"
-                style={{ background: 'radial-gradient(circle, rgba(200,75,48,0.22) 0%, transparent 65%)', filter: 'blur(80px)', transform: 'translate(-30%,-40%)' }} />
-              {/* Warm glow right */}
-              <div className="absolute bottom-0 right-0 w-80 h-80 rounded-full pointer-events-none"
-                style={{ background: 'radial-gradient(circle, rgba(232,97,42,0.15) 0%, transparent 65%)', filter: 'blur(60px)', transform: 'translate(30%,30%)' }} />
 
-              {/* LEFT */}
-              <div className="relative z-10 flex-1 p-10 sm:p-14 lg:p-16 flex flex-col justify-center">
-                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-[11px] font-bold mb-7 self-start"
-                  style={{ background: 'rgba(200,75,48,0.18)', border: '1px solid rgba(200,75,48,0.35)', color: '#E8612A' }}>
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#E8612A] animate-pulse" />
-                  Limited Spots — 2025
+              {/* Large radish glow — right */}
+              <div className="absolute -top-20 -right-20 w-[560px] h-[560px] pointer-events-none"
+                style={{ background: 'radial-gradient(circle, rgba(200,75,48,0.55) 0%, rgba(200,75,48,0.18) 40%, transparent 70%)', filter: 'blur(60px)' }} />
+              {/* Subtle teal glow — bottom left */}
+              <div className="absolute -bottom-20 -left-20 w-[380px] h-[380px] pointer-events-none"
+                style={{ background: 'radial-gradient(circle, rgba(20,60,45,0.7) 0%, transparent 65%)', filter: 'blur(80px)' }} />
+
+              <div className="relative z-10 flex flex-col items-center">
+                {/* Badge */}
+                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-[11px] font-semibold mb-7"
+                  style={{ border: '1px solid rgba(255,255,255,0.18)', color: 'rgba(255,255,255,0.65)' }}>
+                  <Sparkles className="w-3 h-3" />
+                  Let&apos;s build together
                 </div>
-                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white leading-[1.08] mb-5">
-                  Let&apos;s Turn Ideas Into{' '}
-                  <em style={{ fontFamily: 'var(--font-playfair)', fontStyle: 'italic', color: '#E8612A' }}>
-                    Results
-                  </em>
+
+                {/* Headline */}
+                <h2 className="font-black text-white leading-[1.05] mb-5"
+                  style={{ fontSize: 'clamp(2.2rem, 5vw, 4rem)', fontFamily: 'var(--font-playfair)' }}>
+                  Ready to scale with{' '}
+                  <em style={{ fontStyle: 'italic', color: '#E8612A' }}>AI?</em>
                 </h2>
-                <p className="text-base max-w-md mb-8 leading-relaxed" style={{ color: 'rgba(255,255,255,0.58)' }}>
-                  Partner with a team that ships fast, communicates clearly, and drives measurable ROI — starting week one.
-                </p>
-                <div className="flex flex-wrap gap-3">
-                  <Link href="/contact"
-                    className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-black text-sm text-white transition-all hover:brightness-110 active:scale-95"
-                    style={{ background: '#C84B30', boxShadow: '0 0 32px rgba(200,75,48,0.45)' }}>
-                    <Sparkles className="w-4 h-4" />
-                    Become a Client
-                  </Link>
-                  <Link href="/portfolio"
-                    className="inline-flex items-center gap-2 px-7 py-4 rounded-full font-semibold text-sm transition-all hover:border-white/25"
-                    style={{ border: '1px solid rgba(255,255,255,0.14)', color: 'rgba(255,255,255,0.6)' }}
-                    onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = '#FFFFFF'}
-                    onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.6)'}>
-                    See Our Work <ArrowRight className="w-4 h-4" />
-                  </Link>
-                </div>
-              </div>
 
-              {/* RIGHT — stat cards 2×2 */}
-              <div className="relative z-10 lg:w-[42%] flex-shrink-0 flex flex-col justify-center p-10 sm:p-12 lg:p-14">
-                <div className="grid grid-cols-2 gap-3.5 mb-6">
-                  {[
-                    { val: '450+', label: 'Projects Shipped',     color: '#C84B30' },
-                    { val: '250+', label: 'Happy Clients',         color: '#2563EB' },
-                    { val: '7d',   label: 'First Build Delivered', color: '#16A34A' },
-                    { val: '98%',  label: 'Client Retention',      color: '#D97706' },
-                  ].map(s => (
-                    <div key={s.label} className="p-5 rounded-2xl"
-                      style={{ background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.10)' }}>
-                      <p className="text-2xl font-black leading-none mb-2" style={{ color: s.color }}>{s.val}</p>
-                      <p className="text-[11px] leading-snug font-medium" style={{ color: 'rgba(255,255,255,0.48)' }}>{s.label}</p>
-                    </div>
-                  ))}
-                </div>
-                <div className="flex flex-col gap-2.5">
-                  {['NDA signed before we begin', 'Zero long-term lock-in', 'First deliverables in 7 days'].map(point => (
-                    <div key={point} className="flex items-center gap-2.5">
-                      <CheckCircle className="w-3.5 h-3.5 flex-shrink-0" style={{ color: '#C84B30' }} />
-                      <p className="text-xs font-medium" style={{ color: 'rgba(255,255,255,0.52)' }}>{point}</p>
-                    </div>
-                  ))}
+                {/* Subtitle */}
+                <p className="text-base sm:text-lg mb-10 max-w-xl leading-relaxed"
+                  style={{ color: 'rgba(255,255,255,0.52)' }}>
+                  Book a free 30-min strategy call. No commitments — just clarity on what AI can do for your business.
+                </p>
+
+                {/* Buttons */}
+                <div className="flex flex-wrap gap-3 justify-center">
+                  <Link href="/contact"
+                    className="group inline-flex items-center gap-2 px-8 py-4 rounded-full font-bold text-sm text-white transition-all hover:brightness-110 active:scale-95"
+                    style={{ background: '#C84B30', boxShadow: '0 0 40px rgba(200,75,48,0.5)' }}>
+                    Book your strategy call
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+                  </Link>
+                  <Link href="/services"
+                    className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold text-sm transition-all hover:border-white/30"
+                    style={{ border: '1px solid rgba(255,255,255,0.22)', color: 'rgba(255,255,255,0.75)', background: 'transparent' }}>
+                    See services
+                  </Link>
                 </div>
               </div>
             </div>
