@@ -80,10 +80,10 @@ export function Header() {
             <Link href="/" className="flex items-center gap-2.5 group shrink-0">
               <MetLinkLogo size={40} />
               <div className="hidden sm:block">
-                <span className="font-black text-base tracking-tight leading-none">
+                <span className="text-[17px] font-bold leading-none" style={{ fontFamily: 'var(--font-jakarta)', letterSpacing: '0.01em' }}>
                   <span style={{ color: '#192540' }}>Met</span><span style={{ color: '#2B80F0' }}>link</span>
                 </span>
-                <p className="text-[9px] tracking-widest uppercase leading-none mt-0.5" style={{ color: '#ADA09A' }}>AI Agency</p>
+                <p className="text-[9px] tracking-widest uppercase leading-none mt-1 font-semibold" style={{ color: '#ADA09A' }}>AI Agency</p>
               </div>
             </Link>
 

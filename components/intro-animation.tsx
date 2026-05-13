@@ -100,10 +100,10 @@ export function IntroAnimation() {
         {/* Wordmark */}
         <div style={{ display: 'flex', alignItems: 'baseline', overflow: 'hidden', lineHeight: 1 }}>
           <span style={{
-            fontFamily: 'var(--font-syne, system-ui, sans-serif)',
+            fontFamily: 'var(--font-jakarta, system-ui, sans-serif)',
             fontSize: 'clamp(3.2rem, 10vw, 6.5rem)',
-            fontWeight: 900,
-            letterSpacing: '-0.03em',
+            fontWeight: 700,
+            letterSpacing: '0.01em',
             color: '#192540',
             lineHeight: 1,
             opacity: ['name','sub','bar','exit'].includes(phase) ? 1 : 0,
@@ -112,16 +112,16 @@ export function IntroAnimation() {
           }}>Met</span>
 
           <span style={{
-            fontFamily: 'var(--font-syne, system-ui, sans-serif)',
+            fontFamily: 'var(--font-jakarta, system-ui, sans-serif)',
             fontSize: 'clamp(3.2rem, 10vw, 6.5rem)',
-            fontWeight: 900,
-            letterSpacing: '-0.03em',
+            fontWeight: 700,
+            letterSpacing: '0.01em',
             color: '#2B80F0',
             lineHeight: 1,
             opacity: ['name','sub','bar','exit'].includes(phase) ? 1 : 0,
             transform: ['name','sub','bar','exit'].includes(phase) ? 'translateX(0)' : 'translateX(40px)',
             transition: 'opacity 0.6s cubic-bezier(0.16,1,0.3,1) 0.06s, transform 0.6s cubic-bezier(0.16,1,0.3,1) 0.06s',
-          }}>Link</span>
+          }}>link</span>
         </div>
 
         {/* Tagline */}

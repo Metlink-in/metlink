@@ -41,10 +41,10 @@ export function Footer() {
               <div className="flex items-center gap-3 mb-5">
                 <MetLinkLogoFooter />
                 <div>
-                  <p className="font-black text-xl tracking-tight leading-none">
+                  <p className="text-xl font-bold leading-none" style={{ fontFamily: 'var(--font-jakarta)', letterSpacing: '0.01em' }}>
                     <span style={{ color: '#192540' }}>Met</span><span style={{ color: '#2B80F0' }}>link</span>
                   </p>
-                  <p className="text-[10px] tracking-[0.2em] uppercase font-bold mt-1" style={{ color: '#ADA09A' }}>AI Agency</p>
+                  <p className="text-[10px] tracking-[0.2em] uppercase font-semibold mt-1" style={{ color: '#ADA09A' }}>AI Agency</p>
                 </div>
               </div>
               <p className="text-sm leading-relaxed max-w-xs" style={{ color: '#72645A' }}>
