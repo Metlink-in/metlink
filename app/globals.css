@@ -15,7 +15,7 @@
   --primary-light: #FEF1EE;
   --primary-dark: #A83E27;
   --font-sans: var(--font-jakarta), system-ui, sans-serif;
-  --font-heading: var(--font-syne), system-ui, sans-serif;
+  --font-heading: var(--font-playfair), Georgia, serif;
   --font-serif: var(--font-playfair), Georgia, serif;
 }
 
@@ -229,7 +229,7 @@ nav button, nav a { min-height: unset; min-width: unset; }
 /* ── Typography ── */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
-  letter-spacing: -0.025em;
+  letter-spacing: -0.01em;
   color: var(--foreground);
 }
 h1 { font-size: clamp(2.6rem, 9vw, 5.5rem);  line-height: 0.97; font-weight: 800; }
