@@ -111,7 +111,7 @@ export default function HomePage() {
           HERO
       ══════════════════════════════════════ */}
       <section id="hero" className="relative overflow-hidden" style={{
-        background: '#FAF9F6',
+        background: '#F2D5C8',
         minHeight: '100vh',
       }}>
         {/* Noise */}
