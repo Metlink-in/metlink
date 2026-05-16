@@ -48,11 +48,11 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             <span className="text-sm" style={{ color: 'rgba(255,255,255,0.4)' }}>{post.date}</span>
           </div>
 
-          <h1 className="font-black mb-6 leading-tight" style={{ color: '#FFFFFF' }}>{post.title}</h1>
+          <h1 className=" mb-6 leading-tight" style={{ color: '#FFFFFF' }}>{post.title}</h1>
           <p className="text-xl leading-relaxed mb-10" style={{ color: 'rgba(255,255,255,0.6)' }}>{post.excerpt}</p>
 
           <div className="inline-flex items-center gap-4 p-5 rounded-2xl"
-            style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)', boxShadow: '0 2px 12px rgba(0,0,0,0.05)' }}>
+            style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.07)', boxShadow: '0 2px 12px rgba(0,0,0,0.05)' }}>
             <div className="w-12 h-12 rounded-xl flex items-center justify-center font-black text-lg shrink-0"
               style={{ background: 'rgba(43,128,240,0.15)', border: '1px solid rgba(43,128,240,0.2)', color: '#4B9CF4' }}>
               {post.author.split(' ').map((n: string) => n[0]).join('')}
@@ -66,13 +66,13 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
       </section>
 
       {/* Article */}
-      <article className="py-16" style={{ background: '#0B1628', borderTop: '1px solid rgba(255,255,255,0.12)' }}>
+      <article className="py-16" style={{ background: '#0B1628', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="prose prose-lg max-w-none">
             {paragraphs.map((block, i) => {
               if (block.startsWith('## ')) {
                 return (
-                  <h2 key={i} className="text-3xl font-black mt-12 mb-5 leading-tight" style={{ color: '#FFFFFF' }}>
+                  <h2 key={i} className="text-3xl  mt-12 mb-5 leading-tight" style={{ color: '#FFFFFF' }}>
                     {block.replace('## ', '')}
                   </h2>
                 );
@@ -108,12 +108,12 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           </div>
 
           {/* Tags */}
-          <div className="mt-16 pt-8" style={{ borderTop: '1px solid rgba(255,255,255,0.12)' }}>
+          <div className="mt-16 pt-8" style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
             <p className="text-xs font-bold uppercase tracking-[0.2em] mb-4" style={{ color: 'rgba(255,255,255,0.4)' }}>Tags</p>
             <div className="flex flex-wrap gap-2">
               {post.tags.map((tag) => (
                 <span key={tag} className="px-4 py-1.5 rounded-full text-xs font-semibold"
-                  style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)', color: 'rgba(255,255,255,0.6)' }}>
+                  style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.07)', color: 'rgba(255,255,255,0.6)' }}>
                   {tag}
                 </span>
               ))}
@@ -122,7 +122,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
           {/* Author bio */}
           <div className="mt-12 p-8 rounded-3xl flex gap-6 items-start"
-            style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)' }}>
+            style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.07)' }}>
             <div className="w-16 h-16 rounded-2xl flex items-center justify-center font-black text-xl flex-shrink-0"
               style={{ background: 'rgba(43,128,240,0.15)', border: '1px solid rgba(43,128,240,0.2)', color: '#4B9CF4' }}>
               {post.author.split(' ').map((n: string) => n[0]).join('')}
@@ -140,14 +140,14 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
       {/* Related */}
       {relatedPosts.length > 0 && (
-        <section className="py-16 sm:py-24" style={{ background: '#07111F', borderTop: '1px solid rgba(255,255,255,0.12)' }}>
+        <section className="py-16 sm:py-24" style={{ background: '#07111F', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="font-black mb-10 text-center" style={{ color: '#FFFFFF' }}>Continue Reading</h2>
+            <h2 className=" mb-10 text-center" style={{ color: '#FFFFFF' }}>Continue Reading</h2>
             <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
               {relatedPosts.map((p) => (
                 <Link key={p.slug} href={`/blog/${p.slug}`}
                   className="group rounded-2xl overflow-hidden flex transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
-                  style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)' }}>
+                  style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.07)' }}>
                   <div className="w-1.5 flex-shrink-0" style={{ background: '#2B80F0' }} />
                   <div className="p-6 flex-1">
                     <span className="text-xs font-bold uppercase tracking-wider" style={{ color: '#2B80F0' }}>{p.category}</span>
@@ -163,7 +163,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             <div className="text-center mt-12">
               <Link href="/blog"
                 className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full font-semibold text-sm transition-all hover:brightness-95"
-                style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)', color: 'rgba(255,255,255,0.6)' }}>
+                style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.07)', color: 'rgba(255,255,255,0.6)' }}>
                 View All Articles <ArrowRight className="w-4 h-4" />
               </Link>
             </div>

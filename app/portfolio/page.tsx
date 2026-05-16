@@ -18,15 +18,15 @@ export default function PortfolioPage() {
           style={{ background: 'radial-gradient(ellipse, rgba(43,128,240,0.18) 0%, transparent 70%)', filter: 'blur(80px)' }} />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
           <FadeIn>
-            <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-[10px] font-black uppercase tracking-[0.25em] mb-8"
-              style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)', color: '#2B80F0',  }}>
+            <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-[10px] font-normal uppercase tracking-[0.25em] mb-8"
+              style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.07)', color: '#2B80F0',  }}>
               Our Work
             </div>
           </FadeIn>
           <FadeIn delay={0.1}>
-            <h1 className="font-black mb-6 leading-tight" style={{ color: '#FFFFFF' }}>
+            <h1 className=" mb-6 leading-tight" style={{ color: '#FFFFFF' }}>
               Built to{' '}
-              <em style={{ fontFamily: 'var(--font-playfair)', fontStyle: 'italic', color: '#2B80F0' }}>Perform</em>
+              <span style={{ color: '#2B80F0' }}>Perform</span>
             </h1>
           </FadeIn>
           <FadeIn delay={0.2}>
@@ -38,10 +38,10 @@ export default function PortfolioPage() {
             <div className="flex flex-wrap gap-3 justify-center">
               {filters.map((filter, i) => (
                 <button key={filter}
-                  className="px-6 py-2.5 rounded-full text-[11px] font-black uppercase tracking-[0.15em] transition-all hover:scale-105"
+                  className="px-6 py-2.5 rounded-full text-[11px] font-normal uppercase tracking-[0.15em] transition-all hover:scale-105"
                   style={i === 0
                     ? { background: 'rgba(43,128,240,0.15)', border: '1px solid rgba(43,128,240,0.3)', color: '#2B80F0' }
-                    : { background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)', color: 'rgba(255,255,255,0.4)' }}>
+                    : { background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.07)', color: 'rgba(255,255,255,0.4)' }}>
                   {filter}
                 </button>
               ))}
@@ -58,7 +58,7 @@ export default function PortfolioPage() {
               <StaggerItem key={project.slug}>
                 <Link href={`/portfolio/${project.slug}`}
                   className="group relative rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1.5 flex flex-col h-full"
-                  style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)', boxShadow: '0 2px 8px rgba(0,0,0,0.2)' }}
+                  style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.07)', boxShadow: '0 2px 8px rgba(0,0,0,0.2)' }}
                   onMouseEnter={e => (e.currentTarget as HTMLElement).style.boxShadow = '0 16px 48px rgba(0,0,0,0.4)'}
                   onMouseLeave={e => (e.currentTarget as HTMLElement).style.boxShadow = '0 2px 8px rgba(0,0,0,0.2)'}>
 
@@ -96,7 +96,7 @@ export default function PortfolioPage() {
                     <div className="grid grid-cols-2 gap-2.5 mb-5">
                       {project.results.slice(0, 2).map(r => (
                         <div key={r} className="px-3.5 py-2.5 rounded-xl"
-                          style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)' }}>
+                          style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.07)' }}>
                           <p className={`text-sm font-black ${project.colorClass} mb-0 tracking-tight`}>{r.split(' ').slice(0,2).join(' ')}</p>
                           <p className="text-[10px] font-medium uppercase tracking-widest" style={{ color: 'rgba(255,255,255,0.4)' }}>{r.split(' ').slice(2).join(' ')}</p>
                         </div>
@@ -107,7 +107,7 @@ export default function PortfolioPage() {
                     <div className="flex flex-wrap gap-1.5 pt-4" style={{ borderTop: '1px solid rgba(255,255,255,0.08)' }}>
                       {project.tech.slice(0, 3).map(t => (
                         <span key={t} className="px-2.5 py-1 rounded-md text-[9px] font-black uppercase tracking-wider"
-                          style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)', color: 'rgba(255,255,255,0.4)' }}>
+                          style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.07)', color: 'rgba(255,255,255,0.4)' }}>
                           {t}
                         </span>
                       ))}
@@ -124,7 +124,7 @@ export default function PortfolioPage() {
       </section>
 
       {/* Stats strip */}
-      <section style={{ background: '#0B1628', borderTop: '1px solid rgba(255,255,255,0.12)', borderBottom: '1px solid rgba(255,255,255,0.12)' }}>
+      <section style={{ background: '#0B1628', borderTop: '1px solid rgba(255,255,255,0.06)', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
         <StaggerChildren className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
           {[['150+','Projects Delivered'],['$10M+','Revenue Generated'],['80+','Happy Clients'],['98%','Satisfaction Rate']].map(([v, l]) => (
             <StaggerItem key={l}>
@@ -140,9 +140,9 @@ export default function PortfolioPage() {
         <div className="absolute inset-0 pointer-events-none"
           style={{ background: 'radial-gradient(ellipse at 50% 50%, rgba(43,128,240,0.15), transparent 65%)' }} />
         <FadeIn className="max-w-3xl mx-auto px-4 text-center relative z-10">
-          <h2 className="font-black mb-4" style={{ color: '#FFFFFF' }}>
+          <h2 className=" mb-4" style={{ color: '#FFFFFF' }}>
             Want Results Like{' '}
-            <em style={{ fontFamily: 'var(--font-playfair)', fontStyle: 'italic', color: '#2B80F0' }}>These</em>?
+            <span style={{ color: '#2B80F0' }}>These</span>?
           </h2>
           <p className="mb-10 text-lg" style={{ color: 'rgba(255,255,255,0.6)' }}>
             Let&apos;s discuss your project and build the next success story together.

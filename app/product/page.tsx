@@ -27,21 +27,20 @@ export default function ProductPage() {
       <div className="relative z-10 flex flex-col items-center text-center px-6 max-w-3xl mx-auto w-full">
 
         {/* Badge */}
-        <div className="mb-8 inline-flex items-center gap-2 rounded-full px-5 py-2 text-[10px] font-black uppercase tracking-[0.28em]"
+        <div className="mb-8 inline-flex items-center gap-2 rounded-full px-5 py-2 text-[10px] font-normal uppercase tracking-[0.28em]"
           style={{ background: 'rgba(43,128,240,0.15)', border: '1px solid rgba(43,128,240,0.25)', color: '#2B80F0' }}>
           <span className="inline-block w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: '#2B80F0' }} />
           In Development
         </div>
 
         {/* Headline */}
-        <h1 className="font-black leading-[1.0] mb-6"
+        <h1 className=" leading-[1.0] mb-6"
           style={{
             color: '#FFFFFF',
-            fontFamily: 'var(--font-playfair)',
             fontSize: 'clamp(3rem, 7vw, 6rem)',
           }}>
           Coming{' '}
-          <em style={{ fontStyle: 'italic', color: '#2B80F0' }}>Soon</em>
+          <span style={{ color: '#2B80F0' }}>Soon</span>
         </h1>
 
         {/* Subtext */}
@@ -59,7 +58,7 @@ export default function ProductPage() {
 
         {/* Feature preview cards */}
         <div className="grid sm:grid-cols-3 gap-px mb-12 w-full"
-          style={{ border: '1px solid rgba(255,255,255,0.12)', borderRadius: 16, overflow: 'hidden' }}>
+          style={{ border: '1px solid rgba(255,255,255,0.07)', borderRadius: 16, overflow: 'hidden' }}>
           {features.map(({ icon: Icon, title, desc }) => (
             <div key={title} className="flex flex-col items-start p-6 text-left"
               style={{ background: '#0B1628' }}>
@@ -84,7 +83,7 @@ export default function ProductPage() {
           </Link>
           <Link href="/services"
             className="inline-flex items-center gap-2 px-7 py-4 rounded-full text-sm font-semibold transition-all hover:bg-black/5"
-            style={{ border: '1px solid rgba(255,255,255,0.12)', color: 'rgba(255,255,255,0.6)', background: 'rgba(255,255,255,0.08)' }}>
+            style={{ border: '1px solid rgba(255,255,255,0.07)', color: 'rgba(255,255,255,0.6)', background: 'rgba(255,255,255,0.08)' }}>
             See our services
           </Link>
         </div>

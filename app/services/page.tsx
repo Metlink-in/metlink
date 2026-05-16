@@ -23,15 +23,15 @@ export default function ServicesPage() {
           style={{ background: 'radial-gradient(ellipse, rgba(43,128,240,0.18) 0%, transparent 70%)', filter: 'blur(80px)' }} />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
           <FadeIn>
-            <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-[10px] font-black uppercase tracking-[0.25em] mb-8"
-              style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)', color: '#2B80F0',  }}>
+            <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-[10px] font-normal uppercase tracking-[0.25em] mb-8"
+              style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.07)', color: '#2B80F0',  }}>
               What We Offer
             </div>
           </FadeIn>
           <FadeIn delay={0.1}>
-            <h1 className="font-black mb-6 leading-tight" style={{ color: '#FFFFFF' }}>
+            <h1 className=" mb-6 leading-tight" style={{ color: '#FFFFFF' }}>
               Our{' '}
-              <em style={{ fontFamily: 'var(--font-playfair)', fontStyle: 'italic', color: '#2B80F0' }}>Services</em>
+              <span style={{ color: '#2B80F0' }}>Services</span>
             </h1>
           </FadeIn>
           <FadeIn delay={0.2}>
@@ -61,13 +61,13 @@ export default function ServicesPage() {
         const accent = catColors[cat.slug] || '#2B80F0';
         return (
           <section key={cat.slug} id={cat.slug} className="w-full py-24 relative"
-            style={{ background: catIdx % 2 === 0 ? '#0B1628' : '#07111F', borderTop: '1px solid rgba(255,255,255,0.12)' }}>
+            style={{ background: catIdx % 2 === 0 ? '#0B1628' : '#07111F', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <FadeIn className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
                 <div>
                   <span className="text-4xl mb-3 block">{cat.icon}</span>
-                  <p className="text-xs font-black uppercase tracking-[0.25em] mb-2" style={{ color: accent }}>{cat.name}</p>
-                  <h2 className="font-black mb-3" style={{ color: '#FFFFFF' }}>{cat.tagline}</h2>
+                  <p className="text-xs font-normal uppercase tracking-[0.25em] mb-2" style={{ color: accent }}>{cat.name}</p>
+                  <h2 className=" mb-3" style={{ color: '#FFFFFF' }}>{cat.tagline}</h2>
                   <p className="max-w-xl leading-relaxed" style={{ color: 'rgba(255,255,255,0.6)' }}>{cat.description}</p>
                 </div>
                 <Link href={`/services/${cat.slug}`}
@@ -82,7 +82,7 @@ export default function ServicesPage() {
                   <StaggerItem key={svc.slug}>
                     <Link href={`/services/${cat.slug}/${svc.slug}`}
                       className="group relative p-6 rounded-2xl transition-all duration-300 hover:-translate-y-1.5 flex flex-col h-full"
-                      style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)' }}
+                      style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.07)' }}
                       onMouseEnter={e => {
                         (e.currentTarget as HTMLElement).style.borderColor = `${accent}40`;
                         (e.currentTarget as HTMLElement).style.boxShadow = '0 8px 32px rgba(0,0,0,0.08)';
@@ -109,13 +109,13 @@ export default function ServicesPage() {
       })}
 
       {/* CTA */}
-      <section className="py-16 sm:py-24 relative overflow-hidden" style={{ background: '#07111F', borderTop: '1px solid rgba(255,255,255,0.12)' }}>
+      <section className="py-16 sm:py-24 relative overflow-hidden" style={{ background: '#07111F', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
         <div className="absolute inset-0 pointer-events-none"
           style={{ background: 'radial-gradient(ellipse at 50% 50%, rgba(43,128,240,0.15), transparent 65%)' }} />
         <FadeIn className="max-w-3xl mx-auto px-4 text-center relative z-10">
-          <h2 className="font-black mb-4" style={{ color: '#FFFFFF' }}>
+          <h2 className=" mb-4" style={{ color: '#FFFFFF' }}>
             Not Sure Where to{' '}
-            <em style={{ fontFamily: 'var(--font-playfair)', fontStyle: 'italic', color: '#2B80F0' }}>Start</em>?
+            <span style={{ color: '#2B80F0' }}>Start</span>?
           </h2>
           <p className="mb-10 text-lg" style={{ color: 'rgba(255,255,255,0.6)' }}>
             Talk to our experts and we&apos;ll build a custom strategy for your unique business needs.

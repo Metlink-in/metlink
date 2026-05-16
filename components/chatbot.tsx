@@ -89,7 +89,7 @@ export function ChatBot() {
 
             <div className="flex-1">
               <div className="flex items-center gap-2">
-                <p className="text-sm font-black" style={{ color: '#192540' }}>MetLink AI</p>
+                <p className="text-sm font-black" style={{ color: '#0B1628' }}>MetLink AI</p>
                 <Sparkles className="w-3 h-3" style={{ color: '#2B80F0' }} />
               </div>
               <p className="text-[10px] uppercase font-bold tracking-[0.15em] flex items-center gap-1.5"
@@ -124,7 +124,7 @@ export function ChatBot() {
                   }`}
                   style={m.role === 'user'
                     ? { background: '#2B80F0' }
-                    : { background: '#FFFFFF', border: '1px solid #E5DDD5', color: '#192540' }
+                    : { background: '#FFFFFF', border: '1px solid #E5DDD5', color: '#0B1628' }
                   }
                 >
                   {m.text}
@@ -178,7 +178,7 @@ export function ChatBot() {
                 onChange={e => setInput(e.target.value)}
                 placeholder="Ask about our services..."
                 className="flex-1 px-4 py-2.5 rounded-xl text-sm focus:outline-none transition-all"
-                style={{ background: '#FAF9F6', border: '1px solid #E5DDD5', color: '#192540' }}
+                style={{ background: '#FAF9F6', border: '1px solid #E5DDD5', color: '#0B1628' }}
                 onFocus={e => (e.currentTarget.style.borderColor = 'rgba(43,128,240,0.4)')}
                 onBlur={e => (e.currentTarget.style.borderColor = '#E5DDD5')}
               />

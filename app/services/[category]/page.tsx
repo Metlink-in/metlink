@@ -44,7 +44,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
             {data.icon}
           </div>
 
-          <h1 className="font-black mb-6 leading-tight" style={{ color: '#FFFFFF' }}>
+          <h1 className=" mb-6 leading-tight" style={{ color: '#FFFFFF' }}>
             {data.name}
           </h1>
           <p className="text-base sm:text-xl max-w-3xl mx-auto" style={{ color: 'rgba(255,255,255,0.6)' }}>{data.description}</p>
@@ -52,17 +52,17 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
       </section>
 
       {/* Services List */}
-      <section className="py-20" style={{ background: '#0B1628', borderTop: '1px solid rgba(255,255,255,0.12)' }}>
+      <section className="py-20" style={{ background: '#0B1628', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
           {data.services.map((svc) => (
             <div key={svc.slug}
               className="group flex flex-col md:flex-row gap-8 lg:gap-12 p-8 lg:p-10 rounded-3xl transition-all duration-300 hover:shadow-lg"
-              style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)' }}>
+              style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.07)' }}>
 
               {/* Left info */}
               <div className="md:w-1/3 flex-shrink-0">
                 <span className="text-4xl mb-4 block">{svc.icon}</span>
-                <h2 className="text-2xl font-black mb-2" style={{ color: '#FFFFFF' }}>{svc.name}</h2>
+                <h2 className="text-2xl  mb-2" style={{ color: '#FFFFFF' }}>{svc.name}</h2>
                 <p className="text-sm font-medium mb-4" style={{ color: accent }}>{svc.tagline}</p>
                 <p className="text-sm leading-relaxed mb-6" style={{ color: 'rgba(255,255,255,0.6)' }}>{svc.description}</p>
                 <Link href={`/services/${data.slug}/${svc.slug}`}
@@ -89,12 +89,12 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
       </section>
 
       {/* CTA */}
-      <section className="py-16 sm:py-24 relative overflow-hidden" style={{ background: '#07111F', borderTop: '1px solid rgba(255,255,255,0.12)' }}>
+      <section className="py-16 sm:py-24 relative overflow-hidden" style={{ background: '#07111F', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
         <div className="absolute inset-0 pointer-events-none"
           style={{ background: 'radial-gradient(ellipse at 50% 50%, rgba(43,128,240,0.12), transparent 65%)' }} />
         <div className="max-w-3xl mx-auto px-4 text-center relative z-10">
           <p className="text-xs font-bold uppercase tracking-[0.2em] mb-4" style={{ color: accent }}>Let&apos;s Get Started</p>
-          <h2 className="font-black mb-6" style={{ color: '#FFFFFF' }}>
+          <h2 className=" mb-6" style={{ color: '#FFFFFF' }}>
             Need expert help with {data.name.toLowerCase()}?
           </h2>
           <p className="mb-10 text-lg" style={{ color: 'rgba(255,255,255,0.6)' }}>Our team of specialists is ready to help you achieve your goals.</p>

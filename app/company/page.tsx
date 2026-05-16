@@ -44,15 +44,15 @@ export default function CompanyPage() {
           style={{ background: 'radial-gradient(ellipse, rgba(43,128,240,0.18) 0%, transparent 70%)', filter: 'blur(80px)' }} />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
           <FadeIn>
-            <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-[10px] font-black uppercase tracking-[0.25em] mb-8"
-              style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)', color: '#2B80F0',  }}>
+            <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-[10px] font-normal uppercase tracking-[0.25em] mb-8"
+              style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.07)', color: '#2B80F0',  }}>
               About Us
             </div>
           </FadeIn>
           <FadeIn delay={0.1}>
-            <h1 className="font-black mb-6 leading-tight" style={{ color: '#FFFFFF' }}>
+            <h1 className=" mb-6 leading-tight" style={{ color: '#FFFFFF' }}>
               We Are{' '}
-              <em style={{ fontFamily: 'var(--font-playfair)', fontStyle: 'italic', color: '#2B80F0' }}>MetLink</em>
+              <span style={{ color: '#2B80F0' }}>MetLink</span>
             </h1>
           </FadeIn>
           <FadeIn delay={0.2}>
@@ -69,7 +69,7 @@ export default function CompanyPage() {
               </Link>
               <Link href="/portfolio"
                 className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-bold text-sm transition-all hover:bg-black/5"
-                style={{ border: '1px solid rgba(255,255,255,0.12)', color: 'rgba(255,255,255,0.6)', background: 'rgba(255,255,255,0.08)' }}>
+                style={{ border: '1px solid rgba(255,255,255,0.07)', color: 'rgba(255,255,255,0.6)', background: 'rgba(255,255,255,0.08)' }}>
                 View Our Work
               </Link>
             </div>
@@ -78,7 +78,7 @@ export default function CompanyPage() {
       </section>
 
       {/* Stats */}
-      <section style={{ background: '#0B1628', borderTop: '1px solid rgba(255,255,255,0.12)', borderBottom: '1px solid rgba(255,255,255,0.12)' }}>
+      <section style={{ background: '#0B1628', borderTop: '1px solid rgba(255,255,255,0.06)', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
         <StaggerChildren className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
           {stats.map(([v, l]) => (
             <StaggerItem key={l}>
@@ -94,10 +94,10 @@ export default function CompanyPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <FadeIn>
-              <p className="text-xs font-black uppercase tracking-[0.25em] mb-3" style={{ color: '#2B80F0' }}>Who We Are</p>
-              <h2 className="font-black mb-6" style={{ color: '#FFFFFF' }}>
+              <p className="text-xs font-normal uppercase tracking-[0.25em] mb-3" style={{ color: '#2B80F0' }}>Who We Are</p>
+              <h2 className=" mb-6" style={{ color: '#FFFFFF' }}>
                 About{' '}
-                <em style={{ fontFamily: 'var(--font-playfair)', fontStyle: 'italic', color: '#2B80F0' }}>MetLink</em>
+                <span style={{ color: '#2B80F0' }}>MetLink</span>
               </h2>
               <div className="space-y-4 leading-relaxed text-base" style={{ color: 'rgba(255,255,255,0.6)' }}>
                 <p>MetLink was founded with a single conviction: that the gap between ambitious businesses and world-class digital execution doesn&apos;t have to exist.</p>
@@ -114,7 +114,7 @@ export default function CompanyPage() {
               ].map(item => (
                 <StaggerItem key={item.title}>
                   <div className="p-6 rounded-2xl transition-all hover:-translate-y-1 cursor-default h-full"
-                    style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)', boxShadow: '0 2px 8px rgba(0,0,0,0.2)' }}
+                    style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.07)', boxShadow: '0 2px 8px rgba(0,0,0,0.2)' }}
                     onMouseEnter={e => (e.currentTarget as HTMLElement).style.borderColor = 'rgba(43,128,240,0.3)'}
                     onMouseLeave={e => (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.12)'}>
                     <div className="w-9 h-9 rounded-xl flex items-center justify-center mb-3"
@@ -135,10 +135,10 @@ export default function CompanyPage() {
       <section className="py-16 sm:py-24" style={{ background: '#0B1628' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeIn className="text-center mb-16">
-            <p className="text-xs font-black uppercase tracking-[0.25em] mb-3" style={{ color: '#2B80F0' }}>Our Differentiators</p>
-            <h2 className="font-black" style={{ color: '#FFFFFF' }}>
+            <p className="text-xs font-normal uppercase tracking-[0.25em] mb-3" style={{ color: '#2B80F0' }}>Our Differentiators</p>
+            <h2 className="" style={{ color: '#FFFFFF' }}>
               Why Choose{' '}
-              <em style={{ fontFamily: 'var(--font-playfair)', fontStyle: 'italic', color: '#2B80F0' }}>MetLink</em>?
+              <span style={{ color: '#2B80F0' }}>MetLink</span>?
             </h2>
           </FadeIn>
           <StaggerChildren className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -147,7 +147,7 @@ export default function CompanyPage() {
               return (
                 <StaggerItem key={v.title}>
                   <div className="group p-7 rounded-2xl transition-all duration-300 hover:-translate-y-1.5 h-full"
-                    style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)' }}
+                    style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.07)' }}
                     onMouseEnter={e => {
                       (e.currentTarget as HTMLElement).style.borderColor = 'rgba(43,128,240,0.3)';
                       (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.1)';
@@ -173,11 +173,11 @@ export default function CompanyPage() {
       </section>
 
       {/* Timeline */}
-      <section className="py-16 sm:py-24" style={{ background: '#07111F', borderTop: '1px solid rgba(255,255,255,0.12)' }}>
+      <section className="py-16 sm:py-24" style={{ background: '#07111F', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeIn className="text-center mb-16">
-            <p className="text-xs font-black uppercase tracking-[0.25em] mb-3" style={{ color: '#2B80F0' }}>Our Journey</p>
-            <h2 className="font-black" style={{ color: '#FFFFFF' }}>How We Got Here</h2>
+            <p className="text-xs font-normal uppercase tracking-[0.25em] mb-3" style={{ color: '#2B80F0' }}>Our Journey</p>
+            <h2 className="" style={{ color: '#FFFFFF' }}>How We Got Here</h2>
           </FadeIn>
           <div className="relative max-w-3xl mx-auto">
             <div className="absolute left-6 top-0 bottom-0 w-px"
@@ -206,20 +206,20 @@ export default function CompanyPage() {
       </section>
 
       {/* Team */}
-      <section className="py-16 sm:py-24" style={{ background: '#0B1628', borderTop: '1px solid rgba(255,255,255,0.12)' }}>
+      <section className="py-16 sm:py-24" style={{ background: '#0B1628', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeIn className="text-center mb-16">
-            <p className="text-xs font-black uppercase tracking-[0.25em] mb-3" style={{ color: '#2B80F0' }}>The People</p>
-            <h2 className="font-black" style={{ color: '#FFFFFF' }}>
+            <p className="text-xs font-normal uppercase tracking-[0.25em] mb-3" style={{ color: '#2B80F0' }}>The People</p>
+            <h2 className="" style={{ color: '#FFFFFF' }}>
               Meet the{' '}
-              <em style={{ fontFamily: 'var(--font-playfair)', fontStyle: 'italic', color: '#2B80F0' }}>Leadership</em>
+              <span style={{ color: '#2B80F0' }}>Leadership</span>
             </h2>
           </FadeIn>
           <StaggerChildren className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {team.map(member => (
               <StaggerItem key={member.name}>
                 <div className="group p-8 rounded-2xl text-center transition-all duration-300 hover:-translate-y-1.5 h-full"
-                  style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)' }}
+                  style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.07)' }}
                   onMouseEnter={e => {
                     (e.currentTarget as HTMLElement).style.borderColor = `${member.color}40`;
                     (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.1)';
@@ -245,13 +245,13 @@ export default function CompanyPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-16 sm:py-24 relative overflow-hidden" style={{ background: '#07111F', borderTop: '1px solid rgba(255,255,255,0.12)' }}>
+      <section className="py-16 sm:py-24 relative overflow-hidden" style={{ background: '#07111F', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
         <div className="absolute inset-0 pointer-events-none"
           style={{ background: 'radial-gradient(ellipse at 50% 50%, rgba(43,128,240,0.15), transparent 65%)' }} />
         <FadeIn className="max-w-3xl mx-auto px-4 text-center relative z-10">
-          <h2 className="font-black mb-4" style={{ color: '#FFFFFF' }}>
+          <h2 className=" mb-4" style={{ color: '#FFFFFF' }}>
             Ready to Grow{' '}
-            <em style={{ fontFamily: 'var(--font-playfair)', fontStyle: 'italic', color: '#2B80F0' }}>With Us</em>?
+            <span style={{ color: '#2B80F0' }}>With Us</span>?
           </h2>
           <p className="mb-10 text-lg" style={{ color: 'rgba(255,255,255,0.6)' }}>
             Whether you&apos;re a startup or an enterprise, we&apos;re the growth partner you&apos;ve been looking for.
@@ -264,7 +264,7 @@ export default function CompanyPage() {
             </Link>
             <Link href="/services"
               className="inline-flex items-center justify-center gap-2 px-9 py-4 rounded-full font-bold text-sm transition-all hover:bg-black/5"
-              style={{ border: '1px solid rgba(255,255,255,0.12)', color: 'rgba(255,255,255,0.6)', background: 'rgba(255,255,255,0.08)' }}>
+              style={{ border: '1px solid rgba(255,255,255,0.07)', color: 'rgba(255,255,255,0.6)', background: 'rgba(255,255,255,0.08)' }}>
               Explore Services
             </Link>
           </div>

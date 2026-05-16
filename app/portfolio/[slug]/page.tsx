@@ -34,10 +34,10 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
             <span style={{ color: '#2B80F0' }}>{project.title}</span>
           </div>
 
-          <h1 className="font-black mb-6 leading-tight" style={{ color: '#FFFFFF' }}>{project.title}</h1>
+          <h1 className=" mb-6 leading-tight" style={{ color: '#FFFFFF' }}>{project.title}</h1>
           <p className="text-xl mb-10 max-w-3xl leading-relaxed" style={{ color: 'rgba(255,255,255,0.6)' }}>{project.description}</p>
 
-          <div className="grid sm:grid-cols-3 gap-4 pt-8" style={{ borderTop: '1px solid rgba(255,255,255,0.12)' }}>
+          <div className="grid sm:grid-cols-3 gap-4 pt-8" style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
             <div>
               <p className="text-xs uppercase tracking-wider mb-1" style={{ color: 'rgba(255,255,255,0.4)' }}>Client</p>
               <p className="font-bold" style={{ color: '#FFFFFF' }}>{project.client}</p>
@@ -55,21 +55,21 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
       </section>
 
       {/* Main Content */}
-      <section className="py-20" style={{ background: '#0B1628', borderTop: '1px solid rgba(255,255,255,0.12)' }}>
+      <section className="py-20" style={{ background: '#0B1628', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-3 gap-16">
 
             {/* Challenge & Solution */}
             <div className="md:col-span-2 space-y-16">
               <div>
-                <h2 className="text-3xl font-black mb-6" style={{ color: '#FFFFFF' }}>The Challenge</h2>
-                <div className="p-8 rounded-3xl" style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)' }}>
+                <h2 className="text-3xl  mb-6" style={{ color: '#FFFFFF' }}>The Challenge</h2>
+                <div className="p-8 rounded-3xl" style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.07)' }}>
                   <p className="leading-relaxed text-lg" style={{ color: 'rgba(255,255,255,0.6)' }}>{project.problem}</p>
                 </div>
               </div>
 
               <div>
-                <h2 className="text-3xl font-black mb-6" style={{ color: '#FFFFFF' }}>Our Solution</h2>
+                <h2 className="text-3xl  mb-6" style={{ color: '#FFFFFF' }}>Our Solution</h2>
                 <div className="p-8 rounded-3xl" style={{ background: 'rgba(43,128,240,0.15)', border: '1px solid rgba(43,128,240,0.3)' }}>
                   <p className="leading-relaxed text-lg" style={{ color: '#FFFFFF' }}>{project.solution}</p>
                 </div>
@@ -85,7 +85,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                 <div className="space-y-3">
                   {project.results.map((res) => (
                     <div key={res} className="p-4 rounded-xl flex items-start gap-3"
-                      style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)' }}>
+                      style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.07)' }}>
                       <CheckCircle className="w-5 h-5 shrink-0 mt-0.5" style={{ color: '#2B80F0' }} />
                       <p className="text-sm font-semibold" style={{ color: '#FFFFFF' }}>{res}</p>
                     </div>
@@ -100,7 +100,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                 <div className="flex flex-wrap gap-2">
                   {project.tech.map((t) => (
                     <span key={t} className="px-3 py-1.5 rounded-lg text-xs font-semibold"
-                      style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)', color: 'rgba(255,255,255,0.6)' }}>
+                      style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.07)', color: 'rgba(255,255,255,0.6)' }}>
                       {t}
                     </span>
                   ))}
@@ -113,14 +113,14 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
 
       {/* Related Projects */}
       {displayedRelated.length > 0 && (
-        <section className="py-16 sm:py-24" style={{ background: '#07111F', borderTop: '1px solid rgba(255,255,255,0.12)' }}>
+        <section className="py-16 sm:py-24" style={{ background: '#07111F', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-3xl font-black mb-10 text-center" style={{ color: '#FFFFFF' }}>More Projects</h2>
+            <h2 className="text-3xl  mb-10 text-center" style={{ color: '#FFFFFF' }}>More Projects</h2>
             <div className="grid sm:grid-cols-2 gap-6">
               {displayedRelated.map((p) => (
                 <Link key={p.slug} href={`/portfolio/${p.slug}`}
                   className="group rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
-                  style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)' }}>
+                  style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.07)' }}>
                   <div className={`h-32 bg-gradient-to-br ${p.gradientFrom} ${p.gradientTo} relative`}>
                     <div className="absolute inset-0 bg-black/15" />
                     <div className="absolute bottom-3 left-4">
@@ -139,11 +139,11 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
       )}
 
       {/* CTA */}
-      <section className="py-16 sm:py-24" style={{ background: '#0B1628', borderTop: '1px solid rgba(255,255,255,0.12)' }}>
+      <section className="py-16 sm:py-24" style={{ background: '#0B1628', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
         <div className="absolute inset-0 pointer-events-none"
           style={{ background: 'radial-gradient(ellipse at 50% 50%, rgba(43,128,240,0.12), transparent 65%)' }} />
         <div className="max-w-3xl mx-auto px-4 text-center relative z-10">
-          <h2 className="font-black mb-4" style={{ color: '#FFFFFF' }}>Let&apos;s build your success story</h2>
+          <h2 className=" mb-4" style={{ color: '#FFFFFF' }}>Let&apos;s build your success story</h2>
           <p className="mb-8 text-lg" style={{ color: 'rgba(255,255,255,0.6)' }}>We deliver measurable impact through AI, code, and creative strategy.</p>
           <Link href="/contact"
             className="inline-flex items-center gap-2 px-9 py-4 rounded-full font-bold text-sm text-white transition-all hover:brightness-95 active:scale-95"

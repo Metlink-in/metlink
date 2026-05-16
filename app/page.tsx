@@ -232,7 +232,6 @@ const faqData = [
   },
 ];
 
-const PF   = 'var(--font-playfair)';
 const BG   = '#07111F';
 const BG2  = '#0B1628';
 const BDR  = '1px solid rgba(255,255,255,0.05)';
@@ -248,106 +247,185 @@ export default function HomePage() {
     <div className="w-full overflow-x-hidden" style={{ background: BG }}>
 
       {/* ══ HERO ══════════════════════════════════════════════ */}
-      <section className="relative overflow-hidden" style={{ background: '#060D1A', minHeight: '100vh' }}>
-        {/* Subtle glow */}
+      <section className="relative overflow-hidden" style={{ background: '#050B14', minHeight: '100vh' }}>
+
+        {/* ── Background ── */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[600px] rounded-full"
-            style={{ background: 'radial-gradient(ellipse, rgba(43,128,240,0.12) 0%, rgba(43,128,240,0.04) 50%, transparent 70%)', filter: 'blur(80px)' }} />
+          {/* Fine dot grid */}
+          <div className="absolute inset-0"
+            style={{ backgroundImage: 'radial-gradient(rgba(255,255,255,0.12) 1px, transparent 1px)', backgroundSize: '32px 32px', opacity: 0.9 }} />
+          {/* Horizontal line accents */}
+          <div className="absolute inset-0"
+            style={{ backgroundImage: 'linear-gradient(transparent calc(100% - 1px), rgba(255,255,255,0.03) 1px)', backgroundSize: '100% 96px' }} />
+          {/* Center mega glow */}
+          <div className="absolute top-[30%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1100px] h-[700px]"
+            style={{ background: 'radial-gradient(ellipse at center, rgba(43,128,240,0.22) 0%, rgba(43,128,240,0.08) 40%, transparent 68%)', filter: 'blur(60px)' }} />
+          {/* Top-left orb */}
+          <div className="absolute -top-40 -left-20 w-[560px] h-[560px]"
+            style={{ background: 'radial-gradient(circle, rgba(37,99,235,0.14) 0%, transparent 65%)', filter: 'blur(70px)' }} />
+          {/* Bottom-right orb */}
+          <div className="absolute bottom-0 right-0 w-[480px] h-[480px]"
+            style={{ background: 'radial-gradient(circle, rgba(43,128,240,0.1) 0%, transparent 65%)', filter: 'blur(80px)' }} />
+          {/* Vignette edges */}
+          <div className="absolute inset-0"
+            style={{ background: 'radial-gradient(ellipse at center, transparent 40%, rgba(5,11,20,0.7) 100%)' }} />
+          {/* Bottom fade */}
+          <div className="absolute bottom-0 inset-x-0 h-48"
+            style={{ background: 'linear-gradient(to top, #050B14 0%, transparent 100%)' }} />
         </div>
-        {/* Noise */}
-        <div className="absolute inset-0 pointer-events-none opacity-[0.022]"
-          style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E\")" }} />
 
-        {/* Floating metric card */}
-        <div className="absolute bottom-[18%] left-[4%] hidden lg:block animate-float" style={{ zIndex: 20, animationDelay: '1s', width: 160 }}>
+        {/* ── Floating card — left (deploy metric) ── */}
+        <div className="absolute bottom-[24%] left-[4%] hidden xl:block animate-float" style={{ zIndex: 20, animationDelay: '0.6s', width: 180 }}>
           <div className="p-5 rounded-2xl"
-            style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)', boxShadow: '0 20px 60px rgba(0,0,0,0.5)', backdropFilter: 'blur(20px)' }}>
-            <div className="flex items-center gap-1.5 mb-3">
-              <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-              <p className="text-[9px] font-normal uppercase tracking-[0.2em]" style={{ color: 'rgba(255,255,255,0.3)' }}>Live Deploy</p>
+            style={{ background: 'rgba(5,11,20,0.75)', border: '1px solid rgba(255,255,255,0.09)', boxShadow: '0 32px 80px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.07)', backdropFilter: 'blur(28px)' }}>
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+                <span className="text-[9px] uppercase tracking-[0.22em]" style={{ color: 'rgba(255,255,255,0.3)' }}>Live</span>
+              </div>
+              <span className="text-[9px] px-2 py-0.5 rounded-full" style={{ background: 'rgba(34,197,94,0.1)', border: '1px solid rgba(34,197,94,0.2)', color: '#4ADE80' }}>Active</span>
             </div>
-            <p className="leading-none mb-1" style={{ color: 'rgba(255,255,255,0.92)', fontSize: '2rem', fontWeight: 300, letterSpacing: '-0.04em' }}>7 days</p>
-            <p className="text-[11px] font-light" style={{ color: 'rgba(255,255,255,0.35)' }}>avg. time to ship</p>
+            <p style={{ color: '#FFFFFF', fontSize: '2.4rem', fontWeight: 200, letterSpacing: '-0.05em', lineHeight: 1 }}>7</p>
+            <p className="text-sm mb-1" style={{ color: 'rgba(255,255,255,0.35)', fontWeight: 300 }}>days to ship</p>
+            {/* Mini bar chart */}
+            <div className="flex items-end gap-1 mt-4 h-8">
+              {[40,65,45,80,55,90,75].map((h, i) => (
+                <div key={i} className="flex-1 rounded-sm" style={{ height: `${h}%`, background: i === 5 ? '#2B80F0' : 'rgba(43,128,240,0.25)' }} />
+              ))}
+            </div>
           </div>
         </div>
 
-        {/* Floating review card */}
-        <div className="absolute top-[14%] right-[4%] w-[240px] hidden lg:block animate-float" style={{ zIndex: 20, animationDelay: '0.4s' }}>
+        {/* ── Floating card — right top (testimonial) ── */}
+        <div className="absolute top-[20%] right-[4%] w-[256px] hidden xl:block animate-float" style={{ zIndex: 20, animationDelay: '0.2s' }}>
           <div className="p-5 rounded-2xl"
-            style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)', boxShadow: '0 20px 60px rgba(0,0,0,0.5)', backdropFilter: 'blur(20px)' }}>
-            <div className="flex gap-0.5 mb-3">
-              {[0,1,2,3,4].map(i => <Star key={i} className="w-3 h-3 fill-current" style={{ color: 'rgba(255,255,255,0.5)' }} />)}
+            style={{ background: 'rgba(5,11,20,0.75)', border: '1px solid rgba(255,255,255,0.09)', boxShadow: '0 32px 80px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.07)', backdropFilter: 'blur(28px)' }}>
+            <div className="flex items-center justify-between mb-3.5">
+              <div className="flex gap-0.5">
+                {[0,1,2,3,4].map(i => <Star key={i} className="w-3 h-3 fill-current" style={{ color: '#FBBF24' }} />)}
+              </div>
+              <span className="text-[9px] uppercase tracking-[0.16em] px-2 py-0.5 rounded-full"
+                style={{ background: 'rgba(251,191,36,0.08)', border: '1px solid rgba(251,191,36,0.15)', color: 'rgba(251,191,36,0.7)' }}>5.0</span>
             </div>
-            <p className="text-sm leading-relaxed mb-3" style={{ color: 'rgba(255,255,255,0.55)', fontWeight: 300 }}>
-              &ldquo;MetLink shipped our AI agent in 6 days. Revenue up 38%.&rdquo;
+            <p className="text-[13px] leading-relaxed mb-4" style={{ color: 'rgba(255,255,255,0.55)', fontWeight: 300 }}>
+              &ldquo;Shipped our AI agent in 6 days. Support tickets down 65%.&rdquo;
             </p>
-            <p className="text-[11px] pt-3" style={{ borderTop: '1px solid rgba(255,255,255,0.06)', color: 'rgba(255,255,255,0.28)', fontWeight: 300 }}>
-              &mdash; Sarah K, Series B SaaS
-            </p>
+            <div className="flex items-center gap-2.5" style={{ borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '0.75rem' }}>
+              <div className="w-7 h-7 rounded-full flex items-center justify-center text-[11px] font-medium shrink-0"
+                style={{ background: 'linear-gradient(135deg, #2B80F0, #1A6BD6)', color: '#fff' }}>S</div>
+              <div>
+                <p className="text-[11px] font-medium" style={{ color: 'rgba(255,255,255,0.65)' }}>Sarah K.</p>
+                <p className="text-[10px]" style={{ color: 'rgba(255,255,255,0.28)' }}>VP Product · Series B</p>
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* Main content */}
-        <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 sm:pt-36 pb-16 text-center flex flex-col items-center">
+        {/* ── Floating card — right bottom (ROAS metric) ── */}
+        <div className="absolute bottom-[26%] right-[4%] w-[200px] hidden xl:block animate-float" style={{ zIndex: 20, animationDelay: '1s' }}>
+          <div className="p-4 rounded-2xl"
+            style={{ background: 'rgba(5,11,20,0.75)', border: '1px solid rgba(255,255,255,0.09)', boxShadow: '0 32px 80px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.07)', backdropFilter: 'blur(28px)' }}>
+            <div className="flex items-center gap-2 mb-3">
+              <div className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ background: 'rgba(22,163,74,0.15)', border: '1px solid rgba(22,163,74,0.25)' }}>
+                <TrendingUp className="w-3.5 h-3.5" style={{ color: '#4ADE80' }} />
+              </div>
+              <span className="text-[10px] uppercase tracking-[0.18em]" style={{ color: 'rgba(255,255,255,0.3)' }}>ROAS</span>
+            </div>
+            <p style={{ color: '#4ADE80', fontSize: '1.9rem', fontWeight: 300, letterSpacing: '-0.04em', lineHeight: 1 }}>4.2×</p>
+            <p className="text-[11px] mt-1" style={{ color: 'rgba(255,255,255,0.3)' }}>avg. return on ad spend</p>
+          </div>
+        </div>
+
+        {/* ── Main content ── */}
+        <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-36 sm:pt-44 pb-14 text-center flex flex-col items-center">
+
           <FadeIn>
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-10 text-xs font-normal btn-outline"
-              style={{ letterSpacing: '0.08em' }}>
-              <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+            <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full mb-10 text-[11px] btn-outline"
+              style={{ letterSpacing: '0.07em' }}>
+              <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
               AI Marketing &amp; Development Agency
+              <span className="w-px h-3" style={{ background: 'rgba(255,255,255,0.15)' }} />
+              <span style={{ color: '#4B9CF4' }}>150+ projects shipped</span>
             </div>
           </FadeIn>
 
-          <FadeIn delay={0.08}>
-            <h1 className="mb-8"
-              style={{ color: 'rgba(255,255,255,0.95)', fontSize: 'clamp(3.2rem,8.5vw,7.5rem)', fontWeight: 300, lineHeight: 0.92, letterSpacing: '-0.05em' }}>
-              We build{' '}
-              <em style={{ fontStyle: 'italic', fontFamily: PF, color: 'rgba(255,255,255,0.92)' }}>AI&nbsp;systems</em>
-              {' '}that scale.
+          <FadeIn delay={0.07}>
+            <h1 className="mb-7"
+              style={{ fontWeight: 200, lineHeight: 0.88, letterSpacing: '-0.055em', fontSize: 'clamp(3.6rem,10vw,9rem)' }}>
+              <span style={{ color: 'rgba(255,255,255,0.9)', display: 'block' }}>We build</span>
+              <span style={{
+                display: 'block',
+                background: 'linear-gradient(135deg, #60A5FA 0%, #2B80F0 40%, #1D4ED8 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+              }}>AI systems</span>
+              <span style={{ color: 'rgba(255,255,255,0.85)', display: 'block' }}>that scale.</span>
             </h1>
           </FadeIn>
 
-          <FadeIn delay={0.14}>
-            <p className="mb-12 max-w-xl mx-auto" style={{ color: 'rgba(255,255,255,0.45)', fontSize: '1.1rem', lineHeight: 1.8, fontWeight: 300 }}>
-              Strategy, design, and engineering — one team shipping production AI for ambitious brands. From idea to live product in days.
+          <FadeIn delay={0.13}>
+            <p className="mb-10 max-w-[520px] mx-auto" style={{ color: 'rgba(255,255,255,0.38)', fontSize: '1.05rem', lineHeight: 1.9, fontWeight: 300 }}>
+              Strategy, design, and engineering — one team shipping production AI for ambitious brands.
+              From idea to live product in days.
             </p>
           </FadeIn>
 
-          <FadeIn delay={0.2}>
-            <div className="flex flex-wrap gap-3 justify-center">
+          <FadeIn delay={0.19}>
+            <div className="flex flex-wrap gap-3 justify-center mb-8">
               <Link href="/contact"
-                className="group inline-flex items-center gap-2 px-8 py-4 rounded-full text-sm btn-primary">
+                className="group inline-flex items-center gap-2.5 px-8 py-4 rounded-full text-sm font-medium btn-primary">
                 Start building with AI
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
               </Link>
-              <Link href="/services"
-                className="inline-flex items-center px-8 py-4 rounded-full text-sm btn-outline">
-                See our work
+              <Link href="/portfolio"
+                className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-sm btn-outline">
+                View our work
               </Link>
+            </div>
+            {/* Social proof line */}
+            <div className="flex items-center justify-center gap-3">
+              <div className="flex -space-x-2">
+                {['#2B80F0','#16A34A','#D97706','#8B5CF6'].map((c, i) => (
+                  <div key={i} className="w-7 h-7 rounded-full border-2 flex items-center justify-center text-[10px] font-medium"
+                    style={{ background: `${c}22`, borderColor: '#050B14', color: c, zIndex: 4 - i }}>
+                    {['S','M','P','R'][i]}
+                  </div>
+                ))}
+              </div>
+              <p className="text-[11px]" style={{ color: 'rgba(255,255,255,0.3)' }}>
+                Trusted by <span style={{ color: 'rgba(255,255,255,0.55)' }}>80+ teams</span> across 12 countries
+              </p>
             </div>
           </FadeIn>
         </div>
 
-        {/* Stats */}
-        <StaggerChildren className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-20 grid grid-cols-2 lg:grid-cols-4 gap-8 text-center relative z-10">
-          {[['150+','Projects'],['80+','Clients'],['$10M+','Revenue'],['94%','Retention']].map(([val,lbl]) => (
-            <StaggerItem key={lbl} className="flex flex-col items-center">
-              <p className="leading-none mb-2" style={{ color: 'rgba(255,255,255,0.88)', fontSize: 'clamp(2rem,3.5vw,2.8rem)', fontWeight: 300, letterSpacing: '-0.04em' }}>{val}</p>
-              <p className="text-[10px] font-normal uppercase tracking-[0.3em]" style={{ color: 'rgba(255,255,255,0.28)' }}>{lbl}</p>
-            </StaggerItem>
-          ))}
-        </StaggerChildren>
+        {/* ── Stats strip ── */}
+        <div className="relative z-10 pb-20 px-4">
+          <div className="max-w-2xl mx-auto flex items-center justify-center"
+            style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}>
+            {[['150+','Projects Delivered'],['80+','Clients Worldwide'],['$10M+','Revenue Generated'],['94%','Retention Rate']].map(([val,lbl], i) => (
+              <div key={lbl} className="flex-1 flex flex-col items-center py-7"
+                style={{ borderRight: i < 3 ? '1px solid rgba(255,255,255,0.05)' : 'none' }}>
+                <p style={{ color: 'rgba(255,255,255,0.88)', fontSize: 'clamp(1.5rem,2.5vw,2rem)', fontWeight: 300, letterSpacing: '-0.04em', lineHeight: 1 }}>{val}</p>
+                <p className="text-[9px] uppercase tracking-[0.25em] mt-2" style={{ color: 'rgba(255,255,255,0.22)' }}>{lbl}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
       </section>
 
       {/* ══ INTEGRATIONS ════════════════════════════════════════ */}
-      <section className="py-12 overflow-hidden" style={{ background: '#060C18', borderTop: BDR, borderBottom: BDR }}>
+      <section className="py-12 overflow-hidden" style={{ background: '#0B1628', borderTop: BDR, borderBottom: BDR }}>
         <FadeIn className="text-center mb-10 px-4">
           <p className="label-overline">Trusted Integrations &amp; Partners</p>
         </FadeIn>
         <div className="relative">
           <div className="absolute inset-y-0 left-0 w-32 sm:w-48 z-10 pointer-events-none"
-            style={{ background: 'linear-gradient(to right, #060C18, transparent)' }} />
+            style={{ background: 'linear-gradient(to right, #0B1628, transparent)' }} />
           <div className="absolute inset-y-0 right-0 w-32 sm:w-48 z-10 pointer-events-none"
-            style={{ background: 'linear-gradient(to left, #060C18, transparent)' }} />
+            style={{ background: 'linear-gradient(to left, #0B1628, transparent)' }} />
           <div style={{ overflow: 'hidden' }}>
             <div style={{ display: 'flex', width: 'max-content', animation: 'scroll 55s linear infinite', alignItems: 'center', padding: '12px 0' }}>
               {[...integrations, ...integrations].map((name, i) => (
@@ -369,7 +447,7 @@ export default function HomePage() {
             <div>
               <p className="label-overline mb-4">Services</p>
               <h2 style={{ color: 'rgba(255,255,255,0.92)' }}>
-                What we <em style={{ fontStyle: 'italic', fontFamily: PF }}>build</em> for you.
+                What we <span style={{ color: AC }}>build</span> for you.
               </h2>
             </div>
             <Link href="/services"
@@ -512,7 +590,7 @@ export default function HomePage() {
           <FadeIn className="text-center mb-16">
             <p className="label-overline mb-5">Our Clients</p>
             <h2 style={{ color: 'rgba(255,255,255,0.92)' }}>
-              Trusted by <em style={{ fontStyle: 'italic', fontFamily: PF }}>ambitious teams</em>
+              Trusted by <span style={{ color: AC }}>ambitious teams</span>
             </h2>
             <p className="mt-5 max-w-md mx-auto" style={{ color: 'rgba(255,255,255,0.38)', fontSize: '1rem', fontWeight: 300 }}>
               From early-stage startups to scaling enterprises — we partner with businesses that want to lead.
@@ -523,11 +601,11 @@ export default function HomePage() {
             {clients.map(c => (
               <StaggerItem key={c.name}>
                 <div className="group flex flex-col items-center gap-3 p-6 rounded-2xl text-center transition-all duration-300 hover:-translate-y-1"
-                  style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}
+                  style={{ background: 'rgba(255,255,255,0.035)', border: '1px solid rgba(255,255,255,0.08)' }}
                   onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = `${c.color}30`; (e.currentTarget as HTMLElement).style.background = `${c.color}08`; }}
                   onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.08)'; (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.04)'; }}>
                   <div className="w-12 h-12 rounded-xl flex items-center justify-center font-black text-lg"
-                    style={{ background: `${c.color}18`, border: `1px solid ${c.color}25`, color: c.color, fontFamily: 'var(--font-playfair)' }}>
+                    style={{ background: `${c.color}18`, border: `1px solid ${c.color}25`, color: c.color }}>
                     {c.name[0]}
                   </div>
                   <div>
@@ -547,7 +625,7 @@ export default function HomePage() {
           <FadeIn className="text-center mb-16">
             <p className="label-overline mb-5">Success Stories</p>
             <h2 style={{ color: 'rgba(255,255,255,0.92)' }}>
-              What our clients <em style={{ fontStyle: 'italic', fontFamily: PF }}>say</em>
+              What our clients <span style={{ color: AC }}>say</span>
             </h2>
           </FadeIn>
 
@@ -555,7 +633,7 @@ export default function HomePage() {
             {testimonials.map((t, i) => (
               <StaggerItem key={i}>
                 <div className="flex flex-col p-8 rounded-2xl h-full"
-                  style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}>
+                  style={{ background: 'rgba(255,255,255,0.035)', border: '1px solid rgba(255,255,255,0.08)' }}>
                   {/* Stars */}
                   <div className="flex gap-1 mb-5">
                     {Array.from({ length: t.stars }).map((_, j) => (
@@ -568,7 +646,7 @@ export default function HomePage() {
                   </p>
                   {/* Metric */}
                   <div className="flex items-center gap-4 pt-5" style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
-                    <div className="px-3 py-1.5 rounded-lg" style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}>
+                    <div className="px-3 py-1.5 rounded-lg" style={{ background: 'rgba(255,255,255,0.035)', border: '1px solid rgba(255,255,255,0.08)' }}>
                       <p className="leading-tight" style={{ color: 'rgba(255,255,255,0.8)', fontWeight: 300, fontSize: '1.25rem', letterSpacing: '-0.03em' }}>{t.metric}</p>
                       <p className="text-[10px] font-normal" style={{ color: 'rgba(255,255,255,0.3)' }}>{t.metricLabel}</p>
                     </div>
@@ -590,7 +668,7 @@ export default function HomePage() {
           <FadeIn className="mb-16">
             <p className="label-overline mb-5">How We Work</p>
             <h2 style={{ color: 'rgba(255,255,255,0.92)' }}>
-              From idea to <em style={{ fontStyle: 'italic', fontFamily: PF }}>live product</em>.
+              From idea to <span style={{ color: AC }}>live product</span>.
             </h2>
           </FadeIn>
           <div className="grid md:grid-cols-3 gap-10 lg:gap-16">
@@ -616,7 +694,7 @@ export default function HomePage() {
           <FadeIn className="mb-12 max-w-xl">
             <p className="label-overline mb-5">Tech Stack</p>
             <h2 className="mb-5" style={{ color: 'rgba(255,255,255,0.92)' }}>
-              Powered by the <em style={{ fontStyle: 'italic', fontFamily: PF }}>best</em> models.
+              Powered by the <span style={{ color: AC }}>best</span> models.
             </h2>
             <p className="mb-6" style={{ color: 'rgba(255,255,255,0.38)', fontSize: '1rem', fontWeight: 300, lineHeight: 1.8 }}>
               Frontier LLMs, vector databases, and production MLOps tooling — AI systems that work at scale.
@@ -632,7 +710,7 @@ export default function HomePage() {
             {stack.map(t => (
               <StaggerItem key={t.name}>
                 <div className="flex flex-col gap-1 p-4 rounded-xl transition-all hover:-translate-y-0.5 hover:border-white/15"
-                  style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}>
+                  style={{ background: 'rgba(255,255,255,0.035)', border: '1px solid rgba(255,255,255,0.08)' }}>
                   <p className="text-[13px] font-normal" style={{ color: 'rgba(255,255,255,0.72)' }}>{t.name}</p>
                   <p className="text-[11px] font-light" style={{ color: t.color }}>{t.cat}</p>
                 </div>
@@ -648,7 +726,7 @@ export default function HomePage() {
           <FadeIn className="mb-16">
             <p className="label-overline mb-5">Why MetLink</p>
             <h2 style={{ color: 'rgba(255,255,255,0.92)' }}>
-              What sets us <em style={{ fontStyle: 'italic', fontFamily: PF }}>apart</em>.
+              What sets us <span style={{ color: AC }}>apart</span>.
             </h2>
           </FadeIn>
           <StaggerChildren className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -657,7 +735,7 @@ export default function HomePage() {
               return (
                 <StaggerItem key={item.title}>
                   <div className="group p-7 rounded-2xl transition-all duration-300 hover:-translate-y-1 h-full"
-                    style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}
+                    style={{ background: 'rgba(255,255,255,0.035)', border: '1px solid rgba(255,255,255,0.08)' }}
                     onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(43,128,240,0.25)'; (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.07)'; }}
                     onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.08)'; (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.04)'; }}>
                     <div className="w-10 h-10 rounded-xl flex items-center justify-center mb-5"
@@ -681,7 +759,7 @@ export default function HomePage() {
           <FadeIn className="text-center mb-16">
             <p className="label-overline mb-5">Got Questions?</p>
             <h2 style={{ color: 'rgba(255,255,255,0.92)' }}>
-              Frequently asked <em style={{ fontStyle: 'italic', fontFamily: PF }}>questions</em>
+              Frequently asked <span style={{ color: AC }}>questions</span>
             </h2>
           </FadeIn>
 
@@ -727,53 +805,27 @@ export default function HomePage() {
       </section>
 
       {/* ══ CTA ════════════════════════════════════════════════ */}
-      <section id="contact" className="py-16 sm:py-24" style={{ background: BG }}>
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <FadeIn>
-            <div className="relative rounded-[28px] overflow-hidden text-center px-8 sm:px-16 py-16 sm:py-20"
-              style={{ background: '#0C1829', boxShadow: '0 40px 100px rgba(0,0,0,0.4)', border: '1px solid rgba(255,255,255,0.07)' }}>
-              {/* Glows */}
-              <div className="absolute -top-20 -right-20 w-[560px] h-[560px] pointer-events-none"
-                style={{ background: 'radial-gradient(circle, rgba(43,128,240,0.5) 0%, rgba(43,128,240,0.15) 40%, transparent 70%)', filter: 'blur(60px)' }} />
-              <div className="absolute -bottom-20 -left-20 w-[380px] h-[380px] pointer-events-none"
-                style={{ background: 'radial-gradient(circle, rgba(16,60,120,0.6) 0%, transparent 65%)', filter: 'blur(80px)' }} />
-
-              <div className="relative z-10 flex flex-col items-center">
-                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-[11px] font-semibold mb-7 btn-glass"
-                  style={{ color: 'rgba(200,215,255,0.6)' }}>
-                  Let&apos;s build together
-                </div>
-
-                <h2 className="font-black leading-[1.05] mb-5"
-                  style={{ fontSize: 'clamp(2.2rem,5vw,4rem)', fontFamily: PF, color: '#F0F4FF' }}>
-                  Ready to scale with{' '}
-                  <em style={{ fontStyle: 'italic', color: '#4B9CF4' }}>AI?</em>
-                </h2>
-
-                <p className="text-base sm:text-lg mb-10 max-w-xl leading-relaxed"
-                  style={{ color: 'rgba(200,215,255,0.5)' }}>
-                  Book a free 30-min strategy call. No commitments — just clarity on what AI can do for your business.
-                </p>
-
-                <div className="flex flex-wrap gap-3 justify-center">
-                  <a href="mailto:hello@metlink.ai"
-                    className="group inline-flex items-center gap-2 px-8 py-4 rounded-full font-bold text-sm text-white transition-all"
-                    style={{ background: 'linear-gradient(135deg,#2B80F0 0%,#1A6BD6 100%)', border: '1px solid rgba(255,255,255,0.22)', boxShadow: '0 4px 20px rgba(43,128,240,0.35), inset 0 1px 0 rgba(255,255,255,0.25)' }}
-                    onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.boxShadow = '0 6px 28px rgba(43,128,240,0.5),inset 0 1px 0 rgba(255,255,255,0.3)'; el.style.transform = 'translateY(-1px)'; }}
-                    onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.boxShadow = '0 4px 20px rgba(43,128,240,0.35),inset 0 1px 0 rgba(255,255,255,0.25)'; el.style.transform = 'none'; }}>
-                    Book your strategy call
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
-                  </a>
-                  <Link href="/services"
-                    className="inline-flex items-center px-8 py-4 rounded-full font-semibold text-sm btn-glass"
-                    style={{ color: 'rgba(200,215,255,0.7)' }}>
-                    See services
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </FadeIn>
-        </div>
+      <section id="contact" className="py-24 sm:py-32" style={{ background: BG }}>
+        <FadeIn className="max-w-2xl mx-auto px-4 sm:px-6 text-center">
+          <p className="label-overline mb-6">Let&apos;s build together</p>
+          <h2 className="mb-6" style={{ color: 'rgba(255,255,255,0.92)' }}>
+            Ready to scale with <span style={{ color: AC }}>AI?</span>
+          </h2>
+          <p className="mb-10" style={{ color: 'rgba(255,255,255,0.42)', fontWeight: 300 }}>
+            Book a free 30-min strategy call. No commitments — just clarity on what AI can do for your business.
+          </p>
+          <div className="flex flex-wrap gap-3 justify-center">
+            <a href="mailto:hello@metlink.ai"
+              className="group inline-flex items-center gap-2 px-8 py-4 rounded-full text-sm btn-primary">
+              Book your strategy call
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+            </a>
+            <Link href="/services"
+              className="inline-flex items-center px-8 py-4 rounded-full text-sm btn-outline">
+              See services
+            </Link>
+          </div>
+        </FadeIn>
       </section>
 
     </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Metadata, Viewport } from 'next';
-import { DM_Sans, Playfair_Display } from 'next/font/google';
+import { DM_Sans } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/next';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/sections/footer';
@@ -14,13 +14,6 @@ const dm = DM_Sans({
   subsets: ['latin'],
   variable: '--font-dm',
   weight: ['200', '300', '400', '500', '600'],
-  display: 'swap',
-});
-const playfair = Playfair_Display({
-  subsets: ['latin'],
-  variable: '--font-playfair',
-  weight: ['400', '500', '600', '700'],
-  style: ['normal', 'italic'],
   display: 'swap',
 });
 
@@ -59,7 +52,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${dm.variable} ${playfair.variable}`}>
+    <html lang="en" className={dm.variable}>
       <body className="font-sans antialiased">
         <IntroAnimation />
         <Header />

@@ -33,7 +33,7 @@ export function Footer() {
                   <Image src="/logo-mark.png" alt="MetLink" width={80} height={24} className="object-contain" />
                 </div>
               </div>
-              <p className="text-sm leading-relaxed max-w-xs" style={{ color: 'rgba(200,215,255,0.5)' }}>
+              <p className="text-sm leading-relaxed max-w-xs" style={{ color: 'rgba(255,255,255,0.5)' }}>
                 Empowering ambitious businesses with AI-first marketing and high-performance software development.
               </p>
 
@@ -42,9 +42,9 @@ export function Footer() {
                 {[{ label: 'X', href: '#' },{ label: 'in', href: '#' },{ label: 'gh', href: '#' }].map(s => (
                   <a key={s.label} href={s.href}
                     className="w-8 h-8 rounded-lg flex items-center justify-center text-[10px] font-black transition-all hover:scale-110 hover:-translate-y-0.5"
-                    style={{ background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.1)', color: 'rgba(200,215,255,0.4)' }}
+                    style={{ background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.4)' }}
                     onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(43,128,240,0.4)'; (e.currentTarget as HTMLElement).style.color = '#4B9CF4'; }}
-                    onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.1)'; (e.currentTarget as HTMLElement).style.color = 'rgba(200,215,255,0.4)'; }}>
+                    onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.1)'; (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.4)'; }}>
                     {s.label}
                   </a>
                 ))}
@@ -53,7 +53,7 @@ export function Footer() {
 
             {/* Newsletter */}
             <div className="max-w-sm">
-              <p className="text-[10px] font-black uppercase tracking-[0.25em] mb-3" style={{ color: 'rgba(200,215,255,0.3)' }}>Stay Updated</p>
+              <p className="text-[10px] font-black uppercase tracking-[0.25em] mb-3" style={{ color: 'rgba(255,255,255,0.3)' }}>Stay Updated</p>
               <form onSubmit={e => e.preventDefault()} className="flex gap-2">
                 <input
                   type="email" placeholder="your@email.com"
@@ -91,9 +91,9 @@ export function Footer() {
                       <Link
                         href={`/services/${cat.slug}/${svc.slug}`}
                         className="text-xs transition-all duration-200 hover:translate-x-0.5 block"
-                        style={{ color: 'rgba(200,215,255,0.38)' }}
+                        style={{ color: 'rgba(255,255,255,0.38)' }}
                         onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = '#FFFFFF'}
-                        onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'rgba(200,215,255,0.38)'}>
+                        onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.38)'}>
                         {svc.name}
                       </Link>
                     </li>
@@ -119,9 +119,9 @@ export function Footer() {
             {['Portfolio', 'Company', 'Blog', 'Contact'].map(item => (
               <Link key={item} href={`/${item.toLowerCase()}`}
                 className="text-xs font-semibold tracking-wide transition-all duration-200"
-                style={{ color: 'rgba(200,215,255,0.38)' }}
+                style={{ color: 'rgba(255,255,255,0.38)' }}
                 onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = '#4B9CF4'}
-                onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'rgba(200,215,255,0.38)'}>
+                onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.38)'}>
                 {item}
               </Link>
             ))}
@@ -132,12 +132,12 @@ export function Footer() {
       {/* Bottom bar */}
       <div style={{ borderTop: `1px solid rgba(255,255,255,0.05)` }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-[11px]" style={{ color: 'rgba(200,215,255,0.3)' }}>
+          <p className="text-[11px]" style={{ color: 'rgba(255,255,255,0.3)' }}>
             &copy; {new Date().getFullYear()} MetLink. All rights reserved.
           </p>
           <div className="flex items-center gap-1.5">
             <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-            <p className="text-[11px]" style={{ color: 'rgba(200,215,255,0.3)' }}>All systems operational</p>
+            <p className="text-[11px]" style={{ color: 'rgba(255,255,255,0.3)' }}>All systems operational</p>
           </div>
         </div>
       </div>

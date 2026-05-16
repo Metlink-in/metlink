@@ -18,10 +18,10 @@ export default function NotFound() {
 
         {/* 404 */}
         <div className="mb-6 relative inline-block">
-          <p className="text-[10px] font-black uppercase tracking-[0.4em] mb-4" style={{ color: 'rgba(255,255,255,0.4)' }}>
+          <p className="text-[10px] font-normal uppercase tracking-[0.4em] mb-4" style={{ color: 'rgba(255,255,255,0.4)' }}>
             404 — Page Not Found
           </p>
-          <h1 className="text-[9rem] md:text-[11rem] font-black leading-none select-none gradient-text-cyan">
+          <h1 className="text-[9rem] md:text-[11rem]  leading-none select-none gradient-text-cyan">
             404
           </h1>
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
@@ -29,7 +29,7 @@ export default function NotFound() {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black mb-4 leading-tight" style={{ color: '#FFFFFF' }}>
+        <h2 className="text-2xl md:text-3xl  mb-4 leading-tight" style={{ color: '#FFFFFF' }}>
           Lost in the Digital Void
         </h2>
         <p className="text-base mb-10 max-w-sm mx-auto leading-relaxed" style={{ color: 'rgba(255,255,255,0.5)' }}>
@@ -45,7 +45,7 @@ export default function NotFound() {
           </Link>
           <Link href="/contact"
             className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full font-bold text-sm transition-all"
-            style={{ border: '1px solid rgba(255,255,255,0.15)', color: 'rgba(255,255,255,0.7)', background: 'rgba(255,255,255,0.06)' }}>
+            style={{ border: '1px solid rgba(255,255,255,0.07)', color: 'rgba(255,255,255,0.7)', background: 'rgba(255,255,255,0.06)' }}>
             <ArrowLeft className="w-4 h-4" />
             Contact Us
           </Link>
@@ -55,7 +55,7 @@ export default function NotFound() {
           {['Services', 'Portfolio', 'Blog', 'Company'].map(page => (
             <Link key={page} href={`/${page.toLowerCase()}`}
               className="px-4 py-2 rounded-xl text-xs font-semibold transition-all"
-              style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)', color: 'rgba(255,255,255,0.5)' }}
+              style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.07)', color: 'rgba(255,255,255,0.5)' }}
               onMouseEnter={e => {
                 (e.currentTarget as HTMLElement).style.borderColor = 'rgba(43,128,240,0.5)';
                 (e.currentTarget as HTMLElement).style.color = '#2B80F0';

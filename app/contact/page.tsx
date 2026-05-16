@@ -22,8 +22,8 @@ export default function ContactPage() {
     setTimeout(() => { setLoading(false); setSubmitted(true); }, 1500);
   };
 
-  const inputBase = { background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)', color: '#FFFFFF' };
-  const labelCls  = "block text-[10px] font-black uppercase tracking-[0.2em] mb-2.5" ;
+  const inputBase = { background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.07)', color: '#FFFFFF' };
+  const labelCls  = "block text-[10px] font-normal uppercase tracking-[0.2em] mb-2.5" ;
 
   return (
     <div className="w-full overflow-x-hidden" style={{ background: '#07111F' }}>
@@ -35,15 +35,15 @@ export default function ContactPage() {
           style={{ background: 'radial-gradient(ellipse, rgba(43,128,240,0.18) 0%, transparent 70%)', filter: 'blur(80px)' }} />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
           <FadeIn>
-            <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-[10px] font-black uppercase tracking-[0.25em] mb-8"
-              style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)', color: '#2B80F0',  }}>
+            <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-[10px] font-normal uppercase tracking-[0.25em] mb-8"
+              style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.07)', color: '#2B80F0',  }}>
               <MessageCircle className="w-3.5 h-3.5" /> Get In Touch
             </div>
           </FadeIn>
           <FadeIn delay={0.1}>
-            <h1 className="font-black mb-6 leading-tight" style={{ color: '#FFFFFF' }}>
+            <h1 className=" mb-6 leading-tight" style={{ color: '#FFFFFF' }}>
               Let&apos;s{' '}
-              <em style={{ fontFamily: 'var(--font-playfair)', fontStyle: 'italic', color: '#2B80F0' }}>Build Together</em>
+              <span style={{ color: '#2B80F0' }}>Build Together</span>
             </h1>
           </FadeIn>
           <FadeIn delay={0.2}>
@@ -55,7 +55,7 @@ export default function ContactPage() {
       </section>
 
       {/* Info cards */}
-      <section style={{ background: '#0B1628', borderTop: '1px solid rgba(255,255,255,0.12)', borderBottom: '1px solid rgba(255,255,255,0.12)' }}>
+      <section style={{ background: '#0B1628', borderTop: '1px solid rgba(255,255,255,0.06)', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
         <StaggerChildren className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {[
             { Icon: Mail,   title: 'Email',         value: 'hello@metlink.in',  desc: 'Reply within 2 hours', href: 'mailto:hello@metlink.in' },
@@ -66,7 +66,7 @@ export default function ContactPage() {
             <StaggerItem key={title}>
               <a href={href}
                 className="group p-5 rounded-xl text-center transition-all hover:-translate-y-1 block h-full"
-                style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)' }}
+                style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.07)' }}
                 onMouseEnter={e => (e.currentTarget as HTMLElement).style.borderColor = 'rgba(43,128,240,0.3)'}
                 onMouseLeave={e => (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.12)'}>
                 <div className="w-10 h-10 rounded-xl flex items-center justify-center mx-auto mb-3 transition-transform group-hover:scale-110"
@@ -89,10 +89,10 @@ export default function ContactPage() {
 
             {/* Left — trust */}
             <FadeIn className="lg:col-span-2">
-              <p className="text-[10px] font-black uppercase tracking-[0.25em] mb-4" style={{ color: '#2B80F0' }}>Why Work With Us</p>
-              <h2 className="font-black mb-8" style={{ color: '#FFFFFF' }}>
+              <p className="text-[10px] font-normal uppercase tracking-[0.25em] mb-4" style={{ color: '#2B80F0' }}>Why Work With Us</p>
+              <h2 className=" mb-8" style={{ color: '#FFFFFF' }}>
                 The Partner You&apos;ve{' '}
-                <em style={{ fontFamily: 'var(--font-playfair)', fontStyle: 'italic', color: '#2B80F0' }}>Been Looking For</em>
+                <span style={{ color: '#2B80F0' }}>Been Looking For</span>
               </h2>
               <div className="space-y-4 mb-12">
                 {[
@@ -102,7 +102,7 @@ export default function ContactPage() {
                   { icon: <CheckCircle className="w-4 h-4" />, t: 'NDA & Confidentiality', d: 'Your ideas and data are always protected.' },
                 ].map(({ icon, t, d }) => (
                   <div key={t} className="flex items-start gap-4 p-5 rounded-2xl transition-all group"
-                    style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)' }}
+                    style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.07)' }}
                     onMouseEnter={e => (e.currentTarget as HTMLElement).style.borderColor = 'rgba(43,128,240,0.3)'}
                     onMouseLeave={e => (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.12)'}>
                     <div className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0 transition-transform group-hover:scale-110"
@@ -116,13 +116,13 @@ export default function ContactPage() {
                   </div>
                 ))}
               </div>
-              <div className="p-6 rounded-2xl" style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)' }}>
-                <p className="text-[10px] font-black uppercase tracking-[0.2em] mb-4" style={{ color: 'rgba(255,255,255,0.4)' }}>Trusted By Industries</p>
+              <div className="p-6 rounded-2xl" style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.07)' }}>
+                <p className="text-[10px] font-normal uppercase tracking-[0.2em] mb-4" style={{ color: 'rgba(255,255,255,0.4)' }}>Trusted By Industries</p>
                 <div className="flex flex-wrap gap-2">
                   {['FinTech','Healthcare','E-Commerce','SaaS','Real Estate','Startups'].map(tag => (
                     <span key={tag}
                       className="px-3.5 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-wider cursor-default transition-all hover:text-[#2B80F0]"
-                      style={{ background: '#07111F', color: 'rgba(255,255,255,0.4)', border: '1px solid rgba(255,255,255,0.12)' }}>
+                      style={{ background: '#07111F', color: 'rgba(255,255,255,0.4)', border: '1px solid rgba(255,255,255,0.07)' }}>
                       {tag}
                     </span>
                   ))}
@@ -133,7 +133,7 @@ export default function ContactPage() {
             {/* Right — form */}
             <FadeIn delay={0.15} className="lg:col-span-3">
               <div className="rounded-3xl overflow-hidden"
-                style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)', boxShadow: '0 4px 32px rgba(0,0,0,0.3)' }}>
+                style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.07)', boxShadow: '0 4px 32px rgba(0,0,0,0.3)' }}>
                 <div className="h-1" style={{ background: 'linear-gradient(90deg, #2B80F0, #4B9CF4, #2B80F0)' }} />
                 <div className="p-8 md:p-10">
                   {submitted ? (
@@ -152,7 +152,7 @@ export default function ContactPage() {
                     </div>
                   ) : (
                     <>
-                      <h2 className="text-2xl font-black mb-2" style={{ color: '#FFFFFF' }}>Project Inquiry</h2>
+                      <h2 className="text-2xl  mb-2" style={{ color: '#FFFFFF' }}>Project Inquiry</h2>
                       <p className="text-sm mb-10" style={{ color: 'rgba(255,255,255,0.6)' }}>Brief us on your goals and we&apos;ll build the strategy.</p>
                       <form onSubmit={handleSubmit} className="space-y-6">
                         <div className="grid sm:grid-cols-2 gap-6">

@@ -22,16 +22,16 @@ export default function OurProductPage() {
       {/* Hero content */}
       <div className="relative z-10 flex flex-col items-center text-center px-6 max-w-3xl mx-auto">
         {/* Badge */}
-        <div className="mb-8 inline-flex items-center gap-2 rounded-full px-5 py-2 text-[10px] font-black uppercase tracking-[0.25em]"
-          style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)', color: '#2B80F0',  }}>
+        <div className="mb-8 inline-flex items-center gap-2 rounded-full px-5 py-2 text-[10px] font-normal uppercase tracking-[0.25em]"
+          style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.07)', color: '#2B80F0',  }}>
           <span className="inline-block w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: '#2B80F0' }} />
           In Development
         </div>
 
         {/* Headline */}
-        <h1 className="font-black tracking-tight leading-tight mb-6" style={{ color: '#FFFFFF' }}>
+        <h1 className=" tracking-tight leading-tight mb-6" style={{ color: '#FFFFFF' }}>
           Coming{' '}
-          <em style={{ fontFamily: 'var(--font-playfair)', fontStyle: 'italic', color: '#2B80F0' }}>Soon</em>
+          <span style={{ color: '#2B80F0' }}>Soon</span>
         </h1>
 
         {/* Sub-headline */}

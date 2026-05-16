@@ -74,7 +74,7 @@ export function Header() {
 
             {/* Desktop nav — center pill */}
             <div className="hidden md:flex items-center gap-0.5 px-1.5 py-1.5 rounded-full"
-              style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.07)' }}>
+              style={{ background: 'rgba(255,255,255,0.035)', border: '1px solid rgba(255,255,255,0.07)' }}>
               <NavLink href="/">Home</NavLink>
 
               {/* Services dropdown */}
@@ -112,7 +112,7 @@ export function Header() {
                           return (
                             <div key={cat.slug} className="space-y-4">
                               <Link href={`/services/${cat.slug}`}
-                                className="flex items-center gap-2 text-xs font-black uppercase tracking-widest transition-all hover:translate-x-0.5"
+                                className="flex items-center gap-2 text-xs font-normal uppercase tracking-widest transition-all hover:translate-x-0.5"
                                 style={{ color: accent }}
                                 onClick={() => setServicesOpen(false)}>
                                 {cat.slug === 'digital-marketing'   && <Megaphone className="w-3.5 h-3.5" />}
@@ -126,9 +126,9 @@ export function Header() {
                                   <li key={svc.slug}>
                                     <Link href={`/services/${cat.slug}/${svc.slug}`}
                                       className="group/item flex items-center gap-1.5 text-sm transition-all"
-                                      style={{ color: 'rgba(200,215,255,0.5)' }}
+                                      style={{ color: 'rgba(255,255,255,0.5)' }}
                                       onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = '#FFFFFF'}
-                                      onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'rgba(200,215,255,0.5)'}
+                                      onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.5)'}
                                       onClick={() => setServicesOpen(false)}>
                                       <ArrowRight className="w-3 h-3 opacity-0 group-hover/item:opacity-100 -translate-x-1 group-hover/item:translate-x-0 transition-all flex-shrink-0"
                                         style={{ color: accent }} />
@@ -144,7 +144,7 @@ export function Header() {
                           style={{ borderTop: '1px solid rgba(255,255,255,0.09)' }}>
                           <div className="flex items-center gap-2">
                             <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                            <p className="text-sm" style={{ color: 'rgba(200,215,255,0.45)' }}>Custom AI solutions for unique business challenges</p>
+                            <p className="text-sm" style={{ color: 'rgba(255,255,255,0.45)' }}>Custom AI solutions for unique business challenges</p>
                           </div>
                           <Link href="/contact" onClick={() => setServicesOpen(false)}
                             className="group px-5 py-2 rounded-xl text-sm font-bold flex items-center gap-2 transition-all btn-primary-glass text-white">
@@ -187,7 +187,7 @@ export function Header() {
             {/* Mobile hamburger */}
             <button onClick={() => setMobileOpen(v => !v)}
               className="md:hidden p-2 rounded-xl transition-all hover:bg-white/10" aria-label="Toggle menu"
-              style={{ color: 'rgba(220,230,255,0.8)' }}>
+              style={{ color: 'rgba(255,255,255,0.8)' }}>
               {mobileOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
           </div>
@@ -200,7 +200,7 @@ export function Header() {
                 <MobileNavLink href="/" onClose={() => setMobileOpen(false)}>Home</MobileNavLink>
 
                 <div className="px-3 pt-3 pb-1">
-                  <p className="text-[10px] font-black uppercase tracking-wider" style={{ color: 'rgba(200,215,255,0.35)' }}>Services</p>
+                  <p className="text-[10px] font-black uppercase tracking-wider" style={{ color: 'rgba(255,255,255,0.35)' }}>Services</p>
                 </div>
                 {serviceCategories.map((cat) => {
                   const accent = catAccents[cat.slug] || '#2B80F0';
@@ -215,7 +215,7 @@ export function Header() {
                       {cat.services.map((svc) => (
                         <Link key={svc.slug} href={`/services/${cat.slug}/${svc.slug}`}
                           className="block pl-8 py-1 text-sm transition-colors"
-                          style={{ color: 'rgba(200,215,255,0.4)' }}
+                          style={{ color: 'rgba(255,255,255,0.4)' }}
                           onClick={() => setMobileOpen(false)}>
                           {svc.name}
                         </Link>
@@ -242,7 +242,7 @@ export function Header() {
                   </Link>
                   <button onClick={() => { setShowPopup(true); setMobileOpen(false); }}
                     className="w-full text-center py-3 rounded-xl text-sm font-medium btn-glass"
-                    style={{ color: 'rgba(220,230,255,0.7)' }}>
+                    style={{ color: 'rgba(255,255,255,0.7)' }}>
                     Get a Free Proposal
                   </button>
                 </div>
@@ -274,7 +274,7 @@ function MobileNavLink({ href, children, onClose }: { href: string; children: Re
   return (
     <Link href={href}
       className="flex items-center gap-2 px-3 py-2.5 text-sm rounded-xl font-semibold transition-all hover:bg-white/7"
-      style={{ color: 'rgba(220,230,255,0.7)' }}
+      style={{ color: 'rgba(255,255,255,0.7)' }}
       onClick={onClose}>
       {children}
     </Link>
@@ -292,7 +292,7 @@ function ProposalPopup({ onClose }: { onClose: () => void }) {
         style={{ background: 'rgba(10,20,42,0.98)', border: '1px solid rgba(255,255,255,0.12)' }}>
         <div className="h-px w-full" style={{ background: 'linear-gradient(90deg, transparent, #2B80F0, #4B9CF4, transparent)' }} />
         <button onClick={onClose} className="absolute top-4 right-4 p-1.5 rounded-lg transition-colors hover:bg-white/10"
-          style={{ color: 'rgba(200,215,255,0.5)' }}>
+          style={{ color: 'rgba(255,255,255,0.5)' }}>
           <X className="w-4 h-4" />
         </button>
         <div className="p-8">
@@ -302,7 +302,7 @@ function ProposalPopup({ onClose }: { onClose: () => void }) {
                 <ArrowRight className="w-10 h-10 text-white" />
               </div>
               <h3 className="text-2xl font-black mb-2" style={{ color: '#FFFFFF' }}>Request Received!</h3>
-              <p className="text-sm max-w-[240px] mx-auto" style={{ color: 'rgba(200,215,255,0.6)' }}>
+              <p className="text-sm max-w-[240px] mx-auto" style={{ color: 'rgba(255,255,255,0.6)' }}>
                 Our strategy team will reach out within 24 hours.
               </p>
             </div>
@@ -311,7 +311,7 @@ function ProposalPopup({ onClose }: { onClose: () => void }) {
               <div className="mb-8">
                 <p className="text-[10px] font-black tracking-[0.3em] uppercase mb-2" style={{ color: '#2B80F0' }}>Limited Spots</p>
                 <h2 className="text-2xl font-black leading-tight" style={{ color: '#FFFFFF' }}>Get a Free Proposal</h2>
-                <p className="text-sm mt-1" style={{ color: 'rgba(200,215,255,0.55)' }}>Join 80+ businesses growing with AI-powered strategy.</p>
+                <p className="text-sm mt-1" style={{ color: 'rgba(255,255,255,0.55)' }}>Join 80+ businesses growing with AI-powered strategy.</p>
               </div>
               <form onSubmit={handleSubmit} className="space-y-3">
                 {['Full Name', 'Company / Project Name', 'Work Email Address'].map((ph, i) => (
@@ -322,7 +322,7 @@ function ProposalPopup({ onClose }: { onClose: () => void }) {
                     onBlur={e => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)')} />
                 ))}
                 <select className="w-full px-4 py-3.5 rounded-xl text-sm focus:outline-none appearance-none cursor-pointer transition-all"
-                  style={{ background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.12)', color: 'rgba(200,215,255,0.5)' }}
+                  style={{ background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.12)', color: 'rgba(255,255,255,0.5)' }}
                   onFocus={e => (e.currentTarget.style.borderColor = 'rgba(43,128,240,0.5)')}
                   onBlur={e => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)')}>
                   <option value="" style={{ background: '#0d1829' }}>Select a Service</option>
@@ -335,7 +335,7 @@ function ProposalPopup({ onClose }: { onClose: () => void }) {
                   className="w-full py-3.5 mt-2 rounded-xl font-black text-sm tracking-wide uppercase transition-all text-white btn-primary-glass">
                   Submit &amp; Get Started
                 </button>
-                <p className="text-center text-[10px] font-medium mt-4" style={{ color: 'rgba(200,215,255,0.35)' }}>
+                <p className="text-center text-[10px] font-medium mt-4" style={{ color: 'rgba(255,255,255,0.35)' }}>
                   No spam. We respond within 24 hours.
                 </p>
               </form>
