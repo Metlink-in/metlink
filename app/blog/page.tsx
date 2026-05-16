@@ -18,18 +18,18 @@ export default function BlogPage() {
       <section className="relative py-28 overflow-hidden"
         style={{ background: 'linear-gradient(160deg, #FFF9F7 0%, #FAF6F0 50%, #F5EEE4 100%)' }}>
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px] rounded-full pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse, rgba(200,75,48,0.07) 0%, transparent 70%)', filter: 'blur(80px)' }} />
+          style={{ background: 'radial-gradient(ellipse, rgba(43,128,240,0.07) 0%, transparent 70%)', filter: 'blur(80px)' }} />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
           <FadeIn>
             <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-[10px] font-black uppercase tracking-[0.25em] mb-8"
-              style={{ background: '#FFFFFF', border: '1px solid #E5DDD5', color: '#C84B30', boxShadow: '0 1px 8px rgba(0,0,0,0.06)' }}>
+              style={{ background: '#FFFFFF', border: '1px solid #E5DDD5', color: '#2B80F0', boxShadow: '0 1px 8px rgba(0,0,0,0.06)' }}>
               Insights &amp; Ideas
             </div>
           </FadeIn>
           <FadeIn delay={0.1}>
             <h1 className="font-black mb-6 leading-tight" style={{ color: '#192540' }}>
               The MetLink{' '}
-              <em style={{ fontFamily: 'var(--font-playfair)', fontStyle: 'italic', color: '#C84B30' }}>Blog</em>
+              <em style={{ fontFamily: 'var(--font-playfair)', fontStyle: 'italic', color: '#2B80F0' }}>Blog</em>
             </h1>
           </FadeIn>
           <FadeIn delay={0.2}>
@@ -48,7 +48,7 @@ export default function BlogPage() {
             <button key={cat}
               className="flex-shrink-0 px-5 py-2 rounded-full text-sm font-bold transition-all hover:scale-105"
               style={i === 0
-                ? { background: '#FEF1EE', border: '1px solid rgba(200,75,48,0.3)', color: '#C84B30' }
+                ? { background: '#EEF4FE', border: '1px solid rgba(43,128,240,0.3)', color: '#2B80F0' }
                 : { background: '#FAF9F6', border: '1px solid #E5DDD5', color: '#ADA09A' }}>
               {cat}
             </button>
@@ -60,14 +60,14 @@ export default function BlogPage() {
       <section className="py-14" style={{ background: '#FFFFFF' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeIn>
-            <p className="text-xs font-black uppercase tracking-[0.25em] mb-6" style={{ color: '#C84B30' }}>Featured Article</p>
+            <p className="text-xs font-black uppercase tracking-[0.25em] mb-6" style={{ color: '#2B80F0' }}>Featured Article</p>
           </FadeIn>
           <FadeIn delay={0.1}>
             <Link href={`/blog/${featured.slug}`}
               className="group grid lg:grid-cols-5 gap-8 p-8 rounded-3xl transition-all duration-300 overflow-hidden relative hover:-translate-y-1"
               style={{ background: '#FAF9F6', border: '1px solid #E5DDD5' }}
               onMouseEnter={e => {
-                (e.currentTarget as HTMLElement).style.borderColor = 'rgba(200,75,48,0.25)';
+                (e.currentTarget as HTMLElement).style.borderColor = 'rgba(43,128,240,0.25)';
                 (e.currentTarget as HTMLElement).style.boxShadow = '0 12px 40px rgba(0,0,0,0.06)';
               }}
               onMouseLeave={e => {
@@ -90,11 +90,11 @@ export default function BlogPage() {
 
               <div className="lg:col-span-3 flex flex-col justify-center">
                 <div className="flex flex-wrap items-center gap-4 mb-4">
-                  <span className="text-xs font-bold uppercase tracking-wider" style={{ color: '#C84B30' }}>{featured.category}</span>
+                  <span className="text-xs font-bold uppercase tracking-wider" style={{ color: '#2B80F0' }}>{featured.category}</span>
                   <span className="text-xs flex items-center gap-1" style={{ color: '#ADA09A' }}><Clock className="w-3 h-3" />{featured.readTime}</span>
                   <span className="text-xs" style={{ color: '#ADA09A' }}>{featured.date}</span>
                 </div>
-                <h2 className="text-2xl font-black mb-4 leading-tight group-hover:text-[#C84B30] transition-colors" style={{ color: '#192540' }}>{featured.title}</h2>
+                <h2 className="text-2xl font-black mb-4 leading-tight group-hover:text-[#2B80F0] transition-colors" style={{ color: '#192540' }}>{featured.title}</h2>
                 <p className="leading-relaxed mb-6" style={{ color: '#72645A' }}>{featured.excerpt}</p>
                 <div className="flex flex-wrap gap-2 mb-6">
                   {featured.tags.map(tag => (
@@ -102,7 +102,7 @@ export default function BlogPage() {
                       style={{ border: '1px solid #E5DDD5', color: '#ADA09A', background: '#FFFFFF' }}>{tag}</span>
                   ))}
                 </div>
-                <span className="inline-flex items-center gap-2 text-sm font-bold group-hover:gap-3 transition-all" style={{ color: '#C84B30' }}>
+                <span className="inline-flex items-center gap-2 text-sm font-bold group-hover:gap-3 transition-all" style={{ color: '#2B80F0' }}>
                   Read Full Article <ArrowRight className="w-4 h-4" />
                 </span>
               </div>
@@ -134,10 +134,10 @@ export default function BlogPage() {
                   </div>
                   <div className="p-6 flex flex-col flex-1">
                     <div className="flex items-center gap-3 mb-3">
-                      <span className="text-xs font-bold" style={{ color: '#C84B30' }}>{post.category}</span>
+                      <span className="text-xs font-bold" style={{ color: '#2B80F0' }}>{post.category}</span>
                       <span className="text-xs flex items-center gap-1" style={{ color: '#ADA09A' }}><Clock className="w-3 h-3" />{post.readTime}</span>
                     </div>
-                    <h3 className="text-lg font-bold mb-3 leading-snug group-hover:text-[#C84B30] transition-colors line-clamp-2" style={{ color: '#192540' }}>{post.title}</h3>
+                    <h3 className="text-lg font-bold mb-3 leading-snug group-hover:text-[#2B80F0] transition-colors line-clamp-2" style={{ color: '#192540' }}>{post.title}</h3>
                     <p className="text-sm line-clamp-3 flex-1 mb-4" style={{ color: '#72645A' }}>{post.excerpt}</p>
                     <div className="flex items-center justify-between pt-4" style={{ borderTop: '1px solid #F0EBE3' }}>
                       <div className="flex items-center gap-2">
@@ -147,7 +147,7 @@ export default function BlogPage() {
                           <p className="text-xs" style={{ color: '#ADA09A' }}>{post.date}</p>
                         </div>
                       </div>
-                      <span className="text-xs font-bold flex items-center gap-1 group-hover:gap-2 transition-all" style={{ color: '#C84B30' }}>
+                      <span className="text-xs font-bold flex items-center gap-1 group-hover:gap-2 transition-all" style={{ color: '#2B80F0' }}>
                         Read <ArrowRight className="w-3 h-3" />
                       </span>
                     </div>
@@ -162,23 +162,23 @@ export default function BlogPage() {
       {/* Newsletter CTA */}
       <section className="py-24 relative" style={{ background: '#FFFFFF', borderTop: '1px solid #E5DDD5' }}>
         <div className="absolute inset-0 pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse at 50% 50%, rgba(200,75,48,0.04), transparent 65%)' }} />
+          style={{ background: 'radial-gradient(ellipse at 50% 50%, rgba(43,128,240,0.04), transparent 65%)' }} />
         <FadeIn className="max-w-3xl mx-auto px-4 text-center relative z-10">
-          <p className="text-[10px] font-black uppercase tracking-[0.3em] mb-4" style={{ color: '#C84B30' }}>Never Miss an Insight</p>
+          <p className="text-[10px] font-black uppercase tracking-[0.3em] mb-4" style={{ color: '#2B80F0' }}>Never Miss an Insight</p>
           <h2 className="font-black mb-6" style={{ color: '#192540' }}>
             Subscribe to the{' '}
-            <em style={{ fontFamily: 'var(--font-playfair)', fontStyle: 'italic', color: '#C84B30' }}>Insights</em>
+            <em style={{ fontFamily: 'var(--font-playfair)', fontStyle: 'italic', color: '#2B80F0' }}>Insights</em>
           </h2>
           <p className="mb-10 text-lg font-medium" style={{ color: '#72645A' }}>Get our best articles on AI, marketing, and software — once a month.</p>
           <form onSubmit={e => e.preventDefault()} className="flex flex-col sm:flex-row gap-3.5 max-w-xl mx-auto">
             <input type="email" placeholder="your@email.com"
               className="flex-1 px-6 py-4 rounded-full text-sm focus:outline-none transition-all"
               style={{ background: '#FAF9F6', border: '1px solid #E5DDD5', color: '#192540' }}
-              onFocus={e => (e.currentTarget.style.borderColor = 'rgba(200,75,48,0.45)')}
+              onFocus={e => (e.currentTarget.style.borderColor = 'rgba(43,128,240,0.45)')}
               onBlur={e => (e.currentTarget.style.borderColor = '#E5DDD5')} />
             <button type="submit"
               className="px-8 py-4 rounded-full font-black text-sm uppercase tracking-widest hover:brightness-95 active:scale-95 transition-all text-white"
-              style={{ background: '#C84B30', boxShadow: '0 4px 20px rgba(200,75,48,0.25)' }}>
+              style={{ background: '#2B80F0', boxShadow: '0 4px 20px rgba(43,128,240,0.25)' }}>
               Subscribe
             </button>
           </form>

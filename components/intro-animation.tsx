@@ -57,7 +57,7 @@ export function IntroAnimation() {
         position: 'absolute',
         inset: 0,
         pointerEvents: 'none',
-        background: 'radial-gradient(ellipse 55% 55% at 50% 50%, rgba(200,75,48,0.06) 0%, transparent 70%)',
+        background: 'radial-gradient(ellipse 55% 55% at 50% 50%, rgba(43,128,240,0.06) 0%, transparent 70%)',
       }} />
 
       {/* Subtle grid */}
@@ -66,7 +66,7 @@ export function IntroAnimation() {
         inset: 0,
         opacity: 0.06,
         pointerEvents: 'none',
-        backgroundImage: 'linear-gradient(rgba(200,75,48,0.3) 1px,transparent 1px),linear-gradient(90deg,rgba(200,75,48,0.3) 1px,transparent 1px)',
+        backgroundImage: 'linear-gradient(rgba(43,128,240,0.3) 1px,transparent 1px),linear-gradient(90deg,rgba(43,128,240,0.3) 1px,transparent 1px)',
         backgroundSize: '60px 60px',
       }} />
 
@@ -152,7 +152,7 @@ export function IntroAnimation() {
         }}>
           <div style={{
             height: '100%',
-            background: 'linear-gradient(to right, #C84B30, #E8612A)',
+            background: 'linear-gradient(to right, #2B80F0, #4B9CF4)',
             borderRadius: 2,
             width: ['bar','exit'].includes(phase) ? '100%' : '0%',
             transition: 'width 1.4s cubic-bezier(0.4,0,0.2,1)',

@@ -30,16 +30,16 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="flex flex-wrap items-center gap-2 text-xs mb-8" style={{ color: '#ADA09A' }}>
-            <Link href="/" className="hover:text-[#C84B30] transition-colors">Home</Link>
+            <Link href="/" className="hover:text-[#2B80F0] transition-colors">Home</Link>
             <ChevronRight className="w-3 h-3" />
-            <Link href="/blog" className="hover:text-[#C84B30] transition-colors">Blog</Link>
+            <Link href="/blog" className="hover:text-[#2B80F0] transition-colors">Blog</Link>
             <ChevronRight className="w-3 h-3" />
-            <span style={{ color: '#C84B30' }}>{post.category}</span>
+            <span style={{ color: '#2B80F0' }}>{post.category}</span>
           </div>
 
           <div className="flex flex-wrap items-center gap-4 mb-6">
             <span className="px-4 py-1.5 rounded-full text-xs font-bold"
-              style={{ background: '#FEF1EE', border: '1px solid rgba(200,75,48,0.2)', color: '#C84B30' }}>
+              style={{ background: '#EEF4FE', border: '1px solid rgba(43,128,240,0.2)', color: '#2B80F0' }}>
               {post.category}
             </span>
             <span className="text-sm flex items-center gap-1.5" style={{ color: '#ADA09A' }}>
@@ -54,7 +54,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           <div className="inline-flex items-center gap-4 p-5 rounded-2xl"
             style={{ background: '#FFFFFF', border: '1px solid #E5DDD5', boxShadow: '0 2px 12px rgba(0,0,0,0.05)' }}>
             <div className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl shrink-0"
-              style={{ background: 'linear-gradient(135deg, #FEF1EE, #FDDDD5)' }}>
+              style={{ background: 'linear-gradient(135deg, #EEF4FE, #FDDDD5)' }}>
               {post.authorEmoji}
             </div>
             <div>
@@ -90,7 +90,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                   <ul key={i} className="space-y-3 my-6 pl-2">
                     {items.map((item, j) => (
                       <li key={j} className="flex items-start gap-3 leading-relaxed" style={{ color: '#72645A' }}>
-                        <span className="mt-2.5 w-1.5 h-1.5 rounded-full shrink-0" style={{ background: '#C84B30' }} />
+                        <span className="mt-2.5 w-1.5 h-1.5 rounded-full shrink-0" style={{ background: '#2B80F0' }} />
                         <span dangerouslySetInnerHTML={{ __html: item.replace('- ', '').replace(/\*\*(.+?)\*\*/g, '<strong style="color:#192540;font-weight:700">$1</strong>') }} />
                       </li>
                     ))}
@@ -124,12 +124,12 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           <div className="mt-12 p-8 rounded-3xl flex gap-6 items-start"
             style={{ background: '#FAF9F6', border: '1px solid #E5DDD5' }}>
             <div className="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl flex-shrink-0"
-              style={{ background: 'linear-gradient(135deg, #FEF1EE, #FDDDD5)' }}>
+              style={{ background: 'linear-gradient(135deg, #EEF4FE, #FDDDD5)' }}>
               {post.authorEmoji}
             </div>
             <div>
               <p className="font-black text-xl mb-1" style={{ color: '#192540' }}>{post.author}</p>
-              <p className="text-xs font-bold uppercase tracking-wider mb-3" style={{ color: '#C84B30' }}>{post.authorRole} at MetLink</p>
+              <p className="text-xs font-bold uppercase tracking-wider mb-3" style={{ color: '#2B80F0' }}>{post.authorRole} at MetLink</p>
               <p className="text-sm leading-relaxed" style={{ color: '#72645A' }}>
                 Expert at MetLink specializing in {post.category.toLowerCase()}. Helping businesses grow through data, technology, and creative strategy.
               </p>
@@ -148,10 +148,10 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                 <Link key={p.slug} href={`/blog/${p.slug}`}
                   className="group rounded-2xl overflow-hidden flex transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
                   style={{ background: '#FFFFFF', border: '1px solid #E5DDD5' }}>
-                  <div className="w-1.5 flex-shrink-0" style={{ background: '#C84B30' }} />
+                  <div className="w-1.5 flex-shrink-0" style={{ background: '#2B80F0' }} />
                   <div className="p-6 flex-1">
-                    <span className="text-xs font-bold uppercase tracking-wider" style={{ color: '#C84B30' }}>{p.category}</span>
-                    <h3 className="font-bold mt-2 mb-3 leading-snug group-hover:text-[#C84B30] transition-colors line-clamp-2" style={{ color: '#192540' }}>
+                    <span className="text-xs font-bold uppercase tracking-wider" style={{ color: '#2B80F0' }}>{p.category}</span>
+                    <h3 className="font-bold mt-2 mb-3 leading-snug group-hover:text-[#2B80F0] transition-colors line-clamp-2" style={{ color: '#192540' }}>
                       {p.title}
                     </h3>
                     <p className="text-sm leading-relaxed mb-4 line-clamp-2" style={{ color: '#72645A' }}>{p.excerpt}</p>

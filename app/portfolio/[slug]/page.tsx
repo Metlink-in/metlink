@@ -23,15 +23,15 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
       <section className="relative pt-32 pb-20 overflow-hidden"
         style={{ background: 'linear-gradient(160deg, #FFF9F7 0%, #FAF6F0 50%, #F5EEE4 100%)' }}>
         <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full pointer-events-none blur-3xl opacity-30"
-          style={{ background: 'radial-gradient(circle, rgba(200,75,48,0.12), transparent)' }} />
+          style={{ background: 'radial-gradient(circle, rgba(43,128,240,0.12), transparent)' }} />
 
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="flex items-center gap-2 text-xs mb-8 overflow-x-auto whitespace-nowrap pb-2" style={{ color: '#ADA09A' }}>
-            <Link href="/" className="hover:text-[#C84B30] transition-colors">Home</Link>
+            <Link href="/" className="hover:text-[#2B80F0] transition-colors">Home</Link>
             <ChevronRight className="w-3 h-3" />
-            <Link href="/portfolio" className="hover:text-[#C84B30] transition-colors">Portfolio</Link>
+            <Link href="/portfolio" className="hover:text-[#2B80F0] transition-colors">Portfolio</Link>
             <ChevronRight className="w-3 h-3" />
-            <span style={{ color: '#C84B30' }}>{project.title}</span>
+            <span style={{ color: '#2B80F0' }}>{project.title}</span>
           </div>
 
           <h1 className="font-black mb-6 leading-tight" style={{ color: '#192540' }}>{project.title}</h1>
@@ -48,7 +48,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
             </div>
             <div>
               <p className="text-xs uppercase tracking-wider mb-1" style={{ color: '#ADA09A' }}>Date Completed</p>
-              <p className="font-bold" style={{ color: '#C84B30' }}>{project.date}</p>
+              <p className="font-bold" style={{ color: '#2B80F0' }}>{project.date}</p>
             </div>
           </div>
         </div>
@@ -70,7 +70,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
 
               <div>
                 <h2 className="text-3xl font-black mb-6" style={{ color: '#192540' }}>Our Solution</h2>
-                <div className="p-8 rounded-3xl" style={{ background: '#FEF1EE', border: '1px solid rgba(200,75,48,0.15)' }}>
+                <div className="p-8 rounded-3xl" style={{ background: '#EEF4FE', border: '1px solid rgba(43,128,240,0.15)' }}>
                   <p className="leading-relaxed text-lg" style={{ color: '#192540' }}>{project.solution}</p>
                 </div>
               </div>
@@ -80,13 +80,13 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
             <div className="space-y-12">
               <div>
                 <h3 className="text-lg font-bold mb-5 flex items-center gap-2" style={{ color: '#192540' }}>
-                  <span style={{ color: '#C84B30' }}><Play className="w-4 h-4 fill-current shrink-0" /></span> Key Results
+                  <span style={{ color: '#2B80F0' }}><Play className="w-4 h-4 fill-current shrink-0" /></span> Key Results
                 </h3>
                 <div className="space-y-3">
                   {project.results.map((res) => (
                     <div key={res} className="p-4 rounded-xl flex items-start gap-3"
                       style={{ background: '#FAF9F6', border: '1px solid #E5DDD5' }}>
-                      <CheckCircle className="w-5 h-5 shrink-0 mt-0.5" style={{ color: '#C84B30' }} />
+                      <CheckCircle className="w-5 h-5 shrink-0 mt-0.5" style={{ color: '#2B80F0' }} />
                       <p className="text-sm font-semibold" style={{ color: '#192540' }}>{res}</p>
                     </div>
                   ))}
@@ -95,7 +95,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
 
               <div>
                 <h3 className="text-lg font-bold mb-5 flex items-center gap-2" style={{ color: '#192540' }}>
-                  <span style={{ color: '#C84B30' }}><Code2 className="w-4 h-4 shrink-0" /></span> Technologies Used
+                  <span style={{ color: '#2B80F0' }}><Code2 className="w-4 h-4 shrink-0" /></span> Technologies Used
                 </h3>
                 <div className="flex flex-wrap gap-2">
                   {project.tech.map((t) => (
@@ -128,7 +128,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                     </div>
                   </div>
                   <div className="p-5">
-                    <h3 className="font-bold mb-2 group-hover:text-[#C84B30] transition-colors" style={{ color: '#192540' }}>{p.title}</h3>
+                    <h3 className="font-bold mb-2 group-hover:text-[#2B80F0] transition-colors" style={{ color: '#192540' }}>{p.title}</h3>
                     <p className="text-sm line-clamp-2" style={{ color: '#72645A' }}>{p.description}</p>
                   </div>
                 </Link>
@@ -141,13 +141,13 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
       {/* CTA */}
       <section className="py-24" style={{ background: '#FFFFFF', borderTop: '1px solid #E5DDD5' }}>
         <div className="absolute inset-0 pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse at 50% 50%, rgba(200,75,48,0.04), transparent 65%)' }} />
+          style={{ background: 'radial-gradient(ellipse at 50% 50%, rgba(43,128,240,0.04), transparent 65%)' }} />
         <div className="max-w-3xl mx-auto px-4 text-center relative z-10">
           <h2 className="font-black mb-4" style={{ color: '#192540' }}>Let&apos;s build your success story</h2>
           <p className="mb-8 text-lg" style={{ color: '#72645A' }}>We deliver measurable impact through AI, code, and creative strategy.</p>
           <Link href="/contact"
             className="inline-flex items-center gap-2 px-9 py-4 rounded-full font-bold text-sm text-white transition-all hover:brightness-95 active:scale-95"
-            style={{ background: '#C84B30', boxShadow: '0 4px 20px rgba(200,75,48,0.3)' }}>
+            style={{ background: '#2B80F0', boxShadow: '0 4px 20px rgba(43,128,240,0.3)' }}>
             Start Your Project <ArrowRight className="w-5 h-5" />
           </Link>
         </div>

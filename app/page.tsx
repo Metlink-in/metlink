@@ -10,14 +10,14 @@ const DK = '#192540';   // dark text
 const MU = '#72645A';   // muted
 const LM = '#ADA09A';   // light muted
 const BD = '#E5DDD5';   // border
-const AC = '#C84B30';   // radish accent
+const AC = '#2B80F0';   // radish accent
 
 const integrations = [
   { label: 'OpenAI',      dot: '#10B981' },
   { label: 'Anthropic',   dot: '#D97706' },
   { label: 'Notion',      dot: '#192540' },
   { label: 'Klaviyo',     dot: '#F59E0B' },
-  { label: 'LangChain',   dot: '#C84B30' },
+  { label: 'LangChain',   dot: '#2B80F0' },
   { label: 'Pinecone',    dot: '#16A34A' },
   { label: 'Make',        dot: '#A855F7' },
   { label: 'Supabase',    dot: '#3ECF8E' },
@@ -29,7 +29,7 @@ const integrations = [
 
 const services = [
   {
-    num: '01', color: '#C84B30',
+    num: '01', color: '#2B80F0',
     title: 'Digital Marketing',
     tagline: 'Data-driven growth at scale.',
     desc: 'Performance marketing, SEO, and brand strategy that turns audiences into customers.',
@@ -80,7 +80,7 @@ const stack = [
   { name: 'GPT-4o & o3',   cat: 'OpenAI',        color: '#10B981' },
   { name: 'Claude 3.5',    cat: 'Anthropic',     color: '#D97706' },
   { name: 'Gemini 2.5',    cat: 'Google',        color: '#4285F4' },
-  { name: 'LangChain',     cat: 'Orchestration', color: '#C84B30' },
+  { name: 'LangChain',     cat: 'Orchestration', color: '#2B80F0' },
   { name: 'Pinecone',      cat: 'Vector DB',     color: '#16A34A' },
   { name: 'HuggingFace',   cat: 'Open Source',   color: '#F97316' },
   { name: 'AWS / GCP',     cat: 'Cloud Infra',   color: '#F59E0B' },
@@ -193,7 +193,7 @@ export default function HomePage() {
             <div className="flex flex-wrap gap-3 justify-center">
               <Link href="/contact"
                 className="group inline-flex items-center gap-2 px-8 py-4 rounded-full font-bold text-sm text-white transition-all hover:brightness-95 active:scale-95"
-                style={{ background: AC, boxShadow: '0 4px 24px rgba(200,75,48,0.30)' }}>
+                style={{ background: AC, boxShadow: '0 4px 24px rgba(43,128,240,0.30)' }}>
                 <Sparkles className="w-4 h-4" />
                 Start building with AI
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
@@ -414,7 +414,7 @@ export default function HomePage() {
               }}>
               {/* Glows */}
               <div className="absolute -top-20 -right-20 w-[560px] h-[560px] pointer-events-none"
-                style={{ background: 'radial-gradient(circle, rgba(200,75,48,0.55) 0%, rgba(200,75,48,0.18) 40%, transparent 70%)', filter: 'blur(60px)' }} />
+                style={{ background: 'radial-gradient(circle, rgba(43,128,240,0.55) 0%, rgba(43,128,240,0.18) 40%, transparent 70%)', filter: 'blur(60px)' }} />
               <div className="absolute -bottom-20 -left-20 w-[380px] h-[380px] pointer-events-none"
                 style={{ background: 'radial-gradient(circle, rgba(20,60,45,0.7) 0%, transparent 65%)', filter: 'blur(80px)' }} />
 
@@ -430,7 +430,7 @@ export default function HomePage() {
                 <h2 className="font-black leading-[1.05] mb-5"
                   style={{ fontSize: 'clamp(2.2rem, 5vw, 4rem)', fontFamily: PF, color: '#FAF5F0' }}>
                   Ready to scale with{' '}
-                  <em style={{ fontStyle: 'italic', color: '#E8612A' }}>AI?</em>
+                  <em style={{ fontStyle: 'italic', color: '#4B9CF4' }}>AI?</em>
                 </h2>
 
                 {/* Subtext */}
@@ -443,7 +443,7 @@ export default function HomePage() {
                 <div className="flex flex-wrap gap-3 justify-center">
                   <a href="mailto:hello@metlink.ai"
                     className="group inline-flex items-center gap-2 px-8 py-4 rounded-full font-bold text-sm text-white transition-all hover:brightness-110 active:scale-95"
-                    style={{ background: AC, boxShadow: '0 0 40px rgba(200,75,48,0.5)' }}>
+                    style={{ background: AC, boxShadow: '0 0 40px rgba(43,128,240,0.5)' }}>
                     Book your strategy call
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
                   </a>

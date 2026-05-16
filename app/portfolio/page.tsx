@@ -15,18 +15,18 @@ export default function PortfolioPage() {
       <section className="relative py-28 overflow-hidden"
         style={{ background: 'linear-gradient(160deg, #FFF9F7 0%, #FAF6F0 50%, #F5EEE4 100%)' }}>
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px] rounded-full pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse, rgba(200,75,48,0.07) 0%, transparent 70%)', filter: 'blur(80px)' }} />
+          style={{ background: 'radial-gradient(ellipse, rgba(43,128,240,0.07) 0%, transparent 70%)', filter: 'blur(80px)' }} />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
           <FadeIn>
             <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-[10px] font-black uppercase tracking-[0.25em] mb-8"
-              style={{ background: '#FFFFFF', border: '1px solid #E5DDD5', color: '#C84B30', boxShadow: '0 1px 8px rgba(0,0,0,0.06)' }}>
+              style={{ background: '#FFFFFF', border: '1px solid #E5DDD5', color: '#2B80F0', boxShadow: '0 1px 8px rgba(0,0,0,0.06)' }}>
               Our Work
             </div>
           </FadeIn>
           <FadeIn delay={0.1}>
             <h1 className="font-black mb-6 leading-tight" style={{ color: '#192540' }}>
               Built to{' '}
-              <em style={{ fontFamily: 'var(--font-playfair)', fontStyle: 'italic', color: '#C84B30' }}>Perform</em>
+              <em style={{ fontFamily: 'var(--font-playfair)', fontStyle: 'italic', color: '#2B80F0' }}>Perform</em>
             </h1>
           </FadeIn>
           <FadeIn delay={0.2}>
@@ -40,7 +40,7 @@ export default function PortfolioPage() {
                 <button key={filter}
                   className="px-6 py-2.5 rounded-full text-[11px] font-black uppercase tracking-[0.15em] transition-all hover:scale-105"
                   style={i === 0
-                    ? { background: '#FEF1EE', border: '1px solid rgba(200,75,48,0.3)', color: '#C84B30' }
+                    ? { background: '#EEF4FE', border: '1px solid rgba(43,128,240,0.3)', color: '#2B80F0' }
                     : { background: '#FFFFFF', border: '1px solid #E5DDD5', color: '#ADA09A' }}>
                   {filter}
                 </button>
@@ -78,7 +78,7 @@ export default function PortfolioPage() {
                     <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
                       style={{ background: 'rgba(28,20,16,0.6)' }}>
                       <div className="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-bold animate-fadeInScale bg-white"
-                        style={{ color: '#C84B30' }}>
+                        style={{ color: '#2B80F0' }}>
                         <ExternalLink className="w-4 h-4" /> View Case Study
                       </div>
                     </div>
@@ -138,18 +138,18 @@ export default function PortfolioPage() {
       {/* CTA */}
       <section className="py-24 relative overflow-hidden" style={{ background: '#FAF9F6' }}>
         <div className="absolute inset-0 pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse at 50% 50%, rgba(200,75,48,0.05), transparent 65%)' }} />
+          style={{ background: 'radial-gradient(ellipse at 50% 50%, rgba(43,128,240,0.05), transparent 65%)' }} />
         <FadeIn className="max-w-3xl mx-auto px-4 text-center relative z-10">
           <h2 className="font-black mb-4" style={{ color: '#192540' }}>
             Want Results Like{' '}
-            <em style={{ fontFamily: 'var(--font-playfair)', fontStyle: 'italic', color: '#C84B30' }}>These</em>?
+            <em style={{ fontFamily: 'var(--font-playfair)', fontStyle: 'italic', color: '#2B80F0' }}>These</em>?
           </h2>
           <p className="mb-10 text-lg" style={{ color: '#72645A' }}>
             Let&apos;s discuss your project and build the next success story together.
           </p>
           <Link href="/contact"
             className="inline-flex items-center gap-2 px-9 py-4 rounded-full font-bold text-sm text-white transition-all hover:brightness-95 active:scale-95"
-            style={{ background: '#C84B30', boxShadow: '0 4px 20px rgba(200,75,48,0.3)' }}>
+            style={{ background: '#2B80F0', boxShadow: '0 4px 20px rgba(43,128,240,0.3)' }}>
             Start Your Project <ArrowRight className="w-5 h-5" />
           </Link>
         </FadeIn>

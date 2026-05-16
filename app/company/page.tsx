@@ -14,11 +14,11 @@ const values = [
 ];
 
 const team = [
-  { name: 'Aryan Shah',   role: 'Founder & CEO',            specialty: 'AI Strategy & Business Development', initials: 'AS', color: '#C84B30' },
+  { name: 'Aryan Shah',   role: 'Founder & CEO',            specialty: 'AI Strategy & Business Development', initials: 'AS', color: '#2B80F0' },
   { name: 'Priya Nair',   role: 'CTO & Lead Architect',      specialty: 'AI Systems & Cloud Infrastructure',  initials: 'PN', color: '#2563EB' },
   { name: 'Rahul Mehta',  role: 'Head of Engineering',        specialty: 'Full-Stack & Backend Systems',       initials: 'RM', color: '#16A34A' },
   { name: 'Neha Kapoor',  role: 'Creative Director',          specialty: 'Brand Identity & UI/UX Design',      initials: 'NK', color: '#D97706' },
-  { name: 'Vikram Patel', role: 'Performance Marketing Lead', specialty: 'Paid Media & Growth Strategy',       initials: 'VP', color: '#C84B30' },
+  { name: 'Vikram Patel', role: 'Performance Marketing Lead', specialty: 'Paid Media & Growth Strategy',       initials: 'VP', color: '#2B80F0' },
   { name: 'Aisha Khan',   role: 'AI/ML Engineer',             specialty: 'Machine Learning & NLP',             initials: 'AK', color: '#2563EB' },
 ];
 
@@ -41,18 +41,18 @@ export default function CompanyPage() {
       <section className="relative py-28 overflow-hidden"
         style={{ background: 'linear-gradient(160deg, #FFF9F7 0%, #FAF6F0 50%, #F5EEE4 100%)' }}>
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[500px] rounded-full pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse, rgba(200,75,48,0.07) 0%, transparent 70%)', filter: 'blur(80px)' }} />
+          style={{ background: 'radial-gradient(ellipse, rgba(43,128,240,0.07) 0%, transparent 70%)', filter: 'blur(80px)' }} />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
           <FadeIn>
             <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-[10px] font-black uppercase tracking-[0.25em] mb-8"
-              style={{ background: '#FFFFFF', border: '1px solid #E5DDD5', color: '#C84B30', boxShadow: '0 1px 8px rgba(0,0,0,0.06)' }}>
+              style={{ background: '#FFFFFF', border: '1px solid #E5DDD5', color: '#2B80F0', boxShadow: '0 1px 8px rgba(0,0,0,0.06)' }}>
               About Us
             </div>
           </FadeIn>
           <FadeIn delay={0.1}>
             <h1 className="font-black mb-6 leading-tight" style={{ color: '#192540' }}>
               We Are{' '}
-              <em style={{ fontFamily: 'var(--font-playfair)', fontStyle: 'italic', color: '#C84B30' }}>MetLink</em>
+              <em style={{ fontFamily: 'var(--font-playfair)', fontStyle: 'italic', color: '#2B80F0' }}>MetLink</em>
             </h1>
           </FadeIn>
           <FadeIn delay={0.2}>
@@ -64,7 +64,7 @@ export default function CompanyPage() {
             <div className="flex flex-wrap gap-4 justify-center">
               <Link href="/contact"
                 className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-bold text-sm text-white transition-all hover:brightness-95 active:scale-95"
-                style={{ background: '#C84B30', boxShadow: '0 4px 20px rgba(200,75,48,0.3)' }}>
+                style={{ background: '#2B80F0', boxShadow: '0 4px 20px rgba(43,128,240,0.3)' }}>
                 Work With Us <ArrowRight className="w-4 h-4" />
               </Link>
               <Link href="/portfolio"
@@ -94,10 +94,10 @@ export default function CompanyPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <FadeIn>
-              <p className="text-xs font-black uppercase tracking-[0.25em] mb-3" style={{ color: '#C84B30' }}>Who We Are</p>
+              <p className="text-xs font-black uppercase tracking-[0.25em] mb-3" style={{ color: '#2B80F0' }}>Who We Are</p>
               <h2 className="font-black mb-6" style={{ color: '#192540' }}>
                 About{' '}
-                <em style={{ fontFamily: 'var(--font-playfair)', fontStyle: 'italic', color: '#C84B30' }}>MetLink</em>
+                <em style={{ fontFamily: 'var(--font-playfair)', fontStyle: 'italic', color: '#2B80F0' }}>MetLink</em>
               </h2>
               <div className="space-y-4 leading-relaxed text-base" style={{ color: '#72645A' }}>
                 <p>MetLink was founded with a single conviction: that the gap between ambitious businesses and world-class digital execution doesn&apos;t have to exist.</p>
@@ -115,7 +115,7 @@ export default function CompanyPage() {
                 <StaggerItem key={item.title}>
                   <div className="p-6 rounded-2xl transition-all hover:-translate-y-1 cursor-default h-full"
                     style={{ background: '#FFFFFF', border: '1px solid #E5DDD5', boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}
-                    onMouseEnter={e => (e.currentTarget as HTMLElement).style.borderColor = 'rgba(200,75,48,0.3)'}
+                    onMouseEnter={e => (e.currentTarget as HTMLElement).style.borderColor = 'rgba(43,128,240,0.3)'}
                     onMouseLeave={e => (e.currentTarget as HTMLElement).style.borderColor = '#E5DDD5'}>
                     <span className="text-3xl mb-3 block">{item.icon}</span>
                     <h3 className="font-bold mb-2 text-sm" style={{ color: '#192540' }}>{item.title}</h3>
@@ -132,10 +132,10 @@ export default function CompanyPage() {
       <section className="py-24" style={{ background: '#FFFFFF' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeIn className="text-center mb-16">
-            <p className="text-xs font-black uppercase tracking-[0.25em] mb-3" style={{ color: '#C84B30' }}>Our Differentiators</p>
+            <p className="text-xs font-black uppercase tracking-[0.25em] mb-3" style={{ color: '#2B80F0' }}>Our Differentiators</p>
             <h2 className="font-black" style={{ color: '#192540' }}>
               Why Choose{' '}
-              <em style={{ fontFamily: 'var(--font-playfair)', fontStyle: 'italic', color: '#C84B30' }}>MetLink</em>?
+              <em style={{ fontFamily: 'var(--font-playfair)', fontStyle: 'italic', color: '#2B80F0' }}>MetLink</em>?
             </h2>
           </FadeIn>
           <StaggerChildren className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -146,7 +146,7 @@ export default function CompanyPage() {
                   <div className="group p-7 rounded-2xl transition-all duration-300 hover:-translate-y-1.5 h-full"
                     style={{ background: '#FAF9F6', border: '1px solid #E5DDD5' }}
                     onMouseEnter={e => {
-                      (e.currentTarget as HTMLElement).style.borderColor = 'rgba(200,75,48,0.3)';
+                      (e.currentTarget as HTMLElement).style.borderColor = 'rgba(43,128,240,0.3)';
                       (e.currentTarget as HTMLElement).style.background = '#FFFFFF';
                       (e.currentTarget as HTMLElement).style.boxShadow = '0 8px 32px rgba(0,0,0,0.06)';
                     }}
@@ -156,10 +156,10 @@ export default function CompanyPage() {
                       (e.currentTarget as HTMLElement).style.boxShadow = 'none';
                     }}>
                     <div className="w-11 h-11 rounded-xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform"
-                      style={{ background: '#FEF1EE', border: '1px solid rgba(200,75,48,0.15)' }}>
-                      <Icon className="w-5 h-5" style={{ color: '#C84B30' }} />
+                      style={{ background: '#EEF4FE', border: '1px solid rgba(43,128,240,0.15)' }}>
+                      <Icon className="w-5 h-5" style={{ color: '#2B80F0' }} />
                     </div>
-                    <h3 className="font-bold mb-2 group-hover:text-[#C84B30] transition-colors" style={{ color: '#192540' }}>{v.title}</h3>
+                    <h3 className="font-bold mb-2 group-hover:text-[#2B80F0] transition-colors" style={{ color: '#192540' }}>{v.title}</h3>
                     <p className="text-sm leading-relaxed" style={{ color: '#72645A' }}>{v.desc}</p>
                   </div>
                 </StaggerItem>
@@ -173,23 +173,23 @@ export default function CompanyPage() {
       <section className="py-24" style={{ background: '#FAF9F6', borderTop: '1px solid #E5DDD5' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeIn className="text-center mb-16">
-            <p className="text-xs font-black uppercase tracking-[0.25em] mb-3" style={{ color: '#C84B30' }}>Our Journey</p>
+            <p className="text-xs font-black uppercase tracking-[0.25em] mb-3" style={{ color: '#2B80F0' }}>Our Journey</p>
             <h2 className="font-black" style={{ color: '#192540' }}>How We Got Here</h2>
           </FadeIn>
           <div className="relative max-w-3xl mx-auto">
             <div className="absolute left-6 top-0 bottom-0 w-px"
-              style={{ background: 'linear-gradient(to bottom, #C84B30, #E5DDD5, transparent)' }} />
+              style={{ background: 'linear-gradient(to bottom, #2B80F0, #E5DDD5, transparent)' }} />
             <div className="space-y-10">
               {milestones.map((m, i) => (
                 <FadeIn key={m.year} delay={i * 0.08}>
                   <div className="relative flex gap-8 pl-16">
                     <div className="absolute left-0 w-12 h-12 rounded-full flex items-center justify-center text-xs font-black flex-shrink-0 text-white"
-                      style={{ background: '#C84B30', boxShadow: '0 4px 14px rgba(200,75,48,0.3)' }}>
+                      style={{ background: '#2B80F0', boxShadow: '0 4px 14px rgba(43,128,240,0.3)' }}>
                       {m.year.slice(2)}
                     </div>
                     <div className="pb-4">
                       <div className="flex items-center gap-3 mb-2">
-                        <span className="text-xs font-bold" style={{ color: '#C84B30' }}>{m.year}</span>
+                        <span className="text-xs font-bold" style={{ color: '#2B80F0' }}>{m.year}</span>
                         <h3 className="font-bold" style={{ color: '#192540' }}>{m.event}</h3>
                       </div>
                       <p className="text-sm leading-relaxed" style={{ color: '#72645A' }}>{m.desc}</p>
@@ -206,10 +206,10 @@ export default function CompanyPage() {
       <section className="py-24" style={{ background: '#FFFFFF', borderTop: '1px solid #E5DDD5' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeIn className="text-center mb-16">
-            <p className="text-xs font-black uppercase tracking-[0.25em] mb-3" style={{ color: '#C84B30' }}>The People</p>
+            <p className="text-xs font-black uppercase tracking-[0.25em] mb-3" style={{ color: '#2B80F0' }}>The People</p>
             <h2 className="font-black" style={{ color: '#192540' }}>
               Meet the{' '}
-              <em style={{ fontFamily: 'var(--font-playfair)', fontStyle: 'italic', color: '#C84B30' }}>Leadership</em>
+              <em style={{ fontFamily: 'var(--font-playfair)', fontStyle: 'italic', color: '#2B80F0' }}>Leadership</em>
             </h2>
           </FadeIn>
           <StaggerChildren className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -232,7 +232,7 @@ export default function CompanyPage() {
                     {member.initials}
                   </div>
                   <h3 className="font-bold text-lg mb-1" style={{ color: '#192540' }}>{member.name}</h3>
-                  <p className="text-sm font-medium mb-1" style={{ color: '#C84B30' }}>{member.role}</p>
+                  <p className="text-sm font-medium mb-1" style={{ color: '#2B80F0' }}>{member.role}</p>
                   <p className="text-xs" style={{ color: '#ADA09A' }}>{member.specialty}</p>
                 </div>
               </StaggerItem>
@@ -244,11 +244,11 @@ export default function CompanyPage() {
       {/* CTA */}
       <section className="py-24 relative overflow-hidden" style={{ background: '#FAF9F6', borderTop: '1px solid #E5DDD5' }}>
         <div className="absolute inset-0 pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse at 50% 50%, rgba(200,75,48,0.05), transparent 65%)' }} />
+          style={{ background: 'radial-gradient(ellipse at 50% 50%, rgba(43,128,240,0.05), transparent 65%)' }} />
         <FadeIn className="max-w-3xl mx-auto px-4 text-center relative z-10">
           <h2 className="font-black mb-4" style={{ color: '#192540' }}>
             Ready to Grow{' '}
-            <em style={{ fontFamily: 'var(--font-playfair)', fontStyle: 'italic', color: '#C84B30' }}>With Us</em>?
+            <em style={{ fontFamily: 'var(--font-playfair)', fontStyle: 'italic', color: '#2B80F0' }}>With Us</em>?
           </h2>
           <p className="mb-10 text-lg" style={{ color: '#72645A' }}>
             Whether you&apos;re a startup or an enterprise, we&apos;re the growth partner you&apos;ve been looking for.
@@ -256,7 +256,7 @@ export default function CompanyPage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/contact"
               className="inline-flex items-center justify-center gap-2 px-9 py-4 rounded-full font-bold text-sm text-white transition-all hover:brightness-95 active:scale-95"
-              style={{ background: '#C84B30', boxShadow: '0 4px 20px rgba(200,75,48,0.3)' }}>
+              style={{ background: '#2B80F0', boxShadow: '0 4px 20px rgba(43,128,240,0.3)' }}>
               Start the Conversation <ArrowRight className="w-5 h-5" />
             </Link>
             <Link href="/services"

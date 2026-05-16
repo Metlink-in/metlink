@@ -5,7 +5,7 @@ import { Mail, ArrowRight, Megaphone, Palette, Bot, Code } from 'lucide-react';
 import { serviceCategories } from '@/lib/services-data';
 
 const catAccent: Record<string, string> = {
-  'digital-marketing':    '#C84B30',
+  'digital-marketing':    '#2B80F0',
   'creative-media':       '#D97706',
   'ai-automation':        '#16A34A',
   'software-development': '#2563EB',
@@ -29,7 +29,7 @@ export function Footer() {
     <footer style={{ background: '#FAF9F6', borderTop: '1px solid #E5DDD5' }}>
 
       {/* Top accent line */}
-      <div style={{ height: 3, background: 'linear-gradient(to right, transparent, #C84B30 30%, #E8612A 60%, transparent)' }} />
+      <div style={{ height: 3, background: 'linear-gradient(to right, transparent, #2B80F0 30%, #4B9CF4 60%, transparent)' }} />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-12 lg:gap-8">
@@ -62,8 +62,8 @@ export function Footer() {
                     className="w-8 h-8 rounded-lg flex items-center justify-center text-[10px] font-black transition-all hover:scale-110"
                     style={{ background: '#FFFFFF', border: '1px solid #E5DDD5', color: '#ADA09A' }}
                     onMouseEnter={e => {
-                      (e.currentTarget as HTMLElement).style.borderColor = 'rgba(200,75,48,0.3)';
-                      (e.currentTarget as HTMLElement).style.color = '#C84B30';
+                      (e.currentTarget as HTMLElement).style.borderColor = 'rgba(43,128,240,0.3)';
+                      (e.currentTarget as HTMLElement).style.color = '#2B80F0';
                     }}
                     onMouseLeave={e => {
                       (e.currentTarget as HTMLElement).style.borderColor = '#E5DDD5';
@@ -86,12 +86,12 @@ export function Footer() {
                   placeholder="your@email.com"
                   className="flex-1 px-4 py-2.5 rounded-xl text-sm focus:outline-none transition-all"
                   style={{ background: '#FFFFFF', border: '1px solid #E5DDD5', color: '#192540' }}
-                  onFocus={e => (e.currentTarget.style.borderColor = 'rgba(200,75,48,0.4)')}
+                  onFocus={e => (e.currentTarget.style.borderColor = 'rgba(43,128,240,0.4)')}
                   onBlur={e => (e.currentTarget.style.borderColor = '#E5DDD5')}
                 />
                 <button type="submit"
                   className="px-3 py-2.5 rounded-xl flex items-center justify-center transition-all hover:brightness-95 active:scale-95 shrink-0 text-white"
-                  style={{ background: '#C84B30' }}>
+                  style={{ background: '#2B80F0' }}>
                   <ArrowRight className="w-4 h-4" />
                 </button>
               </form>
@@ -100,7 +100,7 @@ export function Footer() {
 
           {/* Service columns */}
           {serviceCategories.map(cat => {
-            const accent = catAccent[cat.slug] || '#C84B30';
+            const accent = catAccent[cat.slug] || '#2B80F0';
             return (
               <div key={cat.slug}>
                 <Link
@@ -138,7 +138,7 @@ export function Footer() {
 
           <Link href="/contact"
             className="group inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-bold transition-all hover:brightness-95 active:scale-95 text-white"
-            style={{ background: '#C84B30', boxShadow: '0 4px 16px rgba(200,75,48,0.25)' }}>
+            style={{ background: '#2B80F0', boxShadow: '0 4px 16px rgba(43,128,240,0.25)' }}>
             <Mail className="w-3.5 h-3.5" />
             Book a Free Strategy Call
             <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
@@ -149,7 +149,7 @@ export function Footer() {
               <Link key={item} href={`/${item.toLowerCase()}`}
                 className="text-xs font-semibold tracking-wide transition-all duration-200"
                 style={{ color: '#ADA09A' }}
-                onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = '#C84B30'}
+                onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = '#2B80F0'}
                 onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = '#ADA09A'}>
                 {item}
               </Link>

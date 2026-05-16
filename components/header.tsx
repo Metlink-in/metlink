@@ -25,7 +25,7 @@ function MetLinkLogo({ size = 40 }: { size?: number }) {
 }
 
 const catAccents: Record<string, string> = {
-  'digital-marketing':   '#C84B30',
+  'digital-marketing':   '#2B80F0',
   'creative-media':      '#D97706',
   'ai-automation':       '#16A34A',
   'software-development':'#2563EB',
@@ -107,7 +107,7 @@ export function Header() {
                   onClick={() => { if (window.innerWidth < 768) setServicesOpen(v => !v); }}>
                   Services
                   <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${servicesOpen ? 'rotate-180' : ''}`}
-                    style={{ color: '#C84B30' }} />
+                    style={{ color: '#2B80F0' }} />
                 </button>
 
                 {servicesOpen && (
@@ -127,7 +127,7 @@ export function Header() {
                     >
                       <div className="max-w-7xl mx-auto px-6 sm:px-8 py-8 grid grid-cols-4 gap-8">
                         {serviceCategories.map((cat) => {
-                          const accent = catAccents[cat.slug] || '#C84B30';
+                          const accent = catAccents[cat.slug] || '#2B80F0';
                           return (
                             <div key={cat.slug} className="space-y-4">
                               <Link href={`/services/${cat.slug}`}
@@ -168,7 +168,7 @@ export function Header() {
                           </div>
                           <Link href="/contact" onClick={() => setServicesOpen(false)}
                             className="group px-5 py-2 rounded-xl text-sm font-bold flex items-center gap-2 transition-all hover:brightness-95"
-                            style={{ background: '#FEF1EE', color: '#C84B30', border: '1px solid rgba(200,75,48,0.2)' }}>
+                            style={{ background: '#EEF4FE', color: '#2B80F0', border: '1px solid rgba(43,128,240,0.2)' }}>
                             Talk to our experts <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
                           </Link>
                         </div>
@@ -187,7 +187,7 @@ export function Header() {
                   {label}
                   {label === 'Product' && (
                     <span className="ml-1.5 px-1.5 py-0.5 rounded text-[9px] font-black uppercase tracking-wider align-middle"
-                      style={{ background: '#FEF1EE', color: '#C84B30' }}>Soon</span>
+                      style={{ background: '#EEF4FE', color: '#2B80F0' }}>Soon</span>
                   )}
                 </Link>
               ))}
@@ -200,12 +200,12 @@ export function Header() {
                 style={{ color: '#ADA09A' }}
                 onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = '#192540'}
                 onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = '#ADA09A'}>
-                <Brain className="w-3.5 h-3.5" style={{ color: '#C84B30' }} />
+                <Brain className="w-3.5 h-3.5" style={{ color: '#2B80F0' }} />
                 Get Proposal
               </button>
               <Link href="/contact"
                 className="px-5 py-2.5 rounded-xl text-sm font-bold text-white transition-all hover:brightness-95 active:scale-95"
-                style={{ background: '#C84B30' }}>
+                style={{ background: '#2B80F0' }}>
                 Contact Us
               </Link>
             </div>
@@ -230,7 +230,7 @@ export function Header() {
                   <p className="text-[10px] font-black uppercase tracking-wider" style={{ color: '#ADA09A' }}>Services</p>
                 </div>
                 {serviceCategories.map((cat) => {
-                  const accent = catAccents[cat.slug] || '#C84B30';
+                  const accent = catAccents[cat.slug] || '#2B80F0';
                   return (
                     <div key={cat.slug}>
                       <Link href={`/services/${cat.slug}`}
@@ -259,7 +259,7 @@ export function Header() {
                     {label}
                     {label === 'Product' && (
                       <span className="px-1.5 py-0.5 rounded text-[9px] font-black uppercase tracking-wider"
-                        style={{ background: '#FEF1EE', color: '#C84B30' }}>Soon</span>
+                        style={{ background: '#EEF4FE', color: '#2B80F0' }}>Soon</span>
                     )}
                   </Link>
                 ))}
@@ -267,7 +267,7 @@ export function Header() {
                 <div className="pt-3 space-y-2">
                   <Link href="/contact"
                     className="block text-center py-3 rounded-xl text-sm font-bold text-white"
-                    style={{ background: '#C84B30' }}
+                    style={{ background: '#2B80F0' }}
                     onClick={() => setMobileOpen(false)}>
                     Contact Us
                   </Link>
@@ -302,7 +302,7 @@ function PopupFormInline({ onClose }: { onClose: () => void }) {
       <div className="absolute inset-0 bg-black/30 backdrop-blur-sm" onClick={onClose} />
       <div className="relative w-full max-w-md rounded-2xl overflow-hidden animate-fadeInScale shadow-2xl"
         style={{ background: '#FFFFFF', border: '1px solid #E5DDD5' }}>
-        <div className="h-1 w-full" style={{ background: 'linear-gradient(90deg, #C84B30, #E8612A)' }} />
+        <div className="h-1 w-full" style={{ background: 'linear-gradient(90deg, #2B80F0, #4B9CF4)' }} />
         <button onClick={onClose} className="absolute top-4 right-4 p-1.5 rounded-lg transition-colors hover:bg-black/5"
           style={{ color: '#ADA09A' }}>
           <X className="w-4 h-4" />
@@ -311,7 +311,7 @@ function PopupFormInline({ onClose }: { onClose: () => void }) {
           {submitted ? (
             <div className="text-center py-10 animate-fadeInScale">
               <div className="w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-5"
-                style={{ background: 'linear-gradient(135deg, #C84B30, #E8612A)', boxShadow: '0 0 40px rgba(200,75,48,0.2)' }}>
+                style={{ background: 'linear-gradient(135deg, #2B80F0, #4B9CF4)', boxShadow: '0 0 40px rgba(43,128,240,0.2)' }}>
                 <Zap className="w-10 h-10 text-white" />
               </div>
               <h3 className="text-2xl font-black mb-2" style={{ color: '#192540' }}>Request Received!</h3>
@@ -322,7 +322,7 @@ function PopupFormInline({ onClose }: { onClose: () => void }) {
           ) : (
             <>
               <div className="mb-8">
-                <p className="text-[10px] font-black tracking-[0.3em] uppercase mb-2" style={{ color: '#C84B30' }}>
+                <p className="text-[10px] font-black tracking-[0.3em] uppercase mb-2" style={{ color: '#2B80F0' }}>
                   Limited Spots Available
                 </p>
                 <h2 className="text-2xl font-black leading-tight" style={{ color: '#192540' }}>
@@ -338,12 +338,12 @@ function PopupFormInline({ onClose }: { onClose: () => void }) {
                   <input key={ph} type={i === 2 ? 'email' : 'text'} placeholder={ph} required
                     className="w-full px-4 py-3.5 rounded-xl text-sm focus:outline-none transition-all"
                     style={{ background: '#FAF9F6', border: '1px solid #E5DDD5', color: '#192540' }}
-                    onFocus={e => (e.currentTarget.style.borderColor = 'rgba(200,75,48,0.5)')}
+                    onFocus={e => (e.currentTarget.style.borderColor = 'rgba(43,128,240,0.5)')}
                     onBlur={e => (e.currentTarget.style.borderColor = '#E5DDD5')} />
                 ))}
                 <select className="w-full px-4 py-3.5 rounded-xl text-sm focus:outline-none appearance-none cursor-pointer transition-all"
                   style={{ background: '#FAF9F6', border: '1px solid #E5DDD5', color: '#ADA09A' }}
-                  onFocus={e => (e.currentTarget.style.borderColor = 'rgba(200,75,48,0.5)')}
+                  onFocus={e => (e.currentTarget.style.borderColor = 'rgba(43,128,240,0.5)')}
                   onBlur={e => (e.currentTarget.style.borderColor = '#E5DDD5')}>
                   <option value="">Select a Service (optional)</option>
                   <option value="ai">AI &amp; Automation</option>
@@ -353,7 +353,7 @@ function PopupFormInline({ onClose }: { onClose: () => void }) {
                 </select>
                 <button type="submit"
                   className="w-full py-3.5 mt-2 rounded-xl font-black text-sm tracking-wide uppercase transition-all hover:brightness-95 active:scale-[0.98] text-white"
-                  style={{ background: '#C84B30' }}>
+                  style={{ background: '#2B80F0' }}>
                   Submit &amp; Get Started →
                 </button>
                 <p className="text-center text-[10px] font-medium mt-4" style={{ color: '#ADA09A' }}>

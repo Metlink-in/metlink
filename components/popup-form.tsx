@@ -45,7 +45,7 @@ export function PopupForm() {
 
           {/* BG glow */}
           <div className="absolute top-0 left-0 w-64 h-64 rounded-full pointer-events-none"
-            style={{ background: 'radial-gradient(circle, rgba(200,75,48,0.2) 0%, transparent 70%)', filter: 'blur(40px)', transform: 'translate(-30%,-30%)' }} />
+            style={{ background: 'radial-gradient(circle, rgba(43,128,240,0.2) 0%, transparent 70%)', filter: 'blur(40px)', transform: 'translate(-30%,-30%)' }} />
           <div className="absolute bottom-0 right-0 w-48 h-48 rounded-full pointer-events-none"
             style={{ background: 'radial-gradient(circle, rgba(232,97,42,0.15) 0%, transparent 70%)', filter: 'blur(40px)', transform: 'translate(30%,30%)' }} />
 
@@ -63,12 +63,12 @@ export function PopupForm() {
               </svg>
             </div>
 
-            <p className="text-[10px] font-black uppercase tracking-[0.35em] mb-3" style={{ color: '#E8612A' }}>
+            <p className="text-[10px] font-black uppercase tracking-[0.35em] mb-3" style={{ color: '#4B9CF4' }}>
               Limited Spots Available
             </p>
             <h2 className="text-2xl font-black text-white leading-tight mb-3">
               Schedule Your<br />
-              <em style={{ fontFamily: 'var(--font-playfair)', fontStyle: 'italic', color: '#E8612A' }}>
+              <em style={{ fontFamily: 'var(--font-playfair)', fontStyle: 'italic', color: '#4B9CF4' }}>
                 Success Story
               </em>
             </h2>
@@ -80,7 +80,7 @@ export function PopupForm() {
             <div className="space-y-3">
               {[
                 { icon: <TrendingUp className="w-3.5 h-3.5" />, text: 'Average 70% revenue growth',  color: '#16A34A' },
-                { icon: <Clock className="w-3.5 h-3.5" />,      text: 'First deliverables in 7 days', color: '#C84B30' },
+                { icon: <Clock className="w-3.5 h-3.5" />,      text: 'First deliverables in 7 days', color: '#2B80F0' },
                 { icon: <Shield className="w-3.5 h-3.5" />,     text: 'NDA signed before we begin',   color: '#2563EB' },
                 { icon: <Zap className="w-3.5 h-3.5" />,        text: 'AI-powered execution',         color: '#D97706' },
               ].map(p => (
@@ -110,7 +110,7 @@ export function PopupForm() {
         {/* ── RIGHT PANEL — form ── */}
         <div className="flex-1 relative flex flex-col overflow-y-auto" style={{ background: '#FFFFFF' }}>
           {/* Top accent */}
-          <div className="h-1 flex-shrink-0" style={{ background: 'linear-gradient(90deg, #C84B30, #E8612A, #C84B30)' }} />
+          <div className="h-1 flex-shrink-0" style={{ background: 'linear-gradient(90deg, #2B80F0, #4B9CF4, #2B80F0)' }} />
 
           <button onClick={close}
             className="absolute top-4 right-4 z-20 p-1.5 rounded-lg transition-all hover:bg-black/5"
@@ -122,7 +122,7 @@ export function PopupForm() {
             {submitted ? (
               <div className="text-center py-10 animate-fadeInScale">
                 <div className="w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-5"
-                  style={{ background: 'linear-gradient(135deg, #C84B30, #E8612A)', boxShadow: '0 0 32px rgba(200,75,48,0.25)' }}>
+                  style={{ background: 'linear-gradient(135deg, #2B80F0, #4B9CF4)', boxShadow: '0 0 32px rgba(43,128,240,0.25)' }}>
                   <CheckCircle className="w-10 h-10 text-white" />
                 </div>
                 <h3 className="text-2xl font-black mb-2" style={{ color: '#192540' }}>You&apos;re In!</h3>
@@ -139,13 +139,13 @@ export function PopupForm() {
                   <input type="text" placeholder="Full Name *" required value={form.name}
                     onChange={e => setForm(p => ({ ...p, name: e.target.value }))}
                     className={inputCls} style={inputStyle}
-                    onFocus={e => (e.currentTarget.style.borderColor = 'rgba(200,75,48,0.45)')}
+                    onFocus={e => (e.currentTarget.style.borderColor = 'rgba(43,128,240,0.45)')}
                     onBlur={e => (e.currentTarget.style.borderColor = '#E5DDD5')} />
 
                   <input type="email" placeholder="Email Address *" required value={form.email}
                     onChange={e => setForm(p => ({ ...p, email: e.target.value }))}
                     className={inputCls} style={inputStyle}
-                    onFocus={e => (e.currentTarget.style.borderColor = 'rgba(200,75,48,0.45)')}
+                    onFocus={e => (e.currentTarget.style.borderColor = 'rgba(43,128,240,0.45)')}
                     onBlur={e => (e.currentTarget.style.borderColor = '#E5DDD5')} />
 
                   <div className="flex gap-2">
@@ -156,7 +156,7 @@ export function PopupForm() {
                     <input type="tel" placeholder="Phone number" value={form.phone}
                       onChange={e => setForm(p => ({ ...p, phone: e.target.value }))}
                       className={`${inputCls} flex-1`} style={inputStyle}
-                      onFocus={e => (e.currentTarget.style.borderColor = 'rgba(200,75,48,0.45)')}
+                      onFocus={e => (e.currentTarget.style.borderColor = 'rgba(43,128,240,0.45)')}
                       onBlur={e => (e.currentTarget.style.borderColor = '#E5DDD5')} />
                   </div>
 
@@ -164,7 +164,7 @@ export function PopupForm() {
                     onChange={e => setForm(p => ({ ...p, budget: e.target.value }))}
                     className={`${inputCls} appearance-none cursor-pointer`}
                     style={{ ...inputStyle, color: form.budget ? '#192540' : '#ADA09A' }}
-                    onFocus={e => (e.currentTarget.style.borderColor = 'rgba(200,75,48,0.45)')}
+                    onFocus={e => (e.currentTarget.style.borderColor = 'rgba(43,128,240,0.45)')}
                     onBlur={e => (e.currentTarget.style.borderColor = '#E5DDD5')}>
                     <option value="" style={{ background: '#FAF9F6', color: '#ADA09A' }}>Select a Budget Range</option>
                     {['< ₹1 Lakh','₹1L – ₹5L','₹5L – ₹20L','₹20L – ₹50L','₹50L+'].map(b => (
@@ -177,23 +177,23 @@ export function PopupForm() {
                     required value={form.message}
                     onChange={e => setForm(p => ({ ...p, message: e.target.value }))}
                     className={`${inputCls} resize-none`} style={inputStyle}
-                    onFocus={e => (e.currentTarget.style.borderColor = 'rgba(200,75,48,0.45)')}
+                    onFocus={e => (e.currentTarget.style.borderColor = 'rgba(43,128,240,0.45)')}
                     onBlur={e => (e.currentTarget.style.borderColor = '#E5DDD5')} />
 
                   <label className="flex items-center gap-3 cursor-pointer group select-none">
-                    <input type="checkbox" className="w-4 h-4 rounded cursor-pointer accent-[#C84B30]" />
+                    <input type="checkbox" className="w-4 h-4 rounded cursor-pointer accent-[#2B80F0]" />
                     <span className="text-xs transition-colors" style={{ color: '#ADA09A' }}>Send me a copy of NDA</span>
                   </label>
 
                   <button type="submit" disabled={loading}
                     className="w-full py-3.5 rounded-xl font-black text-sm uppercase tracking-[0.08em] transition-all hover:brightness-95 active:scale-[0.98] disabled:opacity-60 flex items-center justify-center gap-2 text-white"
-                    style={{ background: '#C84B30', boxShadow: '0 4px 16px rgba(200,75,48,0.25)' }}>
+                    style={{ background: '#2B80F0', boxShadow: '0 4px 16px rgba(43,128,240,0.25)' }}>
                     {loading
                       ? <><span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />Submitting...</>
                       : 'Submit'}
                   </button>
 
-                  <p className="text-center text-[10px] font-bold" style={{ color: '#C84B30' }}>
+                  <p className="text-center text-[10px] font-bold" style={{ color: '#2B80F0' }}>
                     ✓ Your idea is 100% protected by our Non Disclosure Agreement.
                   </p>
                 </form>

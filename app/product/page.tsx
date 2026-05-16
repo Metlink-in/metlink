@@ -21,15 +21,15 @@ export default function ProductPage() {
       {/* Subtle radish glow */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] rounded-full"
-          style={{ background: 'radial-gradient(ellipse, rgba(200,75,48,0.07) 0%, transparent 70%)', filter: 'blur(80px)' }} />
+          style={{ background: 'radial-gradient(ellipse, rgba(43,128,240,0.07) 0%, transparent 70%)', filter: 'blur(80px)' }} />
       </div>
 
       <div className="relative z-10 flex flex-col items-center text-center px-6 max-w-3xl mx-auto w-full">
 
         {/* Badge */}
         <div className="mb-8 inline-flex items-center gap-2 rounded-full px-5 py-2 text-[10px] font-black uppercase tracking-[0.28em]"
-          style={{ background: '#FEF1EE', border: '1px solid rgba(200,75,48,0.25)', color: '#C84B30' }}>
-          <span className="inline-block w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: '#C84B30' }} />
+          style={{ background: '#EEF4FE', border: '1px solid rgba(43,128,240,0.25)', color: '#2B80F0' }}>
+          <span className="inline-block w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: '#2B80F0' }} />
           In Development
         </div>
 
@@ -41,7 +41,7 @@ export default function ProductPage() {
             fontSize: 'clamp(3rem, 7vw, 6rem)',
           }}>
           Coming{' '}
-          <em style={{ fontStyle: 'italic', color: '#C84B30' }}>Soon</em>
+          <em style={{ fontStyle: 'italic', color: '#2B80F0' }}>Soon</em>
         </h1>
 
         {/* Subtext */}
@@ -53,7 +53,7 @@ export default function ProductPage() {
         <div className="flex items-center gap-2.5 mb-12">
           {[0, 160, 320].map(delay => (
             <span key={delay} className="inline-block w-2 h-2 rounded-full animate-bounce"
-              style={{ background: '#C84B30', opacity: 0.6 + delay / 1000, animationDelay: `${delay}ms` }} />
+              style={{ background: '#2B80F0', opacity: 0.6 + delay / 1000, animationDelay: `${delay}ms` }} />
           ))}
         </div>
 
@@ -64,7 +64,7 @@ export default function ProductPage() {
             <div key={title} className="flex flex-col items-start p-6 text-left"
               style={{ background: '#FFFFFF' }}>
               <div className="w-9 h-9 rounded-xl flex items-center justify-center mb-4"
-                style={{ background: '#FEF1EE', color: '#C84B30' }}>
+                style={{ background: '#EEF4FE', color: '#2B80F0' }}>
                 <Icon className="w-4.5 h-4.5 w-[18px] h-[18px]" />
               </div>
               <h3 className="text-sm font-black mb-1.5" style={{ color: '#192540' }}>{title}</h3>
@@ -77,7 +77,7 @@ export default function ProductPage() {
         <div className="flex flex-wrap items-center justify-center gap-3">
           <Link href="/contact"
             className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-sm font-bold text-white transition-all hover:brightness-95 active:scale-95"
-            style={{ background: '#C84B30', boxShadow: '0 4px 20px rgba(200,75,48,0.28)' }}>
+            style={{ background: '#2B80F0', boxShadow: '0 4px 20px rgba(43,128,240,0.28)' }}>
             <Sparkles className="w-4 h-4" />
             Get notified at launch
             <ArrowRight className="w-4 h-4" />
@@ -92,7 +92,7 @@ export default function ProductPage() {
         <p className="mt-8 text-xs" style={{ color: '#ADA09A' }}>
           Questions?{' '}
           <Link href="/contact" className="font-semibold transition-colors"
-            style={{ color: '#C84B30' }}>
+            style={{ color: '#2B80F0' }}>
             Talk to the MetLink team →
           </Link>
         </p>

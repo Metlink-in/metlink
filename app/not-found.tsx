@@ -11,7 +11,7 @@ export default function NotFound() {
       {/* Radish glow */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] rounded-full"
-          style={{ background: 'radial-gradient(ellipse, rgba(200,75,48,0.22) 0%, transparent 65%)', filter: 'blur(80px)' }} />
+          style={{ background: 'radial-gradient(ellipse, rgba(43,128,240,0.22) 0%, transparent 65%)', filter: 'blur(80px)' }} />
       </div>
 
       <div className="relative z-10 max-w-lg w-full px-6 text-center animate-slideInUp">
@@ -25,7 +25,7 @@ export default function NotFound() {
             404
           </h1>
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <div className="w-40 h-40 rounded-full border animate-ripple" style={{ borderColor: 'rgba(200,75,48,0.12)' }} />
+            <div className="w-40 h-40 rounded-full border animate-ripple" style={{ borderColor: 'rgba(43,128,240,0.12)' }} />
           </div>
         </div>
 
@@ -39,7 +39,7 @@ export default function NotFound() {
         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
           <Link href="/"
             className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full font-bold text-sm text-white transition-all hover:brightness-110 active:scale-95"
-            style={{ background: '#C84B30', boxShadow: '0 4px 24px rgba(200,75,48,0.45)' }}>
+            style={{ background: '#2B80F0', boxShadow: '0 4px 24px rgba(43,128,240,0.45)' }}>
             <Home className="w-4 h-4" />
             Back to Home
           </Link>
@@ -57,8 +57,8 @@ export default function NotFound() {
               className="px-4 py-2 rounded-xl text-xs font-semibold transition-all"
               style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)', color: 'rgba(255,255,255,0.5)' }}
               onMouseEnter={e => {
-                (e.currentTarget as HTMLElement).style.borderColor = 'rgba(200,75,48,0.5)';
-                (e.currentTarget as HTMLElement).style.color = '#C84B30';
+                (e.currentTarget as HTMLElement).style.borderColor = 'rgba(43,128,240,0.5)';
+                (e.currentTarget as HTMLElement).style.color = '#2B80F0';
               }}
               onMouseLeave={e => {
                 (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.12)';

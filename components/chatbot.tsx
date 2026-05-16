@@ -52,7 +52,7 @@ export function ChatBot() {
       <button
         onClick={() => setOpen(v => !v)}
         className="fixed bottom-6 right-6 z-50 rounded-2xl flex items-center justify-center shadow-lg transition-all duration-300 hover:scale-110 active:scale-95 group overflow-hidden"
-        style={{ width: 52, height: 52, background: '#C84B30', boxShadow: '0 6px 24px rgba(200,75,48,0.35)' }}
+        style={{ width: 52, height: 52, background: '#2B80F0', boxShadow: '0 6px 24px rgba(43,128,240,0.35)' }}
         aria-label="Chat with MetLink AI"
       >
         <div className="absolute inset-0 bg-black/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
@@ -80,17 +80,17 @@ export function ChatBot() {
           <div className="relative px-5 py-4 flex items-center gap-3 overflow-hidden"
             style={{ background: '#FAF9F6', borderBottom: '1px solid #E5DDD5' }}>
             <div className="absolute top-0 left-0 right-0 h-0.5"
-              style={{ background: 'linear-gradient(90deg, #C84B30, #E8612A, #C84B30)' }} />
+              style={{ background: 'linear-gradient(90deg, #2B80F0, #4B9CF4, #2B80F0)' }} />
 
             <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 text-white"
-              style={{ background: '#C84B30', boxShadow: '0 4px 14px rgba(200,75,48,0.3)' }}>
+              style={{ background: '#2B80F0', boxShadow: '0 4px 14px rgba(43,128,240,0.3)' }}>
               <Bot className="w-5 h-5" />
             </div>
 
             <div className="flex-1">
               <div className="flex items-center gap-2">
                 <p className="text-sm font-black" style={{ color: '#192540' }}>MetLink AI</p>
-                <Sparkles className="w-3 h-3" style={{ color: '#C84B30' }} />
+                <Sparkles className="w-3 h-3" style={{ color: '#2B80F0' }} />
               </div>
               <p className="text-[10px] uppercase font-bold tracking-[0.15em] flex items-center gap-1.5"
                 style={{ color: '#16A34A' }}>
@@ -112,7 +112,7 @@ export function ChatBot() {
               <div key={i} className={`flex items-end gap-2 ${m.role === 'user' ? 'flex-row-reverse' : 'flex-row'}`}>
                 {m.role === 'bot' && (
                   <div className="w-6 h-6 rounded-lg flex items-center justify-center shrink-0 mb-1 text-white"
-                    style={{ background: '#C84B30' }}>
+                    style={{ background: '#2B80F0' }}>
                     <Bot className="w-3 h-3" />
                   </div>
                 )}
@@ -123,7 +123,7 @@ export function ChatBot() {
                       : 'rounded-[16px] rounded-bl-sm'
                   }`}
                   style={m.role === 'user'
-                    ? { background: '#C84B30' }
+                    ? { background: '#2B80F0' }
                     : { background: '#FFFFFF', border: '1px solid #E5DDD5', color: '#192540' }
                   }
                 >
@@ -142,9 +142,9 @@ export function ChatBot() {
                       className="text-left text-[11px] px-4 py-2.5 rounded-xl transition-all border"
                       style={{ background: '#FFFFFF', borderColor: '#E5DDD5', color: '#72645A' }}
                       onMouseEnter={e => {
-                        (e.currentTarget as HTMLElement).style.borderColor = 'rgba(200,75,48,0.3)';
-                        (e.currentTarget as HTMLElement).style.color = '#C84B30';
-                        (e.currentTarget as HTMLElement).style.background = '#FEF1EE';
+                        (e.currentTarget as HTMLElement).style.borderColor = 'rgba(43,128,240,0.3)';
+                        (e.currentTarget as HTMLElement).style.color = '#2B80F0';
+                        (e.currentTarget as HTMLElement).style.background = '#EEF4FE';
                       }}
                       onMouseLeave={e => {
                         (e.currentTarget as HTMLElement).style.borderColor = '#E5DDD5';
@@ -164,7 +164,7 @@ export function ChatBot() {
                 style={{ background: '#FFFFFF', border: '1px solid #E5DDD5' }}>
                 {[0,1,2].map(i => (
                   <span key={i} className="w-1.5 h-1.5 rounded-full animate-bounce"
-                    style={{ background: '#C84B30', animationDelay: `${i * 0.15}s` }} />
+                    style={{ background: '#2B80F0', animationDelay: `${i * 0.15}s` }} />
                 ))}
               </div>
             )}
@@ -179,14 +179,14 @@ export function ChatBot() {
                 placeholder="Ask about our services..."
                 className="flex-1 px-4 py-2.5 rounded-xl text-sm focus:outline-none transition-all"
                 style={{ background: '#FAF9F6', border: '1px solid #E5DDD5', color: '#192540' }}
-                onFocus={e => (e.currentTarget.style.borderColor = 'rgba(200,75,48,0.4)')}
+                onFocus={e => (e.currentTarget.style.borderColor = 'rgba(43,128,240,0.4)')}
                 onBlur={e => (e.currentTarget.style.borderColor = '#E5DDD5')}
               />
               <button
                 type="submit"
                 disabled={!input.trim()}
                 className="w-9 h-9 rounded-xl flex items-center justify-center transition-all hover:brightness-95 active:scale-95 disabled:opacity-30 shrink-0 text-white"
-                style={{ background: '#C84B30' }}
+                style={{ background: '#2B80F0' }}
               >
                 <Send className="w-3.5 h-3.5" />
               </button>
