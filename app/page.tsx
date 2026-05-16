@@ -2,7 +2,8 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { ArrowRight, CheckCircle, Star, TrendingUp, Shield, Zap, BarChart2, Users, ChevronDown, Megaphone, Palette, Bot, Code } from 'lucide-react';
+import Image from 'next/image';
+import { ArrowRight, CheckCircle, Star, TrendingUp, Shield, Zap, BarChart2, Users, Megaphone, Palette, Bot, Code } from 'lucide-react';
 import { FadeIn, StaggerChildren, StaggerItem } from '@/components/fade-in';
 
 /* ─── Brand icons ───────────────────────────────────────────── */
@@ -175,19 +176,51 @@ const testimonials = [
   },
 ];
 
-const stack = [
-  { name: 'GPT-4o',      cat: 'OpenAI',        color: '#10B981' },
-  { name: 'Claude 3.5',  cat: 'Anthropic',     color: '#C88040' },
-  { name: 'Gemini 2.5',  cat: 'Google',        color: '#4285F4' },
-  { name: 'LangChain',   cat: 'Orchestration', color: '#2B80F0' },
-  { name: 'Pinecone',    cat: 'Vector DB',     color: '#16A34A' },
-  { name: 'HuggingFace', cat: 'Open Source',   color: '#F97316' },
-  { name: 'AWS / GCP',   cat: 'Cloud Infra',   color: '#F59E0B' },
-  { name: 'MLflow',      cat: 'MLOps',         color: '#A855F7' },
-  { name: 'LlamaIndex',  cat: 'Retrieval',     color: '#6366F1' },
-  { name: 'Kubernetes',  cat: 'Infra',         color: '#326CE5' },
-  { name: 'Next.js',     cat: 'Frontend',      color: '#E8E8E8' },
-  { name: 'Supabase',    cat: 'Data',          color: '#3ECF8E' },
+const techStack = [
+  {
+    service: 'Digital Marketing', color: '#2B80F0', Icon: Megaphone,
+    tools: [
+      { name: 'Google Ads',   cat: 'Ad Platform' },
+      { name: 'Meta Ads',     cat: 'Ad Platform' },
+      { name: 'Google Analytics 4', cat: 'Analytics' },
+      { name: 'HubSpot',      cat: 'CRM' },
+      { name: 'Klaviyo',      cat: 'Email' },
+      { name: 'SEMrush',      cat: 'SEO' },
+    ],
+  },
+  {
+    service: 'Creative Media', color: '#D97706', Icon: Palette,
+    tools: [
+      { name: 'Figma',        cat: 'UI Design' },
+      { name: 'After Effects', cat: 'Motion' },
+      { name: 'Premiere Pro', cat: 'Video' },
+      { name: 'Midjourney',   cat: 'AI Creative' },
+      { name: 'Framer',       cat: 'Web Design' },
+      { name: 'CapCut',       cat: 'Short Video' },
+    ],
+  },
+  {
+    service: 'AI & Automation', color: '#16A34A', Icon: Bot,
+    tools: [
+      { name: 'GPT-4o',       cat: 'LLM' },
+      { name: 'Claude 3.5',   cat: 'LLM' },
+      { name: 'LangChain',    cat: 'Orchestration' },
+      { name: 'Pinecone',     cat: 'Vector DB' },
+      { name: 'n8n / Make',   cat: 'Automation' },
+      { name: 'LlamaIndex',   cat: 'Retrieval' },
+    ],
+  },
+  {
+    service: 'Software Dev', color: '#2563EB', Icon: Code,
+    tools: [
+      { name: 'Next.js',      cat: 'Frontend' },
+      { name: 'Supabase',     cat: 'Database' },
+      { name: 'AWS / GCP',    cat: 'Cloud' },
+      { name: 'Node.js',      cat: 'Backend' },
+      { name: 'Kubernetes',   cat: 'Infra' },
+      { name: 'GitHub Actions', cat: 'CI/CD' },
+    ],
+  },
 ];
 
 const whyUs = [
@@ -205,32 +238,6 @@ const steps = [
   { num: '03', title: 'Scale & Optimize',   desc: 'We monitor, retrain, and evolve continuously — performance compounds over time.' },
 ];
 
-const faqData = [
-  {
-    q: 'How do I know AI automation will actually produce ROI?',
-    a: 'We define success metrics before writing a single line of code. Every project comes with a clear ROI framework — whether that\'s reduced operational costs, faster turnaround, or direct revenue lift. We track and report on these metrics throughout the engagement so you always know what your investment is returning.',
-  },
-  {
-    q: 'What\'s the difference between ChatGPT and a custom multi-agent AI system?',
-    a: 'ChatGPT is a general-purpose tool. A custom AI system is built around your specific data, workflows, and business logic — it integrates with your stack, operates within your security perimeter, and optimizes for your exact use case. The difference in output quality and relevance is dramatic.',
-  },
-  {
-    q: 'Can you integrate AI into our existing systems without disrupting operations?',
-    a: 'Yes — that\'s core to what we do. We build modular integrations that connect to your existing tools (CRMs, ERPs, databases, APIs) without requiring a full-stack migration. Our deployment approach is incremental and rigorously tested, minimizing downtime to near zero.',
-  },
-  {
-    q: 'How do you ensure AI security and data protection?',
-    a: 'We implement data isolation by design — your data never trains public models without explicit consent. We use SOC 2 compliant infrastructure, enforce role-based access, encrypt data in transit and at rest, and conduct regular security reviews. GDPR, HIPAA, and SOC 2 compliance are standard for relevant industries.',
-  },
-  {
-    q: 'What does working with MetLink look like — project vs retainer?',
-    a: 'Both models are available. Project engagements have a defined scope, timeline, and deliverable — ideal for building a specific AI agent, dashboard, or product. Retainers give you an embedded team for continuous development and iteration. Most clients start with a project and transition to a retainer as results compound.',
-  },
-  {
-    q: 'How long does it take to build an AI agent or custom application?',
-    a: 'First working prototype: 5–7 business days. Production-ready v1: 3–6 weeks depending on integration complexity. We move fast because we\'ve solved these problems before — our reusable agent architecture means we\'re not starting from zero on most builds.',
-  },
-];
 
 const BG   = '#07111F';
 const BG2  = '#0B1628';
@@ -240,7 +247,6 @@ const AC   = '#2B80F0';
 /* ─── Component ─────────────────────────────────────────────── */
 
 export default function HomePage() {
-  const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [activeService, setActiveService] = useState('01');
 
   return (
@@ -337,10 +343,10 @@ export default function HomePage() {
         </div>
 
         {/* ── Main content ── */}
-        <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-36 sm:pt-44 pb-14 text-center flex flex-col items-center">
+        <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 sm:pt-32 pb-8 text-center flex flex-col items-center">
 
           <FadeIn>
-            <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full mb-10 text-[11px] btn-outline"
+            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full mb-7 text-[11px] btn-outline"
               style={{ letterSpacing: '0.07em' }}>
               <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
               AI Marketing &amp; Development Agency
@@ -350,8 +356,8 @@ export default function HomePage() {
           </FadeIn>
 
           <FadeIn delay={0.07}>
-            <h1 className="mb-7"
-              style={{ fontWeight: 200, lineHeight: 0.88, letterSpacing: '-0.055em', fontSize: 'clamp(3.6rem,10vw,9rem)' }}>
+            <h1 className="mb-5"
+              style={{ fontWeight: 200, lineHeight: 0.9, letterSpacing: '-0.055em', fontSize: 'clamp(3rem,7.5vw,7rem)' }}>
               <span style={{ color: 'rgba(255,255,255,0.9)', display: 'block' }}>We build</span>
               <span style={{
                 display: 'block',
@@ -365,50 +371,35 @@ export default function HomePage() {
           </FadeIn>
 
           <FadeIn delay={0.13}>
-            <p className="mb-10 max-w-[520px] mx-auto" style={{ color: 'rgba(255,255,255,0.38)', fontSize: '1.05rem', lineHeight: 1.9, fontWeight: 300 }}>
-              Strategy, design, and engineering — one team shipping production AI for ambitious brands.
-              From idea to live product in days.
+            <p className="mb-8 max-w-[480px] mx-auto" style={{ color: 'rgba(255,255,255,0.38)', fontSize: '1rem', lineHeight: 1.75, fontWeight: 300 }}>
+              Strategy, design, and engineering — one team shipping production AI for ambitious brands. From idea to live product in days.
             </p>
           </FadeIn>
 
           <FadeIn delay={0.19}>
-            <div className="flex flex-wrap gap-3 justify-center mb-8">
+            <div className="flex flex-wrap gap-3 justify-center">
               <Link href="/contact"
-                className="group inline-flex items-center gap-2.5 px-8 py-4 rounded-full text-sm font-medium btn-primary">
+                className="group inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full text-sm font-medium btn-primary">
                 Start building with AI
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
               </Link>
               <Link href="/portfolio"
-                className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-sm btn-outline">
+                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm btn-outline">
                 View our work
               </Link>
-            </div>
-            {/* Social proof line */}
-            <div className="flex items-center justify-center gap-3">
-              <div className="flex -space-x-2">
-                {['#2B80F0','#16A34A','#D97706','#8B5CF6'].map((c, i) => (
-                  <div key={i} className="w-7 h-7 rounded-full border-2 flex items-center justify-center text-[10px] font-medium"
-                    style={{ background: `${c}22`, borderColor: '#050B14', color: c, zIndex: 4 - i }}>
-                    {['S','M','P','R'][i]}
-                  </div>
-                ))}
-              </div>
-              <p className="text-[11px]" style={{ color: 'rgba(255,255,255,0.3)' }}>
-                Trusted by <span style={{ color: 'rgba(255,255,255,0.55)' }}>80+ teams</span> across 12 countries
-              </p>
             </div>
           </FadeIn>
         </div>
 
         {/* ── Stats strip ── */}
-        <div className="relative z-10 pb-20 px-4">
+        <div className="relative z-10 pb-10 px-4">
           <div className="max-w-2xl mx-auto flex items-center justify-center"
             style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}>
-            {[['150+','Projects Delivered'],['80+','Clients Worldwide'],['$10M+','Revenue Generated'],['94%','Retention Rate']].map(([val,lbl], i) => (
-              <div key={lbl} className="flex-1 flex flex-col items-center py-7"
+            {[['150+','Projects'],['80+','Clients'],['$10M+','Revenue'],['94%','Retention']].map(([val,lbl], i) => (
+              <div key={lbl} className="flex-1 flex flex-col items-center py-5"
                 style={{ borderRight: i < 3 ? '1px solid rgba(255,255,255,0.05)' : 'none' }}>
-                <p style={{ color: 'rgba(255,255,255,0.88)', fontSize: 'clamp(1.5rem,2.5vw,2rem)', fontWeight: 300, letterSpacing: '-0.04em', lineHeight: 1 }}>{val}</p>
-                <p className="text-[9px] uppercase tracking-[0.25em] mt-2" style={{ color: 'rgba(255,255,255,0.22)' }}>{lbl}</p>
+                <p style={{ color: 'rgba(255,255,255,0.88)', fontSize: 'clamp(1.3rem,2vw,1.75rem)', fontWeight: 300, letterSpacing: '-0.04em', lineHeight: 1 }}>{val}</p>
+                <p className="text-[9px] uppercase tracking-[0.25em] mt-1.5" style={{ color: 'rgba(255,255,255,0.22)' }}>{lbl}</p>
               </div>
             ))}
           </div>
@@ -691,32 +682,70 @@ export default function HomePage() {
       {/* ══ TECH STACK ═════════════════════════════════════════ */}
       <section id="stack" className="py-20 sm:py-28" style={{ background: BG }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <FadeIn className="mb-12 max-w-xl">
-            <p className="label-overline mb-5">Tech Stack</p>
-            <h2 className="mb-5" style={{ color: 'rgba(255,255,255,0.92)' }}>
-              Powered by the <span style={{ color: AC }}>best</span> models.
-            </h2>
-            <p className="mb-6" style={{ color: 'rgba(255,255,255,0.38)', fontSize: '1rem', fontWeight: 300, lineHeight: 1.8 }}>
-              Frontier LLMs, vector databases, and production MLOps tooling — AI systems that work at scale.
-            </p>
-            <Link href="/contact"
-              className="inline-flex items-center gap-1.5 text-sm font-normal transition-opacity hover:opacity-70"
-              style={{ color: 'rgba(255,255,255,0.55)' }}>
-              Explore AI services <ArrowRight className="w-4 h-4" />
+
+          <FadeIn className="flex flex-wrap items-end justify-between gap-4 mb-14">
+            <div>
+              <p className="label-overline mb-4">Tech Stack</p>
+              <h2 style={{ color: 'rgba(255,255,255,0.92)' }}>
+                Tools we use <span style={{ color: AC }}>per service</span>.
+              </h2>
+            </div>
+            <Link href="/services"
+              className="inline-flex items-center gap-1.5 text-sm font-normal btn-outline px-5 py-2.5 rounded-full">
+              All services <ArrowRight className="w-4 h-4" />
             </Link>
           </FadeIn>
 
-          <StaggerChildren className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
-            {stack.map(t => (
-              <StaggerItem key={t.name}>
-                <div className="flex flex-col gap-1 p-4 rounded-xl transition-all hover:-translate-y-0.5 hover:border-white/15"
-                  style={{ background: 'rgba(255,255,255,0.035)', border: '1px solid rgba(255,255,255,0.08)' }}>
-                  <p className="text-[13px] font-normal" style={{ color: 'rgba(255,255,255,0.72)' }}>{t.name}</p>
-                  <p className="text-[11px] font-light" style={{ color: t.color }}>{t.cat}</p>
-                </div>
-              </StaggerItem>
-            ))}
-          </StaggerChildren>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {techStack.map((cat, ci) => {
+              const CatIcon = cat.Icon;
+              return (
+                <FadeIn key={cat.service} delay={ci * 0.07}>
+                  <div className="rounded-2xl h-full flex flex-col overflow-hidden transition-all duration-300 hover:-translate-y-2"
+                    style={{ background: 'rgba(255,255,255,0.025)', border: '1px solid rgba(255,255,255,0.07)' }}
+                    onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = `${cat.color}55`; el.style.background = 'rgba(255,255,255,0.04)'; el.style.boxShadow = `0 16px 48px ${cat.color}10`; }}
+                    onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = 'rgba(255,255,255,0.07)'; el.style.background = 'rgba(255,255,255,0.025)'; el.style.boxShadow = 'none'; }}>
+
+                    {/* Gradient header */}
+                    <div className="px-5 pt-5 pb-4"
+                      style={{ background: `linear-gradient(135deg, ${cat.color}14 0%, transparent 100%)`, borderBottom: `1px solid ${cat.color}1A` }}>
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
+                          style={{ background: `${cat.color}1C`, border: `1px solid ${cat.color}35`, boxShadow: `0 4px 14px ${cat.color}18` }}>
+                          <CatIcon className="w-[18px] h-[18px]" style={{ color: cat.color }} />
+                        </div>
+                        <div>
+                          <p className="text-sm font-medium leading-tight" style={{ color: 'rgba(255,255,255,0.88)' }}>{cat.service}</p>
+                          <p className="text-[10px] mt-0.5" style={{ color: 'rgba(255,255,255,0.3)' }}>{cat.tools.length} tools</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Tools list */}
+                    <div className="flex flex-col px-3 py-3 gap-0.5 flex-1">
+                      {cat.tools.map((tool, ti) => (
+                        <div key={tool.name}
+                          className="flex items-center justify-between gap-2 px-2 py-2 rounded-xl transition-all duration-150 cursor-default"
+                          onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = `${cat.color}0C`; }}
+                          onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = 'transparent'; }}>
+                          <div className="flex items-center gap-2 min-w-0">
+                            <span className="text-[9px] tabular-nums font-medium shrink-0" style={{ color: `${cat.color}80`, minWidth: 16 }}>
+                              {String(ti + 1).padStart(2, '0')}
+                            </span>
+                            <span className="text-[13px] truncate" style={{ color: 'rgba(255,255,255,0.7)' }}>{tool.name}</span>
+                          </div>
+                          <span className="text-[9px] px-2 py-0.5 rounded-full shrink-0 font-medium tracking-wide"
+                            style={{ background: `${cat.color}14`, border: `1px solid ${cat.color}30`, color: cat.color }}>
+                            {tool.cat}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </FadeIn>
+              );
+            })}
+          </div>
         </div>
       </section>
 
@@ -753,79 +782,73 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ══ FAQ ════════════════════════════════════════════════ */}
-      <section className="py-20 sm:py-28" style={{ background: BG2, borderTop: BDR }}>
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <FadeIn className="text-center mb-16">
-            <p className="label-overline mb-5">Got Questions?</p>
-            <h2 style={{ color: 'rgba(255,255,255,0.92)' }}>
-              Frequently asked <span style={{ color: AC }}>questions</span>
-            </h2>
-          </FadeIn>
+      {/* ══ CTA ════════════════════════════════════════════════ */}
+      <section id="contact" className="py-16 sm:py-20" style={{ background: BG }}>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <FadeIn>
+            <div className="relative overflow-hidden rounded-3xl"
+              style={{ background: 'linear-gradient(120deg, #0F2952 0%, #1A4BAD 45%, #0D1F4A 100%)' }}>
 
-          <div className="space-y-3">
-            {faqData.map((faq, i) => {
-              const isOpen = openFaq === i;
-              return (
-                <FadeIn key={i} delay={i * 0.04}>
-                  <div
-                    className="rounded-2xl overflow-hidden transition-all duration-300"
-                    style={{ background: 'rgba(255,255,255,0.025)', border: isOpen ? '1px solid rgba(255,255,255,0.1)' : '1px solid rgba(255,255,255,0.05)' }}>
-                    <button
-                      className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left"
-                      onClick={() => setOpenFaq(isOpen ? null : i)}>
-                      <span className="text-sm font-normal" style={{ color: isOpen ? 'rgba(255,255,255,0.88)' : 'rgba(255,255,255,0.55)' }}>{faq.q}</span>
-                      <ChevronDown
-                        className={`w-4 h-4 shrink-0 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
-                        style={{ color: 'rgba(255,255,255,0.25)' }} />
-                    </button>
-                    {isOpen && (
-                      <div className="px-6 pb-5">
-                        <p className="text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.4)', fontWeight: 300 }}>{faq.a}</p>
-                      </div>
-                    )}
+              {/* Background glow */}
+              <div className="absolute inset-0 pointer-events-none">
+                <div className="absolute top-0 left-1/4 w-[500px] h-[300px]"
+                  style={{ background: 'radial-gradient(ellipse, rgba(75,156,244,0.25) 0%, transparent 70%)', filter: 'blur(50px)' }} />
+                <div className="absolute bottom-0 right-1/3 w-[300px] h-[200px]"
+                  style={{ background: 'radial-gradient(ellipse, rgba(43,128,240,0.2) 0%, transparent 70%)', filter: 'blur(40px)' }} />
+              </div>
+
+              <div className="relative z-10 flex flex-col lg:flex-row items-center">
+
+                {/* Left: content */}
+                <div className="flex-1 px-10 sm:px-14 py-14 sm:py-16">
+                  <p className="text-[10px] uppercase tracking-[0.28em] mb-5" style={{ color: 'rgba(255,255,255,0.45)' }}>
+                    Let&apos;s build together
+                  </p>
+                  <h2 className="mb-5 leading-[1.05]"
+                    style={{ color: '#FFFFFF', fontSize: 'clamp(1.8rem,3.5vw,3rem)', fontWeight: 300, letterSpacing: '-0.03em', maxWidth: 480 }}>
+                    Let&apos;s Turn Ideas Into <span style={{ color: '#60A5FA' }}>Execution</span>
+                  </h2>
+                  <p className="mb-8 max-w-md" style={{ color: 'rgba(255,255,255,0.52)', fontSize: '0.95rem', fontWeight: 300, lineHeight: 1.75 }}>
+                    Need support with your tech roadmap? Our team works closely with you to define priorities and deliver steady progress.
+                  </p>
+                  <div className="flex flex-wrap gap-3">
+                    <a href="mailto:hello@metlink.ai"
+                      className="group inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-medium btn-primary">
+                      Become a Client
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+                    </a>
+                    <Link href="/services"
+                      className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm"
+                      style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.15)', color: 'rgba(255,255,255,0.75)' }}>
+                      See services
+                    </Link>
                   </div>
-                </FadeIn>
-              );
-            })}
-          </div>
+                </div>
 
-          <FadeIn className="flex flex-wrap gap-3 justify-center mt-14">
-            <Link href="/portfolio"
-              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm btn-outline">
-              Explore Our Work
-            </Link>
-            <Link href="/contact"
-              className="group inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm btn-primary">
-              Get Free Strategy Call
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
-            </Link>
+                {/* Right: person images */}
+                <div className="relative lg:w-[420px] shrink-0 self-end hidden lg:flex items-end justify-center">
+                  <Image
+                    src="/WhatsApp_Image_2026-04-30_at_7.30.41_PM-removebg-preview.png"
+                    alt="Team member"
+                    width={260}
+                    height={340}
+                    className="object-contain object-bottom relative z-10"
+                    style={{ filter: 'drop-shadow(0 -10px 40px rgba(43,128,240,0.2))' }}
+                  />
+                  <Image
+                    src="/WhatsApp_Image_2026-04-30_at_7.30.41_PM__6_-removebg-preview.png"
+                    alt="Team member"
+                    width={220}
+                    height={300}
+                    className="object-contain object-bottom absolute right-4 bottom-0"
+                    style={{ filter: 'drop-shadow(0 -10px 30px rgba(43,128,240,0.15))', opacity: 0.9 }}
+                  />
+                </div>
+
+              </div>
+            </div>
           </FadeIn>
         </div>
-      </section>
-
-      {/* ══ CTA ════════════════════════════════════════════════ */}
-      <section id="contact" className="py-24 sm:py-32" style={{ background: BG }}>
-        <FadeIn className="max-w-2xl mx-auto px-4 sm:px-6 text-center">
-          <p className="label-overline mb-6">Let&apos;s build together</p>
-          <h2 className="mb-6" style={{ color: 'rgba(255,255,255,0.92)' }}>
-            Ready to scale with <span style={{ color: AC }}>AI?</span>
-          </h2>
-          <p className="mb-10" style={{ color: 'rgba(255,255,255,0.42)', fontWeight: 300 }}>
-            Book a free 30-min strategy call. No commitments — just clarity on what AI can do for your business.
-          </p>
-          <div className="flex flex-wrap gap-3 justify-center">
-            <a href="mailto:hello@metlink.ai"
-              className="group inline-flex items-center gap-2 px-8 py-4 rounded-full text-sm btn-primary">
-              Book your strategy call
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
-            </a>
-            <Link href="/services"
-              className="inline-flex items-center px-8 py-4 rounded-full text-sm btn-outline">
-              See services
-            </Link>
-          </div>
-        </FadeIn>
       </section>
 
     </div>
