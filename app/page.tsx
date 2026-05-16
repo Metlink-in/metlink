@@ -48,35 +48,95 @@ const integrations = [
 const services = [
   {
     num: '01', color: '#2B80F0', Icon: Megaphone,
+    tabLabel: 'Marketing',
     title: 'Digital Marketing',
+    subtitle: 'Performance Marketing Systems',
     tagline: 'Data-driven growth at scale.',
     desc: 'Performance marketing, SEO, and brand strategy that turns audiences into loyal customers with measurable ROI.',
     features: ['Performance Marketing', 'SEO & Content', 'Personal Branding', 'Social Media'],
+    builds: ['Google & Meta ad campaigns', 'SEO content engines', 'Email & lifecycle flows', 'Analytics dashboards'],
     slug: 'digital-marketing',
+    vizTitle: 'Campaign Dashboard',
+    vizBars: [
+      { label: 'ROAS', value: '4.2×', pct: 84 },
+      { label: 'CTR', value: '8.7%', pct: 65 },
+      { label: 'Conv Rate', value: '12.4%', pct: 72 },
+      { label: 'CAC Drop', value: '38%', pct: 45 },
+    ],
+    vizMetrics: [
+      { val: '$2.4M', label: 'Managed' },
+      { val: '320%', label: 'Avg ROAS' },
+      { val: '94%', label: 'Retention' },
+    ],
   },
   {
     num: '02', color: '#D97706', Icon: Palette,
+    tabLabel: 'Creative',
     title: 'Creative Media',
+    subtitle: 'Visual Brand Systems',
     tagline: 'Visuals that stop the scroll.',
     desc: 'World-class production—brand identity to high-volume video—built for one goal: conversion.',
     features: ['Brand Identity', 'Video & UGC', 'Motion Design', 'Web & UI/UX'],
+    builds: ['Brand identity & guidelines', 'Video & UGC production', 'Motion graphics', 'Web & UI/UX design'],
     slug: 'creative-media',
+    vizTitle: 'Content Studio',
+    vizBars: [
+      { label: 'Brand Score', value: '96/100', pct: 96 },
+      { label: 'Engagement', value: '+312%', pct: 78 },
+      { label: 'Video Views', value: '2.4M', pct: 67 },
+      { label: 'Conversion', value: '8.3%', pct: 62 },
+    ],
+    vizMetrics: [
+      { val: '180+', label: 'Brands' },
+      { val: '2.4M', label: 'Views' },
+      { val: '98%', label: 'Approval' },
+    ],
   },
   {
     num: '03', color: '#16A34A', Icon: Bot,
+    tabLabel: 'AI Agents',
     title: 'AI & Automation',
+    subtitle: 'Intelligent Automation Systems',
     tagline: 'Intelligent systems. Infinite scale.',
     desc: 'Cutting-edge AI agents and automation that transform operations and unlock compounding growth.',
     features: ['AI Agents', 'Data Science', 'ML Systems', 'Conversational AI'],
+    builds: ['Custom AI agents & chatbots', 'Workflow automation pipelines', 'ML model integration', 'Data science & analytics'],
     slug: 'ai-automation',
+    vizTitle: 'Automation Monitor',
+    vizBars: [
+      { label: 'Tasks Automated', value: '98.2%', pct: 98 },
+      { label: 'Response Time', value: '<200ms', pct: 85 },
+      { label: 'Accuracy', value: '97.8%', pct: 92 },
+      { label: 'Cost Saved', value: '68%', pct: 68 },
+    ],
+    vizMetrics: [
+      { val: '500K+', label: 'Daily Tasks' },
+      { val: '68%', label: 'Cost Cut' },
+      { val: '7 days', label: 'Deploy' },
+    ],
   },
   {
     num: '04', color: '#2563EB', Icon: Code,
+    tabLabel: 'Dev',
     title: 'Software Development',
+    subtitle: 'Full-Stack Product Engineering',
     tagline: 'Code that scales. Systems that last.',
     desc: 'End-to-end product engineering—web, mobile, and cloud architecture built to scale.',
     features: ['Web & Mobile Apps', 'Cloud & APIs', 'AI Integration', 'Automation'],
+    builds: ['Web & mobile applications', 'Cloud infrastructure & APIs', 'AI-powered features', 'DevOps & CI/CD pipelines'],
     slug: 'software-development',
+    vizTitle: 'System Health',
+    vizBars: [
+      { label: 'Uptime', value: '99.99%', pct: 99 },
+      { label: 'Load Time', value: '0.8s', pct: 88 },
+      { label: 'Test Coverage', value: '94%', pct: 94 },
+      { label: 'Deploy Freq', value: '12/day', pct: 75 },
+    ],
+    vizMetrics: [
+      { val: '50K+', label: 'Users' },
+      { val: '99.99%', label: 'Uptime' },
+      { val: '3-6 wks', label: 'MVP' },
+    ],
   },
 ];
 
@@ -182,6 +242,7 @@ const AC   = '#2B80F0';
 
 export default function HomePage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [activeService, setActiveService] = useState('01');
 
   return (
     <div className="w-full overflow-x-hidden" style={{ background: BG }}>
@@ -304,7 +365,7 @@ export default function HomePage() {
       <section id="services" className="py-20 sm:py-28" style={{ background: BG }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
-          <FadeIn className="flex flex-wrap items-end justify-between gap-4 mb-16">
+          <FadeIn className="flex flex-wrap items-end justify-between gap-4 mb-14">
             <div>
               <p className="label-overline mb-4">Services</p>
               <h2 style={{ color: 'rgba(255,255,255,0.92)' }}>
@@ -312,78 +373,133 @@ export default function HomePage() {
               </h2>
             </div>
             <Link href="/services"
-              className="inline-flex items-center gap-1.5 text-sm font-normal btn-outline px-5 py-2.5 rounded-full"
-              style={{}}>
+              className="inline-flex items-center gap-1.5 text-sm font-normal btn-outline px-5 py-2.5 rounded-full">
               All services <ArrowRight className="w-4 h-4" />
             </Link>
           </FadeIn>
 
-          <div className="grid sm:grid-cols-2 gap-5">
-            {services.map((s, i) => {
+          <div className="flex flex-col lg:flex-row gap-6">
+
+            {/* Left: tab list */}
+            <div className="flex flex-row lg:flex-col gap-2 overflow-x-auto lg:overflow-visible lg:w-[196px] shrink-0 pb-1 lg:pb-0">
+              {services.map(s => {
+                const isActive = activeService === s.num;
+                const SvcIcon = s.Icon;
+                return (
+                  <button key={s.num} onClick={() => setActiveService(s.num)}
+                    className="flex items-center gap-3 px-4 py-3.5 rounded-xl text-left transition-all duration-200 whitespace-nowrap lg:whitespace-normal w-full shrink-0"
+                    style={{
+                      background: isActive ? `${s.color}12` : 'rgba(255,255,255,0.025)',
+                      border: `1px solid ${isActive ? `${s.color}35` : 'rgba(255,255,255,0.06)'}`,
+                      borderLeft: `3px solid ${isActive ? s.color : 'transparent'}`,
+                    }}>
+                    <SvcIcon className="w-4 h-4 shrink-0" style={{ color: isActive ? s.color : 'rgba(255,255,255,0.3)' }} />
+                    <span className="text-sm" style={{ color: isActive ? 'rgba(255,255,255,0.9)' : 'rgba(255,255,255,0.42)', fontWeight: isActive ? 500 : 400 }}>
+                      {s.tabLabel}
+                    </span>
+                  </button>
+                );
+              })}
+              <Link href="/contact"
+                className="mt-2 px-4 py-3 rounded-xl text-sm text-center btn-outline hidden lg:block"
+                style={{ border: '1px solid rgba(255,255,255,0.1)' }}>
+                Get Started
+              </Link>
+            </div>
+
+            {/* Right: viz + content panels */}
+            {services.filter(s => s.num === activeService).map(s => {
               const SvcIcon = s.Icon;
               return (
-                <FadeIn key={s.num} delay={i * 0.06}>
-                  <Link href={`/services/${s.slug}`}
-                    className="group relative flex flex-col p-8 rounded-2xl h-full overflow-hidden transition-all duration-500 hover:-translate-y-2"
-                    style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)', boxShadow: '0 4px 24px rgba(0,0,0,0.2)' }}
-                    onMouseEnter={e => {
-                      const el = e.currentTarget as HTMLElement;
-                      el.style.borderColor = `${s.color}45`;
-                      el.style.boxShadow = `0 24px 60px rgba(0,0,0,0.35), 0 0 50px ${s.color}18, inset 0 1px 0 rgba(255,255,255,0.07)`;
-                    }}
-                    onMouseLeave={e => {
-                      const el = e.currentTarget as HTMLElement;
-                      el.style.borderColor = 'rgba(255,255,255,0.08)';
-                      el.style.boxShadow = '0 4px 24px rgba(0,0,0,0.2)';
-                    }}>
+                <div key={s.num} className="flex flex-col md:flex-row gap-5 flex-1 min-w-0">
 
-                    {/* Top accent line */}
-                    <div className="absolute top-0 left-0 right-0 h-[2px]"
-                      style={{ background: `linear-gradient(to right, ${s.color}, ${s.color}55, transparent)` }} />
+                  {/* Center: visualization card */}
+                  <div className="md:w-[268px] shrink-0 p-6 rounded-2xl flex flex-col"
+                    style={{ background: '#0C1117', border: '1px solid rgba(255,255,255,0.07)' }}>
 
-                    {/* Radial glow on hover */}
-                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                      style={{ background: `radial-gradient(ellipse at 20% 0%, ${s.color}0D 0%, transparent 60%)` }} />
-
-                    {/* Large watermark number */}
-                    <div className="absolute bottom-3 right-5 font-black leading-none pointer-events-none select-none transition-all duration-500 group-hover:scale-110 group-hover:opacity-100"
-                      style={{ color: `${s.color}0A`, fontFamily: PF, fontSize: '7rem', lineHeight: 1 }}>
-                      {s.num}
-                    </div>
-
-                    {/* Content */}
-                    <div className="relative z-10 flex flex-col h-full">
-                      {/* Header row */}
-                      <div className="flex items-start justify-between mb-6">
-                        <div className="flex items-center gap-3">
-                          <div className="w-11 h-11 rounded-xl flex items-center justify-center shrink-0 transition-all duration-300 group-hover:scale-110"
-                            style={{ background: `${s.color}18`, border: `1px solid ${s.color}30` }}>
-                            <SvcIcon className="w-5 h-5" style={{ color: s.color }} />
-                          </div>
-                          <span className="text-[10px] font-black tracking-[0.3em]" style={{ color: 'rgba(200,215,255,0.22)' }}>{s.num}</span>
-                        </div>
-                        <div className="w-7 h-7 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 -translate-x-2 group-hover:translate-x-0"
+                    {/* Card header */}
+                    <div className="flex items-center justify-between mb-6">
+                      <div className="flex items-center gap-2.5">
+                        <div className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0"
                           style={{ background: `${s.color}20`, border: `1px solid ${s.color}35` }}>
-                          <ArrowRight className="w-3.5 h-3.5" style={{ color: s.color }} />
+                          <SvcIcon className="w-4 h-4" style={{ color: s.color }} />
                         </div>
+                        <span className="text-sm" style={{ color: 'rgba(255,255,255,0.65)', fontWeight: 400 }}>{s.vizTitle}</span>
                       </div>
-
-                      <h3 className="mb-2 leading-tight" style={{ color: 'rgba(255,255,255,0.9)', fontSize: '1.35rem', fontWeight: 300, letterSpacing: '-0.025em' }}>{s.title}</h3>
-                      <p className="text-sm mb-4" style={{ color: 'rgba(255,255,255,0.35)', fontWeight: 300 }}>{s.tagline}</p>
-                      <p className="text-sm leading-relaxed mb-8" style={{ color: 'rgba(255,255,255,0.4)', fontWeight: 300 }}>{s.desc}</p>
-
-                      <div className="flex flex-wrap gap-2 mt-auto">
-                        {s.features.map(f => (
-                          <span key={f}
-                            className="px-3 py-1.5 rounded-lg text-[11px] font-semibold transition-all duration-300 group-hover:border-opacity-50"
-                            style={{ background: `${s.color}10`, border: `1px solid ${s.color}28`, color: `${s.color}DD` }}>
-                            {f}
-                          </span>
-                        ))}
-                      </div>
+                      <span className="flex items-center gap-1.5 text-[10px] px-2.5 py-1 rounded-full"
+                        style={{ background: 'rgba(34,197,94,0.1)', border: '1px solid rgba(34,197,94,0.2)', color: '#4ADE80' }}>
+                        <span className="w-1 h-1 rounded-full bg-green-400 animate-pulse" />
+                        Live
+                      </span>
                     </div>
-                  </Link>
-                </FadeIn>
+
+                    {/* Progress bars */}
+                    <div className="space-y-4 mb-6 flex-1">
+                      {s.vizBars.map(bar => (
+                        <div key={bar.label}>
+                          <div className="flex items-center justify-between mb-1.5">
+                            <span className="text-[11px]" style={{ color: 'rgba(255,255,255,0.38)' }}>{bar.label}</span>
+                            <span className="text-[11px] font-medium" style={{ color: s.color }}>{bar.value}</span>
+                          </div>
+                          <div className="h-1.5 rounded-full overflow-hidden" style={{ background: 'rgba(255,255,255,0.06)' }}>
+                            <div className="h-full rounded-full"
+                              style={{ width: `${bar.pct}%`, background: `linear-gradient(to right, ${s.color}88, ${s.color})` }} />
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Bottom metrics */}
+                    <div className="grid grid-cols-3 gap-2 pt-5" style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+                      {s.vizMetrics.map(m => (
+                        <div key={m.label} className="text-center">
+                          <p className="font-medium leading-none mb-1.5" style={{ color: s.color, fontSize: '1rem', letterSpacing: '-0.03em' }}>{m.val}</p>
+                          <p className="text-[9px] leading-tight" style={{ color: 'rgba(255,255,255,0.28)' }}>{m.label}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Right: description + features */}
+                  <div className="flex-1 min-w-0 p-6 rounded-2xl flex flex-col"
+                    style={{ background: '#0C1117', border: '1px solid rgba(255,255,255,0.07)' }}>
+                    <p className="text-[10px] uppercase tracking-[0.25em] mb-2" style={{ color: s.color }}>{s.num}</p>
+                    <h3 className="mb-1" style={{ color: 'rgba(255,255,255,0.92)', fontWeight: 300, letterSpacing: '-0.025em' }}>{s.title}</h3>
+                    <p className="text-sm mb-4" style={{ color: s.color, fontWeight: 400 }}>{s.subtitle}</p>
+                    <p className="text-sm leading-relaxed mb-6" style={{ color: 'rgba(255,255,255,0.42)', fontWeight: 300 }}>{s.desc}</p>
+
+                    {/* Feature chips 2×2 */}
+                    <div className="grid grid-cols-2 gap-2 mb-6">
+                      {s.features.map(f => (
+                        <div key={f} className="flex items-center gap-2 px-3 py-2.5 rounded-lg"
+                          style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)' }}>
+                          <div className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: s.color }} />
+                          <span className="text-xs" style={{ color: 'rgba(255,255,255,0.58)' }}>{f}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* What we build */}
+                    <div className="mb-8">
+                      <p className="text-[10px] uppercase tracking-[0.2em] mb-3" style={{ color: 'rgba(255,255,255,0.28)' }}>What we build:</p>
+                      <ul className="space-y-2">
+                        {s.builds.map(b => (
+                          <li key={b} className="flex items-center gap-2.5 text-sm" style={{ color: 'rgba(255,255,255,0.48)', fontWeight: 300 }}>
+                            <span className="w-1 h-1 rounded-full shrink-0" style={{ background: `${s.color}90` }} />
+                            {b}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <Link href={`/services/${s.slug}`}
+                      className="mt-auto inline-flex items-center gap-2 px-5 py-3 rounded-xl text-sm self-start transition-all duration-200 hover:-translate-y-0.5"
+                      style={{ background: `${s.color}15`, border: `1px solid ${s.color}35`, color: s.color, fontWeight: 400 }}>
+                      Explore {s.tabLabel}
+                      <ArrowRight className="w-4 h-4" />
+                    </Link>
+                  </div>
+                </div>
               );
             })}
           </div>
