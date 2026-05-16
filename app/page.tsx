@@ -111,9 +111,14 @@ export default function HomePage() {
           HERO
       ══════════════════════════════════════ */}
       <section id="hero" className="relative overflow-hidden" style={{
-        background: '#F2D5C8',
+        background: '#192540',
         minHeight: '100vh',
       }}>
+        {/* Blue radial glow */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] rounded-full"
+            style={{ background: 'radial-gradient(ellipse, rgba(43,128,240,0.18) 0%, transparent 65%)', filter: 'blur(80px)' }} />
+        </div>
         {/* Noise */}
         <div className="absolute inset-0 pointer-events-none opacity-[0.025]"
           style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E\")" }} />
@@ -122,9 +127,9 @@ export default function HomePage() {
         <div className="absolute bottom-[18%] left-[4%] hidden lg:block animate-float"
           style={{ zIndex: 20, animationDelay: '1s', width: 168 }}>
           <div className="p-4 rounded-2xl" style={{
-            background: DK,
-            border: '1px solid rgba(255,255,255,0.08)',
-            boxShadow: '0 20px 60px rgba(0,0,0,0.18)',
+            background: 'rgba(255,255,255,0.08)',
+            border: '1px solid rgba(255,255,255,0.15)',
+            boxShadow: '0 20px 60px rgba(0,0,0,0.35)',
           }}>
             <div className="flex items-center gap-1.5 mb-2">
               <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
@@ -161,7 +166,7 @@ export default function HomePage() {
           {/* Agency badge */}
           <FadeIn>
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-8 text-sm font-medium"
-              style={{ background: WH, border: `1px solid ${BD}`, color: MU, boxShadow: '0 1px 8px rgba(0,0,0,0.06)' }}>
+              style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.18)', color: 'rgba(255,255,255,0.75)' }}>
               <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
               AI Marketing &amp; Development Agency
             </div>
@@ -171,7 +176,7 @@ export default function HomePage() {
           <FadeIn delay={0.08}>
             <h1 className="font-black leading-[1.0] mb-6"
               style={{
-                color: DK,
+                color: '#FFFFFF',
                 fontFamily: PF,
                 fontSize: 'clamp(2.8rem, 6vw, 5.4rem)',
               }}>
@@ -183,7 +188,7 @@ export default function HomePage() {
 
           {/* Subtext */}
           <FadeIn delay={0.14}>
-            <p className="text-lg sm:text-xl mb-10 max-w-2xl leading-relaxed" style={{ color: MU }}>
+            <p className="text-lg sm:text-xl mb-10 max-w-2xl leading-relaxed" style={{ color: 'rgba(255,255,255,0.6)' }}>
               Strategy, design, and engineering — one team shipping production AI systems for ambitious brands. From idea to live product in days.
             </p>
           </FadeIn>
@@ -199,8 +204,8 @@ export default function HomePage() {
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
               </Link>
               <Link href="/services"
-                className="inline-flex items-center px-7 py-4 rounded-full font-semibold text-sm transition-all hover:bg-black/5"
-                style={{ border: `1px solid rgba(28,20,16,0.18)`, color: DK, background: 'rgba(255,255,255,0.70)' }}>
+                className="inline-flex items-center px-7 py-4 rounded-full font-semibold text-sm transition-all"
+                style={{ border: '1px solid rgba(255,255,255,0.2)', color: 'rgba(255,255,255,0.8)', background: 'rgba(255,255,255,0.08)' }}>
                 See our work
               </Link>
             </div>
@@ -217,8 +222,8 @@ export default function HomePage() {
           ].map(([val, lbl]) => (
             <StaggerItem key={lbl} className="flex flex-col items-center">
               <p className="font-black leading-none mb-1.5"
-                style={{ color: DK, fontFamily: PF, fontSize: 'clamp(2rem, 3.5vw, 3rem)' }}>{val}</p>
-              <p className="text-[10px] uppercase tracking-[0.25em] font-bold" style={{ color: LM }}>{lbl}</p>
+                style={{ color: '#FFFFFF', fontFamily: PF, fontSize: 'clamp(2rem, 3.5vw, 3rem)' }}>{val}</p>
+              <p className="text-[10px] uppercase tracking-[0.25em] font-bold" style={{ color: 'rgba(255,255,255,0.4)' }}>{lbl}</p>
             </StaggerItem>
           ))}
         </StaggerChildren>
