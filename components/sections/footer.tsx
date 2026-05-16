@@ -12,8 +12,8 @@ const catAccent: Record<string, string> = {
   'software-development': '#2563EB',
 };
 
-const BG    = '#0C1829';
-const BDR   = 'rgba(255,255,255,0.08)';
+const BG    = '#070707';
+const BDR   = 'rgba(255,255,255,0.06)';
 
 export function Footer() {
   return (
