@@ -1,28 +1,10 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { useState, useEffect, useRef } from 'react';
-import { Menu, X, ChevronDown, ArrowRight, Zap, Megaphone, Palette, Bot, Code, Brain } from 'lucide-react';
+import { Menu, X, ChevronDown, ArrowRight, Megaphone, Palette, Bot, Code } from 'lucide-react';
 import { serviceCategories } from '@/lib/services-data';
-
-function MetLinkLogo({ size = 40 }: { size?: number }) {
-  const h = Math.round(size * (190 / 220));
-  return (
-    <svg width={size} height={h} viewBox="0 0 220 190" fill="none" xmlns="http://www.w3.org/2000/svg">
-      {/* Left navy M-half */}
-      <path d="M 12,12 L 12,178 L 68,178 L 68,100 L 106,12 Z" fill="#192540"/>
-      {/* Right blue arch M-half */}
-      <path d="M 113,178 L 113,64 C 111,-6 210,-6 208,64 L 208,178 L 162,178 L 162,64 C 162,38 130,38 130,64 L 130,178 Z" fill="#2B80F0"/>
-      {/* Connector line — white */}
-      <line x1="113" y1="61" x2="82" y2="100" stroke="white" strokeWidth="7" strokeLinecap="round"/>
-      {/* Upper connector ring */}
-      <circle cx="113" cy="61" r="15" fill="white"/>
-      <circle cx="113" cy="61" r="9"  fill="#192540"/>
-      {/* Lower connector dot */}
-      <circle cx="82"  cy="100" r="9" fill="#192540"/>
-    </svg>
-  );
-}
 
 const catAccents: Record<string, string> = {
   'digital-marketing':   '#2B80F0',
@@ -61,49 +43,47 @@ export function Header() {
 
   return (
     <>
-      <header className="fixed top-0 inset-x-0 z-50 px-3 sm:px-4 lg:px-6 pt-3">
-        {/* Pill nav container */}
+      <header className="fixed top-0 inset-x-0 z-50">
         <nav
-          className="max-w-7xl mx-auto rounded-2xl transition-all duration-300"
+          className="transition-all duration-300"
           style={{
-            background: scrolled ? 'rgba(255,255,255,0.96)' : 'rgba(255,255,255,0.88)',
-            border: '1px solid rgba(0,0,0,0.07)',
-            boxShadow: scrolled
-              ? '0 4px 32px rgba(0,0,0,0.10), 0 1px 0 rgba(0,0,0,0.04)'
-              : '0 2px 16px rgba(0,0,0,0.06)',
-            backdropFilter: 'blur(20px)',
+            background: scrolled ? 'rgba(6,13,26,0.97)' : 'rgba(6,13,26,0.90)',
+            borderBottom: '1px solid rgba(255,255,255,0.08)',
+            backdropFilter: 'blur(24px)',
+            WebkitBackdropFilter: 'blur(24px)',
+            boxShadow: scrolled ? '0 1px 30px rgba(0,0,0,0.5)' : 'none',
           }}
         >
-          <div className="flex items-center justify-between h-13 px-4 sm:px-6">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
 
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-2.5 group shrink-0">
-              <MetLinkLogo size={40} />
-              <div className="hidden sm:block">
-                <span className="text-[17px] font-bold leading-none" style={{ fontFamily: 'var(--font-jakarta)', letterSpacing: '0.01em' }}>
-                  <span style={{ color: '#192540' }}>Met</span><span style={{ color: '#2B80F0' }}>link</span>
-                </span>
-                <p className="text-[9px] tracking-widest uppercase leading-none mt-1 font-semibold" style={{ color: '#ADA09A' }}>AI Agency</p>
+            <Link href="/" className="flex items-center shrink-0">
+              <div className="overflow-hidden rounded-xl"
+                style={{ background: 'rgba(255,255,255,0.96)', padding: '5px 10px', height: 40, display: 'flex', alignItems: 'center' }}>
+                <Image
+                  src="/logo-mark.png"
+                  alt="MetLink"
+                  width={96}
+                  height={30}
+                  className="object-contain"
+                  priority
+                />
               </div>
             </Link>
 
-            {/* Desktop nav links */}
-            <div className="hidden md:flex items-center gap-0.5">
-              <Link href="/"
-                className="px-3.5 py-2 rounded-xl text-sm font-medium transition-all hover:bg-black/5"
-                style={{ color: '#72645A' }}
-                onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = '#192540'}
-                onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = '#72645A'}>
-                Home
-              </Link>
+            {/* Desktop nav — center pill */}
+            <div className="hidden md:flex items-center gap-0.5 px-2 py-1.5 rounded-full"
+              style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)' }}>
+              <NavLink href="/">Home</NavLink>
 
               {/* Services dropdown */}
               <div ref={dropdownRef} className="relative" onMouseEnter={openDropdown} onMouseLeave={closeDropdown}>
                 <button
-                  className="px-3.5 py-2 rounded-xl text-sm font-medium transition-all hover:bg-black/5 flex items-center gap-1"
-                  style={{ color: '#72645A' }}
-                  onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = '#192540'}
-                  onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = '#72645A'}
+                  className="px-3.5 py-2 rounded-xl text-sm font-semibold transition-all flex items-center gap-1.5"
+                  style={{ color: 'rgba(220,230,255,0.7)' }}
+                  onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = '#FFFFFF'}
+                  onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'rgba(220,230,255,0.7)'}
                   onClick={() => { if (window.innerWidth < 768) setServicesOpen(v => !v); }}>
                   Services
                   <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${servicesOpen ? 'rotate-180' : ''}`}
@@ -114,13 +94,14 @@ export function Header() {
                   <>
                     <div className="fixed inset-0 top-16 z-[-1]" onClick={() => setServicesOpen(false)} />
                     <div
-                      className="fixed top-[68px] inset-x-3 sm:inset-x-4 lg:inset-x-6 shadow-2xl animate-slideInDown overflow-hidden rounded-2xl"
+                      className="fixed top-[70px] inset-x-3 sm:inset-x-4 lg:inset-x-6 animate-slideInDown overflow-hidden rounded-2xl"
                       style={{
-                        background: 'rgba(255,255,255,0.98)',
-                        border: '1px solid rgba(0,0,0,0.07)',
-                        boxShadow: '0 24px 60px rgba(0,0,0,0.12)',
-                        backdropFilter: 'blur(24px)',
-                        maxWidth: '1200px',
+                        background: 'rgba(8,17,38,0.98)',
+                        border: '1px solid rgba(255,255,255,0.1)',
+                        boxShadow: '0 24px 60px rgba(0,0,0,0.5)',
+                        backdropFilter: 'blur(28px)',
+                        WebkitBackdropFilter: 'blur(28px)',
+                        maxWidth: 1200,
                         margin: '0 auto',
                       }}
                       onMouseLeave={closeDropdown}
@@ -145,9 +126,9 @@ export function Header() {
                                   <li key={svc.slug}>
                                     <Link href={`/services/${cat.slug}/${svc.slug}`}
                                       className="group/item flex items-center gap-1.5 text-sm transition-all"
-                                      style={{ color: '#72645A' }}
-                                      onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = '#192540'}
-                                      onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = '#72645A'}
+                                      style={{ color: 'rgba(200,215,255,0.5)' }}
+                                      onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = '#FFFFFF'}
+                                      onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'rgba(200,215,255,0.5)'}
                                       onClick={() => setServicesOpen(false)}>
                                       <ArrowRight className="w-3 h-3 opacity-0 group-hover/item:opacity-100 -translate-x-1 group-hover/item:translate-x-0 transition-all flex-shrink-0"
                                         style={{ color: accent }} />
@@ -159,16 +140,14 @@ export function Header() {
                             </div>
                           );
                         })}
-
-                        <div className="col-span-4 mt-2 pt-6 flex items-center justify-between"
-                          style={{ borderTop: '1px solid #E5DDD5' }}>
+                        <div className="col-span-4 mt-2 pt-5 flex items-center justify-between"
+                          style={{ borderTop: '1px solid rgba(255,255,255,0.09)' }}>
                           <div className="flex items-center gap-2">
                             <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                            <p className="text-sm" style={{ color: '#ADA09A' }}>Custom AI solutions for unique business challenges</p>
+                            <p className="text-sm" style={{ color: 'rgba(200,215,255,0.45)' }}>Custom AI solutions for unique business challenges</p>
                           </div>
                           <Link href="/contact" onClick={() => setServicesOpen(false)}
-                            className="group px-5 py-2 rounded-xl text-sm font-bold flex items-center gap-2 transition-all hover:brightness-95"
-                            style={{ background: '#EEF4FE', color: '#2B80F0', border: '1px solid rgba(43,128,240,0.2)' }}>
+                            className="group px-5 py-2 rounded-xl text-sm font-bold flex items-center gap-2 transition-all btn-primary-glass text-white">
                             Talk to our experts <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
                           </Link>
                         </div>
@@ -179,41 +158,36 @@ export function Header() {
               </div>
 
               {[['Company', '/company'], ['Portfolio', '/portfolio'], ['Blog', '/blog'], ['Product', '/product']].map(([label, href]) => (
-                <Link key={label} href={href}
-                  className="px-3.5 py-2 rounded-xl text-sm font-medium transition-all hover:bg-black/5"
-                  style={{ color: '#72645A' }}
-                  onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = '#192540'}
-                  onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = '#72645A'}>
+                <NavLink key={label} href={href}>
                   {label}
                   {label === 'Product' && (
                     <span className="ml-1.5 px-1.5 py-0.5 rounded text-[9px] font-black uppercase tracking-wider align-middle"
-                      style={{ background: '#EEF4FE', color: '#2B80F0' }}>Soon</span>
+                      style={{ background: 'rgba(43,128,240,0.2)', color: '#4B9CF4', border: '1px solid rgba(43,128,240,0.3)' }}>Soon</span>
                   )}
-                </Link>
+                </NavLink>
               ))}
             </div>
 
             {/* Desktop CTA */}
             <div className="hidden md:flex items-center gap-3">
               <button onClick={() => setShowPopup(true)}
-                className="text-sm font-medium transition-colors flex items-center gap-1.5"
-                style={{ color: '#ADA09A' }}
-                onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = '#192540'}
-                onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = '#ADA09A'}>
-                <Brain className="w-3.5 h-3.5" style={{ color: '#2B80F0' }} />
+                className="text-sm font-medium transition-colors"
+                style={{ color: 'rgba(200,215,255,0.5)' }}
+                onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = '#FFFFFF'}
+                onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'rgba(200,215,255,0.5)'}>
                 Get Proposal
               </button>
               <Link href="/contact"
-                className="px-5 py-2.5 rounded-xl text-sm font-bold text-white transition-all hover:brightness-95 active:scale-95"
-                style={{ background: '#2B80F0' }}>
+                className="px-5 py-2.5 rounded-xl text-sm font-bold transition-all hover:opacity-90 active:scale-95"
+                style={{ background: '#FFFFFF', color: '#07111F' }}>
                 Contact Us
               </Link>
             </div>
 
             {/* Mobile hamburger */}
             <button onClick={() => setMobileOpen(v => !v)}
-              className="md:hidden p-2 rounded-xl transition-colors hover:bg-black/5" aria-label="Toggle menu"
-              style={{ color: '#72645A' }}>
+              className="md:hidden p-2 rounded-xl transition-all hover:bg-white/10" aria-label="Toggle menu"
+              style={{ color: 'rgba(220,230,255,0.8)' }}>
               {mobileOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
           </div>
@@ -221,13 +195,12 @@ export function Header() {
           {/* Mobile menu */}
           {mobileOpen && (
             <div className="md:hidden pb-4 pt-1 border-t animate-slideInDown"
-              style={{ borderColor: '#E5DDD5' }}>
+              style={{ borderColor: 'rgba(255,255,255,0.09)' }}>
               <div className="px-4 py-2 space-y-0.5">
-                <Link href="/" className="block px-3 py-2.5 text-sm rounded-xl hover:bg-black/5 font-medium"
-                  style={{ color: '#72645A' }} onClick={() => setMobileOpen(false)}>Home</Link>
+                <MobileNavLink href="/" onClose={() => setMobileOpen(false)}>Home</MobileNavLink>
 
                 <div className="px-3 pt-3 pb-1">
-                  <p className="text-[10px] font-black uppercase tracking-wider" style={{ color: '#ADA09A' }}>Services</p>
+                  <p className="text-[10px] font-black uppercase tracking-wider" style={{ color: 'rgba(200,215,255,0.35)' }}>Services</p>
                 </div>
                 {serviceCategories.map((cat) => {
                   const accent = catAccents[cat.slug] || '#2B80F0';
@@ -242,7 +215,7 @@ export function Header() {
                       {cat.services.map((svc) => (
                         <Link key={svc.slug} href={`/services/${cat.slug}/${svc.slug}`}
                           className="block pl-8 py-1 text-sm transition-colors"
-                          style={{ color: '#ADA09A' }}
+                          style={{ color: 'rgba(200,215,255,0.4)' }}
                           onClick={() => setMobileOpen(false)}>
                           {svc.name}
                         </Link>
@@ -252,111 +225,118 @@ export function Header() {
                 })}
 
                 {[['Company', '/company'], ['Portfolio', '/portfolio'], ['Blog', '/blog'], ['Product', '/product']].map(([label, href]) => (
-                  <Link key={label} href={href}
-                    className="flex items-center gap-2 px-3 py-2.5 text-sm rounded-xl hover:bg-black/5 font-medium"
-                    style={{ color: '#72645A' }}
-                    onClick={() => setMobileOpen(false)}>
+                  <MobileNavLink key={label} href={href} onClose={() => setMobileOpen(false)}>
                     {label}
                     {label === 'Product' && (
-                      <span className="px-1.5 py-0.5 rounded text-[9px] font-black uppercase tracking-wider"
-                        style={{ background: '#EEF4FE', color: '#2B80F0' }}>Soon</span>
+                      <span className="ml-1.5 px-1.5 py-0.5 rounded text-[9px] font-black uppercase tracking-wider"
+                        style={{ background: 'rgba(43,128,240,0.2)', color: '#4B9CF4' }}>Soon</span>
                     )}
-                  </Link>
+                  </MobileNavLink>
                 ))}
 
                 <div className="pt-3 space-y-2">
                   <Link href="/contact"
-                    className="block text-center py-3 rounded-xl text-sm font-bold text-white"
-                    style={{ background: '#2B80F0' }}
+                    className="block text-center py-3 rounded-xl text-sm font-bold transition-all hover:opacity-90"
+                    style={{ background: '#FFFFFF', color: '#07111F' }}
                     onClick={() => setMobileOpen(false)}>
                     Contact Us
                   </Link>
                   <button onClick={() => { setShowPopup(true); setMobileOpen(false); }}
-                    className="w-full text-center py-3 rounded-xl text-sm font-medium transition-colors hover:bg-black/5"
-                    style={{ color: '#72645A', border: '1px solid #E5DDD5' }}>
+                    className="w-full text-center py-3 rounded-xl text-sm font-medium btn-glass"
+                    style={{ color: 'rgba(220,230,255,0.7)' }}>
                     Get a Free Proposal
                   </button>
                 </div>
               </div>
             </div>
           )}
+          </div>{/* /max-w-7xl */}
         </nav>
       </header>
 
-      {showPopup && <PopupFormInline onClose={() => setShowPopup(false)} />}
+      {showPopup && <ProposalPopup onClose={() => setShowPopup(false)} />}
     </>
   );
 }
 
-function PopupFormInline({ onClose }: { onClose: () => void }) {
-  const [submitted, setSubmitted] = useState(false);
+function NavLink({ href, children }: { href: string; children: React.ReactNode }) {
+  return (
+    <Link href={href}
+      className="px-3.5 py-2 rounded-xl text-sm font-semibold transition-all hover:bg-white/8"
+      style={{ color: 'rgba(220,230,255,0.7)' }}
+      onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = '#FFFFFF'; (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.07)'; }}
+      onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = 'rgba(220,230,255,0.7)'; (e.currentTarget as HTMLElement).style.background = 'transparent'; }}>
+      {children}
+    </Link>
+  );
+}
 
-  const handleSubmit = (e: React.SyntheticEvent) => {
-    e.preventDefault();
-    setSubmitted(true);
-    setTimeout(onClose, 2500);
-  };
+function MobileNavLink({ href, children, onClose }: { href: string; children: React.ReactNode; onClose: () => void }) {
+  return (
+    <Link href={href}
+      className="flex items-center gap-2 px-3 py-2.5 text-sm rounded-xl font-semibold transition-all hover:bg-white/7"
+      style={{ color: 'rgba(220,230,255,0.7)' }}
+      onClick={onClose}>
+      {children}
+    </Link>
+  );
+}
+
+function ProposalPopup({ onClose }: { onClose: () => void }) {
+  const [submitted, setSubmitted] = useState(false);
+  const handleSubmit = (e: React.SyntheticEvent) => { e.preventDefault(); setSubmitted(true); setTimeout(onClose, 2500); };
 
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center px-4">
-      <div className="absolute inset-0 bg-black/30 backdrop-blur-sm" onClick={onClose} />
+      <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={onClose} />
       <div className="relative w-full max-w-md rounded-2xl overflow-hidden animate-fadeInScale shadow-2xl"
-        style={{ background: '#FFFFFF', border: '1px solid #E5DDD5' }}>
-        <div className="h-1 w-full" style={{ background: 'linear-gradient(90deg, #2B80F0, #4B9CF4)' }} />
-        <button onClick={onClose} className="absolute top-4 right-4 p-1.5 rounded-lg transition-colors hover:bg-black/5"
-          style={{ color: '#ADA09A' }}>
+        style={{ background: 'rgba(10,20,42,0.98)', border: '1px solid rgba(255,255,255,0.12)' }}>
+        <div className="h-px w-full" style={{ background: 'linear-gradient(90deg, transparent, #2B80F0, #4B9CF4, transparent)' }} />
+        <button onClick={onClose} className="absolute top-4 right-4 p-1.5 rounded-lg transition-colors hover:bg-white/10"
+          style={{ color: 'rgba(200,215,255,0.5)' }}>
           <X className="w-4 h-4" />
         </button>
         <div className="p-8">
           {submitted ? (
             <div className="text-center py-10 animate-fadeInScale">
-              <div className="w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-5"
-                style={{ background: 'linear-gradient(135deg, #2B80F0, #4B9CF4)', boxShadow: '0 0 40px rgba(43,128,240,0.2)' }}>
-                <Zap className="w-10 h-10 text-white" />
+              <div className="w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-5 btn-primary-glass">
+                <ArrowRight className="w-10 h-10 text-white" />
               </div>
-              <h3 className="text-2xl font-black mb-2" style={{ color: '#192540' }}>Request Received!</h3>
-              <p className="text-sm max-w-[240px] mx-auto" style={{ color: '#72645A' }}>
-                Our AI strategy team will reach out within 24 hours.
+              <h3 className="text-2xl font-black mb-2" style={{ color: '#FFFFFF' }}>Request Received!</h3>
+              <p className="text-sm max-w-[240px] mx-auto" style={{ color: 'rgba(200,215,255,0.6)' }}>
+                Our strategy team will reach out within 24 hours.
               </p>
             </div>
           ) : (
             <>
               <div className="mb-8">
-                <p className="text-[10px] font-black tracking-[0.3em] uppercase mb-2" style={{ color: '#2B80F0' }}>
-                  Limited Spots Available
-                </p>
-                <h2 className="text-2xl font-black leading-tight" style={{ color: '#192540' }}>
-                  Get a Free Proposal
-                </h2>
-                <p className="text-sm mt-1" style={{ color: '#72645A' }}>
-                  Join 80+ businesses growing with AI-powered strategy.
-                </p>
+                <p className="text-[10px] font-black tracking-[0.3em] uppercase mb-2" style={{ color: '#2B80F0' }}>Limited Spots</p>
+                <h2 className="text-2xl font-black leading-tight" style={{ color: '#FFFFFF' }}>Get a Free Proposal</h2>
+                <p className="text-sm mt-1" style={{ color: 'rgba(200,215,255,0.55)' }}>Join 80+ businesses growing with AI-powered strategy.</p>
               </div>
-
               <form onSubmit={handleSubmit} className="space-y-3">
                 {['Full Name', 'Company / Project Name', 'Work Email Address'].map((ph, i) => (
                   <input key={ph} type={i === 2 ? 'email' : 'text'} placeholder={ph} required
-                    className="w-full px-4 py-3.5 rounded-xl text-sm focus:outline-none transition-all"
-                    style={{ background: '#FAF9F6', border: '1px solid #E5DDD5', color: '#192540' }}
+                    className="w-full px-4 py-3.5 rounded-xl text-sm focus:outline-none transition-all placeholder:text-white/25"
+                    style={{ background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.12)', color: '#FFFFFF' }}
                     onFocus={e => (e.currentTarget.style.borderColor = 'rgba(43,128,240,0.5)')}
-                    onBlur={e => (e.currentTarget.style.borderColor = '#E5DDD5')} />
+                    onBlur={e => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)')} />
                 ))}
                 <select className="w-full px-4 py-3.5 rounded-xl text-sm focus:outline-none appearance-none cursor-pointer transition-all"
-                  style={{ background: '#FAF9F6', border: '1px solid #E5DDD5', color: '#ADA09A' }}
+                  style={{ background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.12)', color: 'rgba(200,215,255,0.5)' }}
                   onFocus={e => (e.currentTarget.style.borderColor = 'rgba(43,128,240,0.5)')}
-                  onBlur={e => (e.currentTarget.style.borderColor = '#E5DDD5')}>
-                  <option value="">Select a Service (optional)</option>
-                  <option value="ai">AI &amp; Automation</option>
-                  <option value="dev">Software Development</option>
-                  <option value="marketing">Digital Marketing</option>
-                  <option value="creative">Creative Media</option>
+                  onBlur={e => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)')}>
+                  <option value="" style={{ background: '#0d1829' }}>Select a Service</option>
+                  <option value="ai" style={{ background: '#0d1829', color: '#fff' }}>AI &amp; Automation</option>
+                  <option value="dev" style={{ background: '#0d1829', color: '#fff' }}>Software Development</option>
+                  <option value="marketing" style={{ background: '#0d1829', color: '#fff' }}>Digital Marketing</option>
+                  <option value="creative" style={{ background: '#0d1829', color: '#fff' }}>Creative Media</option>
                 </select>
                 <button type="submit"
-                  className="w-full py-3.5 mt-2 rounded-xl font-black text-sm tracking-wide uppercase transition-all hover:brightness-95 active:scale-[0.98] text-white"
-                  style={{ background: '#2B80F0' }}>
-                  Submit &amp; Get Started →
+                  className="w-full py-3.5 mt-2 rounded-xl font-black text-sm tracking-wide uppercase transition-all text-white btn-primary-glass">
+                  Submit &amp; Get Started
                 </button>
-                <p className="text-center text-[10px] font-medium mt-4" style={{ color: '#ADA09A' }}>
+                <p className="text-center text-[10px] font-medium mt-4" style={{ color: 'rgba(200,215,255,0.35)' }}>
                   No spam. We respond within 24 hours.
                 </p>
               </form>
