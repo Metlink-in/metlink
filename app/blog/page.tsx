@@ -27,7 +27,7 @@ export default function BlogPage() {
             </div>
           </FadeIn>
           <FadeIn delay={0.1}>
-            <h1 className="font-black mb-6 leading-tight" style={{ color: '#1C1410' }}>
+            <h1 className="font-black mb-6 leading-tight" style={{ color: '#192540' }}>
               The MetLink{' '}
               <em style={{ fontFamily: 'var(--font-playfair)', fontStyle: 'italic', color: '#C84B30' }}>Blog</em>
             </h1>
@@ -94,7 +94,7 @@ export default function BlogPage() {
                   <span className="text-xs flex items-center gap-1" style={{ color: '#ADA09A' }}><Clock className="w-3 h-3" />{featured.readTime}</span>
                   <span className="text-xs" style={{ color: '#ADA09A' }}>{featured.date}</span>
                 </div>
-                <h2 className="text-2xl font-black mb-4 leading-tight group-hover:text-[#C84B30] transition-colors" style={{ color: '#1C1410' }}>{featured.title}</h2>
+                <h2 className="text-2xl font-black mb-4 leading-tight group-hover:text-[#C84B30] transition-colors" style={{ color: '#192540' }}>{featured.title}</h2>
                 <p className="leading-relaxed mb-6" style={{ color: '#72645A' }}>{featured.excerpt}</p>
                 <div className="flex flex-wrap gap-2 mb-6">
                   {featured.tags.map(tag => (
@@ -137,13 +137,13 @@ export default function BlogPage() {
                       <span className="text-xs font-bold" style={{ color: '#C84B30' }}>{post.category}</span>
                       <span className="text-xs flex items-center gap-1" style={{ color: '#ADA09A' }}><Clock className="w-3 h-3" />{post.readTime}</span>
                     </div>
-                    <h3 className="text-lg font-bold mb-3 leading-snug group-hover:text-[#C84B30] transition-colors line-clamp-2" style={{ color: '#1C1410' }}>{post.title}</h3>
+                    <h3 className="text-lg font-bold mb-3 leading-snug group-hover:text-[#C84B30] transition-colors line-clamp-2" style={{ color: '#192540' }}>{post.title}</h3>
                     <p className="text-sm line-clamp-3 flex-1 mb-4" style={{ color: '#72645A' }}>{post.excerpt}</p>
                     <div className="flex items-center justify-between pt-4" style={{ borderTop: '1px solid #F0EBE3' }}>
                       <div className="flex items-center gap-2">
                         <span className="text-lg">{post.authorEmoji}</span>
                         <div>
-                          <p className="text-xs font-semibold" style={{ color: '#1C1410' }}>{post.author}</p>
+                          <p className="text-xs font-semibold" style={{ color: '#192540' }}>{post.author}</p>
                           <p className="text-xs" style={{ color: '#ADA09A' }}>{post.date}</p>
                         </div>
                       </div>
@@ -165,7 +165,7 @@ export default function BlogPage() {
           style={{ background: 'radial-gradient(ellipse at 50% 50%, rgba(200,75,48,0.04), transparent 65%)' }} />
         <FadeIn className="max-w-3xl mx-auto px-4 text-center relative z-10">
           <p className="text-[10px] font-black uppercase tracking-[0.3em] mb-4" style={{ color: '#C84B30' }}>Never Miss an Insight</p>
-          <h2 className="font-black mb-6" style={{ color: '#1C1410' }}>
+          <h2 className="font-black mb-6" style={{ color: '#192540' }}>
             Subscribe to the{' '}
             <em style={{ fontFamily: 'var(--font-playfair)', fontStyle: 'italic', color: '#C84B30' }}>Insights</em>
           </h2>
@@ -173,7 +173,7 @@ export default function BlogPage() {
           <form onSubmit={e => e.preventDefault()} className="flex flex-col sm:flex-row gap-3.5 max-w-xl mx-auto">
             <input type="email" placeholder="your@email.com"
               className="flex-1 px-6 py-4 rounded-full text-sm focus:outline-none transition-all"
-              style={{ background: '#FAF9F6', border: '1px solid #E5DDD5', color: '#1C1410' }}
+              style={{ background: '#FAF9F6', border: '1px solid #E5DDD5', color: '#192540' }}
               onFocus={e => (e.currentTarget.style.borderColor = 'rgba(200,75,48,0.45)')}
               onBlur={e => (e.currentTarget.style.borderColor = '#E5DDD5')} />
             <button type="submit"

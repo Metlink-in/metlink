@@ -36,7 +36,7 @@ export default function ProductPage() {
         {/* Headline */}
         <h1 className="font-black leading-[1.0] mb-6"
           style={{
-            color: '#1C1410',
+            color: '#192540',
             fontFamily: 'var(--font-playfair)',
             fontSize: 'clamp(3rem, 7vw, 6rem)',
           }}>
@@ -67,7 +67,7 @@ export default function ProductPage() {
                 style={{ background: '#FEF1EE', color: '#C84B30' }}>
                 <Icon className="w-4.5 h-4.5 w-[18px] h-[18px]" />
               </div>
-              <h3 className="text-sm font-black mb-1.5" style={{ color: '#1C1410' }}>{title}</h3>
+              <h3 className="text-sm font-black mb-1.5" style={{ color: '#192540' }}>{title}</h3>
               <p className="text-xs leading-relaxed" style={{ color: '#ADA09A' }}>{desc}</p>
             </div>
           ))}

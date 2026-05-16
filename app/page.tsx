@@ -6,7 +6,7 @@ import { FadeIn, StaggerChildren, StaggerItem } from '@/components/fade-in';
 
 const CR = '#FAF9F6';   // cream bg
 const WH = '#FFFFFF';   // white
-const DK = '#1C1410';   // dark text
+const DK = '#192540';   // dark text
 const MU = '#72645A';   // muted
 const LM = '#ADA09A';   // light muted
 const BD = '#E5DDD5';   // border
@@ -15,13 +15,13 @@ const AC = '#C84B30';   // radish accent
 const integrations = [
   { label: 'OpenAI',      dot: '#10B981' },
   { label: 'Anthropic',   dot: '#D97706' },
-  { label: 'Notion',      dot: '#1C1410' },
+  { label: 'Notion',      dot: '#192540' },
   { label: 'Klaviyo',     dot: '#F59E0B' },
   { label: 'LangChain',   dot: '#C84B30' },
   { label: 'Pinecone',    dot: '#16A34A' },
   { label: 'Make',        dot: '#A855F7' },
   { label: 'Supabase',    dot: '#3ECF8E' },
-  { label: 'Vercel',      dot: '#1C1410' },
+  { label: 'Vercel',      dot: '#192540' },
   { label: 'HuggingFace', dot: '#F97316' },
   { label: 'Stripe',      dot: '#6366F1' },
   { label: 'Zapier',      dot: '#FF4A00' },

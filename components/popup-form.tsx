@@ -26,7 +26,7 @@ export function PopupForm() {
   if (!open) return null;
 
   const inputCls = "w-full px-4 py-3 rounded-xl text-sm focus:outline-none transition-all";
-  const inputStyle = { background: '#FAF9F6', border: '1px solid #E5DDD5', color: '#1C1410' };
+  const inputStyle = { background: '#FAF9F6', border: '1px solid #E5DDD5', color: '#192540' };
 
   return (
     <div className="fixed inset-0 z-[200] flex items-center justify-center px-4" role="dialog" aria-modal="true">
@@ -41,7 +41,7 @@ export function PopupForm() {
 
         {/* ── LEFT PANEL ── */}
         <div className="relative md:w-[42%] flex-shrink-0 p-8 flex flex-col justify-between overflow-hidden"
-          style={{ background: 'linear-gradient(160deg, #1C1410 0%, #2D1A12 60%, #1C1410 100%)' }}>
+          style={{ background: 'linear-gradient(160deg, #192540 0%, #2D1A12 60%, #192540 100%)' }}>
 
           {/* BG glow */}
           <div className="absolute top-0 left-0 w-64 h-64 rounded-full pointer-events-none"
@@ -125,13 +125,13 @@ export function PopupForm() {
                   style={{ background: 'linear-gradient(135deg, #C84B30, #E8612A)', boxShadow: '0 0 32px rgba(200,75,48,0.25)' }}>
                   <CheckCircle className="w-10 h-10 text-white" />
                 </div>
-                <h3 className="text-2xl font-black mb-2" style={{ color: '#1C1410' }}>You&apos;re In!</h3>
+                <h3 className="text-2xl font-black mb-2" style={{ color: '#192540' }}>You&apos;re In!</h3>
                 <p className="text-sm" style={{ color: '#72645A' }}>Our strategy team will reach out within 24 hours.</p>
               </div>
             ) : (
               <>
                 <div className="mb-7">
-                  <h3 className="text-xl font-black mb-1" style={{ color: '#1C1410' }}>Get My Free Proposal 🚀</h3>
+                  <h3 className="text-xl font-black mb-1" style={{ color: '#192540' }}>Get My Free Proposal 🚀</h3>
                   <p className="text-sm" style={{ color: '#72645A' }}>Complete the form and we&apos;ll validate your idea now.</p>
                 </div>
 
@@ -163,12 +163,12 @@ export function PopupForm() {
                   <select value={form.budget}
                     onChange={e => setForm(p => ({ ...p, budget: e.target.value }))}
                     className={`${inputCls} appearance-none cursor-pointer`}
-                    style={{ ...inputStyle, color: form.budget ? '#1C1410' : '#ADA09A' }}
+                    style={{ ...inputStyle, color: form.budget ? '#192540' : '#ADA09A' }}
                     onFocus={e => (e.currentTarget.style.borderColor = 'rgba(200,75,48,0.45)')}
                     onBlur={e => (e.currentTarget.style.borderColor = '#E5DDD5')}>
                     <option value="" style={{ background: '#FAF9F6', color: '#ADA09A' }}>Select a Budget Range</option>
                     {['< ₹1 Lakh','₹1L – ₹5L','₹5L – ₹20L','₹20L – ₹50L','₹50L+'].map(b => (
-                      <option key={b} value={b} style={{ background: '#FAF9F6', color: '#1C1410' }}>{b}</option>
+                      <option key={b} value={b} style={{ background: '#FAF9F6', color: '#192540' }}>{b}</option>
                     ))}
                   </select>
 

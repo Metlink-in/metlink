@@ -29,7 +29,7 @@ export default function OurProductPage() {
         </div>
 
         {/* Headline */}
-        <h1 className="font-black tracking-tight leading-tight mb-6" style={{ color: '#1C1410' }}>
+        <h1 className="font-black tracking-tight leading-tight mb-6" style={{ color: '#192540' }}>
           Coming{' '}
           <em style={{ fontFamily: 'var(--font-playfair)', fontStyle: 'italic', color: '#C84B30' }}>Soon</em>
         </h1>

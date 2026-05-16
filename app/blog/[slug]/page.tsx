@@ -48,7 +48,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             <span className="text-sm" style={{ color: '#ADA09A' }}>{post.date}</span>
           </div>
 
-          <h1 className="font-black mb-6 leading-tight" style={{ color: '#1C1410' }}>{post.title}</h1>
+          <h1 className="font-black mb-6 leading-tight" style={{ color: '#192540' }}>{post.title}</h1>
           <p className="text-xl leading-relaxed mb-10" style={{ color: '#72645A' }}>{post.excerpt}</p>
 
           <div className="inline-flex items-center gap-4 p-5 rounded-2xl"
@@ -58,7 +58,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               {post.authorEmoji}
             </div>
             <div>
-              <p className="font-bold mb-0.5" style={{ color: '#1C1410' }}>{post.author}</p>
+              <p className="font-bold mb-0.5" style={{ color: '#192540' }}>{post.author}</p>
               <p className="text-xs uppercase tracking-wider" style={{ color: '#ADA09A' }}>{post.authorRole} · MetLink</p>
             </div>
           </div>
@@ -72,14 +72,14 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             {paragraphs.map((block, i) => {
               if (block.startsWith('## ')) {
                 return (
-                  <h2 key={i} className="text-3xl font-black mt-12 mb-5 leading-tight" style={{ color: '#1C1410' }}>
+                  <h2 key={i} className="text-3xl font-black mt-12 mb-5 leading-tight" style={{ color: '#192540' }}>
                     {block.replace('## ', '')}
                   </h2>
                 );
               }
               if (block.startsWith('### ')) {
                 return (
-                  <h3 key={i} className="text-xl font-bold mt-8 mb-4" style={{ color: '#1C1410' }}>
+                  <h3 key={i} className="text-xl font-bold mt-8 mb-4" style={{ color: '#192540' }}>
                     {block.replace('### ', '')}
                   </h3>
                 );
@@ -91,7 +91,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                     {items.map((item, j) => (
                       <li key={j} className="flex items-start gap-3 leading-relaxed" style={{ color: '#72645A' }}>
                         <span className="mt-2.5 w-1.5 h-1.5 rounded-full shrink-0" style={{ background: '#C84B30' }} />
-                        <span dangerouslySetInnerHTML={{ __html: item.replace('- ', '').replace(/\*\*(.+?)\*\*/g, '<strong style="color:#1C1410;font-weight:700">$1</strong>') }} />
+                        <span dangerouslySetInnerHTML={{ __html: item.replace('- ', '').replace(/\*\*(.+?)\*\*/g, '<strong style="color:#192540;font-weight:700">$1</strong>') }} />
                       </li>
                     ))}
                   </ul>
@@ -100,7 +100,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               if (block.trim()) {
                 return (
                   <p key={i} className="leading-relaxed my-6 text-lg" style={{ color: '#72645A' }}
-                    dangerouslySetInnerHTML={{ __html: block.replace(/\*\*(.+?)\*\*/g, '<strong style="color:#1C1410;font-weight:700">$1</strong>') }} />
+                    dangerouslySetInnerHTML={{ __html: block.replace(/\*\*(.+?)\*\*/g, '<strong style="color:#192540;font-weight:700">$1</strong>') }} />
                 );
               }
               return null;
@@ -128,7 +128,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               {post.authorEmoji}
             </div>
             <div>
-              <p className="font-black text-xl mb-1" style={{ color: '#1C1410' }}>{post.author}</p>
+              <p className="font-black text-xl mb-1" style={{ color: '#192540' }}>{post.author}</p>
               <p className="text-xs font-bold uppercase tracking-wider mb-3" style={{ color: '#C84B30' }}>{post.authorRole} at MetLink</p>
               <p className="text-sm leading-relaxed" style={{ color: '#72645A' }}>
                 Expert at MetLink specializing in {post.category.toLowerCase()}. Helping businesses grow through data, technology, and creative strategy.
@@ -142,7 +142,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
       {relatedPosts.length > 0 && (
         <section className="py-24" style={{ background: '#FAF9F6', borderTop: '1px solid #E5DDD5' }}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="font-black mb-10 text-center" style={{ color: '#1C1410' }}>Continue Reading</h2>
+            <h2 className="font-black mb-10 text-center" style={{ color: '#192540' }}>Continue Reading</h2>
             <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
               {relatedPosts.map((p) => (
                 <Link key={p.slug} href={`/blog/${p.slug}`}
@@ -151,7 +151,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                   <div className="w-1.5 flex-shrink-0" style={{ background: '#C84B30' }} />
                   <div className="p-6 flex-1">
                     <span className="text-xs font-bold uppercase tracking-wider" style={{ color: '#C84B30' }}>{p.category}</span>
-                    <h3 className="font-bold mt-2 mb-3 leading-snug group-hover:text-[#C84B30] transition-colors line-clamp-2" style={{ color: '#1C1410' }}>
+                    <h3 className="font-bold mt-2 mb-3 leading-snug group-hover:text-[#C84B30] transition-colors line-clamp-2" style={{ color: '#192540' }}>
                       {p.title}
                     </h3>
                     <p className="text-sm leading-relaxed mb-4 line-clamp-2" style={{ color: '#72645A' }}>{p.excerpt}</p>

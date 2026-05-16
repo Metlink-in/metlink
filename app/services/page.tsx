@@ -29,7 +29,7 @@ export default function ServicesPage() {
             </div>
           </FadeIn>
           <FadeIn delay={0.1}>
-            <h1 className="font-black mb-6 leading-tight" style={{ color: '#1C1410' }}>
+            <h1 className="font-black mb-6 leading-tight" style={{ color: '#192540' }}>
               Our{' '}
               <em style={{ fontFamily: 'var(--font-playfair)', fontStyle: 'italic', color: '#C84B30' }}>Services</em>
             </h1>
@@ -67,7 +67,7 @@ export default function ServicesPage() {
                 <div>
                   <span className="text-4xl mb-3 block">{cat.icon}</span>
                   <p className="text-xs font-black uppercase tracking-[0.25em] mb-2" style={{ color: accent }}>{cat.name}</p>
-                  <h2 className="font-black mb-3" style={{ color: '#1C1410' }}>{cat.tagline}</h2>
+                  <h2 className="font-black mb-3" style={{ color: '#192540' }}>{cat.tagline}</h2>
                   <p className="max-w-xl leading-relaxed" style={{ color: '#72645A' }}>{cat.description}</p>
                 </div>
                 <Link href={`/services/${cat.slug}`}
@@ -92,7 +92,7 @@ export default function ServicesPage() {
                         (e.currentTarget as HTMLElement).style.boxShadow = 'none';
                       }}>
                       <span className="text-3xl mb-4 block">{svc.icon}</span>
-                      <h3 className="text-base font-bold mb-2 group-hover:text-[#C84B30] transition-colors" style={{ color: '#1C1410' }}>{svc.name}</h3>
+                      <h3 className="text-base font-bold mb-2 group-hover:text-[#C84B30] transition-colors" style={{ color: '#192540' }}>{svc.name}</h3>
                       <p className="text-xs leading-relaxed mb-4 line-clamp-2 flex-1" style={{ color: '#72645A' }}>{svc.tagline}</p>
                       <div className="flex items-center gap-1 text-xs font-bold transition-colors" style={{ color: '#ADA09A' }}
                         onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = accent}
@@ -113,7 +113,7 @@ export default function ServicesPage() {
         <div className="absolute inset-0 pointer-events-none"
           style={{ background: 'radial-gradient(ellipse at 50% 50%, rgba(200,75,48,0.05), transparent 65%)' }} />
         <FadeIn className="max-w-3xl mx-auto px-4 text-center relative z-10">
-          <h2 className="font-black mb-4" style={{ color: '#1C1410' }}>
+          <h2 className="font-black mb-4" style={{ color: '#192540' }}>
             Not Sure Where to{' '}
             <em style={{ fontFamily: 'var(--font-playfair)', fontStyle: 'italic', color: '#C84B30' }}>Start</em>?
           </h2>

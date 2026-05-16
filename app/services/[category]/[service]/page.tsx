@@ -46,7 +46,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
           <div className="max-w-4xl">
             <span className="text-5xl mb-6 block">{svcData.icon}</span>
             <p className="text-sm font-bold uppercase tracking-[0.2em] mb-3" style={{ color: accent }}>{svcData.tagline}</p>
-            <h1 className="font-black mb-6 leading-tight" style={{ color: '#1C1410' }}>{svcData.name}</h1>
+            <h1 className="font-black mb-6 leading-tight" style={{ color: '#192540' }}>{svcData.name}</h1>
             <p className="text-xl leading-relaxed mb-10 max-w-2xl" style={{ color: '#72645A' }}>{svcData.description}</p>
             <Link href="/contact"
               className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-bold text-sm text-white transition-all hover:brightness-95 active:scale-95"
@@ -63,7 +63,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
           <div className="grid lg:grid-cols-2 gap-16 items-start">
             <div>
               <p className="text-xs font-bold uppercase tracking-[0.2em] mb-3" style={{ color: accent }}>Capabilities</p>
-              <h2 className="font-black mb-6" style={{ color: '#1C1410' }}>What We Will Deliver</h2>
+              <h2 className="font-black mb-6" style={{ color: '#192540' }}>What We Will Deliver</h2>
               <p className="leading-relaxed" style={{ color: '#72645A' }}>
                 Our {svcData.name.toLowerCase()} services are comprehensive, tailored to your specific business goals, and designed to generate measurable ROI.
               </p>
@@ -73,7 +73,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
                 <div key={feat} className="flex items-start gap-3 p-5 rounded-2xl"
                   style={{ background: '#FAF9F6', border: '1px solid #E5DDD5' }}>
                   <CheckCircle className="w-5 h-5 shrink-0 mt-0.5" style={{ color: accent }} />
-                  <span className="font-medium text-sm" style={{ color: '#1C1410' }}>{feat}</span>
+                  <span className="font-medium text-sm" style={{ color: '#192540' }}>{feat}</span>
                 </div>
               ))}
             </div>
@@ -89,7 +89,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
               {svcData.subFeatures.map((sub) => (
                 <div key={sub.title} className="p-8 rounded-3xl"
                   style={{ background: '#FFFFFF', border: '1px solid #E5DDD5' }}>
-                  <h3 className="text-xl font-bold mb-6 flex items-center gap-3" style={{ color: '#1C1410' }}>
+                  <h3 className="text-xl font-bold mb-6 flex items-center gap-3" style={{ color: '#192540' }}>
                     <span className="w-8 h-8 rounded-lg flex items-center justify-center font-black text-white"
                       style={{ background: accent }}>
                       <Zap className="w-4 h-4" />
@@ -116,7 +116,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
         <div className="absolute inset-0 pointer-events-none"
           style={{ background: 'radial-gradient(ellipse at 50% 50%, rgba(200,75,48,0.04), transparent 65%)' }} />
         <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
-          <h2 className="font-black mb-6" style={{ color: '#1C1410' }}>
+          <h2 className="font-black mb-6" style={{ color: '#192540' }}>
             Ready to scale your business with {svcData.name}?
           </h2>
           <p className="mb-10 text-lg" style={{ color: '#72645A' }}>

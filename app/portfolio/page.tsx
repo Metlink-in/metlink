@@ -24,7 +24,7 @@ export default function PortfolioPage() {
             </div>
           </FadeIn>
           <FadeIn delay={0.1}>
-            <h1 className="font-black mb-6 leading-tight" style={{ color: '#1C1410' }}>
+            <h1 className="font-black mb-6 leading-tight" style={{ color: '#192540' }}>
               Built to{' '}
               <em style={{ fontFamily: 'var(--font-playfair)', fontStyle: 'italic', color: '#C84B30' }}>Perform</em>
             </h1>
@@ -140,7 +140,7 @@ export default function PortfolioPage() {
         <div className="absolute inset-0 pointer-events-none"
           style={{ background: 'radial-gradient(ellipse at 50% 50%, rgba(200,75,48,0.05), transparent 65%)' }} />
         <FadeIn className="max-w-3xl mx-auto px-4 text-center relative z-10">
-          <h2 className="font-black mb-4" style={{ color: '#1C1410' }}>
+          <h2 className="font-black mb-4" style={{ color: '#192540' }}>
             Want Results Like{' '}
             <em style={{ fontFamily: 'var(--font-playfair)', fontStyle: 'italic', color: '#C84B30' }}>These</em>?
           </h2>

@@ -44,7 +44,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
             {data.icon}
           </div>
 
-          <h1 className="font-black mb-6 leading-tight" style={{ color: '#1C1410' }}>
+          <h1 className="font-black mb-6 leading-tight" style={{ color: '#192540' }}>
             {data.name}
           </h1>
           <p className="text-xl max-w-3xl mx-auto" style={{ color: '#72645A' }}>{data.description}</p>
@@ -62,7 +62,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
               {/* Left info */}
               <div className="md:w-1/3 flex-shrink-0">
                 <span className="text-4xl mb-4 block">{svc.icon}</span>
-                <h2 className="text-2xl font-black mb-2" style={{ color: '#1C1410' }}>{svc.name}</h2>
+                <h2 className="text-2xl font-black mb-2" style={{ color: '#192540' }}>{svc.name}</h2>
                 <p className="text-sm font-medium mb-4" style={{ color: accent }}>{svc.tagline}</p>
                 <p className="text-sm leading-relaxed mb-6" style={{ color: '#72645A' }}>{svc.description}</p>
                 <Link href={`/services/${data.slug}/${svc.slug}`}
@@ -79,7 +79,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
                 {svc.features.map((feat) => (
                   <div key={feat} className="flex items-start gap-3">
                     <CheckCircle className="w-4 h-4 mt-0.5 flex-shrink-0" style={{ color: accent }} />
-                    <span className="text-sm" style={{ color: '#1C1410' }}>{feat}</span>
+                    <span className="text-sm" style={{ color: '#192540' }}>{feat}</span>
                   </div>
                 ))}
               </div>
@@ -94,7 +94,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
           style={{ background: 'radial-gradient(ellipse at 50% 50%, rgba(200,75,48,0.04), transparent 65%)' }} />
         <div className="max-w-3xl mx-auto px-4 text-center relative z-10">
           <p className="text-xs font-bold uppercase tracking-[0.2em] mb-4" style={{ color: accent }}>Let&apos;s Get Started</p>
-          <h2 className="font-black mb-6" style={{ color: '#1C1410' }}>
+          <h2 className="font-black mb-6" style={{ color: '#192540' }}>
             Need expert help with {data.name.toLowerCase()}?
           </h2>
           <p className="mb-10 text-lg" style={{ color: '#72645A' }}>Our team of specialists is ready to help you achieve your goals.</p>

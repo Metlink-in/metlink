@@ -22,7 +22,7 @@ export default function ContactPage() {
     setTimeout(() => { setLoading(false); setSubmitted(true); }, 1500);
   };
 
-  const inputBase = { background: '#FAF9F6', border: '1px solid #E5DDD5', color: '#1C1410' };
+  const inputBase = { background: '#FAF9F6', border: '1px solid #E5DDD5', color: '#192540' };
   const labelCls  = "block text-[10px] font-black uppercase tracking-[0.2em] mb-2.5" ;
 
   return (
@@ -41,7 +41,7 @@ export default function ContactPage() {
             </div>
           </FadeIn>
           <FadeIn delay={0.1}>
-            <h1 className="font-black mb-6 leading-tight" style={{ color: '#1C1410' }}>
+            <h1 className="font-black mb-6 leading-tight" style={{ color: '#192540' }}>
               Let&apos;s{' '}
               <em style={{ fontFamily: 'var(--font-playfair)', fontStyle: 'italic', color: '#C84B30' }}>Build Together</em>
             </h1>
@@ -74,7 +74,7 @@ export default function ContactPage() {
                   <Icon className="w-4 h-4" style={{ color: '#C84B30' }} />
                 </div>
                 <p className="text-[10px] uppercase tracking-widest mb-1" style={{ color: '#ADA09A' }}>{title}</p>
-                <p className="font-bold text-sm mb-0.5" style={{ color: '#1C1410' }}>{value}</p>
+                <p className="font-bold text-sm mb-0.5" style={{ color: '#192540' }}>{value}</p>
                 <p className="text-xs" style={{ color: '#ADA09A' }}>{desc}</p>
               </a>
             </StaggerItem>
@@ -90,7 +90,7 @@ export default function ContactPage() {
             {/* Left — trust */}
             <FadeIn className="lg:col-span-2">
               <p className="text-[10px] font-black uppercase tracking-[0.25em] mb-4" style={{ color: '#C84B30' }}>Why Work With Us</p>
-              <h2 className="font-black mb-8" style={{ color: '#1C1410' }}>
+              <h2 className="font-black mb-8" style={{ color: '#192540' }}>
                 The Partner You&apos;ve{' '}
                 <em style={{ fontFamily: 'var(--font-playfair)', fontStyle: 'italic', color: '#C84B30' }}>Been Looking For</em>
               </h2>
@@ -110,7 +110,7 @@ export default function ContactPage() {
                       {icon}
                     </div>
                     <div>
-                      <p className="font-bold text-sm mb-1" style={{ color: '#1C1410' }}>{t}</p>
+                      <p className="font-bold text-sm mb-1" style={{ color: '#192540' }}>{t}</p>
                       <p className="text-xs leading-relaxed" style={{ color: '#72645A' }}>{d}</p>
                     </div>
                   </div>
@@ -142,7 +142,7 @@ export default function ContactPage() {
                         style={{ background: 'linear-gradient(135deg, #C84B30, #E8612A)', boxShadow: '0 0 40px rgba(200,75,48,0.2)' }}>
                         <CheckCircle className="w-12 h-12 text-white" />
                       </div>
-                      <h3 className="text-3xl font-black mb-3" style={{ color: '#1C1410' }}>Message Received!</h3>
+                      <h3 className="text-3xl font-black mb-3" style={{ color: '#192540' }}>Message Received!</h3>
                       <p className="mb-8 text-lg" style={{ color: '#72645A' }}>We&apos;ll be in touch within 2 hours during business hours.</p>
                       <Link href="/portfolio"
                         className="inline-flex items-center gap-2 px-7 py-3 rounded-full font-bold text-sm text-white transition-all hover:brightness-95"
@@ -152,7 +152,7 @@ export default function ContactPage() {
                     </div>
                   ) : (
                     <>
-                      <h2 className="text-2xl font-black mb-2" style={{ color: '#1C1410' }}>Project Inquiry</h2>
+                      <h2 className="text-2xl font-black mb-2" style={{ color: '#192540' }}>Project Inquiry</h2>
                       <p className="text-sm mb-10" style={{ color: '#72645A' }}>Brief us on your goals and we&apos;ll build the strategy.</p>
                       <form onSubmit={handleSubmit} className="space-y-6">
                         <div className="grid sm:grid-cols-2 gap-6">
@@ -186,22 +186,22 @@ export default function ContactPage() {
                             <label className={labelCls} style={{ color: '#C84B30' }}>Service Needed</label>
                             <select name="service" value={form.service} onChange={handleChange}
                               className="w-full px-4 py-3.5 rounded-xl text-sm focus:outline-none appearance-none cursor-pointer transition-all"
-                              style={{ ...inputBase, color: form.service ? '#1C1410' : '#ADA09A' }}
+                              style={{ ...inputBase, color: form.service ? '#192540' : '#ADA09A' }}
                               onFocus={e => (e.currentTarget.style.borderColor = 'rgba(200,75,48,0.45)')}
                               onBlur={e => (e.currentTarget.style.borderColor = '#E5DDD5')}>
                               <option value="" style={{ background:'#FAF9F6' }}>Select a service...</option>
-                              {services.map(s => <option key={s} value={s} style={{ background:'#FAF9F6',color:'#1C1410' }}>{s}</option>)}
+                              {services.map(s => <option key={s} value={s} style={{ background:'#FAF9F6',color:'#192540' }}>{s}</option>)}
                             </select>
                           </div>
                           <div>
                             <label className={labelCls} style={{ color: '#C84B30' }}>Budget Range</label>
                             <select name="budget" value={form.budget} onChange={handleChange}
                               className="w-full px-4 py-3.5 rounded-xl text-sm focus:outline-none appearance-none cursor-pointer transition-all"
-                              style={{ ...inputBase, color: form.budget ? '#1C1410' : '#ADA09A' }}
+                              style={{ ...inputBase, color: form.budget ? '#192540' : '#ADA09A' }}
                               onFocus={e => (e.currentTarget.style.borderColor = 'rgba(200,75,48,0.45)')}
                               onBlur={e => (e.currentTarget.style.borderColor = '#E5DDD5')}>
                               <option value="" style={{ background:'#FAF9F6' }}>Select budget...</option>
-                              {budgets.map(b => <option key={b} value={b} style={{ background:'#FAF9F6',color:'#1C1410' }}>{b}</option>)}
+                              {budgets.map(b => <option key={b} value={b} style={{ background:'#FAF9F6',color:'#192540' }}>{b}</option>)}
                             </select>
                           </div>
                         </div>

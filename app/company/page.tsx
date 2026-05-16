@@ -50,7 +50,7 @@ export default function CompanyPage() {
             </div>
           </FadeIn>
           <FadeIn delay={0.1}>
-            <h1 className="font-black mb-6 leading-tight" style={{ color: '#1C1410' }}>
+            <h1 className="font-black mb-6 leading-tight" style={{ color: '#192540' }}>
               We Are{' '}
               <em style={{ fontFamily: 'var(--font-playfair)', fontStyle: 'italic', color: '#C84B30' }}>MetLink</em>
             </h1>
@@ -95,7 +95,7 @@ export default function CompanyPage() {
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <FadeIn>
               <p className="text-xs font-black uppercase tracking-[0.25em] mb-3" style={{ color: '#C84B30' }}>Who We Are</p>
-              <h2 className="font-black mb-6" style={{ color: '#1C1410' }}>
+              <h2 className="font-black mb-6" style={{ color: '#192540' }}>
                 About{' '}
                 <em style={{ fontFamily: 'var(--font-playfair)', fontStyle: 'italic', color: '#C84B30' }}>MetLink</em>
               </h2>
@@ -118,7 +118,7 @@ export default function CompanyPage() {
                     onMouseEnter={e => (e.currentTarget as HTMLElement).style.borderColor = 'rgba(200,75,48,0.3)'}
                     onMouseLeave={e => (e.currentTarget as HTMLElement).style.borderColor = '#E5DDD5'}>
                     <span className="text-3xl mb-3 block">{item.icon}</span>
-                    <h3 className="font-bold mb-2 text-sm" style={{ color: '#1C1410' }}>{item.title}</h3>
+                    <h3 className="font-bold mb-2 text-sm" style={{ color: '#192540' }}>{item.title}</h3>
                     <p className="text-xs leading-relaxed" style={{ color: '#72645A' }}>{item.desc}</p>
                   </div>
                 </StaggerItem>
@@ -133,7 +133,7 @@ export default function CompanyPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeIn className="text-center mb-16">
             <p className="text-xs font-black uppercase tracking-[0.25em] mb-3" style={{ color: '#C84B30' }}>Our Differentiators</p>
-            <h2 className="font-black" style={{ color: '#1C1410' }}>
+            <h2 className="font-black" style={{ color: '#192540' }}>
               Why Choose{' '}
               <em style={{ fontFamily: 'var(--font-playfair)', fontStyle: 'italic', color: '#C84B30' }}>MetLink</em>?
             </h2>
@@ -159,7 +159,7 @@ export default function CompanyPage() {
                       style={{ background: '#FEF1EE', border: '1px solid rgba(200,75,48,0.15)' }}>
                       <Icon className="w-5 h-5" style={{ color: '#C84B30' }} />
                     </div>
-                    <h3 className="font-bold mb-2 group-hover:text-[#C84B30] transition-colors" style={{ color: '#1C1410' }}>{v.title}</h3>
+                    <h3 className="font-bold mb-2 group-hover:text-[#C84B30] transition-colors" style={{ color: '#192540' }}>{v.title}</h3>
                     <p className="text-sm leading-relaxed" style={{ color: '#72645A' }}>{v.desc}</p>
                   </div>
                 </StaggerItem>
@@ -174,7 +174,7 @@ export default function CompanyPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeIn className="text-center mb-16">
             <p className="text-xs font-black uppercase tracking-[0.25em] mb-3" style={{ color: '#C84B30' }}>Our Journey</p>
-            <h2 className="font-black" style={{ color: '#1C1410' }}>How We Got Here</h2>
+            <h2 className="font-black" style={{ color: '#192540' }}>How We Got Here</h2>
           </FadeIn>
           <div className="relative max-w-3xl mx-auto">
             <div className="absolute left-6 top-0 bottom-0 w-px"
@@ -190,7 +190,7 @@ export default function CompanyPage() {
                     <div className="pb-4">
                       <div className="flex items-center gap-3 mb-2">
                         <span className="text-xs font-bold" style={{ color: '#C84B30' }}>{m.year}</span>
-                        <h3 className="font-bold" style={{ color: '#1C1410' }}>{m.event}</h3>
+                        <h3 className="font-bold" style={{ color: '#192540' }}>{m.event}</h3>
                       </div>
                       <p className="text-sm leading-relaxed" style={{ color: '#72645A' }}>{m.desc}</p>
                     </div>
@@ -207,7 +207,7 @@ export default function CompanyPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeIn className="text-center mb-16">
             <p className="text-xs font-black uppercase tracking-[0.25em] mb-3" style={{ color: '#C84B30' }}>The People</p>
-            <h2 className="font-black" style={{ color: '#1C1410' }}>
+            <h2 className="font-black" style={{ color: '#192540' }}>
               Meet the{' '}
               <em style={{ fontFamily: 'var(--font-playfair)', fontStyle: 'italic', color: '#C84B30' }}>Leadership</em>
             </h2>
@@ -231,7 +231,7 @@ export default function CompanyPage() {
                     style={{ background: `${member.color}15`, border: `1px solid ${member.color}25`, color: member.color }}>
                     {member.initials}
                   </div>
-                  <h3 className="font-bold text-lg mb-1" style={{ color: '#1C1410' }}>{member.name}</h3>
+                  <h3 className="font-bold text-lg mb-1" style={{ color: '#192540' }}>{member.name}</h3>
                   <p className="text-sm font-medium mb-1" style={{ color: '#C84B30' }}>{member.role}</p>
                   <p className="text-xs" style={{ color: '#ADA09A' }}>{member.specialty}</p>
                 </div>
@@ -246,7 +246,7 @@ export default function CompanyPage() {
         <div className="absolute inset-0 pointer-events-none"
           style={{ background: 'radial-gradient(ellipse at 50% 50%, rgba(200,75,48,0.05), transparent 65%)' }} />
         <FadeIn className="max-w-3xl mx-auto px-4 text-center relative z-10">
-          <h2 className="font-black mb-4" style={{ color: '#1C1410' }}>
+          <h2 className="font-black mb-4" style={{ color: '#192540' }}>
             Ready to Grow{' '}
             <em style={{ fontFamily: 'var(--font-playfair)', fontStyle: 'italic', color: '#C84B30' }}>With Us</em>?
           </h2>

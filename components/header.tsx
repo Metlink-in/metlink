@@ -92,7 +92,7 @@ export function Header() {
               <Link href="/"
                 className="px-3.5 py-2 rounded-xl text-sm font-medium transition-all hover:bg-black/5"
                 style={{ color: '#72645A' }}
-                onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = '#1C1410'}
+                onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = '#192540'}
                 onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = '#72645A'}>
                 Home
               </Link>
@@ -102,7 +102,7 @@ export function Header() {
                 <button
                   className="px-3.5 py-2 rounded-xl text-sm font-medium transition-all hover:bg-black/5 flex items-center gap-1"
                   style={{ color: '#72645A' }}
-                  onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = '#1C1410'}
+                  onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = '#192540'}
                   onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = '#72645A'}
                   onClick={() => { if (window.innerWidth < 768) setServicesOpen(v => !v); }}>
                   Services
@@ -146,7 +146,7 @@ export function Header() {
                                     <Link href={`/services/${cat.slug}/${svc.slug}`}
                                       className="group/item flex items-center gap-1.5 text-sm transition-all"
                                       style={{ color: '#72645A' }}
-                                      onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = '#1C1410'}
+                                      onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = '#192540'}
                                       onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = '#72645A'}
                                       onClick={() => setServicesOpen(false)}>
                                       <ArrowRight className="w-3 h-3 opacity-0 group-hover/item:opacity-100 -translate-x-1 group-hover/item:translate-x-0 transition-all flex-shrink-0"
@@ -182,7 +182,7 @@ export function Header() {
                 <Link key={label} href={href}
                   className="px-3.5 py-2 rounded-xl text-sm font-medium transition-all hover:bg-black/5"
                   style={{ color: '#72645A' }}
-                  onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = '#1C1410'}
+                  onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = '#192540'}
                   onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = '#72645A'}>
                   {label}
                   {label === 'Product' && (
@@ -198,7 +198,7 @@ export function Header() {
               <button onClick={() => setShowPopup(true)}
                 className="text-sm font-medium transition-colors flex items-center gap-1.5"
                 style={{ color: '#ADA09A' }}
-                onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = '#1C1410'}
+                onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = '#192540'}
                 onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = '#ADA09A'}>
                 <Brain className="w-3.5 h-3.5" style={{ color: '#C84B30' }} />
                 Get Proposal
@@ -314,7 +314,7 @@ function PopupFormInline({ onClose }: { onClose: () => void }) {
                 style={{ background: 'linear-gradient(135deg, #C84B30, #E8612A)', boxShadow: '0 0 40px rgba(200,75,48,0.2)' }}>
                 <Zap className="w-10 h-10 text-white" />
               </div>
-              <h3 className="text-2xl font-black mb-2" style={{ color: '#1C1410' }}>Request Received!</h3>
+              <h3 className="text-2xl font-black mb-2" style={{ color: '#192540' }}>Request Received!</h3>
               <p className="text-sm max-w-[240px] mx-auto" style={{ color: '#72645A' }}>
                 Our AI strategy team will reach out within 24 hours.
               </p>
@@ -325,7 +325,7 @@ function PopupFormInline({ onClose }: { onClose: () => void }) {
                 <p className="text-[10px] font-black tracking-[0.3em] uppercase mb-2" style={{ color: '#C84B30' }}>
                   Limited Spots Available
                 </p>
-                <h2 className="text-2xl font-black leading-tight" style={{ color: '#1C1410' }}>
+                <h2 className="text-2xl font-black leading-tight" style={{ color: '#192540' }}>
                   Get a Free Proposal
                 </h2>
                 <p className="text-sm mt-1" style={{ color: '#72645A' }}>
@@ -337,7 +337,7 @@ function PopupFormInline({ onClose }: { onClose: () => void }) {
                 {['Full Name', 'Company / Project Name', 'Work Email Address'].map((ph, i) => (
                   <input key={ph} type={i === 2 ? 'email' : 'text'} placeholder={ph} required
                     className="w-full px-4 py-3.5 rounded-xl text-sm focus:outline-none transition-all"
-                    style={{ background: '#FAF9F6', border: '1px solid #E5DDD5', color: '#1C1410' }}
+                    style={{ background: '#FAF9F6', border: '1px solid #E5DDD5', color: '#192540' }}
                     onFocus={e => (e.currentTarget.style.borderColor = 'rgba(200,75,48,0.5)')}
                     onBlur={e => (e.currentTarget.style.borderColor = '#E5DDD5')} />
                 ))}

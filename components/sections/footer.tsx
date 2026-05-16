@@ -85,7 +85,7 @@ export function Footer() {
                   type="email"
                   placeholder="your@email.com"
                   className="flex-1 px-4 py-2.5 rounded-xl text-sm focus:outline-none transition-all"
-                  style={{ background: '#FFFFFF', border: '1px solid #E5DDD5', color: '#1C1410' }}
+                  style={{ background: '#FFFFFF', border: '1px solid #E5DDD5', color: '#192540' }}
                   onFocus={e => (e.currentTarget.style.borderColor = 'rgba(200,75,48,0.4)')}
                   onBlur={e => (e.currentTarget.style.borderColor = '#E5DDD5')}
                 />
@@ -120,7 +120,7 @@ export function Footer() {
                         href={`/services/${cat.slug}/${svc.slug}`}
                         className="text-xs transition-all duration-200 hover:translate-x-0.5 block"
                         style={{ color: '#ADA09A' }}
-                        onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = '#1C1410'}
+                        onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = '#192540'}
                         onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = '#ADA09A'}>
                         {svc.name}
                       </Link>
