@@ -47,7 +47,7 @@ export function Header() {
         <nav
           className="transition-all duration-500"
           style={{
-            background: scrolled ? 'rgba(5,5,5,0.96)' : 'rgba(5,5,5,0.82)',
+            background: scrolled ? 'rgba(6,13,26,0.96)' : 'rgba(6,13,26,0.82)',
             borderBottom: scrolled ? '1px solid rgba(255,255,255,0.07)' : '1px solid transparent',
             backdropFilter: 'blur(28px)',
             WebkitBackdropFilter: 'blur(28px)',

@@ -15,8 +15,8 @@
 
 /* ── Design tokens ── */
 :root {
-  --bg:            #050505;
-  --bg-alt:        #0A0A0A;
+  --bg:            #07111F;
+  --bg-alt:        #0B1628;
   --bg-card:       rgba(255,255,255,0.025);
   --surface:       rgba(255,255,255,0.03);
   --surface-hover: rgba(255,255,255,0.055);
@@ -28,7 +28,7 @@
   --accent:        #2B80F0;
   --accent-soft:   rgba(43,128,240,0.1);
   --accent-glow:   rgba(43,128,240,0.2);
-  --glass-bg:      rgba(5,5,5,0.88);
+  --glass-bg:      rgba(6,13,26,0.88);
   --glass-border:  rgba(255,255,255,0.07);
 
   --font-sans:    var(--font-dm), 'General Sans', 'Satoshi', 'Inter', system-ui, sans-serif;
@@ -36,8 +36,8 @@
   --font-serif:   var(--font-playfair), Georgia, serif;
 
   /* compat aliases */
-  --background:   #050505;
-  --surface-alt:  #0A0A0A;
+  --background:   #07111F;
+  --surface-alt:  #0B1628;
   --foreground:   rgba(255,255,255,0.92);
   --muted:        rgba(255,255,255,0.52);
   --muted-light:  rgba(255,255,255,0.32);
@@ -78,7 +78,7 @@ nav button, nav a { min-height: unset; min-width: unset; }
 
 /* ── Scrollbar ── */
 ::-webkit-scrollbar { width: 5px; }
-::-webkit-scrollbar-track { background: #050505; }
+::-webkit-scrollbar-track { background: #07111F; }
 ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
 
@@ -138,7 +138,7 @@ nav button, nav a { min-height: unset; min-width: unset; }
 /* ── PRIMARY BUTTON — white bg / black text ── */
 .btn-primary {
   background: #FFFFFF;
-  color: #050505;
+  color: #07111F;
   border: 1px solid transparent;
   font-weight: 500;
   font-family: var(--font-sans);
@@ -180,7 +180,7 @@ nav button, nav a { min-height: unset; min-width: unset; }
 }
 .btn-primary-glass {
   background: #FFFFFF;
-  color: #050505;
+  color: #07111F;
   border: 1px solid transparent;
   font-weight: 500;
   transition: opacity 0.2s ease, transform 0.18s ease;

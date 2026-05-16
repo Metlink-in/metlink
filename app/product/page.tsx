@@ -16,7 +16,7 @@ const features = [
 export default function ProductPage() {
   return (
     <main className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden"
-      style={{ background: '#050505', paddingTop: '6rem', paddingBottom: '5rem' }}>
+      style={{ background: '#07111F', paddingTop: '6rem', paddingBottom: '5rem' }}>
 
       {/* Subtle radish glow */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
@@ -62,7 +62,7 @@ export default function ProductPage() {
           style={{ border: '1px solid rgba(255,255,255,0.12)', borderRadius: 16, overflow: 'hidden' }}>
           {features.map(({ icon: Icon, title, desc }) => (
             <div key={title} className="flex flex-col items-start p-6 text-left"
-              style={{ background: '#0A0A0A' }}>
+              style={{ background: '#0B1628' }}>
               <div className="w-9 h-9 rounded-xl flex items-center justify-center mb-4"
                 style={{ background: 'rgba(43,128,240,0.15)', color: '#2B80F0' }}>
                 <Icon className="w-4.5 h-4.5 w-[18px] h-[18px]" />

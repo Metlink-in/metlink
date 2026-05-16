@@ -173,8 +173,8 @@ const faqData = [
 ];
 
 const PF   = 'var(--font-playfair)';
-const BG   = '#050505';
-const BG2  = '#0A0A0A';
+const BG   = '#07111F';
+const BG2  = '#0B1628';
 const BDR  = '1px solid rgba(255,255,255,0.05)';
 const AC   = '#2B80F0';
 
@@ -187,7 +187,7 @@ export default function HomePage() {
     <div className="w-full overflow-x-hidden" style={{ background: BG }}>
 
       {/* ══ HERO ══════════════════════════════════════════════ */}
-      <section className="relative overflow-hidden" style={{ background: '#050505', minHeight: '100vh' }}>
+      <section className="relative overflow-hidden" style={{ background: '#060D1A', minHeight: '100vh' }}>
         {/* Subtle glow */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[600px] rounded-full"
@@ -278,15 +278,15 @@ export default function HomePage() {
       </section>
 
       {/* ══ INTEGRATIONS ════════════════════════════════════════ */}
-      <section className="py-12 overflow-hidden" style={{ background: '#050505', borderTop: BDR, borderBottom: BDR }}>
+      <section className="py-12 overflow-hidden" style={{ background: '#060C18', borderTop: BDR, borderBottom: BDR }}>
         <FadeIn className="text-center mb-10 px-4">
           <p className="label-overline">Trusted Integrations &amp; Partners</p>
         </FadeIn>
         <div className="relative">
           <div className="absolute inset-y-0 left-0 w-32 sm:w-48 z-10 pointer-events-none"
-            style={{ background: 'linear-gradient(to right, #050505, transparent)' }} />
+            style={{ background: 'linear-gradient(to right, #060C18, transparent)' }} />
           <div className="absolute inset-y-0 right-0 w-32 sm:w-48 z-10 pointer-events-none"
-            style={{ background: 'linear-gradient(to left, #050505, transparent)' }} />
+            style={{ background: 'linear-gradient(to left, #060C18, transparent)' }} />
           <div style={{ overflow: 'hidden' }}>
             <div style={{ display: 'flex', width: 'max-content', animation: 'scroll 55s linear infinite', alignItems: 'center', padding: '12px 0' }}>
               {[...integrations, ...integrations].map((name, i) => (
@@ -615,7 +615,7 @@ export default function HomePage() {
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeIn>
             <div className="relative rounded-3xl overflow-hidden text-center px-8 sm:px-16 py-20 sm:py-24"
-              style={{ background: '#0A0A0A', border: '1px solid rgba(255,255,255,0.06)' }}>
+              style={{ background: '#0B1628', border: '1px solid rgba(255,255,255,0.06)' }}>
               {/* Subtle glow */}
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] pointer-events-none"
                 style={{ background: 'radial-gradient(ellipse, rgba(43,128,240,0.1) 0%, transparent 65%)', filter: 'blur(60px)' }} />

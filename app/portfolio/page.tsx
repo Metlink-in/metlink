@@ -9,11 +9,11 @@ const filters = ['All', 'Software + AI', 'Digital Marketing', 'Creative Media', 
 
 export default function PortfolioPage() {
   return (
-    <div className="w-full overflow-x-hidden" style={{ background: '#050505' }}>
+    <div className="w-full overflow-x-hidden" style={{ background: '#07111F' }}>
 
       {/* Hero */}
       <section className="relative py-20 sm:py-28 overflow-hidden"
-        style={{ background: '#050505' }}>
+        style={{ background: '#07111F' }}>
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px] rounded-full pointer-events-none"
           style={{ background: 'radial-gradient(ellipse, rgba(43,128,240,0.18) 0%, transparent 70%)', filter: 'blur(80px)' }} />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
@@ -51,7 +51,7 @@ export default function PortfolioPage() {
       </section>
 
       {/* Projects grid */}
-      <section className="py-12 pb-24" style={{ background: '#050505' }}>
+      <section className="py-12 pb-24" style={{ background: '#07111F' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <StaggerChildren className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
             {projects.map(project => (
@@ -124,7 +124,7 @@ export default function PortfolioPage() {
       </section>
 
       {/* Stats strip */}
-      <section style={{ background: '#0A0A0A', borderTop: '1px solid rgba(255,255,255,0.12)', borderBottom: '1px solid rgba(255,255,255,0.12)' }}>
+      <section style={{ background: '#0B1628', borderTop: '1px solid rgba(255,255,255,0.12)', borderBottom: '1px solid rgba(255,255,255,0.12)' }}>
         <StaggerChildren className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
           {[['150+','Projects Delivered'],['$10M+','Revenue Generated'],['80+','Happy Clients'],['98%','Satisfaction Rate']].map(([v, l]) => (
             <StaggerItem key={l}>
@@ -136,7 +136,7 @@ export default function PortfolioPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-16 sm:py-24 relative overflow-hidden" style={{ background: '#050505' }}>
+      <section className="py-16 sm:py-24 relative overflow-hidden" style={{ background: '#07111F' }}>
         <div className="absolute inset-0 pointer-events-none"
           style={{ background: 'radial-gradient(ellipse at 50% 50%, rgba(43,128,240,0.15), transparent 65%)' }} />
         <FadeIn className="max-w-3xl mx-auto px-4 text-center relative z-10">

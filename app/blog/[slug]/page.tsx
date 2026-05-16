@@ -19,11 +19,11 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   const paragraphs = post.content.split('\n\n');
 
   return (
-    <div className="w-full overflow-x-hidden" style={{ background: '#050505' }}>
+    <div className="w-full overflow-x-hidden" style={{ background: '#07111F' }}>
 
       {/* Hero */}
       <section className="relative py-20 sm:py-28 overflow-hidden"
-        style={{ background: '#050505' }}>
+        style={{ background: '#07111F' }}>
         <div className="absolute inset-0 pointer-events-none">
           <div className={`absolute inset-0 bg-gradient-to-br ${post.gradientFrom} ${post.gradientTo} opacity-[0.06]`} />
         </div>
@@ -66,7 +66,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
       </section>
 
       {/* Article */}
-      <article className="py-16" style={{ background: '#0A0A0A', borderTop: '1px solid rgba(255,255,255,0.12)' }}>
+      <article className="py-16" style={{ background: '#0B1628', borderTop: '1px solid rgba(255,255,255,0.12)' }}>
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="prose prose-lg max-w-none">
             {paragraphs.map((block, i) => {
@@ -140,7 +140,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
       {/* Related */}
       {relatedPosts.length > 0 && (
-        <section className="py-16 sm:py-24" style={{ background: '#050505', borderTop: '1px solid rgba(255,255,255,0.12)' }}>
+        <section className="py-16 sm:py-24" style={{ background: '#07111F', borderTop: '1px solid rgba(255,255,255,0.12)' }}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="font-black mb-10 text-center" style={{ color: '#FFFFFF' }}>Continue Reading</h2>
             <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">

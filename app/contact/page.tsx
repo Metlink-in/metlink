@@ -26,11 +26,11 @@ export default function ContactPage() {
   const labelCls  = "block text-[10px] font-black uppercase tracking-[0.2em] mb-2.5" ;
 
   return (
-    <div className="w-full overflow-x-hidden" style={{ background: '#050505' }}>
+    <div className="w-full overflow-x-hidden" style={{ background: '#07111F' }}>
 
       {/* Hero */}
       <section className="relative py-20 sm:py-28 overflow-hidden"
-        style={{ background: '#050505' }}>
+        style={{ background: '#07111F' }}>
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px] rounded-full pointer-events-none"
           style={{ background: 'radial-gradient(ellipse, rgba(43,128,240,0.18) 0%, transparent 70%)', filter: 'blur(80px)' }} />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
@@ -55,7 +55,7 @@ export default function ContactPage() {
       </section>
 
       {/* Info cards */}
-      <section style={{ background: '#0A0A0A', borderTop: '1px solid rgba(255,255,255,0.12)', borderBottom: '1px solid rgba(255,255,255,0.12)' }}>
+      <section style={{ background: '#0B1628', borderTop: '1px solid rgba(255,255,255,0.12)', borderBottom: '1px solid rgba(255,255,255,0.12)' }}>
         <StaggerChildren className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {[
             { Icon: Mail,   title: 'Email',         value: 'hello@metlink.in',  desc: 'Reply within 2 hours', href: 'mailto:hello@metlink.in' },
@@ -83,7 +83,7 @@ export default function ContactPage() {
       </section>
 
       {/* Main form — split */}
-      <section className="py-20" style={{ background: '#050505' }}>
+      <section className="py-20" style={{ background: '#07111F' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-5 gap-14">
 
@@ -122,7 +122,7 @@ export default function ContactPage() {
                   {['FinTech','Healthcare','E-Commerce','SaaS','Real Estate','Startups'].map(tag => (
                     <span key={tag}
                       className="px-3.5 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-wider cursor-default transition-all hover:text-[#2B80F0]"
-                      style={{ background: '#050505', color: 'rgba(255,255,255,0.4)', border: '1px solid rgba(255,255,255,0.12)' }}>
+                      style={{ background: '#07111F', color: 'rgba(255,255,255,0.4)', border: '1px solid rgba(255,255,255,0.12)' }}>
                       {tag}
                     </span>
                   ))}
@@ -189,8 +189,8 @@ export default function ContactPage() {
                               style={{ ...inputBase, color: form.service ? '#FFFFFF' : 'rgba(255,255,255,0.4)' }}
                               onFocus={e => (e.currentTarget.style.borderColor = 'rgba(43,128,240,0.45)')}
                               onBlur={e => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)')}>
-                              <option value="" style={{ background:'#050505' }}>Select a service...</option>
-                              {services.map(s => <option key={s} value={s} style={{ background:'#050505',color:'#FFFFFF' }}>{s}</option>)}
+                              <option value="" style={{ background:'#07111F' }}>Select a service...</option>
+                              {services.map(s => <option key={s} value={s} style={{ background:'#07111F',color:'#FFFFFF' }}>{s}</option>)}
                             </select>
                           </div>
                           <div>
@@ -200,8 +200,8 @@ export default function ContactPage() {
                               style={{ ...inputBase, color: form.budget ? '#FFFFFF' : 'rgba(255,255,255,0.4)' }}
                               onFocus={e => (e.currentTarget.style.borderColor = 'rgba(43,128,240,0.45)')}
                               onBlur={e => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)')}>
-                              <option value="" style={{ background:'#050505' }}>Select budget...</option>
-                              {budgets.map(b => <option key={b} value={b} style={{ background:'#050505',color:'#FFFFFF' }}>{b}</option>)}
+                              <option value="" style={{ background:'#07111F' }}>Select budget...</option>
+                              {budgets.map(b => <option key={b} value={b} style={{ background:'#07111F',color:'#FFFFFF' }}>{b}</option>)}
                             </select>
                           </div>
                         </div>

@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function OurProductPage() {
   return (
     <main className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden pt-20"
-      style={{ background: '#050505' }}>
+      style={{ background: '#07111F' }}>
 
       {/* Warm glow */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">

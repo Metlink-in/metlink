@@ -17,11 +17,11 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
   const displayedRelated = relatedProjects.length > 0 ? relatedProjects : fallbackProjects;
 
   return (
-    <div className="w-full overflow-x-hidden" style={{ background: '#050505' }}>
+    <div className="w-full overflow-x-hidden" style={{ background: '#07111F' }}>
 
       {/* Hero */}
       <section className="relative pt-32 pb-20 overflow-hidden"
-        style={{ background: '#050505' }}>
+        style={{ background: '#07111F' }}>
         <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full pointer-events-none blur-3xl opacity-30"
           style={{ background: 'radial-gradient(circle, rgba(43,128,240,0.12), transparent)' }} />
 
@@ -55,7 +55,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
       </section>
 
       {/* Main Content */}
-      <section className="py-20" style={{ background: '#0A0A0A', borderTop: '1px solid rgba(255,255,255,0.12)' }}>
+      <section className="py-20" style={{ background: '#0B1628', borderTop: '1px solid rgba(255,255,255,0.12)' }}>
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-3 gap-16">
 
@@ -113,7 +113,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
 
       {/* Related Projects */}
       {displayedRelated.length > 0 && (
-        <section className="py-16 sm:py-24" style={{ background: '#050505', borderTop: '1px solid rgba(255,255,255,0.12)' }}>
+        <section className="py-16 sm:py-24" style={{ background: '#07111F', borderTop: '1px solid rgba(255,255,255,0.12)' }}>
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="text-3xl font-black mb-10 text-center" style={{ color: '#FFFFFF' }}>More Projects</h2>
             <div className="grid sm:grid-cols-2 gap-6">
@@ -139,7 +139,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
       )}
 
       {/* CTA */}
-      <section className="py-16 sm:py-24" style={{ background: '#0A0A0A', borderTop: '1px solid rgba(255,255,255,0.12)' }}>
+      <section className="py-16 sm:py-24" style={{ background: '#0B1628', borderTop: '1px solid rgba(255,255,255,0.12)' }}>
         <div className="absolute inset-0 pointer-events-none"
           style={{ background: 'radial-gradient(ellipse at 50% 50%, rgba(43,128,240,0.12), transparent 65%)' }} />
         <div className="max-w-3xl mx-auto px-4 text-center relative z-10">
