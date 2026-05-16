@@ -53,9 +53,9 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
           <div className="inline-flex items-center gap-4 p-5 rounded-2xl"
             style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)', boxShadow: '0 2px 12px rgba(0,0,0,0.05)' }}>
-            <div className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl shrink-0"
-              style={{ background: 'rgba(43,128,240,0.15)', border: '1px solid rgba(43,128,240,0.2)' }}>
-              {post.authorEmoji}
+            <div className="w-12 h-12 rounded-xl flex items-center justify-center font-black text-lg shrink-0"
+              style={{ background: 'rgba(43,128,240,0.15)', border: '1px solid rgba(43,128,240,0.2)', color: '#4B9CF4' }}>
+              {post.author.split(' ').map((n: string) => n[0]).join('')}
             </div>
             <div>
               <p className="font-bold mb-0.5" style={{ color: '#FFFFFF' }}>{post.author}</p>
@@ -123,9 +123,9 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           {/* Author bio */}
           <div className="mt-12 p-8 rounded-3xl flex gap-6 items-start"
             style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)' }}>
-            <div className="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl flex-shrink-0"
-              style={{ background: 'rgba(43,128,240,0.15)', border: '1px solid rgba(43,128,240,0.2)' }}>
-              {post.authorEmoji}
+            <div className="w-16 h-16 rounded-2xl flex items-center justify-center font-black text-xl flex-shrink-0"
+              style={{ background: 'rgba(43,128,240,0.15)', border: '1px solid rgba(43,128,240,0.2)', color: '#4B9CF4' }}>
+              {post.author.split(' ').map((n: string) => n[0]).join('')}
             </div>
             <div>
               <p className="font-black text-xl mb-1" style={{ color: '#FFFFFF' }}>{post.author}</p>
