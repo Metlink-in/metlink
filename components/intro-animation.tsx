@@ -77,7 +77,7 @@ export function IntroAnimation() {
           width: 60,
           height: 60,
           borderRadius: 18,
-          background: 'linear-gradient(135deg, #0B1628, #2B80F0)',
+          background: 'linear-gradient(135deg, #0C0C0C, #2B80F0)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
@@ -152,7 +152,7 @@ export function IntroAnimation() {
         }}>
           <div style={{
             height: '100%',
-            background: 'linear-gradient(to right, #2B80F0, #4B9CF4)',
+            background: 'linear-gradient(to right, #2B80F0, #5FA8FF)',
             borderRadius: 2,
             width: ['bar','exit'].includes(phase) ? '100%' : '0%',
             transition: 'width 1.4s cubic-bezier(0.4,0,0.2,1)',

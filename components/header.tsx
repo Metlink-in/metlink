@@ -8,9 +8,9 @@ import { serviceCategories } from '@/lib/services-data';
 
 const catAccents: Record<string, string> = {
   'digital-marketing':   '#2B80F0',
-  'creative-media':      '#D97706',
-  'ai-automation':       '#16A34A',
-  'software-development':'#2563EB',
+  'creative-media':      '#2B80F0',
+  'ai-automation':       '#2B80F0',
+  'software-development':'#2B80F0',
 };
 
 export function Header() {
@@ -58,19 +58,10 @@ export function Header() {
           <div className="flex items-center justify-between h-16">
 
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-2.5 shrink-0">
-              <div className="w-8 h-8 rounded-xl flex items-center justify-center shrink-0"
-                style={{ background: 'rgba(43,128,240,0.18)', border: '1px solid rgba(43,128,240,0.35)' }}>
-                <Image
-                  src="/icon-light-32x32.png"
-                  alt="MetLink"
-                  width={18}
-                  height={18}
-                  className="object-contain"
-                  priority
-                />
+            <Link href="/" className="flex items-center shrink-0">
+              <div style={{ background: '#FFFFFF', borderRadius: 9, padding: '5px 12px', height: 38, display: 'flex', alignItems: 'center' }}>
+                <Image src="/logo-mark.png" alt="MetLink" width={96} height={26} className="object-contain" priority />
               </div>
-              <span style={{ color: 'rgba(255,255,255,0.92)', fontWeight: 500, fontSize: '0.95rem', letterSpacing: '-0.025em' }}>MetLink</span>
             </Link>
 
             {/* Desktop nav — center pill */}
@@ -163,7 +154,7 @@ export function Header() {
                   {label}
                   {label === 'Product' && (
                     <span className="ml-1.5 px-1.5 py-0.5 rounded text-[9px] font-black uppercase tracking-wider align-middle"
-                      style={{ background: 'rgba(43,128,240,0.2)', color: '#4B9CF4', border: '1px solid rgba(43,128,240,0.3)' }}>Soon</span>
+                      style={{ background: 'rgba(43,128,240,0.2)', color: '#5FA8FF', border: '1px solid rgba(43,128,240,0.3)' }}>Soon</span>
                   )}
                 </NavLink>
               ))}
@@ -180,9 +171,9 @@ export function Header() {
               </button>
               <Link href="/contact"
                 className="px-5 py-2.5 rounded-full text-sm font-medium transition-all active:scale-95"
-                style={{ background: 'rgba(43,128,240,0.22)', border: '1px solid rgba(43,128,240,0.45)', color: '#7AB8FF', backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)' }}
-                onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.background = 'rgba(43,128,240,0.35)'; el.style.borderColor = 'rgba(43,128,240,0.65)'; el.style.color = '#AECFFF'; }}
-                onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.background = 'rgba(43,128,240,0.22)'; el.style.borderColor = 'rgba(43,128,240,0.45)'; el.style.color = '#7AB8FF'; }}>
+                style={{ background: 'rgba(43,128,240,0.22)', border: '1px solid rgba(43,128,240,0.45)', color: '#5FA8FF', backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)' }}
+                onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.background = 'rgba(43,128,240,0.35)'; el.style.borderColor = 'rgba(43,128,240,0.65)'; el.style.color = '#FFE8A0'; }}
+                onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.background = 'rgba(43,128,240,0.22)'; el.style.borderColor = 'rgba(43,128,240,0.45)'; el.style.color = '#5FA8FF'; }}>
                 Contact Us
               </Link>
             </div>
@@ -232,7 +223,7 @@ export function Header() {
                     {label}
                     {label === 'Product' && (
                       <span className="ml-1.5 px-1.5 py-0.5 rounded text-[9px] font-black uppercase tracking-wider"
-                        style={{ background: 'rgba(43,128,240,0.2)', color: '#4B9CF4' }}>Soon</span>
+                        style={{ background: 'rgba(43,128,240,0.2)', color: '#5FA8FF' }}>Soon</span>
                     )}
                   </MobileNavLink>
                 ))}
@@ -292,8 +283,8 @@ function ProposalPopup({ onClose }: { onClose: () => void }) {
     <div className="fixed inset-0 z-[100] flex items-center justify-center px-4">
       <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={onClose} />
       <div className="relative w-full max-w-md rounded-2xl overflow-hidden animate-fadeInScale shadow-2xl"
-        style={{ background: 'rgba(10,20,42,0.98)', border: '1px solid rgba(255,255,255,0.12)' }}>
-        <div className="h-px w-full" style={{ background: 'linear-gradient(90deg, transparent, #2B80F0, #4B9CF4, transparent)' }} />
+        style={{ background: 'rgba(6,13,26,0.98)', border: '1px solid rgba(255,255,255,0.12)' }}>
+        <div className="h-px w-full" style={{ background: 'linear-gradient(90deg, transparent, #2B80F0, #5FA8FF, transparent)' }} />
         <button onClick={onClose} className="absolute top-4 right-4 p-1.5 rounded-lg transition-colors hover:bg-white/10"
           style={{ color: 'rgba(255,255,255,0.5)' }}>
           <X className="w-4 h-4" />
@@ -328,11 +319,11 @@ function ProposalPopup({ onClose }: { onClose: () => void }) {
                   style={{ background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.12)', color: 'rgba(255,255,255,0.5)' }}
                   onFocus={e => (e.currentTarget.style.borderColor = 'rgba(43,128,240,0.5)')}
                   onBlur={e => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)')}>
-                  <option value="" style={{ background: '#0d1829' }}>Select a Service</option>
-                  <option value="ai" style={{ background: '#0d1829', color: '#fff' }}>AI &amp; Automation</option>
-                  <option value="dev" style={{ background: '#0d1829', color: '#fff' }}>Software Development</option>
-                  <option value="marketing" style={{ background: '#0d1829', color: '#fff' }}>Digital Marketing</option>
-                  <option value="creative" style={{ background: '#0d1829', color: '#fff' }}>Creative Media</option>
+                  <option value="" style={{ background: '#0A0900' }}>Select a Service</option>
+                  <option value="ai" style={{ background: '#0A0900', color: '#fff' }}>AI &amp; Automation</option>
+                  <option value="dev" style={{ background: '#0A0900', color: '#fff' }}>Software Development</option>
+                  <option value="marketing" style={{ background: '#0A0900', color: '#fff' }}>Digital Marketing</option>
+                  <option value="creative" style={{ background: '#0A0900', color: '#fff' }}>Creative Media</option>
                 </select>
                 <button type="submit"
                   className="w-full py-3.5 mt-2 rounded-xl font-black text-sm tracking-wide uppercase transition-all text-white btn-primary-glass">

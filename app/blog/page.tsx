@@ -148,7 +148,7 @@ export default function BlogPage() {
                     <div className="flex items-center justify-between pt-4" style={{ borderTop: '1px solid rgba(255,255,255,0.08)' }}>
                       <div className="flex items-center gap-2">
                         <div className="w-7 h-7 rounded-full flex items-center justify-center text-[10px] font-black shrink-0"
-                          style={{ background: 'rgba(43,128,240,0.2)', color: '#4B9CF4' }}>
+                          style={{ background: 'rgba(43,128,240,0.2)', color: '#5FA8FF' }}>
                           {post.author.split(' ').map((n: string) => n[0]).join('')}
                         </div>
                         <div>

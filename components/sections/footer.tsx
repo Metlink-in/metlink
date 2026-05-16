@@ -7,9 +7,9 @@ import { serviceCategories } from '@/lib/services-data';
 
 const catAccent: Record<string, string> = {
   'digital-marketing':    '#2B80F0',
-  'creative-media':       '#D97706',
-  'ai-automation':        '#16A34A',
-  'software-development': '#2563EB',
+  'creative-media':       '#2B80F0',
+  'ai-automation':        '#2B80F0',
+  'software-development': '#2B80F0',
 };
 
 const catIcon: Record<string, React.ReactNode> = {
@@ -28,7 +28,7 @@ export function Footer() {
         style={{ background: 'radial-gradient(ellipse, rgba(43,128,240,0.09) 0%, transparent 70%)', filter: 'blur(70px)' }} />
 
       {/* Top gradient line */}
-      <div className="relative" style={{ height: 1, background: 'linear-gradient(to right, transparent 0%, rgba(43,128,240,0.6) 25%, rgba(75,156,244,0.9) 50%, rgba(43,128,240,0.6) 75%, transparent 100%)' }} />
+      <div className="relative" style={{ height: 1, background: 'linear-gradient(to right, transparent 0%, rgba(43,128,240,0.6) 25%, rgba(95,168,255,0.9) 50%, rgba(43,128,240,0.6) 75%, transparent 100%)' }} />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-10">
 
@@ -71,7 +71,7 @@ export function Footer() {
                 <a key={label} href={href} aria-label={label}
                   className="w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-200 hover:-translate-y-0.5"
                   style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.35)' }}
-                  onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = 'rgba(43,128,240,0.5)'; el.style.color = '#4B9CF4'; el.style.background = 'rgba(43,128,240,0.12)'; el.style.boxShadow = '0 0 14px rgba(43,128,240,0.2)'; }}
+                  onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = 'rgba(43,128,240,0.5)'; el.style.color = '#5FA8FF'; el.style.background = 'rgba(43,128,240,0.12)'; el.style.boxShadow = '0 0 14px rgba(43,128,240,0.2)'; }}
                   onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = 'rgba(255,255,255,0.1)'; el.style.color = 'rgba(255,255,255,0.35)'; el.style.background = 'rgba(255,255,255,0.06)'; el.style.boxShadow = 'none'; }}>
                   {svg}
                 </a>

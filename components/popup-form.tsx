@@ -41,7 +41,7 @@ export function PopupForm() {
 
         {/* ── LEFT PANEL ── */}
         <div className="relative md:w-[42%] flex-shrink-0 p-8 flex flex-col justify-between overflow-hidden"
-          style={{ background: 'linear-gradient(160deg, #0B1628 0%, #2D1A12 60%, #0B1628 100%)' }}>
+          style={{ background: 'linear-gradient(160deg, #0C0C0C 0%, #2D1A12 60%, #0C0C0C 100%)' }}>
 
           {/* BG glow */}
           <div className="absolute top-0 left-0 w-64 h-64 rounded-full pointer-events-none"
@@ -52,7 +52,7 @@ export function PopupForm() {
           <div className="relative z-10">
             {/* Logo mark */}
             <div className="w-10 h-10 rounded-xl flex items-center justify-center mb-6"
-              style={{ background: 'linear-gradient(135deg, #0B1628, #2B80F0)' }}>
+              style={{ background: 'linear-gradient(135deg, #0C0C0C, #2B80F0)' }}>
               <svg width="28" height="24" viewBox="0 0 112 96" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M 4,92 L 4,6 L 30,6 L 50,54 L 50,92 Z" fill="rgba(255,255,255,0.95)" />
                 <path d="M 60,92 L 60,48 C 60,6 108,6 108,48 L 108,92 Z" fill="rgba(255,255,255,0.65)" />
@@ -63,12 +63,12 @@ export function PopupForm() {
               </svg>
             </div>
 
-            <p className="text-[10px] font-black uppercase tracking-[0.35em] mb-3" style={{ color: '#4B9CF4' }}>
+            <p className="text-[10px] font-black uppercase tracking-[0.35em] mb-3" style={{ color: '#5FA8FF' }}>
               Limited Spots Available
             </p>
             <h2 className="text-2xl font-black text-white leading-tight mb-3">
               Schedule Your<br />
-              <span style={{ color: '#4B9CF4' }}>
+              <span style={{ color: '#5FA8FF' }}>
                 Success Story
               </span>
             </h2>
@@ -79,10 +79,10 @@ export function PopupForm() {
             {/* Trust points */}
             <div className="space-y-3">
               {[
-                { icon: <TrendingUp className="w-3.5 h-3.5" />, text: 'Average 70% revenue growth',  color: '#16A34A' },
+                { icon: <TrendingUp className="w-3.5 h-3.5" />, text: 'Average 70% revenue growth',  color: '#2B80F0' },
                 { icon: <Clock className="w-3.5 h-3.5" />,      text: 'First deliverables in 7 days', color: '#2B80F0' },
-                { icon: <Shield className="w-3.5 h-3.5" />,     text: 'NDA signed before we begin',   color: '#2563EB' },
-                { icon: <Zap className="w-3.5 h-3.5" />,        text: 'AI-powered execution',         color: '#D97706' },
+                { icon: <Shield className="w-3.5 h-3.5" />,     text: 'NDA signed before we begin',   color: '#2B80F0' },
+                { icon: <Zap className="w-3.5 h-3.5" />,        text: 'AI-powered execution',         color: '#2B80F0' },
               ].map(p => (
                 <div key={p.text} className="flex items-center gap-3">
                   <div className="w-6 h-6 rounded-md flex items-center justify-center flex-shrink-0"
@@ -110,7 +110,7 @@ export function PopupForm() {
         {/* ── RIGHT PANEL — form ── */}
         <div className="flex-1 relative flex flex-col overflow-y-auto" style={{ background: '#FFFFFF' }}>
           {/* Top accent */}
-          <div className="h-1 flex-shrink-0" style={{ background: 'linear-gradient(90deg, #2B80F0, #4B9CF4, #2B80F0)' }} />
+          <div className="h-1 flex-shrink-0" style={{ background: 'linear-gradient(90deg, #2B80F0, #5FA8FF, #2B80F0)' }} />
 
           <button onClick={close}
             className="absolute top-4 right-4 z-20 p-1.5 rounded-lg transition-all hover:bg-black/5"
@@ -122,7 +122,7 @@ export function PopupForm() {
             {submitted ? (
               <div className="text-center py-10 animate-fadeInScale">
                 <div className="w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-5"
-                  style={{ background: 'linear-gradient(135deg, #2B80F0, #4B9CF4)', boxShadow: '0 0 32px rgba(43,128,240,0.25)' }}>
+                  style={{ background: 'linear-gradient(135deg, #2B80F0, #5FA8FF)', boxShadow: '0 0 32px rgba(43,128,240,0.25)' }}>
                   <CheckCircle className="w-10 h-10 text-white" />
                 </div>
                 <h3 className="text-2xl font-black mb-2" style={{ color: '#0B1628' }}>You&apos;re In!</h3>

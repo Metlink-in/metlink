@@ -5,9 +5,9 @@ import { getCategoryBySlug, serviceCategories } from '@/lib/services-data';
 
 const catColors: Record<string, string> = {
   'digital-marketing':    '#2B80F0',
-  'creative-media':       '#D97706',
-  'ai-automation':        '#16A34A',
-  'software-development': '#2563EB',
+  'creative-media':       '#2B80F0',
+  'ai-automation':        '#2B80F0',
+  'software-development': '#2B80F0',
 };
 
 export async function generateStaticParams() {

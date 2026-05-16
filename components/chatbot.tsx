@@ -80,7 +80,7 @@ export function ChatBot() {
           <div className="relative px-5 py-4 flex items-center gap-3 overflow-hidden"
             style={{ background: '#FAF9F6', borderBottom: '1px solid #E5DDD5' }}>
             <div className="absolute top-0 left-0 right-0 h-0.5"
-              style={{ background: 'linear-gradient(90deg, #2B80F0, #4B9CF4, #2B80F0)' }} />
+              style={{ background: 'linear-gradient(90deg, #2B80F0, #5FA8FF, #2B80F0)' }} />
 
             <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 text-white"
               style={{ background: '#2B80F0', boxShadow: '0 4px 14px rgba(43,128,240,0.3)' }}>
@@ -93,7 +93,7 @@ export function ChatBot() {
                 <Sparkles className="w-3 h-3" style={{ color: '#2B80F0' }} />
               </div>
               <p className="text-[10px] uppercase font-bold tracking-[0.15em] flex items-center gap-1.5"
-                style={{ color: '#16A34A' }}>
+                style={{ color: '#2B80F0' }}>
                 <span className="w-1.5 h-1.5 rounded-full bg-green-500" />
                 Online · Powered by Gemini
               </p>

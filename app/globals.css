@@ -44,7 +44,7 @@
   --border-color: rgba(255,255,255,0.06);
   --primary:      #2B80F0;
   --primary-foreground: #FFFFFF;
-  --primary-light: #111827;
+  --primary-light: #0A1F3A;
   --primary-dark:  #1A6BD6;
 }
 
@@ -90,7 +90,7 @@ nav button, nav a { min-height: unset; min-width: unset; }
 @keyframes shimmer      { 0% { background-position:-200% center; } 100% { background-position:200% center; } }
 @keyframes pulseGlow    { 0%,100% { opacity:0.35; transform:scale(1); } 50% { opacity:0.7; transform:scale(1.04); } }
 @keyframes gradientShift{ 0% { background-position:0% 50%; } 50% { background-position:100% 50%; } 100% { background-position:0% 50%; } }
-@keyframes borderGlow   { 0%,100% { border-color:rgba(43,128,240,.2); box-shadow:0 0 10px rgba(43,128,240,.07); } 50% { border-color:rgba(75,156,244,.4); box-shadow:0 0 20px rgba(75,156,244,.14); } }
+@keyframes borderGlow   { 0%,100% { border-color:rgba(43,128,240,.2); box-shadow:0 0 10px rgba(43,128,240,.07); } 50% { border-color:rgba(95,168,255,.4); box-shadow:0 0 20px rgba(95,168,255,.14); } }
 @keyframes blob         { 0%,100% { border-radius:60% 40% 30% 70%/60% 30% 70% 40%; } 33% { border-radius:30% 60% 70% 40%/50% 60% 30% 60%; } 66% { border-radius:50% 60% 30% 60%/30% 50% 70% 40%; } }
 @keyframes ping         { 75%,100% { transform:scale(2); opacity:0; } }
 @keyframes scroll       { from { transform:translateX(0); } to { transform:translateX(-50%); } }
@@ -113,7 +113,7 @@ nav button, nav a { min-height: unset; min-width: unset; }
 
 /* ── Gradient text ── */
 .gradient-text-cyan {
-  background: linear-gradient(135deg, #1A6BD6 0%, #2B80F0 50%, #4B9CF4 100%);
+  background: linear-gradient(135deg, #1A6BD6 0%, #2B80F0 50%, #5FA8FF 100%);
   background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -121,7 +121,7 @@ nav button, nav a { min-height: unset; min-width: unset; }
   animation: shimmer 3s linear infinite;
 }
 .gradient-text-accent {
-  background: linear-gradient(135deg, #2B80F0, #4B9CF4);
+  background: linear-gradient(135deg, #2B80F0, #5FA8FF);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -135,10 +135,10 @@ nav button, nav a { min-height: unset; min-width: unset; }
   border: 1px solid var(--glass-border);
 }
 
-/* ── PRIMARY BUTTON — white bg / black text ── */
+/* ── PRIMARY BUTTON — yellow bg / black text ── */
 .btn-primary {
-  background: #FFFFFF;
-  color: #07111F;
+  background: #2B80F0;
+  color: #FFFFFF;
   border: 1px solid transparent;
   font-weight: 500;
   font-family: var(--font-sans);
@@ -179,8 +179,8 @@ nav button, nav a { min-height: unset; min-width: unset; }
   color: rgba(255,255,255,0.85);
 }
 .btn-primary-glass {
-  background: #FFFFFF;
-  color: #07111F;
+  background: #2B80F0;
+  color: #FFFFFF;
   border: 1px solid transparent;
   font-weight: 500;
   transition: opacity 0.2s ease, transform 0.18s ease;
@@ -193,7 +193,7 @@ nav button, nav a { min-height: unset; min-width: unset; }
 .glow-border { position:relative; }
 .glow-border::before {
   content:''; position:absolute; inset:-1px; border-radius:inherit;
-  background: linear-gradient(135deg, rgba(43,128,240,.3), rgba(75,156,244,.3));
+  background: linear-gradient(135deg, rgba(43,128,240,.3), rgba(95,168,255,.3));
   z-index:-1; opacity:0; transition:opacity .3s;
 }
 .glow-border:hover::before { opacity:1; }

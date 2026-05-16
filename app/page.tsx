@@ -71,7 +71,7 @@ const services = [
     ],
   },
   {
-    num: '02', color: '#D97706', Icon: Palette,
+    num: '02', color: '#2B80F0', Icon: Palette,
     tabLabel: 'Creative',
     title: 'Creative Media',
     subtitle: 'Visual Brand Systems',
@@ -94,7 +94,7 @@ const services = [
     ],
   },
   {
-    num: '03', color: '#16A34A', Icon: Bot,
+    num: '03', color: '#2B80F0', Icon: Bot,
     tabLabel: 'AI Agents',
     title: 'AI & Automation',
     subtitle: 'Intelligent Automation Systems',
@@ -117,7 +117,7 @@ const services = [
     ],
   },
   {
-    num: '04', color: '#2563EB', Icon: Code,
+    num: '04', color: '#2B80F0', Icon: Code,
     tabLabel: 'Dev',
     title: 'Software Development',
     subtitle: 'Full-Stack Product Engineering',
@@ -189,7 +189,7 @@ const techStack = [
     ],
   },
   {
-    service: 'Creative Media', color: '#D97706', Icon: Palette,
+    service: 'Creative Media', color: '#2B80F0', Icon: Palette,
     tools: [
       { name: 'Figma',        cat: 'UI Design' },
       { name: 'After Effects', cat: 'Motion' },
@@ -200,7 +200,7 @@ const techStack = [
     ],
   },
   {
-    service: 'AI & Automation', color: '#16A34A', Icon: Bot,
+    service: 'AI & Automation', color: '#2B80F0', Icon: Bot,
     tools: [
       { name: 'GPT-4o',       cat: 'LLM' },
       { name: 'Claude 3.5',   cat: 'LLM' },
@@ -211,7 +211,7 @@ const techStack = [
     ],
   },
   {
-    service: 'Software Dev', color: '#2563EB', Icon: Code,
+    service: 'Software Dev', color: '#2B80F0', Icon: Code,
     tools: [
       { name: 'Next.js',      cat: 'Frontend' },
       { name: 'Supabase',     cat: 'Database' },
@@ -268,22 +268,22 @@ export default function HomePage() {
             style={{ background: 'radial-gradient(ellipse at center, rgba(43,128,240,0.22) 0%, rgba(43,128,240,0.08) 40%, transparent 68%)', filter: 'blur(60px)' }} />
           {/* Top-left orb */}
           <div className="absolute -top-40 -left-20 w-[560px] h-[560px]"
-            style={{ background: 'radial-gradient(circle, rgba(37,99,235,0.14) 0%, transparent 65%)', filter: 'blur(70px)' }} />
+            style={{ background: 'radial-gradient(circle, rgba(43,128,240,0.14) 0%, transparent 65%)', filter: 'blur(70px)' }} />
           {/* Bottom-right orb */}
           <div className="absolute bottom-0 right-0 w-[480px] h-[480px]"
             style={{ background: 'radial-gradient(circle, rgba(43,128,240,0.1) 0%, transparent 65%)', filter: 'blur(80px)' }} />
           {/* Vignette edges */}
           <div className="absolute inset-0"
-            style={{ background: 'radial-gradient(ellipse at center, transparent 40%, rgba(5,11,20,0.7) 100%)' }} />
+            style={{ background: 'radial-gradient(ellipse at center, transparent 40%, rgba(2,2,2,0.7) 100%)' }} />
           {/* Bottom fade */}
           <div className="absolute bottom-0 inset-x-0 h-48"
-            style={{ background: 'linear-gradient(to top, #050B14 0%, transparent 100%)' }} />
+            style={{ background: 'linear-gradient(to top, #020202 0%, transparent 100%)' }} />
         </div>
 
         {/* ── Floating card — left (deploy metric) ── */}
         <div className="absolute bottom-[24%] left-[4%] hidden xl:block animate-float" style={{ zIndex: 20, animationDelay: '0.6s', width: 180 }}>
           <div className="p-5 rounded-2xl"
-            style={{ background: 'rgba(5,11,20,0.75)', border: '1px solid rgba(255,255,255,0.09)', boxShadow: '0 32px 80px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.07)', backdropFilter: 'blur(28px)' }}>
+            style={{ background: 'rgba(2,2,2,0.75)', border: '1px solid rgba(255,255,255,0.09)', boxShadow: '0 32px 80px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.07)', backdropFilter: 'blur(28px)' }}>
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
@@ -305,7 +305,7 @@ export default function HomePage() {
         {/* ── Floating card — right top (testimonial) ── */}
         <div className="absolute top-[20%] right-[4%] w-[256px] hidden xl:block animate-float" style={{ zIndex: 20, animationDelay: '0.2s' }}>
           <div className="p-5 rounded-2xl"
-            style={{ background: 'rgba(5,11,20,0.75)', border: '1px solid rgba(255,255,255,0.09)', boxShadow: '0 32px 80px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.07)', backdropFilter: 'blur(28px)' }}>
+            style={{ background: 'rgba(2,2,2,0.75)', border: '1px solid rgba(255,255,255,0.09)', boxShadow: '0 32px 80px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.07)', backdropFilter: 'blur(28px)' }}>
             <div className="flex items-center justify-between mb-3.5">
               <div className="flex gap-0.5">
                 {[0,1,2,3,4].map(i => <Star key={i} className="w-3 h-3 fill-current" style={{ color: '#FBBF24' }} />)}
@@ -330,9 +330,9 @@ export default function HomePage() {
         {/* ── Floating card — right bottom (ROAS metric) ── */}
         <div className="absolute bottom-[26%] right-[4%] w-[200px] hidden xl:block animate-float" style={{ zIndex: 20, animationDelay: '1s' }}>
           <div className="p-4 rounded-2xl"
-            style={{ background: 'rgba(5,11,20,0.75)', border: '1px solid rgba(255,255,255,0.09)', boxShadow: '0 32px 80px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.07)', backdropFilter: 'blur(28px)' }}>
+            style={{ background: 'rgba(2,2,2,0.75)', border: '1px solid rgba(255,255,255,0.09)', boxShadow: '0 32px 80px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.07)', backdropFilter: 'blur(28px)' }}>
             <div className="flex items-center gap-2 mb-3">
-              <div className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ background: 'rgba(22,163,74,0.15)', border: '1px solid rgba(22,163,74,0.25)' }}>
+              <div className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ background: 'rgba(43,128,240,0.15)', border: '1px solid rgba(43,128,240,0.25)' }}>
                 <TrendingUp className="w-3.5 h-3.5" style={{ color: '#4ADE80' }} />
               </div>
               <span className="text-[10px] uppercase tracking-[0.18em]" style={{ color: 'rgba(255,255,255,0.3)' }}>ROAS</span>
@@ -351,7 +351,7 @@ export default function HomePage() {
               <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
               AI Marketing &amp; Development Agency
               <span className="w-px h-3" style={{ background: 'rgba(255,255,255,0.15)' }} />
-              <span style={{ color: '#4B9CF4' }}>150+ projects shipped</span>
+              <span style={{ color: '#5FA8FF' }}>150+ projects shipped</span>
             </div>
           </FadeIn>
 
@@ -361,7 +361,7 @@ export default function HomePage() {
               <span style={{ color: 'rgba(255,255,255,0.9)', display: 'block' }}>We build</span>
               <span style={{
                 display: 'block',
-                background: 'linear-gradient(135deg, #60A5FA 0%, #2B80F0 40%, #1D4ED8 100%)',
+                background: 'linear-gradient(135deg, #5FA8FF 0%, #2B80F0 40%, #1A6BD6 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
@@ -414,9 +414,9 @@ export default function HomePage() {
         </FadeIn>
         <div className="relative">
           <div className="absolute inset-y-0 left-0 w-32 sm:w-48 z-10 pointer-events-none"
-            style={{ background: 'linear-gradient(to right, #0B1628, transparent)' }} />
+            style={{ background: 'linear-gradient(to right, #0C0C0C, transparent)' }} />
           <div className="absolute inset-y-0 right-0 w-32 sm:w-48 z-10 pointer-events-none"
-            style={{ background: 'linear-gradient(to left, #0B1628, transparent)' }} />
+            style={{ background: 'linear-gradient(to left, #0C0C0C, transparent)' }} />
           <div style={{ overflow: 'hidden' }}>
             <div style={{ display: 'flex', width: 'max-content', animation: 'scroll 55s linear infinite', alignItems: 'center', padding: '12px 0' }}>
               {[...integrations, ...integrations].map((name, i) => (
@@ -696,49 +696,49 @@ export default function HomePage() {
             </Link>
           </FadeIn>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div className="rounded-2xl overflow-hidden" style={{ border: '1px solid rgba(255,255,255,0.07)' }}>
             {techStack.map((cat, ci) => {
               const CatIcon = cat.Icon;
               return (
-                <FadeIn key={cat.service} delay={ci * 0.07}>
-                  <div className="rounded-2xl h-full flex flex-col overflow-hidden transition-all duration-300 hover:-translate-y-2"
-                    style={{ background: 'rgba(255,255,255,0.025)', border: '1px solid rgba(255,255,255,0.07)' }}
-                    onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = `${cat.color}55`; el.style.background = 'rgba(255,255,255,0.04)'; el.style.boxShadow = `0 16px 48px ${cat.color}10`; }}
-                    onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = 'rgba(255,255,255,0.07)'; el.style.background = 'rgba(255,255,255,0.025)'; el.style.boxShadow = 'none'; }}>
+                <FadeIn key={cat.service} delay={ci * 0.06}>
+                  <div
+                    className="flex flex-col lg:flex-row lg:items-center gap-5 px-6 py-5 transition-all duration-200 cursor-default"
+                    style={{
+                      borderBottom: ci < techStack.length - 1 ? '1px solid rgba(255,255,255,0.05)' : 'none',
+                      background: 'rgba(255,255,255,0.015)',
+                    }}
+                    onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(43,128,240,0.028)'; }}
+                    onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.015)'; }}>
 
-                    {/* Gradient header */}
-                    <div className="px-5 pt-5 pb-4"
-                      style={{ background: `linear-gradient(135deg, ${cat.color}14 0%, transparent 100%)`, borderBottom: `1px solid ${cat.color}1A` }}>
-                      <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
-                          style={{ background: `${cat.color}1C`, border: `1px solid ${cat.color}35`, boxShadow: `0 4px 14px ${cat.color}18` }}>
-                          <CatIcon className="w-[18px] h-[18px]" style={{ color: cat.color }} />
-                        </div>
-                        <div>
-                          <p className="text-sm font-medium leading-tight" style={{ color: 'rgba(255,255,255,0.88)' }}>{cat.service}</p>
-                          <p className="text-[10px] mt-0.5" style={{ color: 'rgba(255,255,255,0.3)' }}>{cat.tools.length} tools</p>
-                        </div>
+                    {/* Left: service label */}
+                    <div className="flex items-center gap-3 shrink-0 lg:w-52">
+                      <div className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0"
+                        style={{ background: 'rgba(43,128,240,0.12)', border: '1px solid rgba(43,128,240,0.28)', boxShadow: '0 4px 12px rgba(43,128,240,0.1)' }}>
+                        <CatIcon className="w-4 h-4" style={{ color: '#2B80F0' }} />
+                      </div>
+                      <div>
+                        <p className="text-sm font-medium" style={{ color: 'rgba(255,255,255,0.82)' }}>{cat.service}</p>
+                        <p className="text-[10px] mt-0.5" style={{ color: 'rgba(255,255,255,0.28)' }}>{cat.tools.length} tools</p>
                       </div>
                     </div>
 
-                    {/* Tools list */}
-                    <div className="flex flex-col px-3 py-3 gap-0.5 flex-1">
-                      {cat.tools.map((tool, ti) => (
-                        <div key={tool.name}
-                          className="flex items-center justify-between gap-2 px-2 py-2 rounded-xl transition-all duration-150 cursor-default"
-                          onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = `${cat.color}0C`; }}
-                          onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = 'transparent'; }}>
-                          <div className="flex items-center gap-2 min-w-0">
-                            <span className="text-[9px] tabular-nums font-medium shrink-0" style={{ color: `${cat.color}80`, minWidth: 16 }}>
-                              {String(ti + 1).padStart(2, '0')}
-                            </span>
-                            <span className="text-[13px] truncate" style={{ color: 'rgba(255,255,255,0.7)' }}>{tool.name}</span>
-                          </div>
-                          <span className="text-[9px] px-2 py-0.5 rounded-full shrink-0 font-medium tracking-wide"
-                            style={{ background: `${cat.color}14`, border: `1px solid ${cat.color}30`, color: cat.color }}>
+                    {/* Desktop divider */}
+                    <div className="hidden lg:block w-px h-8 shrink-0" style={{ background: 'rgba(255,255,255,0.06)' }} />
+
+                    {/* Tool chips */}
+                    <div className="flex flex-wrap gap-2">
+                      {cat.tools.map(tool => (
+                        <span key={tool.name}
+                          className="inline-flex items-center gap-2 text-[12px] px-3 py-1.5 rounded-full transition-all duration-150"
+                          style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.6)' }}
+                          onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = 'rgba(43,128,240,0.4)'; el.style.color = 'rgba(255,255,255,0.9)'; el.style.background = 'rgba(43,128,240,0.07)'; }}
+                          onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = 'rgba(255,255,255,0.08)'; el.style.color = 'rgba(255,255,255,0.6)'; el.style.background = 'rgba(255,255,255,0.04)'; }}>
+                          {tool.name}
+                          <span className="text-[9px] px-1.5 py-0.5 rounded-full font-medium"
+                            style={{ background: 'rgba(43,128,240,0.14)', color: '#2B80F0', border: '1px solid rgba(43,128,240,0.22)' }}>
                             {tool.cat}
                           </span>
-                        </div>
+                        </span>
                       ))}
                     </div>
                   </div>
@@ -787,14 +787,14 @@ export default function HomePage() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeIn>
             <div className="relative overflow-hidden rounded-3xl"
-              style={{ background: 'linear-gradient(120deg, #0F2952 0%, #1A4BAD 45%, #0D1F4A 100%)' }}>
+              style={{ background: '#050E1A', border: '1px solid rgba(43,128,240,0.18)', boxShadow: '0 0 80px rgba(43,128,240,0.06), inset 0 1px 0 rgba(43,128,240,0.08)' }}>
 
               {/* Background glow */}
               <div className="absolute inset-0 pointer-events-none">
-                <div className="absolute top-0 left-1/4 w-[500px] h-[300px]"
-                  style={{ background: 'radial-gradient(ellipse, rgba(75,156,244,0.25) 0%, transparent 70%)', filter: 'blur(50px)' }} />
-                <div className="absolute bottom-0 right-1/3 w-[300px] h-[200px]"
-                  style={{ background: 'radial-gradient(ellipse, rgba(43,128,240,0.2) 0%, transparent 70%)', filter: 'blur(40px)' }} />
+                <div className="absolute top-0 left-1/4 w-[600px] h-[320px]"
+                  style={{ background: 'radial-gradient(ellipse, rgba(43,128,240,0.12) 0%, transparent 70%)', filter: 'blur(60px)' }} />
+                <div className="absolute bottom-0 right-0 w-[400px] h-[300px]"
+                  style={{ background: 'radial-gradient(ellipse, rgba(43,128,240,0.07) 0%, transparent 70%)', filter: 'blur(50px)' }} />
               </div>
 
               <div className="relative z-10 flex flex-col lg:flex-row items-center">
@@ -806,7 +806,7 @@ export default function HomePage() {
                   </p>
                   <h2 className="mb-5 leading-[1.05]"
                     style={{ color: '#FFFFFF', fontSize: 'clamp(1.8rem,3.5vw,3rem)', fontWeight: 300, letterSpacing: '-0.03em', maxWidth: 480 }}>
-                    Let&apos;s Turn Ideas Into <span style={{ color: '#60A5FA' }}>Execution</span>
+                    Let&apos;s Turn Ideas Into <span style={{ color: '#5FA8FF' }}>Execution</span>
                   </h2>
                   <p className="mb-8 max-w-md" style={{ color: 'rgba(255,255,255,0.52)', fontSize: '0.95rem', fontWeight: 300, lineHeight: 1.75 }}>
                     Need support with your tech roadmap? Our team works closely with you to define priorities and deliver steady progress.

@@ -15,11 +15,11 @@ const values = [
 
 const team = [
   { name: 'Aryan Shah',   role: 'Founder & CEO',            specialty: 'AI Strategy & Business Development', initials: 'AS', color: '#2B80F0' },
-  { name: 'Priya Nair',   role: 'CTO & Lead Architect',      specialty: 'AI Systems & Cloud Infrastructure',  initials: 'PN', color: '#2563EB' },
-  { name: 'Rahul Mehta',  role: 'Head of Engineering',        specialty: 'Full-Stack & Backend Systems',       initials: 'RM', color: '#16A34A' },
-  { name: 'Neha Kapoor',  role: 'Creative Director',          specialty: 'Brand Identity & UI/UX Design',      initials: 'NK', color: '#D97706' },
+  { name: 'Priya Nair',   role: 'CTO & Lead Architect',      specialty: 'AI Systems & Cloud Infrastructure',  initials: 'PN', color: '#2B80F0' },
+  { name: 'Rahul Mehta',  role: 'Head of Engineering',        specialty: 'Full-Stack & Backend Systems',       initials: 'RM', color: '#2B80F0' },
+  { name: 'Neha Kapoor',  role: 'Creative Director',          specialty: 'Brand Identity & UI/UX Design',      initials: 'NK', color: '#2B80F0' },
   { name: 'Vikram Patel', role: 'Performance Marketing Lead', specialty: 'Paid Media & Growth Strategy',       initials: 'VP', color: '#2B80F0' },
-  { name: 'Aisha Khan',   role: 'AI/ML Engineer',             specialty: 'Machine Learning & NLP',             initials: 'AK', color: '#2563EB' },
+  { name: 'Aisha Khan',   role: 'AI/ML Engineer',             specialty: 'Machine Learning & NLP',             initials: 'AK', color: '#2B80F0' },
 ];
 
 const milestones = [

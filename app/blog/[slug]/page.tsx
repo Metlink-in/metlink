@@ -54,7 +54,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           <div className="inline-flex items-center gap-4 p-5 rounded-2xl"
             style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.07)', boxShadow: '0 2px 12px rgba(0,0,0,0.05)' }}>
             <div className="w-12 h-12 rounded-xl flex items-center justify-center font-black text-lg shrink-0"
-              style={{ background: 'rgba(43,128,240,0.15)', border: '1px solid rgba(43,128,240,0.2)', color: '#4B9CF4' }}>
+              style={{ background: 'rgba(43,128,240,0.15)', border: '1px solid rgba(43,128,240,0.2)', color: '#5FA8FF' }}>
               {post.author.split(' ').map((n: string) => n[0]).join('')}
             </div>
             <div>
@@ -124,7 +124,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           <div className="mt-12 p-8 rounded-3xl flex gap-6 items-start"
             style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.07)' }}>
             <div className="w-16 h-16 rounded-2xl flex items-center justify-center font-black text-xl flex-shrink-0"
-              style={{ background: 'rgba(43,128,240,0.15)', border: '1px solid rgba(43,128,240,0.2)', color: '#4B9CF4' }}>
+              style={{ background: 'rgba(43,128,240,0.15)', border: '1px solid rgba(43,128,240,0.2)', color: '#5FA8FF' }}>
               {post.author.split(' ').map((n: string) => n[0]).join('')}
             </div>
             <div>

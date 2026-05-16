@@ -134,12 +134,12 @@ export default function ContactPage() {
             <FadeIn delay={0.15} className="lg:col-span-3">
               <div className="rounded-3xl overflow-hidden"
                 style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.07)', boxShadow: '0 4px 32px rgba(0,0,0,0.3)' }}>
-                <div className="h-1" style={{ background: 'linear-gradient(90deg, #2B80F0, #4B9CF4, #2B80F0)' }} />
+                <div className="h-1" style={{ background: 'linear-gradient(90deg, #2B80F0, #5FA8FF, #2B80F0)' }} />
                 <div className="p-8 md:p-10">
                   {submitted ? (
                     <div className="text-center py-16 animate-fadeInScale">
                       <div className="w-24 h-24 rounded-2xl flex items-center justify-center mx-auto mb-6"
-                        style={{ background: 'linear-gradient(135deg, #2B80F0, #4B9CF4)', boxShadow: '0 0 40px rgba(43,128,240,0.2)' }}>
+                        style={{ background: 'linear-gradient(135deg, #2B80F0, #5FA8FF)', boxShadow: '0 0 40px rgba(43,128,240,0.2)' }}>
                         <CheckCircle className="w-12 h-12 text-white" />
                       </div>
                       <h3 className="text-3xl font-black mb-3" style={{ color: '#FFFFFF' }}>Message Received!</h3>
