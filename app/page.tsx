@@ -611,37 +611,46 @@ export default function HomePage() {
       </section>
 
       {/* ══ CTA ════════════════════════════════════════════════ */}
-      <section id="contact" className="py-24 sm:py-32" style={{ background: BG }}>
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="contact" className="py-16 sm:py-24" style={{ background: BG }}>
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeIn>
-            <div className="relative rounded-3xl overflow-hidden text-center px-8 sm:px-16 py-20 sm:py-24"
-              style={{ background: '#0B1628', border: '1px solid rgba(255,255,255,0.06)' }}>
-              {/* Subtle glow */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] pointer-events-none"
-                style={{ background: 'radial-gradient(ellipse, rgba(43,128,240,0.1) 0%, transparent 65%)', filter: 'blur(60px)' }} />
+            <div className="relative rounded-[28px] overflow-hidden text-center px-8 sm:px-16 py-16 sm:py-20"
+              style={{ background: '#0C1829', boxShadow: '0 40px 100px rgba(0,0,0,0.4)', border: '1px solid rgba(255,255,255,0.07)' }}>
+              {/* Glows */}
+              <div className="absolute -top-20 -right-20 w-[560px] h-[560px] pointer-events-none"
+                style={{ background: 'radial-gradient(circle, rgba(43,128,240,0.5) 0%, rgba(43,128,240,0.15) 40%, transparent 70%)', filter: 'blur(60px)' }} />
+              <div className="absolute -bottom-20 -left-20 w-[380px] h-[380px] pointer-events-none"
+                style={{ background: 'radial-gradient(circle, rgba(16,60,120,0.6) 0%, transparent 65%)', filter: 'blur(80px)' }} />
 
               <div className="relative z-10 flex flex-col items-center">
-                <p className="label-overline mb-8">Let&apos;s build together</p>
+                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-[11px] font-semibold mb-7 btn-glass"
+                  style={{ color: 'rgba(200,215,255,0.6)' }}>
+                  Let&apos;s build together
+                </div>
 
-                <h2 className="mb-6"
-                  style={{ color: 'rgba(255,255,255,0.92)', fontWeight: 300, letterSpacing: '-0.04em' }}>
+                <h2 className="font-black leading-[1.05] mb-5"
+                  style={{ fontSize: 'clamp(2.2rem,5vw,4rem)', fontFamily: PF, color: '#F0F4FF' }}>
                   Ready to scale with{' '}
-                  <em style={{ fontStyle: 'italic', fontFamily: PF }}>AI?</em>
+                  <em style={{ fontStyle: 'italic', color: '#4B9CF4' }}>AI?</em>
                 </h2>
 
-                <p className="mb-12 max-w-md mx-auto"
-                  style={{ color: 'rgba(255,255,255,0.38)', fontSize: '1rem', fontWeight: 300, lineHeight: 1.8 }}>
+                <p className="text-base sm:text-lg mb-10 max-w-xl leading-relaxed"
+                  style={{ color: 'rgba(200,215,255,0.5)' }}>
                   Book a free 30-min strategy call. No commitments — just clarity on what AI can do for your business.
                 </p>
 
                 <div className="flex flex-wrap gap-3 justify-center">
                   <a href="mailto:hello@metlink.ai"
-                    className="group inline-flex items-center gap-2 px-8 py-4 rounded-full text-sm btn-primary">
+                    className="group inline-flex items-center gap-2 px-8 py-4 rounded-full font-bold text-sm text-white transition-all"
+                    style={{ background: 'linear-gradient(135deg,#2B80F0 0%,#1A6BD6 100%)', border: '1px solid rgba(255,255,255,0.22)', boxShadow: '0 4px 20px rgba(43,128,240,0.35), inset 0 1px 0 rgba(255,255,255,0.25)' }}
+                    onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.boxShadow = '0 6px 28px rgba(43,128,240,0.5),inset 0 1px 0 rgba(255,255,255,0.3)'; el.style.transform = 'translateY(-1px)'; }}
+                    onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.boxShadow = '0 4px 20px rgba(43,128,240,0.35),inset 0 1px 0 rgba(255,255,255,0.25)'; el.style.transform = 'none'; }}>
                     Book your strategy call
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
                   </a>
                   <Link href="/services"
-                    className="inline-flex items-center px-8 py-4 rounded-full text-sm btn-outline">
+                    className="inline-flex items-center px-8 py-4 rounded-full font-semibold text-sm btn-glass"
+                    style={{ color: 'rgba(200,215,255,0.7)' }}>
                     See services
                   </Link>
                 </div>
