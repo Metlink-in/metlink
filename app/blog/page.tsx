@@ -12,11 +12,11 @@ export default function BlogPage() {
   const rest      = blogPosts.slice(1);
 
   return (
-    <div className="w-full overflow-x-hidden" style={{ background: '#07111F' }}>
+    <div className="w-full overflow-x-hidden" style={{ background: '#050505' }}>
 
       {/* Hero */}
       <section className="relative py-20 sm:py-28 overflow-hidden"
-        style={{ background: '#07111F' }}>
+        style={{ background: '#050505' }}>
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px] rounded-full pointer-events-none"
           style={{ background: 'radial-gradient(ellipse, rgba(43,128,240,0.18) 0%, transparent 70%)', filter: 'blur(80px)' }} />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
@@ -42,7 +42,7 @@ export default function BlogPage() {
 
       {/* Filters */}
       <section className="py-4 sticky top-16 z-40"
-        style={{ background: 'rgba(6,13,26,0.95)', borderTop: '1px solid rgba(255,255,255,0.12)', borderBottom: '1px solid rgba(255,255,255,0.12)', backdropFilter: 'blur(16px)' }}>
+        style={{ background: 'rgba(5,5,5,0.95)', borderTop: '1px solid rgba(255,255,255,0.12)', borderBottom: '1px solid rgba(255,255,255,0.12)', backdropFilter: 'blur(16px)' }}>
         <div className="max-w-7xl mx-auto px-4 flex gap-2.5 overflow-x-auto pb-1">
           {categories.map((cat, i) => (
             <button key={cat}
@@ -57,7 +57,7 @@ export default function BlogPage() {
       </section>
 
       {/* Featured */}
-      <section className="py-14" style={{ background: '#0B1628' }}>
+      <section className="py-14" style={{ background: '#0A0A0A' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeIn>
             <p className="text-xs font-black uppercase tracking-[0.25em] mb-6" style={{ color: '#2B80F0' }}>Featured Article</p>
@@ -102,7 +102,7 @@ export default function BlogPage() {
                 <div className="flex flex-wrap gap-2 mb-6">
                   {featured.tags.map(tag => (
                     <span key={tag} className="px-3 py-1 rounded-full text-xs"
-                      style={{ border: '1px solid rgba(255,255,255,0.12)', color: 'rgba(255,255,255,0.4)', background: '#0B1628' }}>{tag}</span>
+                      style={{ border: '1px solid rgba(255,255,255,0.12)', color: 'rgba(255,255,255,0.4)', background: '#0A0A0A' }}>{tag}</span>
                   ))}
                 </div>
                 <span className="inline-flex items-center gap-2 text-sm font-bold group-hover:gap-3 transition-all" style={{ color: '#2B80F0' }}>
@@ -115,7 +115,7 @@ export default function BlogPage() {
       </section>
 
       {/* Grid */}
-      <section className="py-8 pb-24" style={{ background: '#07111F' }}>
+      <section className="py-8 pb-24" style={{ background: '#050505' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeIn>
             <p className="text-xs font-black uppercase tracking-[0.25em] mb-8" style={{ color: 'rgba(255,255,255,0.4)' }}>Latest Articles</p>
@@ -169,7 +169,7 @@ export default function BlogPage() {
       </section>
 
       {/* Newsletter CTA */}
-      <section className="py-16 sm:py-24 relative" style={{ background: '#0B1628', borderTop: '1px solid rgba(255,255,255,0.12)' }}>
+      <section className="py-16 sm:py-24 relative" style={{ background: '#0A0A0A', borderTop: '1px solid rgba(255,255,255,0.12)' }}>
         <div className="absolute inset-0 pointer-events-none"
           style={{ background: 'radial-gradient(ellipse at 50% 50%, rgba(43,128,240,0.12), transparent 65%)' }} />
         <FadeIn className="max-w-3xl mx-auto px-4 text-center relative z-10">

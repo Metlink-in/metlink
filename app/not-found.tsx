@@ -6,7 +6,7 @@ import { Home, ArrowLeft } from 'lucide-react';
 export default function NotFound() {
   return (
     <main className="w-full min-h-screen flex items-center justify-center overflow-hidden pt-20 relative"
-      style={{ background: '#07111F' }}>
+      style={{ background: '#050505' }}>
 
       {/* Radish glow */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">

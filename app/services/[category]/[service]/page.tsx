@@ -24,11 +24,11 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
   const accent = catColors[catData.slug] || '#2B80F0';
 
   return (
-    <div className="w-full overflow-x-hidden" style={{ background: '#07111F' }}>
+    <div className="w-full overflow-x-hidden" style={{ background: '#050505' }}>
 
       {/* Hero */}
       <section className="relative py-20 sm:py-28 overflow-hidden"
-        style={{ background: '#07111F' }}>
+        style={{ background: '#050505' }}>
         <div className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full pointer-events-none"
           style={{ background: `radial-gradient(circle, ${accent}08 0%, transparent 70%)`, filter: 'blur(80px)' }} />
 
@@ -58,7 +58,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
       </section>
 
       {/* Core Features */}
-      <section className="py-16 sm:py-24" style={{ background: '#0B1628', borderTop: '1px solid rgba(255,255,255,0.12)' }}>
+      <section className="py-16 sm:py-24" style={{ background: '#0A0A0A', borderTop: '1px solid rgba(255,255,255,0.12)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-start">
             <div>
@@ -83,7 +83,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
 
       {/* Subfeatures */}
       {svcData.subFeatures && (
-        <section className="py-16 sm:py-24" style={{ background: '#07111F', borderTop: '1px solid rgba(255,255,255,0.12)' }}>
+        <section className="py-16 sm:py-24" style={{ background: '#050505', borderTop: '1px solid rgba(255,255,255,0.12)' }}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid md:grid-cols-2 gap-6">
               {svcData.subFeatures.map((sub) => (
@@ -112,7 +112,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
       )}
 
       {/* CTA */}
-      <section className="py-16 sm:py-24 relative overflow-hidden" style={{ background: '#0B1628', borderTop: '1px solid rgba(255,255,255,0.12)' }}>
+      <section className="py-16 sm:py-24 relative overflow-hidden" style={{ background: '#0A0A0A', borderTop: '1px solid rgba(255,255,255,0.12)' }}>
         <div className="absolute inset-0 pointer-events-none"
           style={{ background: 'radial-gradient(ellipse at 50% 50%, rgba(43,128,240,0.12), transparent 65%)' }} />
         <div className="max-w-4xl mx-auto px-4 text-center relative z-10">

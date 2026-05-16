@@ -173,9 +173,9 @@ const faqData = [
 ];
 
 const PF   = 'var(--font-playfair)';
-const BG   = '#07111F';
-const BG2  = '#0B1628';
-const BDR  = '1px solid rgba(255,255,255,0.09)';
+const BG   = '#050505';
+const BG2  = '#0A0A0A';
+const BDR  = '1px solid rgba(255,255,255,0.05)';
 const AC   = '#2B80F0';
 
 /* ─── Component ─────────────────────────────────────────────── */
@@ -187,42 +187,40 @@ export default function HomePage() {
     <div className="w-full overflow-x-hidden" style={{ background: BG }}>
 
       {/* ══ HERO ══════════════════════════════════════════════ */}
-      <section className="relative overflow-hidden" style={{ background: '#060D1A', minHeight: '100vh' }}>
-        {/* Glow */}
+      <section className="relative overflow-hidden" style={{ background: '#050505', minHeight: '100vh' }}>
+        {/* Subtle glow */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1200px] h-[800px] rounded-full"
-            style={{ background: 'radial-gradient(ellipse, rgba(43,128,240,0.32) 0%, rgba(43,128,240,0.12) 40%, transparent 65%)', filter: 'blur(70px)' }} />
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] rounded-full"
-            style={{ background: 'radial-gradient(ellipse, rgba(43,128,240,0.08) 0%, transparent 60%)', filter: 'blur(60px)' }} />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[600px] rounded-full"
+            style={{ background: 'radial-gradient(ellipse, rgba(43,128,240,0.12) 0%, rgba(43,128,240,0.04) 50%, transparent 70%)', filter: 'blur(80px)' }} />
         </div>
         {/* Noise */}
         <div className="absolute inset-0 pointer-events-none opacity-[0.022]"
           style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E\")" }} />
 
         {/* Floating metric card */}
-        <div className="absolute bottom-[18%] left-[4%] hidden lg:block animate-float" style={{ zIndex: 20, animationDelay: '1s', width: 168 }}>
-          <div className="p-4 rounded-2xl"
-            style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)', boxShadow: '0 20px 60px rgba(0,0,0,0.4)', backdropFilter: 'blur(16px)' }}>
-            <div className="flex items-center gap-1.5 mb-2">
-              <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-              <p className="text-[9px] font-black uppercase tracking-[0.2em]" style={{ color: 'rgba(255,255,255,0.45)' }}>Live Deploy</p>
+        <div className="absolute bottom-[18%] left-[4%] hidden lg:block animate-float" style={{ zIndex: 20, animationDelay: '1s', width: 160 }}>
+          <div className="p-5 rounded-2xl"
+            style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)', boxShadow: '0 20px 60px rgba(0,0,0,0.5)', backdropFilter: 'blur(20px)' }}>
+            <div className="flex items-center gap-1.5 mb-3">
+              <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+              <p className="text-[9px] font-normal uppercase tracking-[0.2em]" style={{ color: 'rgba(255,255,255,0.3)' }}>Live Deploy</p>
             </div>
-            <p className="text-3xl font-black leading-none mb-1" style={{ color: '#FFFFFF', fontFamily: PF }}>7 days</p>
-            <p className="text-[11px]" style={{ color: 'rgba(255,255,255,0.4)' }}>avg. time to ship</p>
+            <p className="leading-none mb-1" style={{ color: 'rgba(255,255,255,0.92)', fontSize: '2rem', fontWeight: 300, letterSpacing: '-0.04em' }}>7 days</p>
+            <p className="text-[11px] font-light" style={{ color: 'rgba(255,255,255,0.35)' }}>avg. time to ship</p>
           </div>
         </div>
 
         {/* Floating review card */}
-        <div className="absolute top-[14%] right-[4%] w-[260px] hidden lg:block animate-float" style={{ zIndex: 20, animationDelay: '0.4s' }}>
+        <div className="absolute top-[14%] right-[4%] w-[240px] hidden lg:block animate-float" style={{ zIndex: 20, animationDelay: '0.4s' }}>
           <div className="p-5 rounded-2xl"
-            style={{ background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.13)', boxShadow: '0 20px 60px rgba(0,0,0,0.4)', backdropFilter: 'blur(16px)' }}>
-            <div className="flex gap-0.5 mb-2.5">
-              {[0,1,2,3,4].map(i => <Star key={i} className="w-3 h-3 fill-current" style={{ color: '#FBBF24' }} />)}
+            style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)', boxShadow: '0 20px 60px rgba(0,0,0,0.5)', backdropFilter: 'blur(20px)' }}>
+            <div className="flex gap-0.5 mb-3">
+              {[0,1,2,3,4].map(i => <Star key={i} className="w-3 h-3 fill-current" style={{ color: 'rgba(255,255,255,0.5)' }} />)}
             </div>
-            <p className="text-sm leading-relaxed mb-3" style={{ color: 'rgba(220,230,255,0.85)' }}>
-              &ldquo;MetLink shipped our AI agent in <strong style={{ color: '#FFFFFF' }}>6 days</strong>. Revenue up 38%.&rdquo;
+            <p className="text-sm leading-relaxed mb-3" style={{ color: 'rgba(255,255,255,0.55)', fontWeight: 300 }}>
+              &ldquo;MetLink shipped our AI agent in 6 days. Revenue up 38%.&rdquo;
             </p>
-            <p className="text-[11px] pt-3" style={{ borderTop: '1px solid rgba(255,255,255,0.1)', color: 'rgba(200,215,255,0.4)' }}>
+            <p className="text-[11px] pt-3" style={{ borderTop: '1px solid rgba(255,255,255,0.06)', color: 'rgba(255,255,255,0.28)', fontWeight: 300 }}>
               &mdash; Sarah K, Series B SaaS
             </p>
           </div>
@@ -231,38 +229,37 @@ export default function HomePage() {
         {/* Main content */}
         <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 sm:pt-36 pb-16 text-center flex flex-col items-center">
           <FadeIn>
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-8 text-sm font-semibold btn-glass"
-              style={{ color: 'rgba(200,215,255,0.75)' }}>
-              <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-10 text-xs font-normal btn-outline"
+              style={{ letterSpacing: '0.08em' }}>
+              <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
               AI Marketing &amp; Development Agency
             </div>
           </FadeIn>
 
           <FadeIn delay={0.08}>
-            <h1 className="font-black leading-[1.0] mb-6"
-              style={{ color: '#FFFFFF', fontFamily: PF, fontSize: 'clamp(2.8rem,6vw,5.4rem)' }}>
+            <h1 className="mb-8"
+              style={{ color: 'rgba(255,255,255,0.95)', fontSize: 'clamp(3.2rem,8.5vw,7.5rem)', fontWeight: 300, lineHeight: 0.92, letterSpacing: '-0.05em' }}>
               We build{' '}
-              <em style={{ fontStyle: 'italic', color: AC }}>AI systems</em>
-              {' '}that actually scale.
+              <em style={{ fontStyle: 'italic', fontFamily: PF, color: 'rgba(255,255,255,0.92)' }}>AI&nbsp;systems</em>
+              {' '}that scale.
             </h1>
           </FadeIn>
 
           <FadeIn delay={0.14}>
-            <p className="text-lg sm:text-xl mb-10 max-w-2xl leading-relaxed" style={{ color: 'rgba(200,215,255,0.6)' }}>
-              Strategy, design, and engineering — one team shipping production AI systems for ambitious brands. From idea to live product in days.
+            <p className="mb-12 max-w-xl mx-auto" style={{ color: 'rgba(255,255,255,0.45)', fontSize: '1.1rem', lineHeight: 1.8, fontWeight: 300 }}>
+              Strategy, design, and engineering — one team shipping production AI for ambitious brands. From idea to live product in days.
             </p>
           </FadeIn>
 
           <FadeIn delay={0.2}>
             <div className="flex flex-wrap gap-3 justify-center">
               <Link href="/contact"
-                className="group inline-flex items-center gap-2 px-8 py-4 rounded-full font-bold text-sm text-white btn-primary-glass">
+                className="group inline-flex items-center gap-2 px-8 py-4 rounded-full text-sm btn-primary">
                 Start building with AI
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
               </Link>
               <Link href="/services"
-                className="inline-flex items-center px-7 py-4 rounded-full font-semibold text-sm btn-glass"
-                style={{ color: 'rgba(200,215,255,0.8)' }}>
+                className="inline-flex items-center px-8 py-4 rounded-full text-sm btn-outline">
                 See our work
               </Link>
             </div>
@@ -270,32 +267,32 @@ export default function HomePage() {
         </div>
 
         {/* Stats */}
-        <StaggerChildren className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 grid grid-cols-2 lg:grid-cols-4 gap-8 text-center relative z-10">
+        <StaggerChildren className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-20 grid grid-cols-2 lg:grid-cols-4 gap-8 text-center relative z-10">
           {[['150+','Projects'],['80+','Clients'],['$10M+','Revenue'],['94%','Retention']].map(([val,lbl]) => (
             <StaggerItem key={lbl} className="flex flex-col items-center">
-              <p className="font-black leading-none mb-1.5" style={{ color: '#FFFFFF', fontFamily: PF, fontSize: 'clamp(2rem,3.5vw,3rem)' }}>{val}</p>
-              <p className="text-[10px] uppercase tracking-[0.25em] font-bold" style={{ color: 'rgba(200,215,255,0.35)' }}>{lbl}</p>
+              <p className="leading-none mb-2" style={{ color: 'rgba(255,255,255,0.88)', fontSize: 'clamp(2rem,3.5vw,2.8rem)', fontWeight: 300, letterSpacing: '-0.04em' }}>{val}</p>
+              <p className="text-[10px] font-normal uppercase tracking-[0.3em]" style={{ color: 'rgba(255,255,255,0.28)' }}>{lbl}</p>
             </StaggerItem>
           ))}
         </StaggerChildren>
       </section>
 
       {/* ══ INTEGRATIONS ════════════════════════════════════════ */}
-      <section className="py-14 sm:py-16 overflow-hidden" style={{ background: '#060C18', borderTop: '1px solid rgba(255,255,255,0.07)', borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
+      <section className="py-12 overflow-hidden" style={{ background: '#050505', borderTop: BDR, borderBottom: BDR }}>
         <FadeIn className="text-center mb-10 px-4">
-          <p className="text-[10px] font-bold uppercase tracking-[0.45em]" style={{ color: 'rgba(200,215,255,0.3)' }}>Trusted Integrations &amp; Partners</p>
+          <p className="label-overline">Trusted Integrations &amp; Partners</p>
         </FadeIn>
         <div className="relative">
           <div className="absolute inset-y-0 left-0 w-32 sm:w-48 z-10 pointer-events-none"
-            style={{ background: 'linear-gradient(to right, #060C18, transparent)' }} />
+            style={{ background: 'linear-gradient(to right, #050505, transparent)' }} />
           <div className="absolute inset-y-0 right-0 w-32 sm:w-48 z-10 pointer-events-none"
-            style={{ background: 'linear-gradient(to left, #060C18, transparent)' }} />
+            style={{ background: 'linear-gradient(to left, #050505, transparent)' }} />
           <div style={{ overflow: 'hidden' }}>
-            <div style={{ display: 'flex', width: 'max-content', animation: 'scroll 50s linear infinite', alignItems: 'center', padding: '12px 0' }}>
+            <div style={{ display: 'flex', width: 'max-content', animation: 'scroll 55s linear infinite', alignItems: 'center', padding: '12px 0' }}>
               {[...integrations, ...integrations].map((name, i) => (
                 <div key={i} className="inline-flex items-center gap-5 shrink-0 px-14">
                   <BrandIcon name={name} />
-                  <span className="text-xl font-semibold whitespace-nowrap" style={{ color: 'rgba(220,235,255,0.85)' }}>{name}</span>
+                  <span className="text-xl whitespace-nowrap" style={{ color: 'rgba(255,255,255,0.35)', fontWeight: 300 }}>{name}</span>
                 </div>
               ))}
             </div>
@@ -307,16 +304,16 @@ export default function HomePage() {
       <section id="services" className="py-20 sm:py-28" style={{ background: BG }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
-          <FadeIn className="flex flex-wrap items-end justify-between gap-4 mb-14">
+          <FadeIn className="flex flex-wrap items-end justify-between gap-4 mb-16">
             <div>
-              <p className="text-[10px] font-bold uppercase tracking-[0.45em] mb-3" style={{ color: AC }}>Services</p>
-              <h2 className="font-black leading-[1.05]" style={{ color: '#FFFFFF', fontFamily: PF, fontSize: 'clamp(1.8rem,3.5vw,2.8rem)' }}>
-                What we <em style={{ fontStyle: 'italic', color: AC }}>build</em> for you.
+              <p className="label-overline mb-4">Services</p>
+              <h2 style={{ color: 'rgba(255,255,255,0.92)' }}>
+                What we <em style={{ fontStyle: 'italic', fontFamily: PF }}>build</em> for you.
               </h2>
             </div>
             <Link href="/services"
-              className="inline-flex items-center gap-1.5 text-sm font-semibold btn-glass px-4 py-2.5 rounded-full"
-              style={{ color: 'rgba(200,215,255,0.7)' }}>
+              className="inline-flex items-center gap-1.5 text-sm font-normal btn-outline px-5 py-2.5 rounded-full"
+              style={{}}>
               All services <ArrowRight className="w-4 h-4" />
             </Link>
           </FadeIn>
@@ -371,9 +368,9 @@ export default function HomePage() {
                         </div>
                       </div>
 
-                      <h3 className="text-2xl font-black mb-2 leading-tight" style={{ color: '#FFFFFF', fontFamily: PF }}>{s.title}</h3>
-                      <p className="text-sm font-bold mb-4 tracking-wide" style={{ color: s.color }}>{s.tagline}</p>
-                      <p className="text-sm leading-relaxed mb-8" style={{ color: 'rgba(200,215,255,0.5)' }}>{s.desc}</p>
+                      <h3 className="mb-2 leading-tight" style={{ color: 'rgba(255,255,255,0.9)', fontSize: '1.35rem', fontWeight: 300, letterSpacing: '-0.025em' }}>{s.title}</h3>
+                      <p className="text-sm mb-4" style={{ color: 'rgba(255,255,255,0.35)', fontWeight: 300 }}>{s.tagline}</p>
+                      <p className="text-sm leading-relaxed mb-8" style={{ color: 'rgba(255,255,255,0.4)', fontWeight: 300 }}>{s.desc}</p>
 
                       <div className="flex flex-wrap gap-2 mt-auto">
                         {s.features.map(f => (
@@ -396,12 +393,12 @@ export default function HomePage() {
       {/* ══ OUR CLIENTS ════════════════════════════════════════ */}
       <section className="py-20 sm:py-24" style={{ background: BG2, borderTop: BDR, borderBottom: BDR }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <FadeIn className="text-center mb-14">
-            <p className="text-[10px] font-bold uppercase tracking-[0.45em] mb-3" style={{ color: 'rgba(200,215,255,0.35)' }}>Our Clients</p>
-            <h2 className="font-black leading-[1.05]" style={{ color: '#FFFFFF', fontFamily: PF, fontSize: 'clamp(1.8rem,3.5vw,2.8rem)' }}>
-              Trusted by <em style={{ fontStyle: 'italic', color: AC }}>ambitious teams</em>
+          <FadeIn className="text-center mb-16">
+            <p className="label-overline mb-5">Our Clients</p>
+            <h2 style={{ color: 'rgba(255,255,255,0.92)' }}>
+              Trusted by <em style={{ fontStyle: 'italic', fontFamily: PF }}>ambitious teams</em>
             </h2>
-            <p className="mt-4 text-base max-w-xl mx-auto" style={{ color: 'rgba(200,215,255,0.5)' }}>
+            <p className="mt-5 max-w-md mx-auto" style={{ color: 'rgba(255,255,255,0.38)', fontSize: '1rem', fontWeight: 300 }}>
               From early-stage startups to scaling enterprises — we partner with businesses that want to lead.
             </p>
           </FadeIn>
@@ -418,8 +415,8 @@ export default function HomePage() {
                     {c.name[0]}
                   </div>
                   <div>
-                    <p className="font-black text-sm" style={{ color: '#FFFFFF' }}>{c.name}</p>
-                    <p className="text-[11px] mt-0.5" style={{ color: 'rgba(200,215,255,0.4)' }}>{c.industry}</p>
+                    <p className="text-sm font-normal" style={{ color: 'rgba(255,255,255,0.75)' }}>{c.name}</p>
+                    <p className="text-[11px] mt-0.5 font-light" style={{ color: 'rgba(255,255,255,0.3)' }}>{c.industry}</p>
                   </div>
                 </div>
               </StaggerItem>
@@ -431,10 +428,10 @@ export default function HomePage() {
       {/* ══ CLIENT SUCCESS STORIES ══════════════════════════════ */}
       <section className="py-20 sm:py-28" style={{ background: BG }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <FadeIn className="text-center mb-14">
-            <p className="text-[10px] font-bold uppercase tracking-[0.45em] mb-3" style={{ color: AC }}>Success Stories</p>
-            <h2 className="font-black leading-[1.05]" style={{ color: '#FFFFFF', fontFamily: PF, fontSize: 'clamp(1.8rem,3.5vw,2.8rem)' }}>
-              What our clients <em style={{ fontStyle: 'italic', color: AC }}>say</em>
+          <FadeIn className="text-center mb-16">
+            <p className="label-overline mb-5">Success Stories</p>
+            <h2 style={{ color: 'rgba(255,255,255,0.92)' }}>
+              What our clients <em style={{ fontStyle: 'italic', fontFamily: PF }}>say</em>
             </h2>
           </FadeIn>
 
@@ -450,18 +447,18 @@ export default function HomePage() {
                     ))}
                   </div>
                   {/* Quote */}
-                  <p className="text-sm leading-relaxed mb-6 flex-1" style={{ color: 'rgba(200,215,255,0.7)' }}>
+                  <p className="text-sm leading-relaxed mb-6 flex-1" style={{ color: 'rgba(255,255,255,0.45)', fontWeight: 300 }}>
                     &ldquo;{t.quote}&rdquo;
                   </p>
                   {/* Metric */}
-                  <div className="flex items-center gap-4 pt-5" style={{ borderTop: '1px solid rgba(255,255,255,0.08)' }}>
-                    <div className="px-3 py-1.5 rounded-lg" style={{ background: 'rgba(43,128,240,0.15)', border: '1px solid rgba(43,128,240,0.25)' }}>
-                      <p className="text-xl font-black" style={{ color: '#4B9CF4', fontFamily: PF }}>{t.metric}</p>
-                      <p className="text-[10px]" style={{ color: 'rgba(200,215,255,0.45)' }}>{t.metricLabel}</p>
+                  <div className="flex items-center gap-4 pt-5" style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+                    <div className="px-3 py-1.5 rounded-lg" style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}>
+                      <p className="leading-tight" style={{ color: 'rgba(255,255,255,0.8)', fontWeight: 300, fontSize: '1.25rem', letterSpacing: '-0.03em' }}>{t.metric}</p>
+                      <p className="text-[10px] font-normal" style={{ color: 'rgba(255,255,255,0.3)' }}>{t.metricLabel}</p>
                     </div>
                     <div>
-                      <p className="font-bold text-sm" style={{ color: '#FFFFFF' }}>{t.name}</p>
-                      <p className="text-[11px]" style={{ color: 'rgba(200,215,255,0.4)' }}>{t.title}</p>
+                      <p className="text-sm font-normal" style={{ color: 'rgba(255,255,255,0.7)' }}>{t.name}</p>
+                      <p className="text-[11px] font-light" style={{ color: 'rgba(255,255,255,0.3)' }}>{t.title}</p>
                     </div>
                   </div>
                 </div>
@@ -474,10 +471,10 @@ export default function HomePage() {
       {/* ══ PROCESS ════════════════════════════════════════════ */}
       <section id="process" className="py-20 sm:py-28" style={{ background: BG2, borderTop: BDR, borderBottom: BDR }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <FadeIn className="mb-14">
-            <p className="text-[10px] font-bold uppercase tracking-[0.45em] mb-3" style={{ color: AC }}>How We Work</p>
-            <h2 className="font-black leading-[1.05]" style={{ color: '#FFFFFF', fontFamily: PF, fontSize: 'clamp(1.8rem,3.5vw,2.8rem)' }}>
-              From idea to <em style={{ fontStyle: 'italic', color: AC }}>live product</em>.
+          <FadeIn className="mb-16">
+            <p className="label-overline mb-5">How We Work</p>
+            <h2 style={{ color: 'rgba(255,255,255,0.92)' }}>
+              From idea to <em style={{ fontStyle: 'italic', fontFamily: PF }}>live product</em>.
             </h2>
           </FadeIn>
           <div className="grid md:grid-cols-3 gap-10 lg:gap-16">
@@ -485,11 +482,11 @@ export default function HomePage() {
               <FadeIn key={step.num} delay={i * 0.1}>
                 <div>
                   <div className="flex items-center gap-3 mb-6">
-                    <span className="text-xs font-black" style={{ color: AC }}>{step.num}</span>
-                    <div className="flex-1 h-px" style={{ background: 'rgba(255,255,255,0.09)' }} />
+                    <span className="text-xs font-normal" style={{ color: 'rgba(255,255,255,0.25)' }}>{step.num}</span>
+                    <div className="flex-1 h-px" style={{ background: 'rgba(255,255,255,0.05)' }} />
                   </div>
-                  <h3 className="text-xl font-black mb-3" style={{ color: '#FFFFFF', fontFamily: PF }}>{step.title}</h3>
-                  <p className="text-sm leading-relaxed" style={{ color: 'rgba(200,215,255,0.55)' }}>{step.desc}</p>
+                  <h3 className="mb-3" style={{ color: 'rgba(255,255,255,0.88)', fontSize: '1.15rem', fontWeight: 300, letterSpacing: '-0.02em' }}>{step.title}</h3>
+                  <p className="text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.38)', fontWeight: 300 }}>{step.desc}</p>
                 </div>
               </FadeIn>
             ))}
@@ -500,17 +497,17 @@ export default function HomePage() {
       {/* ══ TECH STACK ═════════════════════════════════════════ */}
       <section id="stack" className="py-20 sm:py-28" style={{ background: BG }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <FadeIn className="mb-10 max-w-xl">
-            <p className="text-[10px] font-bold uppercase tracking-[0.45em] mb-3" style={{ color: AC }}>Tech Stack</p>
-            <h2 className="font-black leading-[1.05] mb-4" style={{ color: '#FFFFFF', fontFamily: PF, fontSize: 'clamp(1.8rem,3.5vw,2.8rem)' }}>
-              Powered by the <em style={{ fontStyle: 'italic', color: AC }}>best</em> models.
+          <FadeIn className="mb-12 max-w-xl">
+            <p className="label-overline mb-5">Tech Stack</p>
+            <h2 className="mb-5" style={{ color: 'rgba(255,255,255,0.92)' }}>
+              Powered by the <em style={{ fontStyle: 'italic', fontFamily: PF }}>best</em> models.
             </h2>
-            <p className="text-base leading-relaxed mb-5" style={{ color: 'rgba(200,215,255,0.55)' }}>
+            <p className="mb-6" style={{ color: 'rgba(255,255,255,0.38)', fontSize: '1rem', fontWeight: 300, lineHeight: 1.8 }}>
               Frontier LLMs, vector databases, and production MLOps tooling — AI systems that work at scale.
             </p>
             <Link href="/contact"
-              className="inline-flex items-center gap-1.5 text-sm font-semibold transition-opacity hover:opacity-80"
-              style={{ color: AC }}>
+              className="inline-flex items-center gap-1.5 text-sm font-normal transition-opacity hover:opacity-70"
+              style={{ color: 'rgba(255,255,255,0.55)' }}>
               Explore AI services <ArrowRight className="w-4 h-4" />
             </Link>
           </FadeIn>
@@ -520,8 +517,8 @@ export default function HomePage() {
               <StaggerItem key={t.name}>
                 <div className="flex flex-col gap-1 p-4 rounded-xl transition-all hover:-translate-y-0.5 hover:border-white/15"
                   style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}>
-                  <p className="text-[13px] font-black" style={{ color: '#FFFFFF' }}>{t.name}</p>
-                  <p className="text-[11px] font-semibold" style={{ color: t.color }}>{t.cat}</p>
+                  <p className="text-[13px] font-normal" style={{ color: 'rgba(255,255,255,0.72)' }}>{t.name}</p>
+                  <p className="text-[11px] font-light" style={{ color: t.color }}>{t.cat}</p>
                 </div>
               </StaggerItem>
             ))}
@@ -532,10 +529,10 @@ export default function HomePage() {
       {/* ══ WHY METLINK ════════════════════════════════════════ */}
       <section className="py-20 sm:py-28" style={{ background: BG2, borderTop: BDR }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <FadeIn className="mb-14">
-            <p className="text-[10px] font-bold uppercase tracking-[0.45em] mb-3" style={{ color: AC }}>Why MetLink</p>
-            <h2 className="font-black leading-[1.05]" style={{ color: '#FFFFFF', fontFamily: PF, fontSize: 'clamp(1.8rem,3.5vw,2.8rem)' }}>
-              What sets us <em style={{ fontStyle: 'italic', color: AC }}>apart</em>.
+          <FadeIn className="mb-16">
+            <p className="label-overline mb-5">Why MetLink</p>
+            <h2 style={{ color: 'rgba(255,255,255,0.92)' }}>
+              What sets us <em style={{ fontStyle: 'italic', fontFamily: PF }}>apart</em>.
             </h2>
           </FadeIn>
           <StaggerChildren className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -551,9 +548,9 @@ export default function HomePage() {
                       style={{ background: 'rgba(43,128,240,0.12)', border: '1px solid rgba(43,128,240,0.2)' }}>
                       <Icon className="w-4.5 h-4.5" style={{ color: AC }} />
                     </div>
-                    <p className="text-[10px] font-black mb-2" style={{ color: 'rgba(200,215,255,0.3)' }}>0{i + 1}</p>
-                    <h3 className="font-bold mb-2 text-sm" style={{ color: '#FFFFFF' }}>{item.title}</h3>
-                    <p className="text-sm leading-relaxed" style={{ color: 'rgba(200,215,255,0.52)' }}>{item.desc}</p>
+                    <p className="text-[10px] font-normal mb-2" style={{ color: 'rgba(255,255,255,0.2)' }}>0{i + 1}</p>
+                    <h3 className="mb-2 text-sm" style={{ color: 'rgba(255,255,255,0.8)', fontWeight: 300, letterSpacing: '-0.01em' }}>{item.title}</h3>
+                    <p className="text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.38)', fontWeight: 300 }}>{item.desc}</p>
                   </div>
                 </StaggerItem>
               );
@@ -565,10 +562,10 @@ export default function HomePage() {
       {/* ══ FAQ ════════════════════════════════════════════════ */}
       <section className="py-20 sm:py-28" style={{ background: BG2, borderTop: BDR }}>
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <FadeIn className="text-center mb-14">
-            <p className="text-[10px] font-bold uppercase tracking-[0.45em] mb-3" style={{ color: 'rgba(200,215,255,0.35)' }}>Got Questions?</p>
-            <h2 className="font-black leading-[1.05]" style={{ color: '#FFFFFF', fontFamily: PF, fontSize: 'clamp(1.8rem,3.5vw,2.8rem)' }}>
-              Frequently asked <em style={{ fontStyle: 'italic', color: AC }}>questions</em>
+          <FadeIn className="text-center mb-16">
+            <p className="label-overline mb-5">Got Questions?</p>
+            <h2 style={{ color: 'rgba(255,255,255,0.92)' }}>
+              Frequently asked <em style={{ fontStyle: 'italic', fontFamily: PF }}>questions</em>
             </h2>
           </FadeIn>
 
@@ -579,18 +576,18 @@ export default function HomePage() {
                 <FadeIn key={i} delay={i * 0.04}>
                   <div
                     className="rounded-2xl overflow-hidden transition-all duration-300"
-                    style={{ background: isOpen ? 'rgba(43,128,240,0.08)' : 'rgba(255,255,255,0.04)', border: isOpen ? '1px solid rgba(43,128,240,0.25)' : '1px solid rgba(255,255,255,0.08)' }}>
+                    style={{ background: 'rgba(255,255,255,0.025)', border: isOpen ? '1px solid rgba(255,255,255,0.1)' : '1px solid rgba(255,255,255,0.05)' }}>
                     <button
                       className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left"
                       onClick={() => setOpenFaq(isOpen ? null : i)}>
-                      <span className="text-sm font-bold" style={{ color: isOpen ? '#FFFFFF' : 'rgba(220,230,255,0.85)' }}>{faq.q}</span>
+                      <span className="text-sm font-normal" style={{ color: isOpen ? 'rgba(255,255,255,0.88)' : 'rgba(255,255,255,0.55)' }}>{faq.q}</span>
                       <ChevronDown
                         className={`w-4 h-4 shrink-0 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
-                        style={{ color: isOpen ? AC : 'rgba(200,215,255,0.4)' }} />
+                        style={{ color: 'rgba(255,255,255,0.25)' }} />
                     </button>
                     {isOpen && (
                       <div className="px-6 pb-5">
-                        <p className="text-sm leading-relaxed" style={{ color: 'rgba(200,215,255,0.6)' }}>{faq.a}</p>
+                        <p className="text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.4)', fontWeight: 300 }}>{faq.a}</p>
                       </div>
                     )}
                   </div>
@@ -599,14 +596,13 @@ export default function HomePage() {
             })}
           </div>
 
-          <FadeIn className="flex flex-wrap gap-3 justify-center mt-12">
+          <FadeIn className="flex flex-wrap gap-3 justify-center mt-14">
             <Link href="/portfolio"
-              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-bold text-sm btn-glass"
-              style={{ color: 'rgba(200,215,255,0.8)' }}>
+              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm btn-outline">
               Explore Our Work
             </Link>
             <Link href="/contact"
-              className="group inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-bold text-sm text-white btn-primary-glass">
+              className="group inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm btn-primary">
               Get Free Strategy Call
               <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
             </Link>
@@ -615,43 +611,37 @@ export default function HomePage() {
       </section>
 
       {/* ══ CTA ════════════════════════════════════════════════ */}
-      <section id="contact" className="py-16 sm:py-24" style={{ background: BG }}>
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="contact" className="py-24 sm:py-32" style={{ background: BG }}>
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeIn>
-            <div className="relative rounded-[28px] overflow-hidden text-center px-8 sm:px-16 py-16 sm:py-20"
-              style={{ background: '#0C1829', boxShadow: '0 40px 100px rgba(0,0,0,0.4)', border: '1px solid rgba(255,255,255,0.07)' }}>
-              {/* Glows */}
-              <div className="absolute -top-20 -right-20 w-[560px] h-[560px] pointer-events-none"
-                style={{ background: 'radial-gradient(circle, rgba(43,128,240,0.5) 0%, rgba(43,128,240,0.15) 40%, transparent 70%)', filter: 'blur(60px)' }} />
-              <div className="absolute -bottom-20 -left-20 w-[380px] h-[380px] pointer-events-none"
-                style={{ background: 'radial-gradient(circle, rgba(16,60,120,0.6) 0%, transparent 65%)', filter: 'blur(80px)' }} />
+            <div className="relative rounded-3xl overflow-hidden text-center px-8 sm:px-16 py-20 sm:py-24"
+              style={{ background: '#0A0A0A', border: '1px solid rgba(255,255,255,0.06)' }}>
+              {/* Subtle glow */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] pointer-events-none"
+                style={{ background: 'radial-gradient(ellipse, rgba(43,128,240,0.1) 0%, transparent 65%)', filter: 'blur(60px)' }} />
 
               <div className="relative z-10 flex flex-col items-center">
-                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-[11px] font-semibold mb-7 btn-glass"
-                  style={{ color: 'rgba(200,215,255,0.6)' }}>
-                  Let&apos;s build together
-                </div>
+                <p className="label-overline mb-8">Let&apos;s build together</p>
 
-                <h2 className="font-black leading-[1.05] mb-5"
-                  style={{ fontSize: 'clamp(2.2rem,5vw,4rem)', fontFamily: PF, color: '#F0F4FF' }}>
+                <h2 className="mb-6"
+                  style={{ color: 'rgba(255,255,255,0.92)', fontWeight: 300, letterSpacing: '-0.04em' }}>
                   Ready to scale with{' '}
-                  <em style={{ fontStyle: 'italic', color: '#4B9CF4' }}>AI?</em>
+                  <em style={{ fontStyle: 'italic', fontFamily: PF }}>AI?</em>
                 </h2>
 
-                <p className="text-base sm:text-lg mb-10 max-w-xl leading-relaxed"
-                  style={{ color: 'rgba(200,215,255,0.5)' }}>
+                <p className="mb-12 max-w-md mx-auto"
+                  style={{ color: 'rgba(255,255,255,0.38)', fontSize: '1rem', fontWeight: 300, lineHeight: 1.8 }}>
                   Book a free 30-min strategy call. No commitments — just clarity on what AI can do for your business.
                 </p>
 
                 <div className="flex flex-wrap gap-3 justify-center">
                   <a href="mailto:hello@metlink.ai"
-                    className="group inline-flex items-center gap-2 px-8 py-4 rounded-full font-bold text-sm text-white btn-primary-glass">
+                    className="group inline-flex items-center gap-2 px-8 py-4 rounded-full text-sm btn-primary">
                     Book your strategy call
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
                   </a>
                   <Link href="/services"
-                    className="inline-flex items-center px-8 py-4 rounded-full font-semibold text-sm btn-glass"
-                    style={{ color: 'rgba(200,215,255,0.7)' }}>
+                    className="inline-flex items-center px-8 py-4 rounded-full text-sm btn-outline">
                     See services
                   </Link>
                 </div>

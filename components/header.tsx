@@ -45,13 +45,13 @@ export function Header() {
     <>
       <header className="fixed top-0 inset-x-0 z-50">
         <nav
-          className="transition-all duration-300"
+          className="transition-all duration-500"
           style={{
-            background: scrolled ? 'rgba(6,13,26,0.97)' : 'rgba(6,13,26,0.90)',
-            borderBottom: '1px solid rgba(255,255,255,0.08)',
-            backdropFilter: 'blur(24px)',
-            WebkitBackdropFilter: 'blur(24px)',
-            boxShadow: scrolled ? '0 1px 30px rgba(0,0,0,0.5)' : 'none',
+            background: scrolled ? 'rgba(5,5,5,0.96)' : 'rgba(5,5,5,0.82)',
+            borderBottom: scrolled ? '1px solid rgba(255,255,255,0.07)' : '1px solid transparent',
+            backdropFilter: 'blur(28px)',
+            WebkitBackdropFilter: 'blur(28px)',
+            boxShadow: scrolled ? '0 1px 40px rgba(0,0,0,0.6)' : 'none',
           }}
         >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -73,17 +73,17 @@ export function Header() {
             </Link>
 
             {/* Desktop nav — center pill */}
-            <div className="hidden md:flex items-center gap-0.5 px-2 py-1.5 rounded-full"
-              style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)' }}>
+            <div className="hidden md:flex items-center gap-0.5 px-1.5 py-1.5 rounded-full"
+              style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.07)' }}>
               <NavLink href="/">Home</NavLink>
 
               {/* Services dropdown */}
               <div ref={dropdownRef} className="relative" onMouseEnter={openDropdown} onMouseLeave={closeDropdown}>
                 <button
-                  className="px-3.5 py-2 rounded-xl text-sm font-semibold transition-all flex items-center gap-1.5"
-                  style={{ color: 'rgba(220,230,255,0.7)' }}
-                  onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = '#FFFFFF'}
-                  onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'rgba(220,230,255,0.7)'}
+                  className="px-3.5 py-2 rounded-xl text-sm font-normal transition-all flex items-center gap-1.5"
+                  style={{ color: 'rgba(255,255,255,0.5)' }}
+                  onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.9)'}
+                  onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.5)'}
                   onClick={() => { if (window.innerWidth < 768) setServicesOpen(v => !v); }}>
                   Services
                   <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${servicesOpen ? 'rotate-180' : ''}`}
@@ -96,9 +96,9 @@ export function Header() {
                     <div
                       className="fixed top-[70px] inset-x-3 sm:inset-x-4 lg:inset-x-6 animate-slideInDown overflow-hidden rounded-2xl"
                       style={{
-                        background: 'rgba(8,17,38,0.98)',
-                        border: '1px solid rgba(255,255,255,0.1)',
-                        boxShadow: '0 24px 60px rgba(0,0,0,0.5)',
+                        background: 'rgba(8,8,8,0.98)',
+                        border: '1px solid rgba(255,255,255,0.08)',
+                        boxShadow: '0 24px 80px rgba(0,0,0,0.7)',
                         backdropFilter: 'blur(28px)',
                         WebkitBackdropFilter: 'blur(28px)',
                         maxWidth: 1200,
@@ -171,15 +171,15 @@ export function Header() {
             {/* Desktop CTA */}
             <div className="hidden md:flex items-center gap-3">
               <button onClick={() => setShowPopup(true)}
-                className="text-sm font-medium transition-colors"
-                style={{ color: 'rgba(200,215,255,0.5)' }}
-                onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = '#FFFFFF'}
-                onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'rgba(200,215,255,0.5)'}>
+                className="text-sm font-normal transition-colors"
+                style={{ color: 'rgba(255,255,255,0.4)' }}
+                onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.8)'}
+                onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.4)'}>
                 Get Proposal
               </button>
               <Link href="/contact"
-                className="px-5 py-2.5 rounded-xl text-sm font-bold transition-all hover:opacity-90 active:scale-95"
-                style={{ background: '#FFFFFF', color: '#07111F' }}>
+                className="px-5 py-2.5 rounded-full text-sm font-medium btn-primary transition-all active:scale-95"
+                style={{}}>
                 Contact Us
               </Link>
             </div>
@@ -236,8 +236,7 @@ export function Header() {
 
                 <div className="pt-3 space-y-2">
                   <Link href="/contact"
-                    className="block text-center py-3 rounded-xl text-sm font-bold transition-all hover:opacity-90"
-                    style={{ background: '#FFFFFF', color: '#07111F' }}
+                    className="block text-center py-3 rounded-full text-sm font-medium btn-primary"
                     onClick={() => setMobileOpen(false)}>
                     Contact Us
                   </Link>
@@ -262,10 +261,10 @@ export function Header() {
 function NavLink({ href, children }: { href: string; children: React.ReactNode }) {
   return (
     <Link href={href}
-      className="px-3.5 py-2 rounded-xl text-sm font-semibold transition-all hover:bg-white/8"
-      style={{ color: 'rgba(220,230,255,0.7)' }}
-      onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = '#FFFFFF'; (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.07)'; }}
-      onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = 'rgba(220,230,255,0.7)'; (e.currentTarget as HTMLElement).style.background = 'transparent'; }}>
+      className="px-3.5 py-2 rounded-xl text-sm font-normal transition-all"
+      style={{ color: 'rgba(255,255,255,0.5)' }}
+      onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.9)'; (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.05)'; }}
+      onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.5)'; (e.currentTarget as HTMLElement).style.background = 'transparent'; }}>
       {children}
     </Link>
   );

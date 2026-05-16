@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Metadata, Viewport } from 'next';
-import { Syne, Plus_Jakarta_Sans, Playfair_Display } from 'next/font/google';
+import { DM_Sans, Playfair_Display } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/next';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/sections/footer';
@@ -10,22 +10,16 @@ import { PopupForm } from '@/components/popup-form';
 import { IntroAnimation } from '@/components/intro-animation';
 import './globals.css';
 
-const syne = Syne({
+const dm = DM_Sans({
   subsets: ['latin'],
-  variable: '--font-syne',
-  weight: ['400', '500', '600', '700', '800'],
-  display: 'swap',
-});
-const jakarta = Plus_Jakarta_Sans({
-  subsets: ['latin'],
-  variable: '--font-jakarta',
-  weight: ['300', '400', '500', '600', '700', '800'],
+  variable: '--font-dm',
+  weight: ['200', '300', '400', '500', '600'],
   display: 'swap',
 });
 const playfair = Playfair_Display({
   subsets: ['latin'],
   variable: '--font-playfair',
-  weight: ['400', '500', '600', '700', '800'],
+  weight: ['400', '500', '600', '700'],
   style: ['normal', 'italic'],
   display: 'swap',
 });
@@ -60,12 +54,12 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   maximumScale: 5,
-  themeColor: '#07111F',
+  themeColor: '#050505',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${syne.variable} ${jakarta.variable} ${playfair.variable}`}>
+    <html lang="en" className={`${dm.variable} ${playfair.variable}`}>
       <body className="font-sans antialiased">
         <IntroAnimation />
         <Header />

@@ -35,11 +35,11 @@ const stats = [['5+','Years'],['80+','Clients'],['150+','Projects'],['40+','Team
 
 export default function CompanyPage() {
   return (
-    <div className="w-full overflow-x-hidden" style={{ background: '#07111F' }}>
+    <div className="w-full overflow-x-hidden" style={{ background: '#050505' }}>
 
       {/* Hero */}
       <section className="relative py-20 sm:py-28 overflow-hidden"
-        style={{ background: '#07111F' }}>
+        style={{ background: '#050505' }}>
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[500px] rounded-full pointer-events-none"
           style={{ background: 'radial-gradient(ellipse, rgba(43,128,240,0.18) 0%, transparent 70%)', filter: 'blur(80px)' }} />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
@@ -78,7 +78,7 @@ export default function CompanyPage() {
       </section>
 
       {/* Stats */}
-      <section style={{ background: '#0B1628', borderTop: '1px solid rgba(255,255,255,0.12)', borderBottom: '1px solid rgba(255,255,255,0.12)' }}>
+      <section style={{ background: '#0A0A0A', borderTop: '1px solid rgba(255,255,255,0.12)', borderBottom: '1px solid rgba(255,255,255,0.12)' }}>
         <StaggerChildren className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
           {stats.map(([v, l]) => (
             <StaggerItem key={l}>
@@ -90,7 +90,7 @@ export default function CompanyPage() {
       </section>
 
       {/* Mission & Vision */}
-      <section className="py-16 sm:py-24" style={{ background: '#07111F' }}>
+      <section className="py-16 sm:py-24" style={{ background: '#050505' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <FadeIn>
@@ -132,7 +132,7 @@ export default function CompanyPage() {
       </section>
 
       {/* Values */}
-      <section className="py-16 sm:py-24" style={{ background: '#0B1628' }}>
+      <section className="py-16 sm:py-24" style={{ background: '#0A0A0A' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeIn className="text-center mb-16">
             <p className="text-xs font-black uppercase tracking-[0.25em] mb-3" style={{ color: '#2B80F0' }}>Our Differentiators</p>
@@ -173,7 +173,7 @@ export default function CompanyPage() {
       </section>
 
       {/* Timeline */}
-      <section className="py-16 sm:py-24" style={{ background: '#07111F', borderTop: '1px solid rgba(255,255,255,0.12)' }}>
+      <section className="py-16 sm:py-24" style={{ background: '#050505', borderTop: '1px solid rgba(255,255,255,0.12)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeIn className="text-center mb-16">
             <p className="text-xs font-black uppercase tracking-[0.25em] mb-3" style={{ color: '#2B80F0' }}>Our Journey</p>
@@ -206,7 +206,7 @@ export default function CompanyPage() {
       </section>
 
       {/* Team */}
-      <section className="py-16 sm:py-24" style={{ background: '#0B1628', borderTop: '1px solid rgba(255,255,255,0.12)' }}>
+      <section className="py-16 sm:py-24" style={{ background: '#0A0A0A', borderTop: '1px solid rgba(255,255,255,0.12)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeIn className="text-center mb-16">
             <p className="text-xs font-black uppercase tracking-[0.25em] mb-3" style={{ color: '#2B80F0' }}>The People</p>
@@ -245,7 +245,7 @@ export default function CompanyPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-16 sm:py-24 relative overflow-hidden" style={{ background: '#07111F', borderTop: '1px solid rgba(255,255,255,0.12)' }}>
+      <section className="py-16 sm:py-24 relative overflow-hidden" style={{ background: '#050505', borderTop: '1px solid rgba(255,255,255,0.12)' }}>
         <div className="absolute inset-0 pointer-events-none"
           style={{ background: 'radial-gradient(ellipse at 50% 50%, rgba(43,128,240,0.15), transparent 65%)' }} />
         <FadeIn className="max-w-3xl mx-auto px-4 text-center relative z-10">

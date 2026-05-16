@@ -14,11 +14,11 @@ const catColors: Record<string, string> = {
 
 export default function ServicesPage() {
   return (
-    <div className="w-full overflow-x-hidden" style={{ background: '#07111F' }}>
+    <div className="w-full overflow-x-hidden" style={{ background: '#050505' }}>
 
       {/* Hero */}
       <section className="relative py-20 sm:py-28 overflow-hidden"
-        style={{ background: '#07111F' }}>
+        style={{ background: '#050505' }}>
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px] rounded-full pointer-events-none"
           style={{ background: 'radial-gradient(ellipse, rgba(43,128,240,0.18) 0%, transparent 70%)', filter: 'blur(80px)' }} />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
@@ -61,7 +61,7 @@ export default function ServicesPage() {
         const accent = catColors[cat.slug] || '#2B80F0';
         return (
           <section key={cat.slug} id={cat.slug} className="w-full py-24 relative"
-            style={{ background: catIdx % 2 === 0 ? '#0B1628' : '#07111F', borderTop: '1px solid rgba(255,255,255,0.12)' }}>
+            style={{ background: catIdx % 2 === 0 ? '#0A0A0A' : '#050505', borderTop: '1px solid rgba(255,255,255,0.12)' }}>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <FadeIn className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
                 <div>
@@ -109,7 +109,7 @@ export default function ServicesPage() {
       })}
 
       {/* CTA */}
-      <section className="py-16 sm:py-24 relative overflow-hidden" style={{ background: '#07111F', borderTop: '1px solid rgba(255,255,255,0.12)' }}>
+      <section className="py-16 sm:py-24 relative overflow-hidden" style={{ background: '#050505', borderTop: '1px solid rgba(255,255,255,0.12)' }}>
         <div className="absolute inset-0 pointer-events-none"
           style={{ background: 'radial-gradient(ellipse at 50% 50%, rgba(43,128,240,0.15), transparent 65%)' }} />
         <FadeIn className="max-w-3xl mx-auto px-4 text-center relative z-10">
