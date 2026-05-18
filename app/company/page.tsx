@@ -14,12 +14,7 @@ const values = [
 ];
 
 const team = [
-  { name: 'Aryan Shah',   role: 'Founder & CEO',            specialty: 'AI Strategy & Business Development', initials: 'AS', color: '#2B80F0' },
-  { name: 'Priya Nair',   role: 'CTO & Lead Architect',      specialty: 'AI Systems & Cloud Infrastructure',  initials: 'PN', color: '#2B80F0' },
-  { name: 'Rahul Mehta',  role: 'Head of Engineering',        specialty: 'Full-Stack & Backend Systems',       initials: 'RM', color: '#2B80F0' },
-  { name: 'Neha Kapoor',  role: 'Creative Director',          specialty: 'Brand Identity & UI/UX Design',      initials: 'NK', color: '#2B80F0' },
-  { name: 'Vikram Patel', role: 'Performance Marketing Lead', specialty: 'Paid Media & Growth Strategy',       initials: 'VP', color: '#2B80F0' },
-  { name: 'Aisha Khan',   role: 'AI/ML Engineer',             specialty: 'Machine Learning & NLP',             initials: 'AK', color: '#2B80F0' },
+  { name: 'Jitesh Bawaskar', role: 'Founder', specialty: 'AI Strategy & Business Development', initials: 'JB', color: '#2B80F0' },
 ];
 
 const milestones = [
@@ -215,10 +210,10 @@ export default function CompanyPage() {
               <span style={{ color: '#2B80F0' }}>Leadership</span>
             </h2>
           </FadeIn>
-          <StaggerChildren className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <StaggerChildren className="flex justify-center">
             {team.map(member => (
               <StaggerItem key={member.name}>
-                <div className="group p-8 rounded-2xl text-center transition-all duration-300 hover:-translate-y-1.5 h-full"
+                <div className="group p-10 rounded-2xl text-center transition-all duration-300 hover:-translate-y-1.5 w-72"
                   style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.07)' }}
                   onMouseEnter={e => {
                     (e.currentTarget as HTMLElement).style.borderColor = `${member.color}40`;

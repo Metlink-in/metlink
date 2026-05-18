@@ -231,25 +231,25 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Hero — cinematic large display */
 h1 {
-  font-size: clamp(3rem, 9vw, 8rem);
-  line-height: 0.92;
-  letter-spacing: -0.05em;
+  font-size: clamp(2.4rem, 6.5vw, 5.5rem);
+  line-height: 0.94;
+  letter-spacing: -0.04em;
   font-weight: 300;
 }
 
 /* Section heading */
 h2 {
-  font-size: clamp(2rem, 4.5vw, 3.75rem);
-  line-height: 1.05;
-  letter-spacing: -0.03em;
+  font-size: clamp(1.65rem, 3.6vw, 3rem);
+  line-height: 1.08;
+  letter-spacing: -0.028em;
   font-weight: 300;
 }
 
 /* Sub-heading */
 h3 {
-  font-size: clamp(1.2rem, 2.5vw, 1.75rem);
-  line-height: 1.2;
-  letter-spacing: -0.025em;
+  font-size: clamp(1.05rem, 2vw, 1.45rem);
+  line-height: 1.25;
+  letter-spacing: -0.02em;
   font-weight: 300;
 }
 
