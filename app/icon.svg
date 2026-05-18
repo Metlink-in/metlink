@@ -1,33 +1,17 @@
 <svg width="32" height="32" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
-      <stop stopColor="#07111F" />
-      <stop offset="1" stopColor="#0B1A30" />
-    </linearGradient>
-    <linearGradient id="ring" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
-      <stop stopColor="#2B80F0" />
-      <stop offset="1" stopColor="#5FA8FF" />
-    </linearGradient>
-    <linearGradient id="letter" x1="18" y1="28" x2="78" y2="72" gradientUnits="userSpaceOnUse">
-      <stop stopColor="#5FA8FF" />
-      <stop offset="0.5" stopColor="#2B80F0" />
-      <stop offset="1" stopColor="#1A6BD6" />
-    </linearGradient>
-    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="2.5" result="blur" />
-      <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
-    </filter>
-  </defs>
-  <!-- Rounded square background -->
-  <rect x="2" y="2" width="96" height="96" rx="22" ry="22" fill="url(#bg)" stroke="url(#ring)" strokeWidth="3" />
-  <!-- M letterform -->
-  <path
-    d="M18 72 L18 30 L50 62 L82 30 L82 72"
-    stroke="url(#letter)"
-    strokeWidth="9"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    fill="none"
-    filter="url(#glow)"
-  />
+  <!-- White background — visible against dark browser chrome -->
+  <rect width="100" height="100" rx="18" fill="white"/>
+
+  <!-- Left M shape — dark navy -->
+  <path d="M13,80 L13,18 L49,18 L49,38 L37,63 L37,80 Z" fill="#12203A"/>
+
+  <!-- Right M shape — blue arch with rounded top -->
+  <path d="M53,80 L53,63 Q54,36 68,20 Q80,9 87,19 L87,80 Z" fill="#2B80F0"/>
+
+  <!-- Connector line -->
+  <line x1="60" y1="40" x2="46" y2="62" stroke="#12203A" stroke-width="4.5" stroke-linecap="round"/>
+  <!-- Upper dot -->
+  <circle cx="60" cy="40" r="6.5" fill="#12203A"/>
+  <!-- Lower dot -->
+  <circle cx="46" cy="62" r="6.5" fill="#12203A"/>
 </svg>
