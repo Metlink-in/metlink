@@ -46,7 +46,7 @@ export function Footer() {
                 width={559}
                 height={447}
                 className="transition-all duration-200 group-hover:scale-105 group-hover:opacity-90"
-                style={{ height: '110px', width: 'auto', objectFit: 'contain' }}
+                style={{ height: '130px', width: 'auto', objectFit: 'contain' }}
               />
             </Link>
 
