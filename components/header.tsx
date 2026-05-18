@@ -3,22 +3,22 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState, useEffect, useRef } from 'react';
-import { Menu, X, ChevronDown, ArrowRight, Megaphone, Palette, Bot, Code } from 'lucide-react';
+import { Menu, X, ChevronDown, ArrowRight } from 'lucide-react';
 import { serviceCategories } from '@/lib/services-data';
 
 const catAccents: Record<string, string> = {
   'digital-marketing':   '#2B80F0',
-  'creative-media':      '#2B80F0',
-  'ai-automation':       '#2B80F0',
-  'software-development':'#2B80F0',
+  'creative-media':      '#A855F7',
+  'ai-automation':       '#10B981',
+  'software-development':'#06B6D4',
 };
+
 
 export function Header() {
   const [mobileOpen, setMobileOpen]     = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [scrolled, setScrolled]         = useState(false);
   const [showPopup, setShowPopup]       = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
   const timeoutRef  = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => () => { if (timeoutRef.current) clearTimeout(timeoutRef.current); }, []);
@@ -29,20 +29,14 @@ export function Header() {
     return () => window.removeEventListener('scroll', fn);
   }, []);
 
-  useEffect(() => {
-    const fn = (e: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node))
-        setServicesOpen(false);
-    };
-    document.addEventListener('mousedown', fn);
-    return () => document.removeEventListener('mousedown', fn);
-  }, []);
-
   const openDropdown  = () => { if (window.innerWidth >= 768) { if (timeoutRef.current) clearTimeout(timeoutRef.current); setServicesOpen(true); } };
   const closeDropdown = () => { if (window.innerWidth >= 768) { timeoutRef.current = setTimeout(() => setServicesOpen(false), 180); } };
+  const cancelClose   = () => { if (timeoutRef.current) clearTimeout(timeoutRef.current); };
 
   return (
     <>
+      {/* Dropdown is rendered OUTSIDE <nav> so that nav's backdrop-filter
+          does not create a containing block for position:fixed children. */}
       <header className="fixed top-0 inset-x-0 z-50">
         <nav
           className="transition-all duration-500"
@@ -58,10 +52,9 @@ export function Header() {
           <div className="flex items-center justify-between h-16">
 
             {/* Logo */}
-            <Link href="/" className="flex items-center shrink-0">
-              <div style={{ background: '#FFFFFF', borderRadius: 9, padding: '5px 12px', height: 38, display: 'flex', alignItems: 'center' }}>
-                <Image src="/logo-mark.png" alt="MetLink" width={96} height={26} className="object-contain" priority />
-              </div>
+            <Link href="/" className="flex items-center gap-2.5 shrink-0 group">
+              <Image src="/icon-light-32x32.png" alt="MetLink" width={30} height={30} className="object-contain transition-transform duration-200 group-hover:scale-105" priority />
+              <span style={{ color: 'rgba(255,255,255,0.92)', fontWeight: 500, fontSize: '0.95rem', letterSpacing: '-0.03em' }}>MetLink</span>
             </Link>
 
             {/* Desktop nav — center pill */}
@@ -69,84 +62,18 @@ export function Header() {
               style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)' }}>
               <NavLink href="/">Home</NavLink>
 
-              {/* Services dropdown */}
-              <div ref={dropdownRef} className="relative" onMouseEnter={openDropdown} onMouseLeave={closeDropdown}>
+              {/* Services trigger only — panel is rendered outside <nav> below */}
+              <div className="relative" onMouseEnter={openDropdown} onMouseLeave={closeDropdown}>
                 <button
                   className="px-3.5 py-2 rounded-xl text-sm font-normal transition-all flex items-center gap-1.5"
-                  style={{ color: 'rgba(255,255,255,0.7)' }}
+                  style={{ color: 'rgba(255,255,255,0.88)' }}
                   onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = '#FFFFFF'}
-                  onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.7)'}
+                  onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.88)'}
                   onClick={() => { if (window.innerWidth < 768) setServicesOpen(v => !v); }}>
                   Services
                   <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${servicesOpen ? 'rotate-180' : ''}`}
                     style={{ color: '#2B80F0' }} />
                 </button>
-
-                {servicesOpen && (
-                  <>
-                    <div className="fixed inset-0 top-16 z-[-1]" onClick={() => setServicesOpen(false)} />
-                    <div
-                      className="fixed top-[70px] inset-x-3 sm:inset-x-4 lg:inset-x-6 animate-slideInDown overflow-hidden rounded-2xl"
-                      style={{
-                        background: 'rgba(8,8,8,0.98)',
-                        border: '1px solid rgba(255,255,255,0.08)',
-                        boxShadow: '0 24px 80px rgba(0,0,0,0.7)',
-                        backdropFilter: 'blur(28px)',
-                        WebkitBackdropFilter: 'blur(28px)',
-                        maxWidth: 1200,
-                        margin: '0 auto',
-                      }}
-                      onMouseLeave={closeDropdown}
-                    >
-                      <div className="max-w-7xl mx-auto px-6 sm:px-8 py-8 grid grid-cols-4 gap-8">
-                        {serviceCategories.map((cat) => {
-                          const accent = catAccents[cat.slug] || '#2B80F0';
-                          return (
-                            <div key={cat.slug} className="space-y-4">
-                              <Link href={`/services/${cat.slug}`}
-                                className="flex items-center gap-2 text-xs font-normal uppercase tracking-widest transition-all hover:translate-x-0.5"
-                                style={{ color: accent }}
-                                onClick={() => setServicesOpen(false)}>
-                                {cat.slug === 'digital-marketing'   && <Megaphone className="w-3.5 h-3.5" />}
-                                {cat.slug === 'creative-media'       && <Palette   className="w-3.5 h-3.5" />}
-                                {cat.slug === 'ai-automation'        && <Bot       className="w-3.5 h-3.5" />}
-                                {cat.slug === 'software-development' && <Code      className="w-3.5 h-3.5" />}
-                                {cat.name}
-                              </Link>
-                              <ul className="space-y-2.5">
-                                {cat.services.map((svc) => (
-                                  <li key={svc.slug}>
-                                    <Link href={`/services/${cat.slug}/${svc.slug}`}
-                                      className="group/item flex items-center gap-1.5 text-sm transition-all"
-                                      style={{ color: 'rgba(255,255,255,0.5)' }}
-                                      onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = '#FFFFFF'}
-                                      onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.5)'}
-                                      onClick={() => setServicesOpen(false)}>
-                                      <ArrowRight className="w-3 h-3 opacity-0 group-hover/item:opacity-100 -translate-x-1 group-hover/item:translate-x-0 transition-all flex-shrink-0"
-                                        style={{ color: accent }} />
-                                      {svc.name}
-                                    </Link>
-                                  </li>
-                                ))}
-                              </ul>
-                            </div>
-                          );
-                        })}
-                        <div className="col-span-4 mt-2 pt-5 flex items-center justify-between"
-                          style={{ borderTop: '1px solid rgba(255,255,255,0.09)' }}>
-                          <div className="flex items-center gap-2">
-                            <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                            <p className="text-sm" style={{ color: 'rgba(255,255,255,0.45)' }}>Custom AI solutions for unique business challenges</p>
-                          </div>
-                          <Link href="/contact" onClick={() => setServicesOpen(false)}
-                            className="group px-5 py-2 rounded-xl text-sm font-bold flex items-center gap-2 transition-all btn-primary-glass text-white">
-                            Talk to our experts <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
-                          </Link>
-                        </div>
-                      </div>
-                    </div>
-                  </>
-                )}
               </div>
 
               {[['Company', '/company'], ['Portfolio', '/portfolio'], ['Blog', '/blog'], ['Product', '/product']].map(([label, href]) => (
@@ -164,9 +91,9 @@ export function Header() {
             <div className="hidden md:flex items-center gap-3">
               <button onClick={() => setShowPopup(true)}
                 className="text-sm font-normal transition-colors px-3 py-2"
-                style={{ color: 'rgba(255,255,255,0.55)' }}
-                onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.9)'}
-                onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.55)'}>
+                style={{ color: 'rgba(255,255,255,0.75)' }}
+                onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = '#FFFFFF'}
+                onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.75)'}>
                 Get Proposal
               </button>
               <Link href="/contact"
@@ -245,6 +172,106 @@ export function Header() {
           )}
           </div>{/* /max-w-7xl */}
         </nav>
+
+        {/* Services mega-menu — sibling of <nav>, outside backdrop-filter scope */}
+        {servicesOpen && (
+          <>
+            {/* Click-outside overlay */}
+            <div
+              className="fixed inset-0"
+              style={{ top: 64, zIndex: 48 }}
+              onClick={() => setServicesOpen(false)}
+            />
+
+            {/* Full-width panel */}
+            <div
+              className="fixed left-0 right-0 animate-slideInDown"
+              style={{
+                top: 64,
+                zIndex: 49,
+                background: '#04090F',
+                borderBottom: '1px solid rgba(255,255,255,0.08)',
+                boxShadow: '0 40px 100px rgba(0,0,0,0.85)',
+              }}
+              onMouseEnter={cancelClose}
+              onMouseLeave={closeDropdown}
+            >
+              {/* Single blue accent top line */}
+              <div style={{ height: 1, background: 'linear-gradient(to right, transparent 0%, rgba(43,128,240,0.55) 20%, rgba(95,168,255,0.85) 50%, rgba(43,128,240,0.55) 80%, transparent 100%)' }} />
+
+              <div className="max-w-7xl mx-auto px-8 lg:px-12 py-10 lg:py-12">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-10 lg:gap-x-16 gap-y-10">
+                  {serviceCategories.map((cat) => {
+                    const accent = catAccents[cat.slug] || '#2B80F0';
+                    return (
+                      <div key={cat.slug}>
+
+                        {/* Category label */}
+                        <Link
+                          href={`/services/${cat.slug}`}
+                          className="group/cat inline-flex items-center gap-2 mb-6"
+                          onClick={() => setServicesOpen(false)}
+                        >
+                          <span
+                            className="text-[13px] font-semibold uppercase tracking-[0.2em] transition-opacity duration-150 group-hover/cat:opacity-80"
+                            style={{ color: accent }}
+                          >
+                            {cat.name}
+                          </span>
+                        </Link>
+
+                        {/* Service links */}
+                        <ul className="space-y-4">
+                          {cat.services.map((svc) => (
+                            <li key={svc.slug}>
+                              <Link
+                                href={`/services/${cat.slug}/${svc.slug}`}
+                                className="block text-[14.5px] font-light leading-snug transition-colors duration-150"
+                                style={{ color: 'rgba(255,255,255,0.52)', fontWeight: 300 }}
+                                onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = '#FFFFFF'}
+                                onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.52)'}
+                                onClick={() => setServicesOpen(false)}
+                              >
+                                {svc.name}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+
+                      </div>
+                    );
+                  })}
+                </div>
+
+                {/* Bottom bar */}
+                <div className="mt-10 pt-5 flex items-center justify-between"
+                  style={{ borderTop: '1px solid rgba(255,255,255,0.07)' }}>
+                  <div className="flex items-center gap-5">
+                    <div className="flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                      <span className="text-[11px]" style={{ color: 'rgba(255,255,255,0.40)' }}>
+                        All systems operational
+                      </span>
+                    </div>
+                    <span style={{ color: 'rgba(255,255,255,0.15)' }}>·</span>
+                    <span className="text-[11px]" style={{ color: 'rgba(255,255,255,0.35)' }}>
+                      150+ projects shipped
+                    </span>
+                  </div>
+                  <Link
+                    href="/contact"
+                    onClick={() => setServicesOpen(false)}
+                    className="group inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[12px] font-medium transition-all duration-200 hover:brightness-110 active:scale-95"
+                    style={{ background: '#2B80F0', color: '#FFFFFF', boxShadow: '0 4px 18px rgba(43,128,240,0.35)' }}
+                  >
+                    Book a free call
+                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </>
+        )}
       </header>
 
       {showPopup && <ProposalPopup onClose={() => setShowPopup(false)} />}
@@ -256,9 +283,9 @@ function NavLink({ href, children }: { href: string; children: React.ReactNode }
   return (
     <Link href={href}
       className="px-3.5 py-2 rounded-xl text-sm font-normal transition-all duration-150"
-      style={{ color: 'rgba(255,255,255,0.7)' }}
+      style={{ color: 'rgba(255,255,255,0.88)' }}
       onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = '#FFFFFF'; (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.08)'; }}
-      onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.7)'; (e.currentTarget as HTMLElement).style.background = 'transparent'; }}>
+      onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.88)'; (e.currentTarget as HTMLElement).style.background = 'transparent'; }}>
       {children}
     </Link>
   );

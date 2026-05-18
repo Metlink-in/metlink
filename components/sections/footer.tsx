@@ -48,7 +48,7 @@ export function Footer() {
                 style={{ color: 'rgba(255,255,255,0.82)', letterSpacing: '-0.02em' }}>MetLink</span>
             </Link>
 
-            <p className="text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.32)', fontWeight: 300, maxWidth: 260 }}>
+            <p className="text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.52)', fontWeight: 300, maxWidth: 260 }}>
               AI-first marketing and high-performance software for ambitious businesses that want to lead.
             </p>
 
@@ -80,7 +80,7 @@ export function Footer() {
 
             {/* Newsletter */}
             <div>
-              <p className="text-[10px] uppercase tracking-[0.28em] mb-3" style={{ color: 'rgba(255,255,255,0.22)' }}>Newsletter</p>
+              <p className="text-[10px] uppercase tracking-[0.28em] mb-3" style={{ color: 'rgba(255,255,255,0.45)' }}>Newsletter</p>
               <form onSubmit={e => e.preventDefault()} className="flex gap-2">
                 <input
                   type="email"
@@ -119,10 +119,10 @@ export function Footer() {
                       <li key={svc.slug}>
                         <Link
                           href={`/services/${cat.slug}/${svc.slug}`}
-                          className="text-[13px] transition-all duration-200 hover:translate-x-0.5 block"
-                          style={{ color: 'rgba(255,255,255,0.38)', fontWeight: 300 }}
-                          onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.82)'}
-                          onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.38)'}>
+                          className="text-[14.5px] transition-all duration-200 hover:translate-x-0.5 block"
+                          style={{ color: 'rgba(255,255,255,0.62)', fontWeight: 300 }}
+                          onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.92)'}
+                          onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.62)'}>
                           {svc.name}
                         </Link>
                       </li>
@@ -142,15 +142,15 @@ export function Footer() {
 
           {/* Left: copyright + links */}
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
-            <p className="text-[11px]" style={{ color: 'rgba(255,255,255,0.22)' }}>
+            <p className="text-[11px]" style={{ color: 'rgba(255,255,255,0.45)' }}>
               &copy; {new Date().getFullYear()} MetLink. All rights reserved.
             </p>
             {['Privacy', 'Terms', 'Cookies'].map(item => (
               <Link key={item} href={`/${item.toLowerCase()}`}
                 className="text-[11px] transition-colors duration-200"
-                style={{ color: 'rgba(255,255,255,0.22)' }}
-                onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.65)'}
-                onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.22)'}>
+                style={{ color: 'rgba(255,255,255,0.42)' }}
+                onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.78)'}
+                onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.42)'}>
                 {item}
               </Link>
             ))}
@@ -160,7 +160,7 @@ export function Footer() {
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-1.5">
               <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-              <span className="text-[11px]" style={{ color: 'rgba(255,255,255,0.22)' }}>All systems operational</span>
+              <span className="text-[11px]" style={{ color: 'rgba(255,255,255,0.50)' }}>All systems operational</span>
             </div>
             <Link href="/contact"
               className="group inline-flex items-center gap-2 px-4 py-2 rounded-full text-[11px] font-medium transition-all"
