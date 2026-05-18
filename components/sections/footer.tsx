@@ -39,13 +39,15 @@ export function Footer() {
           <div className="lg:col-span-2 flex flex-col gap-7">
 
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-3 w-fit group">
-              <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-all duration-200 group-hover:scale-105"
-                style={{ background: 'rgba(43,128,240,0.18)', border: '1px solid rgba(43,128,240,0.35)', boxShadow: '0 4px 16px rgba(43,128,240,0.15)' }}>
-                <Image src="/icon-light-32x32.png" alt="MetLink" width={22} height={22} className="object-contain" />
-              </div>
-              <span className="text-base font-medium transition-colors duration-200 group-hover:text-white"
-                style={{ color: 'rgba(255,255,255,0.82)', letterSpacing: '-0.02em' }}>MetLink</span>
+            <Link href="/" className="flex items-center w-fit group">
+              <Image
+                src="/WhatsApp_Image_2026-04-30_at_7.30.41_PM-removebg-preview.png"
+                alt="Metlink"
+                width={559}
+                height={447}
+                className="transition-all duration-200 group-hover:scale-105 group-hover:opacity-90"
+                style={{ height: '90px', width: 'auto', objectFit: 'contain' }}
+              />
             </Link>
 
             <p className="text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.52)', fontWeight: 300, maxWidth: 260 }}>

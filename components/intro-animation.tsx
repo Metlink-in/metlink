@@ -72,57 +72,20 @@ export function IntroAnimation() {
 
       <div style={{ position: 'relative', zIndex: 10, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
 
-        {/* Logo icon */}
-        <div style={{
-          width: 60,
-          height: 60,
-          borderRadius: 18,
-          background: 'linear-gradient(135deg, #0C0C0C, #2B80F0)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          marginBottom: 28,
-          boxShadow: '0 8px 40px rgba(43,128,240,0.25), 0 0 0 1px rgba(43,128,240,0.15)',
-          opacity: phase !== 'init' ? 1 : 0,
-          transform: phase !== 'init' ? 'translateY(0) scale(1)' : 'translateY(24px) scale(0.75)',
-          transition: 'opacity 0.55s cubic-bezier(0.16,1,0.3,1), transform 0.55s cubic-bezier(0.16,1,0.3,1)',
-        }}>
-          <svg width="46" height="40" viewBox="0 0 220 190" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M 12,12 L 12,178 L 68,178 L 68,100 L 106,12 Z" fill="rgba(255,255,255,0.95)"/>
-            <path d="M 113,178 L 113,64 C 111,-6 210,-6 208,64 L 208,178 L 162,178 L 162,64 C 162,38 130,38 130,64 L 130,178 Z" fill="rgba(255,255,255,0.70)"/>
-            <line x1="113" y1="61" x2="82" y2="100" stroke="rgba(255,255,255,0.9)" strokeWidth="7" strokeLinecap="round"/>
-            <circle cx="113" cy="61" r="15" fill="rgba(255,255,255,0.25)"/>
-            <circle cx="113" cy="61" r="9"  fill="white"/>
-            <circle cx="82"  cy="100" r="9" fill="rgba(255,255,255,0.9)"/>
-          </svg>
-        </div>
-
-        {/* Wordmark */}
-        <div style={{ display: 'flex', alignItems: 'baseline', overflow: 'hidden', lineHeight: 1 }}>
-          <span style={{
-            fontFamily: 'var(--font-jakarta, system-ui, sans-serif)',
-            fontSize: 'clamp(3.2rem, 10vw, 6.5rem)',
-            fontWeight: 700,
-            letterSpacing: '0.01em',
-            color: '#FFFFFF',
-            lineHeight: 1,
+        {/* Logo */}
+        <img
+          src="/WhatsApp_Image_2026-04-30_at_7.30.41_PM-removebg-preview.png"
+          alt="Metlink"
+          style={{
+            width: 'clamp(260px, 50vw, 380px)',
+            height: 'auto',
+            objectFit: 'contain',
+            marginBottom: 32,
             opacity: ['name','sub','bar','exit'].includes(phase) ? 1 : 0,
-            transform: ['name','sub','bar','exit'].includes(phase) ? 'translateX(0)' : 'translateX(-40px)',
-            transition: 'opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1)',
-          }}>Met</span>
-
-          <span style={{
-            fontFamily: 'var(--font-jakarta, system-ui, sans-serif)',
-            fontSize: 'clamp(3.2rem, 10vw, 6.5rem)',
-            fontWeight: 700,
-            letterSpacing: '0.01em',
-            color: '#2B80F0',
-            lineHeight: 1,
-            opacity: ['name','sub','bar','exit'].includes(phase) ? 1 : 0,
-            transform: ['name','sub','bar','exit'].includes(phase) ? 'translateX(0)' : 'translateX(40px)',
-            transition: 'opacity 0.6s cubic-bezier(0.16,1,0.3,1) 0.06s, transform 0.6s cubic-bezier(0.16,1,0.3,1) 0.06s',
-          }}>link</span>
-        </div>
+            transform: ['name','sub','bar','exit'].includes(phase) ? 'translateY(0) scale(1)' : 'translateY(28px) scale(0.88)',
+            transition: 'opacity 0.65s cubic-bezier(0.16,1,0.3,1), transform 0.65s cubic-bezier(0.16,1,0.3,1)',
+          }}
+        />
 
         {/* Tagline */}
         <p style={{

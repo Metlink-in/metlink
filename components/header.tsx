@@ -17,17 +17,13 @@ const catAccents: Record<string, string> = {
 export function Header() {
   const [mobileOpen, setMobileOpen]     = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
-  const [scrolled, setScrolled]         = useState(false);
+
   const [showPopup, setShowPopup]       = useState(false);
   const timeoutRef  = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => () => { if (timeoutRef.current) clearTimeout(timeoutRef.current); }, []);
 
-  useEffect(() => {
-    const fn = () => setScrolled(window.scrollY > 12);
-    window.addEventListener('scroll', fn, { passive: true });
-    return () => window.removeEventListener('scroll', fn);
-  }, []);
+
 
   const openDropdown  = () => { if (window.innerWidth >= 768) { if (timeoutRef.current) clearTimeout(timeoutRef.current); setServicesOpen(true); } };
   const closeDropdown = () => { if (window.innerWidth >= 768) { timeoutRef.current = setTimeout(() => setServicesOpen(false), 180); } };
@@ -41,38 +37,52 @@ export function Header() {
         <nav
           className="transition-all duration-500"
           style={{
-            background: scrolled ? 'rgba(6,13,26,0.96)' : 'rgba(6,13,26,0.82)',
-            borderBottom: scrolled ? '1px solid rgba(255,255,255,0.07)' : '1px solid transparent',
-            backdropFilter: 'blur(28px)',
-            WebkitBackdropFilter: 'blur(28px)',
-            boxShadow: scrolled ? '0 1px 40px rgba(0,0,0,0.6)' : 'none',
+            background: 'transparent',
+            borderBottom: '1px solid transparent',
+            backdropFilter: 'none',
+            WebkitBackdropFilter: 'none',
+            boxShadow: 'none',
           }}
         >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
+          <div className="flex items-center justify-between h-20" style={{ overflow: 'visible' }}>
 
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-2.5 shrink-0 group">
-              <Image src="/icon-light-32x32.png" alt="MetLink" width={30} height={30} className="object-contain transition-transform duration-200 group-hover:scale-105" priority />
-              <span style={{ color: 'rgba(255,255,255,0.92)', fontWeight: 500, fontSize: '0.95rem', letterSpacing: '-0.03em' }}>MetLink</span>
+            <Link href="/" className="flex items-center shrink-0 group">
+              <Image
+                src="/WhatsApp_Image_2026-04-30_at_7.30.41_PM-removebg-preview.png"
+                alt="Metlink"
+                width={559}
+                height={447}
+                priority
+                className="transition-all duration-200 group-hover:opacity-80"
+                style={{ height: '130px', width: 'auto', objectFit: 'contain' }}
+              />
             </Link>
 
-            {/* Desktop nav — center pill */}
-            <div className="hidden md:flex items-center gap-0.5 px-1.5 py-1.5 rounded-full"
-              style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)' }}>
+            {/* Desktop nav — pill container */}
+            <div className="hidden md:flex items-center"
+              style={{
+                background: 'rgba(255,255,255,0.06)',
+                border: '1px solid rgba(255,255,255,0.1)',
+                borderRadius: '9999px',
+                padding: '4px',
+                backdropFilter: 'blur(20px)',
+                WebkitBackdropFilter: 'blur(20px)',
+              }}>
+
               <NavLink href="/">Home</NavLink>
 
-              {/* Services trigger only — panel is rendered outside <nav> below */}
+              {/* Services trigger */}
               <div className="relative" onMouseEnter={openDropdown} onMouseLeave={closeDropdown}>
                 <button
-                  className="px-3.5 py-2 rounded-xl text-sm font-normal transition-all flex items-center gap-1.5"
-                  style={{ color: 'rgba(255,255,255,0.88)' }}
-                  onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = '#FFFFFF'}
-                  onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.88)'}
+                  className="px-4 py-1.5 rounded-full text-sm font-normal transition-all flex items-center gap-1.5"
+                  style={{ color: 'rgba(255,255,255,0.75)' }}
+                  onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.color = '#FFFFFF'; el.style.background = 'rgba(255,255,255,0.09)'; }}
+                  onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.color = 'rgba(255,255,255,0.75)'; el.style.background = 'transparent'; }}
                   onClick={() => { if (window.innerWidth < 768) setServicesOpen(v => !v); }}>
                   Services
-                  <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${servicesOpen ? 'rotate-180' : ''}`}
-                    style={{ color: '#2B80F0' }} />
+                  <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${servicesOpen ? 'rotate-180' : ''}`} />
                 </button>
               </div>
 
@@ -88,20 +98,20 @@ export function Header() {
             </div>
 
             {/* Desktop CTA */}
-            <div className="hidden md:flex items-center gap-3">
+            <div className="hidden md:flex items-center gap-2">
               <button onClick={() => setShowPopup(true)}
-                className="text-sm font-normal transition-colors px-3 py-2"
-                style={{ color: 'rgba(255,255,255,0.75)' }}
-                onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = '#FFFFFF'}
-                onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.75)'}>
+                className="text-sm font-normal transition-colors px-4 py-2 rounded-full"
+                style={{ color: 'rgba(255,255,255,0.72)' }}
+                onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.color = '#FFFFFF'; el.style.background = 'rgba(255,255,255,0.07)'; }}
+                onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.color = 'rgba(255,255,255,0.72)'; el.style.background = 'transparent'; }}>
                 Get Proposal
               </button>
               <Link href="/contact"
-                className="px-5 py-2.5 rounded-full text-sm font-medium transition-all active:scale-95"
-                style={{ background: 'rgba(43,128,240,0.22)', border: '1px solid rgba(43,128,240,0.45)', color: '#5FA8FF', backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)' }}
-                onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.background = 'rgba(43,128,240,0.35)'; el.style.borderColor = 'rgba(43,128,240,0.65)'; el.style.color = '#FFE8A0'; }}
-                onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.background = 'rgba(43,128,240,0.22)'; el.style.borderColor = 'rgba(43,128,240,0.45)'; el.style.color = '#5FA8FF'; }}>
-                Contact Us
+                className="px-5 py-2 rounded-full text-sm font-semibold transition-all active:scale-95"
+                style={{ background: '#FFFFFF', color: '#0A0F1A' }}
+                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.88)'; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = '#FFFFFF'; }}>
+                Let&apos;s Talk
               </Link>
             </div>
 
@@ -179,7 +189,7 @@ export function Header() {
             {/* Click-outside overlay */}
             <div
               className="fixed inset-0"
-              style={{ top: 64, zIndex: 48 }}
+              style={{ top: 80, zIndex: 48 }}
               onClick={() => setServicesOpen(false)}
             />
 
@@ -187,7 +197,7 @@ export function Header() {
             <div
               className="fixed left-0 right-0 animate-slideInDown"
               style={{
-                top: 64,
+                top: 80,
                 zIndex: 49,
                 background: '#04090F',
                 borderBottom: '1px solid rgba(255,255,255,0.08)',
@@ -282,10 +292,10 @@ export function Header() {
 function NavLink({ href, children }: { href: string; children: React.ReactNode }) {
   return (
     <Link href={href}
-      className="px-3.5 py-2 rounded-xl text-sm font-normal transition-all duration-150"
-      style={{ color: 'rgba(255,255,255,0.88)' }}
-      onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = '#FFFFFF'; (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.08)'; }}
-      onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.88)'; (e.currentTarget as HTMLElement).style.background = 'transparent'; }}>
+      className="px-4 py-1.5 rounded-full text-sm font-normal transition-all duration-150"
+      style={{ color: 'rgba(255,255,255,0.75)' }}
+      onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = '#FFFFFF'; (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.09)'; }}
+      onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.75)'; (e.currentTarget as HTMLElement).style.background = 'transparent'; }}>
       {children}
     </Link>
   );

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowRight, CheckCircle, Star, TrendingUp, Shield, Zap, BarChart2, Users, Megaphone, Palette, Bot, Code } from 'lucide-react';
@@ -278,47 +278,97 @@ const testimonials = [
 
 const techStack = [
   {
-    service: 'Digital Marketing', color: '#2B80F0', Icon: Megaphone,
+    category: 'Programming Languages',
     tools: [
-      { name: 'Google Ads',   cat: 'Ad Platform' },
-      { name: 'Meta Ads',     cat: 'Ad Platform' },
-      { name: 'Google Analytics 4', cat: 'Analytics' },
-      { name: 'HubSpot',      cat: 'CRM' },
-      { name: 'Klaviyo',      cat: 'Email' },
-      { name: 'SEMrush',      cat: 'SEO' },
+      { name: 'JavaScript', logo: '/tools/javascript.svg' },
+      { name: 'TypeScript', logo: '/tools/typescript.svg' },
+      { name: 'Python',     logo: '/tools/python.svg' },
+      { name: 'Go',         logo: '/tools/go.svg' },
+      { name: 'Rust',       logo: '/tools/rust.svg' },
+      { name: 'Java',       logo: '/tools/java.svg' },
+      { name: 'C++',        logo: '/tools/cplusplus.svg' },
+      { name: 'Scala',      logo: '/tools/scala.svg' },
     ],
   },
   {
-    service: 'Creative Media', color: '#2B80F0', Icon: Palette,
+    category: 'Frontend',
     tools: [
-      { name: 'Figma',        cat: 'UI Design' },
-      { name: 'After Effects', cat: 'Motion' },
-      { name: 'Premiere Pro', cat: 'Video' },
-      { name: 'Midjourney',   cat: 'AI Creative' },
-      { name: 'Framer',       cat: 'Web Design' },
-      { name: 'CapCut',       cat: 'Short Video' },
+      { name: 'React',        logo: '/tools/react.svg' },
+      { name: 'Next.js',      logo: '/tools/nextjs.svg', invert: true },
+      { name: 'Vue.js',       logo: '/tools/vuejs.svg' },
+      { name: 'Angular',      logo: '/tools/angular.svg' },
+      { name: 'Tailwind CSS', logo: '/tools/tailwindcss.svg' },
+      { name: 'Figma',        logo: '/tools/figma.svg' },
+      { name: 'Framer',       logo: '/tools/framer.svg' },
+      { name: 'GraphQL',      logo: '/tools/graphql.svg' },
     ],
   },
   {
-    service: 'AI & Automation', color: '#2B80F0', Icon: Bot,
+    category: 'Backend & APIs',
     tools: [
-      { name: 'GPT-4o',       cat: 'LLM' },
-      { name: 'Claude 3.5',   cat: 'LLM' },
-      { name: 'LangChain',    cat: 'Orchestration' },
-      { name: 'Pinecone',     cat: 'Vector DB' },
-      { name: 'n8n / Make',   cat: 'Automation' },
-      { name: 'LlamaIndex',   cat: 'Retrieval' },
+      { name: 'Node.js',    logo: '/tools/nodejs.svg' },
+      { name: 'FastAPI',    logo: '/tools/fastapi.svg' },
+      { name: 'Django',     logo: '/tools/django.svg' },
+      { name: 'Express',    logo: '/tools/express.svg', invert: true },
+      { name: 'GraphQL',    logo: '/tools/graphql.svg' },
+      { name: 'Supabase',   logo: '/tools/supabase.svg' },
+      { name: 'Redis',      logo: '/tools/redis.svg' },
+      { name: 'PostgreSQL', logo: '/tools/postgresql.svg' },
     ],
   },
   {
-    service: 'Software Dev', color: '#2B80F0', Icon: Code,
+    category: 'Databases',
     tools: [
-      { name: 'Next.js',      cat: 'Frontend' },
-      { name: 'Supabase',     cat: 'Database' },
-      { name: 'AWS / GCP',    cat: 'Cloud' },
-      { name: 'Node.js',      cat: 'Backend' },
-      { name: 'Kubernetes',   cat: 'Infra' },
-      { name: 'GitHub Actions', cat: 'CI/CD' },
+      { name: 'PostgreSQL', logo: '/tools/postgresql.svg' },
+      { name: 'MySQL',      logo: '/tools/mysql.svg' },
+      { name: 'MongoDB',    logo: '/tools/mongodb.svg' },
+      { name: 'Redis',      logo: '/tools/redis.svg' },
+      { name: 'Supabase',   logo: '/tools/supabase.svg' },
+      { name: 'Snowflake',  logo: '/tools/snowflake.svg' },
+    ],
+  },
+  {
+    category: 'GenAI Models',
+    tools: [
+      { name: 'OpenAI',       logo: '/tools/openai.svg', invert: true },
+      { name: 'Anthropic',    logo: '/tools/anthropic.svg', invert: true },
+      { name: 'Gemini',       logo: '/tools/googlegemini.svg' },
+      { name: 'Hugging Face', logo: '/tools/huggingface.svg' },
+      { name: 'LangChain',    logo: '/tools/langchain.svg' },
+    ],
+  },
+  {
+    category: 'Cloud & DevOps',
+    tools: [
+      { name: 'AWS',            logo: '/tools/aws.svg' },
+      { name: 'Google Cloud',   logo: '/tools/gcp.svg' },
+      { name: 'Azure',          logo: '/tools/azure.svg' },
+      { name: 'Docker',         logo: '/tools/docker.svg' },
+      { name: 'Kubernetes',     logo: '/tools/kubernetes.svg' },
+      { name: 'Terraform',      logo: '/tools/terraform.svg' },
+      { name: 'GitHub Actions', logo: '/tools/github-actions.svg' },
+      { name: 'Vercel',         logo: '/tools/vercel.svg' },
+    ],
+  },
+  {
+    category: 'Digital Marketing',
+    tools: [
+      { name: 'Google Ads', logo: '/tools/google-ads.svg' },
+      { name: 'Meta Ads',   logo: '/tools/meta-ads.svg' },
+      { name: 'GA4',        logo: '/tools/ga4.svg' },
+      { name: 'HubSpot',    logo: '/tools/hubspot.svg' },
+      { name: 'SEMrush',    logo: '/tools/semrush.svg' },
+    ],
+  },
+  {
+    category: 'Automation',
+    tools: [
+      { name: 'n8n',    logo: '/tools/n8n.svg' },
+      { name: 'Make',   logo: '/tools/make.svg' },
+      { name: 'Zapier', logo: '/tools/zapier.svg' },
+      { name: 'Slack',  logo: '/tools/slack.svg' },
+      { name: 'Notion', logo: '/tools/notion.svg' },
+      { name: 'Stripe', logo: '/tools/stripe.svg' },
     ],
   },
 ];
@@ -347,13 +397,22 @@ const AC   = '#2B80F0';
 /* ─── Component ─────────────────────────────────────────────── */
 
 export default function HomePage() {
-  const [activeService, setActiveService] = useState('01');
+  const [activeService, setActiveService]       = useState('01');
+  const [activeStack, setActiveStack]           = useState(0);
+  const [stackPaused, setStackPaused]           = useState(false);
+  const [integrationsPaused, setIntegrationsPaused] = useState(false);
+
+  useEffect(() => {
+    if (stackPaused) return;
+    const t = setTimeout(() => setActiveStack(p => (p + 1) % techStack.length), 1800);
+    return () => clearTimeout(t);
+  }, [activeStack, stackPaused]);
 
   return (
     <div className="w-full overflow-x-hidden" style={{ background: BG }}>
 
       {/* ══ HERO ══════════════════════════════════════════════ */}
-      <section className="relative overflow-hidden" style={{ background: '#050B14', minHeight: '100vh' }}>
+      <section className="relative overflow-hidden flex flex-col" style={{ background: '#050B14', height: '100vh', paddingTop: '80px' }}>
 
         {/* ── Background ── */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
@@ -418,7 +477,7 @@ export default function HomePage() {
         </div>
 
         {/* ── Main content ── */}
-        <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 sm:pt-32 pb-8 text-center flex flex-col items-center">
+        <div className="relative z-10 flex-1 flex flex-col items-center justify-center max-w-5xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 text-center">
 
           <FadeIn delay={0.07}>
             <h1 className="mb-5"
@@ -477,13 +536,22 @@ export default function HomePage() {
         <FadeIn className="text-center mb-10 px-4">
           <p className="label-overline">Trusted Integrations &amp; Partners</p>
         </FadeIn>
-        <div className="relative">
+        <div
+          className="relative"
+          onMouseEnter={() => setIntegrationsPaused(true)}
+          onMouseLeave={() => setIntegrationsPaused(false)}
+        >
           <div className="absolute inset-y-0 left-0 w-32 sm:w-48 z-10 pointer-events-none"
-            style={{ background: 'linear-gradient(to right, #0C0C0C, transparent)' }} />
+            style={{ background: 'linear-gradient(to right, #0B1628, transparent)' }} />
           <div className="absolute inset-y-0 right-0 w-32 sm:w-48 z-10 pointer-events-none"
-            style={{ background: 'linear-gradient(to left, #0C0C0C, transparent)' }} />
+            style={{ background: 'linear-gradient(to left, #0B1628, transparent)' }} />
           <div style={{ overflow: 'hidden' }}>
-            <div style={{ display: 'flex', width: 'max-content', animation: 'scroll 55s linear infinite', alignItems: 'center', padding: '12px 0' }}>
+            <div style={{
+              display: 'flex', width: 'max-content',
+              animation: 'scroll 55s linear infinite',
+              animationPlayState: integrationsPaused ? 'paused' : 'running',
+              alignItems: 'center', padding: '12px 0',
+            }}>
               {[...integrations, ...integrations].map((name, i) => (
                 <div key={i} className="inline-flex items-center gap-5 shrink-0 px-14">
                   <BrandIcon name={name} />
@@ -897,78 +965,89 @@ export default function HomePage() {
 
       {/* ══ TECH STACK ═════════════════════════════════════════ */}
       <section id="stack" className="py-20 sm:py-28" style={{ background: BG }}>
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
 
-          <FadeIn className="flex flex-wrap items-end justify-between gap-4 mb-14">
-            <div>
-              <p className="label-overline mb-4">Tech Stack</p>
-              <h2 style={{ color: 'rgba(255,255,255,0.92)' }}>
-                Tools we use <span style={{ color: AC }}>per service</span>
-              </h2>
+          {/* Header */}
+          <FadeIn className="text-center mb-14">
+            <div className="inline-flex items-center gap-2 mb-5">
+              <span style={{ color: AC, fontSize: 14 }}>✦</span>
+              <p className="label-overline" style={{ color: AC, letterSpacing: '0.28em' }}>Our Tech Stack</p>
             </div>
-            <Link href="/services"
-              className="inline-flex items-center gap-1.5 text-sm font-normal btn-outline px-5 py-2.5 rounded-full">
-              All services <ArrowRight className="w-4 h-4" />
-            </Link>
+            <h2 style={{ color: 'rgba(255,255,255,0.92)' }}>
+              Tech Capabilities Powering<br />Digital Transformation
+            </h2>
+            <p className="mt-5 text-sm max-w-xl mx-auto" style={{ color: 'rgba(255,255,255,0.40)', lineHeight: 1.8, fontWeight: 300 }}>
+              A modern, flexible stack designed to support evolving business and technical requirements.
+            </p>
           </FadeIn>
 
-          <div className="space-y-5">
-            {techStack.map((cat, ci) => {
-              const CatIcon = cat.Icon;
-              return (
-                <FadeIn key={cat.service} delay={ci * 0.07}>
-                  <div
-                    className="rounded-2xl overflow-hidden transition-all duration-300"
-                    style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.07)' }}
-                    onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = `${cat.color}30`; }}
-                    onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.07)'; }}
-                  >
-                    {/* Category header bar */}
-                    <div className="flex items-center gap-3 px-6 py-4"
-                      style={{ borderBottom: '1px solid rgba(255,255,255,0.06)', background: `linear-gradient(to right, ${cat.color}10, transparent 60%)` }}>
-                      <div className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0"
-                        style={{ background: `${cat.color}18`, border: `1px solid ${cat.color}35` }}>
-                        <CatIcon className="w-4 h-4" style={{ color: cat.color }} />
-                      </div>
-                      <span className="text-sm font-medium" style={{ color: 'rgba(255,255,255,0.90)' }}>{cat.service}</span>
-                      <span className="ml-auto text-[10px] px-2.5 py-0.5 rounded-full font-medium"
-                        style={{ color: cat.color, background: `${cat.color}14`, border: `1px solid ${cat.color}28` }}>
-                        {cat.tools.length} tools
-                      </span>
-                    </div>
+          {/* Card */}
+          <FadeIn>
+            <div
+              className="rounded-2xl overflow-hidden"
+              style={{
+                background: 'rgba(255,255,255,0.025)',
+                border: '1px solid rgba(255,255,255,0.08)',
+                boxShadow: '0 0 0 1px rgba(43,128,240,0.04), 0 24px 60px rgba(0,0,0,0.3)',
+              }}
+              onMouseEnter={() => setStackPaused(true)}
+              onMouseLeave={() => setStackPaused(false)}
+            >
+              {/* Thin accent top line */}
+              <div style={{ height: 1, background: 'linear-gradient(to right, transparent, rgba(43,128,240,0.5) 40%, rgba(95,168,255,0.7) 50%, rgba(43,128,240,0.5) 60%, transparent)' }} />
 
-                    {/* Tool cells — open grid, no individual card borders */}
-                    <div className="grid grid-cols-3 sm:grid-cols-6">
-                      {cat.tools.map((tool, ti) => (
-                        <div key={tool.name}
-                          className="flex flex-col items-center gap-3 py-8 px-4 transition-all duration-200 cursor-default"
-                          style={{
-                            borderRight: ti < cat.tools.length - 1 ? '1px solid rgba(255,255,255,0.05)' : 'none',
-                          }}
-                          onMouseEnter={e => {
-                            const el = e.currentTarget as HTMLElement;
-                            el.style.background = `${cat.color}0C`;
-                          }}
-                          onMouseLeave={e => {
-                            (e.currentTarget as HTMLElement).style.background = 'transparent';
-                          }}>
-                          <ToolIcon name={tool.name} />
-                          <div className="flex flex-col items-center gap-1.5">
-                            <span className="text-[12.5px] text-center leading-tight font-normal"
-                              style={{ color: 'rgba(255,255,255,0.82)' }}>{tool.name}</span>
-                            <span className="text-[9px] px-2 py-0.5 rounded-full"
-                              style={{ background: `${cat.color}14`, color: cat.color, border: `1px solid ${cat.color}28` }}>
-                              {tool.cat}
-                            </span>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
+              {/* Category title with divider */}
+              <div className="flex items-center gap-6 px-10 pt-9 pb-2">
+                <div style={{ flex: 1, height: 1, background: 'rgba(255,255,255,0.07)' }} />
+                <h3 className="font-semibold whitespace-nowrap"
+                  style={{ color: 'rgba(255,255,255,0.88)', letterSpacing: '0.04em', fontSize: '0.95rem' }}>
+                  {techStack[activeStack].category}
+                </h3>
+                <div style={{ flex: 1, height: 1, background: 'rgba(255,255,255,0.07)' }} />
+              </div>
+
+              {/* Tool logos grid */}
+              <div className="grid grid-cols-3 sm:grid-cols-4 px-6 pb-5">
+                {techStack[activeStack].tools.map((tool) => (
+                  <div key={tool.name}
+                    className="flex flex-col items-center justify-center gap-3 py-8 px-4 transition-all duration-200 cursor-default rounded-xl"
+                    onMouseEnter={e => {
+                      const el = e.currentTarget as HTMLElement;
+                      el.style.background = 'rgba(255,255,255,0.06)';
+                      const img = el.querySelector('img') as HTMLImageElement;
+                      if (img) img.style.transform = 'scale(1.1)';
+                    }}
+                    onMouseLeave={e => {
+                      const el = e.currentTarget as HTMLElement;
+                      el.style.background = 'transparent';
+                      const img = el.querySelector('img') as HTMLImageElement;
+                      if (img) img.style.transform = 'scale(1)';
+                    }}>
+                    <img
+                      src={tool.logo}
+                      alt={tool.name}
+                      style={{
+                        height: 54,
+                        width: 'auto',
+                        maxWidth: 108,
+                        objectFit: 'contain',
+                        filter: (tool as { invert?: boolean }).invert
+                          ? 'brightness(0) invert(1) drop-shadow(0 0 6px rgba(255,255,255,0.3))'
+                          : 'brightness(1.15) saturate(1.3) drop-shadow(0 2px 8px rgba(0,0,0,0.4))',
+                        transition: 'filter 0.2s ease, transform 0.2s ease',
+                      }}
+                    />
+                    <span className="text-[12px] text-center leading-tight font-medium"
+                      style={{ color: 'rgba(255,255,255,0.75)' }}>
+                      {tool.name}
+                    </span>
                   </div>
-                </FadeIn>
-              );
-            })}
-          </div>
+                ))}
+              </div>
+
+
+            </div>
+          </FadeIn>
         </div>
       </section>
 

@@ -56,7 +56,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="font-sans antialiased">
         <IntroAnimation />
         <Header />
-        <main className="pt-16">{children}</main>
+        <main>{children}</main>
         <Footer />
         <ScrollToTop />
         <ChatBot />
