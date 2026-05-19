@@ -316,58 +316,163 @@ function ProposalPopup({ onClose }: { onClose: () => void }) {
   const [submitted, setSubmitted] = useState(false);
   const handleSubmit = (e: React.SyntheticEvent) => { e.preventDefault(); setSubmitted(true); setTimeout(onClose, 2500); };
 
+  const inputStyle = {
+    background: 'rgba(255,255,255,0.06)',
+    border: '1px solid rgba(255,255,255,0.1)',
+    color: '#FFFFFF',
+    borderRadius: 12,
+  };
+  const onFocus = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    e.currentTarget.style.borderColor = 'rgba(43,128,240,0.6)';
+    e.currentTarget.style.boxShadow = '0 0 0 3px rgba(43,128,240,0.12)';
+  };
+  const onBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)';
+    e.currentTarget.style.boxShadow = 'none';
+  };
+
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center px-4">
-      <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={onClose} />
-      <div className="relative w-full max-w-md rounded-2xl overflow-hidden animate-fadeInScale shadow-2xl"
-        style={{ background: 'rgba(6,13,26,0.98)', border: '1px solid rgba(255,255,255,0.12)' }}>
-        <div className="h-px w-full" style={{ background: 'linear-gradient(90deg, transparent, #2B80F0, #5FA8FF, transparent)' }} />
-        <button onClick={onClose} className="absolute top-4 right-4 p-1.5 rounded-lg transition-colors hover:bg-white/10"
-          style={{ color: 'rgba(255,255,255,0.5)' }}>
-          <X className="w-4 h-4" />
-        </button>
-        <div className="p-8">
+    <div className="fixed inset-0 z-[100] flex items-center justify-center px-4 py-6">
+      <div className="absolute inset-0 bg-black/60 backdrop-blur-md" onClick={onClose} />
+
+      <div className="relative w-full max-w-3xl rounded-2xl overflow-hidden animate-fadeInScale shadow-2xl flex"
+        style={{ background: '#07111F', border: '1px solid rgba(255,255,255,0.1)', maxHeight: '92vh' }}>
+
+        {/* Top accent line */}
+        <div className="absolute top-0 left-0 right-0 h-px"
+          style={{ background: 'linear-gradient(90deg, transparent, #2B80F0 30%, #5FA8FF 50%, #2B80F0 70%, transparent)' }} />
+
+        {/* ── LEFT PANEL ── */}
+        <div className="hidden sm:flex flex-col justify-between w-[46%] shrink-0 p-8 relative overflow-hidden"
+          style={{ background: 'linear-gradient(160deg, #0B1628 0%, #07111F 60%, #091520 100%)' }}>
+
+          {/* Glow blob */}
+          <div className="absolute top-0 left-0 w-64 h-64 rounded-full pointer-events-none"
+            style={{ background: 'radial-gradient(circle, rgba(43,128,240,0.18) 0%, transparent 70%)', filter: 'blur(40px)' }} />
+
+          <div className="relative z-10">
+            {/* Logo */}
+            <div className="mb-7">
+              <img src="/logo-mark.png" alt="MetLink"
+                style={{ width: 52, height: 52, borderRadius: 12, objectFit: 'cover', border: '1px solid rgba(43,128,240,0.3)' }} />
+            </div>
+
+            {/* Badge */}
+            <p className="text-[10px] font-bold uppercase tracking-[0.28em] mb-4" style={{ color: '#2B80F0' }}>
+              Limited Spots Available
+            </p>
+
+            {/* Headline */}
+            <h2 className="text-2xl font-black leading-tight mb-3" style={{ color: '#FFFFFF', letterSpacing: '-0.02em' }}>
+              Schedule Your<br />
+              <span style={{ color: '#2B80F0' }}>Success Story</span>
+            </h2>
+            <p className="text-sm leading-relaxed mb-8" style={{ color: 'rgba(255,255,255,0.5)' }}>
+              Join 80+ businesses growing with AI-powered marketing and development.
+            </p>
+
+            {/* Bullets */}
+            <ul className="space-y-3">
+              {[
+                { icon: '📈', text: 'Average 70% revenue growth' },
+                { icon: '⚡', text: 'First deliverables in 7 days' },
+                { icon: '🔒', text: 'NDA signed before we begin' },
+                { icon: '🤖', text: 'AI-powered execution' },
+              ].map(({ icon, text }) => (
+                <li key={text} className="flex items-center gap-3 text-sm" style={{ color: 'rgba(255,255,255,0.75)' }}>
+                  <span className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0 text-sm"
+                    style={{ background: 'rgba(43,128,240,0.15)', border: '1px solid rgba(43,128,240,0.2)' }}>
+                    {icon}
+                  </span>
+                  {text}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Testimonial */}
+          <div className="relative z-10 mt-8 pt-6" style={{ borderTop: '1px solid rgba(255,255,255,0.08)' }}>
+            <div className="flex gap-0.5 mb-2">
+              {[...Array(5)].map((_, i) => (
+                <svg key={i} viewBox="0 0 24 24" className="w-4 h-4" fill="#F59E0B"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              ))}
+            </div>
+            <p className="text-xs italic leading-relaxed" style={{ color: 'rgba(255,255,255,0.45)' }}>
+              &ldquo;MetLink delivered in half the time and doubled our ROI.&rdquo;
+            </p>
+          </div>
+        </div>
+
+        {/* ── RIGHT PANEL ── */}
+        <div className="flex-1 flex flex-col overflow-y-auto p-7 sm:p-8 relative"
+          style={{ background: '#0B1628' }}>
+
+          {/* Close */}
+          <button onClick={onClose}
+            className="absolute top-4 right-4 w-8 h-8 rounded-lg flex items-center justify-center transition-all hover:bg-white/10"
+            style={{ color: 'rgba(255,255,255,0.45)', border: '1px solid rgba(255,255,255,0.08)' }}>
+            <X className="w-4 h-4" />
+          </button>
+
           {submitted ? (
-            <div className="text-center py-10 animate-fadeInScale">
-              <div className="w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-5 btn-primary-glass">
-                <ArrowRight className="w-10 h-10 text-white" />
+            <div className="flex-1 flex flex-col items-center justify-center text-center py-10 animate-fadeInScale">
+              <div className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-5"
+                style={{ background: 'rgba(43,128,240,0.15)', border: '1px solid rgba(43,128,240,0.3)' }}>
+                <ArrowRight className="w-8 h-8" style={{ color: '#2B80F0' }} />
               </div>
-              <h3 className="text-2xl font-black mb-2" style={{ color: '#FFFFFF' }}>Request Received!</h3>
-              <p className="text-sm max-w-[240px] mx-auto" style={{ color: 'rgba(255,255,255,0.6)' }}>
+              <h3 className="text-xl font-black mb-2" style={{ color: '#FFFFFF' }}>Request Received!</h3>
+              <p className="text-sm" style={{ color: 'rgba(255,255,255,0.55)' }}>
                 Our strategy team will reach out within 24 hours.
               </p>
             </div>
           ) : (
             <>
-              <div className="mb-8">
-                <p className="text-[10px] font-black tracking-[0.3em] uppercase mb-2" style={{ color: '#2B80F0' }}>Limited Spots</p>
-                <h2 className="text-2xl font-black leading-tight" style={{ color: '#FFFFFF' }}>Get a Free Proposal</h2>
-                <p className="text-sm mt-1" style={{ color: 'rgba(255,255,255,0.55)' }}>Join 80+ businesses growing with AI-powered strategy.</p>
+              <div className="mb-6 pr-8">
+                <h3 className="text-xl font-black mb-1" style={{ color: '#FFFFFF' }}>Get My Free Proposal 🚀</h3>
+                <p className="text-sm" style={{ color: 'rgba(255,255,255,0.45)' }}>
+                  Complete the form and we&apos;ll validate your idea now.
+                </p>
               </div>
-              <form onSubmit={handleSubmit} className="space-y-3">
-                {['Full Name', 'Company / Project Name', 'Work Email Address'].map((ph, i) => (
-                  <input key={ph} type={i === 2 ? 'email' : 'text'} placeholder={ph} required
-                    className="w-full px-4 py-3.5 rounded-xl text-sm focus:outline-none transition-all placeholder:text-white/25"
-                    style={{ background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.12)', color: '#FFFFFF' }}
-                    onFocus={e => (e.currentTarget.style.borderColor = 'rgba(43,128,240,0.5)')}
-                    onBlur={e => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)')} />
-                ))}
-                <select className="w-full px-4 py-3.5 rounded-xl text-sm focus:outline-none appearance-none cursor-pointer transition-all"
-                  style={{ background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.12)', color: 'rgba(255,255,255,0.5)' }}
-                  onFocus={e => (e.currentTarget.style.borderColor = 'rgba(43,128,240,0.5)')}
-                  onBlur={e => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)')}>
-                  <option value="" style={{ background: '#0A0900' }}>Select a Service</option>
-                  <option value="ai" style={{ background: '#0A0900', color: '#fff' }}>AI &amp; Automation</option>
-                  <option value="dev" style={{ background: '#0A0900', color: '#fff' }}>Software Development</option>
-                  <option value="marketing" style={{ background: '#0A0900', color: '#fff' }}>Digital Marketing</option>
-                  <option value="creative" style={{ background: '#0A0900', color: '#fff' }}>Creative Media</option>
+
+              <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+                <input type="text" placeholder="Full Name *" required
+                  className="w-full px-4 py-3 text-sm focus:outline-none placeholder:text-white/25"
+                  style={inputStyle} onFocus={onFocus} onBlur={onBlur} />
+                <input type="email" placeholder="Email Address *" required
+                  className="w-full px-4 py-3 text-sm focus:outline-none placeholder:text-white/25"
+                  style={inputStyle} onFocus={onFocus} onBlur={onBlur} />
+                <input type="tel" placeholder="Phone Number"
+                  className="w-full px-4 py-3 text-sm focus:outline-none placeholder:text-white/25"
+                  style={inputStyle} onFocus={onFocus} onBlur={onBlur} />
+                <select className="w-full px-4 py-3 text-sm focus:outline-none appearance-none cursor-pointer"
+                  style={{ ...inputStyle, color: 'rgba(255,255,255,0.4)' }}
+                  onFocus={onFocus} onBlur={onBlur}>
+                  <option value="" style={{ background: '#0B1628' }}>Select a Budget Range</option>
+                  <option value="5k" style={{ background: '#0B1628', color: '#fff' }}>$1k – $5k</option>
+                  <option value="10k" style={{ background: '#0B1628', color: '#fff' }}>$5k – $10k</option>
+                  <option value="25k" style={{ background: '#0B1628', color: '#fff' }}>$10k – $25k</option>
+                  <option value="25k+" style={{ background: '#0B1628', color: '#fff' }}>$25k+</option>
                 </select>
+                <textarea placeholder="Please share any information that will help us provide an accurate estimate. *"
+                  rows={3} required
+                  className="w-full px-4 py-3 text-sm focus:outline-none resize-none placeholder:text-white/25"
+                  style={inputStyle}
+                  onFocus={onFocus as React.FocusEventHandler<HTMLTextAreaElement>}
+                  onBlur={onBlur as React.FocusEventHandler<HTMLTextAreaElement>} />
+
+                <label className="flex items-center gap-3 cursor-pointer mt-1">
+                  <input type="checkbox" className="w-4 h-4 rounded accent-blue-500" />
+                  <span className="text-xs" style={{ color: 'rgba(255,255,255,0.5)' }}>Send me a copy of NDA</span>
+                </label>
+
                 <button type="submit"
-                  className="w-full py-3.5 mt-2 rounded-xl font-black text-sm tracking-wide uppercase transition-all text-white btn-primary-glass">
-                  Submit &amp; Get Started
+                  className="w-full py-3.5 rounded-xl font-bold text-sm tracking-widest uppercase transition-all hover:brightness-110 active:scale-[0.98] mt-1"
+                  style={{ background: '#2B80F0', color: '#FFFFFF', boxShadow: '0 4px 20px rgba(43,128,240,0.35)', letterSpacing: '0.1em' }}>
+                  Submit
                 </button>
-                <p className="text-center text-[10px] font-medium mt-4" style={{ color: 'rgba(255,255,255,0.35)' }}>
-                  No spam. We respond within 24 hours.
+
+                <p className="text-center text-[11px] mt-1" style={{ color: '#2B80F0' }}>
+                  ✓ Your idea is 100% protected by our Non Disclosure Agreement.
                 </p>
               </form>
             </>
