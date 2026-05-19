@@ -115,9 +115,9 @@ export function IntroAnimation() {
         alignItems: 'center',
         opacity: showLogo ? 1 : 0,
         transform: showLogo
-          ? (isExpanded ? 'translateY(-6px) scale(1.04)' : 'translateY(0) scale(1)')
-          : 'translateY(32px) scale(0.88)',
-        transition: 'opacity 0.65s cubic-bezier(0.16,1,0.3,1), transform 0.65s cubic-bezier(0.16,1,0.3,1)',
+          ? (isExpanded ? 'scale(1.08)' : 'scale(1)')
+          : 'scale(0.15)',
+        transition: 'opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.75s cubic-bezier(0.16,1,0.3,1)',
         filter: showRings ? 'drop-shadow(0 0 28px rgba(43,128,240,0.55))' : 'none',
       }}>
         <img

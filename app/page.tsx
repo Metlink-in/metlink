@@ -411,7 +411,7 @@ export default function HomePage() {
         setActiveStack(p => (p + 1) % techStack.length);
         setStackVisible(true);
       }, 220);
-    }, 2200);
+    }, 3400);
     return () => clearTimeout(t);
   }, [activeStack, stackPaused]);
 
