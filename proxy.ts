@@ -4,10 +4,9 @@ import { jwtVerify } from 'jose';
 const SECRET = new TextEncoder().encode('ml-admin-secret-2025-jb-metlink');
 const COOKIE = 'ml_admin_token';
 
-export async function middleware(req: NextRequest) {
+export async function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
-  // Skip login route
   if (pathname === '/api/admin/auth/login') return NextResponse.next();
 
   const token = req.cookies.get(COOKIE)?.value;
