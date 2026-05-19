@@ -37,10 +37,10 @@ export function Header() {
         <nav
           className="transition-all duration-500"
           style={{
-            background: 'transparent',
-            borderBottom: '1px solid transparent',
-            backdropFilter: 'none',
-            WebkitBackdropFilter: 'none',
+            background: mobileOpen ? '#04090F' : 'transparent',
+            borderBottom: mobileOpen ? '1px solid rgba(255,255,255,0.08)' : '1px solid transparent',
+            backdropFilter: mobileOpen ? 'blur(20px)' : 'none',
+            WebkitBackdropFilter: mobileOpen ? 'blur(20px)' : 'none',
             boxShadow: 'none',
           }}
         >
@@ -123,62 +123,73 @@ export function Header() {
             </button>
           </div>
 
-          {/* Mobile menu */}
+          {/* Mobile menu — full-screen overlay */}
           {mobileOpen && (
-            <div className="md:hidden pb-4 pt-1 border-t animate-slideInDown"
-              style={{ borderColor: 'rgba(255,255,255,0.09)' }}>
-              <div className="px-4 py-2 space-y-0.5">
-                <MobileNavLink href="/" onClose={() => setMobileOpen(false)}>Home</MobileNavLink>
+            <>
+              {/* Dim backdrop covers entire screen below header */}
+              <div
+                className="md:hidden fixed inset-0 z-[-1]"
+                style={{ top: 80, background: 'rgba(4,9,15,0.97)', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)' }}
+                onClick={() => setMobileOpen(false)}
+              />
+              <div className="md:hidden fixed left-0 right-0 z-40 overflow-y-auto animate-slideInDown"
+                style={{ top: 81, bottom: 0, background: '#04090F', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
+                <div className="px-5 py-4 space-y-0.5 pb-10">
+                  <MobileNavLink href="/" onClose={() => setMobileOpen(false)}>Home</MobileNavLink>
 
-                <div className="px-3 pt-3 pb-1">
-                  <p className="text-[10px] font-black uppercase tracking-wider" style={{ color: 'rgba(255,255,255,0.35)' }}>Services</p>
-                </div>
-                {serviceCategories.map((cat) => {
-                  const accent = catAccents[cat.slug] || '#2B80F0';
-                  return (
-                    <div key={cat.slug}>
-                      <Link href={`/services/${cat.slug}`}
-                        className="block px-3 py-1.5 text-sm font-bold rounded-xl"
-                        style={{ color: accent }}
-                        onClick={() => setMobileOpen(false)}>
-                        {cat.name}
-                      </Link>
-                      {cat.services.map((svc) => (
-                        <Link key={svc.slug} href={`/services/${cat.slug}/${svc.slug}`}
-                          className="block pl-8 py-1 text-sm transition-colors"
-                          style={{ color: 'rgba(255,255,255,0.4)' }}
+                  <div className="px-3 pt-4 pb-1">
+                    <p className="text-[10px] font-black uppercase tracking-wider" style={{ color: 'rgba(255,255,255,0.3)' }}>Services</p>
+                  </div>
+                  {serviceCategories.map((cat) => {
+                    const accent = catAccents[cat.slug] || '#2B80F0';
+                    return (
+                      <div key={cat.slug}>
+                        <Link href={`/services/${cat.slug}`}
+                          className="block px-3 py-2 text-sm font-bold rounded-xl"
+                          style={{ color: accent }}
                           onClick={() => setMobileOpen(false)}>
-                          {svc.name}
+                          {cat.name}
                         </Link>
-                      ))}
-                    </div>
-                  );
-                })}
+                        {cat.services.map((svc) => (
+                          <Link key={svc.slug} href={`/services/${cat.slug}/${svc.slug}`}
+                            className="block pl-8 py-1.5 text-sm transition-colors"
+                            style={{ color: 'rgba(255,255,255,0.45)' }}
+                            onClick={() => setMobileOpen(false)}>
+                            {svc.name}
+                          </Link>
+                        ))}
+                      </div>
+                    );
+                  })}
 
-                {[['Company', '/company'], ['Portfolio', '/portfolio'], ['Blog', '/blog'], ['Product', '/product']].map(([label, href]) => (
-                  <MobileNavLink key={label} href={href} onClose={() => setMobileOpen(false)}>
-                    {label}
-                    {label === 'Product' && (
-                      <span className="ml-1.5 px-1.5 py-0.5 rounded text-[9px] font-black uppercase tracking-wider"
-                        style={{ background: 'rgba(43,128,240,0.2)', color: '#5FA8FF' }}>Soon</span>
-                    )}
-                  </MobileNavLink>
-                ))}
+                  <div className="pt-2">
+                    {[['Company', '/company'], ['Portfolio', '/portfolio'], ['Blog', '/blog'], ['Product', '/product']].map(([label, href]) => (
+                      <MobileNavLink key={label} href={href} onClose={() => setMobileOpen(false)}>
+                        {label}
+                        {label === 'Product' && (
+                          <span className="ml-1.5 px-1.5 py-0.5 rounded text-[9px] font-black uppercase tracking-wider"
+                            style={{ background: 'rgba(43,128,240,0.2)', color: '#5FA8FF' }}>Soon</span>
+                        )}
+                      </MobileNavLink>
+                    ))}
+                  </div>
 
-                <div className="pt-3 space-y-2">
-                  <Link href="/contact"
-                    className="block text-center py-3 rounded-full text-sm font-medium btn-primary"
-                    onClick={() => setMobileOpen(false)}>
-                    Contact Us
-                  </Link>
-                  <button onClick={() => { setShowPopup(true); setMobileOpen(false); }}
-                    className="w-full text-center py-3 rounded-xl text-sm font-medium btn-glass"
-                    style={{ color: 'rgba(255,255,255,0.7)' }}>
-                    Get a Free Proposal
-                  </button>
+                  <div className="pt-4 space-y-2.5 border-t mt-3" style={{ borderColor: 'rgba(255,255,255,0.07)' }}>
+                    <Link href="/contact"
+                      className="block text-center py-3.5 rounded-full text-sm font-semibold text-white"
+                      style={{ background: '#2B80F0', boxShadow: '0 4px 16px rgba(43,128,240,0.3)' }}
+                      onClick={() => setMobileOpen(false)}>
+                      Contact Us
+                    </Link>
+                    <button onClick={() => { setShowPopup(true); setMobileOpen(false); }}
+                      className="w-full text-center py-3.5 rounded-full text-sm font-semibold"
+                      style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.7)' }}>
+                      Get a Free Proposal
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
+            </>
           )}
           </div>{/* /max-w-7xl */}
         </nav>
