@@ -399,12 +399,19 @@ const AC   = '#2B80F0';
 export default function HomePage() {
   const [activeService, setActiveService]       = useState('01');
   const [activeStack, setActiveStack]           = useState(0);
+  const [stackVisible, setStackVisible]         = useState(true);
   const [stackPaused, setStackPaused]           = useState(false);
   const [integrationsPaused, setIntegrationsPaused] = useState(false);
 
   useEffect(() => {
     if (stackPaused) return;
-    const t = setTimeout(() => setActiveStack(p => (p + 1) % techStack.length), 1800);
+    const t = setTimeout(() => {
+      setStackVisible(false);
+      setTimeout(() => {
+        setActiveStack(p => (p + 1) % techStack.length);
+        setStackVisible(true);
+      }, 220);
+    }, 2200);
     return () => clearTimeout(t);
   }, [activeStack, stackPaused]);
 
@@ -996,6 +1003,9 @@ export default function HomePage() {
               {/* Thin accent top line */}
               <div style={{ height: 1, background: 'linear-gradient(to right, transparent, rgba(43,128,240,0.5) 40%, rgba(95,168,255,0.7) 50%, rgba(43,128,240,0.5) 60%, transparent)' }} />
 
+              {/* Fade wrapper — smooth category transitions */}
+              <div style={{ opacity: stackVisible ? 1 : 0, transition: 'opacity 0.22s ease', willChange: 'opacity' }}>
+
               {/* Category title with divider */}
               <div className="flex items-center gap-6 px-10 pt-9 pb-2">
                 <div style={{ flex: 1, height: 1, background: 'rgba(255,255,255,0.07)' }} />
@@ -1045,7 +1055,7 @@ export default function HomePage() {
                 ))}
               </div>
 
-
+              </div>{/* /fade wrapper */}
             </div>
           </FadeIn>
         </div>

@@ -121,9 +121,17 @@ export function IntroAnimation() {
         filter: showRings ? 'drop-shadow(0 0 28px rgba(43,128,240,0.55))' : 'none',
       }}>
         <img
-          src="/WhatsApp_Image_2026-04-30_at_7.30.41_PM-removebg-preview.png"
+          src="/logo-mark.png"
           alt="Metlink"
-          style={{ width: 'clamp(220px, 38vw, 320px)', height: 'auto', objectFit: 'contain' }}
+          style={{
+            width: 'clamp(100px, 14vw, 140px)',
+            height: 'auto',
+            objectFit: 'contain',
+            borderRadius: 20,
+            filter: showRings
+              ? 'drop-shadow(0 0 28px rgba(43,128,240,0.7)) drop-shadow(0 0 60px rgba(43,128,240,0.3))'
+              : 'none',
+          }}
         />
       </div>
     </div>
