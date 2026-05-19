@@ -50,18 +50,12 @@ export function PopupForm() {
             style={{ background: 'radial-gradient(circle, rgba(232,97,42,0.15) 0%, transparent 70%)', filter: 'blur(40px)', transform: 'translate(30%,30%)' }} />
 
           <div className="relative z-10">
-            {/* Logo mark */}
-            <div className="w-10 h-10 rounded-xl flex items-center justify-center mb-6"
-              style={{ background: 'linear-gradient(135deg, #0C0C0C, #2B80F0)' }}>
-              <svg width="28" height="24" viewBox="0 0 112 96" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M 4,92 L 4,6 L 30,6 L 50,54 L 50,92 Z" fill="rgba(255,255,255,0.95)" />
-                <path d="M 60,92 L 60,48 C 60,6 108,6 108,48 L 108,92 Z" fill="rgba(255,255,255,0.65)" />
-                <line x1="60" y1="46" x2="44" y2="66" stroke="rgba(255,255,255,0.9)" strokeWidth="4.5" strokeLinecap="round" />
-                <circle cx="60" cy="46" r="9"   fill="rgba(255,255,255,0.25)" />
-                <circle cx="60" cy="46" r="5.5" fill="white" />
-                <circle cx="44" cy="66" r="5.5" fill="rgba(255,255,255,0.9)" />
-              </svg>
-            </div>
+            {/* Logo */}
+            <img
+              src="/WhatsApp_Image_2026-04-30_at_7.30.41_PM-removebg-preview.png"
+              alt="MetLink"
+              style={{ height: 56, width: 'auto', objectFit: 'contain', marginBottom: 24 }}
+            />
 
             <p className="text-[10px] font-black uppercase tracking-[0.35em] mb-3" style={{ color: '#5FA8FF' }}>
               Limited Spots Available
