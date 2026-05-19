@@ -1004,7 +1004,7 @@ export default function HomePage() {
               <div style={{ height: 1, background: 'linear-gradient(to right, transparent, rgba(43,128,240,0.5) 40%, rgba(95,168,255,0.7) 50%, rgba(43,128,240,0.5) 60%, transparent)' }} />
 
               {/* Fade wrapper — smooth category transitions */}
-              <div style={{ opacity: stackVisible ? 1 : 0, transition: 'opacity 0.22s ease', willChange: 'opacity' }}>
+              <div style={{ opacity: stackVisible ? 1 : 0, transform: stackVisible ? 'translateY(0) scale(1)' : 'translateY(16px) scale(0.98)', transition: stackVisible ? 'opacity 0.35s cubic-bezier(0.16,1,0.3,1), transform 0.35s cubic-bezier(0.16,1,0.3,1)' : 'opacity 0.18s ease, transform 0.18s ease', willChange: 'opacity, transform' }}>
 
               {/* Category title with divider */}
               <div className="flex items-center gap-6 px-10 pt-9 pb-2">
