@@ -353,8 +353,8 @@ function ProposalPopup({ onClose }: { onClose: () => void }) {
           <div className="relative z-10">
             {/* Logo */}
             <div className="mb-7">
-              <img src="/logo-mark.png" alt="MetLink"
-                style={{ width: 52, height: 52, borderRadius: 12, objectFit: 'cover', border: '1px solid rgba(43,128,240,0.3)' }} />
+              <img src="/WhatsApp_Image_2026-04-30_at_7.30.41_PM-removebg-preview.png" alt="MetLink"
+                style={{ width: 160, height: 'auto', objectFit: 'contain' }} />
             </div>
 
             {/* Badge */}
