@@ -1081,9 +1081,6 @@ export default function HomePage() {
                 <ChevronLeft className="w-5 h-5" />
               </button>
 
-              <span className="text-xs" style={{ color: 'rgba(255,255,255,0.25)' }}>
-                {activeStack + 1} / {techStack.length}
-              </span>
 
               <button
                 onClick={() => navigateStack(1)}
