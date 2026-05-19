@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowRight, CheckCircle, Star, TrendingUp, Shield, Zap, BarChart2, Users, Megaphone, Palette, Bot, Code } from 'lucide-react';
+import { ArrowRight, CheckCircle, Star, TrendingUp, Shield, Zap, BarChart2, Users, Megaphone, Palette, Bot, Code, ChevronLeft, ChevronRight } from 'lucide-react';
 import { FadeIn, StaggerChildren, StaggerItem } from '@/components/fade-in';
 
 /* ─── Brand icons ───────────────────────────────────────────── */
@@ -414,6 +414,14 @@ export default function HomePage() {
     }, 3400);
     return () => clearTimeout(t);
   }, [activeStack, stackPaused]);
+
+  const navigateStack = (dir: 1 | -1) => {
+    setStackVisible(false);
+    setTimeout(() => {
+      setActiveStack(p => (p + dir + techStack.length) % techStack.length);
+      setStackVisible(true);
+    }, 200);
+  };
 
   return (
     <div className="w-full overflow-x-hidden" style={{ background: BG }}>
@@ -990,6 +998,32 @@ export default function HomePage() {
 
           {/* Card */}
           <FadeIn>
+            <div className="relative">
+
+              {/* Left arrow */}
+              <button
+                onClick={() => navigateStack(-1)}
+                aria-label="Previous category"
+                className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-5 z-10 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 active:scale-95"
+                style={{ background: 'rgba(43,128,240,0.15)', border: '1px solid rgba(43,128,240,0.3)', color: '#5FA8FF', backdropFilter: 'blur(8px)' }}
+                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(43,128,240,0.3)'; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(43,128,240,0.15)'; }}
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+
+              {/* Right arrow */}
+              <button
+                onClick={() => navigateStack(1)}
+                aria-label="Next category"
+                className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-5 z-10 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 active:scale-95"
+                style={{ background: 'rgba(43,128,240,0.15)', border: '1px solid rgba(43,128,240,0.3)', color: '#5FA8FF', backdropFilter: 'blur(8px)' }}
+                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(43,128,240,0.3)'; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(43,128,240,0.15)'; }}
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
+
             <div
               className="rounded-2xl overflow-hidden"
               style={{
@@ -1056,7 +1090,8 @@ export default function HomePage() {
               </div>
 
               </div>{/* /fade wrapper */}
-            </div>
+            </div>{/* /card */}
+            </div>{/* /relative wrapper */}
           </FadeIn>
         </div>
       </section>
