@@ -1,15 +1,24 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { ArrowRight, Clock } from 'lucide-react';
-import { blogPosts } from '@/lib/blog-data';
+import { blogPosts as staticPosts } from '@/lib/blog-data';
 import { FadeIn, StaggerChildren, StaggerItem } from '@/components/fade-in';
 
 const categories = ['All', 'AI & Automation', 'Digital Marketing', 'Creative Media', 'Software Development'];
 
 export default function BlogPage() {
-  const featured = blogPosts[0];
-  const rest      = blogPosts.slice(1);
+  const [posts, setPosts] = useState(staticPosts);
+
+  useEffect(() => {
+    fetch('/api/public/blog').then(r => r.json()).then(data => {
+      if (Array.isArray(data) && data.length) setPosts(data);
+    }).catch(() => {});
+  }, []);
+
+  const featured = posts[0];
+  const rest      = posts.slice(1);
 
   return (
     <div className="w-full overflow-x-hidden" style={{ background: '#07111F' }}>

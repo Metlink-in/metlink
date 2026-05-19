@@ -2,12 +2,7 @@ import React from 'react';
 import type { Metadata, Viewport } from 'next';
 import { DM_Sans } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/next';
-import { Header } from '@/components/header';
-import { Footer } from '@/components/sections/footer';
-import { ScrollToTop } from '@/components/scroll-to-top';
-import { ChatBot } from '@/components/chatbot';
-import { PopupForm } from '@/components/popup-form';
-import { IntroAnimation } from '@/components/intro-animation';
+import { PublicShell } from '@/components/public-shell';
 import './globals.css';
 
 const dm = DM_Sans({
@@ -54,13 +49,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={dm.variable}>
       <body className="font-sans antialiased">
-        <IntroAnimation />
-        <Header />
-        <main>{children}</main>
-        <Footer />
-        <ScrollToTop />
-        <ChatBot />
-        <PopupForm />
+        <PublicShell>{children}</PublicShell>
         <Analytics />
       </body>
     </html>

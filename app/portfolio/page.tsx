@@ -1,13 +1,22 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { ArrowRight, ExternalLink } from 'lucide-react';
-import { projects } from '@/lib/portfolio-data';
+import { projects as staticProjects } from '@/lib/portfolio-data';
 import { FadeIn, StaggerChildren, StaggerItem } from '@/components/fade-in';
 
 const filters = ['All', 'Software + AI', 'Digital Marketing', 'Creative Media', 'Business Automation'];
 
 export default function PortfolioPage() {
+  const [projects, setProjects] = useState(staticProjects);
+
+  useEffect(() => {
+    fetch('/api/public/portfolio').then(r => r.json()).then(data => {
+      if (Array.isArray(data) && data.length) setProjects(data);
+    }).catch(() => {});
+  }, []);
+
   return (
     <div className="w-full overflow-x-hidden" style={{ background: '#07111F' }}>
 

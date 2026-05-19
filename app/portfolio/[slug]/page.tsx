@@ -9,7 +9,15 @@ export async function generateStaticParams() {
 
 export default async function ProjectPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const project = getProjectBySlug(slug);
+
+  // Try CMS first, then fall back to static data
+  let project: ReturnType<typeof getProjectBySlug> = undefined;
+  try {
+    const base = process.env.NEXT_PUBLIC_BASE_URL ?? 'http://localhost:3000';
+    const res = await fetch(`${base}/api/public/portfolio/${slug}`, { cache: 'no-store' });
+    if (res.ok) project = await res.json();
+  } catch { /* ignore */ }
+  if (!project) project = getProjectBySlug(slug);
   if (!project) notFound();
 
   const relatedProjects = projects.filter((p) => p.slug !== slug && p.category === project.category).slice(0, 2);

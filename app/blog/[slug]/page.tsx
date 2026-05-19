@@ -9,7 +9,15 @@ export async function generateStaticParams() {
 
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+
+  // Try CMS first, then fall back to static data
+  let post: ReturnType<typeof getPostBySlug> = undefined;
+  try {
+    const base = process.env.NEXT_PUBLIC_BASE_URL ?? 'http://localhost:3000';
+    const res = await fetch(`${base}/api/public/blog/${slug}`, { cache: 'no-store' });
+    if (res.ok) post = await res.json();
+  } catch { /* ignore */ }
+  if (!post) post = getPostBySlug(slug);
   if (!post) notFound();
 
   const related = blogPosts.filter((p) => p.slug !== slug && p.category === post.category).slice(0, 2);
