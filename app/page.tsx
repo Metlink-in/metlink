@@ -1000,30 +1000,6 @@ export default function HomePage() {
           <FadeIn>
             <div className="relative">
 
-              {/* Left arrow */}
-              <button
-                onClick={() => navigateStack(-1)}
-                aria-label="Previous category"
-                className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-5 z-10 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 active:scale-95"
-                style={{ background: 'rgba(43,128,240,0.15)', border: '1px solid rgba(43,128,240,0.3)', color: '#5FA8FF', backdropFilter: 'blur(8px)' }}
-                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(43,128,240,0.3)'; }}
-                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(43,128,240,0.15)'; }}
-              >
-                <ChevronLeft className="w-5 h-5" />
-              </button>
-
-              {/* Right arrow */}
-              <button
-                onClick={() => navigateStack(1)}
-                aria-label="Next category"
-                className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-5 z-10 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 active:scale-95"
-                style={{ background: 'rgba(43,128,240,0.15)', border: '1px solid rgba(43,128,240,0.3)', color: '#5FA8FF', backdropFilter: 'blur(8px)' }}
-                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(43,128,240,0.3)'; }}
-                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(43,128,240,0.15)'; }}
-              >
-                <ChevronRight className="w-5 h-5" />
-              </button>
-
             <div
               className="rounded-2xl overflow-hidden"
               style={{
@@ -1091,6 +1067,36 @@ export default function HomePage() {
 
               </div>{/* /fade wrapper */}
             </div>{/* /card */}
+
+            {/* Below-card navigation */}
+            <div className="flex items-center justify-center gap-6 mt-6">
+              <button
+                onClick={() => navigateStack(-1)}
+                aria-label="Previous category"
+                className="flex items-center gap-1.5 text-sm transition-all duration-200 hover:translate-x-[-2px] active:scale-95"
+                style={{ color: 'rgba(255,255,255,0.35)', background: 'none', border: 'none' }}
+                onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = '#5FA8FF'}
+                onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.35)'}
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+
+              <span className="text-xs" style={{ color: 'rgba(255,255,255,0.25)' }}>
+                {activeStack + 1} / {techStack.length}
+              </span>
+
+              <button
+                onClick={() => navigateStack(1)}
+                aria-label="Next category"
+                className="flex items-center gap-1.5 text-sm transition-all duration-200 hover:translate-x-[2px] active:scale-95"
+                style={{ color: 'rgba(255,255,255,0.35)', background: 'none', border: 'none' }}
+                onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = '#5FA8FF'}
+                onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.35)'}
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
+            </div>
+
             </div>{/* /relative wrapper */}
           </FadeIn>
         </div>
