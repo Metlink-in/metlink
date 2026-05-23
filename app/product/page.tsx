@@ -3,8 +3,8 @@ import Link from 'next/link';
 import { ArrowRight, Sparkles, Zap, Shield, BarChart3 } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Product — MetLink AI Agency',
-  description: 'Something powerful is on the way. MetLink is building a next-generation AI product — stay tuned.',
+  title: 'Product, MetLink AI Agency',
+  description: 'Something powerful is on the way. MetLink is building a next-generation AI product, stay tuned.',
 };
 
 const features = [
@@ -45,7 +45,7 @@ export default function ProductPage() {
 
         {/* Subtext */}
         <p className="text-lg md:text-xl leading-relaxed mb-10 max-w-xl" style={{ color: 'rgba(255,255,255,0.6)' }}>
-          We are crafting something extraordinary — a next-generation AI product built to transform the way businesses grow. The reveal is close.
+          We are crafting something extraordinary, a next-generation AI product built to transform the way businesses grow. The reveal is close.
         </p>
 
         {/* Animated dots */}

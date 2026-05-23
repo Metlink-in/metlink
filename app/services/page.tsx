@@ -36,7 +36,7 @@ export default function ServicesPage() {
           </FadeIn>
           <FadeIn delay={0.2}>
             <p className="text-base sm:text-xl max-w-3xl mx-auto mb-10" style={{ color: 'rgba(255,255,255,0.6)' }}>
-              Four comprehensive service pillars covering every dimension of digital growth — marketing, media, AI, and software.
+              Four comprehensive service pillars covering every dimension of digital growth, marketing, media, AI, and software.
             </p>
           </FadeIn>
           <FadeIn delay={0.3}>
@@ -121,8 +121,8 @@ export default function ServicesPage() {
             Talk to our experts and we&apos;ll build a custom strategy for your unique business needs.
           </p>
           <Link href="/contact"
-            className="inline-flex items-center gap-2 px-9 py-4 rounded-full font-bold text-sm text-white transition-all hover:brightness-95 active:scale-95"
-            style={{ background: '#2B80F0', boxShadow: '0 4px 20px rgba(43,128,240,0.3)' }}>
+            className="inline-flex items-center gap-2 px-5 py-2 rounded-xl font-semibold text-xs text-white transition-all active:scale-95"
+            style={{ background: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.18)' }}>
             Get a Free Consultation <ArrowRight className="w-5 h-5" />
           </Link>
         </FadeIn>

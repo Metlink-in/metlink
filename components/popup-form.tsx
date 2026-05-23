@@ -97,11 +97,11 @@ export function PopupForm() {
             <p className="text-xs italic leading-relaxed" style={{ color: 'rgba(255,255,255,0.5)' }}>
               &quot;MetLink delivered in half the time and doubled our ROI.&quot;
             </p>
-            <p className="text-[10px] font-bold mt-1.5" style={{ color: 'rgba(255,255,255,0.3)' }}>— Rohan M., CEO at FinEdge</p>
+            <p className="text-[10px] font-bold mt-1.5" style={{ color: 'rgba(255,255,255,0.3)' }}>  Rohan M., CEO at FinEdge</p>
           </div>
         </div>
 
-        {/* ── RIGHT PANEL — form ── */}
+        {/* ── RIGHT PANEL, form ── */}
         <div className="flex-1 relative flex flex-col overflow-y-auto" style={{ background: '#FFFFFF' }}>
           {/* Top accent */}
           <div className="h-1 flex-shrink-0" style={{ background: 'linear-gradient(90deg, #2B80F0, #5FA8FF, #2B80F0)' }} />

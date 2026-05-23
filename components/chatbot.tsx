@@ -132,7 +132,7 @@ export function ChatBot() {
               </div>
             ))}
 
-            {/* Quick replies — first message only */}
+            {/* Quick replies, first message only */}
             {messages.length === 1 && !typing && (
               <div className="flex flex-col gap-1.5 mt-2 ml-8 animate-slideInUp">
                 <p className="text-[9px] uppercase font-black tracking-[0.2em]" style={{ color: '#ADA09A' }}>Quick Actions</p>

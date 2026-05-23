@@ -60,7 +60,7 @@ export function Header() {
               />
             </Link>
 
-            {/* Desktop nav — pill container */}
+            {/* Desktop nav, pill container */}
             <div className="hidden md:flex items-center"
               style={{
                 background: 'rgba(255,255,255,0.06)',
@@ -107,10 +107,10 @@ export function Header() {
                 Get Proposal
               </button>
               <Link href="/contact"
-                className="px-5 py-2 rounded-full text-sm font-semibold transition-all active:scale-95"
-                style={{ background: '#FFFFFF', color: '#0A0F1A' }}
-                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.88)'; }}
-                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = '#FFFFFF'; }}>
+                className="px-5 py-2 rounded-xl text-xs font-semibold transition-all active:scale-95"
+                style={{ background: 'rgba(255,255,255,0.10)', color: '#FFFFFF', border: '1px solid rgba(255,255,255,0.18)' }}
+                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.16)'; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.10)'; }}>
                 Let&apos;s Talk
               </Link>
             </div>
@@ -123,7 +123,7 @@ export function Header() {
             </button>
           </div>
 
-          {/* Mobile menu — full-screen overlay */}
+          {/* Mobile menu, full-screen overlay */}
           {mobileOpen && (
             <>
               {/* Dim backdrop covers entire screen below header */}
@@ -194,7 +194,7 @@ export function Header() {
           </div>{/* /max-w-7xl */}
         </nav>
 
-        {/* Services mega-menu — sibling of <nav>, outside backdrop-filter scope */}
+        {/* Services mega-menu, sibling of <nav>, outside backdrop-filter scope */}
         {servicesOpen && (
           <>
             {/* Click-outside overlay */}
@@ -267,23 +267,12 @@ export function Header() {
                 {/* Bottom bar */}
                 <div className="mt-10 pt-5 flex items-center justify-between"
                   style={{ borderTop: '1px solid rgba(255,255,255,0.07)' }}>
-                  <div className="flex items-center gap-5">
-                    <div className="flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                      <span className="text-[11px]" style={{ color: 'rgba(255,255,255,0.40)' }}>
-                        All systems operational
-                      </span>
-                    </div>
-                    <span style={{ color: 'rgba(255,255,255,0.15)' }}>·</span>
-                    <span className="text-[11px]" style={{ color: 'rgba(255,255,255,0.35)' }}>
-                      150+ projects shipped
-                    </span>
-                  </div>
+                  <div />
                   <Link
                     href="/contact"
                     onClick={() => setServicesOpen(false)}
-                    className="group inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[12px] font-medium transition-all duration-200 hover:brightness-110 active:scale-95"
-                    style={{ background: '#2B80F0', color: '#FFFFFF', boxShadow: '0 4px 18px rgba(43,128,240,0.35)' }}
+                    className="group inline-flex items-center gap-2 px-5 py-2 rounded-xl text-xs font-semibold transition-all duration-200 active:scale-95"
+                    style={{ background: 'rgba(255,255,255,0.10)', color: '#FFFFFF', border: '1px solid rgba(255,255,255,0.18)' }}
                   >
                     Book a free call
                     <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />

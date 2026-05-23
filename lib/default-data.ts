@@ -1,4 +1,4 @@
-// Default site content — used as fallback when MongoDB has no data yet
+// Default site content, used as fallback when MongoDB has no data yet
 
 export const defaults: Record<string, unknown> = {
   hero: {
@@ -6,7 +6,7 @@ export const defaults: Record<string, unknown> = {
     headline1: 'We build',
     headline2: 'AI systems',
     headline3: 'that scale',
-    subheadline: 'Strategy, design, and engineering — one team shipping production AI for ambitious brands. From idea to live product in days.',
+    subheadline: 'Strategy, design, and engineering, one team shipping production AI for ambitious brands. From idea to live product in days.',
     cta1Text: 'Start building with AI',
     cta1Href: '/contact',
     cta2Text: 'View our work',
@@ -42,7 +42,7 @@ export const defaults: Record<string, unknown> = {
   ],
 
   whyus: [
-    { title: 'End-to-End Partner',    desc: 'Strategy, design, dev, and deployment — one accountable team, no handoffs.' },
+    { title: 'End-to-End Partner',    desc: 'Strategy, design, dev, and deployment, one accountable team, no handoffs.' },
     { title: 'AI-First Execution',    desc: 'Every project integrates cutting-edge AI to deliver compounding results.' },
     { title: 'Real-Time Insights',    desc: 'Live KPI dashboards. Zero ambiguity on what your investment is doing.' },
     { title: 'Ship in 7 Days',        desc: 'No lengthy discovery. First working deliverables in one week, guaranteed.' },
@@ -53,14 +53,14 @@ export const defaults: Record<string, unknown> = {
   process: [
     { num: '01', title: 'Discover & Define',  desc: "Deep-dive strategy session. We map your goals and find where AI creates the most leverage." },
     { num: '02', title: 'Build & Integrate',  desc: "We ship working systems in days, not months. Modular, tested, integrated into your stack." },
-    { num: '03', title: 'Scale & Optimize',   desc: "We monitor, retrain, and evolve continuously — performance compounds over time." },
+    { num: '03', title: 'Scale & Optimize',   desc: "We monitor, retrain, and evolve continuously, performance compounds over time." },
   ],
 
   company: {
     aboutTitle: 'About MetLink',
     para1: 'MetLink was founded with a single conviction: that the gap between ambitious businesses and world-class digital execution doesn\'t have to exist.',
-    para2: 'We\'re a full-service AI marketing and development agency — combining the strategic horsepower of a top-tier marketing firm with the technical depth of a software studio. We don\'t do cookie-cutter. Every engagement is custom-built around your goals.',
-    para3: 'From brand identity to machine learning systems, from performance ads to enterprise software — we handle the full stack of what it takes to grow a modern digital business.',
+    para2: 'We\'re a full-service AI marketing and development agency, combining the strategic horsepower of a top-tier marketing firm with the technical depth of a software studio. We don\'t do cookie-cutter. Every engagement is custom-built around your goals.',
+    para3: 'From brand identity to machine learning systems, from performance ads to enterprise software, we handle the full stack of what it takes to grow a modern digital business.',
     mission:  'To empower businesses with AI-powered marketing and technology that creates lasting competitive advantages.',
     vision:   'To become the most trusted AI marketing and development partner for ambitious businesses worldwide.',
     approach: 'Data-first strategy, creative excellence, and ruthless focus on metrics that actually move the needle.',
@@ -68,7 +68,7 @@ export const defaults: Record<string, unknown> = {
   },
 
   values: [
-    { title: 'Mission-Driven',       desc: 'Every decision we make is anchored to one goal — measurable results for our clients.' },
+    { title: 'Mission-Driven',       desc: 'Every decision we make is anchored to one goal, measurable results for our clients.' },
     { title: 'Radical Transparency', desc: 'No hidden fees, no smoke and mirrors. You always know exactly where your investment is going.' },
     { title: 'Client-Obsessed',      desc: "Your success is the only metric we care about. We treat every client's business like our own." },
     { title: 'Global Perspective',   desc: 'We bring international best practices and diverse insights to every project we take on.' },
@@ -80,7 +80,7 @@ export const defaults: Record<string, unknown> = {
     { year: '2020', event: 'MetLink Founded',       desc: 'Started as a 3-person digital marketing consultancy in Mumbai.' },
     { year: '2021', event: 'AI Division Launch',    desc: 'Expanded into AI development, delivering first custom ML models.' },
     { year: '2022', event: '50 Clients Milestone',  desc: 'Crossed 50 active clients across 10+ industries globally.' },
-    { year: '2023', event: 'Software Studio',        desc: 'Launched full-service software development — web, mobile, cloud.' },
+    { year: '2023', event: 'Software Studio',        desc: 'Launched full-service software development, web, mobile, cloud.' },
     { year: '2024', event: 'Global Expansion',       desc: 'Serving clients in 15+ countries with a 40+ person remote team.' },
     { year: '2025', event: 'AI-First Agency',        desc: "Positioned as India's leading AI marketing & development agency." },
   ],
@@ -110,4 +110,6 @@ export const defaults: Record<string, unknown> = {
     tagline: 'AI-first marketing and high-performance software for ambitious businesses that want to lead.',
     copyright: 'MetLink. All rights reserved.',
   },
+
+  'blog-categories': ['AI & Automation', 'Digital Marketing', 'Creative Media', 'Software Development'],
 };

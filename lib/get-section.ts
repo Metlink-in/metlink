@@ -6,7 +6,10 @@ export async function getSection<T = unknown>(section: string): Promise<T> {
   try {
     await connectDB();
     const doc = await SiteContent.findOne({ section }).lean();
-    if (doc) return (doc as { data: T }).data;
+    if (doc) {
+      const raw = (doc as { data: unknown }).data;
+      if (raw !== null && raw !== undefined) return raw as T;
+    }
   } catch { /* fall through to defaults */ }
   return (defaults[section] ?? null) as T;
 }

@@ -127,7 +127,7 @@ export const serviceCategories: ServiceCategory[] = [
     bgGlow: 'rgba(200,148,20,0.15)',
     tagline: 'Visuals That Stop Scrolling',
     description:
-      'World-class creative production — from brand identity to high-volume video content — that captivates audiences and drives real business results.',
+      'World-class creative production, from brand identity to high-volume video content, that captivates audiences and drives real business results.',
     services: [
       {
         name: 'Video & UGC Production',
@@ -255,7 +255,7 @@ export const serviceCategories: ServiceCategory[] = [
         slug: 'machine-learning',
         tagline: 'Systems That Learn. Businesses That Grow.',
         description:
-          'End-to-end ML solutions from data preparation to production deployment — including generative AI, RAG systems, and MLOps pipelines.',
+          'End-to-end ML solutions from data preparation to production deployment, including generative AI, RAG systems, and MLOps pipelines.',
         icon: '',
         features: [
           'Data preprocessing & feature engineering',
@@ -298,14 +298,14 @@ export const serviceCategories: ServiceCategory[] = [
     bgGlow: 'rgba(163,120,32,0.15)',
     tagline: 'Code That Scales. Systems That Last.',
     description:
-      'End-to-end custom software development — from web and mobile applications to enterprise systems and cloud infrastructure — built to scale.',
+      'End-to-end custom software development, from web and mobile applications to enterprise systems and cloud infrastructure, built to scale.',
     services: [
       {
         name: 'Application Development',
         slug: 'app-development',
         tagline: 'Web. Mobile. Enterprise. Delivered.',
         description:
-          'Custom application development across all platforms — web, mobile, and enterprise — built with modern tech stacks that perform and scale.',
+          'Custom application development across all platforms, web, mobile, and enterprise, built with modern tech stacks that perform and scale.',
         icon: '',
         features: [
           'Web application development',

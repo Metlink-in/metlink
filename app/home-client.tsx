@@ -1,9 +1,8 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
-import { ArrowRight, CheckCircle, Star, TrendingUp, Shield, Zap, BarChart2, Users, Megaphone, Palette, Bot, Code, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowRight, Star, TrendingUp, Megaphone, Palette, Bot, Code, ChevronLeft, ChevronRight } from 'lucide-react';
 import { FadeIn, StaggerChildren, StaggerItem } from '@/components/fade-in';
 
 /* ─── Brand icons ───────────────────────────────────────────── */
@@ -39,58 +38,61 @@ function BrandIcon({ name }: { name: string }) {
   }
 }
 
-/* Tool icon — uses downloaded SVG where available, falls back to inline SVG */
-const TOOL_IMG: Record<string, { src: string; bg: string }> = {
-  'Google Ads':          { src: '/tools/google-ads.svg',     bg: 'rgba(66,133,244,0.18)' },
-  'Meta Ads':            { src: '/tools/meta-ads.svg',        bg: 'rgba(24,119,242,0.18)' },
-  'Google Analytics 4':  { src: '/tools/ga4.svg',             bg: 'rgba(227,116,0,0.18)' },
-  'HubSpot':             { src: '/tools/hubspot.svg',         bg: 'rgba(255,122,89,0.18)' },
-  'SEMrush':             { src: '/tools/semrush.svg',         bg: 'rgba(255,100,45,0.18)' },
-  'Figma':               { src: '/tools/figma.svg',           bg: 'rgba(242,78,30,0.18)' },
-  'Framer':              { src: '/tools/framer.svg',          bg: 'rgba(0,85,255,0.18)' },
-  'Claude 3.5':          { src: '/tools/anthropic.svg',       bg: 'rgba(212,162,127,0.18)' },
-  'LangChain':           { src: '/tools/langchain.svg',       bg: 'rgba(0,199,165,0.18)' },
-  'n8n / Make':          { src: '/tools/n8n.svg',             bg: 'rgba(234,75,113,0.18)' },
-  'Next.js':             { src: '/tools/nextjs.svg',          bg: 'rgba(255,255,255,0.1)' },
-  'Supabase':            { src: '/tools/supabase.svg',        bg: 'rgba(62,207,142,0.18)' },
-  'Node.js':             { src: '/tools/nodejs.svg',          bg: 'rgba(51,153,51,0.18)' },
-  'Kubernetes':          { src: '/tools/kubernetes.svg',      bg: 'rgba(50,108,229,0.18)' },
-  'GitHub Actions':      { src: '/tools/github-actions.svg',  bg: 'rgba(255,255,255,0.1)' },
-};
 
-function ToolIcon({ name }: { name: string }) {
-  if (TOOL_IMG[name]) {
-    const { src, bg } = TOOL_IMG[name];
+/* ─── Typewriter heading ─────────────────────────────────────── */
+
+type Seg = { text: string; accent?: boolean; style?: React.CSSProperties };
+
+function TypewriterH2({ segments, className, style, speed = 55 }: {
+  segments: Seg[];
+  className?: string;
+  style?: React.CSSProperties;
+  speed?: number;
+}) {
+  const ref  = useRef<HTMLHeadingElement>(null);
+  const [count, setCount]   = useState(0);
+  const [active, setActive] = useState(false);
+  const full = segments.reduce((a, s) => a + s.text, '');
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting) { setCount(0); setActive(true); }
+      else                  { setActive(false); setCount(0); }
+    }, { threshold: 0.35 });
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!active || count >= full.length) return;
+    const t = setTimeout(() => setCount(c => c + 1), speed);
+    return () => clearTimeout(t);
+  }, [active, count, full.length, speed]);
+
+  let rem = count;
+  const nodes = segments.map((seg, i) => {
+    if (rem <= 0) return null;
+    const shown = seg.text.slice(0, rem);
+    rem = Math.max(0, rem - seg.text.length);
+    if (!shown) return null;
+    const s = seg.accent ? { color: '#2B80F0', ...seg.style } : seg.style;
+    const parts = shown.split('\n');
     return (
-      <div style={{ width: 60, height: 60, borderRadius: 16, background: bg, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <img src={src} alt={name} style={{ width: 38, height: 38, objectFit: 'contain' }} />
-      </div>
+      <span key={i} style={s}>
+        {parts.map((p, j) => j === 0 ? p : [<br key={j} />, p])}
+      </span>
     );
-  }
-  /* ── Inline SVG fallbacks for tools without downloaded images ── */
-  const fallbacks: Record<string, { bg: string; el: React.ReactNode }> = {
-    'Klaviyo':    { bg: 'rgba(255,222,0,0.18)',   el: <svg viewBox="0 0 24 24" width="34" height="34" fill="#FFDE00"><path d="M16.63 19.2c.84.665 1.883 1.05 3.037 1.05H21V3.75h-1.333c-1.154 0-2.197.386-3.037 1.05l-8.04 6.313a1.875 1.875 0 000 2.774zM3 3.75v16.5h1.875V3.75H3z"/></svg> },
-    'After Effects': { bg: 'rgba(153,153,255,0.18)', el: <svg viewBox="0 0 24 24" width="34" height="34"><rect width="24" height="24" rx="5" fill="#00005B"/><path fill="#9999FF" d="M5.5 17l2.8-8 2.8 8M6.4 14.5h3.8M13 9.5v7M13 13.5h2.5c1.1 0 2-.9 2-2s-.9-2-2-2H13"/></svg> },
-    'Premiere Pro': { bg: 'rgba(153,153,255,0.18)', el: <svg viewBox="0 0 24 24" width="34" height="34"><rect width="24" height="24" rx="5" fill="#00005B"/><path fill="#9999FF" d="M4 9.5h3c1.4 0 2.5 1.1 2.5 2.5S8.4 14.5 7 14.5H5.2V17H4V9.5zm1.2 4h1.8c.7 0 1.3-.6 1.3-1.5s-.6-1.4-1.3-1.4H5.2V13.5zM12 9.5h3c1.4 0 2.5 1.1 2.5 2.5s-1.1 2.5-2.5 2.5h-1.8V17H12V9.5zm1.2 4h1.8c.7 0 1.3-.6 1.3-1.5s-.6-1.4-1.3-1.4h-1.8V13.5z"/></svg> },
-    'Midjourney': { bg: 'rgba(255,255,255,0.1)',   el: <svg viewBox="0 0 24 24" width="34" height="34" fill="white"><path d="M2 20.5h3L12 5l7 15.5h3L12 1 2 20.5z"/></svg> },
-    'CapCut':     { bg: 'rgba(255,255,255,0.1)',   el: <svg viewBox="0 0 24 24" width="34" height="34"><rect width="24" height="24" rx="6" fill="#111"/><path fill="white" d="M16 8H8c-1.1 0-2 .9-2 2v4c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2v-4c0-1.1-.9-2-2-2zm-2.5 6l-3.5-2.5v5l3.5-2.5z"/></svg> },
-    'GPT-4o':     { bg: 'rgba(255,255,255,0.1)',   el: <svg viewBox="0 0 24 24" width="34" height="34" fill="white"><path d="M22.282 9.821a5.985 5.985 0 0 0-.516-4.91 6.046 6.046 0 0 0-6.51-2.9A6.065 6.065 0 0 0 4.981 4.18a5.985 5.985 0 0 0-3.998 2.9 6.046 6.046 0 0 0 .743 7.097 5.98 5.98 0 0 0 .51 4.911 6.051 6.051 0 0 0 6.515 2.9A5.985 5.985 0 0 0 13.26 24a6.056 6.056 0 0 0 5.772-4.206 5.99 5.99 0 0 0 3.997-2.9 6.056 6.056 0 0 0-.747-7.073z"/></svg> },
-    'AWS / GCP':  { bg: 'rgba(255,153,0,0.18)',   el: <svg viewBox="0 0 32 20" width="44" height="28"><path fill="#FF9900" d="M8.7 7.8c0-.4.1-.7.2-1 .2-.3.4-.5.7-.7.5-.3 1-.5 1.6-.5.4 0 .8.1 1.1.3.4.2.6.5.8.8.1.3.2.6.2 1v.1H12v-.1c0-.3-.1-.5-.3-.7-.2-.2-.4-.3-.7-.3-.3 0-.5.1-.7.2-.2.1-.3.3-.4.5-.1.2-.1.4-.1.7v1.5c0 .3 0 .5.1.7.1.2.2.4.4.5.2.1.4.2.6.2.3 0 .5-.1.7-.3.2-.2.3-.4.3-.7v-.1H13v.1c0 .4-.1.7-.3 1-.2.3-.4.5-.7.7-.3.1-.7.2-1.1.2-.7 0-1.2-.2-1.6-.5-.3-.2-.5-.4-.6-.7-.1-.3-.2-.6-.2-1V7.8zm5.3 3V7.4h1l2.2 3.1V7.4H18v4.4h-1l-2.2-3v3H14zm4.2 0V7.4h2c.5 0 1 .1 1.3.4.3.3.5.6.5 1.1 0 .2-.1.5-.2.7-.1.2-.3.3-.5.4.3.1.5.3.6.5.2.2.3.5.3.8 0 .4-.2.8-.5 1-.3.3-.7.4-1.2.4h-2.3zm1-2.5h1c.2 0 .4 0 .5-.2.1-.1.2-.3.2-.4 0-.2-.1-.4-.2-.4-.1-.1-.3-.1-.5-.1h-1v1.1zm0 1.7h1.1c.3 0 .4-.1.5-.2.1-.2.2-.3.2-.5s-.1-.3-.2-.4c-.1-.1-.3-.2-.5-.2H19v1.3z"/><path fill="#4285F4" d="M2 17l2.5-5h23l2.5 5H2zm2.5 1.5h20l1 2H3.5l1-2z" opacity="0.8"/></svg> },
-    'Pinecone':   { bg: 'rgba(87,209,127,0.18)',  el: <svg viewBox="0 0 24 24" width="34" height="34"><rect width="24" height="24" rx="6" fill="#0a0a0a"/><path fill="#57D17F" d="M12 3L21 19H3L12 3z"/><line x1="12" y1="19" x2="12" y2="22" stroke="#57D17F" strokeWidth="1.5"/><circle cx="12" cy="23" r="1" fill="#57D17F"/></svg> },
-    'LlamaIndex': { bg: 'rgba(124,58,237,0.18)',  el: <svg viewBox="0 0 24 24" width="34" height="34"><rect width="24" height="24" rx="6" fill="#1A1A2E"/><path fill="#7C3AED" d="M4 19c.8-5 3-8 8-10 5 2 7 5 8 10H4z"/><ellipse cx="9" cy="14" rx="1.5" ry="2" fill="white"/><ellipse cx="15" cy="14" rx="1.5" ry="2" fill="white"/><circle cx="9" cy="14" r="0.7" fill="#1A1A2E"/><circle cx="15" cy="14" r="0.7" fill="#1A1A2E"/></svg> },
-  };
-  const fb = fallbacks[name];
-  if (fb) {
-    return (
-      <div style={{ width: 52, height: 52, borderRadius: 14, background: fb.bg, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        {fb.el}
-      </div>
-    );
-  }
+  });
+
   return (
-    <div style={{ width: 52, height: 52, borderRadius: 14, background: 'rgba(43,128,240,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13, color: '#5FA8FF', fontWeight: 700 }}>
-      {name.slice(0, 2).toUpperCase()}
-    </div>
+    <h2 ref={ref} className={className} style={style}>
+      {nodes}
+      {active && count < full.length && (
+        <span style={{ color: '#2B80F0', animation: 'blink 0.8s step-end infinite', marginLeft: 1 }}>|</span>
+      )}
+    </h2>
   );
 }
 
@@ -131,7 +133,7 @@ const services = [
     title: 'Creative Media',
     subtitle: 'Visual Brand Systems',
     tagline: 'Visuals that stop the scroll.',
-    desc: 'World-class production—brand identity to high-volume video—built for one goal: conversion.',
+    desc: 'World-class production brand identity to high-volume video built for one goal: conversion.',
     features: ['Brand Identity', 'Video & UGC', 'Motion Design', 'Web & UI/UX'],
     builds: ['Brand identity & guidelines', 'Video & UGC production', 'Motion graphics', 'Web & UI/UX design'],
     slug: 'creative-media',
@@ -177,7 +179,7 @@ const services = [
     title: 'Software Development',
     subtitle: 'Full-Stack Product Engineering',
     tagline: 'Code that scales. Systems that last.',
-    desc: 'End-to-end product engineering—web, mobile, and cloud architecture built to scale.',
+    desc: 'End-to-end product engineering web, mobile, and cloud architecture built to scale.',
     features: ['Web & Mobile Apps', 'Cloud & APIs', 'AI Integration', 'Automation'],
     builds: ['Web & mobile applications', 'Cloud infrastructure & APIs', 'AI-powered features', 'DevOps & CI/CD pipelines'],
     slug: 'software-development',
@@ -196,88 +198,55 @@ const services = [
   },
 ];
 
-const clients = [
-  { name: 'TechFlow',   industry: 'SaaS',           color: '#2B80F0' },
-  { name: 'FinEdge',    industry: 'FinTech',         color: '#10B981' },
-  { name: 'NexaCart',   industry: 'E-Commerce',      color: '#F59E0B' },
-  { name: 'HealthSync', industry: 'Healthcare',      color: '#EF4444' },
-  { name: 'PropX',      industry: 'Real Estate',     color: '#8B5CF6' },
-  { name: 'DataCore',   industry: 'Analytics',       color: '#06B6D4' },
-  { name: 'GrowthLabs', industry: 'Growth Agency',   color: '#EC4899' },
-  { name: 'CloudBase',  industry: 'Infrastructure',  color: '#3ECF8E' },
-];
+
 
 function ClientCard({ c }: { c: { name: string; industry: string; color: string; logo?: string } }) {
   return (
     <div
-      className="flex flex-col items-center gap-3.5 rounded-2xl text-center transition-all duration-300 cursor-default shrink-0"
-      style={{
-        width: 148,
-        padding: '22px 16px 18px',
-        background: 'rgba(255,255,255,0.04)',
-        border: '1px solid rgba(255,255,255,0.08)',
-      }}
-      onMouseEnter={e => {
-        const el = e.currentTarget as HTMLElement;
-        el.style.borderColor = `${c.color}45`;
-        el.style.background  = `${c.color}0C`;
-        el.style.transform   = 'translateY(-4px)';
-        el.style.boxShadow   = `0 12px 32px ${c.color}18`;
-      }}
-      onMouseLeave={e => {
-        const el = e.currentTarget as HTMLElement;
-        el.style.borderColor = 'rgba(255,255,255,0.08)';
-        el.style.background  = 'rgba(255,255,255,0.04)';
-        el.style.transform   = 'translateY(0)';
-        el.style.boxShadow   = 'none';
-      }}
+      className="flex items-center justify-center shrink-0"
+      style={{ padding: '0 40px' }}
     >
-      <div
-        className="flex items-center justify-center font-black text-xl overflow-hidden"
-        style={{
-          width: 52, height: 52,
-          borderRadius: 14,
-          background: `${c.color}18`,
-          border: `1px solid ${c.color}30`,
-          color: c.color,
-        }}
-      >
-        {c.logo
-          ? <img src={c.logo} alt={c.name} style={{ width: 38, height: 38, objectFit: 'contain', borderRadius: 8 }} />
-          : c.name[0]
-        }
-      </div>
-      <div>
-        <p className="text-[13.5px] font-medium" style={{ color: 'rgba(255,255,255,0.82)' }}>{c.name}</p>
-        <p className="text-[11px] mt-0.5 font-light tracking-wide" style={{ color: 'rgba(255,255,255,0.38)' }}>{c.industry}</p>
-      </div>
+      {c.logo ? (
+        <img
+          src={c.logo}
+          alt={c.name}
+          style={{
+            height: 72,
+            width: 'auto',
+            maxWidth: 200,
+            objectFit: 'contain',
+            opacity: 0.92,
+            filter: 'brightness(1.15) contrast(1.05)',
+            transition: 'opacity 0.25s ease, transform 0.25s ease, filter 0.25s ease',
+          }}
+          onMouseEnter={e => {
+            const el = e.currentTarget as HTMLImageElement;
+            el.style.opacity = '1';
+            el.style.transform = 'scale(1.1)';
+            el.style.filter = 'brightness(1.3) contrast(1.1) drop-shadow(0 0 12px rgba(255,255,255,0.25))';
+          }}
+          onMouseLeave={e => {
+            const el = e.currentTarget as HTMLImageElement;
+            el.style.opacity = '0.92';
+            el.style.transform = 'scale(1)';
+            el.style.filter = 'brightness(1.15) contrast(1.05)';
+          }}
+        />
+      ) : (
+        <p
+          className="font-black text-lg tracking-wide whitespace-nowrap"
+          style={{ color: 'rgba(255,255,255,0.6)', transition: 'color 0.25s ease' }}
+          onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = '#fff'; }}
+          onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.6)'; }}
+        >
+          {c.name}
+        </p>
+      )}
     </div>
   );
 }
 
-const testimonials = [
-  {
-    quote: "MetLink shipped our AI customer support agent in 6 days. Support load dropped 65% in the first month.",
-    name: 'Sarah K.',
-    title: 'VP Product · Series B SaaS',
-    metric: '65%', metricLabel: 'fewer support tickets',
-    stars: 5,
-  },
-  {
-    quote: "Their performance marketing team 4x'd our ROAS in 90 days. I've never seen results move this fast.",
-    name: 'Marcus T.',
-    title: 'CMO · DTC Brand',
-    metric: '4×', metricLabel: 'return on ad spend',
-    stars: 5,
-  },
-  {
-    quote: "The software they built scaled from 0 to 50k users without a single architecture change. Remarkable.",
-    name: 'Priya S.',
-    title: 'CTO · FinTech Startup',
-    metric: '50k', metricLabel: 'users without re-arch',
-    stars: 5,
-  },
-];
+
 
 const techStack = [
   {
@@ -376,20 +345,7 @@ const techStack = [
   },
 ];
 
-const whyUs = [
-  { Icon: Users,    title: 'End-to-End Partner',  desc: 'Strategy, design, dev, and deployment — one accountable team, no handoffs.' },
-  { Icon: Zap,      title: 'AI-First Execution',  desc: 'Every project integrates cutting-edge AI to deliver compounding results.' },
-  { Icon: BarChart2,title: 'Real-Time Insights',  desc: 'Live KPI dashboards. Zero ambiguity on what your investment is doing.' },
-  { Icon: TrendingUp,title:'Ship in 7 Days',      desc: 'No lengthy discovery. First working deliverables in one week, guaranteed.' },
-  { Icon: CheckCircle,title:'Measurable ROI',     desc: 'We define success metrics upfront and own every single one of them.' },
-  { Icon: Shield,   title: 'Scalable Systems',    desc: 'Built to grow from 10 to 10 million users without re-architecting.' },
-];
 
-const steps = [
-  { num: '01', title: 'Discover & Define',  desc: 'Deep-dive strategy session. We map your goals and find where AI creates the most leverage.' },
-  { num: '02', title: 'Build & Integrate',  desc: 'We ship working systems in days, not months. Modular, tested, integrated into your stack.' },
-  { num: '03', title: 'Scale & Optimize',   desc: 'We monitor, retrain, and evolve continuously — performance compounds over time.' },
-];
 
 
 const BG   = '#07111F';
@@ -404,8 +360,79 @@ interface Props {
   cmsHero: HeroCMS;
   cmsClients: { name: string; industry: string; color: string; logo?: string }[];
   cmsTestimonials: { quote: string; name: string; title: string; metric: string; metricLabel: string; stars?: number }[];
-  cmsWhyUs: { Icon?: React.ElementType; title: string; desc: string }[];
+  cmsWhyUs: { title: string; desc: string }[];
   cmsSteps: { num: string; title: string; desc: string }[];
+}
+
+/* ─── FAQ Section ───────────────────────────────────────────── */
+
+const faqs = [
+  { q: 'How do I know AI automation will actually produce ROI for my business?', a: 'We start every engagement by mapping your existing workflows and identifying high-impact automation opportunities. Before writing a single line of code we define measurable KPIs: cost savings, time reduction, conversion lift, and tie our delivery milestones to those numbers.' },
+  { q: 'Can you integrate AI into my existing systems without disrupting my current tech stack?', a: 'Yes. We design integrations as thin adapters around your existing infrastructure, no rip-and-replace required. We support REST, GraphQL, webhooks, and direct database connections, so your current tools keep working while AI enhances them.' },
+  { q: 'How do you ensure AI security and data protection?', a: 'All models run inside your cloud environment or a dedicated VPC. Your data never flows through third-party training pipelines. We follow SOC 2-aligned practices: encryption at rest and in transit, role-based access, audit logging, and regular penetration testing.' },
+  { q: 'What does working with you look like: project-based or ongoing support?', a: 'Both. For discrete builds we run fixed-scope sprints with weekly demos. For ongoing work we operate as an embedded team with a dedicated Slack channel, sprint planning, and a shared roadmap. Most clients start with a project and move to a retainer once they see results.' },
+  { q: 'How long does it take to build an AI agent or custom application?', a: 'A focused AI agent is typically live in 2 to 4 weeks. A full-stack application with AI features runs 6 to 12 weeks depending on integrations. We share a working prototype within the first 7 days of every engagement so you see real progress immediately.' },
+];
+
+function FAQSection() {
+  const [open, setOpen] = useState<number | null>(null);
+  return (
+    <section className="py-20 sm:py-28" style={{ background: '#07111F' }}>
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <FadeIn className="text-center mb-14">
+          <TypewriterH2
+            style={{ color: 'rgba(255,255,255,0.92)' }}
+            segments={[{ text: 'Frequently Asked Questions' }]}
+          />
+        </FadeIn>
+
+        <div className="flex flex-col gap-2 mb-14">
+          {faqs.map((faq, i) => (
+            <FadeIn key={i} delay={i * 0.04}>
+              <div
+                className="rounded-2xl overflow-hidden transition-all duration-300 cursor-pointer"
+                style={{
+                  background: open === i ? 'rgba(43,128,240,0.07)' : 'rgba(255,255,255,0.04)',
+                  border: `1px solid ${open === i ? 'rgba(43,128,240,0.25)' : 'rgba(255,255,255,0.08)'}`,
+                }}
+                onClick={() => setOpen(open === i ? null : i)}
+              >
+                <div className="flex items-center justify-between gap-4 px-6 py-3.5">
+                  <span style={{ color: '#FFFFFF', fontSize: '0.95rem', fontWeight: 500 }}>{faq.q}</span>
+                  <span
+                    className="shrink-0 transition-transform duration-300"
+                    style={{ transform: open === i ? 'rotate(180deg)' : 'rotate(0deg)', color: 'rgba(255,255,255,0.5)' }}
+                  >
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="6 9 12 15 18 9" />
+                    </svg>
+                  </span>
+                </div>
+                {open === i && (
+                  <div className="px-6 pb-4" style={{ color: 'rgba(255,255,255,0.55)', fontSize: '0.9rem', lineHeight: 1.7 }}>
+                    {faq.a}
+                  </div>
+                )}
+              </div>
+            </FadeIn>
+          ))}
+        </div>
+
+        <FadeIn className="flex flex-wrap gap-3 justify-center">
+          <Link href="/contact"
+            className="group inline-flex items-center gap-2.5 font-medium btn-primary">
+            Start building with AI
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+          </Link>
+          <Link href="/portfolio"
+            className="inline-flex items-center gap-2 btn-outline">
+            View our work
+          </Link>
+        </FadeIn>
+
+      </div>
+    </section>
+  );
 }
 
 /* ─── Component ─────────────────────────────────────────────── */
@@ -474,7 +501,7 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
             style={{ background: 'linear-gradient(to top, #020202 0%, transparent 100%)' }} />
         </div>
 
-        {/* ── Floating card — left (deploy metric) ── */}
+        {/* ── Floating card, left (deploy metric) ── */}
         <div className="absolute bottom-[24%] left-[4%] hidden xl:block animate-float" style={{ zIndex: 20, animationDelay: '0.6s', width: 180 }}>
           <div className="p-5 rounded-2xl"
             style={{ background: 'rgba(2,2,2,0.75)', border: '1px solid rgba(255,255,255,0.09)', boxShadow: '0 32px 80px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.07)', backdropFilter: 'blur(28px)' }}>
@@ -496,7 +523,7 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
           </div>
         </div>
 
-        {/* ── Floating card — right bottom (ROAS metric) ── */}
+        {/* ── Floating card, right bottom (ROAS metric) ── */}
         <div className="absolute bottom-[26%] right-[4%] w-[200px] hidden xl:block animate-float" style={{ zIndex: 20, animationDelay: '1s' }}>
           <div className="p-4 rounded-2xl"
             style={{ background: 'rgba(2,2,2,0.75)', border: '1px solid rgba(255,255,255,0.09)', boxShadow: '0 32px 80px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.07)', backdropFilter: 'blur(28px)' }}>
@@ -512,7 +539,7 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
         </div>
 
         {/* ── Main content ── */}
-        <div className="relative z-10 flex-1 flex flex-col items-center justify-center max-w-5xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 text-center">
+        <div className="relative z-10 flex-1 flex flex-col items-center justify-center max-w-6xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 text-center">
 
           <FadeIn delay={0.07}>
             <h1 className="mb-5"
@@ -538,12 +565,12 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
           <FadeIn delay={0.19}>
             <div className="flex flex-wrap gap-3 justify-center">
               <Link href={hero.cta1Href}
-                className="group inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full text-sm font-medium btn-primary">
+                className="group inline-flex items-center gap-2.5 font-medium btn-primary">
                 {hero.cta1Text}
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
               </Link>
               <Link href={hero.cta2Href}
-                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm btn-outline">
+                className="inline-flex items-center gap-2 btn-outline">
                 {hero.cta2Text}
               </Link>
             </div>
@@ -605,12 +632,13 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
           <FadeIn className="flex flex-wrap items-end justify-between gap-4 mb-14">
             <div>
               <p className="label-overline mb-4">Services</p>
-              <h2 style={{ color: 'rgba(255,255,255,0.92)' }}>
-                What we <span style={{ color: AC }}>build</span> for you
-              </h2>
+              <TypewriterH2
+                style={{ color: 'rgba(255,255,255,0.92)' }}
+                segments={[{ text: 'What we ' }, { text: 'build', accent: true }, { text: ' for you' }]}
+              />
             </div>
             <Link href="/services"
-              className="inline-flex items-center gap-1.5 text-sm font-normal btn-outline px-5 py-2.5 rounded-full">
+              className="inline-flex items-center gap-1.5 font-normal btn-outline">
               All services <ArrowRight className="w-4 h-4" />
             </Link>
           </FadeIn>
@@ -638,7 +666,7 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
                 );
               })}
               <Link href="/contact"
-                className="mt-2 px-4 py-3 rounded-xl text-sm text-center btn-outline hidden lg:block"
+                className="mt-2 text-center btn-outline hidden lg:block"
                 style={{ border: '1px solid rgba(255,255,255,0.1)' }}>
                 Get Started
               </Link>
@@ -747,12 +775,10 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
       <section className="py-20 sm:py-28 overflow-hidden" style={{ background: BG2, borderTop: BDR, borderBottom: BDR }}>
         <FadeIn className="text-center mb-14 px-4">
           <p className="label-overline mb-5">Our Clients</p>
-          <h2 style={{ color: 'rgba(255,255,255,0.92)' }}>
-            Trusted by <span style={{ color: AC }}>ambitious teams</span>
-          </h2>
-          <p className="mt-5 max-w-md mx-auto" style={{ color: 'rgba(255,255,255,0.40)', fontSize: '1rem', fontWeight: 300 }}>
-            From early-stage startups to scaling enterprises — we partner with businesses that want to lead.
-          </p>
+          <TypewriterH2
+            style={{ color: 'rgba(255,255,255,0.92)' }}
+            segments={[{ text: 'Trusted by ' }, { text: 'ambitious teams', accent: true }]}
+          />
         </FadeIn>
 
         {/* Single continuous loop */}
@@ -776,9 +802,10 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeIn className="text-center mb-16">
             <p className="label-overline mb-5">Success Stories</p>
-            <h2 style={{ color: 'rgba(255,255,255,0.92)' }}>
-              What our clients <span style={{ color: AC }}>say</span>
-            </h2>
+            <TypewriterH2
+              style={{ color: 'rgba(255,255,255,0.92)' }}
+              segments={[{ text: 'What our clients ' }, { text: 'say', accent: true }]}
+            />
           </FadeIn>
 
           <StaggerChildren className="grid md:grid-cols-3 gap-5">
@@ -833,18 +860,19 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
 
         <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
-          {/* Header — centred */}
+          {/* Header, centred */}
           <FadeIn className="text-center mb-20">
             <p className="label-overline mb-5">How We Work</p>
-            <h2 style={{ color: 'rgba(255,255,255,0.92)' }}>
-              From idea to <span style={{ color: AC }}>live product</span>
-            </h2>
+            <TypewriterH2
+              style={{ color: 'rgba(255,255,255,0.92)' }}
+              segments={[{ text: 'From idea to ' }, { text: 'live product', accent: true }]}
+            />
             <p className="mt-5 max-w-lg mx-auto text-base font-light" style={{ color: 'rgba(255,255,255,0.40)', lineHeight: 1.7 }}>
               A focused three-phase process designed for speed, quality, and compounding results.
             </p>
           </FadeIn>
 
-          {/* Step cards — icon 64px at p-8 (32px) padding → centre at 32+32 = 64px */}
+          {/* Step cards, icon 64px at p-8 (32px) padding → centre at 32+32 = 64px */}
           <div className="relative grid md:grid-cols-3 gap-6">
 
             {/* Glowing connector line at icon centres */}
@@ -866,14 +894,14 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
 
             {stepsList.map((step, i) => {
               const stepSvgs = [
-                /* Discover & Define — magnifying glass + target */
+                /* Discover & Define, magnifying glass + target */
                 <svg key="d" width="26" height="26" viewBox="0 0 26 26" fill="none">
                   <circle cx="11" cy="11" r="7" stroke="#2B80F0" strokeWidth="2.2"/>
                   <circle cx="11" cy="11" r="3.5" fill="#2B80F0" fillOpacity="0.25" stroke="#5FA8FF" strokeWidth="1.4"/>
                   <circle cx="11" cy="11" r="1.2" fill="#5FA8FF"/>
                   <line x1="16.5" y1="16.5" x2="23" y2="23" stroke="#2B80F0" strokeWidth="2.4" strokeLinecap="round"/>
                 </svg>,
-                /* Build & Integrate — circuit/code chip */
+                /* Build & Integrate, circuit/code chip */
                 <svg key="b" width="26" height="26" viewBox="0 0 26 26" fill="none">
                   <rect x="7" y="7" width="12" height="12" rx="3" fill="#1A6BD6" fillOpacity="0.3" stroke="#2B80F0" strokeWidth="1.8"/>
                   <rect x="10" y="10" width="6" height="6" rx="1.5" fill="#5FA8FF"/>
@@ -882,7 +910,7 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
                   <line x1="2" y1="13" x2="7" y2="13" stroke="#2B80F0" strokeWidth="1.8" strokeLinecap="round"/>
                   <line x1="19" y1="13" x2="24" y2="13" stroke="#2B80F0" strokeWidth="1.8" strokeLinecap="round"/>
                 </svg>,
-                /* Scale & Optimize — rocket */
+                /* Scale & Optimize, rocket */
                 <svg key="s" width="26" height="26" viewBox="0 0 26 26" fill="none">
                   <path d="M13 3C13 3 20 6 20 14L16 18H10L6 14C6 6 13 3 13 3Z" fill="#1A6BD6" fillOpacity="0.35" stroke="#2B80F0" strokeWidth="1.8" strokeLinejoin="round"/>
                   <circle cx="13" cy="12" r="2.5" fill="#5FA8FF"/>
@@ -922,7 +950,7 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
                     <div className="absolute inset-x-0 top-0 h-px rounded-t-2xl"
                       style={{ background: 'linear-gradient(to right, transparent, rgba(43,128,240,0.9) 50%, transparent)' }} />
 
-                    {/* Corner bracket accents — TL */}
+                    {/* Corner bracket accents, TL */}
                     <div className="absolute top-3 left-3 w-5 h-5 opacity-50 group-hover:opacity-100 transition-opacity duration-300"
                       style={{ borderTop: '1.5px solid #2B80F0', borderLeft: '1.5px solid #2B80F0', borderRadius: '2px 0 0 0' }} />
                     {/* TR */}
@@ -938,7 +966,7 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
 
                     <div className="relative flex flex-col flex-1 p-8">
 
-                      {/* Icon — 64px so connector line centres at 32+32=64px */}
+                      {/* Icon, 64px so connector line centres at 32+32=64px */}
                       <div className="w-16 h-16 rounded-2xl flex items-center justify-center mb-5 transition-all duration-300 group-hover:scale-110"
                         style={{
                           background: 'rgba(43,128,240,0.12)',
@@ -1008,12 +1036,10 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
               <span style={{ color: AC, fontSize: 14 }}>✦</span>
               <p className="label-overline" style={{ color: AC, letterSpacing: '0.28em' }}>Our Tech Stack</p>
             </div>
-            <h2 style={{ color: 'rgba(255,255,255,0.92)' }}>
-              Tech Capabilities Powering<br />Digital Transformation
-            </h2>
-            <p className="mt-5 text-sm max-w-xl mx-auto" style={{ color: 'rgba(255,255,255,0.40)', lineHeight: 1.8, fontWeight: 300 }}>
-              A modern, flexible stack designed to support evolving business and technical requirements.
-            </p>
+            <TypewriterH2
+              style={{ color: 'rgba(255,255,255,0.92)' }}
+              segments={[{ text: 'Tech Capabilities Powering\nDigital Transformation' }]}
+            />
           </FadeIn>
 
           {/* Card */}
@@ -1033,7 +1059,7 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
               {/* Thin accent top line */}
               <div style={{ height: 1, background: 'linear-gradient(to right, transparent, rgba(43,128,240,0.5) 40%, rgba(95,168,255,0.7) 50%, rgba(43,128,240,0.5) 60%, transparent)' }} />
 
-              {/* Fade wrapper — smooth category transitions */}
+              {/* Fade wrapper, smooth category transitions */}
               <div style={{ opacity: stackVisible ? 1 : 0, transform: stackVisible ? 'translateY(0) scale(1)' : 'translateY(16px) scale(0.98)', transition: stackVisible ? 'opacity 0.35s cubic-bezier(0.16,1,0.3,1), transform 0.35s cubic-bezier(0.16,1,0.3,1)' : 'opacity 0.18s ease, transform 0.18s ease', willChange: 'opacity, transform' }}>
 
               {/* Category title with divider */}
@@ -1131,16 +1157,14 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
         <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
           {/* Header */}
-          <FadeIn className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-16">
+          <FadeIn className="text-center mb-16">
             <div>
               <p className="label-overline mb-5">Why MetLink</p>
-              <h2 style={{ color: 'rgba(255,255,255,0.92)' }}>
-                What sets us <span style={{ color: AC }}>apart</span>
-              </h2>
+              <TypewriterH2
+                style={{ color: 'rgba(255,255,255,0.92)' }}
+                segments={[{ text: 'What sets us ' }, { text: 'apart', accent: true }]}
+              />
             </div>
-            <p className="max-w-xs text-sm font-light sm:text-right" style={{ color: 'rgba(255,255,255,0.38)', lineHeight: 1.7 }}>
-              Six reasons ambitious teams choose MetLink over a traditional agency.
-            </p>
           </FadeIn>
 
           <StaggerChildren className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -1169,7 +1193,7 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
                       el.style.boxShadow   = 'none';
                     }}
                   >
-                    {/* Top gradient bar — appears on hover */}
+                    {/* Top gradient bar, appears on hover */}
                     <div className="h-[2px] w-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                       style={{ background: `linear-gradient(to right, transparent, ${color}, transparent)` }} />
 
@@ -1185,54 +1209,21 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
                             boxShadow: `0 4px 20px ${color}20`,
                           }}
                         >
-                          {[
-                            /* 0 End-to-End Partner — interlocked team rings */
-                            <svg key={0} width="26" height="26" viewBox="0 0 26 26" fill="none">
-                              <circle cx="9" cy="10" r="4" fill={`${color}30`} stroke={color} strokeWidth="1.8"/>
-                              <circle cx="17" cy="10" r="4" fill={`${color}20`} stroke={color} strokeWidth="1.8" strokeDasharray="2 1.5"/>
-                              <path d="M3 22c0-3.3 2.7-6 6-6h8c3.3 0 6 2.7 6 6" stroke={color} strokeWidth="1.8" strokeLinecap="round" fill="none"/>
-                            </svg>,
-                            /* 1 AI-First Execution — neural / AI chip */
-                            <svg key={1} width="26" height="26" viewBox="0 0 26 26" fill="none">
-                              <rect x="8" y="8" width="10" height="10" rx="2.5" fill={`${color}25`} stroke={color} strokeWidth="1.8"/>
-                              <circle cx="13" cy="13" r="2" fill={color}/>
-                              <line x1="13" y1="3" x2="13" y2="8" stroke={color} strokeWidth="1.6" strokeLinecap="round"/>
-                              <line x1="13" y1="18" x2="13" y2="23" stroke={color} strokeWidth="1.6" strokeLinecap="round"/>
-                              <line x1="3" y1="13" x2="8" y2="13" stroke={color} strokeWidth="1.6" strokeLinecap="round"/>
-                              <line x1="18" y1="13" x2="23" y2="13" stroke={color} strokeWidth="1.6" strokeLinecap="round"/>
-                              <line x1="5.5" y1="5.5" x2="8" y2="8" stroke={color} strokeWidth="1.4" strokeLinecap="round" strokeOpacity="0.6"/>
-                              <line x1="18" y1="18" x2="20.5" y2="20.5" stroke={color} strokeWidth="1.4" strokeLinecap="round" strokeOpacity="0.6"/>
-                            </svg>,
-                            /* 2 Real-Time Insights — live chart bars */
-                            <svg key={2} width="26" height="26" viewBox="0 0 26 26" fill="none">
-                              <rect x="4" y="16" width="4" height="7" rx="1.2" fill={`${color}50`}/>
-                              <rect x="11" y="11" width="4" height="12" rx="1.2" fill={`${color}80`}/>
-                              <rect x="18" y="6" width="4" height="17" rx="1.2" fill={color}/>
-                              <polyline points="4,14 11,9 18,4" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none" strokeOpacity="0.5"/>
-                              <circle cx="18" cy="4" r="2" fill={color}/>
-                            </svg>,
-                            /* 3 Ship in 7 Days — lightning bolt */
-                            <svg key={3} width="26" height="26" viewBox="0 0 26 26" fill="none">
-                              <path d="M15 2L4 15h8l-1 9 13-13h-8z" fill={`${color}30`} stroke={color} strokeWidth="1.8" strokeLinejoin="round"/>
-                              <path d="M15 2L4 15h8" fill={`${color}50`} stroke="none"/>
-                            </svg>,
-                            /* 4 Measurable ROI — arrow + coin */
-                            <svg key={4} width="26" height="26" viewBox="0 0 26 26" fill="none">
-                              <circle cx="17" cy="16" r="7" fill={`${color}20`} stroke={color} strokeWidth="1.8"/>
-                              <text x="17" y="20" textAnchor="middle" fontSize="8" fontWeight="700" fill={color}>$</text>
-                              <polyline points="3,18 8,12 12,15 17,7" stroke={color} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
-                              <polyline points="14,7 17,7 17,10" stroke={color} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
-                            </svg>,
-                            /* 5 Scalable Systems — stacked server layers */
-                            <svg key={5} width="26" height="26" viewBox="0 0 26 26" fill="none">
-                              <rect x="3" y="5" width="20" height="5" rx="2" fill={`${color}25`} stroke={color} strokeWidth="1.7"/>
-                              <rect x="3" y="12" width="20" height="5" rx="2" fill={`${color}35`} stroke={color} strokeWidth="1.7"/>
-                              <rect x="3" y="19" width="20" height="5" rx="2" fill={`${color}45`} stroke={color} strokeWidth="1.7"/>
-                              <circle cx="20" cy="7.5" r="1" fill={color}/>
-                              <circle cx="20" cy="14.5" r="1" fill={color}/>
-                              <circle cx="20" cy="21.5" r="1" fill={color}/>
-                            </svg>,
-                          ][i]}
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img
+                            src={[
+                              '/tools/hubspot.svg',
+                              '/tools/openai.svg',
+                              '/tools/ga4.svg',
+                              '/tools/vercel.svg',
+                              '/tools/google-ads.svg',
+                              '/tools/kubernetes.svg',
+                            ][i]}
+                            alt={item.title}
+                            width={28}
+                            height={28}
+                            style={{ objectFit: 'contain', filter: 'brightness(1.1)' }}
+                          />
                         </div>
                         <span
                           className="text-[11px] font-bold px-2.5 py-1 rounded-full"
@@ -1241,12 +1232,6 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
                           {stat}
                         </span>
                       </div>
-
-                      {/* Number label */}
-                      <span className="text-[10px] font-black uppercase tracking-[0.28em] mb-2 block"
-                        style={{ color: `${color}70` }}>
-                        {String(i + 1).padStart(2, '0')}
-                      </span>
 
                       {/* Title */}
                       <h3 className="text-[1.2rem] font-semibold mb-3 leading-snug"
@@ -1272,262 +1257,8 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
         </div>
       </section>
 
-      {/* ══ CTA ════════════════════════════════════════════════ */}
-      <section id="contact" className="py-16 sm:py-20" style={{ background: BG }}>
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <FadeIn>
-            <div className="relative overflow-hidden rounded-3xl"
-              style={{ background: '#050E1A', border: '1px solid rgba(43,128,240,0.18)', boxShadow: '0 0 80px rgba(43,128,240,0.06), inset 0 1px 0 rgba(43,128,240,0.08)' }}>
-
-              {/* Background glow */}
-              <div className="absolute inset-0 pointer-events-none">
-                <div className="absolute top-0 left-1/4 w-[600px] h-[320px]"
-                  style={{ background: 'radial-gradient(ellipse, rgba(43,128,240,0.12) 0%, transparent 70%)', filter: 'blur(60px)' }} />
-                <div className="absolute bottom-0 right-0 w-[400px] h-[300px]"
-                  style={{ background: 'radial-gradient(ellipse, rgba(43,128,240,0.07) 0%, transparent 70%)', filter: 'blur(50px)' }} />
-              </div>
-
-              <div className="relative z-10 flex flex-col lg:flex-row items-stretch">
-
-                {/* Left: content */}
-                <div className="flex-1 px-10 sm:px-14 py-14 sm:py-16 flex flex-col justify-center">
-                  <p className="text-[10px] uppercase tracking-[0.28em] mb-5" style={{ color: 'rgba(255,255,255,0.45)' }}>
-                    Let&apos;s build together
-                  </p>
-                  <h2 className="mb-5 leading-[1.05]"
-                    style={{ color: '#FFFFFF', fontSize: 'clamp(1.8rem,3.5vw,3rem)', fontWeight: 300, letterSpacing: '-0.03em', maxWidth: 480 }}>
-                    Let&apos;s Turn Ideas Into <span style={{ color: '#5FA8FF' }}>Execution</span>
-                  </h2>
-                  <p className="mb-8 max-w-md" style={{ color: 'rgba(255,255,255,0.52)', fontSize: '0.95rem', fontWeight: 300, lineHeight: 1.75 }}>
-                    Need support with your tech roadmap? Our team works closely with you to define priorities and deliver steady progress.
-                  </p>
-                  <div className="flex flex-wrap gap-3">
-                    <a href="mailto:hello@metlink.ai"
-                      className="group inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-medium btn-primary">
-                      Become a Client
-                      <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
-                    </a>
-                    <Link href="/services"
-                      className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm"
-                      style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.15)', color: 'rgba(255,255,255,0.75)' }}>
-                      See services
-                    </Link>
-                  </div>
-                </div>
-
-                {/* Right: team photo */}
-                <div className="relative hidden lg:block shrink-0 overflow-hidden rounded-r-3xl" style={{ width: 480 }}>
-                  {/* Photo */}
-                  <Image
-                    src="/cta-team.jpg"
-                    alt="MetLink team collaborating"
-                    fill
-                    className="object-cover"
-                    style={{ opacity: 1, objectPosition: '50% 30%' }}
-                    sizes="480px"
-                  />
-                  {/* Left-edge fade */}
-                  <div className="absolute inset-y-0 left-0 w-40 pointer-events-none z-10"
-                    style={{ background: 'linear-gradient(to right, #050E1A 30%, rgba(5,14,26,0.6) 65%, transparent)' }} />
-                  {/* Bottom fade */}
-                  <div className="absolute inset-x-0 bottom-0 h-24 pointer-events-none z-10"
-                    style={{ background: 'linear-gradient(to top, #050E1A 10%, transparent)' }} />
-                  {/* Top fade */}
-                  <div className="absolute inset-x-0 top-0 h-12 pointer-events-none z-10"
-                    style={{ background: 'linear-gradient(to bottom, #050E1A 10%, transparent)' }} />
-
-                  {/* Placeholder SVG — remove once real team photo is added */}
-                  <svg
-                    style={{ display: 'none' }}
-                    viewBox="0 0 460 340"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    aria-hidden="true"
-                  >
-                    {/* Desk surface */}
-                    <ellipse cx="230" cy="298" rx="195" ry="18" fill="rgba(43,128,240,0.07)" />
-                    <rect x="55" y="285" width="350" height="14" rx="7" fill="rgba(43,128,240,0.12)" />
-
-                    {/* Laptop base */}
-                    <rect x="130" y="220" width="200" height="70" rx="8" fill="#0D1E36" stroke="rgba(43,128,240,0.45)" strokeWidth="1.5" />
-                    {/* Keyboard rows */}
-                    {[0,1,2].map(row => (
-                      <g key={row}>
-                        {Array.from({length: 10}).map((_, k) => (
-                          <rect key={k} x={138 + k * 18} y={230 + row * 17} width="13" height="10" rx="2.5"
-                            fill="rgba(43,128,240,0.12)" stroke="rgba(43,128,240,0.2)" strokeWidth="0.5" />
-                        ))}
-                      </g>
-                    ))}
-                    {/* Touchpad */}
-                    <rect x="190" y="265" width="80" height="22" rx="4" fill="rgba(43,128,240,0.1)" stroke="rgba(43,128,240,0.25)" strokeWidth="0.8" />
-
-                    {/* Laptop screen lid */}
-                    <rect x="120" y="90" width="220" height="140" rx="10" fill="#0A1828" stroke="rgba(43,128,240,0.5)" strokeWidth="1.5" />
-                    {/* Screen bezel inner */}
-                    <rect x="128" y="98" width="204" height="124" rx="6" fill="#060E1C" />
-                    {/* Screen glow */}
-                    <rect x="128" y="98" width="204" height="124" rx="6" fill="url(#screenGrad)" />
-                    {/* Screen content lines */}
-                    <rect x="140" y="112" width="80" height="8" rx="3" fill="rgba(43,128,240,0.6)" />
-                    <rect x="140" y="126" width="120" height="5" rx="2" fill="rgba(255,255,255,0.12)" />
-                    <rect x="140" y="137" width="95" height="5" rx="2" fill="rgba(255,255,255,0.08)" />
-                    <rect x="140" y="148" width="110" height="5" rx="2" fill="rgba(255,255,255,0.08)" />
-                    {/* Chart on screen */}
-                    {[0,1,2,3,4].map((b,i) => {
-                      const heights = [28, 42, 20, 52, 35];
-                      const h = heights[i];
-                      return <rect key={b} x={260 + i * 13} y={210 - h} width="10" height={h} rx="2"
-                        fill={i === 3 ? '#2B80F0' : 'rgba(43,128,240,0.35)'} />;
-                    })}
-                    <rect x="256" y="210" width="72" height="1.5" rx="1" fill="rgba(255,255,255,0.15)" />
-                    {/* Laptop hinge */}
-                    <rect x="130" y="226" width="200" height="6" rx="3" fill="rgba(43,128,240,0.2)" />
-
-                    {/* ── Person 1 — far left, standing, looking at screen ── */}
-                    {/* Head */}
-                    <circle cx="78" cy="148" r="22" fill="#1A3050" stroke="rgba(255,255,255,0.12)" strokeWidth="1" />
-                    <circle cx="78" cy="148" r="18" fill="#243D5C" />
-                    {/* Face */}
-                    <ellipse cx="72" cy="148" rx="3" ry="3.5" fill="rgba(255,255,255,0.55)" />
-                    <ellipse cx="84" cy="148" rx="3" ry="3.5" fill="rgba(255,255,255,0.55)" />
-                    <path d="M73 155 Q78 159 83 155" stroke="rgba(255,255,255,0.4)" strokeWidth="1.5" fill="none" strokeLinecap="round" />
-                    {/* Hair */}
-                    <path d="M57 140 Q68 126 78 130 Q88 126 99 140 Q88 128 78 132 Q68 128 57 140Z" fill="rgba(255,255,255,0.18)" />
-                    {/* Body */}
-                    <rect x="56" y="172" width="44" height="72" rx="12" fill="#1A3050" stroke="rgba(255,255,255,0.08)" strokeWidth="1" />
-                    {/* Collar */}
-                    <path d="M72 172 L78 184 L84 172" stroke="rgba(255,255,255,0.2)" strokeWidth="1.5" fill="none" />
-                    {/* Left arm pointing at screen */}
-                    <path d="M100 190 Q126 175 148 168" stroke="#1A3050" strokeWidth="14" strokeLinecap="round" fill="none" />
-                    <path d="M100 190 Q126 175 148 168" stroke="rgba(43,128,240,0.15)" strokeWidth="12" strokeLinecap="round" fill="none" />
-                    {/* Pointing finger */}
-                    <circle cx="148" cy="168" r="5" fill="#243D5C" stroke="rgba(255,255,255,0.2)" strokeWidth="0.8" />
-                    {/* Right arm */}
-                    <path d="M56 185 Q42 200 44 218" stroke="#1A3050" strokeWidth="14" strokeLinecap="round" fill="none" />
-                    {/* Legs */}
-                    <rect x="58" y="240" width="16" height="55" rx="8" fill="#122034" />
-                    <rect x="82" y="240" width="16" height="55" rx="8" fill="#122034" />
-                    {/* Shoes */}
-                    <ellipse cx="66" cy="295" rx="10" ry="5" fill="#0B1828" />
-                    <ellipse cx="90" cy="295" rx="10" ry="5" fill="#0B1828" />
-
-                    {/* ── Person 2 — center-left, sitting, typing ── */}
-                    {/* Head */}
-                    <circle cx="178" cy="118" r="24" fill="#1D3555" stroke="rgba(255,255,255,0.1)" strokeWidth="1" />
-                    <circle cx="178" cy="118" r="20" fill="#2A4870" />
-                    {/* Face */}
-                    <ellipse cx="171" cy="117" rx="3.5" ry="4" fill="rgba(255,255,255,0.6)" />
-                    <ellipse cx="185" cy="117" rx="3.5" ry="4" fill="rgba(255,255,255,0.6)" />
-                    <path d="M172 125 Q178 130 184 125" stroke="rgba(255,255,255,0.45)" strokeWidth="1.5" fill="none" strokeLinecap="round" />
-                    {/* Hair */}
-                    <path d="M155 110 Q165 93 178 97 Q191 93 201 110 Q190 98 178 102 Q166 98 155 110Z" fill="#2B80F0" opacity="0.7" />
-                    {/* Body */}
-                    <rect x="155" y="143" width="46" height="80" rx="13" fill="#1D3555" />
-                    {/* Collar detail */}
-                    <path d="M173 143 L178 157 L183 143" stroke="rgba(255,255,255,0.18)" strokeWidth="1.5" fill="none" />
-                    {/* Arms reaching to keyboard */}
-                    <path d="M155 165 Q140 200 155 225" stroke="#1D3555" strokeWidth="15" strokeLinecap="round" fill="none" />
-                    <path d="M201 165 Q216 200 210 222" stroke="#1D3555" strokeWidth="15" strokeLinecap="round" fill="none" />
-                    {/* Hands on keyboard */}
-                    <ellipse cx="155" cy="228" rx="10" ry="7" fill="#243D5C" stroke="rgba(255,255,255,0.15)" strokeWidth="0.8" />
-                    <ellipse cx="210" cy="225" rx="10" ry="7" fill="#243D5C" stroke="rgba(255,255,255,0.15)" strokeWidth="0.8" />
-                    {/* Chair seat */}
-                    <rect x="142" y="222" width="72" height="12" rx="6" fill="#102030" stroke="rgba(43,128,240,0.2)" strokeWidth="1" />
-                    {/* Chair back */}
-                    <rect x="152" y="185" width="52" height="40" rx="8" fill="#0C1A2E" stroke="rgba(43,128,240,0.15)" strokeWidth="1" />
-                    {/* Legs of chair */}
-                    <line x1="150" y1="234" x2="145" y2="290" stroke="#0C1A2E" strokeWidth="5" strokeLinecap="round" />
-                    <line x1="206" y1="234" x2="211" y2="290" stroke="#0C1A2E" strokeWidth="5" strokeLinecap="round" />
-
-                    {/* ── Person 3 — center-right, standing, smiling ── */}
-                    {/* Head */}
-                    <circle cx="290" cy="125" r="26" fill="#1E3B5C" stroke="rgba(255,255,255,0.1)" strokeWidth="1" />
-                    <circle cx="290" cy="125" r="22" fill="#2D4F78" />
-                    {/* Face */}
-                    <ellipse cx="282" cy="124" rx="4" ry="4.5" fill="rgba(255,255,255,0.65)" />
-                    <ellipse cx="298" cy="124" rx="4" ry="4.5" fill="rgba(255,255,255,0.65)" />
-                    {/* Smile */}
-                    <path d="M283 134 Q290 140 297 134" stroke="rgba(255,255,255,0.5)" strokeWidth="1.8" fill="none" strokeLinecap="round" />
-                    {/* Hair */}
-                    <path d="M265 116 Q275 97 290 100 Q305 97 315 116 Q303 101 290 105 Q277 101 265 116Z" fill="rgba(255,255,255,0.22)" />
-                    {/* Body */}
-                    <rect x="264" y="152" width="52" height="82" rx="14" fill="#1E3B5C" />
-                    {/* Collar */}
-                    <path d="M282 152 L290 168 L298 152" stroke="rgba(255,255,255,0.2)" strokeWidth="1.5" fill="none" />
-                    {/* Arms at sides slightly raised */}
-                    <path d="M264 170 Q245 188 242 210" stroke="#1E3B5C" strokeWidth="15" strokeLinecap="round" fill="none" />
-                    <path d="M316 170 Q335 185 336 205" stroke="#1E3B5C" strokeWidth="15" strokeLinecap="round" fill="none" />
-                    {/* Hands */}
-                    <ellipse cx="242" cy="214" rx="10" ry="7" fill="#2D4F78" stroke="rgba(255,255,255,0.15)" strokeWidth="0.8" />
-                    <ellipse cx="336" cy="208" rx="10" ry="7" fill="#2D4F78" stroke="rgba(255,255,255,0.15)" strokeWidth="0.8" />
-                    {/* Legs */}
-                    <rect x="266" y="230" width="18" height="62" rx="9" fill="#142A44" />
-                    <rect x="296" y="230" width="18" height="62" rx="9" fill="#142A44" />
-                    {/* Shoes */}
-                    <ellipse cx="275" cy="292" rx="11" ry="5" fill="#0B1828" />
-                    <ellipse cx="305" cy="292" rx="11" ry="5" fill="#0B1828" />
-
-                    {/* ── Person 4 — right, standing, arm around 3 ── */}
-                    {/* Head */}
-                    <circle cx="382" cy="135" r="23" fill="#1A3050" stroke="rgba(255,255,255,0.1)" strokeWidth="1" />
-                    <circle cx="382" cy="135" r="19" fill="#253C5A" />
-                    {/* Face */}
-                    <ellipse cx="375" cy="134" rx="3.5" ry="4" fill="rgba(255,255,255,0.55)" />
-                    <ellipse cx="389" cy="134" rx="3.5" ry="4" fill="rgba(255,255,255,0.55)" />
-                    <path d="M376 143 Q382 148 388 143" stroke="rgba(255,255,255,0.4)" strokeWidth="1.6" fill="none" strokeLinecap="round" />
-                    {/* Hair — different style, curly-ish */}
-                    <path d="M360 126 Q363 112 374 110 Q382 107 390 110 Q401 112 404 126 Q396 116 382 119 Q368 116 360 126Z" fill="#2B80F0" opacity="0.55" />
-                    <circle cx="363" cy="124" r="5" fill="#1A3050" opacity="0.7" />
-                    <circle cx="401" cy="124" r="5" fill="#1A3050" opacity="0.7" />
-                    {/* Body */}
-                    <rect x="360" y="160" width="44" height="78" rx="12" fill="#1A3050" />
-                    {/* Collar */}
-                    <path d="M376 160 L382 174 L388 160" stroke="rgba(255,255,255,0.18)" strokeWidth="1.5" fill="none" />
-                    {/* Arm reaching toward person 3 */}
-                    <path d="M360 174 Q340 185 326 198" stroke="#1A3050" strokeWidth="15" strokeLinecap="round" fill="none" />
-                    <path d="M404 174 Q418 192 420 214" stroke="#1A3050" strokeWidth="15" strokeLinecap="round" fill="none" />
-                    {/* Hands */}
-                    <ellipse cx="326" cy="200" rx="9" ry="7" fill="#253C5A" stroke="rgba(255,255,255,0.12)" strokeWidth="0.8" />
-                    <ellipse cx="420" cy="216" rx="9" ry="7" fill="#253C5A" stroke="rgba(255,255,255,0.12)" strokeWidth="0.8" />
-                    {/* Legs */}
-                    <rect x="362" y="234" width="16" height="58" rx="8" fill="#122034" />
-                    <rect x="388" y="234" width="16" height="58" rx="8" fill="#122034" />
-                    {/* Shoes */}
-                    <ellipse cx="370" cy="292" rx="10" ry="5" fill="#0B1828" />
-                    <ellipse cx="396" cy="292" rx="10" ry="5" fill="#0B1828" />
-
-                    {/* Screen gradient def */}
-                    <defs>
-                      <linearGradient id="screenGrad" x1="128" y1="98" x2="332" y2="222" gradientUnits="userSpaceOnUse">
-                        <stop offset="0%" stopColor="#0C1E3A" />
-                        <stop offset="50%" stopColor="#0A1828" stopOpacity="0.8" />
-                        <stop offset="100%" stopColor="#060E1C" />
-                      </linearGradient>
-                      <radialGradient id="deskGlow" cx="50%" cy="50%" r="50%">
-                        <stop offset="0%" stopColor="rgba(43,128,240,0.15)" />
-                        <stop offset="100%" stopColor="transparent" />
-                      </radialGradient>
-                    </defs>
-
-                    {/* Floating accent dots */}
-                    <circle cx="420" cy="60" r="4" fill="rgba(43,128,240,0.5)" />
-                    <circle cx="405" cy="75" r="2.5" fill="rgba(95,168,255,0.35)" />
-                    <circle cx="435" cy="80" r="2" fill="rgba(43,128,240,0.3)" />
-                    <circle cx="40" cy="200" r="3" fill="rgba(43,128,240,0.35)" />
-                    <circle cx="28" cy="215" r="2" fill="rgba(95,168,255,0.25)" />
-
-                    {/* Connection lines between people (team vibe) */}
-                    <path d="M78 155 Q128 140 155 143" stroke="rgba(43,128,240,0.15)" strokeWidth="1" strokeDasharray="3 4" fill="none" />
-                    <path d="M316 168 Q350 160 360 160" stroke="rgba(43,128,240,0.15)" strokeWidth="1" strokeDasharray="3 4" fill="none" />
-                  </svg>
-                </div>
-
-              </div>
-            </div>
-          </FadeIn>
-        </div>
-      </section>
+      {/* ══ FAQ ════════════════════════════════════════════════ */}
+      <FAQSection />
 
     </div>
   );

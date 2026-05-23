@@ -20,12 +20,12 @@ export const blogPosts: BlogPost[] = [
     slug: 'ai-automation-business-2025',
     title: 'How AI Automation Is Reshaping Business Operations in 2025',
     excerpt:
-      'From intelligent document processing to predictive workflows — discover how leading companies are using AI automation to cut costs by 60% and scale without adding headcount.',
+      'From intelligent document processing to predictive workflows, discover how leading companies are using AI automation to cut costs by 60% and scale without adding headcount.',
     content: `AI automation is no longer a futuristic concept reserved for tech giants. In 2025, businesses of all sizes are implementing intelligent automation to handle everything from customer support to financial reconciliation.
 
 ## The Shift from Rule-Based to Intelligent Automation
 
-Traditional automation followed rigid, rule-based logic. But modern AI automation uses machine learning to handle nuance, exceptions, and edge cases — the kind of situations that previously required human judgment.
+Traditional automation followed rigid, rule-based logic. But modern AI automation uses machine learning to handle nuance, exceptions, and edge cases, the kind of situations that previously required human judgment.
 
 This shift is transformative. It means automation can now tackle:
 - Complex document processing with OCR and NLP
@@ -43,7 +43,7 @@ Companies implementing AI automation in 2025 are seeing:
 
 ## Where to Start
 
-The best starting point is always your highest-volume, most repetitive processes. Invoice processing, customer onboarding, and IT ticket routing are typically the fastest wins — delivering ROI within 30 days.`,
+The best starting point is always your highest-volume, most repetitive processes. Invoice processing, customer onboarding, and IT ticket routing are typically the fastest wins, delivering ROI within 30 days.`,
     author: 'Aryan Shah',
     authorRole: 'Founder & CEO',
     authorEmoji: '‍',
@@ -59,7 +59,7 @@ The best starting point is always your highest-volume, most repetitive processes
     slug: 'performance-marketing-roas-guide',
     title: 'The 2025 Guide to Performance Marketing: Maximizing ROAS Across Every Channel',
     excerpt:
-      'Meta, Google, LinkedIn, TikTok — each platform has its own algorithm and bidding logic. Here is the exact framework we use to get 5x ROAS consistently across all paid channels.',
+      'Meta, Google, LinkedIn, TikTok, each platform has its own algorithm and bidding logic. Here is the exact framework we use to get 5x ROAS consistently across all paid channels.',
     content: `Performance marketing has evolved dramatically. With increasing privacy restrictions and AI-driven bidding, the old playbook is dead. Here is what actually works in 2025.
 
 ## The Multi-Channel Mindset
@@ -99,7 +99,7 @@ Best for B2B with ABM (Account-Based Marketing) strategies. Cost per lead is hig
     title: 'Building Production-Ready RAG Systems: What Nobody Tells You',
     excerpt:
       'RAG sounds simple in tutorials, but building it for enterprise use is a different challenge entirely. Here are the 7 lessons we learned deploying RAG for 20+ companies.',
-    content: `RAG systems are powerful — but the jump from a proof of concept to a production-ready system that your enterprise clients trust is enormous. Here is what we have learned.
+    content: `RAG systems are powerful, but the jump from a proof of concept to a production-ready system that your enterprise clients trust is enormous. Here is what we have learned.
 
 ## Lesson 1: Chunking Strategy Is Everything
 
@@ -139,8 +139,8 @@ A 97%-accurate system with 8-second latency will fail in production. Users aband
     slug: 'brand-identity-startup-guide',
     title: "Why Your Startup's Brand Identity Is Your Most Important Product",
     excerpt:
-      'Most founders treat branding as a nice-to-have. The data says differently — companies with strong brand identity grow 3x faster and convert at 2x the rate.',
-    content: `In a crowded market, brand identity is the only truly defensible moat. Products can be copied. Features can be replicated. But a brand your audience feels deeply connected to — that is priceless.
+      'Most founders treat branding as a nice-to-have. The data says differently, companies with strong brand identity grow 3x faster and convert at 2x the rate.',
+    content: `In a crowded market, brand identity is the only truly defensible moat. Products can be copied. Features can be replicated. But a brand your audience feels deeply connected to, that is priceless.
 
 ## What Brand Identity Actually Is
 
@@ -189,7 +189,7 @@ The App Router in Next.js 15+ fundamentally changes how you think about data fet
 
 ## Backend: FastAPI or tRPC
 
-For data-intensive applications, FastAPI (Python) gives you the performance you need with the AI ecosystem you want. For TypeScript-heavy teams, tRPC eliminates the API layer entirely — type-safe end-to-end.
+For data-intensive applications, FastAPI (Python) gives you the performance you need with the AI ecosystem you want. For TypeScript-heavy teams, tRPC eliminates the API layer entirely, type-safe end-to-end.
 
 ## Database Architecture
 

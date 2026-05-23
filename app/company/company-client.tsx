@@ -5,33 +5,11 @@ import Link from 'next/link';
 import { ArrowRight, Target, Eye, Heart, Globe, Award, Clock, BarChart2, Shield } from 'lucide-react';
 import { FadeIn, StaggerChildren, StaggerItem } from '@/components/fade-in';
 
-const values = [
-  { icon: Target, title: 'Mission-Driven',      desc: 'Every decision we make is anchored to one goal — measurable results for our clients.' },
-  { icon: Eye,    title: 'Radical Transparency', desc: 'No hidden fees, no smoke and mirrors. You always know exactly where your investment is going.' },
-  { icon: Heart,  title: 'Client-Obsessed',      desc: "Your success is the only metric we care about. We treat every client's business like our own." },
-  { icon: Globe,  title: 'Global Perspective',   desc: 'We bring international best practices and diverse insights to every project we take on.' },
-  { icon: Award,  title: 'Excellence Always',    desc: "We don't ship mediocre. Every deliverable meets the highest standard of quality." },
-  { icon: Clock,  title: 'Speed & Reliability',  desc: 'Fast execution without cutting corners. We deliver on time, every time.' },
-];
-
-const team = [
-  { name: 'Jitesh Bawaskar', role: 'Founder', specialty: 'AI Strategy & Business Development', initials: 'JB', color: '#2B80F0' },
-];
-
-const milestones = [
-  { year: '2020', event: 'MetLink Founded',       desc: 'Started as a 3-person digital marketing consultancy in Mumbai.' },
-  { year: '2021', event: 'AI Division Launch',    desc: 'Expanded into AI development, delivering first custom ML models.' },
-  { year: '2022', event: '50 Clients Milestone',  desc: 'Crossed 50 active clients across 10+ industries globally.' },
-  { year: '2023', event: 'Software Studio',        desc: 'Launched full-service software development — web, mobile, cloud.' },
-  { year: '2024', event: 'Global Expansion',       desc: 'Serving clients in 15+ countries with a 40+ person remote team.' },
-  { year: '2025', event: 'AI-First Agency',        desc: "Positioned as India's leading AI marketing & development agency." },
-];
-
 const valueIcons = [Target, Eye, Heart, Globe, Award, Clock];
 
 interface Props {
   company: Record<string, string>;
-  valuesList: { icon?: unknown; title: string; desc: string }[];
+  valuesList: { title: string; desc: string }[];
   teamList: { name: string; role: string; specialty: string; initials: string; color: string }[];
   milestonesList: { year: string; event: string; desc: string }[];
   statsList: string[][];
@@ -61,7 +39,7 @@ export default function CompanyClient({ company, valuesList, teamList, milestone
           </FadeIn>
           <FadeIn delay={0.2}>
             <p className="text-base sm:text-xl max-w-3xl mx-auto mb-10 leading-relaxed" style={{ color: 'rgba(255,255,255,0.6)' }}>
-              An AI-first marketing and development agency — founded on the belief that every business deserves access to world-class technology, creativity, and strategic thinking.
+              An AI-first marketing and development agency, founded on the belief that every business deserves access to world-class technology, creativity, and strategic thinking.
             </p>
           </FadeIn>
           <FadeIn delay={0.3}>
@@ -105,8 +83,8 @@ export default function CompanyClient({ company, valuesList, teamList, milestone
               </h2>
               <div className="space-y-4 leading-relaxed text-base" style={{ color: 'rgba(255,255,255,0.6)' }}>
                 <p>{company.para1 || "MetLink was founded with a single conviction: that the gap between ambitious businesses and world-class digital execution doesn't have to exist."}</p>
-                <p>{company.para2 || "We're a full-service AI marketing and development agency — combining the strategic horsepower of a top-tier marketing firm with the technical depth of a software studio. We don't do cookie-cutter. Every engagement is custom-built around your goals."}</p>
-                <p>{company.para3 || "From brand identity to machine learning systems, from performance ads to enterprise software — we handle the full stack of what it takes to grow a modern digital business."}</p>
+                <p>{company.para2 || "We're a full-service AI marketing and development agency, combining the strategic horsepower of a top-tier marketing firm with the technical depth of a software studio. We don't do cookie-cutter. Every engagement is custom-built around your goals."}</p>
+                <p>{company.para3 || "From brand identity to machine learning systems, from performance ads to enterprise software, we handle the full stack of what it takes to grow a modern digital business."}</p>
               </div>
             </FadeIn>
             <StaggerChildren className="grid grid-cols-2 gap-4">
@@ -147,7 +125,7 @@ export default function CompanyClient({ company, valuesList, teamList, milestone
           </FadeIn>
           <StaggerChildren className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {valuesList.map((v, vIdx) => {
-              const Icon = (v.icon as React.ElementType) ?? valueIcons[vIdx % valueIcons.length];
+              const Icon = valueIcons[vIdx % valueIcons.length];
               return (
                 <StaggerItem key={v.title}>
                   <div className="group p-7 rounded-2xl transition-all duration-300 hover:-translate-y-1.5 h-full"

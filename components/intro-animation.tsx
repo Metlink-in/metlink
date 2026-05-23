@@ -44,7 +44,7 @@ export function IntroAnimation() {
         alignItems: 'center',
         justifyContent: 'center',
         overflow: 'hidden',
-        /* Portal close — circle shrinks to nothing, revealing the site */
+        /* Portal close, circle shrinks to nothing, revealing the site */
         clipPath: isClosing ? 'circle(0% at 50% 50%)' : 'circle(150% at 50% 50%)',
         transition: isClosing
           ? 'clip-path 0.72s cubic-bezier(0.7,0,0.84,0)'
@@ -52,7 +52,7 @@ export function IntroAnimation() {
         pointerEvents: isClosing ? 'none' : undefined,
       }}
     >
-      {/* Background — matches site theme */}
+      {/* Background, matches site theme */}
       <div style={{
         position: 'absolute', inset: 0,
         background: 'radial-gradient(ellipse 80% 80% at 50% 48%, #071628 0%, #050B14 50%, #020608 100%)',
@@ -78,7 +78,7 @@ export function IntroAnimation() {
         transition: 'opacity 0.7s ease, transform 1.1s cubic-bezier(0.16,1,0.3,1)',
       }} />
 
-      {/* Portal rings — expand outward */}
+      {/* Portal rings, expand outward */}
       {[120, 200, 290, 390, 500].map((size, i) => (
         <div key={size} style={{
           position: 'absolute',

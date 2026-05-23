@@ -19,7 +19,7 @@ export default function NotFound() {
         {/* 404 */}
         <div className="mb-6 relative inline-block">
           <p className="text-[10px] font-normal uppercase tracking-[0.4em] mb-4" style={{ color: 'rgba(255,255,255,0.4)' }}>
-            404 — Page Not Found
+            404, Page Not Found
           </p>
           <h1 className="text-[9rem] md:text-[11rem]  leading-none select-none gradient-text-cyan">
             404
@@ -38,14 +38,14 @@ export default function NotFound() {
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
           <Link href="/"
-            className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full font-bold text-sm text-white transition-all hover:brightness-110 active:scale-95"
-            style={{ background: '#2B80F0', boxShadow: '0 4px 24px rgba(43,128,240,0.45)' }}>
+            className="inline-flex items-center justify-center gap-2 px-5 py-2 rounded-xl font-semibold text-xs text-white transition-all active:scale-95"
+            style={{ background: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.18)' }}>
             <Home className="w-4 h-4" />
             Back to Home
           </Link>
           <Link href="/contact"
-            className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full font-bold text-sm transition-all"
-            style={{ border: '1px solid rgba(255,255,255,0.07)', color: 'rgba(255,255,255,0.7)', background: 'rgba(255,255,255,0.06)' }}>
+            className="inline-flex items-center justify-center gap-2 px-5 py-2 rounded-xl font-semibold text-xs transition-all"
+            style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', color: 'rgba(255,255,255,0.7)' }}>
             <ArrowLeft className="w-4 h-4" />
             Contact Us
           </Link>
