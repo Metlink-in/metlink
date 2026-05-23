@@ -1,16 +1,15 @@
 import { getSection } from '@/lib/get-section';
-import { Target, Eye, Heart, Globe, Award, Clock } from 'lucide-react';
 import CompanyClient from './company-client';
 
 export const dynamic = 'force-dynamic';
 
 const defaultValues = [
-  { icon: Target, title: 'Mission-Driven',      desc: 'Every decision we make is anchored to one goal — measurable results for our clients.' },
-  { icon: Eye,    title: 'Radical Transparency', desc: 'No hidden fees, no smoke and mirrors. You always know exactly where your investment is going.' },
-  { icon: Heart,  title: 'Client-Obsessed',      desc: "Your success is the only metric we care about. We treat every client's business like our own." },
-  { icon: Globe,  title: 'Global Perspective',   desc: 'We bring international best practices and diverse insights to every project we take on.' },
-  { icon: Award,  title: 'Excellence Always',    desc: "We don't ship mediocre. Every deliverable meets the highest standard of quality." },
-  { icon: Clock,  title: 'Speed & Reliability',  desc: 'Fast execution without cutting corners. We deliver on time, every time.' },
+  { title: 'Mission-Driven',      desc: 'Every decision we make is anchored to one goal — measurable results for our clients.' },
+  { title: 'Radical Transparency', desc: 'No hidden fees, no smoke and mirrors. You always know exactly where your investment is going.' },
+  { title: 'Client-Obsessed',      desc: "Your success is the only metric we care about. We treat every client's business like our own." },
+  { title: 'Global Perspective',   desc: 'We bring international best practices and diverse insights to every project we take on.' },
+  { title: 'Excellence Always',    desc: "We don't ship mediocre. Every deliverable meets the highest standard of quality." },
+  { title: 'Speed & Reliability',  desc: 'Fast execution without cutting corners. We deliver on time, every time.' },
 ];
 
 const defaultTeam = [
