@@ -113,6 +113,7 @@ export function IntroAnimation() {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
+        gap: 18,
         opacity: showLogo ? 1 : 0,
         transform: showLogo
           ? (isExpanded ? 'scale(1.08)' : 'scale(1)')
@@ -121,18 +122,27 @@ export function IntroAnimation() {
         filter: showRings ? 'drop-shadow(0 0 28px rgba(43,128,240,0.55))' : 'none',
       }}>
         <img
-          src="/logo-mark.png"
-          alt="Metlink"
+          src="/WhatsApp_Image_2026-04-30_at_7.30.41_PM-removebg-preview.png"
+          alt="MetLink"
           style={{
-            width: 'clamp(100px, 14vw, 140px)',
+            width: 'clamp(180px, 28vw, 280px)',
             height: 'auto',
             objectFit: 'contain',
-            borderRadius: 20,
             filter: showRings
-              ? 'drop-shadow(0 0 28px rgba(43,128,240,0.7)) drop-shadow(0 0 60px rgba(43,128,240,0.3))'
-              : 'none',
+              ? 'drop-shadow(0 0 28px rgba(43,128,240,0.7)) drop-shadow(0 0 60px rgba(43,128,240,0.3)) brightness(1.15)'
+              : 'brightness(1)',
           }}
         />
+        <p style={{
+          color: 'rgba(255,255,255,0.45)',
+          fontSize: 'clamp(11px, 1.6vw, 14px)',
+          fontWeight: 500,
+          letterSpacing: '0.28em',
+          textTransform: 'uppercase',
+          margin: 0,
+        }}>
+          Grow with AI
+        </p>
       </div>
     </div>
   );

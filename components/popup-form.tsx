@@ -54,7 +54,7 @@ export function PopupForm() {
             <img
               src="/WhatsApp_Image_2026-04-30_at_7.30.41_PM-removebg-preview.png"
               alt="MetLink"
-              style={{ height: 56, width: 'auto', objectFit: 'contain', marginBottom: 24 }}
+              style={{ height: 90, width: 'auto', objectFit: 'contain', marginBottom: 20 }}
             />
 
             <p className="text-[10px] font-black uppercase tracking-[0.35em] mb-3" style={{ color: '#5FA8FF' }}>

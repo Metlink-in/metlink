@@ -14,7 +14,7 @@ const dm = DM_Sans({
 
 export const metadata: Metadata = {
   title: {
-    default: 'MetLink — AI Marketing & Development Agency',
+    default: 'MetLink — Grow with AI',
     template: '%s | MetLink',
   },
   description:
