@@ -12,10 +12,11 @@ export default function ContactPage() {
   const [form, setForm]           = useState({ name:'', email:'', company:'', service:'', budget:'', message:'' });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading]     = useState(false);
+  const [error, setError] = useState('');
   const [info, setInfo] = useState({
     email: 'hello@metlink.in', emailNote: 'Reply within 2 hours',
-    phone: '+91 123 456 7890', phoneNote: '9AM to 6PM IST',
-    location: 'Mumbai, India', locationNote: 'By appointment',
+    phone: '+91 8602333400',   phoneNote: '9AM to 6PM IST',
+    location: 'Indore, MP, India', locationNote: 'By appointment',
     responseTime: '< 2 Hours',
   });
 
@@ -26,10 +27,24 @@ export default function ContactPage() {
   const set = (e: React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement|HTMLSelectElement>) =>
     setForm(p => ({ ...p, [e.target.name]: e.target.value }));
 
-  const submit = (e: React.SyntheticEvent) => {
+  const submit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     setLoading(true);
-    setTimeout(() => { setLoading(false); setSubmitted(true); }, 1500);
+    setError('');
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...form, source: 'contact' }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Submission failed.');
+      setSubmitted(true);
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : 'Something went wrong. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   const inp = {
@@ -247,6 +262,13 @@ export default function ContactPage() {
                             onFocus={e => (e.currentTarget.style.borderColor = inp.focus)}
                             onBlur={e => (e.currentTarget.style.borderColor = inp.blur)} />
                         </div>
+
+                        {/* Error */}
+                        {error && (
+                          <p className="text-xs px-4 py-3 rounded-xl" style={{ background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.25)', color: '#FCA5A5' }}>
+                            {error}
+                          </p>
+                        )}
 
                         {/* Submit */}
                         <button type="submit" disabled={loading}

@@ -45,18 +45,18 @@ export function Header() {
           }}
         >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-20" style={{ overflow: 'visible' }}>
+          <div className="flex items-center justify-between h-[116px]" style={{ overflow: 'visible' }}>
 
             {/* Logo */}
             <Link href="/" className="flex items-center shrink-0 group">
               <Image
                 src="/WhatsApp_Image_2026-04-30_at_7.30.41_PM-removebg-preview.png"
-                alt="Metlink"
+                alt="MetLink"
                 width={559}
                 height={447}
                 priority
-                className="transition-all duration-200 group-hover:opacity-80"
-                style={{ height: '130px', width: 'auto', objectFit: 'contain' }}
+                className="transition-opacity duration-200 group-hover:opacity-80"
+                style={{ height: '110px', width: 'auto', objectFit: 'contain' }}
               />
             </Link>
 
@@ -129,11 +129,11 @@ export function Header() {
               {/* Dim backdrop covers entire screen below header */}
               <div
                 className="md:hidden fixed inset-0 z-[-1]"
-                style={{ top: 80, background: 'rgba(4,9,15,0.97)', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)' }}
+                style={{ top: 116, background: 'rgba(4,9,15,0.97)', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)' }}
                 onClick={() => setMobileOpen(false)}
               />
               <div className="md:hidden fixed left-0 right-0 z-40 overflow-y-auto animate-slideInDown"
-                style={{ top: 81, bottom: 0, background: '#04090F', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
+                style={{ top: 117, bottom: 0, background: '#04090F', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
                 <div className="px-5 py-4 space-y-0.5 pb-10">
                   <MobileNavLink href="/" onClose={() => setMobileOpen(false)}>Home</MobileNavLink>
 
@@ -200,7 +200,7 @@ export function Header() {
             {/* Click-outside overlay */}
             <div
               className="fixed inset-0"
-              style={{ top: 80, zIndex: 48 }}
+              style={{ top: 116, zIndex: 48 }}
               onClick={() => setServicesOpen(false)}
             />
 
@@ -208,7 +208,7 @@ export function Header() {
             <div
               className="fixed left-0 right-0 animate-slideInDown"
               style={{
-                top: 80,
+                top: 116,
                 zIndex: 49,
                 background: '#04090F',
                 borderBottom: '1px solid rgba(255,255,255,0.08)',

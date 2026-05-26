@@ -8,6 +8,7 @@ export function PopupForm() {
   const [submitted, setSubmitted] = useState(false);
   const [form, setForm]           = useState({ name: '', email: '', phone: '', budget: '', message: '' });
   const [loading, setLoading]     = useState(false);
+  const [error, setError]         = useState('');
 
   useEffect(() => {
     if (sessionStorage.getItem('ml_popup')) return;
@@ -17,10 +18,32 @@ export function PopupForm() {
 
   const close = () => { sessionStorage.setItem('ml_popup', '1'); setOpen(false); };
 
-  const handleSubmit = (e: React.SyntheticEvent) => {
+  const handleSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     setLoading(true);
-    setTimeout(() => { setLoading(false); setSubmitted(true); setTimeout(close, 3000); }, 1400);
+    setError('');
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          phone: form.phone,
+          budget: form.budget,
+          message: form.message,
+          source: 'popup',
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Submission failed.');
+      setSubmitted(true);
+      setTimeout(close, 3000);
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : 'Something went wrong. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (!open) return null;
@@ -178,6 +201,12 @@ export function PopupForm() {
                     <input type="checkbox" className="w-4 h-4 rounded cursor-pointer accent-[#2B80F0]" />
                     <span className="text-xs transition-colors" style={{ color: '#ADA09A' }}>Send me a copy of NDA</span>
                   </label>
+
+                  {error && (
+                    <p className="text-xs px-3 py-2.5 rounded-xl" style={{ background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.2)', color: '#EF4444' }}>
+                      {error}
+                    </p>
+                  )}
 
                   <button type="submit" disabled={loading}
                     className="w-full py-3.5 rounded-xl font-black text-sm uppercase tracking-[0.08em] transition-all hover:brightness-95 active:scale-[0.98] disabled:opacity-60 flex items-center justify-center gap-2 text-white"

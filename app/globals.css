@@ -219,6 +219,15 @@ nav button, nav a { min-height: unset; min-width: unset; }
 .btn-primary-glass:hover { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.28); }
 .btn-primary-glass:active { transform: scale(0.97); }
 
+/* ── Legal prose ── */
+.prose-legal { color: rgba(255,255,255,0.55); font-size: 0.925rem; line-height: 1.8; font-weight: 300; }
+.prose-legal p { margin-bottom: 1rem; }
+.prose-legal ul { list-style: disc; padding-left: 1.5rem; margin-bottom: 1rem; }
+.prose-legal ul li { margin-bottom: 0.4rem; }
+.prose-legal strong { color: rgba(255,255,255,0.8); font-weight: 500; }
+.prose-legal a { color: #5FA8FF; text-decoration: underline; text-underline-offset: 3px; }
+.prose-legal a:hover { color: #FFFFFF; }
+
 /* ── Glow utilities ── */
 .glow-accent { box-shadow: 0 0 22px rgba(43,128,240,.16), 0 0 60px rgba(43,128,240,.06); }
 .glow-border { position:relative; }

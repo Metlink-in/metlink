@@ -14,16 +14,11 @@ const dm = DM_Sans({
 
 export const metadata: Metadata = {
   title: {
-    default: 'MetLink — Grow with AI',
+    default: 'Grow with AI',
     template: '%s | MetLink',
   },
   icons: {
-    icon: [
-      { url: '/logo-mark.png', sizes: '32x32', type: 'image/png' },
-      { url: '/logo-mark.png', type: 'image/png' },
-    ],
     apple: '/logo-mark.png',
-    shortcut: '/logo-mark.png',
   },
   description:
     'MetLink is a full-service AI marketing & development agency — digital marketing, creative media, AI automation, and custom software that drives measurable revenue growth.',

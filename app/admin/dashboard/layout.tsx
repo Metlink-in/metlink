@@ -20,6 +20,7 @@ const NAV = [
   { label: 'Footer',       href: '/admin/dashboard/footer' },
   { label: 'Portfolio',    href: '/admin/dashboard/portfolio' },
   { label: 'Blog',         href: '/admin/dashboard/blog' },
+  { label: 'SMTP / Email', href: '/admin/dashboard/smtp' },
 ];
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
