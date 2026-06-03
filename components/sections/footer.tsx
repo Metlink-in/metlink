@@ -54,8 +54,8 @@ export function Footer() {
   const columns = footerCms.columns?.length ? footerCms.columns : defaultColumns;
 
   useEffect(() => {
-    fetch('/api/admin/content/footer').then(r => r.json()).then(res => { if (res.data) setFooterCms(res.data); }).catch(() => {});
-    fetch('/api/admin/content/social').then(r => r.json()).then(res => { if (res.data) setSocial(res.data); }).catch(() => {});
+    fetch('/api/public/content/footer').then(r => r.json()).then(res => { if (res.data) setFooterCms(res.data); }).catch(() => {});
+    fetch('/api/public/content/social').then(r => r.json()).then(res => { if (res.data) setSocial(res.data); }).catch(() => {});
   }, []);
 
   return (

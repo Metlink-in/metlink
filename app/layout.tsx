@@ -18,6 +18,8 @@ export const metadata: Metadata = {
     template: '%s | MetLink',
   },
   icons: {
+    icon: '/icon.svg',
+    shortcut: '/icon.svg',
     apple: '/logo-mark.png',
   },
   description:

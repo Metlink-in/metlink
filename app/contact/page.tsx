@@ -21,7 +21,7 @@ export default function ContactPage() {
   });
 
   useEffect(() => {
-    fetch('/api/admin/content/contact').then(r => r.json()).then(res => { if (res.data) setInfo(res.data); }).catch(() => {});
+    fetch('/api/public/content/contact').then(r => r.json()).then(res => { if (res.data) setInfo(res.data); }).catch(() => {});
   }, []);
 
   const set = (e: React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement|HTMLSelectElement>) =>

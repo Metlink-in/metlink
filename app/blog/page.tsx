@@ -18,7 +18,7 @@ export default function BlogPage() {
       if (Array.isArray(data) && data.length) setPosts(data);
     }).catch(() => {});
 
-    fetch('/api/admin/content/blog-categories').then(r => r.json()).then(res => {
+    fetch('/api/public/content/blog-categories').then(r => r.json()).then(res => {
       if (Array.isArray(res.data) && res.data.length) setCategories(['All', ...res.data]);
     }).catch(() => {});
   }, []);

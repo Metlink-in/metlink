@@ -508,28 +508,6 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
             style={{ background: 'linear-gradient(to top, #020202 0%, transparent 100%)' }} />
         </div>
 
-        {/* ── Floating card, left (deploy metric) ── */}
-        <div className="absolute bottom-[24%] left-[4%] hidden xl:block animate-float" style={{ zIndex: 20, animationDelay: '0.6s', width: 180 }}>
-          <div className="p-5 rounded-2xl"
-            style={{ background: 'rgba(2,2,2,0.75)', border: '1px solid rgba(255,255,255,0.09)', boxShadow: '0 32px 80px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.07)', backdropFilter: 'blur(28px)' }}>
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-                <span className="text-[9px] uppercase tracking-[0.22em]" style={{ color: 'rgba(255,255,255,0.3)' }}>Live</span>
-              </div>
-              <span className="text-[9px] px-2 py-0.5 rounded-full" style={{ background: 'rgba(34,197,94,0.1)', border: '1px solid rgba(34,197,94,0.2)', color: '#4ADE80' }}>Active</span>
-            </div>
-            <p style={{ color: '#FFFFFF', fontSize: '2.4rem', fontWeight: 200, letterSpacing: '-0.05em', lineHeight: 1 }}>7</p>
-            <p className="text-sm mb-1" style={{ color: 'rgba(255,255,255,0.35)', fontWeight: 300 }}>days to ship</p>
-            {/* Mini bar chart */}
-            <div className="flex items-end gap-1 mt-4 h-8">
-              {[40,65,45,80,55,90,75].map((h, i) => (
-                <div key={i} className="flex-1 rounded-sm" style={{ height: `${h}%`, background: i === 5 ? '#2B80F0' : 'rgba(43,128,240,0.25)' }} />
-              ))}
-            </div>
-          </div>
-        </div>
-
         {/* ── Floating card, right bottom (ROAS metric) ── */}
         <div className="absolute bottom-[26%] right-[4%] w-[200px] hidden xl:block animate-float" style={{ zIndex: 20, animationDelay: '1s' }}>
           <div className="p-4 rounded-2xl"
