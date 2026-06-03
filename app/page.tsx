@@ -55,7 +55,7 @@ export default async function Page() {
     <HomeClient
       cmsHero={hero ?? defaultHero}
       cmsClients={Array.isArray(clientsData) && clientsData.length ? clientsData : defaultClients}
-      cmsTestimonials={Array.isArray(testimonialsData) && testimonialsData.length ? testimonialsData : defaultTestimonials}
+      cmsTestimonials={Array.isArray(testimonialsData) ? testimonialsData : defaultTestimonials}
       cmsWhyUs={whyUsMerged}
       cmsSteps={Array.isArray(processData) && processData.length ? processData : defaultSteps}
     />

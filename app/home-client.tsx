@@ -798,6 +798,7 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
       </section>
 
       {/* ══ CLIENT SUCCESS STORIES ══════════════════════════════ */}
+      {testimonialsList.length > 0 && (
       <section className="py-20 sm:py-28" style={{ background: BG }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeIn className="text-center mb-16">
@@ -840,6 +841,7 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
           </StaggerChildren>
         </div>
       </section>
+      )}
 
       {/* ══ PROCESS ════════════════════════════════════════════ */}
       <section id="process" className="relative py-24 sm:py-32 overflow-hidden" style={{ background: '#000000', borderTop: '1px solid rgba(255,255,255,0.08)', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
