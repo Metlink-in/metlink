@@ -18,8 +18,6 @@ export const metadata: Metadata = {
     template: '%s | MetLink',
   },
   icons: {
-    icon: '/WhatsApp_Image_2026-04-30_at_7.30.41_PM-removebg-preview.png',
-    shortcut: '/WhatsApp_Image_2026-04-30_at_7.30.41_PM-removebg-preview.png',
     apple: '/logo-mark.png',
   },
   description:
