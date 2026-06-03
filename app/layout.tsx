@@ -18,7 +18,9 @@ export const metadata: Metadata = {
     template: '%s | MetLink',
   },
   icons: {
-    apple: '/logo-mark.png',
+    icon: '/favicon-logo.png',
+    shortcut: '/favicon-logo.png',
+    apple: '/favicon-logo.png',
   },
   description:
     'MetLink is a full-service AI marketing & development agency — digital marketing, creative media, AI automation, and custom software that drives measurable revenue growth.',
