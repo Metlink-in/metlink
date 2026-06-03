@@ -106,7 +106,7 @@ export function Header() {
                 onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.color = 'rgba(255,255,255,0.72)'; el.style.background = 'transparent'; }}>
                 Get Proposal
               </button>
-              <Link href="/contact"
+              <Link href="https://calendly.com/jitesh-bawaskar-metlinkai/30min"
                 className="px-5 py-2 rounded-xl text-xs font-semibold transition-all active:scale-95"
                 style={{ background: 'rgba(255,255,255,0.10)', color: '#FFFFFF', border: '1px solid rgba(255,255,255,0.18)' }}
                 onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.16)'; }}
@@ -175,7 +175,7 @@ export function Header() {
                   </div>
 
                   <div className="pt-4 space-y-2.5 border-t mt-3" style={{ borderColor: 'rgba(255,255,255,0.07)' }}>
-                    <Link href="/contact"
+                    <Link href="https://calendly.com/jitesh-bawaskar-metlinkai/30min"
                       className="block text-center py-3.5 rounded-full text-sm font-semibold text-white"
                       style={{ background: '#2B80F0', boxShadow: '0 4px 16px rgba(43,128,240,0.3)' }}
                       onClick={() => setMobileOpen(false)}>
@@ -269,7 +269,7 @@ export function Header() {
                   style={{ borderTop: '1px solid rgba(255,255,255,0.07)' }}>
                   <div />
                   <Link
-                    href="/contact"
+                    href="https://calendly.com/jitesh-bawaskar-metlinkai/30min"
                     onClick={() => setServicesOpen(false)}
                     className="group inline-flex items-center gap-2 px-5 py-2 rounded-xl text-xs font-semibold transition-all duration-200 active:scale-95"
                     style={{ background: 'rgba(255,255,255,0.10)', color: '#FFFFFF', border: '1px solid rgba(255,255,255,0.18)' }}

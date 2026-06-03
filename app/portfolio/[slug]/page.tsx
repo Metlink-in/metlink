@@ -153,7 +153,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
         <div className="max-w-3xl mx-auto px-4 text-center relative z-10">
           <h2 className=" mb-4" style={{ color: '#FFFFFF' }}>Let&apos;s build your success story</h2>
           <p className="mb-8 text-lg" style={{ color: 'rgba(255,255,255,0.6)' }}>We deliver measurable impact through AI, code, and creative strategy.</p>
-          <Link href="/contact"
+          <Link href="https://calendly.com/jitesh-bawaskar-metlinkai/30min"
             className="inline-flex items-center gap-2 px-9 py-4 rounded-full font-bold text-sm text-white transition-all hover:brightness-95 active:scale-95"
             style={{ background: '#2B80F0', boxShadow: '0 4px 20px rgba(43,128,240,0.3)' }}>
             Start Your Project <ArrowRight className="w-5 h-5" />

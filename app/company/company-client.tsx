@@ -44,7 +44,7 @@ export default function CompanyClient({ company, valuesList, teamList, milestone
           </FadeIn>
           <FadeIn delay={0.3}>
             <div className="flex flex-wrap gap-4 justify-center">
-              <Link href="/contact"
+              <Link href="https://calendly.com/jitesh-bawaskar-metlinkai/30min"
                 className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-bold text-sm text-white transition-all hover:brightness-95 active:scale-95"
                 style={{ background: '#2B80F0', boxShadow: '0 4px 20px rgba(43,128,240,0.3)' }}>
                 Work With Us <ArrowRight className="w-4 h-4" />
@@ -239,7 +239,7 @@ export default function CompanyClient({ company, valuesList, teamList, milestone
             Whether you&apos;re a startup or an enterprise, we&apos;re the growth partner you&apos;ve been looking for.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/contact"
+            <Link href="https://calendly.com/jitesh-bawaskar-metlinkai/30min"
               className="inline-flex items-center justify-center gap-2 px-9 py-4 rounded-full font-bold text-sm text-white transition-all hover:brightness-95 active:scale-95"
               style={{ background: '#2B80F0', boxShadow: '0 4px 20px rgba(43,128,240,0.3)' }}>
               Start the Conversation <ArrowRight className="w-5 h-5" />

@@ -74,7 +74,7 @@ export default function ProductPage() {
 
         {/* CTA */}
         <div className="flex flex-wrap items-center justify-center gap-3">
-          <Link href="/contact"
+          <Link href="https://calendly.com/jitesh-bawaskar-metlinkai/30min"
             className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-sm font-bold text-white transition-all hover:brightness-95 active:scale-95"
             style={{ background: '#2B80F0', boxShadow: '0 4px 20px rgba(43,128,240,0.28)' }}>
             <Sparkles className="w-4 h-4" />
@@ -90,7 +90,7 @@ export default function ProductPage() {
 
         <p className="mt-8 text-xs" style={{ color: 'rgba(255,255,255,0.4)' }}>
           Questions?{' '}
-          <Link href="/contact" className="font-semibold transition-colors"
+          <Link href="https://calendly.com/jitesh-bawaskar-metlinkai/30min" className="font-semibold transition-colors"
             style={{ color: '#2B80F0' }}>
             Talk to the MetLink team →
           </Link>

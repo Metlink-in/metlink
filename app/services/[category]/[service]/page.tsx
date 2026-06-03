@@ -48,7 +48,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
             <p className="text-sm font-bold uppercase tracking-[0.2em] mb-3" style={{ color: accent }}>{svcData.tagline}</p>
             <h1 className=" mb-6 leading-tight" style={{ color: '#FFFFFF' }}>{svcData.name}</h1>
             <p className="text-xl leading-relaxed mb-10 max-w-2xl" style={{ color: 'rgba(255,255,255,0.6)' }}>{svcData.description}</p>
-            <Link href="/contact"
+            <Link href="https://calendly.com/jitesh-bawaskar-metlinkai/30min"
               className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-bold text-sm text-white transition-all hover:brightness-95 active:scale-95"
               style={{ background: '#2B80F0', boxShadow: '0 4px 20px rgba(43,128,240,0.3)' }}>
               Work With Us <ArrowRight className="w-4 h-4" />
@@ -122,7 +122,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
           <p className="mb-10 text-lg" style={{ color: 'rgba(255,255,255,0.6)' }}>
             Book a free strategy session with our experts today. No commitments, just clear actionable guidance.
           </p>
-          <Link href="/contact"
+          <Link href="https://calendly.com/jitesh-bawaskar-metlinkai/30min"
             className="inline-flex items-center gap-2 px-9 py-4 rounded-full font-bold text-sm text-white transition-all hover:brightness-95 active:scale-95"
             style={{ background: '#2B80F0', boxShadow: '0 4px 20px rgba(43,128,240,0.3)' }}>
             Book Strategy Call <ArrowRight className="w-5 h-5" />

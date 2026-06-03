@@ -138,7 +138,10 @@ export function ChatBot() {
                 <p className="text-[9px] uppercase font-black tracking-[0.2em]" style={{ color: '#ADA09A' }}>Quick Actions</p>
                 <div className="flex flex-col gap-1.5">
                   {QUICK_REPLIES.map(qr => (
-                    <button key={qr} onClick={() => send(qr)}
+                    <button key={qr} onClick={() => {
+                        if (qr === 'Book a strategy call') { window.location.href = 'https://calendly.com/jitesh-bawaskar-metlinkai/30min'; return; }
+                        send(qr);
+                      }}
                       className="text-left text-[11px] px-4 py-2.5 rounded-xl transition-all border"
                       style={{ background: '#FFFFFF', borderColor: '#E5DDD5', color: '#72645A' }}
                       onMouseEnter={e => {

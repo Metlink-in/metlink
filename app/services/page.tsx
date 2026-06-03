@@ -120,7 +120,7 @@ export default function ServicesPage() {
           <p className="mb-10 text-lg" style={{ color: 'rgba(255,255,255,0.6)' }}>
             Talk to our experts and we&apos;ll build a custom strategy for your unique business needs.
           </p>
-          <Link href="/contact"
+          <Link href="https://calendly.com/jitesh-bawaskar-metlinkai/30min"
             className="inline-flex items-center gap-2 px-5 py-2 rounded-xl font-semibold text-xs text-white transition-all active:scale-95"
             style={{ background: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.18)' }}>
             Get a Free Consultation <ArrowRight className="w-5 h-5" />

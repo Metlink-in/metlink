@@ -94,6 +94,10 @@ export default function ClientsEditor() {
     setClients(prev => prev.map((c, idx) => idx === i ? { ...c, logo } : c));
   }
 
+  function updateField(i: number, field: keyof Client, val: string) {
+    setClients(prev => prev.map((c, idx) => idx === i ? { ...c, [field]: val } : c));
+  }
+
   function addSlot() {
     setClients(prev => [...prev, { logo: '', name: '', industry: '', color: '#2B80F0' }]);
   }
@@ -104,11 +108,13 @@ export default function ClientsEditor() {
 
   async function save() {
     setSaving(true);
+    // Drop slots that have neither a logo nor a name — they render blank on the site.
+    const cleaned = clients.filter(c => c.logo.trim() || c.name.trim());
     try {
       const res = await fetch('/api/admin/content/clients', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(clients),
+        body: JSON.stringify(cleaned),
       });
       setToast(res.ok ? 'Saved!' : 'Save failed.');
     } catch { setToast('Save failed.'); }
@@ -121,7 +127,7 @@ export default function ClientsEditor() {
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8 }}>
         <div>
           <h1 style={{ color: '#fff', fontSize: 22, fontWeight: 700, margin: 0 }}>Client Logos</h1>
-          <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: 13, marginTop: 4 }}>Upload client logos shown in the marquee strip.</p>
+          <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: 13, marginTop: 4 }}>Add client names and logos shown in the marquee strip. If no logo is uploaded, the name is shown instead.</p>
         </div>
         <button
           onClick={save}
@@ -153,6 +159,28 @@ export default function ClientsEditor() {
                   ✕
                 </button>
                 <LogoUpload value={c.logo} onChange={v => updateLogo(i, v)} />
+                <input
+                  type="text"
+                  value={c.name}
+                  onChange={e => updateField(i, 'name', e.target.value)}
+                  placeholder="Client name"
+                  style={{
+                    width: '100%', marginTop: 12, boxSizing: 'border-box',
+                    background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)',
+                    borderRadius: 8, padding: '8px 10px', fontSize: 13, color: '#fff',
+                  }}
+                />
+                <input
+                  type="text"
+                  value={c.industry}
+                  onChange={e => updateField(i, 'industry', e.target.value)}
+                  placeholder="Industry (optional)"
+                  style={{
+                    width: '100%', marginTop: 8, boxSizing: 'border-box',
+                    background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)',
+                    borderRadius: 8, padding: '8px 10px', fontSize: 13, color: 'rgba(255,255,255,0.7)',
+                  }}
+                />
               </div>
             ))}
           </div>

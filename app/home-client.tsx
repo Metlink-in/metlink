@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { ArrowRight, Star, TrendingUp, Megaphone, Palette, Bot, Code, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowRight, Star, TrendingUp, Megaphone, Palette, Bot, Code, ChevronLeft, ChevronRight, Target, Users, DollarSign, Repeat } from 'lucide-react';
 import { FadeIn, StaggerChildren, StaggerItem } from '@/components/fade-in';
 
 /* ─── Brand icons ───────────────────────────────────────────── */
@@ -203,10 +203,9 @@ const services = [
 function ClientCard({ c }: { c: { name: string; industry: string; color: string; logo?: string } }) {
   return (
     <div
-      className="flex items-center justify-center shrink-0"
-      style={{ padding: '0 40px' }}
+      className="flex flex-col items-center justify-center shrink-0 gap-3"
     >
-      {c.logo ? (
+      {c.logo && (
         <img
           src={c.logo}
           alt={c.name}
@@ -232,9 +231,10 @@ function ClientCard({ c }: { c: { name: string; industry: string; color: string;
             el.style.filter = 'brightness(1.15) contrast(1.05)';
           }}
         />
-      ) : (
+      )}
+      {c.name && (
         <p
-          className="font-black text-lg tracking-wide whitespace-nowrap"
+          className={c.logo ? 'text-sm font-bold tracking-wide whitespace-nowrap' : 'font-black text-lg tracking-wide whitespace-nowrap'}
           style={{ color: 'rgba(255,255,255,0.6)', transition: 'color 0.25s ease' }}
           onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = '#fff'; }}
           onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.6)'; }}
@@ -378,39 +378,46 @@ function FAQSection() {
   const [open, setOpen] = useState<number | null>(null);
   return (
     <section className="py-20 sm:py-28" style={{ background: '#07111F' }}>
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <FadeIn className="text-center mb-14">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <FadeIn className="text-center mb-12">
           <TypewriterH2
             style={{ color: 'rgba(255,255,255,0.92)' }}
-            segments={[{ text: 'Frequently Asked Questions' }]}
+            segments={[{ text: 'Frequently ' }, { text: 'Asked Questions', accent: true }]}
           />
+          <p className="mt-4 text-sm" style={{ color: 'rgba(255,255,255,0.45)', fontWeight: 300 }}>
+            Get answers to common questions about our services
+          </p>
         </FadeIn>
 
-        <div className="flex flex-col gap-2 mb-14">
+        <div className="flex flex-col gap-3 mb-14">
           {faqs.map((faq, i) => (
             <FadeIn key={i} delay={i * 0.04}>
               <div
-                className="rounded-2xl overflow-hidden transition-all duration-300 cursor-pointer"
+                className="rounded-xl overflow-hidden transition-all duration-300 cursor-pointer"
                 style={{
                   background: open === i ? 'rgba(43,128,240,0.07)' : 'rgba(255,255,255,0.04)',
                   border: `1px solid ${open === i ? 'rgba(43,128,240,0.25)' : 'rgba(255,255,255,0.08)'}`,
                 }}
                 onClick={() => setOpen(open === i ? null : i)}
               >
-                <div className="flex items-center justify-between gap-4 px-6 py-3.5">
-                  <span style={{ color: '#FFFFFF', fontSize: '0.95rem', fontWeight: 500 }}>{faq.q}</span>
+                <div className="flex items-center justify-between gap-4 px-6 py-4">
+                  <span className="flex items-center" style={{ color: '#FFFFFF', fontSize: '0.95rem', fontWeight: 500 }}>
+                    <span className="inline-block rounded-full shrink-0" style={{ width: 8, height: 8, background: '#2B80F0', marginRight: 12 }} />
+                    {faq.q}
+                  </span>
                   <span
-                    className="shrink-0 transition-transform duration-300"
-                    style={{ transform: open === i ? 'rotate(180deg)' : 'rotate(0deg)', color: 'rgba(255,255,255,0.5)' }}
+                    className="shrink-0 transition-transform duration-300 flex items-center justify-center"
+                    style={{ transform: open === i ? 'rotate(45deg)' : 'rotate(0deg)', color: '#2B80F0' }}
                   >
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <polyline points="6 9 12 15 18 9" />
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <line x1="12" y1="5" x2="12" y2="19" />
+                      <line x1="5" y1="12" x2="19" y2="12" />
                     </svg>
                   </span>
                 </div>
                 {open === i && (
-                  <div className="px-6 pb-4" style={{ color: 'rgba(255,255,255,0.55)', fontSize: '0.9rem', lineHeight: 1.7 }}>
-                    {faq.a}
+                  <div className="px-6 pb-5" style={{ color: 'rgba(255,255,255,0.55)', fontSize: '0.9rem', lineHeight: 1.7 }}>
+                    <span style={{ color: '#2B80F0', fontWeight: 600, marginRight: 8 }}>A:</span>{faq.a}
                   </div>
                 )}
               </div>
@@ -419,7 +426,7 @@ function FAQSection() {
         </div>
 
         <FadeIn className="flex flex-wrap gap-3 justify-center">
-          <Link href="/contact"
+          <Link href="https://calendly.com/jitesh-bawaskar-metlinkai/30min"
             className="group inline-flex items-center gap-2.5 font-medium btn-primary">
             Start building with AI
             <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
@@ -474,7 +481,7 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
     <div className="w-full overflow-x-hidden" style={{ background: BG }}>
 
       {/* ══ HERO ══════════════════════════════════════════════ */}
-      <section className="relative overflow-hidden flex flex-col" style={{ background: '#050B14', height: '100vh', paddingTop: '80px' }}>
+      <section className="relative overflow-hidden flex flex-col" style={{ background: '#050B14', minHeight: '100vh', paddingTop: '80px' }}>
 
         {/* ── Background ── */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
@@ -577,15 +584,20 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
           </FadeIn>
         </div>
 
-        {/* ── Stats strip ── */}
-        <div className="relative z-10 pb-10 px-4">
-          <div className="max-w-2xl mx-auto flex items-center justify-center"
-            style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}>
-            {[[hero.stat1Value,hero.stat1Label],[hero.stat2Value,hero.stat2Label],[hero.stat3Value,hero.stat3Label],[hero.stat4Value,hero.stat4Label]].map(([val,lbl], i) => (
-              <div key={i} className="flex-1 flex flex-col items-center py-5"
-                style={{ borderRight: i < 3 ? '1px solid rgba(255,255,255,0.05)' : 'none' }}>
-                <p style={{ color: 'rgba(255,255,255,0.88)', fontSize: 'clamp(1.3rem,2vw,1.75rem)', fontWeight: 300, letterSpacing: '-0.04em', lineHeight: 1 }}>{val}</p>
-                <p className="text-[9px] uppercase tracking-[0.25em] mt-1.5" style={{ color: 'rgba(255,255,255,0.22)' }}>{lbl}</p>
+        {/* ── Stats cards ── */}
+        <div className="relative z-10 pb-10 pt-2 px-4">
+          <div className="max-w-4xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-3">
+            {[
+              { val: hero.stat1Value, lbl: hero.stat1Label, Icon: Target },
+              { val: hero.stat2Value, lbl: hero.stat2Label, Icon: Users },
+              { val: hero.stat3Value, lbl: hero.stat3Label, Icon: DollarSign },
+              { val: hero.stat4Value, lbl: hero.stat4Label, Icon: Repeat },
+            ].map(({ val, lbl, Icon }, i) => (
+              <div key={i} className="flex flex-col items-center text-center px-4 py-3 rounded-xl transition-all duration-200 hover:-translate-y-0.5"
+                style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}>
+                <Icon className="w-3.5 h-3.5 mb-1.5" style={{ color: '#5FA8FF' }} />
+                <p style={{ color: 'rgba(255,255,255,0.95)', fontSize: 'clamp(1rem,1.4vw,1.25rem)', fontWeight: 700, letterSpacing: '-0.03em', lineHeight: 1 }}>{val}</p>
+                <p className="text-[9px] uppercase tracking-[0.15em] mt-1" style={{ color: 'rgba(255,255,255,0.45)' }}>{lbl}</p>
               </div>
             ))}
           </div>
@@ -665,7 +677,7 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
                   </button>
                 );
               })}
-              <Link href="/contact"
+              <Link href="https://calendly.com/jitesh-bawaskar-metlinkai/30min"
                 className="mt-2 text-center btn-outline hidden lg:block"
                 style={{ border: '1px solid rgba(255,255,255,0.1)' }}>
                 Get Started
@@ -772,27 +784,37 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
       </section>
 
       {/* ══ OUR CLIENTS ════════════════════════════════════════ */}
-      <section className="py-20 sm:py-28 overflow-hidden" style={{ background: BG2, borderTop: BDR, borderBottom: BDR }}>
-        <FadeIn className="text-center mb-14 px-4">
-          <p className="label-overline mb-5">Our Clients</p>
-          <TypewriterH2
-            style={{ color: 'rgba(255,255,255,0.92)' }}
-            segments={[{ text: 'Trusted by ' }, { text: 'ambitious teams', accent: true }]}
-          />
-        </FadeIn>
+      <section className="py-16 sm:py-20" style={{ background: BG2, borderTop: BDR, borderBottom: BDR }}>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        {/* Single continuous loop */}
-        <div
-          className="marquee-track relative"
-          style={{
-            maskImage: 'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)',
-            WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)',
-          }}
-        >
-          <div className="animate-scroll-fwd gap-6" style={{ width: 'max-content' }}>
-            {[...clientsList, ...clientsList].map((c, i) => (
-              <ClientCard key={`loop-${i}`} c={c} />
-            ))}
+          {/* Top accent line */}
+          <div className="h-px w-full mb-9"
+            style={{ background: 'linear-gradient(to right, transparent, rgba(43,128,240,0.45) 18%, rgba(43,128,240,0.45) 82%, transparent)' }} />
+
+          <FadeIn className="text-center mb-10">
+            <p className="label-overline">Trusted by World&apos;s Best</p>
+          </FadeIn>
+
+          {/* Infinite auto-scroll loop, pauses on hover */}
+          <div
+            className="marquee-track relative mb-10"
+            style={{
+              maskImage: 'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)',
+              WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)',
+            }}
+          >
+            <div className="animate-scroll-fwd gap-16" style={{ width: 'max-content' }}>
+              {[...clientsList, ...clientsList].map((c, i) => (
+                <ClientCard key={`loop-${i}`} c={c} />
+              ))}
+            </div>
+          </div>
+
+          {/* Bottom divider with label */}
+          <div className="flex items-center gap-5">
+            <span className="h-px flex-1" style={{ background: 'linear-gradient(to right, transparent, rgba(43,128,240,0.4))' }} />
+            <span className="label-overline whitespace-nowrap">More than 15 brands</span>
+            <span className="h-px flex-1" style={{ background: 'linear-gradient(to left, transparent, rgba(43,128,240,0.4))' }} />
           </div>
         </div>
       </section>

@@ -109,6 +109,45 @@ export const defaults: Record<string, unknown> = {
   footer: {
     tagline: 'AI-first marketing and high-performance software for ambitious businesses that want to lead.',
     copyright: 'MetLink. All rights reserved.',
+    columns: [
+      {
+        heading: 'Services',
+        links: [
+          { label: 'Digital Marketing', href: '/services/digital-marketing' },
+          { label: 'Creative Media',    href: '/services/creative-media' },
+          { label: 'AI Automation',     href: '/services/ai-automation' },
+          { label: 'Software Dev',      href: '/services/software-development' },
+        ],
+      },
+      {
+        heading: 'Solutions',
+        links: [
+          { label: 'Performance Marketing', href: '/services/digital-marketing/performance-marketing' },
+          { label: 'SEO & Content',         href: '/services/digital-marketing/seo-content' },
+          { label: 'Web Development',       href: '/services/software-development/web-development' },
+          { label: 'AI Development',        href: '/services/ai-automation/ai-development' },
+          { label: 'Brand Identity',        href: '/services/creative-media/brand-identity' },
+        ],
+      },
+      {
+        heading: 'Resources',
+        links: [
+          { label: 'Blog',      href: '/blog' },
+          { label: 'Portfolio', href: '/portfolio' },
+          { label: 'Product',   href: '/product' },
+        ],
+      },
+      {
+        heading: 'Company',
+        links: [
+          { label: 'About Us',         href: '/company' },
+          { label: 'Contact',          href: '/contact' },
+          { label: 'Privacy Policy',   href: '/privacy' },
+          { label: 'Terms of Service', href: '/terms' },
+          { label: 'Cookie Policy',    href: '/cookies' },
+        ],
+      },
+    ],
   },
 
   'blog-categories': ['AI & Automation', 'Digital Marketing', 'Creative Media', 'Software Development'],
