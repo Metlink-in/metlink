@@ -509,6 +509,13 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
   const [stackPaused, setStackPaused]           = useState(false);
   const [integrationsPaused, setIntegrationsPaused] = useState(false);
   const [heroSlide, setHeroSlide]               = useState(0);
+  const whyRef = useRef<HTMLDivElement>(null);
+
+  const scrollWhy = (dir: 1 | -1) => {
+    const el = whyRef.current;
+    if (!el) return;
+    el.scrollBy({ left: el.clientWidth * 0.85 * dir, behavior: 'smooth' });
+  };
 
   // Auto-advance hero background videos one by one.
   useEffect(() => {
@@ -1051,8 +1058,8 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
 
         <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
-          {/* Header */}
-          <FadeIn className="text-center mb-16">
+          {/* Header: title left, arrows right */}
+          <FadeIn className="flex items-end justify-between gap-6 mb-12">
             <div>
               <p className="label-overline mb-5">Why MetLink</p>
               <TypewriterH2
@@ -1060,16 +1067,29 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
                 segments={[{ text: 'What sets us ' }, { text: 'apart', accent: true }]}
               />
             </div>
+            <div className="hidden sm:flex items-center gap-3 shrink-0">
+              {[ChevronLeft, ChevronRight].map((Arrow, k) => (
+                <button key={k} onClick={() => scrollWhy(k === 0 ? -1 : 1)}
+                  aria-label={k === 0 ? 'Previous' : 'Next'}
+                  className="w-11 h-11 rounded-xl flex items-center justify-center transition-all duration-200 hover:scale-105 active:scale-95"
+                  style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.12)', color: 'rgba(255,255,255,0.8)' }}
+                  onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = 'rgba(43,128,240,0.5)'; el.style.color = '#5FA8FF'; }}
+                  onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = 'rgba(255,255,255,0.12)'; el.style.color = 'rgba(255,255,255,0.8)'; }}>
+                  <Arrow className="w-5 h-5" />
+                </button>
+              ))}
+            </div>
           </FadeIn>
 
-          <StaggerChildren className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div ref={whyRef} className="no-scrollbar flex gap-5 overflow-x-auto pb-2 -mx-4 px-4 sm:mx-0 sm:px-0"
+            style={{ scrollSnapType: 'x mandatory' }}>
             {whyUsList.map((item, i) => {
               const colors = ['#2B80F0','#8B5CF6','#06B6D4','#F59E0B','#10B981','#EC4899'];
               const stats  = ['1 Team','AI-Native','Live Data','7 Days','3× ROI','10M+ Scale'];
               const color  = colors[i] || AC;
               const stat   = stats[i];
               return (
-                <StaggerItem key={item.title}>
+                <div key={item.title} className="shrink-0 w-[300px] sm:w-[340px]" style={{ scrollSnapAlign: 'start' }}>
                   <div
                     className="group relative flex flex-col rounded-2xl overflow-hidden h-full cursor-default transition-all duration-300"
                     style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)' }}
@@ -1145,10 +1165,10 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
                         style={{ background: `linear-gradient(to right, ${color}40, transparent)` }} />
                     </div>
                   </div>
-                </StaggerItem>
+                </div>
               );
             })}
-          </StaggerChildren>
+          </div>
         </div>
       </section>
 

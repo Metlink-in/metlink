@@ -91,6 +91,8 @@ button, a, [role="button"] { min-height: 44px; min-width: 44px; }
 nav button, nav a { min-height: unset; min-width: unset; }
 
 /* ── Scrollbar ── */
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
 ::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: #07111F; }
 ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
