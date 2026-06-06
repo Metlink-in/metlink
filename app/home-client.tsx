@@ -442,53 +442,15 @@ function FAQSection() {
   );
 }
 
-/* ─── Hero background videos + per-video copy ───────────────── */
+/* ─── Hero background video ─────────────────────────────────── */
 
-type HeroSlide = { v: string; h1: string; h2: string; h3: string; sub: string };
-
-const heroSlides: HeroSlide[] = [
-  { v: '/hero/1.mp4', h1: 'We Build',         h2: 'Growth Engines',   h3: 'Powered by AI',          sub: 'Full-stack marketing, creative, and software that turns ambition into measurable revenue.' },
-  { v: '/hero/2.mp4', h1: 'Marketing That',   h2: 'Performs',          h3: 'Not Just Looks Good',    sub: 'Performance marketing and SEO engineered for ROI you can actually measure.' },
-  { v: '/hero/3.mp4', h1: 'Creative That',    h2: 'Stops the Scroll',  h3: 'And Drives Conversions', sub: 'World-class brand identity, video, and UGC built for one goal — results.' },
-  { v: '/hero/4.mp4', h1: 'Intelligent',      h2: 'AI & Automation',   h3: 'Built to Scale',         sub: 'Custom AI agents and automation that run your operations around the clock.' },
-  { v: '/hero/5.mp4', h1: 'Software',         h2: 'Built to Last',     h3: 'Engineered to Scale',    sub: 'Web, mobile, and cloud applications crafted with modern, future-proof stacks.' },
-  { v: '/hero/6.mp4', h1: 'Automate',         h2: 'Everything',        h3: 'Focus on What Matters',  sub: 'Connect your tools and let smart workflows handle the busywork for you.' },
-  { v: '/hero/7.mp4', h1: "Let's Turn Ideas", h2: 'Into Execution',    h3: 'Starting Today',         sub: 'Partner with MetLink and ship your next big thing faster than you thought possible.' },
-];
-
-function HeroVideoBg({ active }: { active: number }) {
-  const refs = useRef<(HTMLVideoElement | null)[]>([]);
-
-  useEffect(() => {
-    refs.current.forEach((vid, i) => {
-      if (!vid) return;
-      if (i === active) {
-        try { vid.currentTime = 0; } catch { /* ignore */ }
-        vid.play().catch(() => { /* autoplay can be blocked; ignore */ });
-      } else {
-        vid.pause();
-      }
-    });
-  }, [active]);
-
-  return (
-    <div className="absolute inset-0 overflow-hidden">
-      {heroSlides.map((s, i) => (
-        <video
-          key={s.v}
-          ref={el => { refs.current[i] = el; }}
-          src={s.v}
-          muted
-          loop
-          playsInline
-          preload={i === active || i === (active + 1) % heroSlides.length ? 'auto' : 'none'}
-          className="absolute inset-0 w-full h-full object-cover transition-opacity duration-[1200ms] ease-in-out"
-          style={{ opacity: i === active ? 1 : 0 }}
-        />
-      ))}
-    </div>
-  );
-}
+const HERO_VIDEO = '/hero/hero.mp4';
+const heroCopy = {
+  h1:  'Intelligent',
+  h2:  'AI & Automation',
+  h3:  'Built to Scale',
+  sub: 'Custom AI agents and automation that run your operations around the clock.',
+};
 
 /* ─── Component ─────────────────────────────────────────────── */
 
@@ -498,14 +460,6 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
   const [stackVisible, setStackVisible]         = useState(true);
   const [stackPaused, setStackPaused]           = useState(false);
   const [integrationsPaused, setIntegrationsPaused] = useState(false);
-  const [heroSlide, setHeroSlide]               = useState(0);
-
-  // Auto-advance hero background videos one by one.
-  useEffect(() => {
-    const t = setInterval(() => setHeroSlide(p => (p + 1) % heroSlides.length), 6500);
-    return () => clearInterval(t);
-  }, []);
-  const slide = heroSlides[heroSlide];
 
   const hero          = cmsHero;
   const clientsList   = cmsClients;
@@ -541,8 +495,12 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
 
         {/* ── Background ── */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          {/* Cycling video background */}
-          <HeroVideoBg active={heroSlide} />
+          {/* Background video */}
+          <video
+            src={HERO_VIDEO}
+            autoPlay muted loop playsInline preload="auto"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
           {/* Dark scrim for text legibility */}
           <div className="absolute inset-0"
             style={{ background: 'linear-gradient(180deg, rgba(5,11,20,0.74) 0%, rgba(5,11,20,0.55) 38%, rgba(5,11,20,0.8) 76%, #050B14 100%)' }} />
@@ -564,23 +522,23 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
         <div className="relative z-10 flex-1 flex flex-col items-center justify-center max-w-6xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 text-center">
 
           <FadeIn delay={0.07}>
-            <h1 key={heroSlide} className="mb-5 animate-fadeInScale"
+            <h1 className="mb-5"
               style={{ fontWeight: 200, lineHeight: 0.9, letterSpacing: '-0.055em', fontSize: 'clamp(3rem,7.5vw,7rem)' }}>
-              <span style={{ color: 'rgba(255,255,255,0.9)', display: 'block' }}>{slide.h1}</span>
+              <span style={{ color: 'rgba(255,255,255,0.9)', display: 'block' }}>{heroCopy.h1}</span>
               <span style={{
                 display: 'block',
                 background: 'linear-gradient(135deg, #5FA8FF 0%, #2B80F0 40%, #1A6BD6 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
-              }}>{slide.h2}</span>
-              <span style={{ color: 'rgba(255,255,255,0.85)', display: 'block' }}>{slide.h3}</span>
+              }}>{heroCopy.h2}</span>
+              <span style={{ color: 'rgba(255,255,255,0.85)', display: 'block' }}>{heroCopy.h3}</span>
             </h1>
           </FadeIn>
 
           <FadeIn delay={0.13}>
-            <p key={heroSlide} className="mb-8 max-w-[480px] mx-auto animate-fadeInScale" style={{ color: 'rgba(255,255,255,0.55)', fontSize: '1rem', lineHeight: 1.75, fontWeight: 300 }}>
-              {slide.sub}
+            <p className="mb-8 max-w-[480px] mx-auto" style={{ color: 'rgba(255,255,255,0.55)', fontSize: '1rem', lineHeight: 1.75, fontWeight: 300 }}>
+              {heroCopy.sub}
             </p>
           </FadeIn>
 
@@ -616,15 +574,6 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
               </div>
             ))}
           </div>
-        </div>
-
-        {/* ── Video slide indicators ── */}
-        <div className="relative z-20 flex justify-center items-center gap-2 pb-7">
-          {heroSlides.map((_, i) => (
-            <button key={i} onClick={() => setHeroSlide(i)} aria-label={`Show background video ${i + 1}`}
-              className="transition-all duration-300 rounded-full cursor-pointer"
-              style={{ width: i === heroSlide ? 24 : 7, height: 7, background: i === heroSlide ? '#2B80F0' : 'rgba(255,255,255,0.3)' }} />
-          ))}
         </div>
 
       </section>
