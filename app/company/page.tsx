@@ -13,7 +13,7 @@ const defaultValues = [
 ];
 
 const defaultTeam = [
-  { name: 'Jitesh Bawaskar', role: 'Founder', specialty: 'AI Strategy & Business Development', initials: 'JB', color: '#2B80F0' },
+  { name: 'Jitesh Bawaskar', role: 'Founder', specialty: 'AI Strategy & Business Development', initials: 'JB', color: '#2B80F0', image: '/team/jitesh-bawaskar.jpg' },
 ];
 
 const defaultMilestones = [

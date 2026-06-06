@@ -10,7 +10,7 @@ const valueIcons = [Target, Eye, Heart, Globe, Award, Clock];
 interface Props {
   company: Record<string, string>;
   valuesList: { title: string; desc: string }[];
-  teamList: { name: string; role: string; specialty: string; initials: string; color: string }[];
+  teamList: { name: string; role: string; specialty: string; initials: string; color: string; image?: string }[];
   milestonesList: { year: string; event: string; desc: string }[];
   statsList: string[][];
 }
@@ -212,9 +212,16 @@ export default function CompanyClient({ company, valuesList, teamList, milestone
                     (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.06)';
                     (e.currentTarget as HTMLElement).style.boxShadow = 'none';
                   }}>
-                  <div className="w-16 h-16 mx-auto mb-4 rounded-2xl flex items-center justify-center text-lg font-black group-hover:scale-110 transition-transform"
+                  <div className="relative w-20 h-20 mx-auto mb-4 rounded-2xl overflow-hidden flex items-center justify-center text-lg font-black group-hover:scale-110 transition-transform"
                     style={{ background: `${member.color}15`, border: `1px solid ${member.color}25`, color: member.color }}>
-                    {member.initials}
+                    <span>{member.initials}</span>
+                    {member.image && (
+                      /* eslint-disable-next-line @next/next/no-img-element */
+                      <img src={member.image} alt={member.name}
+                        className="absolute inset-0 w-full h-full object-cover"
+                        style={{ objectPosition: 'center top' }}
+                        onError={e => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }} />
+                    )}
                   </div>
                   <h3 className="font-bold text-lg mb-1" style={{ color: '#FFFFFF' }}>{member.name}</h3>
                   <p className="text-sm font-medium mb-1" style={{ color: '#2B80F0' }}>{member.role}</p>
