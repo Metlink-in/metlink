@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { ArrowRight, Star, TrendingUp, Megaphone, Palette, Bot, Code, ChevronLeft, ChevronRight, Target, Users, DollarSign, Repeat } from 'lucide-react';
+import { ArrowRight, Star, Megaphone, Palette, Bot, Code, ChevronLeft, ChevronRight, Target, Users, DollarSign, Repeat } from 'lucide-react';
 import { FadeIn, StaggerChildren, StaggerItem } from '@/components/fade-in';
 
 /* ─── Brand icons ───────────────────────────────────────────── */
@@ -558,21 +558,6 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
           {/* Bottom fade */}
           <div className="absolute bottom-0 inset-x-0 h-48"
             style={{ background: 'linear-gradient(to top, #020202 0%, transparent 100%)' }} />
-        </div>
-
-        {/* ── Floating card, right bottom (ROAS metric) ── */}
-        <div className="absolute bottom-[26%] right-[4%] w-[200px] hidden xl:block animate-float" style={{ zIndex: 20, animationDelay: '1s' }}>
-          <div className="p-4 rounded-2xl"
-            style={{ background: 'rgba(2,2,2,0.75)', border: '1px solid rgba(255,255,255,0.09)', boxShadow: '0 32px 80px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.07)', backdropFilter: 'blur(28px)' }}>
-            <div className="flex items-center gap-2 mb-3">
-              <div className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ background: 'rgba(43,128,240,0.15)', border: '1px solid rgba(43,128,240,0.25)' }}>
-                <TrendingUp className="w-3.5 h-3.5" style={{ color: '#4ADE80' }} />
-              </div>
-              <span className="text-[10px] uppercase tracking-[0.18em]" style={{ color: 'rgba(255,255,255,0.3)' }}>ROAS</span>
-            </div>
-            <p style={{ color: '#4ADE80', fontSize: '1.9rem', fontWeight: 300, letterSpacing: '-0.04em', lineHeight: 1 }}>4.2×</p>
-            <p className="text-[11px] mt-1" style={{ color: 'rgba(255,255,255,0.3)' }}>avg. return on ad spend</p>
-          </div>
         </div>
 
         {/* ── Main content ── */}
