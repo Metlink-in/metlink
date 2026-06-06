@@ -514,7 +514,9 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
   const scrollWhy = (dir: 1 | -1) => {
     const el = whyRef.current;
     if (!el) return;
-    el.scrollBy({ left: el.clientWidth * 0.85 * dir, behavior: 'smooth' });
+    const card = el.firstElementChild as HTMLElement | null;
+    const step = card ? card.offsetWidth + 20 : el.clientWidth * 0.85; // 20 = gap-5
+    el.scrollBy({ left: step * dir, behavior: 'smooth' });
   };
 
   // Auto-advance hero background videos one by one.
@@ -1088,7 +1090,7 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
               const color  = '#2B80F0';
               const stat   = stats[i];
               return (
-                <div key={item.title} className="shrink-0 w-[300px] sm:w-[340px]" style={{ scrollSnapAlign: 'start' }}>
+                <div key={item.title} className="shrink-0 w-[82%] sm:w-[47%] lg:w-[38%]" style={{ scrollSnapAlign: 'start' }}>
                   <div
                     className="group relative flex flex-col rounded-2xl overflow-hidden h-full cursor-default transition-all duration-300"
                     style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)' }}
