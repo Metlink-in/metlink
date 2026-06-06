@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { ArrowRight, Star, Megaphone, Palette, Bot, Code, ChevronLeft, ChevronRight, Target, Users, DollarSign, Repeat } from 'lucide-react';
+import { ArrowRight, Star, Megaphone, Palette, Bot, Code, ChevronLeft, ChevronRight, Target, Users, DollarSign, Repeat, CalendarDays, Video, FileText, Rocket } from 'lucide-react';
 import { FadeIn, StaggerChildren, StaggerItem } from '@/components/fade-in';
 
 /* ─── Brand icons ───────────────────────────────────────────── */
@@ -452,6 +452,15 @@ const heroCopy = {
   sub: 'From lead generation to operations automation, we build intelligent systems that increase revenue and reduce costs.',
 };
 
+/* ─── Get Started steps ─────────────────────────────────────── */
+
+const getStartedSteps = [
+  { Icon: CalendarDays, title: '1. Contact Us',        desc: 'Fill out the contact form protected by NDA, book a calendar and schedule a Zoom Meeting with our experts.' },
+  { Icon: Video,        title: '2. Get a Consultation', desc: 'Get on a call with our team to know the feasibility of your project idea.' },
+  { Icon: FileText,     title: '3. Get a Cost Estimate', desc: 'Based on the project requirements, we share a project proposal with budget and timeline estimates.' },
+  { Icon: Rocket,       title: '4. Project Kickoff',    desc: 'Once the project is signed, we bring together a team from a range of disciplines to kick start your project.' },
+];
+
 function HeroVideoBg({ active }: { active: number }) {
   const refs = useRef<(HTMLVideoElement | null)[]>([]);
 
@@ -488,7 +497,7 @@ function HeroVideoBg({ active }: { active: number }) {
 
 /* ─── Component ─────────────────────────────────────────────── */
 
-export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWhyUs, cmsSteps }: Props) {
+export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWhyUs }: Props) {
   const [activeService, setActiveService]       = useState('01');
   const [activeStack, setActiveStack]           = useState(0);
   const [stackVisible, setStackVisible]         = useState(true);
@@ -506,7 +515,6 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
   const clientsList   = cmsClients;
   const testimonialsList = cmsTestimonials;
   const whyUsList     = cmsWhyUs;
-  const stepsList     = cmsSteps;
 
   useEffect(() => {
     if (stackPaused) return;
@@ -875,188 +883,29 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
       </section>
       )}
 
-      {/* ══ PROCESS ════════════════════════════════════════════ */}
-      <section id="process" className="relative py-24 sm:py-32 overflow-hidden" style={{ background: '#000000', borderTop: '1px solid rgba(255,255,255,0.08)', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
-
-        {/* Circuit grid bg */}
-        <div className="absolute inset-0 pointer-events-none" style={{
-          backgroundImage: 'linear-gradient(rgba(43,128,240,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(43,128,240,0.04) 1px, transparent 1px)',
-          backgroundSize: '48px 48px',
-        }} />
-        {/* Centre radial glow */}
-        <div className="absolute inset-0 pointer-events-none" style={{
-          background: 'radial-gradient(ellipse 80% 60% at 50% 50%, rgba(43,128,240,0.09) 0%, transparent 70%)',
-        }} />
-        {/* Scanlines overlay */}
-        <div className="absolute inset-0 pointer-events-none" style={{
-          backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.07) 3px, rgba(0,0,0,0.07) 4px)',
-        }} />
-
-        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-
-          {/* Header, centred */}
-          <FadeIn className="text-center mb-20">
-            <p className="label-overline mb-5">How We Work</p>
-            <TypewriterH2
-              style={{ color: 'rgba(255,255,255,0.92)' }}
-              segments={[{ text: 'From idea to ' }, { text: 'live product', accent: true }]}
-            />
-            <p className="mt-5 max-w-lg mx-auto text-base font-light" style={{ color: 'rgba(255,255,255,0.40)', lineHeight: 1.7 }}>
-              A focused three-phase process designed for speed, quality, and compounding results.
-            </p>
+      {/* ══ GET STARTED ════════════════════════════════════════ */}
+      <section id="process" className="py-20 sm:py-28" style={{ background: '#FFFFFF' }}>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <FadeIn className="text-center mb-16">
+            <h2 style={{ fontFamily: 'Georgia, "Times New Roman", serif', fontWeight: 700, color: '#0B1628', fontSize: 'clamp(2rem,4vw,2.75rem)', letterSpacing: '-0.01em' }}>
+              Get Started Today
+            </h2>
           </FadeIn>
 
-          {/* Step cards, icon 64px at p-8 (32px) padding → centre at 32+32 = 64px */}
-          <div className="relative grid md:grid-cols-3 gap-6">
-
-            {/* Glowing connector line at icon centres */}
-            <div className="absolute hidden md:block"
-              style={{ top: 64, left: 'calc(33.33% + 26px)', right: 'calc(33.33% + 26px)', height: 2,
-                background: 'linear-gradient(to right, rgba(43,128,240,0.7), rgba(95,168,255,0.5) 50%, rgba(43,128,240,0.7))',
-                boxShadow: '0 0 10px rgba(43,128,240,0.4)',
-              }} />
-            {/* Node circles at 64px centre → top = 64 - 10 = 54 */}
-            {[0,1].map(k => (
-              <div key={k} className="absolute hidden md:flex items-center justify-center"
-                style={{ top: 54, left: k === 0 ? 'calc(33.33% - 10px)' : 'calc(66.66% - 10px)', width: 20, height: 20,
-                  background: '#000000', border: '1.5px solid rgba(43,128,240,0.7)', borderRadius: '50%',
-                  boxShadow: '0 0 12px rgba(43,128,240,0.5)',
-                }}>
-                <ArrowRight className="w-3 h-3" style={{ color: '#5FA8FF' }} />
-              </div>
-            ))}
-
-            {stepsList.map((step, i) => {
-              const stepSvgs = [
-                /* Discover & Define, magnifying glass + target */
-                <svg key="d" width="26" height="26" viewBox="0 0 26 26" fill="none">
-                  <circle cx="11" cy="11" r="7" stroke="#2B80F0" strokeWidth="2.2"/>
-                  <circle cx="11" cy="11" r="3.5" fill="#2B80F0" fillOpacity="0.25" stroke="#5FA8FF" strokeWidth="1.4"/>
-                  <circle cx="11" cy="11" r="1.2" fill="#5FA8FF"/>
-                  <line x1="16.5" y1="16.5" x2="23" y2="23" stroke="#2B80F0" strokeWidth="2.4" strokeLinecap="round"/>
-                </svg>,
-                /* Build & Integrate, circuit/code chip */
-                <svg key="b" width="26" height="26" viewBox="0 0 26 26" fill="none">
-                  <rect x="7" y="7" width="12" height="12" rx="3" fill="#1A6BD6" fillOpacity="0.3" stroke="#2B80F0" strokeWidth="1.8"/>
-                  <rect x="10" y="10" width="6" height="6" rx="1.5" fill="#5FA8FF"/>
-                  <line x1="13" y1="2" x2="13" y2="7" stroke="#2B80F0" strokeWidth="1.8" strokeLinecap="round"/>
-                  <line x1="13" y1="19" x2="13" y2="24" stroke="#2B80F0" strokeWidth="1.8" strokeLinecap="round"/>
-                  <line x1="2" y1="13" x2="7" y2="13" stroke="#2B80F0" strokeWidth="1.8" strokeLinecap="round"/>
-                  <line x1="19" y1="13" x2="24" y2="13" stroke="#2B80F0" strokeWidth="1.8" strokeLinecap="round"/>
-                </svg>,
-                /* Scale & Optimize, rocket */
-                <svg key="s" width="26" height="26" viewBox="0 0 26 26" fill="none">
-                  <path d="M13 3C13 3 20 6 20 14L16 18H10L6 14C6 6 13 3 13 3Z" fill="#1A6BD6" fillOpacity="0.35" stroke="#2B80F0" strokeWidth="1.8" strokeLinejoin="round"/>
-                  <circle cx="13" cy="12" r="2.5" fill="#5FA8FF"/>
-                  <path d="M10 18L8 23L13 21L18 23L16 18" fill="#2B80F0" fillOpacity="0.5" stroke="#5FA8FF" strokeWidth="1.2" strokeLinejoin="round"/>
-                </svg>,
-              ];
-              const highlights = [
-                ['Strategy & goal mapping', 'AI opportunity audit', 'Scope & timeline'],
-                ['Rapid prototyping', 'System integration', 'Testing & QA'],
-                ['Live performance tracking', 'Model retraining', 'Continuous growth'],
-              ][i];
-              return (
-                <FadeIn key={step.num} delay={i * 0.12}>
-                  <div
-                    className="relative group flex flex-col rounded-2xl transition-all duration-300 h-full"
-                    style={{
-                      background: 'rgba(12,12,12,0.95)',
-                      border: '1px solid rgba(43,128,240,0.18)',
-                      boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.04)',
-                    }}
-                    onMouseEnter={e => {
-                      const el = e.currentTarget as HTMLElement;
-                      el.style.borderColor = 'rgba(43,128,240,0.55)';
-                      el.style.background  = 'rgba(10,18,38,0.98)';
-                      el.style.transform   = 'translateY(-6px)';
-                      el.style.boxShadow   = '0 28px 60px rgba(43,128,240,0.18), inset 0 1px 0 rgba(255,255,255,0.06), 0 0 0 1px rgba(43,128,240,0.15)';
-                    }}
-                    onMouseLeave={e => {
-                      const el = e.currentTarget as HTMLElement;
-                      el.style.borderColor = 'rgba(43,128,240,0.18)';
-                      el.style.background  = 'rgba(12,12,12,0.95)';
-                      el.style.transform   = 'translateY(0)';
-                      el.style.boxShadow   = 'inset 0 1px 0 rgba(255,255,255,0.04)';
-                    }}
-                  >
-                    {/* Glowing top border */}
-                    <div className="absolute inset-x-0 top-0 h-px rounded-t-2xl"
-                      style={{ background: 'linear-gradient(to right, transparent, rgba(43,128,240,0.9) 50%, transparent)' }} />
-
-                    {/* Corner bracket accents, TL */}
-                    <div className="absolute top-3 left-3 w-5 h-5 opacity-50 group-hover:opacity-100 transition-opacity duration-300"
-                      style={{ borderTop: '1.5px solid #2B80F0', borderLeft: '1.5px solid #2B80F0', borderRadius: '2px 0 0 0' }} />
-                    {/* TR */}
-                    <div className="absolute top-3 right-3 w-5 h-5 opacity-50 group-hover:opacity-100 transition-opacity duration-300"
-                      style={{ borderTop: '1.5px solid #2B80F0', borderRight: '1.5px solid #2B80F0', borderRadius: '0 2px 0 0' }} />
-                    {/* BL */}
-                    <div className="absolute bottom-3 left-3 w-5 h-5 opacity-0 group-hover:opacity-60 transition-opacity duration-500"
-                      style={{ borderBottom: '1.5px solid #5FA8FF', borderLeft: '1.5px solid #5FA8FF', borderRadius: '0 0 0 2px' }} />
-                    {/* BR */}
-                    <div className="absolute bottom-3 right-3 w-5 h-5 opacity-0 group-hover:opacity-60 transition-opacity duration-500"
-                      style={{ borderBottom: '1.5px solid #5FA8FF', borderRight: '1.5px solid #5FA8FF', borderRadius: '0 0 2px 0' }} />
-
-
-                    <div className="relative flex flex-col flex-1 p-8">
-
-                      {/* Icon, 64px so connector line centres at 32+32=64px */}
-                      <div className="w-16 h-16 rounded-2xl flex items-center justify-center mb-5 transition-all duration-300 group-hover:scale-110"
-                        style={{
-                          background: 'rgba(43,128,240,0.12)',
-                          border: '1px solid rgba(43,128,240,0.45)',
-                          boxShadow: '0 0 0 5px rgba(43,128,240,0.07), 0 0 22px rgba(43,128,240,0.2)',
-                        }}>
-                        {stepSvgs[i]}
-                      </div>
-
-                      {/* Bracket-style phase label */}
-                      <div className="flex items-center gap-1.5 mb-3">
-                        <span style={{ color: 'rgba(43,128,240,0.45)', fontFamily: 'monospace', fontSize: 11 }}>[</span>
-                        <span className="text-[10px] font-bold uppercase tracking-[0.35em]"
-                          style={{ color: '#2B80F0', fontFamily: 'monospace' }}>
-                          PHASE {step.num}
-                        </span>
-                        <span style={{ color: 'rgba(43,128,240,0.45)', fontFamily: 'monospace', fontSize: 11 }}>]</span>
-                      </div>
-
-                      {/* Title */}
-                      <h3 className="text-2xl font-light mb-3 leading-tight"
-                        style={{ color: '#FFFFFF', letterSpacing: '-0.03em' }}>
-                        {step.title}
-                      </h3>
-
-                      {/* Description */}
-                      <p className="text-sm leading-relaxed mb-7 flex-1"
-                        style={{ color: 'rgba(255,255,255,0.40)', fontWeight: 300, lineHeight: 1.8 }}>
-                        {step.desc}
-                      </p>
-
-                      {/* Circuit-trace divider */}
-                      <div className="flex items-center gap-2 mb-5">
-                        <div className="flex-1 h-px" style={{ background: 'linear-gradient(to right, rgba(43,128,240,0.35), transparent)' }} />
-                        <div className="w-1 h-1 rounded-full" style={{ background: 'rgba(43,128,240,0.6)', boxShadow: '0 0 4px #2B80F0' }} />
-                        <div className="w-3 h-px" style={{ background: 'rgba(43,128,240,0.3)' }} />
-                        <div className="w-1 h-1 rounded-sm rotate-45" style={{ background: 'rgba(43,128,240,0.4)' }} />
-                      </div>
-
-                      {/* Highlights */}
-                      <ul className="space-y-3">
-                        {highlights.map(h => (
-                          <li key={h} className="flex items-center gap-3 text-[13px]"
-                            style={{ color: 'rgba(255,255,255,0.52)', fontWeight: 300 }}>
-                            <span className="shrink-0 transition-all duration-200 group-hover:scale-125"
-                              style={{ width: 6, height: 6, borderRadius: 2, background: '#2B80F0', boxShadow: '0 0 6px rgba(43,128,240,0.7)', display: 'block', transform: 'rotate(45deg)' }} />
-                            {h}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
+          <StaggerChildren className="grid sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12">
+            {getStartedSteps.map(({ Icon, title, desc }) => (
+              <StaggerItem key={title}>
+                <div className="flex flex-col">
+                  <div className="flex items-center justify-center mb-7"
+                    style={{ width: 64, height: 64, border: '1.5px solid #2B80F0', borderRadius: 10 }}>
+                    <Icon className="w-7 h-7" strokeWidth={1.6} style={{ color: '#2B80F0' }} />
                   </div>
-                </FadeIn>
-              );
-            })}
-          </div>
+                  <h3 className="mb-4" style={{ color: '#0B1628', fontWeight: 700, fontSize: '1.2rem' }}>{title}</h3>
+                  <p style={{ color: '#3F4754', fontSize: '1rem', lineHeight: 1.7 }}>{desc}</p>
+                </div>
+              </StaggerItem>
+            ))}
+          </StaggerChildren>
         </div>
       </section>
 
