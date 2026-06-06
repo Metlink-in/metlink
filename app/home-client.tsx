@@ -410,6 +410,7 @@ function FAQSection() {
                     {faq.q}
                   </span>
                   <span
+                    onClick={e => { if (isOpen(i)) { e.stopPropagation(); setPinned(null); setHovered(null); } }}
                     className="shrink-0 transition-transform duration-300 flex items-center justify-center"
                     style={{ transform: isOpen(i) ? 'rotate(45deg)' : 'rotate(0deg)', color: '#2B80F0' }}
                   >
