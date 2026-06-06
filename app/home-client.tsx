@@ -477,7 +477,7 @@ function HeroVideoBg({ active }: { active: number }) {
           loop
           playsInline
           preload="auto"
-          className="absolute inset-0 w-full h-full object-cover transition-opacity duration-[1200ms] ease-in-out"
+          className="absolute inset-0 w-full h-full object-cover transition-opacity duration-[2000ms] ease-in-out"
           style={{ opacity: i === active ? 1 : 0 }}
         />
       ))}
@@ -497,7 +497,7 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
 
   // Auto-advance hero background videos one by one.
   useEffect(() => {
-    const t = setInterval(() => setHeroSlide(p => (p + 1) % heroSlides.length), 6500);
+    const t = setInterval(() => setHeroSlide(p => (p + 1) % heroSlides.length), 8500);
     return () => clearInterval(t);
   }, []);
   const slide = heroSlides[heroSlide];
@@ -559,7 +559,7 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
         <div className="relative z-10 flex-1 flex flex-col items-center justify-center max-w-6xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 text-center">
 
           <FadeIn delay={0.07}>
-            <h1 key={heroSlide} className="mb-5 animate-fadeInScale"
+            <h1 key={heroSlide} className="mb-5 animate-heroText"
               style={{ fontWeight: 200, lineHeight: 1.08, letterSpacing: '-0.04em', fontSize: 'clamp(2.75rem,7vw,6.5rem)' }}>
               <span style={{ color: 'rgba(255,255,255,0.92)', display: 'block', paddingBottom: '0.04em' }}>{slide.h1}</span>
               <span style={{
@@ -575,7 +575,7 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
           </FadeIn>
 
           <FadeIn delay={0.13}>
-            <p key={heroSlide} className="mb-8 max-w-[480px] mx-auto animate-fadeInScale" style={{ color: 'rgba(255,255,255,0.55)', fontSize: '1rem', lineHeight: 1.75, fontWeight: 300 }}>
+            <p key={heroSlide} className="mb-8 max-w-[480px] mx-auto animate-heroText" style={{ color: 'rgba(255,255,255,0.55)', fontSize: '1rem', lineHeight: 1.75, fontWeight: 300, animationDelay: '0.15s', opacity: 0, animationFillMode: 'forwards' }}>
               {slide.sub}
             </p>
           </FadeIn>
