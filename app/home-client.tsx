@@ -442,14 +442,15 @@ function FAQSection() {
   );
 }
 
-/* ─── Hero background videos + per-video copy ───────────────── */
+/* ─── Hero background videos + copy ─────────────────────────── */
 
-type HeroSlide = { v: string; h1: string; h2: string; h3: string; sub: string };
+const heroVideos = ['/hero/hero.mp4', '/hero/1.mp4'];
 
-const heroSlides: HeroSlide[] = [
-  { v: '/hero/hero.mp4', h1: 'Intelligent', h2: 'AI & Automation', h3: 'Built to Scale', sub: 'Custom AI agents and automation that run your operations around the clock.' },
-  { v: '/hero/1.mp4',    h1: 'We Build',    h2: 'Growth Engines',  h3: 'Powered by AI',  sub: 'Full-stack marketing, creative, and software that turns ambition into measurable revenue.' },
-];
+const heroCopy = {
+  h1:  'AI Systems That',
+  h2:  'Generate Growth',
+  sub: 'From lead generation to operations automation, we build intelligent systems that increase revenue and reduce costs.',
+};
 
 function HeroVideoBg({ active }: { active: number }) {
   const refs = useRef<(HTMLVideoElement | null)[]>([]);
@@ -468,11 +469,11 @@ function HeroVideoBg({ active }: { active: number }) {
 
   return (
     <div className="absolute inset-0 overflow-hidden">
-      {heroSlides.map((s, i) => (
+      {heroVideos.map((src, i) => (
         <video
-          key={s.v}
+          key={src}
           ref={el => { refs.current[i] = el; }}
-          src={s.v}
+          src={src}
           muted
           loop
           playsInline
@@ -497,10 +498,9 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
 
   // Auto-advance hero background videos one by one.
   useEffect(() => {
-    const t = setInterval(() => setHeroSlide(p => (p + 1) % heroSlides.length), 8500);
+    const t = setInterval(() => setHeroSlide(p => (p + 1) % heroVideos.length), 8500);
     return () => clearInterval(t);
   }, []);
-  const slide = heroSlides[heroSlide];
 
   const hero          = cmsHero;
   const clientsList   = cmsClients;
@@ -559,9 +559,9 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
         <div className="relative z-10 flex-1 flex flex-col items-center justify-center max-w-6xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 text-center">
 
           <FadeIn delay={0.07}>
-            <h1 key={heroSlide} className="mb-5 animate-heroText"
+            <h1 className="mb-5"
               style={{ fontWeight: 200, lineHeight: 1.08, letterSpacing: '-0.04em', fontSize: 'clamp(2.75rem,7vw,6.5rem)' }}>
-              <span style={{ color: 'rgba(255,255,255,0.92)', display: 'block', paddingBottom: '0.04em' }}>{slide.h1}</span>
+              <span style={{ color: 'rgba(255,255,255,0.92)', display: 'block', paddingBottom: '0.04em' }}>{heroCopy.h1}</span>
               <span style={{
                 display: 'block',
                 paddingBottom: '0.08em',
@@ -569,14 +569,13 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
-              }}>{slide.h2}</span>
-              <span style={{ color: 'rgba(255,255,255,0.88)', display: 'block' }}>{slide.h3}</span>
+              }}>{heroCopy.h2}</span>
             </h1>
           </FadeIn>
 
           <FadeIn delay={0.13}>
-            <p key={heroSlide} className="mb-8 max-w-[480px] mx-auto animate-heroText" style={{ color: 'rgba(255,255,255,0.55)', fontSize: '1rem', lineHeight: 1.75, fontWeight: 300, animationDelay: '0.15s', opacity: 0, animationFillMode: 'forwards' }}>
-              {slide.sub}
+            <p className="mb-8 max-w-[560px] mx-auto" style={{ color: 'rgba(255,255,255,0.6)', fontSize: '1rem', lineHeight: 1.75, fontWeight: 300 }}>
+              {heroCopy.sub}
             </p>
           </FadeIn>
 
@@ -616,7 +615,7 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
 
         {/* ── Video slide indicators ── */}
         <div className="relative z-20 flex justify-center items-center gap-2 pb-7">
-          {heroSlides.map((_, i) => (
+          {heroVideos.map((_, i) => (
             <button key={i} onClick={() => setHeroSlide(i)} aria-label={`Show background video ${i + 1}`}
               className="transition-all duration-300 rounded-full cursor-pointer"
               style={{ width: i === heroSlide ? 24 : 7, height: 7, background: i === heroSlide ? '#2B80F0' : 'rgba(255,255,255,0.3)' }} />
