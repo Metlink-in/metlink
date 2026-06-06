@@ -509,15 +509,6 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
   const [stackPaused, setStackPaused]           = useState(false);
   const [integrationsPaused, setIntegrationsPaused] = useState(false);
   const [heroSlide, setHeroSlide]               = useState(0);
-  const whyRef = useRef<HTMLDivElement>(null);
-
-  const scrollWhy = (dir: 1 | -1) => {
-    const el = whyRef.current;
-    if (!el) return;
-    const card = el.firstElementChild as HTMLElement | null;
-    const step = card ? card.offsetWidth + 20 : el.clientWidth * 0.85; // 20 = gap-5
-    el.scrollBy({ left: step * dir, behavior: 'smooth' });
-  };
 
   // Auto-advance hero background videos one by one.
   useEffect(() => {
@@ -1060,126 +1051,73 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
 
         <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
-          {/* Header: title left, arrows right */}
-          <FadeIn className="flex items-end justify-between gap-6 mb-12">
-            <div>
-              <p className="label-overline mb-5">Why MetLink</p>
-              <TypewriterH2
-                style={{ color: 'rgba(255,255,255,0.92)' }}
-                segments={[{ text: 'What sets us ' }, { text: 'apart', accent: true }]}
-              />
-            </div>
-            <div className="hidden sm:flex items-center gap-3 shrink-0">
-              {[ChevronLeft, ChevronRight].map((Arrow, k) => (
-                <button key={k} onClick={() => scrollWhy(k === 0 ? -1 : 1)}
-                  aria-label={k === 0 ? 'Previous' : 'Next'}
-                  className="w-11 h-11 rounded-xl flex items-center justify-center transition-all duration-200 hover:scale-105 active:scale-95"
-                  style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.12)', color: 'rgba(255,255,255,0.8)' }}
-                  onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = 'rgba(43,128,240,0.5)'; el.style.color = '#5FA8FF'; }}
-                  onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = 'rgba(255,255,255,0.12)'; el.style.color = 'rgba(255,255,255,0.8)'; }}>
-                  <Arrow className="w-5 h-5" />
-                </button>
-              ))}
-            </div>
+          {/* Header, centred */}
+          <FadeIn className="text-center mb-16">
+            <p className="label-overline mb-5">Why MetLink</p>
+            <TypewriterH2
+              style={{ color: 'rgba(255,255,255,0.92)' }}
+              segments={[{ text: 'What sets us ' }, { text: 'apart', accent: true }]}
+            />
+            <p className="mt-5 max-w-lg mx-auto text-base font-light" style={{ color: 'rgba(255,255,255,0.40)', lineHeight: 1.7 }}>
+              One accountable team, AI-native execution, and results you can measure.
+            </p>
           </FadeIn>
 
-          <div ref={whyRef} className="no-scrollbar flex gap-5 overflow-x-auto pb-2 -mx-4 px-4 sm:mx-0 sm:px-0"
-            style={{ scrollSnapType: 'x mandatory' }}>
+          {/* Divided columns */}
+          <StaggerChildren className="grid sm:grid-cols-2 lg:grid-cols-3 rounded-2xl overflow-hidden border-t border-l border-white/[0.08]">
             {whyUsList.map((item, i) => {
-              const stats  = ['1 Team','AI-Native','Live Data','7 Days','3× ROI','10M+ Scale'];
-              const color  = '#2B80F0';
-              const stat   = stats[i];
+              const color = '#2B80F0';
+              const icon = ['/tools/hubspot.svg','/tools/openai.svg','/tools/ga4.svg','/tools/vercel.svg','/tools/google-ads.svg','/tools/kubernetes.svg'][i];
               return (
-                <div key={item.title} className="shrink-0 w-[82%] sm:w-[47%] lg:w-[38%]" style={{ scrollSnapAlign: 'start' }}>
+                <StaggerItem key={item.title}>
                   <div
-                    className="group relative flex flex-col rounded-2xl overflow-hidden h-full cursor-default transition-all duration-300"
-                    style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)' }}
+                    className="group relative h-full p-8 overflow-hidden transition-colors duration-300"
+                    style={{ borderRight: '1px solid rgba(255,255,255,0.08)', borderBottom: '1px solid rgba(255,255,255,0.08)' }}
                     onMouseMove={e => {
                       const el = e.currentTarget as HTMLElement;
                       const r = el.getBoundingClientRect();
                       el.style.setProperty('--mx', `${e.clientX - r.left}px`);
                       el.style.setProperty('--my', `${e.clientY - r.top}px`);
                     }}
-                    onMouseEnter={e => {
-                      const el = e.currentTarget as HTMLElement;
-                      el.style.borderColor = `${color}55`;
-                      el.style.background  = `${color}0A`;
-                      el.style.transform   = 'translateY(-5px)';
-                      el.style.boxShadow   = `0 24px 60px ${color}1F`;
-                    }}
-                    onMouseLeave={e => {
-                      const el = e.currentTarget as HTMLElement;
-                      el.style.borderColor = 'rgba(255,255,255,0.08)';
-                      el.style.background  = 'rgba(255,255,255,0.03)';
-                      el.style.transform   = 'translateY(0)';
-                      el.style.boxShadow   = 'none';
-                    }}
                   >
                     {/* Mouse-following blue reflection */}
                     <div className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                      style={{ background: `radial-gradient(280px circle at var(--mx,50%) var(--my,0%), ${color}38, transparent 60%)` }} />
+                      style={{ background: `radial-gradient(240px circle at var(--mx,50%) var(--my,30%), ${color}22, transparent 60%)` }} />
 
-                    {/* Top gradient bar, appears on hover */}
-                    <div className="h-[2px] w-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                      style={{ background: `linear-gradient(to right, transparent, ${color}, transparent)` }} />
-
-                    <div className="flex flex-col flex-1 p-7">
-
-                      {/* Top row: icon + stat badge */}
-                      <div className="flex items-start justify-between mb-6">
-                        <div
-                          className="w-12 h-12 rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:scale-110"
-                          style={{
-                            background: `${color}18`,
-                            border: `1px solid ${color}35`,
-                            boxShadow: `0 4px 20px ${color}20`,
-                          }}
-                        >
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img
-                            src={[
-                              '/tools/hubspot.svg',
-                              '/tools/openai.svg',
-                              '/tools/ga4.svg',
-                              '/tools/vercel.svg',
-                              '/tools/google-ads.svg',
-                              '/tools/kubernetes.svg',
-                            ][i]}
-                            alt={item.title}
-                            width={28}
-                            height={28}
-                            style={{ objectFit: 'contain', filter: 'brightness(1.1)' }}
-                          />
-                        </div>
-                        <span
-                          className="text-[11px] font-bold px-2.5 py-1 rounded-full"
-                          style={{ background: `${color}14`, border: `1px solid ${color}28`, color }}
-                        >
-                          {stat}
-                        </span>
+                    <div className="relative">
+                      {/* Icon tile */}
+                      <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-105"
+                        style={{ background: `${color}14`, border: `1px solid ${color}30` }}>
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src={icon} alt={item.title} width={28} height={28} style={{ objectFit: 'contain', filter: 'brightness(1.1)' }} />
                       </div>
 
                       {/* Title */}
-                      <h3 className="text-[1.2rem] font-semibold mb-3 leading-snug"
+                      <h3 className="text-[1.25rem] font-semibold mb-3 leading-snug"
                         style={{ color: 'rgba(255,255,255,0.92)', letterSpacing: '-0.02em' }}>
                         {item.title}
                       </h3>
 
                       {/* Description */}
-                      <p className="text-sm leading-relaxed flex-1"
+                      <p className="text-sm leading-relaxed"
                         style={{ color: 'rgba(255,255,255,0.50)', fontWeight: 300 }}>
                         {item.desc}
                       </p>
-
-                      {/* Bottom accent line */}
-                      <div className="mt-6 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                        style={{ background: `linear-gradient(to right, ${color}40, transparent)` }} />
                     </div>
                   </div>
-                </div>
+                </StaggerItem>
               );
             })}
-          </div>
+          </StaggerChildren>
+
+          {/* Bottom CTA */}
+          <FadeIn className="flex justify-center mt-12">
+            <Link href="/services" className="group inline-flex items-center gap-2 btn-outline">
+              View All Services
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+            </Link>
+          </FadeIn>
+
         </div>
       </section>
 
