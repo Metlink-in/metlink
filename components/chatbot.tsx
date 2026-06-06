@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { X, Send, Bot, Sparkles, Minimize2 } from 'lucide-react';
+import { X, Send, MessageSquare, Sparkles, Minimize2 } from 'lucide-react';
 
 const QUICK_REPLIES = [
   'What AI services do you offer?',
@@ -51,14 +51,14 @@ export function ChatBot() {
       {/* Toggle button */}
       <button
         onClick={() => setOpen(v => !v)}
-        className="fixed bottom-6 right-6 z-50 rounded-2xl flex items-center justify-center shadow-lg transition-all duration-300 hover:scale-110 active:scale-95 group overflow-hidden"
-        style={{ width: 52, height: 52, background: '#2B80F0', boxShadow: '0 6px 24px rgba(43,128,240,0.35)' }}
+        className="fixed bottom-6 right-6 z-50 rounded-full flex items-center justify-center shadow-lg transition-all duration-300 hover:scale-110 active:scale-95 group overflow-hidden"
+        style={{ width: 56, height: 56, background: '#2B80F0', boxShadow: '0 6px 24px rgba(43,128,240,0.35)' }}
         aria-label="Chat with MetLink AI"
       >
         <div className="absolute inset-0 bg-black/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
         {open
           ? <X className="relative z-10 w-5 h-5 text-white" />
-          : <Bot className="relative z-10 w-5 h-5 text-white" />
+          : <MessageSquare className="relative z-10 w-6 h-6 text-white" fill="white" strokeWidth={1.5} />
         }
         {!open && (
           <span className="absolute top-1 right-1 w-3 h-3 rounded-full bg-green-400 border-2 border-white animate-pulse" />
@@ -82,9 +82,9 @@ export function ChatBot() {
             <div className="absolute top-0 left-0 right-0 h-0.5"
               style={{ background: 'linear-gradient(90deg, #2B80F0, #5FA8FF, #2B80F0)' }} />
 
-            <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 text-white"
+            <div className="w-10 h-10 rounded-full flex items-center justify-center shrink-0 text-white"
               style={{ background: '#2B80F0', boxShadow: '0 4px 14px rgba(43,128,240,0.3)' }}>
-              <Bot className="w-5 h-5" />
+              <MessageSquare className="w-5 h-5" fill="white" strokeWidth={1.5} />
             </div>
 
             <div className="flex-1">
@@ -111,9 +111,9 @@ export function ChatBot() {
             {messages.map((m, i) => (
               <div key={i} className={`flex items-end gap-2 ${m.role === 'user' ? 'flex-row-reverse' : 'flex-row'}`}>
                 {m.role === 'bot' && (
-                  <div className="w-6 h-6 rounded-lg flex items-center justify-center shrink-0 mb-1 text-white"
+                  <div className="w-6 h-6 rounded-full flex items-center justify-center shrink-0 mb-1 text-white"
                     style={{ background: '#2B80F0' }}>
-                    <Bot className="w-3 h-3" />
+                    <MessageSquare className="w-3 h-3" fill="white" strokeWidth={1.5} />
                   </div>
                 )}
                 <div
