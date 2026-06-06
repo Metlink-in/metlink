@@ -1084,21 +1084,26 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
           <div ref={whyRef} className="no-scrollbar flex gap-5 overflow-x-auto pb-2 -mx-4 px-4 sm:mx-0 sm:px-0"
             style={{ scrollSnapType: 'x mandatory' }}>
             {whyUsList.map((item, i) => {
-              const colors = ['#2B80F0','#8B5CF6','#06B6D4','#F59E0B','#10B981','#EC4899'];
               const stats  = ['1 Team','AI-Native','Live Data','7 Days','3× ROI','10M+ Scale'];
-              const color  = colors[i] || AC;
+              const color  = '#2B80F0';
               const stat   = stats[i];
               return (
                 <div key={item.title} className="shrink-0 w-[300px] sm:w-[340px]" style={{ scrollSnapAlign: 'start' }}>
                   <div
                     className="group relative flex flex-col rounded-2xl overflow-hidden h-full cursor-default transition-all duration-300"
                     style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)' }}
+                    onMouseMove={e => {
+                      const el = e.currentTarget as HTMLElement;
+                      const r = el.getBoundingClientRect();
+                      el.style.setProperty('--mx', `${e.clientX - r.left}px`);
+                      el.style.setProperty('--my', `${e.clientY - r.top}px`);
+                    }}
                     onMouseEnter={e => {
                       const el = e.currentTarget as HTMLElement;
-                      el.style.borderColor = `${color}45`;
-                      el.style.background  = `${color}08`;
+                      el.style.borderColor = `${color}55`;
+                      el.style.background  = `${color}0A`;
                       el.style.transform   = 'translateY(-5px)';
-                      el.style.boxShadow   = `0 24px 60px ${color}14`;
+                      el.style.boxShadow   = `0 24px 60px ${color}1F`;
                     }}
                     onMouseLeave={e => {
                       const el = e.currentTarget as HTMLElement;
@@ -1108,6 +1113,10 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
                       el.style.boxShadow   = 'none';
                     }}
                   >
+                    {/* Mouse-following blue reflection */}
+                    <div className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                      style={{ background: `radial-gradient(280px circle at var(--mx,50%) var(--my,0%), ${color}38, transparent 60%)` }} />
+
                     {/* Top gradient bar, appears on hover */}
                     <div className="h-[2px] w-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                       style={{ background: `linear-gradient(to right, transparent, ${color}, transparent)` }} />
