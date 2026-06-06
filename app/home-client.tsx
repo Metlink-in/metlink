@@ -613,15 +613,6 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
           </div>
         </div>
 
-        {/* ── Video slide indicators ── */}
-        <div className="relative z-20 flex justify-center items-center gap-2 pb-7">
-          {heroVideos.map((_, i) => (
-            <button key={i} onClick={() => setHeroSlide(i)} aria-label={`Show background video ${i + 1}`}
-              className="transition-all duration-300 rounded-full cursor-pointer"
-              style={{ width: i === heroSlide ? 24 : 7, height: 7, background: i === heroSlide ? '#2B80F0' : 'rgba(255,255,255,0.3)' }} />
-          ))}
-        </div>
-
       </section>
 
       {/* ══ INTEGRATIONS ════════════════════════════════════════ */}
