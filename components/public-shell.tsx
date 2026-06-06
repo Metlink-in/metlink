@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/sections/footer';
-import { ScrollToTop } from '@/components/scroll-to-top';
 import { ChatBot } from '@/components/chatbot';
 import { PopupForm } from '@/components/popup-form';
 import { IntroAnimation } from '@/components/intro-animation';
@@ -84,7 +83,6 @@ export function PublicShell({ children }: { children: React.ReactNode }) {
         </motion.main>
       </AnimatePresence>
       <Footer />
-      <ScrollToTop />
       <ChatBot />
       <PopupForm />
     </>
