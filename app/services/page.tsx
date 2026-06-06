@@ -81,7 +81,7 @@ export default function ServicesPage() {
                 {cat.services.map(svc => (
                   <StaggerItem key={svc.slug}>
                     <Link href={`/services/${cat.slug}/${svc.slug}`}
-                      className="group relative p-6 rounded-2xl transition-all duration-300 hover:-translate-y-1.5 flex flex-col h-full"
+                      className="group relative overflow-hidden p-6 rounded-2xl transition-all duration-300 hover:-translate-y-1.5 flex flex-col h-full"
                       style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.07)' }}
                       onMouseEnter={e => {
                         (e.currentTarget as HTMLElement).style.borderColor = `${accent}40`;
@@ -91,7 +91,10 @@ export default function ServicesPage() {
                         (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.12)';
                         (e.currentTarget as HTMLElement).style.boxShadow = 'none';
                       }}>
-                      <span className="text-3xl mb-4 block">{svc.icon}</span>
+                      {/* Hover image-reveal panel */}
+                      <div className="absolute inset-0 pointer-events-none translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out"
+                        style={{ background: `linear-gradient(160deg, ${accent}26 0%, ${accent}0D 45%, transparent 72%)` }} />
+                      <span className="relative text-3xl mb-4 block">{svc.icon}</span>
                       <h3 className="text-base font-bold mb-2 group-hover:text-[#2B80F0] transition-colors" style={{ color: '#FFFFFF' }}>{svc.name}</h3>
                       <p className="text-xs leading-relaxed mb-4 line-clamp-2 flex-1" style={{ color: 'rgba(255,255,255,0.6)' }}>{svc.tagline}</p>
                       <div className="flex items-center gap-1 text-xs font-bold transition-colors" style={{ color: 'rgba(255,255,255,0.4)' }}
