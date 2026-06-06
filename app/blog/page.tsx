@@ -12,6 +12,31 @@ export default function BlogPage() {
   const [posts, setPosts]             = useState(staticPosts);
   const [categories, setCategories]   = useState(defaultCategories);
   const [active, setActive]           = useState('All');
+  const [subEmail, setSubEmail]       = useState('');
+  const [subState, setSubState]       = useState<'idle' | 'loading' | 'done' | 'error'>('idle');
+
+  const subscribe = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!subEmail.trim()) return;
+    setSubState('loading');
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: 'Newsletter Subscriber',
+          email: subEmail,
+          message: `Newsletter subscription request from ${subEmail}.`,
+          source: 'newsletter',
+        }),
+      });
+      if (!res.ok) throw new Error();
+      setSubState('done');
+      setSubEmail('');
+    } catch {
+      setSubState('error');
+    }
+  };
 
   useEffect(() => {
     fetch('/api/public/blog').then(r => r.json()).then(data => {
@@ -197,18 +222,29 @@ export default function BlogPage() {
           <p className="text-[10px] font-normal uppercase tracking-[0.3em] mb-4" style={{ color: '#2B80F0' }}>Never Miss an Insight</p>
           <h2 className="mb-6" style={{ color: '#FFFFFF' }}>Subscribe to the <span style={{ color: '#2B80F0' }}>Insights</span></h2>
           <p className="mb-10 text-lg font-medium" style={{ color: 'rgba(255,255,255,0.6)' }}>Get our best articles on AI, marketing, and software, once a month.</p>
-          <form onSubmit={e => e.preventDefault()} className="flex flex-col sm:flex-row gap-3.5 max-w-xl mx-auto">
-            <input type="email" placeholder="your@email.com"
-              className="flex-1 px-6 py-4 rounded-full text-sm focus:outline-none transition-all"
-              style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.07)', color: '#FFFFFF' }}
-              onFocus={e => (e.currentTarget.style.borderColor = 'rgba(43,128,240,0.45)')}
-              onBlur={e => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)')} />
-            <button type="submit"
-              className="px-8 py-4 rounded-full font-black text-sm uppercase tracking-widest hover:brightness-95 active:scale-95 transition-all text-white"
-              style={{ background: '#2B80F0', boxShadow: '0 4px 20px rgba(43,128,240,0.25)' }}>
-              Subscribe
-            </button>
-          </form>
+          {subState === 'done' ? (
+            <p className="text-base font-semibold max-w-xl mx-auto px-6 py-4 rounded-full"
+              style={{ background: 'rgba(34,197,94,0.1)', border: '1px solid rgba(34,197,94,0.3)', color: '#86EFAC' }}>
+              ✓ You&apos;re subscribed! We&apos;ll be in touch with our best insights.
+            </p>
+          ) : (
+            <form onSubmit={subscribe} className="flex flex-col sm:flex-row gap-3.5 max-w-xl mx-auto">
+              <input type="email" placeholder="your@email.com" required value={subEmail}
+                onChange={e => setSubEmail(e.target.value)}
+                className="flex-1 px-6 py-4 rounded-full text-sm focus:outline-none transition-all"
+                style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.07)', color: '#FFFFFF' }}
+                onFocus={e => (e.currentTarget.style.borderColor = 'rgba(43,128,240,0.45)')}
+                onBlur={e => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)')} />
+              <button type="submit" disabled={subState === 'loading'}
+                className="px-8 py-4 rounded-full font-black text-sm uppercase tracking-widest hover:brightness-95 active:scale-95 transition-all text-white disabled:opacity-60"
+                style={{ background: '#2B80F0', boxShadow: '0 4px 20px rgba(43,128,240,0.25)' }}>
+                {subState === 'loading' ? 'Subscribing…' : 'Subscribe'}
+              </button>
+            </form>
+          )}
+          {subState === 'error' && (
+            <p className="mt-4 text-sm" style={{ color: '#FCA5A5' }}>Something went wrong. Please try again.</p>
+          )}
         </FadeIn>
       </section>
     </div>

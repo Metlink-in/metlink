@@ -36,7 +36,7 @@ export default function ServicesPage() {
           </FadeIn>
           <FadeIn delay={0.2}>
             <p className="text-base sm:text-xl max-w-3xl mx-auto mb-10" style={{ color: 'rgba(255,255,255,0.6)' }}>
-              Four comprehensive service pillars covering every dimension of digital growth, marketing, media, AI, and software.
+              Five comprehensive service pillars covering every dimension of digital growth, marketing, media, AI, software, and automation.
             </p>
           </FadeIn>
           <FadeIn delay={0.3}>

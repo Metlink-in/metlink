@@ -11,6 +11,7 @@ const catAccents: Record<string, string> = {
   'creative-media':      '#A855F7',
   'ai-automation':       '#10B981',
   'software-development':'#06B6D4',
+  'automation-services': '#F97316',
 };
 
 
@@ -221,7 +222,7 @@ export function Header() {
               <div style={{ height: 1, background: 'linear-gradient(to right, transparent 0%, rgba(43,128,240,0.55) 20%, rgba(95,168,255,0.85) 50%, rgba(43,128,240,0.55) 80%, transparent 100%)' }} />
 
               <div className="max-w-7xl mx-auto px-8 lg:px-12 py-10 lg:py-12">
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-10 lg:gap-x-16 gap-y-10">
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-x-10 lg:gap-x-12 gap-y-10">
                   {serviceCategories.map((cat) => {
                     const accent = catAccents[cat.slug] || '#2B80F0';
                     return (
@@ -314,7 +315,36 @@ function MobileNavLink({ href, children, onClose }: { href: string; children: Re
 
 function ProposalPopup({ onClose }: { onClose: () => void }) {
   const [submitted, setSubmitted] = useState(false);
-  const handleSubmit = (e: React.SyntheticEvent) => { e.preventDefault(); setSubmitted(true); setTimeout(onClose, 2500); };
+  const [loading, setLoading]     = useState(false);
+  const [error, setError]         = useState('');
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const fd = new FormData(e.currentTarget);
+    setLoading(true); setError('');
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name:    fd.get('name'),
+          email:   fd.get('email'),
+          phone:   fd.get('phone'),
+          budget:  fd.get('budget'),
+          message: fd.get('message'),
+          source:  'proposal',
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Submission failed.');
+      setSubmitted(true);
+      setTimeout(onClose, 2800);
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : 'Something went wrong. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const inputStyle = {
     background: 'rgba(255,255,255,0.06)',
@@ -435,25 +465,25 @@ function ProposalPopup({ onClose }: { onClose: () => void }) {
               </div>
 
               <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-                <input type="text" placeholder="Full Name *" required
+                <input type="text" name="name" placeholder="Full Name *" required
                   className="w-full px-4 py-3 text-sm focus:outline-none placeholder:text-white/25"
                   style={inputStyle} onFocus={onFocus} onBlur={onBlur} />
-                <input type="email" placeholder="Email Address *" required
+                <input type="email" name="email" placeholder="Email Address *" required
                   className="w-full px-4 py-3 text-sm focus:outline-none placeholder:text-white/25"
                   style={inputStyle} onFocus={onFocus} onBlur={onBlur} />
-                <input type="tel" placeholder="Phone Number"
+                <input type="tel" name="phone" placeholder="Phone Number"
                   className="w-full px-4 py-3 text-sm focus:outline-none placeholder:text-white/25"
                   style={inputStyle} onFocus={onFocus} onBlur={onBlur} />
-                <select className="w-full px-4 py-3 text-sm focus:outline-none appearance-none cursor-pointer"
+                <select name="budget" className="w-full px-4 py-3 text-sm focus:outline-none appearance-none cursor-pointer"
                   style={{ ...inputStyle, color: 'rgba(255,255,255,0.4)' }}
                   onFocus={onFocus} onBlur={onBlur}>
                   <option value="" style={{ background: '#0B1628' }}>Select a Budget Range</option>
-                  <option value="5k" style={{ background: '#0B1628', color: '#fff' }}>$1k – $5k</option>
-                  <option value="10k" style={{ background: '#0B1628', color: '#fff' }}>$5k – $10k</option>
-                  <option value="25k" style={{ background: '#0B1628', color: '#fff' }}>$10k – $25k</option>
-                  <option value="25k+" style={{ background: '#0B1628', color: '#fff' }}>$25k+</option>
+                  <option value="$1k – $5k" style={{ background: '#0B1628', color: '#fff' }}>$1k – $5k</option>
+                  <option value="$5k – $10k" style={{ background: '#0B1628', color: '#fff' }}>$5k – $10k</option>
+                  <option value="$10k – $25k" style={{ background: '#0B1628', color: '#fff' }}>$10k – $25k</option>
+                  <option value="$25k+" style={{ background: '#0B1628', color: '#fff' }}>$25k+</option>
                 </select>
-                <textarea placeholder="Please share any information that will help us provide an accurate estimate. *"
+                <textarea name="message" placeholder="Please share any information that will help us provide an accurate estimate. *"
                   rows={3} required
                   className="w-full px-4 py-3 text-sm focus:outline-none resize-none placeholder:text-white/25"
                   style={inputStyle}
@@ -465,10 +495,18 @@ function ProposalPopup({ onClose }: { onClose: () => void }) {
                   <span className="text-xs" style={{ color: 'rgba(255,255,255,0.5)' }}>Send me a copy of NDA</span>
                 </label>
 
-                <button type="submit"
-                  className="w-full py-3.5 rounded-xl font-bold text-sm tracking-widest uppercase transition-all hover:brightness-110 active:scale-[0.98] mt-1"
+                {error && (
+                  <p className="text-xs px-3 py-2.5 rounded-xl" style={{ background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.25)', color: '#FCA5A5' }}>
+                    {error}
+                  </p>
+                )}
+
+                <button type="submit" disabled={loading}
+                  className="w-full py-3.5 rounded-xl font-bold text-sm tracking-widest uppercase transition-all hover:brightness-110 active:scale-[0.98] disabled:opacity-60 mt-1 flex items-center justify-center gap-2"
                   style={{ background: '#2B80F0', color: '#FFFFFF', boxShadow: '0 4px 20px rgba(43,128,240,0.35)', letterSpacing: '0.1em' }}>
-                  Submit
+                  {loading
+                    ? <><span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />Submitting…</>
+                    : 'Submit'}
                 </button>
 
                 <p className="text-center text-[11px] mt-1" style={{ color: '#2B80F0' }}>

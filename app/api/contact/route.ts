@@ -9,51 +9,80 @@ async function getSmtpConfig() {
     const doc = await SiteContent.findOne({ section: 'smtp' }).lean() as { data?: Record<string, string> } | null;
     const d = doc?.data ?? {};
     return {
-      host:   d.host   || process.env.SMTP_HOST   || '',
-      port:   Number(d.port   || process.env.SMTP_PORT   || 587),
-      secure: (d.secure || process.env.SMTP_SECURE) === 'true',
-      user:   d.user   || process.env.SMTP_USER   || '',
-      pass:   d.pass   || process.env.SMTP_PASS   || '',
-      to:     d.to     || process.env.CONTACT_TO  || 'hello@metlink.in',
+      host:    d.host    || process.env.SMTP_HOST   || '',
+      port:    Number(d.port || process.env.SMTP_PORT || 587),
+      secure:  (d.secure || process.env.SMTP_SECURE) === 'true',
+      user:    d.user    || process.env.SMTP_USER   || '',
+      pass:    d.pass    || process.env.SMTP_PASS   || '',
+      to:      d.to      || process.env.CONTACT_TO  || 'hello@metlinkai.com',
+      fromName: d.fromName || process.env.SMTP_FROM_NAME || 'Metlink-AI',
+      replyTo: d.replyTo || process.env.SMTP_REPLY_TO || '',
     };
   } catch {
     return {
-      host:   process.env.SMTP_HOST   || '',
-      port:   Number(process.env.SMTP_PORT || 587),
-      secure: process.env.SMTP_SECURE === 'true',
-      user:   process.env.SMTP_USER   || '',
-      pass:   process.env.SMTP_PASS   || '',
-      to:     process.env.CONTACT_TO  || 'hello@metlink.in',
+      host:    process.env.SMTP_HOST   || '',
+      port:    Number(process.env.SMTP_PORT || 587),
+      secure:  process.env.SMTP_SECURE === 'true',
+      user:    process.env.SMTP_USER   || '',
+      pass:    process.env.SMTP_PASS   || '',
+      to:      process.env.CONTACT_TO  || 'hello@metlinkai.com',
+      fromName: process.env.SMTP_FROM_NAME || 'Metlink-AI',
+      replyTo: process.env.SMTP_REPLY_TO || '',
     };
   }
 }
 
-const FROM_NAME = 'MetLink Website';
+const SOURCE_LABELS: Record<string, string> = {
+  contact:    'Contact Page',
+  popup:      'Homepage Popup',
+  proposal:   'Get Proposal (Header)',
+  newsletter: 'Blog Newsletter',
+  footer:     'Footer Newsletter',
+};
 
-function teamHtml(d: Record<string, string>) {
+function esc(s: string) {
+  return String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c] as string));
+}
+
+function teamHtml(d: Record<string, string>, sourceLabel: string) {
   const row = (label: string, val: string) =>
-    val ? `<tr><td style="padding:8px 16px;width:140px;color:#6B7280;font-size:13px;white-space:nowrap;vertical-align:top">${label}</td><td style="padding:8px 16px;color:#111827;font-size:13px">${val}</td></tr>` : '';
+    val ? `<tr>
+      <td style="padding:11px 16px;width:130px;color:#6B7280;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;white-space:nowrap;vertical-align:top;border-bottom:1px solid #F1F3F5">${label}</td>
+      <td style="padding:11px 16px;color:#0B1628;font-size:14px;vertical-align:top;border-bottom:1px solid #F1F3F5">${val}</td>
+    </tr>` : '';
 
-  return `<!DOCTYPE html><html><body style="margin:0;padding:0;background:#F3F4F6;font-family:system-ui,sans-serif">
-<div style="max-width:600px;margin:32px auto;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.08)">
-  <div style="background:linear-gradient(135deg,#1A6BD6,#2B80F0);padding:28px 32px">
-    <h1 style="margin:0;color:#fff;font-size:20px;font-weight:700">New Inquiry — MetLink</h1>
-    <p style="margin:6px 0 0;color:rgba(255,255,255,0.75);font-size:13px">Submitted via website contact form</p>
+  const ts = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata', dateStyle: 'medium', timeStyle: 'short' });
+
+  return `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="margin:0;padding:0;background:#EEF1F5;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif">
+<div style="max-width:620px;margin:32px auto;background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 6px 28px rgba(15,23,42,0.10)">
+
+  <div style="background:linear-gradient(135deg,#0C111D 0%,#1A6BD6 60%,#2B80F0 100%);padding:30px 32px">
+    <p style="margin:0 0 6px;font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,0.6)">New Lead · MetLink</p>
+    <h1 style="margin:0;color:#fff;font-size:22px;font-weight:800;letter-spacing:-0.01em">${esc(d.name) || 'New Inquiry'}</h1>
+    <span style="display:inline-block;margin-top:12px;padding:4px 12px;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.25);border-radius:999px;color:#fff;font-size:11px;font-weight:600">📥 ${esc(sourceLabel)}</span>
   </div>
-  <table style="width:100%;border-collapse:collapse;margin-top:8px">
-    ${row('Name',      d.name)}
-    ${row('Email',     d.email)}
-    ${row('Company',   d.company)}
-    ${row('Phone',     d.phone)}
-    ${row('Service',   d.service)}
-    ${row('Budget',    d.budget)}
+
+  <table style="width:100%;border-collapse:collapse">
+    ${row('Name',    esc(d.name))}
+    ${row('Email',   d.email ? `<a href="mailto:${esc(d.email)}" style="color:#2B80F0;text-decoration:none">${esc(d.email)}</a>` : '')}
+    ${row('Phone',   d.phone ? `<a href="tel:${esc(d.phone)}" style="color:#2B80F0;text-decoration:none">${esc(d.phone)}</a>` : '')}
+    ${row('Company', esc(d.company))}
+    ${row('Service', esc(d.service))}
+    ${row('Budget',  esc(d.budget))}
   </table>
-  ${d.message ? `<div style="margin:8px 24px 24px;padding:16px;background:#F9FAFB;border-radius:8px;border:1px solid #E5E7EB">
-    <p style="margin:0 0 8px;font-size:12px;color:#6B7280;text-transform:uppercase;letter-spacing:.05em">Message</p>
-    <p style="margin:0;font-size:14px;color:#111827;white-space:pre-wrap">${d.message}</p>
+
+  ${d.message ? `<div style="margin:18px 24px 8px;padding:18px;background:#F8FAFC;border-radius:10px;border:1px solid #E8EDF2">
+    <p style="margin:0 0 8px;font-size:11px;font-weight:700;color:#6B7280;text-transform:uppercase;letter-spacing:.06em">Message</p>
+    <p style="margin:0;font-size:14px;color:#0B1628;line-height:1.65;white-space:pre-wrap">${esc(d.message)}</p>
   </div>` : ''}
-  <div style="padding:16px 32px;background:#F9FAFB;border-top:1px solid #E5E7EB">
-    <p style="margin:0;font-size:11px;color:#9CA3AF">Sent from metlinkai.com · ${new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })} IST</p>
+
+  ${d.email ? `<div style="padding:8px 24px 24px;text-align:center">
+    <a href="mailto:${esc(d.email)}" style="display:inline-block;padding:12px 30px;background:#2B80F0;color:#fff;border-radius:10px;font-size:14px;font-weight:700;text-decoration:none">Reply to ${esc((d.name || '').split(' ')[0]) || 'Lead'} →</a>
+  </div>` : ''}
+
+  <div style="padding:16px 32px;background:#F8FAFC;border-top:1px solid #E8EDF2">
+    <p style="margin:0;font-size:11px;color:#9CA3AF">Submitted via metlinkai.com · ${ts} IST · Reply directly to this email to reach the sender.</p>
   </div>
 </div></body></html>`;
 }
@@ -84,7 +113,7 @@ function confirmHtml(name: string) {
   <div style="padding:20px 40px;background:#F9FAFB;border-top:1px solid #E5E7EB">
     <p style="margin:0;font-size:12px;color:#6B7280">
       MetLink · Indore, Madhya Pradesh, India · 452001<br>
-      <a href="mailto:hello@metlink.in" style="color:#2B80F0;text-decoration:none">hello@metlink.in</a> · +91 8602333400
+      <a href="mailto:hello@metlinkai.com" style="color:#2B80F0;text-decoration:none">hello@metlinkai.com</a> · +91 8602333400
     </p>
   </div>
 </div></body></html>`;
@@ -102,31 +131,39 @@ export async function POST(req: NextRequest) {
     const cfg = await getSmtpConfig();
     if (!cfg.host || !cfg.user || !cfg.pass) {
       console.warn('[contact] SMTP not configured');
-      return NextResponse.json({ error: 'Email service not configured. Please contact us at hello@metlink.in' }, { status: 503 });
+      return NextResponse.json({ error: 'Email service not configured. Please contact us at hello@metlinkai.com' }, { status: 503 });
     }
 
     const transport = nodemailer.createTransport({
       host: cfg.host, port: cfg.port, secure: cfg.secure,
       auth: { user: cfg.user, pass: cfg.pass },
     });
-    const subjectTag = source === 'popup' ? '[Quick Proposal]' : '[Project Inquiry]';
-    const subject    = `${subjectTag} ${name} — ${service || 'General Enquiry'}`;
+    const sourceLabel = SOURCE_LABELS[source] || 'Website Form';
+    const subject     = `🔔 New Lead — ${name} (${sourceLabel})${service ? ` · ${service}` : ''}`;
 
-    await Promise.all([
-      transport.sendMail({
-        from:    `"${FROM_NAME}" <${cfg.user}>`,
-        to:      cfg.to,
-        replyTo: `"${name}" <${email}>`,
-        subject,
-        html: teamHtml({ name, email, company, phone, service, budget, message }),
-      }),
-      transport.sendMail({
-        from:    `"MetLink" <${cfg.user}>`,
+    // 1) Owner notification — CRITICAL. If this fails, the whole request fails so the
+    //    visitor is told to retry and the lead is never silently lost.
+    await transport.sendMail({
+      from:    `"${cfg.fromName}" <${cfg.user}>`,
+      to:      cfg.to,
+      replyTo: `"${name}" <${email}>`,
+      subject,
+      html: teamHtml({ name, email, company, phone, service, budget, message }, sourceLabel),
+    });
+
+    // 2) Confirmation to the person who filled the form — BEST EFFORT. A bad/typo'd
+    //    submitter address must never discard the owner notification above.
+    try {
+      await transport.sendMail({
+        from:    `"${cfg.fromName}" <${cfg.user}>`,
         to:      `"${name}" <${email}>`,
+        replyTo: cfg.replyTo || cfg.to,
         subject: `We received your inquiry — MetLink`,
         html:    confirmHtml(name),
-      }),
-    ]);
+      });
+    } catch (confErr) {
+      console.warn('[contact] confirmation email to submitter failed:', confErr);
+    }
 
     return NextResponse.json({ ok: true });
   } catch (err) {

@@ -373,6 +373,100 @@ export const serviceCategories: ServiceCategory[] = [
       },
     ],
   },
+  {
+    name: 'Automation Services',
+    slug: 'automation-services',
+    icon: '',
+    colorClass: 'text-orange-400',
+    gradientFrom: 'from-orange-500',
+    gradientTo: 'to-amber-600',
+    bgGlow: 'rgba(249,115,22,0.15)',
+    tagline: 'Run Your Business on Autopilot',
+    description:
+      'End-to-end automation services that connect your tools, eliminate manual busywork, and let intelligent workflows and AI agents run your operations around the clock.',
+    services: [
+      {
+        name: 'Workflow Automation',
+        slug: 'workflow-automation',
+        tagline: 'Connect Everything. Automate Anything.',
+        description:
+          'Design and deploy automated workflows that link your apps and data, removing repetitive manual steps across every team and process.',
+        icon: '',
+        features: [
+          'No-code / low-code workflow design (Zapier, Make, n8n)',
+          'Multi-app integrations & data sync',
+          'Trigger-based task automation',
+          'Approval & notification flows',
+          'Error handling & monitoring',
+          'Custom internal automation tools',
+        ],
+      },
+      {
+        name: 'AI Agents & Assistants',
+        slug: 'ai-agents',
+        tagline: 'Autonomous AI That Gets Work Done.',
+        description:
+          'Build AI agents and assistants that handle support, research, and routine decisions autonomously, working 24/7 across your channels.',
+        icon: '',
+        features: [
+          'Custom AI agent development',
+          'Autonomous task & decision agents',
+          'AI customer support assistants',
+          'Knowledge-base (RAG) assistants',
+          'Voice & chat agent deployment',
+          'Human-in-the-loop controls',
+        ],
+      },
+      {
+        name: 'CRM & Sales Automation',
+        slug: 'crm-sales-automation',
+        tagline: 'Close More. Chase Less.',
+        description:
+          'Automate lead capture, follow-ups, and pipeline management so your sales team spends time selling instead of doing data entry.',
+        icon: '',
+        features: [
+          'Lead capture & enrichment',
+          'Automated follow-up sequences',
+          'Pipeline & deal-stage automation',
+          'CRM integration (HubSpot, Salesforce, Zoho)',
+          'Quote & invoice automation',
+          'Sales reporting dashboards',
+        ],
+      },
+      {
+        name: 'RPA & Process Bots',
+        slug: 'rpa-bots',
+        tagline: 'Software Robots for Repetitive Work.',
+        description:
+          'Robotic Process Automation bots that mimic human actions to handle high-volume, rule-based tasks with speed and zero errors.',
+        icon: '',
+        features: [
+          'RPA bot development & deployment',
+          'Data entry & migration bots',
+          'Document & invoice processing',
+          'Web scraping & data collection',
+          'Scheduled & event-driven bots',
+          'Bot monitoring & maintenance',
+        ],
+      },
+      {
+        name: 'Marketing Automation',
+        slug: 'marketing-automation',
+        tagline: 'Personalized Campaigns. On Autopilot.',
+        description:
+          'Automate email, SMS, and multi-channel marketing journeys that nurture leads and re-engage customers without manual effort.',
+        icon: '',
+        features: [
+          'Email & SMS drip campaigns',
+          'Behavior-based customer journeys',
+          'Lead scoring & segmentation',
+          'Abandoned-cart & re-engagement flows',
+          'Multi-channel campaign orchestration',
+          'Analytics & A/B testing',
+        ],
+      },
+    ],
+  },
 ];
 
 export function getCategoryBySlug(slug: string): ServiceCategory | undefined {
