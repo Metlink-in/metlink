@@ -560,16 +560,17 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
 
           <FadeIn delay={0.07}>
             <h1 key={heroSlide} className="mb-5 animate-fadeInScale"
-              style={{ fontWeight: 200, lineHeight: 0.9, letterSpacing: '-0.055em', fontSize: 'clamp(3rem,7.5vw,7rem)' }}>
-              <span style={{ color: 'rgba(255,255,255,0.9)', display: 'block' }}>{slide.h1}</span>
+              style={{ fontWeight: 200, lineHeight: 1.08, letterSpacing: '-0.04em', fontSize: 'clamp(2.75rem,7vw,6.5rem)' }}>
+              <span style={{ color: 'rgba(255,255,255,0.92)', display: 'block', paddingBottom: '0.04em' }}>{slide.h1}</span>
               <span style={{
                 display: 'block',
+                paddingBottom: '0.08em',
                 background: 'linear-gradient(135deg, #5FA8FF 0%, #2B80F0 40%, #1A6BD6 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
               }}>{slide.h2}</span>
-              <span style={{ color: 'rgba(255,255,255,0.85)', display: 'block' }}>{slide.h3}</span>
+              <span style={{ color: 'rgba(255,255,255,0.88)', display: 'block' }}>{slide.h3}</span>
             </h1>
           </FadeIn>
 
