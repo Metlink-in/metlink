@@ -908,8 +908,7 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
                   <div className="flex items-center justify-center mb-7 transition-all duration-300 group-hover:scale-105"
                     style={{ width: 64, height: 64, borderRadius: 14,
                       background: 'rgba(43,128,240,0.10)',
-                      border: '1px solid rgba(43,128,240,0.40)',
-                      boxShadow: '0 0 0 5px rgba(43,128,240,0.06), 0 0 22px rgba(43,128,240,0.15)' }}>
+                      border: '1px solid rgba(43,128,240,0.40)' }}>
                     <Icon className="w-7 h-7" strokeWidth={1.6} style={{ color: '#5FA8FF' }} />
                   </div>
                   <h3 className="mb-3" style={{ color: '#FFFFFF', fontWeight: 700, fontSize: '1.15rem', letterSpacing: '-0.01em' }}>{title}</h3>
