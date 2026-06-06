@@ -6,6 +6,7 @@ import { ArrowRight, Star, Megaphone, Palette, Bot, Code, ChevronLeft, ChevronRi
 import { FadeIn, StaggerChildren, StaggerItem } from '@/components/fade-in';
 import { CountUp } from '@/components/count-up';
 import { Parallax } from '@/components/parallax';
+import { SectionBackdrop } from '@/components/section-backdrop';
 
 /* ─── Brand icons ───────────────────────────────────────────── */
 
@@ -381,8 +382,9 @@ function FAQSection() {
   const [hovered, setHovered] = useState<number | null>(null);
   const isOpen = (i: number) => pinned === i || hovered === i;
   return (
-    <section className="py-20 sm:py-28" style={{ background: '#07111F' }}>
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="relative overflow-hidden py-20 sm:py-28" style={{ background: '#07111F' }}>
+      <SectionBackdrop />
+      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <FadeIn className="text-center mb-12">
           <TypewriterH2
             style={{ color: 'rgba(255,255,255,0.92)' }}
@@ -663,8 +665,9 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
       </section>
 
       {/* ══ SERVICES ════════════════════════════════════════════ */}
-      <section id="services" className="py-20 sm:py-28" style={{ background: BG }}>
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="services" className="relative overflow-hidden py-20 sm:py-28" style={{ background: BG }}>
+        <SectionBackdrop />
+        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
           <FadeIn className="flex flex-wrap items-end justify-between gap-4 mb-14">
             <div>
@@ -891,8 +894,9 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
       )}
 
       {/* ══ GET STARTED ════════════════════════════════════════ */}
-      <section id="process" className="py-20 sm:py-28" style={{ background: BG2, borderTop: BDR, borderBottom: BDR }}>
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="process" className="relative overflow-hidden py-20 sm:py-28" style={{ background: BG2, borderTop: BDR, borderBottom: BDR }}>
+        <SectionBackdrop tint="#10B981" tint2="#2B80F0" />
+        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeIn className="text-center mb-16">
             <p className="label-overline mb-5">How It Works</p>
             <TypewriterH2
@@ -924,8 +928,9 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
       </section>
 
       {/* ══ TECH STACK ═════════════════════════════════════════ */}
-      <section id="stack" className="py-20 sm:py-28" style={{ background: BG }}>
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="stack" className="relative overflow-hidden py-20 sm:py-28" style={{ background: BG }}>
+        <SectionBackdrop tint="#06B6D4" tint2="#8B5CF6" />
+        <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
 
           {/* Header */}
           <FadeIn className="text-center mb-14">
@@ -1045,13 +1050,14 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
       {/* ══ WHY METLINK ════════════════════════════════════════ */}
       <section className="relative py-24 sm:py-32 overflow-hidden" style={{ background: BG2, borderTop: BDR }}>
 
+        <SectionBackdrop />
         {/* Ambient background glow (parallax) */}
         <Parallax speed={70}>
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[400px]"
             style={{ background: 'radial-gradient(ellipse, rgba(43,128,240,0.08) 0%, transparent 70%)', filter: 'blur(80px)' }} />
         </Parallax>
 
-        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
           {/* Header, centred */}
           <FadeIn className="text-center mb-16">
