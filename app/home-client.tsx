@@ -888,24 +888,32 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
       )}
 
       {/* ══ GET STARTED ════════════════════════════════════════ */}
-      <section id="process" className="py-20 sm:py-28" style={{ background: '#FFFFFF' }}>
+      <section id="process" className="py-20 sm:py-28" style={{ background: BG2, borderTop: BDR, borderBottom: BDR }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeIn className="text-center mb-16">
-            <h2 style={{ fontFamily: 'Georgia, "Times New Roman", serif', fontWeight: 700, color: '#0B1628', fontSize: 'clamp(2rem,4vw,2.75rem)', letterSpacing: '-0.01em' }}>
-              Get Started Today
-            </h2>
+            <p className="label-overline mb-5">How It Works</p>
+            <TypewriterH2
+              style={{ color: 'rgba(255,255,255,0.92)' }}
+              segments={[{ text: 'Get Started ' }, { text: 'Today', accent: true }]}
+            />
+            <p className="mt-5 max-w-lg mx-auto text-base font-light" style={{ color: 'rgba(255,255,255,0.40)', lineHeight: 1.7 }}>
+              A simple four-step path from first hello to project kickoff.
+            </p>
           </FadeIn>
 
           <StaggerChildren className="grid sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12">
             {getStartedSteps.map(({ Icon, title, desc }) => (
               <StaggerItem key={title}>
-                <div className="flex flex-col">
-                  <div className="flex items-center justify-center mb-7"
-                    style={{ width: 64, height: 64, border: '1.5px solid #2B80F0', borderRadius: 10 }}>
-                    <Icon className="w-7 h-7" strokeWidth={1.6} style={{ color: '#2B80F0' }} />
+                <div className="flex flex-col group">
+                  <div className="flex items-center justify-center mb-7 transition-all duration-300 group-hover:scale-105"
+                    style={{ width: 64, height: 64, borderRadius: 14,
+                      background: 'rgba(43,128,240,0.10)',
+                      border: '1px solid rgba(43,128,240,0.40)',
+                      boxShadow: '0 0 0 5px rgba(43,128,240,0.06), 0 0 22px rgba(43,128,240,0.15)' }}>
+                    <Icon className="w-7 h-7" strokeWidth={1.6} style={{ color: '#5FA8FF' }} />
                   </div>
-                  <h3 className="mb-4" style={{ color: '#0B1628', fontWeight: 700, fontSize: '1.2rem' }}>{title}</h3>
-                  <p style={{ color: '#3F4754', fontSize: '1rem', lineHeight: 1.7 }}>{desc}</p>
+                  <h3 className="mb-3" style={{ color: '#FFFFFF', fontWeight: 700, fontSize: '1.15rem', letterSpacing: '-0.01em' }}>{title}</h3>
+                  <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: '0.95rem', lineHeight: 1.75, fontWeight: 300 }}>{desc}</p>
                 </div>
               </StaggerItem>
             ))}
