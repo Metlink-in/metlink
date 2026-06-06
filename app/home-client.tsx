@@ -417,7 +417,7 @@ function FAQSection() {
                 </div>
                 {open === i && (
                   <div className="px-6 pb-5" style={{ color: 'rgba(255,255,255,0.55)', fontSize: '0.9rem', lineHeight: 1.7 }}>
-                    <span style={{ color: '#2B80F0', fontWeight: 600, marginRight: 8 }}>A:</span>{faq.a}
+                    <span style={{ color: '#2B80F0', fontWeight: 700, marginRight: 8 }}>→</span>{faq.a}
                   </div>
                 )}
               </div>
