@@ -90,6 +90,29 @@ input, textarea, select { transition: border-color 0.18s ease, box-shadow 0.18s 
 button, a, [role="button"] { min-height: 44px; min-width: 44px; }
 nav button, nav a { min-height: unset; min-width: unset; }
 
+/* ── Page transition curtain ── */
+@keyframes curtainWipe {
+  0%   { transform: translateY(-100%); }
+  45%  { transform: translateY(0); }
+  55%  { transform: translateY(0); }
+  100% { transform: translateY(100%); }
+}
+.page-curtain {
+  position: fixed; inset: 0; z-index: 9998; pointer-events: none;
+  background: linear-gradient(180deg, #05060A 0%, #0B1628 55%, #05060A 100%);
+  animation: curtainWipe 0.85s cubic-bezier(0.76, 0, 0.24, 1) both;
+}
+.page-curtain::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, #2B80F0, #5FA8FF, #2B80F0, transparent);
+}
+
+/* ── Lenis smooth scroll ── */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
+
 /* ── Scrollbar ── */
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 .no-scrollbar::-webkit-scrollbar { display: none; }

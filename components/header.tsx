@@ -133,7 +133,7 @@ export function Header() {
                 style={{ top: 116, background: 'rgba(4,9,15,0.97)', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)' }}
                 onClick={() => setMobileOpen(false)}
               />
-              <div className="md:hidden fixed left-0 right-0 z-40 overflow-y-auto animate-slideInDown"
+              <div data-lenis-prevent className="md:hidden fixed left-0 right-0 z-40 overflow-y-auto animate-slideInDown"
                 style={{ top: 117, bottom: 0, background: '#04090F', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
                 <div className="px-5 py-4 space-y-0.5 pb-10">
                   <MobileNavLink href="/" onClose={() => setMobileOpen(false)}>Home</MobileNavLink>

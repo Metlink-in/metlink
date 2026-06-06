@@ -107,7 +107,7 @@ export function ChatBot() {
           </div>
 
           {/* Messages */}
-          <div ref={scrollRef} className="flex-1 overflow-y-auto p-4 space-y-3" style={{ minHeight: 260, background: '#FAFAF8' }}>
+          <div ref={scrollRef} data-lenis-prevent className="flex-1 overflow-y-auto p-4 space-y-3" style={{ minHeight: 260, background: '#FAFAF8' }}>
             {messages.map((m, i) => (
               <div key={i} className={`flex items-end gap-2 ${m.role === 'user' ? 'flex-row-reverse' : 'flex-row'}`}>
                 {m.role === 'bot' && (

@@ -4,6 +4,9 @@ import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { ArrowRight, Star, Megaphone, Palette, Bot, Code, ChevronLeft, ChevronRight, Target, Users, DollarSign, Repeat, CalendarDays, Video, FileText, Rocket } from 'lucide-react';
 import { FadeIn, StaggerChildren, StaggerItem } from '@/components/fade-in';
+import { CountUp } from '@/components/count-up';
+import { Magnetic } from '@/components/magnetic';
+import { Parallax } from '@/components/parallax';
 
 /* ─── Brand icons ───────────────────────────────────────────── */
 
@@ -594,15 +597,19 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
 
           <FadeIn delay={0.19}>
             <div className="flex flex-wrap gap-3 justify-center">
-              <Link href={hero.cta1Href}
-                className="group inline-flex items-center gap-2.5 font-medium btn-primary">
-                {hero.cta1Text}
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
-              </Link>
-              <Link href={hero.cta2Href}
-                className="inline-flex items-center gap-2 btn-outline">
-                {hero.cta2Text}
-              </Link>
+              <Magnetic>
+                <Link href={hero.cta1Href}
+                  className="group inline-flex items-center gap-2.5 font-medium btn-primary">
+                  {hero.cta1Text}
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+                </Link>
+              </Magnetic>
+              <Magnetic>
+                <Link href={hero.cta2Href}
+                  className="inline-flex items-center gap-2 btn-outline">
+                  {hero.cta2Text}
+                </Link>
+              </Magnetic>
             </div>
           </FadeIn>
         </div>
@@ -619,7 +626,7 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
               <div key={i} className="flex flex-col items-center text-center px-4 py-3 rounded-xl transition-all duration-200 hover:-translate-y-0.5"
                 style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}>
                 <Icon className="w-3.5 h-3.5 mb-1.5" style={{ color: '#5FA8FF' }} />
-                <p style={{ color: 'rgba(255,255,255,0.95)', fontSize: 'clamp(1rem,1.4vw,1.25rem)', fontWeight: 700, letterSpacing: '-0.03em', lineHeight: 1 }}>{val}</p>
+                <p style={{ color: 'rgba(255,255,255,0.95)', fontSize: 'clamp(1rem,1.4vw,1.25rem)', fontWeight: 700, letterSpacing: '-0.03em', lineHeight: 1 }}><CountUp value={val} /></p>
                 <p className="text-[9px] uppercase tracking-[0.15em] mt-1" style={{ color: 'rgba(255,255,255,0.45)' }}>{lbl}</p>
               </div>
             ))}
@@ -680,8 +687,8 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
 
           <div className="flex flex-col lg:flex-row gap-6">
 
-            {/* Left: tab list */}
-            <div className="flex flex-row lg:flex-col gap-2 overflow-x-auto lg:overflow-visible lg:w-[196px] shrink-0 pb-1 lg:pb-0">
+            {/* Left: tab list (pinned on desktop) */}
+            <div className="flex flex-row lg:flex-col gap-2 overflow-x-auto lg:overflow-visible lg:w-[196px] shrink-0 pb-1 lg:pb-0 lg:sticky lg:top-28 lg:self-start">
               {services.map(s => {
                 const isActive = activeService === s.num;
                 const SvcIcon = s.Icon;
@@ -1043,11 +1050,11 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
       {/* ══ WHY METLINK ════════════════════════════════════════ */}
       <section className="relative py-24 sm:py-32 overflow-hidden" style={{ background: BG2, borderTop: BDR }}>
 
-        {/* Ambient background glow */}
-        <div className="absolute inset-0 pointer-events-none">
+        {/* Ambient background glow (parallax) */}
+        <Parallax speed={70}>
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[400px]"
-            style={{ background: 'radial-gradient(ellipse, rgba(43,128,240,0.06) 0%, transparent 70%)', filter: 'blur(80px)' }} />
-        </div>
+            style={{ background: 'radial-gradient(ellipse, rgba(43,128,240,0.08) 0%, transparent 70%)', filter: 'blur(80px)' }} />
+        </Parallax>
 
         <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
