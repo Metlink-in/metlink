@@ -7,6 +7,7 @@ import { ChatBot } from '@/components/chatbot';
 import { PopupForm } from '@/components/popup-form';
 import { IntroAnimation } from '@/components/intro-animation';
 import { SmoothScroll } from '@/components/smooth-scroll';
+import { GlobalMagnetic } from '@/components/global-magnetic';
 
 export function PublicShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -17,6 +18,7 @@ export function PublicShell({ children }: { children: React.ReactNode }) {
   return (
     <>
       <SmoothScroll />
+      <GlobalMagnetic />
       {/* Page-transition curtain — replays on each route change */}
       <div key={pathname} className="page-curtain" aria-hidden />
       <IntroAnimation />

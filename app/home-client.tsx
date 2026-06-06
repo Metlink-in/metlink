@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { ArrowRight, Star, Megaphone, Palette, Bot, Code, ChevronLeft, ChevronRight, Target, Users, DollarSign, Repeat, CalendarDays, Video, FileText, Rocket } from 'lucide-react';
 import { FadeIn, StaggerChildren, StaggerItem } from '@/components/fade-in';
 import { CountUp } from '@/components/count-up';
-import { Magnetic } from '@/components/magnetic';
 import { Parallax } from '@/components/parallax';
 
 /* ─── Brand icons ───────────────────────────────────────────── */
@@ -597,19 +596,15 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
 
           <FadeIn delay={0.19}>
             <div className="flex flex-wrap gap-3 justify-center">
-              <Magnetic>
-                <Link href={hero.cta1Href}
-                  className="group inline-flex items-center gap-2.5 font-medium btn-primary">
-                  {hero.cta1Text}
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
-                </Link>
-              </Magnetic>
-              <Magnetic>
-                <Link href={hero.cta2Href}
-                  className="inline-flex items-center gap-2 btn-outline">
-                  {hero.cta2Text}
-                </Link>
-              </Magnetic>
+              <Link href={hero.cta1Href}
+                className="group inline-flex items-center gap-2.5 font-medium btn-primary">
+                {hero.cta1Text}
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+              </Link>
+              <Link href={hero.cta2Href}
+                className="inline-flex items-center gap-2 btn-outline">
+                {hero.cta2Text}
+              </Link>
             </div>
           </FadeIn>
         </div>
