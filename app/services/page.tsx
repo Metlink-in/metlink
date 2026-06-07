@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { SectionBackdrop } from '@/components/section-backdrop';
 import { ArrowRight, ChevronRight } from 'lucide-react';
 import { serviceCategories } from '@/lib/services-data';
 import { FadeIn, StaggerChildren, StaggerItem } from '@/components/fade-in';
@@ -60,8 +61,9 @@ export default function ServicesPage() {
       {serviceCategories.map((cat, catIdx) => {
         const accent = catColors[cat.slug] || '#2B80F0';
         return (
-          <section key={cat.slug} id={cat.slug} className="w-full py-24 relative"
+          <section key={cat.slug} id={cat.slug} className="w-full py-24 relative overflow-hidden isolate"
             style={{ background: catIdx % 2 === 0 ? '#0B1628' : '#07111F', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+        <SectionBackdrop behind />
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <FadeIn className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
                 <div>
@@ -112,7 +114,8 @@ export default function ServicesPage() {
       })}
 
       {/* CTA */}
-      <section className="py-16 sm:py-24 relative overflow-hidden" style={{ background: '#07111F', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+      <section className="py-16 sm:py-24 relative overflow-hidden isolate" style={{ background: '#07111F', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+        <SectionBackdrop behind />
         <div className="absolute inset-0 pointer-events-none"
           style={{ background: 'radial-gradient(ellipse at 50% 50%, rgba(43,128,240,0.15), transparent 65%)' }} />
         <FadeIn className="max-w-3xl mx-auto px-4 text-center relative z-10">

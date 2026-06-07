@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { SectionBackdrop } from '@/components/section-backdrop';
 import Link from 'next/link';
 import { ArrowRight, ExternalLink } from 'lucide-react';
 import { projects as staticProjects } from '@/lib/portfolio-data';
@@ -133,7 +134,8 @@ export default function PortfolioPage() {
       </section>
 
       {/* Stats strip */}
-      <section style={{ background: '#0B1628', borderTop: '1px solid rgba(255,255,255,0.06)', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
+      <section className="relative overflow-hidden isolate" style={{ background: '#0B1628', borderTop: '1px solid rgba(255,255,255,0.06)', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
+        <SectionBackdrop behind />
         <StaggerChildren className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
           {[['150+','Projects Delivered'],['$10M+','Revenue Generated'],['80+','Happy Clients'],['98%','Satisfaction Rate']].map(([v, l]) => (
             <StaggerItem key={l}>
@@ -145,7 +147,8 @@ export default function PortfolioPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-16 sm:py-24 relative overflow-hidden" style={{ background: '#07111F' }}>
+      <section className="py-16 sm:py-24 relative overflow-hidden isolate" style={{ background: '#07111F' }}>
+        <SectionBackdrop behind />
         <div className="absolute inset-0 pointer-events-none"
           style={{ background: 'radial-gradient(ellipse at 50% 50%, rgba(43,128,240,0.15), transparent 65%)' }} />
         <FadeIn className="max-w-3xl mx-auto px-4 text-center relative z-10">

@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { SectionBackdrop } from '@/components/section-backdrop';
 import { notFound } from 'next/navigation';
 import { ChevronRight, Clock, ArrowRight } from 'lucide-react';
 import { getPostBySlug, blogPosts } from '@/lib/blog-data';
@@ -148,7 +149,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
       {/* Related */}
       {relatedPosts.length > 0 && (
-        <section className="py-16 sm:py-24" style={{ background: '#07111F', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+        <section className="py-16 sm:py-24 relative overflow-hidden isolate" style={{ background: '#07111F', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+        <SectionBackdrop behind />
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className=" mb-10 text-center" style={{ color: '#FFFFFF' }}>Continue Reading</h2>
             <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">

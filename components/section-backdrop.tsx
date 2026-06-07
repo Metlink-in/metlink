@@ -9,9 +9,9 @@ import React from 'react';
  * child, then keep the real content above it (e.g. in a `relative z-10` wrapper
  * or simply later in the DOM).
  */
-export function SectionBackdrop({ tint = '#2B80F0', tint2 = '#8B5CF6' }: { tint?: string; tint2?: string }) {
+export function SectionBackdrop({ tint = '#2B80F0', tint2 = '#8B5CF6', behind = false }: { tint?: string; tint2?: string; behind?: boolean }) {
   return (
-    <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden>
+    <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden style={behind ? { zIndex: -1 } : undefined}>
       {/* Fading grid */}
       <div
         className="absolute inset-0"

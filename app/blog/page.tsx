@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { SectionBackdrop } from '@/components/section-backdrop';
 import Link from 'next/link';
 import { ArrowRight, Clock } from 'lucide-react';
 import { blogPosts as staticPosts } from '@/lib/blog-data';
@@ -100,14 +101,16 @@ export default function BlogPage() {
 
       {/* No results */}
       {filtered.length === 0 && (
-        <section className="py-24 text-center" style={{ background: '#0B1628' }}>
+        <section className="py-24 text-center relative overflow-hidden isolate" style={{ background: '#0B1628' }}>
+        <SectionBackdrop behind />
           <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: 16 }}>No articles in &ldquo;{active}&rdquo; yet.</p>
         </section>
       )}
 
       {/* Featured */}
       {featured && (
-        <section className="py-14" style={{ background: '#0B1628' }}>
+        <section className="py-14 relative overflow-hidden isolate" style={{ background: '#0B1628' }}>
+        <SectionBackdrop behind />
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <FadeIn>
               <p className="text-xs font-normal uppercase tracking-[0.25em] mb-6" style={{ color: '#2B80F0' }}>Featured Article</p>
@@ -215,7 +218,8 @@ export default function BlogPage() {
       )}
 
       {/* Newsletter CTA */}
-      <section className="py-16 sm:py-24 relative" style={{ background: '#0B1628', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+      <section className="py-16 sm:py-24 relative overflow-hidden isolate" style={{ background: '#0B1628', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+        <SectionBackdrop behind />
         <div className="absolute inset-0 pointer-events-none"
           style={{ background: 'radial-gradient(ellipse at 50% 50%, rgba(43,128,240,0.12), transparent 65%)' }} />
         <FadeIn className="max-w-3xl mx-auto px-4 text-center relative z-10">

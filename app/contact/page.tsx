@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { SectionBackdrop } from '@/components/section-backdrop';
 import { useState, useEffect } from 'react';
 import { Mail, Phone, MapPin, Clock, ArrowRight, CheckCircle } from 'lucide-react';
 import { FadeIn, StaggerChildren, StaggerItem } from '@/components/fade-in';
@@ -86,7 +87,8 @@ export default function ContactPage() {
       </section>
 
       {/* ── Main ── */}
-      <section className="pb-28">
+      <section className="pb-28 relative overflow-hidden isolate">
+        <SectionBackdrop behind />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-5 gap-10 xl:gap-16 items-start">
 

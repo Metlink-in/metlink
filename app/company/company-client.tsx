@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { SectionBackdrop } from '@/components/section-backdrop';
 import Link from 'next/link';
 import { ArrowRight, Target, Eye, Heart, Globe, Award, Clock, BarChart2, Shield } from 'lucide-react';
 import { FadeIn, StaggerChildren, StaggerItem } from '@/components/fade-in';
@@ -60,7 +61,8 @@ export default function CompanyClient({ company, valuesList, teamList, milestone
       </section>
 
       {/* Stats */}
-      <section style={{ background: '#0B1628', borderTop: '1px solid rgba(255,255,255,0.06)', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
+      <section className="relative overflow-hidden isolate" style={{ background: '#0B1628', borderTop: '1px solid rgba(255,255,255,0.06)', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
+        <SectionBackdrop behind />
         <StaggerChildren className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
           {statsList.map(([v, l]) => (
             <StaggerItem key={l}>
@@ -72,7 +74,8 @@ export default function CompanyClient({ company, valuesList, teamList, milestone
       </section>
 
       {/* Mission & Vision */}
-      <section className="py-16 sm:py-24" style={{ background: '#07111F' }}>
+      <section className="py-16 sm:py-24 relative overflow-hidden isolate" style={{ background: '#07111F' }}>
+        <SectionBackdrop behind />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <FadeIn>
@@ -114,7 +117,8 @@ export default function CompanyClient({ company, valuesList, teamList, milestone
       </section>
 
       {/* Values */}
-      <section className="py-16 sm:py-24" style={{ background: '#0B1628' }}>
+      <section className="py-16 sm:py-24 relative overflow-hidden isolate" style={{ background: '#0B1628' }}>
+        <SectionBackdrop behind />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeIn className="text-center mb-16">
             <p className="text-xs font-normal uppercase tracking-[0.25em] mb-3" style={{ color: '#2B80F0' }}>Our Differentiators</p>
@@ -155,7 +159,8 @@ export default function CompanyClient({ company, valuesList, teamList, milestone
       </section>
 
       {/* Timeline */}
-      <section className="py-16 sm:py-24" style={{ background: '#07111F', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+      <section className="py-16 sm:py-24 relative overflow-hidden isolate" style={{ background: '#07111F', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+        <SectionBackdrop behind />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeIn className="text-center mb-16">
             <p className="text-xs font-normal uppercase tracking-[0.25em] mb-3" style={{ color: '#2B80F0' }}>Our Journey</p>
@@ -188,7 +193,8 @@ export default function CompanyClient({ company, valuesList, teamList, milestone
       </section>
 
       {/* Team */}
-      <section className="py-16 sm:py-24" style={{ background: '#0B1628', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+      <section className="py-16 sm:py-24 relative overflow-hidden isolate" style={{ background: '#0B1628', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+        <SectionBackdrop behind />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeIn className="text-center mb-16">
             <p className="text-xs font-normal uppercase tracking-[0.25em] mb-3" style={{ color: '#2B80F0' }}>The People</p>
@@ -234,7 +240,8 @@ export default function CompanyClient({ company, valuesList, teamList, milestone
       </section>
 
       {/* CTA */}
-      <section className="py-16 sm:py-24 relative overflow-hidden" style={{ background: '#07111F', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+      <section className="py-16 sm:py-24 relative overflow-hidden isolate" style={{ background: '#07111F', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+        <SectionBackdrop behind />
         <div className="absolute inset-0 pointer-events-none"
           style={{ background: 'radial-gradient(ellipse at 50% 50%, rgba(43,128,240,0.15), transparent 65%)' }} />
         <FadeIn className="max-w-3xl mx-auto px-4 text-center relative z-10">

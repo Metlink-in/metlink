@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { SectionBackdrop } from '@/components/section-backdrop';
 import { notFound } from 'next/navigation';
 import { ChevronRight, ArrowRight, CheckCircle } from 'lucide-react';
 import { getCategoryBySlug, serviceCategories } from '@/lib/services-data';
@@ -52,7 +53,8 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
       </section>
 
       {/* Services List */}
-      <section className="py-20" style={{ background: '#0B1628', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+      <section className="py-20 relative overflow-hidden isolate" style={{ background: '#0B1628', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+        <SectionBackdrop behind />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
           {data.services.map((svc) => (
             <div key={svc.slug}
@@ -89,7 +91,8 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
       </section>
 
       {/* CTA */}
-      <section className="py-16 sm:py-24 relative overflow-hidden" style={{ background: '#07111F', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+      <section className="py-16 sm:py-24 relative overflow-hidden isolate" style={{ background: '#07111F', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+        <SectionBackdrop behind />
         <div className="absolute inset-0 pointer-events-none"
           style={{ background: 'radial-gradient(ellipse at 50% 50%, rgba(43,128,240,0.12), transparent 65%)' }} />
         <div className="max-w-3xl mx-auto px-4 text-center relative z-10">
