@@ -27,3 +27,5 @@ yarn-error.log*
 next-env.d.ts
 # Source video assets (used copies live in public/hero)
 Vedio asset/
+
+image asset/

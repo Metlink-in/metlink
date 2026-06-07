@@ -633,7 +633,8 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
       </section>
 
       {/* ══ INTEGRATIONS ════════════════════════════════════════ */}
-      <section className="py-12 overflow-hidden" style={{ background: '#0B1628', borderTop: BDR, borderBottom: BDR }}>
+      <section className="relative isolate py-12 overflow-hidden" style={{ background: '#0B1628', borderTop: BDR, borderBottom: BDR }}>
+        <SectionBackdrop behind />
         <FadeIn className="text-center mb-10 px-4">
           <p className="label-overline">Trusted Integrations &amp; Partners</p>
         </FadeIn>
@@ -812,7 +813,8 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
       </section>
 
       {/* ══ OUR CLIENTS ════════════════════════════════════════ */}
-      <section className="py-16 sm:py-20" style={{ background: BG2, borderTop: BDR, borderBottom: BDR }}>
+      <section className="relative isolate overflow-hidden py-16 sm:py-20" style={{ background: BG2, borderTop: BDR, borderBottom: BDR }}>
+        <SectionBackdrop behind />
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
           {/* Top accent line */}
