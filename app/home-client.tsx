@@ -851,7 +851,8 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
 
       {/* ══ CLIENT SUCCESS STORIES ══════════════════════════════ */}
       {testimonialsList.length > 0 && (
-      <section className="py-20 sm:py-28" style={{ background: BG }}>
+      <section className="relative isolate overflow-hidden py-20 sm:py-28" style={{ background: BG }}>
+        <SectionBackdrop behind />
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeIn className="text-center mb-16">
             <p className="label-overline mb-5">Success Stories</p>
