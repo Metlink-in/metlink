@@ -1,29 +1,35 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { writeFile } from 'fs/promises';
-import path from 'path';
+import { getSession } from '@/lib/auth';
 
+const ALLOWED = ['image/png', 'image/jpeg', 'image/svg+xml', 'image/webp', 'image/gif'];
+const MAX_BYTES = 2 * 1024 * 1024; // 2MB
+
+// Returns the uploaded image as a base64 data URI so it can be stored directly
+// in the CMS content (MongoDB) and rendered anywhere. This avoids writing to the
+// filesystem, which fails on serverless/production hosts (read-only FS).
 export async function POST(req: NextRequest) {
+  if (!(await getSession())) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
   try {
     const formData = await req.formData();
     const file = formData.get('file') as File | null;
-    if (!file) return NextResponse.json({ error: 'No file' }, { status: 400 });
+    if (!file) return NextResponse.json({ error: 'No file provided' }, { status: 400 });
 
-    const bytes = await file.arrayBuffer();
-    const buffer = Buffer.from(bytes);
-
-    const ext = file.name.split('.').pop()?.toLowerCase() ?? 'png';
-    const allowed = ['png', 'jpg', 'jpeg', 'svg', 'webp', 'gif'];
-    if (!allowed.includes(ext)) {
-      return NextResponse.json({ error: 'File type not allowed' }, { status: 400 });
+    const type = file.type || '';
+    if (!ALLOWED.includes(type)) {
+      return NextResponse.json({ error: 'File type not allowed. Use PNG, JPG, SVG, WEBP or GIF.' }, { status: 400 });
+    }
+    if (file.size > MAX_BYTES) {
+      return NextResponse.json({ error: 'Image too large. Max size is 2MB.' }, { status: 400 });
     }
 
-    const filename = `${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
-    const filepath = path.join(process.cwd(), 'public', 'uploads', filename);
-    await writeFile(filepath, buffer);
+    const buffer = Buffer.from(await file.arrayBuffer());
+    const dataUrl = `data:${type};base64,${buffer.toString('base64')}`;
 
-    return NextResponse.json({ url: `/uploads/${filename}` });
+    return NextResponse.json({ url: dataUrl });
   } catch (err) {
     console.error('[upload]', err);
-    return NextResponse.json({ error: 'Upload failed' }, { status: 500 });
+    return NextResponse.json({ error: 'Upload failed. Please try again.' }, { status: 500 });
   }
 }
