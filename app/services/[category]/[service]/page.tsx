@@ -4,6 +4,14 @@ import { notFound } from 'next/navigation';
 import { ChevronRight, ArrowRight, CheckCircle, Zap } from 'lucide-react';
 import { getAllServiceSlugs, getServiceBySlug, getCategoryBySlug } from '@/lib/services-data';
 import { TileIcon } from '@/components/tile-icon';
+import { FadeIn, StaggerChildren, StaggerItem } from '@/components/fade-in';
+
+const PROCESS = [
+  { step: '01', title: 'Discovery & Strategy', desc: 'We learn your goals, audit what exists, and define clear success metrics before any build begins.' },
+  { step: '02', title: 'Design & Build', desc: 'Our specialists design and develop the solution in tight, transparent iterations you can review.' },
+  { step: '03', title: 'Test & Launch', desc: 'We rigorously test, refine, and ship — with a first working deliverable typically within about a week.' },
+  { step: '04', title: 'Optimize & Scale', desc: 'Post-launch we measure, optimize, and scale so results compound over time.' },
+];
 
 const catColors: Record<string, string> = {
   'digital-marketing':    '#2B80F0',
@@ -111,6 +119,86 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
                 </div>
               ))}
             </div>
+          </div>
+        </section>
+      )}
+
+      {/* How we work */}
+      <section className="py-16 sm:py-24 relative overflow-hidden isolate" style={{ background: '#07111F', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+        <SectionBackdrop behind />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <FadeIn className="text-center mb-14">
+            <p className="text-xs font-bold uppercase tracking-[0.2em] mb-3" style={{ color: accent }}>How We Work</p>
+            <h2 style={{ color: '#FFFFFF' }}>A clear path from idea to impact</h2>
+          </FadeIn>
+          <StaggerChildren className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {PROCESS.map((p) => (
+              <StaggerItem key={p.step}>
+                <div className="h-full p-6 rounded-2xl transition-all duration-300 hover:-translate-y-1"
+                  style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}>
+                  <span className="text-2xl font-black" style={{ color: `${accent}80` }}>{p.step}</span>
+                  <h3 className="text-base font-bold mt-3 mb-2" style={{ color: '#FFFFFF' }}>{p.title}</h3>
+                  <p className="text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.55)' }}>{p.desc}</p>
+                </div>
+              </StaggerItem>
+            ))}
+          </StaggerChildren>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="py-16 sm:py-24 relative overflow-hidden isolate" style={{ background: '#0B1628', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+        <SectionBackdrop behind />
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <FadeIn className="text-center mb-12">
+            <p className="text-xs font-bold uppercase tracking-[0.2em] mb-3" style={{ color: accent }}>FAQ</p>
+            <h2 style={{ color: '#FFFFFF' }}>Common questions</h2>
+          </FadeIn>
+          <div className="space-y-3">
+            {[
+              { q: `How long does a typical ${svcData.name} project take?`, a: 'Timelines depend on scope, but most engagements deliver a first working milestone within about a week of kickoff, with a clear plan agreed upfront.' },
+              { q: `How much does ${svcData.name} cost?`, a: 'Every project is scoped to your needs. We work with budgets from ₹50K to ₹50L+ — share your goals and we’ll send a tailored estimate.' },
+              { q: 'Do you provide ongoing support after launch?', a: 'Yes. We offer continued optimization, monitoring, and support so your solution keeps improving and scaling over time.' },
+              { q: 'How do we get started?', a: 'Book a free strategy call or send us a message — we’ll align on goals and map out the fastest path to results.' },
+            ].map((f) => (
+              <details key={f.q} className="group rounded-2xl overflow-hidden"
+                style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}>
+                <summary className="flex items-center justify-between gap-4 cursor-pointer list-none px-6 py-4 text-sm font-semibold"
+                  style={{ color: '#FFFFFF' }}>
+                  {f.q}
+                  <span className="transition-transform duration-300 group-open:rotate-45 text-xl leading-none" style={{ color: accent }}>+</span>
+                </summary>
+                <p className="px-6 pb-5 text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.55)' }}>{f.a}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Related services */}
+      {catData.services.filter(s => s.slug !== svcData.slug).length > 0 && (
+        <section className="py-16 sm:py-20 relative overflow-hidden isolate" style={{ background: '#07111F', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+          <SectionBackdrop behind />
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <FadeIn className="mb-10">
+              <p className="text-xs font-bold uppercase tracking-[0.2em] mb-3" style={{ color: accent }}>Explore More</p>
+              <h2 style={{ color: '#FFFFFF' }}>Related {catData.name} services</h2>
+            </FadeIn>
+            <StaggerChildren className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {catData.services.filter(s => s.slug !== svcData.slug).slice(0, 6).map((s) => (
+                <StaggerItem key={s.slug}>
+                  <Link href={`/services/${catData.slug}/${s.slug}`}
+                    className="group flex items-start gap-4 h-full p-5 rounded-2xl transition-all duration-300 hover:-translate-y-1"
+                    style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}>
+                    <TileIcon slug={s.slug} className="w-6 h-6 shrink-0 text-white/80 mt-0.5" strokeWidth={1.3} />
+                    <div>
+                      <h3 className="text-sm font-bold mb-1 group-hover:text-[#5FA8FF] transition-colors" style={{ color: '#FFFFFF' }}>{s.name}</h3>
+                      <p className="text-xs leading-relaxed" style={{ color: 'rgba(255,255,255,0.5)' }}>{s.tagline}</p>
+                    </div>
+                  </Link>
+                </StaggerItem>
+              ))}
+            </StaggerChildren>
           </div>
         </section>
       )}
