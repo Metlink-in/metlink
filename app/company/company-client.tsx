@@ -158,40 +158,6 @@ export default function CompanyClient({ company, valuesList, teamList, milestone
         </div>
       </section>
 
-      {/* Timeline */}
-      <section className="py-16 sm:py-24 relative overflow-hidden isolate" style={{ background: '#07111F', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
-        <SectionBackdrop behind />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <FadeIn className="text-center mb-16">
-            <p className="text-xs font-normal uppercase tracking-[0.25em] mb-3" style={{ color: '#2B80F0' }}>Our Journey</p>
-            <h2 className="" style={{ color: '#FFFFFF' }}>How We Got Here</h2>
-          </FadeIn>
-          <div className="relative max-w-3xl mx-auto">
-            <div className="absolute left-6 top-0 bottom-0 w-px"
-              style={{ background: 'linear-gradient(to bottom, #2B80F0, rgba(255,255,255,0.1), transparent)' }} />
-            <div className="space-y-10">
-              {milestonesList.map((m, i) => (
-                <FadeIn key={m.year} delay={i * 0.08}>
-                  <div className="relative flex gap-8 pl-16">
-                    <div className="absolute left-0 w-12 h-12 rounded-full flex items-center justify-center text-xs font-black flex-shrink-0 text-white"
-                      style={{ background: '#2B80F0', boxShadow: '0 4px 14px rgba(43,128,240,0.3)' }}>
-                      {m.year.slice(2)}
-                    </div>
-                    <div className="pb-4">
-                      <div className="flex items-center gap-3 mb-2">
-                        <span className="text-xs font-bold" style={{ color: '#2B80F0' }}>{m.year}</span>
-                        <h3 className="font-bold" style={{ color: '#FFFFFF' }}>{m.event}</h3>
-                      </div>
-                      <p className="text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.6)' }}>{m.desc}</p>
-                    </div>
-                  </div>
-                </FadeIn>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Team */}
       <section className="py-16 sm:py-24 relative overflow-hidden isolate" style={{ background: '#0B1628', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
         <SectionBackdrop behind />
