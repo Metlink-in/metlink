@@ -24,7 +24,7 @@ export function SectionBackdrop({ tint = '#2B80F0', tint2 = '#8B5CF6', behind = 
       {/* Dark scrim to blend with theme + legibility */}
       <div
         className="absolute inset-0"
-        style={{ background: 'linear-gradient(180deg, rgba(5,11,20,0.90) 0%, rgba(5,11,20,0.84) 45%, rgba(5,11,20,0.93) 100%)' }}
+        style={{ background: 'linear-gradient(180deg, rgba(5,11,20,0.72) 0%, rgba(5,11,20,0.62) 45%, rgba(5,11,20,0.78) 100%)' }}
       />
       {/* Soft brand glows */}
       <div
