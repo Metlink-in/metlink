@@ -6,6 +6,7 @@ import { useState, useEffect, useRef } from 'react';
 import { Menu, X, ChevronDown, ChevronRight, ArrowRight } from 'lucide-react';
 import { serviceCategories } from '@/lib/services-data';
 import { industries } from '@/lib/industries-data';
+import { TileIcon } from '@/components/tile-icon';
 
 // Normalized shape both mega-menus share.
 interface MenuItem { name: string; slug: string; icon: string; tagline: string }
@@ -223,7 +224,7 @@ export function Header() {
                                 ...(featured ? { borderLeft: '2px solid rgba(43,128,240,0.8)' } : {}),
                               }}>
                               <span className="flex items-center gap-2.5">
-                                <span className="text-base">{g.icon}</span>
+                                <TileIcon slug={g.slug} className="w-[18px] h-[18px] flex-shrink-0" strokeWidth={1.6} />
                                 {g.name}
                                 {featured && (
                                   <span className="px-1.5 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider"
@@ -252,7 +253,7 @@ export function Header() {
                           style={{ background: '#0B1628', border: '1px solid rgba(255,255,255,0.07)' }}
                           onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(43,128,240,0.45)'; }}
                           onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.07)'; }}>
-                          <span className="text-2xl mb-3 block">{item.icon}</span>
+                          <TileIcon slug={item.slug} className="w-7 h-7 mb-3 text-white/90" strokeWidth={1.3} />
                           <span className="text-[13.5px] font-semibold leading-snug transition-colors group-hover/tile:text-[#5FA8FF]" style={{ color: '#FFFFFF' }}>
                             {item.name}
                           </span>
@@ -313,7 +314,7 @@ function MobileMegaSection({ title, basePath, groups, openGroup, setOpenGroup, o
               onClick={() => setOpenGroup(open ? null : key)}
               className="w-full flex items-center justify-between px-3 py-2 text-sm font-bold rounded-xl"
               style={{ color: '#5FA8FF' }}>
-              <span className="flex items-center gap-2"><span>{g.icon}</span>{g.name}</span>
+              <span className="flex items-center gap-2"><TileIcon slug={g.slug} className="w-4 h-4" strokeWidth={1.6} />{g.name}</span>
               <ChevronDown className={`w-4 h-4 transition-transform ${open ? 'rotate-180' : ''}`} />
             </button>
             {open && (

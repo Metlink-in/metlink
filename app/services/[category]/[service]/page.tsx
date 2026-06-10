@@ -3,6 +3,7 @@ import { SectionBackdrop } from '@/components/section-backdrop';
 import { notFound } from 'next/navigation';
 import { ChevronRight, ArrowRight, CheckCircle, Zap } from 'lucide-react';
 import { getAllServiceSlugs, getServiceBySlug, getCategoryBySlug } from '@/lib/services-data';
+import { TileIcon } from '@/components/tile-icon';
 
 const catColors: Record<string, string> = {
   'digital-marketing':    '#2B80F0',
@@ -45,7 +46,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
           </div>
 
           <div className="max-w-4xl">
-            <span className="text-5xl mb-6 block">{svcData.icon}</span>
+            <TileIcon slug={svcData.slug} className="w-11 h-11 mb-6 text-white/90" strokeWidth={1.3} />
             <p className="text-sm font-bold uppercase tracking-[0.2em] mb-3" style={{ color: accent }}>{svcData.tagline}</p>
             <h1 className=" mb-6 leading-tight" style={{ color: '#FFFFFF' }}>{svcData.name}</h1>
             <p className="text-xl leading-relaxed mb-10 max-w-2xl" style={{ color: 'rgba(255,255,255,0.6)' }}>{svcData.description}</p>

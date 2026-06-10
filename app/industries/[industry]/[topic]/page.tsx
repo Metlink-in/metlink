@@ -3,6 +3,7 @@ import { SectionBackdrop } from '@/components/section-backdrop';
 import { notFound } from 'next/navigation';
 import { ChevronRight, ArrowRight, CheckCircle } from 'lucide-react';
 import { getAllIndustryTopicSlugs, getTopicBySlug, getIndustryBySlug } from '@/lib/industries-data';
+import { TileIcon } from '@/components/tile-icon';
 
 const accent = '#2B80F0';
 
@@ -34,7 +35,7 @@ export default async function IndustryTopicPage({ params }: { params: Promise<{ 
             <span style={{ color: accent }}>{tpData.name}</span>
           </div>
           <div className="max-w-4xl">
-            <span className="text-5xl mb-6 block">{tpData.icon}</span>
+            <TileIcon slug={tpData.slug} className="w-11 h-11 mb-6 text-white/90" strokeWidth={1.3} />
             <p className="text-sm font-bold uppercase tracking-[0.2em] mb-3" style={{ color: accent }}>{tpData.tagline}</p>
             <h1 className=" mb-6 leading-tight" style={{ color: '#FFFFFF' }}>{tpData.name}</h1>
             <p className="text-xl leading-relaxed mb-10 max-w-2xl" style={{ color: 'rgba(255,255,255,0.6)' }}>{tpData.description}</p>

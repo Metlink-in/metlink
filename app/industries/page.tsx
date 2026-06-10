@@ -5,6 +5,7 @@ import { SectionBackdrop } from '@/components/section-backdrop';
 import { ArrowRight, ChevronRight } from 'lucide-react';
 import { industries } from '@/lib/industries-data';
 import { FadeIn, StaggerChildren, StaggerItem } from '@/components/fade-in';
+import { TileIcon } from '@/components/tile-icon';
 
 const accent = '#2B80F0';
 
@@ -38,9 +39,9 @@ export default function IndustriesPage() {
             <div className="flex flex-wrap justify-center gap-3">
               {industries.map(ind => (
                 <a key={ind.slug} href={`#${ind.slug}`}
-                  className="px-5 py-2.5 rounded-full text-sm font-bold transition-all hover:scale-105"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-bold transition-all hover:scale-105"
                   style={{ background: `${accent}10`, border: `1px solid ${accent}30`, color: accent }}>
-                  {ind.icon} {ind.name}
+                  <TileIcon slug={ind.slug} className="w-4 h-4" strokeWidth={1.6} /> {ind.name}
                 </a>
               ))}
             </div>
@@ -56,7 +57,7 @@ export default function IndustriesPage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <FadeIn className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
               <div>
-                <span className="text-4xl mb-3 block">{ind.icon}</span>
+                <TileIcon slug={ind.slug} className="w-9 h-9 mb-3 text-white/90" strokeWidth={1.3} />
                 <p className="text-xs font-normal uppercase tracking-[0.25em] mb-2" style={{ color: accent }}>{ind.name}</p>
                 <h2 className=" mb-3" style={{ color: '#FFFFFF' }}>{ind.tagline}</h2>
                 <p className="max-w-xl leading-relaxed" style={{ color: 'rgba(255,255,255,0.6)' }}>{ind.description}</p>
@@ -76,7 +77,7 @@ export default function IndustriesPage() {
                     style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.07)' }}>
                     <div className="absolute inset-0 pointer-events-none translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out"
                       style={{ background: `linear-gradient(160deg, ${accent}26 0%, ${accent}0D 45%, transparent 72%)` }} />
-                    <span className="relative text-3xl mb-4 block">{tp.icon}</span>
+                    <TileIcon slug={tp.slug} className="relative w-8 h-8 mb-4 text-white/90" strokeWidth={1.3} />
                     <h3 className="text-base font-bold mb-2 group-hover:text-[#2B80F0] transition-colors" style={{ color: '#FFFFFF' }}>{tp.name}</h3>
                     <p className="text-xs leading-relaxed mb-4 line-clamp-2 flex-1" style={{ color: 'rgba(255,255,255,0.6)' }}>{tp.tagline}</p>
                     <div className="flex items-center gap-1 text-xs font-bold transition-colors" style={{ color: 'rgba(255,255,255,0.4)' }}>

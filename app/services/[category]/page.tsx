@@ -3,6 +3,7 @@ import { SectionBackdrop } from '@/components/section-backdrop';
 import { notFound } from 'next/navigation';
 import { ChevronRight, ArrowRight, CheckCircle } from 'lucide-react';
 import { getCategoryBySlug, serviceCategories } from '@/lib/services-data';
+import { TileIcon } from '@/components/tile-icon';
 
 const catColors: Record<string, string> = {
   'digital-marketing':    '#2B80F0',
@@ -40,9 +41,9 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
             <span style={{ color: accent }}>{data.name}</span>
           </div>
 
-          <div className="w-20 h-20 mx-auto rounded-2xl flex items-center justify-center text-4xl mb-6 shadow-lg"
+          <div className="w-20 h-20 mx-auto rounded-2xl flex items-center justify-center mb-6 shadow-lg"
             style={{ background: `${accent}12`, border: `1px solid ${accent}30` }}>
-            {data.icon}
+            <TileIcon slug={data.slug} className="w-9 h-9 text-white/90" strokeWidth={1.3} />
           </div>
 
           <h1 className=" mb-6 leading-tight" style={{ color: '#FFFFFF' }}>
@@ -63,7 +64,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
 
               {/* Left info */}
               <div className="md:w-1/3 flex-shrink-0">
-                <span className="text-4xl mb-4 block">{svc.icon}</span>
+                <TileIcon slug={svc.slug} className="w-9 h-9 mb-4 text-white/90" strokeWidth={1.3} />
                 <h2 className="text-2xl  mb-2" style={{ color: '#FFFFFF' }}>{svc.name}</h2>
                 <p className="text-sm font-medium mb-4" style={{ color: accent }}>{svc.tagline}</p>
                 <p className="text-sm leading-relaxed mb-6" style={{ color: 'rgba(255,255,255,0.6)' }}>{svc.description}</p>

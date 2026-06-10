@@ -3,6 +3,7 @@ import { SectionBackdrop } from '@/components/section-backdrop';
 import { notFound } from 'next/navigation';
 import { ChevronRight, ArrowRight, CheckCircle } from 'lucide-react';
 import { getIndustryBySlug, industries } from '@/lib/industries-data';
+import { TileIcon } from '@/components/tile-icon';
 
 const accent = '#2B80F0';
 
@@ -30,9 +31,9 @@ export default async function IndustryPage({ params }: { params: Promise<{ indus
             <ChevronRight className="w-3 h-3" />
             <span style={{ color: accent }}>{data.name}</span>
           </div>
-          <div className="w-20 h-20 mx-auto rounded-2xl flex items-center justify-center text-4xl mb-6 shadow-lg"
+          <div className="w-20 h-20 mx-auto rounded-2xl flex items-center justify-center mb-6 shadow-lg"
             style={{ background: `${accent}12`, border: `1px solid ${accent}30` }}>
-            {data.icon}
+            <TileIcon slug={data.slug} className="w-9 h-9 text-white/90" strokeWidth={1.3} />
           </div>
           <h1 className=" mb-6 leading-tight" style={{ color: '#FFFFFF' }}>{data.name}</h1>
           <p className="text-base sm:text-xl max-w-3xl mx-auto" style={{ color: 'rgba(255,255,255,0.6)' }}>{data.description}</p>
@@ -48,7 +49,7 @@ export default async function IndustryPage({ params }: { params: Promise<{ indus
               className="group flex flex-col md:flex-row gap-8 lg:gap-12 p-8 lg:p-10 rounded-3xl transition-all duration-300 hover:shadow-lg"
               style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.07)' }}>
               <div className="md:w-1/3 flex-shrink-0">
-                <span className="text-4xl mb-4 block">{tp.icon}</span>
+                <TileIcon slug={tp.slug} className="w-9 h-9 mb-4 text-white/90" strokeWidth={1.3} />
                 <h2 className="text-2xl mb-2" style={{ color: '#FFFFFF' }}>{tp.name}</h2>
                 <p className="text-sm font-medium mb-4" style={{ color: accent }}>{tp.tagline}</p>
                 <p className="text-sm leading-relaxed mb-6" style={{ color: 'rgba(255,255,255,0.6)' }}>{tp.description}</p>
