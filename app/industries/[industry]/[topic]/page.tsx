@@ -5,6 +5,7 @@ import { ChevronRight, ArrowRight, CheckCircle } from 'lucide-react';
 import { getAllIndustryTopicSlugs, getTopicBySlug, getIndustryBySlug } from '@/lib/industries-data';
 import { TileIcon } from '@/components/tile-icon';
 import { FadeIn, StaggerChildren, StaggerItem } from '@/components/fade-in';
+import { FaqAccordion } from '@/components/faq-accordion';
 
 const PROCESS = [
   { step: '01', title: 'Discovery & Strategy', desc: 'We learn your goals and constraints, then define clear success metrics before any build begins.' },
@@ -112,24 +113,12 @@ export default async function IndustryTopicPage({ params }: { params: Promise<{ 
             <p className="text-xs font-bold uppercase tracking-[0.2em] mb-3" style={{ color: accent }}>FAQ</p>
             <h2 style={{ color: '#FFFFFF' }}>Common questions</h2>
           </FadeIn>
-          <div className="space-y-3">
-            {[
-              { q: `How does ${tpData.name} apply to the ${indData.name.toLowerCase()} industry?`, a: `We tailor every solution to ${indData.name.toLowerCase()}-specific workflows, data, and compliance needs so it fits how your business actually operates.` },
-              { q: 'How long does implementation take?', a: 'Timelines depend on scope, but most engagements deliver a first working milestone within about a week of kickoff.' },
-              { q: 'What does it cost?', a: 'Every project is scoped to your needs. We work with budgets from ₹50K to ₹50L+ — share your goals and we’ll send a tailored estimate.' },
-              { q: 'How do we get started?', a: 'Book a free strategy call or message us — we’ll align on goals and map the fastest path to results.' },
-            ].map((f) => (
-              <details key={f.q} className="group rounded-2xl overflow-hidden"
-                style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}>
-                <summary className="flex items-center justify-between gap-4 cursor-pointer list-none px-6 py-4 text-sm font-semibold"
-                  style={{ color: '#FFFFFF' }}>
-                  {f.q}
-                  <span className="transition-transform duration-300 group-open:rotate-45 text-xl leading-none" style={{ color: accent }}>+</span>
-                </summary>
-                <p className="px-6 pb-5 text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.55)' }}>{f.a}</p>
-              </details>
-            ))}
-          </div>
+          <FaqAccordion accent={accent} items={[
+            { q: `How does ${tpData.name} apply to the ${indData.name.toLowerCase()} industry?`, a: `We tailor every solution to ${indData.name.toLowerCase()}-specific workflows, data, and compliance needs so it fits how your business actually operates.` },
+            { q: 'How long does implementation take?', a: 'Timelines depend on scope, but most engagements deliver a first working milestone within about a week of kickoff.' },
+            { q: 'What does it cost?', a: 'Every project is scoped to your needs. We work with budgets from ₹50K to ₹50L+ — share your goals and we’ll send a tailored estimate.' },
+            { q: 'How do we get started?', a: 'Book a free strategy call or message us — we’ll align on goals and map the fastest path to results.' },
+          ]} />
         </div>
       </section>
 
