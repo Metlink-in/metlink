@@ -13,12 +13,10 @@ interface MenuGroup { name: string; slug: string; icon: string; items: MenuItem[
 
 const servicesMenu: { basePath: string; groups: MenuGroup[] } = {
   basePath: '/services',
-  groups: serviceCategories
-    .filter(c => c.slug !== 'automation-first')
-    .map(c => ({
-      name: c.name, slug: c.slug, icon: c.icon,
-      items: c.services.map(s => ({ name: s.name, slug: s.slug, icon: s.icon, tagline: s.tagline })),
-    })),
+  groups: serviceCategories.map(c => ({
+    name: c.name, slug: c.slug, icon: c.icon,
+    items: c.services.map(s => ({ name: s.name, slug: s.slug, icon: s.icon, tagline: s.tagline })),
+  })),
 };
 
 const industriesMenu: { basePath: string; groups: MenuGroup[] } = {
@@ -106,16 +104,6 @@ export function Header() {
                   </button>
                 </div>
 
-                {/* Automation First — highlighted standalone */}
-                <Link href="/services/automation-first"
-                  className="ml-0.5 px-4 py-1.5 rounded-full text-sm font-semibold transition-all flex items-center gap-1.5"
-                  style={{ color: '#FFFFFF', background: 'linear-gradient(90deg, #2B80F0, #5FA8FF)', boxShadow: '0 2px 14px rgba(43,128,240,0.45)' }}
-                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.filter = 'brightness(1.08)'; }}
-                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.filter = 'none'; }}>
-                  <span className="text-[13px]">⚙️</span>
-                  Automation First
-                </Link>
-
                 {[['Company', '/company'], ['Portfolio', '/portfolio'], ['Blog', '/blog'], ['Product', '/product']].map(([label, href]) => (
                   <NavLink key={label} href={href}>
                     {label}
@@ -169,12 +157,6 @@ export function Header() {
                     <MobileMegaSection title="Industries" basePath="/industries" groups={industriesMenu.groups}
                       openGroup={mobileGroup} setOpenGroup={setMobileGroup} onClose={() => setMobileOpen(false)} />
 
-                    <Link href="/services/automation-first" onClick={() => setMobileOpen(false)}
-                      className="flex items-center gap-2 px-3 py-2.5 mt-3 text-sm rounded-xl font-semibold"
-                      style={{ color: '#FFFFFF', background: 'linear-gradient(90deg, #2B80F0, #5FA8FF)', boxShadow: '0 2px 14px rgba(43,128,240,0.4)' }}>
-                      ⚙️ Automation First
-                    </Link>
-
                     <div className="pt-2">
                       {[['Company', '/company'], ['Portfolio', '/portfolio'], ['Blog', '/blog'], ['Product', '/product']].map(([label, href]) => (
                         <MobileNavLink key={label} href={href} onClose={() => setMobileOpen(false)}>
@@ -227,6 +209,7 @@ export function Header() {
                     <ul className="space-y-0.5">
                       {menu.groups.map(g => {
                         const active = g.slug === currentGroupSlug;
+                        const featured = g.slug === 'automation-first';
                         return (
                           <li key={g.slug}
                             onMouseEnter={() => setActiveGroup(prev => ({ ...prev, [activeMenu as string]: g.slug }))}>
@@ -237,10 +220,17 @@ export function Header() {
                               style={{
                                 color: active ? '#5FA8FF' : 'rgba(255,255,255,0.7)',
                                 background: active ? 'rgba(43,128,240,0.10)' : 'transparent',
+                                ...(featured ? { borderLeft: '2px solid rgba(43,128,240,0.8)' } : {}),
                               }}>
                               <span className="flex items-center gap-2.5">
                                 <span className="text-base">{g.icon}</span>
                                 {g.name}
+                                {featured && (
+                                  <span className="px-1.5 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider"
+                                    style={{ background: 'rgba(43,128,240,0.18)', color: '#5FA8FF', border: '1px solid rgba(43,128,240,0.3)' }}>
+                                    New
+                                  </span>
+                                )}
                               </span>
                               <ChevronRight className="w-3.5 h-3.5 flex-shrink-0" style={{ opacity: active ? 1 : 0.4 }} />
                             </Link>
