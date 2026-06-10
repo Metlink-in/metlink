@@ -169,35 +169,48 @@ export default function CompanyClient({ company, valuesList, teamList, milestone
               <span style={{ color: '#2B80F0' }}>Leadership</span>
             </h2>
           </FadeIn>
-          <StaggerChildren className="flex justify-center">
+          <StaggerChildren className="flex flex-wrap justify-center gap-6">
             {teamList.map(member => (
               <StaggerItem key={member.name}>
-                <div className="group p-10 rounded-2xl text-center transition-all duration-300 hover:-translate-y-1.5 w-72"
-                  style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.07)' }}
+                <div className="group relative p-8 sm:p-10 rounded-3xl text-center transition-all duration-300 hover:-translate-y-2 w-[300px] overflow-hidden"
+                  style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}
                   onMouseEnter={e => {
-                    (e.currentTarget as HTMLElement).style.borderColor = `${member.color}40`;
-                    (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.1)';
-                    (e.currentTarget as HTMLElement).style.boxShadow = '0 8px 32px rgba(0,0,0,0.3)';
+                    (e.currentTarget as HTMLElement).style.borderColor = `${member.color}50`;
+                    (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.07)';
+                    (e.currentTarget as HTMLElement).style.boxShadow = `0 20px 50px rgba(0,0,0,0.4), 0 0 0 1px ${member.color}20`;
                   }}
                   onMouseLeave={e => {
-                    (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.12)';
-                    (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.06)';
+                    (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.08)';
+                    (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.04)';
                     (e.currentTarget as HTMLElement).style.boxShadow = 'none';
                   }}>
-                  <div className="relative w-20 h-20 mx-auto mb-4 rounded-2xl overflow-hidden flex items-center justify-center text-lg font-black group-hover:scale-110 transition-transform"
-                    style={{ background: `${member.color}15`, border: `1px solid ${member.color}25`, color: member.color }}>
-                    <span>{member.initials}</span>
-                    {member.image && (
-                      /* eslint-disable-next-line @next/next/no-img-element */
-                      <img src={member.image} alt={member.name}
-                        className="absolute inset-0 w-full h-full object-cover"
-                        style={{ objectPosition: 'center top' }}
-                        onError={e => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }} />
-                    )}
+                  {/* Top accent line */}
+                  <div className="absolute top-0 left-0 right-0 h-px"
+                    style={{ background: `linear-gradient(90deg, transparent, ${member.color}, transparent)` }} />
+                  {/* Hover glow */}
+                  <div className="absolute -top-16 left-1/2 -translate-x-1/2 w-48 h-48 rounded-full pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                    style={{ background: `radial-gradient(circle, ${member.color}22, transparent 70%)`, filter: 'blur(30px)' }} />
+
+                  {/* Avatar with gradient ring */}
+                  <div className="relative w-24 h-24 mx-auto mb-5 rounded-full p-[2px] group-hover:scale-105 transition-transform duration-300"
+                    style={{ background: `linear-gradient(135deg, ${member.color}, ${member.color}30)` }}>
+                    <div className="relative w-full h-full rounded-full overflow-hidden flex items-center justify-center text-xl font-black"
+                      style={{ background: '#0B1628', color: member.color }}>
+                      <span>{member.initials}</span>
+                      {member.image && (
+                        /* eslint-disable-next-line @next/next/no-img-element */
+                        <img src={member.image} alt={member.name}
+                          className="absolute inset-0 w-full h-full object-cover"
+                          style={{ objectPosition: 'center top' }}
+                          onError={e => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }} />
+                      )}
+                    </div>
                   </div>
-                  <h3 className="font-bold text-lg mb-1" style={{ color: '#FFFFFF' }}>{member.name}</h3>
-                  <p className="text-sm font-medium mb-1" style={{ color: '#2B80F0' }}>{member.role}</p>
-                  <p className="text-xs" style={{ color: 'rgba(255,255,255,0.4)' }}>{member.specialty}</p>
+
+                  <h3 className="font-bold text-lg mb-1.5 relative" style={{ color: '#FFFFFF' }}>{member.name}</h3>
+                  <p className="text-xs font-semibold uppercase tracking-[0.15em] mb-3 relative" style={{ color: member.color }}>{member.role}</p>
+                  <div className="w-10 h-px mx-auto mb-3" style={{ background: 'rgba(255,255,255,0.12)' }} />
+                  <p className="text-xs leading-relaxed relative" style={{ color: 'rgba(255,255,255,0.45)' }}>{member.specialty}</p>
                 </div>
               </StaggerItem>
             ))}

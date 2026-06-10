@@ -92,19 +92,28 @@ nav button, nav a { min-height: unset; min-width: unset; }
 
 /* ── Page transition curtain ── */
 @keyframes curtainWipe {
-  0%   { transform: translateY(-100%); }
-  45%  { transform: translateY(0); }
-  55%  { transform: translateY(0); }
-  100% { transform: translateY(100%); }
+  0%   { transform: translateY(-100%); border-radius: 0 0 45% 45%; }
+  42%  { transform: translateY(0);     border-radius: 0 0 0 0; }
+  58%  { transform: translateY(0);     border-radius: 0 0 0 0; }
+  100% { transform: translateY(100%);  border-radius: 45% 45% 0 0; }
 }
 .page-curtain {
   position: fixed; inset: 0; z-index: 9998; pointer-events: none;
-  background: linear-gradient(180deg, #05060A 0%, #0B1628 55%, #05060A 100%);
-  animation: curtainWipe 0.85s cubic-bezier(0.76, 0, 0.24, 1) both;
+  background: linear-gradient(180deg, #05060A 0%, #0B1628 50%, #05060A 100%);
+  animation: curtainWipe 0.8s cubic-bezier(0.83, 0, 0.17, 1) both;
+}
+.page-curtain::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 50% 50%, rgba(43,128,240,0.18), transparent 60%);
 }
 .page-curtain::after {
   content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 2px;
   background: linear-gradient(90deg, transparent, #2B80F0, #5FA8FF, #2B80F0, transparent);
+  box-shadow: 0 0 18px rgba(43,128,240,0.6);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-curtain { animation: none; display: none; }
 }
 
 /* ── Lenis smooth scroll ── */
