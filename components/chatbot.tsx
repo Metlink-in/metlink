@@ -95,7 +95,7 @@ export function ChatBot() {
               <p className="text-[10px] uppercase font-bold tracking-[0.15em] flex items-center gap-1.5"
                 style={{ color: '#2B80F0' }}>
                 <span className="w-1.5 h-1.5 rounded-full bg-green-500" />
-                Online · Powered by Gemini
+                Online
               </p>
             </div>
 
