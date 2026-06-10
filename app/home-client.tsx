@@ -551,7 +551,7 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
     <div className="w-full overflow-x-hidden" style={{ background: BG }}>
 
       {/* ══ HERO ══════════════════════════════════════════════ */}
-      <section className="relative overflow-hidden flex flex-col min-h-[600px] sm:min-h-screen" style={{ background: '#050B14', paddingTop: '88px' }}>
+      <section className="relative overflow-hidden flex flex-col sm:min-h-screen sm:justify-center" style={{ background: '#050B14', paddingTop: '92px' }}>
 
         {/* ── Background ── */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
