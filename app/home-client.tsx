@@ -235,9 +235,10 @@ function ClientCard({ c }: { c: { name: string; industry: string; color: string;
           }}
         />
       )}
-      {c.name && (
+      {/* Show the name only when no logo is uploaded — a logo renders on its own, like AVI-OIL. */}
+      {!c.logo && c.name && (
         <p
-          className={c.logo ? 'text-sm font-bold tracking-wide whitespace-nowrap' : 'font-black text-lg tracking-wide whitespace-nowrap'}
+          className="font-black text-lg tracking-wide whitespace-nowrap"
           style={{ color: 'rgba(255,255,255,0.6)', transition: 'color 0.25s ease' }}
           onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = '#fff'; }}
           onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.6)'; }}
