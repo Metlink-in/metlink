@@ -11,20 +11,21 @@ const defaultColumns: FooterColumn[] = [
   {
     heading: 'Services',
     links: [
-      { label: 'Digital Marketing', href: '/services/digital-marketing' },
-      { label: 'Creative Media',    href: '/services/creative-media' },
-      { label: 'AI Automation',     href: '/services/ai-automation' },
-      { label: 'Software Dev',      href: '/services/software-development' },
+      { label: 'Digital Marketing',  href: '/services/digital-marketing' },
+      { label: 'Generative AI',       href: '/services/generative-ai' },
+      { label: 'AI & ML',             href: '/services/ai-ml' },
+      { label: 'Software Dev',        href: '/services/software-development' },
+      { label: 'Automation First',    href: '/services/automation-first' },
     ],
   },
   {
-    heading: 'Solutions',
+    heading: 'Industries',
     links: [
-      { label: 'Performance Marketing', href: '/services/digital-marketing/performance-marketing' },
-      { label: 'SEO & Content',         href: '/services/digital-marketing/seo-content' },
-      { label: 'Web Development',       href: '/services/software-development/web-development' },
-      { label: 'AI Development',        href: '/services/ai-automation/ai-development' },
-      { label: 'Brand Identity',        href: '/services/creative-media/brand-identity' },
+      { label: 'Finance',     href: '/industries/finance' },
+      { label: 'Healthcare',  href: '/industries/healthcare' },
+      { label: 'Retail',      href: '/industries/retail' },
+      { label: 'Logistics',   href: '/industries/logistics' },
+      { label: 'Startup',     href: '/industries/startup' },
     ],
   },
   {
