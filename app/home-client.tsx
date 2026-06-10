@@ -209,31 +209,33 @@ function ClientCard({ c }: { c: { name: string; industry: string; color: string;
       className="flex flex-col items-center justify-center shrink-0 gap-3"
     >
       {c.logo && (
-        <img
-          src={c.logo}
-          alt={c.name}
-          style={{
-            height: 72,
-            width: 'auto',
-            maxWidth: 200,
-            objectFit: 'contain',
-            opacity: 0.92,
-            filter: 'brightness(1.15) contrast(1.05)',
-            transition: 'opacity 0.25s ease, transform 0.25s ease, filter 0.25s ease',
-          }}
+        <div
+          className="flex items-center justify-center"
+          style={{ height: 72, width: 180 }}
           onMouseEnter={e => {
-            const el = e.currentTarget as HTMLImageElement;
-            el.style.opacity = '1';
-            el.style.transform = 'scale(1.1)';
-            el.style.filter = 'brightness(1.3) contrast(1.1) drop-shadow(0 0 12px rgba(255,255,255,0.25))';
+            const img = e.currentTarget.querySelector('img') as HTMLImageElement | null;
+            if (img) { img.style.opacity = '1'; img.style.transform = 'scale(1.08)'; img.style.filter = 'brightness(1.3) contrast(1.1) drop-shadow(0 0 12px rgba(255,255,255,0.25))'; }
           }}
           onMouseLeave={e => {
-            const el = e.currentTarget as HTMLImageElement;
-            el.style.opacity = '0.92';
-            el.style.transform = 'scale(1)';
-            el.style.filter = 'brightness(1.15) contrast(1.05)';
+            const img = e.currentTarget.querySelector('img') as HTMLImageElement | null;
+            if (img) { img.style.opacity = '0.92'; img.style.transform = 'scale(1)'; img.style.filter = 'brightness(1.15) contrast(1.05)'; }
           }}
-        />
+        >
+          <img
+            src={c.logo}
+            alt={c.name}
+            style={{
+              maxHeight: '100%',
+              maxWidth: '100%',
+              width: 'auto',
+              height: 'auto',
+              objectFit: 'contain',
+              opacity: 0.92,
+              filter: 'brightness(1.15) contrast(1.05)',
+              transition: 'opacity 0.25s ease, transform 0.25s ease, filter 0.25s ease',
+            }}
+          />
+        </div>
       )}
       {/* Show the name only when no logo is uploaded — a logo renders on its own, like AVI-OIL. */}
       {!c.logo && c.name && (
