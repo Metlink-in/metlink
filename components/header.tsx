@@ -243,7 +243,7 @@ export function Header() {
 
                   {/* Right grid */}
                   <div className="flex-1 min-w-0">
-                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4 max-h-[62vh] overflow-y-auto pr-1" data-lenis-prevent>
+                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4 max-h-[58vh] overflow-y-auto px-1 pt-1.5 pb-2" data-lenis-prevent>
                       {currentGroup.items.map(item => (
                         <Link
                           key={item.slug}
