@@ -1098,9 +1098,9 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
                     <div className="relative">
                       {/* Icon tile */}
                       <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-105"
-                        style={{ background: `${color}14`, border: `1px solid ${color}30` }}>
+                        style={{ background: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.16)' }}>
                         {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img src={icon} alt={item.title} width={28} height={28} style={{ objectFit: 'contain', filter: 'brightness(1.1)' }} />
+                        <img src={icon} alt={item.title} width={30} height={30} style={{ objectFit: 'contain', filter: 'brightness(1.45) saturate(1.2) drop-shadow(0 0 6px rgba(255,255,255,0.18))' }} />
                       </div>
 
                       {/* Title */}
