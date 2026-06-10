@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { ChevronRight, ArrowRight, CheckCircle } from 'lucide-react';
 import { getIndustryBySlug, industries } from '@/lib/industries-data';
 import { TileIcon } from '@/components/tile-icon';
+import { FadeIn, StaggerChildren, StaggerItem } from '@/components/fade-in';
 
 const accent = '#2B80F0';
 
@@ -23,7 +24,7 @@ export default async function IndustryPage({ params }: { params: Promise<{ indus
       <section className="relative py-20 sm:py-28 overflow-hidden" style={{ background: '#07111F' }}>
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px] rounded-full pointer-events-none"
           style={{ background: `radial-gradient(ellipse, ${accent}12 0%, transparent 70%)`, filter: 'blur(80px)' }} />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+        <FadeIn className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
           <div className="flex items-center justify-center gap-2 text-xs mb-8" style={{ color: 'rgba(255,255,255,0.4)' }}>
             <Link href="/" className="hover:text-[#2B80F0] transition-colors">Home</Link>
             <ChevronRight className="w-3 h-3" />
@@ -37,16 +38,17 @@ export default async function IndustryPage({ params }: { params: Promise<{ indus
           </div>
           <h1 className=" mb-6 leading-tight" style={{ color: '#FFFFFF' }}>{data.name}</h1>
           <p className="text-base sm:text-xl max-w-3xl mx-auto" style={{ color: 'rgba(255,255,255,0.6)' }}>{data.description}</p>
-        </div>
+        </FadeIn>
       </section>
 
       {/* Topics list */}
       <section className="py-20 relative overflow-hidden isolate" style={{ background: '#0B1628', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
         <SectionBackdrop behind />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+        <StaggerChildren className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
           {data.topics.map((tp) => (
-            <div key={tp.slug}
-              className="group flex flex-col md:flex-row gap-8 lg:gap-12 p-8 lg:p-10 rounded-3xl transition-all duration-300 hover:shadow-lg"
+            <StaggerItem key={tp.slug}>
+            <div
+              className="group flex flex-col md:flex-row gap-8 lg:gap-12 p-8 lg:p-10 rounded-3xl transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
               style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.07)' }}>
               <div className="md:w-1/3 flex-shrink-0">
                 <TileIcon slug={tp.slug} className="w-9 h-9 mb-4 text-white/90" strokeWidth={1.3} />
@@ -69,8 +71,9 @@ export default async function IndustryPage({ params }: { params: Promise<{ indus
                 ))}
               </div>
             </div>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerChildren>
       </section>
 
       {/* CTA */}

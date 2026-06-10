@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { ChevronRight, ArrowRight, CheckCircle } from 'lucide-react';
 import { getCategoryBySlug, serviceCategories } from '@/lib/services-data';
 import { TileIcon } from '@/components/tile-icon';
+import { FadeIn, StaggerChildren, StaggerItem } from '@/components/fade-in';
 
 const catColors: Record<string, string> = {
   'digital-marketing':    '#2B80F0',
@@ -32,7 +33,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px] rounded-full pointer-events-none"
           style={{ background: `radial-gradient(ellipse, ${accent}12 0%, transparent 70%)`, filter: 'blur(80px)' }} />
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+        <FadeIn className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
           <div className="flex items-center justify-center gap-2 text-xs mb-8" style={{ color: 'rgba(255,255,255,0.4)' }}>
             <Link href="/" className="hover:text-[#2B80F0] transition-colors">Home</Link>
             <ChevronRight className="w-3 h-3" />
@@ -50,16 +51,17 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
             {data.name}
           </h1>
           <p className="text-base sm:text-xl max-w-3xl mx-auto" style={{ color: 'rgba(255,255,255,0.6)' }}>{data.description}</p>
-        </div>
+        </FadeIn>
       </section>
 
       {/* Services List */}
       <section className="py-20 relative overflow-hidden isolate" style={{ background: '#0B1628', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
         <SectionBackdrop behind />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+        <StaggerChildren className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
           {data.services.map((svc) => (
-            <div key={svc.slug}
-              className="group flex flex-col md:flex-row gap-8 lg:gap-12 p-8 lg:p-10 rounded-3xl transition-all duration-300 hover:shadow-lg"
+            <StaggerItem key={svc.slug}>
+            <div
+              className="group flex flex-col md:flex-row gap-8 lg:gap-12 p-8 lg:p-10 rounded-3xl transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
               style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.07)' }}>
 
               {/* Left info */}
@@ -87,8 +89,9 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
                 ))}
               </div>
             </div>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerChildren>
       </section>
 
       {/* CTA */}
