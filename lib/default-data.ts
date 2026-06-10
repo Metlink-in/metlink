@@ -151,4 +151,30 @@ export const defaults: Record<string, unknown> = {
   },
 
   'blog-categories': ['AI & Automation', 'Digital Marketing', 'Creative Media', 'Software Development'],
+
+  'automation-first': {
+    title: 'Automation Services',
+    subtitle: 'Connect your tools, remove manual busywork, and let intelligent workflows and AI agents run your operations around the clock.',
+    videos: ['/hero/hero.mp4', '/hero/1.mp4'],
+    sections: [
+      {
+        name: 'Workflow & Process Automation',
+        items: [
+          { name: 'Workflow Automation', image: '' },
+          { name: 'RPA & Process Bots', image: '' },
+          { name: 'Document Processing', image: '' },
+          { name: 'Approval Flows', image: '' },
+        ],
+      },
+      {
+        name: 'AI & Sales Automation',
+        items: [
+          { name: 'AI Agents & Assistants', image: '' },
+          { name: 'CRM & Sales Automation', image: '' },
+          { name: 'Marketing Automation', image: '' },
+          { name: 'Lead Enrichment', image: '' },
+        ],
+      },
+    ],
+  },
 };

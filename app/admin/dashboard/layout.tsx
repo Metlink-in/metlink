@@ -7,6 +7,7 @@ const NAV = [
   { label: 'Hero',         href: '/admin/dashboard/hero' },
   { label: 'Stats',        href: '/admin/dashboard/stats' },
   { label: 'Services',     href: '/admin/dashboard/services' },
+  { label: 'Automation First', href: '/admin/dashboard/automation' },
   { label: 'Clients',      href: '/admin/dashboard/clients' },
   { label: 'Testimonials', href: '/admin/dashboard/testimonials' },
   { label: 'Why Us',       href: '/admin/dashboard/why-us' },
