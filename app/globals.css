@@ -92,15 +92,16 @@ nav button, nav a { min-height: unset; min-width: unset; }
 
 /* ── Page transition curtain ── */
 @keyframes curtainWipe {
-  0%   { transform: translateY(-100%); border-radius: 0 0 45% 45%; }
-  42%  { transform: translateY(0);     border-radius: 0 0 0 0; }
-  58%  { transform: translateY(0);     border-radius: 0 0 0 0; }
-  100% { transform: translateY(100%);  border-radius: 45% 45% 0 0; }
+  0%   { transform: translateY(-100%); border-radius: 0 0 35% 35%; }
+  48%  { transform: translateY(0);     border-radius: 0 0 8% 8%; }
+  52%  { transform: translateY(0);     border-radius: 8% 8% 0 0; }
+  100% { transform: translateY(100%);  border-radius: 35% 35% 0 0; }
 }
 .page-curtain {
   position: fixed; inset: 0; z-index: 9998; pointer-events: none;
   background: linear-gradient(180deg, #05060A 0%, #0B1628 50%, #05060A 100%);
-  animation: curtainWipe 0.8s cubic-bezier(0.83, 0, 0.17, 1) both;
+  animation: curtainWipe 1s cubic-bezier(0.65, 0, 0.35, 1) both;
+  will-change: transform;
 }
 .page-curtain::before {
   content: ''; position: absolute; inset: 0;
