@@ -202,7 +202,7 @@ export function Header() {
             >
               <div style={{ height: 1, background: 'linear-gradient(to right, transparent 0%, rgba(43,128,240,0.55) 20%, rgba(95,168,255,0.85) 50%, rgba(43,128,240,0.55) 80%, transparent 100%)' }} />
 
-              <div className="max-w-7xl mx-auto px-6 lg:px-10 py-8 lg:py-10">
+              <div className="max-w-7xl mx-auto px-6 lg:px-10 pt-10 pb-8 lg:pt-12 lg:pb-10">
                 <div className="flex gap-8 lg:gap-12">
 
                   {/* Left rail */}
