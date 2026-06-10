@@ -163,7 +163,7 @@ export function PopupForm() {
             ) : (
               <>
                 <div className="mb-7">
-                  <h3 className="text-xl font-black mb-1" style={{ color: '#FFFFFF' }}>Get My Free Proposal 🚀</h3>
+                  <h3 className="text-xl font-black mb-1" style={{ color: '#FFFFFF' }}>Get My Free Proposal</h3>
                   <p className="text-sm" style={{ color: 'rgba(255,255,255,0.55)' }}>Complete the form and we&apos;ll validate your idea now.</p>
                 </div>
 

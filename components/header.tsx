@@ -462,7 +462,7 @@ function ProposalPopup({ onClose }: { onClose: () => void }) {
           ) : (
             <>
               <div className="mb-6 pr-8">
-                <h3 className="text-xl font-black mb-1" style={{ color: '#FFFFFF' }}>Get My Free Proposal 🚀</h3>
+                <h3 className="text-xl font-black mb-1" style={{ color: '#FFFFFF' }}>Get My Free Proposal</h3>
                 <p className="text-sm" style={{ color: 'rgba(255,255,255,0.45)' }}>
                   Complete the form and we&apos;ll validate your idea now.
                 </p>
