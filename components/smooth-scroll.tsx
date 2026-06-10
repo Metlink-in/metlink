@@ -13,6 +13,8 @@ export function SmoothScroll() {
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
     });
+    // Expose so route changes can reset scroll to top.
+    (window as unknown as { lenis?: Lenis }).lenis = lenis;
 
     let raf = 0;
     const loop = (time: number) => {
@@ -24,6 +26,7 @@ export function SmoothScroll() {
     return () => {
       cancelAnimationFrame(raf);
       lenis.destroy();
+      delete (window as unknown as { lenis?: Lenis }).lenis;
     };
   }, []);
 

@@ -1,5 +1,6 @@
 'use client';
 import { usePathname } from 'next/navigation';
+import { useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/sections/footer';
@@ -12,6 +13,14 @@ import { GlobalMagnetic } from '@/components/global-magnetic';
 export function PublicShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const isAdmin = pathname?.startsWith('/admin');
+
+  // Reset scroll to top on every route change (Lenis keeps the old offset otherwise,
+  // which makes a new page look "stuck" mid-scroll).
+  useEffect(() => {
+    const lenis = (window as unknown as { lenis?: { scrollTo: (v: number, o?: object) => void } }).lenis;
+    if (lenis) lenis.scrollTo(0, { immediate: true });
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   if (isAdmin) return <>{children}</>;
 
