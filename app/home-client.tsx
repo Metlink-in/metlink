@@ -117,17 +117,17 @@ const services = [
     features: ['Performance Marketing', 'SEO & Content', 'Personal Branding', 'Social Media'],
     builds: ['Google & Meta ad campaigns', 'SEO content engines', 'Email & lifecycle flows', 'Analytics dashboards'],
     slug: 'digital-marketing',
-    vizTitle: 'Campaign Dashboard',
+    vizTitle: 'What We Run',
     vizBars: [
-      { label: 'ROAS', value: '4.2×', pct: 84 },
-      { label: 'CTR', value: '8.7%', pct: 65 },
-      { label: 'Conv Rate', value: '12.4%', pct: 72 },
-      { label: 'CAC Drop', value: '38%', pct: 45 },
+      { label: 'Paid Ads', value: 'Managed', pct: 82 },
+      { label: 'SEO & Content', value: 'Ongoing', pct: 70 },
+      { label: 'Lifecycle Email', value: 'Automated', pct: 64 },
+      { label: 'Analytics', value: 'Real-time', pct: 76 },
     ],
     vizMetrics: [
-      { val: '$2.4M', label: 'Managed' },
-      { val: '320%', label: 'Avg ROAS' },
-      { val: '94%', label: 'Retention' },
+      { val: 'ROI-led', label: 'Approach' },
+      { val: 'Multi-channel', label: 'Campaigns' },
+      { val: 'Transparent', label: 'Reporting' },
     ],
   },
   {
@@ -140,17 +140,17 @@ const services = [
     features: ['Brand Identity', 'Video & UGC', 'Motion Design', 'Web & UI/UX'],
     builds: ['Brand identity & guidelines', 'Video & UGC production', 'Motion graphics', 'Web & UI/UX design'],
     slug: 'creative-media',
-    vizTitle: 'Content Studio',
+    vizTitle: 'What We Produce',
     vizBars: [
-      { label: 'Brand Score', value: '96/100', pct: 96 },
-      { label: 'Engagement', value: '+312%', pct: 78 },
-      { label: 'Video Views', value: '2.4M', pct: 67 },
-      { label: 'Conversion', value: '8.3%', pct: 62 },
+      { label: 'Brand Identity', value: 'Crafted', pct: 80 },
+      { label: 'Video & UGC', value: 'High-volume', pct: 72 },
+      { label: 'Motion Design', value: 'Dynamic', pct: 66 },
+      { label: 'Web & UI/UX', value: 'Conversion', pct: 74 },
     ],
     vizMetrics: [
-      { val: '180+', label: 'Brands' },
-      { val: '2.4M', label: 'Views' },
-      { val: '98%', label: 'Approval' },
+      { val: 'Full', label: 'Production' },
+      { val: 'On-brand', label: 'Assets' },
+      { val: 'Fast', label: 'Turnaround' },
     ],
   },
   {
@@ -163,17 +163,17 @@ const services = [
     features: ['AI Agents', 'Data Science', 'ML Systems', 'Conversational AI'],
     builds: ['Custom AI agents & chatbots', 'Workflow automation pipelines', 'ML model integration', 'Data science & analytics'],
     slug: 'ai-automation',
-    vizTitle: 'Automation Monitor',
+    vizTitle: 'What We Automate',
     vizBars: [
-      { label: 'Tasks Automated', value: '98.2%', pct: 98 },
-      { label: 'Response Time', value: '<200ms', pct: 85 },
-      { label: 'Accuracy', value: '97.8%', pct: 92 },
-      { label: 'Cost Saved', value: '68%', pct: 68 },
+      { label: 'Workflow Automation', value: 'Custom', pct: 82 },
+      { label: 'AI Agents', value: 'Tailored', pct: 74 },
+      { label: 'Integrations', value: 'Seamless', pct: 70 },
+      { label: 'Monitoring', value: '24/7', pct: 78 },
     ],
     vizMetrics: [
-      { val: '500K+', label: 'Daily Tasks' },
-      { val: '68%', label: 'Cost Cut' },
-      { val: '7 days', label: 'Deploy' },
+      { val: 'Custom', label: 'AI Agents' },
+      { val: 'Always-on', label: 'Automation' },
+      { val: 'Reliable', label: 'Delivery' },
     ],
   },
   {
@@ -186,17 +186,17 @@ const services = [
     features: ['Web & Mobile Apps', 'Cloud & APIs', 'AI Integration', 'Automation'],
     builds: ['Web & mobile applications', 'Cloud infrastructure & APIs', 'AI-powered features', 'DevOps & CI/CD pipelines'],
     slug: 'software-development',
-    vizTitle: 'System Health',
+    vizTitle: 'What We Engineer',
     vizBars: [
-      { label: 'Uptime', value: '99.99%', pct: 99 },
-      { label: 'Load Time', value: '0.8s', pct: 88 },
-      { label: 'Test Coverage', value: '94%', pct: 94 },
-      { label: 'Deploy Freq', value: '12/day', pct: 75 },
+      { label: 'Web & Mobile', value: 'Modern', pct: 82 },
+      { label: 'Cloud & APIs', value: 'Scalable', pct: 76 },
+      { label: 'Code Quality', value: 'Tested', pct: 80 },
+      { label: 'DevOps & CI/CD', value: 'Automated', pct: 72 },
     ],
     vizMetrics: [
-      { val: '50K+', label: 'Users' },
-      { val: '99.99%', label: 'Uptime' },
-      { val: '3-6 wks', label: 'MVP' },
+      { val: 'Scalable', label: 'Architecture' },
+      { val: 'Modern', label: 'Stack' },
+      { val: 'Reliable', label: 'Delivery' },
     ],
   },
 ];
@@ -737,7 +737,7 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
                       <span className="flex items-center gap-1.5 text-[10px] px-2.5 py-1 rounded-full"
                         style={{ background: 'rgba(34,197,94,0.1)', border: '1px solid rgba(34,197,94,0.2)', color: '#4ADE80' }}>
                         <span className="w-1 h-1 rounded-full bg-green-400 animate-pulse" />
-                        Live
+                        Capabilities
                       </span>
                     </div>
 
