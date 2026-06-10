@@ -48,29 +48,30 @@ export function PopupForm() {
 
   if (!open) return null;
 
-  const inputCls = "w-full px-4 py-3 rounded-xl text-sm focus:outline-none transition-all";
-  const inputStyle = { background: '#FAF9F6', border: '1px solid #E5DDD5', color: '#0B1628' };
+  const inputCls = "w-full px-4 py-3 rounded-xl text-sm focus:outline-none transition-all placeholder:text-white/35";
+  const inputStyle = { background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.10)', color: '#FFFFFF' };
+  const inputBorder = 'rgba(255,255,255,0.10)';
 
   return (
     <div className="fixed inset-0 z-[200] flex items-center justify-center px-4" role="dialog" aria-modal="true">
       {/* Backdrop */}
       <div className="absolute inset-0 animate-fadeInScale"
-        style={{ background: 'rgba(28,20,16,0.5)', backdropFilter: 'blur(6px)' }}
+        style={{ background: 'rgba(5,11,20,0.65)', backdropFilter: 'blur(6px)' }}
         onClick={close} />
 
       {/* Modal */}
       <div className="relative w-full max-w-3xl rounded-2xl overflow-hidden shadow-2xl animate-slideInUp flex flex-col md:flex-row"
-        style={{ maxHeight: '92vh', background: '#FFFFFF', border: '1px solid #E5DDD5', boxShadow: '0 32px 80px rgba(0,0,0,0.15)' }}>
+        style={{ maxHeight: '92vh', background: '#0B1628', border: '1px solid rgba(255,255,255,0.10)', boxShadow: '0 32px 80px rgba(0,0,0,0.5)' }}>
 
         {/* ── LEFT PANEL ── */}
         <div className="relative md:w-[42%] flex-shrink-0 p-8 flex flex-col justify-between overflow-hidden"
-          style={{ background: 'linear-gradient(160deg, #0C0C0C 0%, #2D1A12 60%, #0C0C0C 100%)' }}>
+          style={{ background: 'linear-gradient(160deg, #0A1322 0%, #0E2138 60%, #07111F 100%)', borderRight: '1px solid rgba(255,255,255,0.08)' }}>
 
           {/* BG glow */}
           <div className="absolute top-0 left-0 w-64 h-64 rounded-full pointer-events-none"
             style={{ background: 'radial-gradient(circle, rgba(43,128,240,0.2) 0%, transparent 70%)', filter: 'blur(40px)', transform: 'translate(-30%,-30%)' }} />
           <div className="absolute bottom-0 right-0 w-48 h-48 rounded-full pointer-events-none"
-            style={{ background: 'radial-gradient(circle, rgba(232,97,42,0.15) 0%, transparent 70%)', filter: 'blur(40px)', transform: 'translate(30%,30%)' }} />
+            style={{ background: 'radial-gradient(circle, rgba(139,92,246,0.18) 0%, transparent 70%)', filter: 'blur(40px)', transform: 'translate(30%,30%)' }} />
 
           <div className="relative z-10">
             {/* Logo */}
@@ -125,13 +126,13 @@ export function PopupForm() {
         </div>
 
         {/* ── RIGHT PANEL, form ── */}
-        <div className="flex-1 relative flex flex-col overflow-y-auto" style={{ background: '#FFFFFF' }}>
+        <div className="flex-1 relative flex flex-col overflow-y-auto" style={{ background: '#0B1628' }}>
           {/* Top accent */}
           <div className="h-1 flex-shrink-0" style={{ background: 'linear-gradient(90deg, #2B80F0, #5FA8FF, #2B80F0)' }} />
 
           <button onClick={close}
-            className="absolute top-4 right-4 z-20 p-1.5 rounded-lg transition-all hover:bg-black/5"
-            style={{ color: '#ADA09A' }} aria-label="Close">
+            className="absolute top-4 right-4 z-20 p-1.5 rounded-lg transition-all hover:bg-white/10"
+            style={{ color: 'rgba(255,255,255,0.45)' }} aria-label="Close">
             <X className="w-4 h-4" />
           </button>
 
@@ -142,14 +143,14 @@ export function PopupForm() {
                   style={{ background: 'linear-gradient(135deg, #2B80F0, #5FA8FF)', boxShadow: '0 0 32px rgba(43,128,240,0.25)' }}>
                   <CheckCircle className="w-10 h-10 text-white" />
                 </div>
-                <h3 className="text-2xl font-black mb-2" style={{ color: '#0B1628' }}>You&apos;re In!</h3>
-                <p className="text-sm" style={{ color: '#72645A' }}>Our strategy team will reach out within 24 hours.</p>
+                <h3 className="text-2xl font-black mb-2" style={{ color: '#FFFFFF' }}>You&apos;re In!</h3>
+                <p className="text-sm" style={{ color: 'rgba(255,255,255,0.55)' }}>Our strategy team will reach out within 24 hours.</p>
               </div>
             ) : (
               <>
                 <div className="mb-7">
-                  <h3 className="text-xl font-black mb-1" style={{ color: '#0B1628' }}>Get My Free Proposal 🚀</h3>
-                  <p className="text-sm" style={{ color: '#72645A' }}>Complete the form and we&apos;ll validate your idea now.</p>
+                  <h3 className="text-xl font-black mb-1" style={{ color: '#FFFFFF' }}>Get My Free Proposal 🚀</h3>
+                  <p className="text-sm" style={{ color: 'rgba(255,255,255,0.55)' }}>Complete the form and we&apos;ll validate your idea now.</p>
                 </div>
 
                 <form onSubmit={handleSubmit} className="space-y-3.5">
@@ -157,35 +158,35 @@ export function PopupForm() {
                     onChange={e => setForm(p => ({ ...p, name: e.target.value }))}
                     className={inputCls} style={inputStyle}
                     onFocus={e => (e.currentTarget.style.borderColor = 'rgba(43,128,240,0.45)')}
-                    onBlur={e => (e.currentTarget.style.borderColor = '#E5DDD5')} />
+                    onBlur={e => (e.currentTarget.style.borderColor = inputBorder)} />
 
                   <input type="email" placeholder="Email Address *" required value={form.email}
                     onChange={e => setForm(p => ({ ...p, email: e.target.value }))}
                     className={inputCls} style={inputStyle}
                     onFocus={e => (e.currentTarget.style.borderColor = 'rgba(43,128,240,0.45)')}
-                    onBlur={e => (e.currentTarget.style.borderColor = '#E5DDD5')} />
+                    onBlur={e => (e.currentTarget.style.borderColor = inputBorder)} />
 
                   <div className="flex gap-2">
                     <div className="flex items-center gap-2 px-3 py-3 rounded-xl text-sm flex-shrink-0 whitespace-nowrap"
-                      style={{ ...inputStyle, color: '#72645A' }}>
+                      style={{ ...inputStyle, color: 'rgba(255,255,255,0.7)' }}>
                       🇮🇳 +91
                     </div>
                     <input type="tel" placeholder="Phone number" value={form.phone}
                       onChange={e => setForm(p => ({ ...p, phone: e.target.value }))}
                       className={`${inputCls} flex-1`} style={inputStyle}
                       onFocus={e => (e.currentTarget.style.borderColor = 'rgba(43,128,240,0.45)')}
-                      onBlur={e => (e.currentTarget.style.borderColor = '#E5DDD5')} />
+                      onBlur={e => (e.currentTarget.style.borderColor = inputBorder)} />
                   </div>
 
                   <select value={form.budget}
                     onChange={e => setForm(p => ({ ...p, budget: e.target.value }))}
                     className={`${inputCls} appearance-none cursor-pointer`}
-                    style={{ ...inputStyle, color: form.budget ? '#0B1628' : '#ADA09A' }}
+                    style={{ ...inputStyle, color: form.budget ? '#FFFFFF' : 'rgba(255,255,255,0.45)' }}
                     onFocus={e => (e.currentTarget.style.borderColor = 'rgba(43,128,240,0.45)')}
-                    onBlur={e => (e.currentTarget.style.borderColor = '#E5DDD5')}>
-                    <option value="" style={{ background: '#FAF9F6', color: '#ADA09A' }}>Select a Budget Range</option>
+                    onBlur={e => (e.currentTarget.style.borderColor = inputBorder)}>
+                    <option value="" style={{ background: '#0B1628', color: 'rgba(255,255,255,0.45)' }}>Select a Budget Range</option>
                     {['< ₹1 Lakh','₹1L – ₹5L','₹5L – ₹20L','₹20L – ₹50L','₹50L+'].map(b => (
-                      <option key={b} value={b} style={{ background: '#FAF9F6', color: '#0B1628' }}>{b}</option>
+                      <option key={b} value={b} style={{ background: '#0B1628', color: '#FFFFFF' }}>{b}</option>
                     ))}
                   </select>
 
@@ -195,11 +196,11 @@ export function PopupForm() {
                     onChange={e => setForm(p => ({ ...p, message: e.target.value }))}
                     className={`${inputCls} resize-none`} style={inputStyle}
                     onFocus={e => (e.currentTarget.style.borderColor = 'rgba(43,128,240,0.45)')}
-                    onBlur={e => (e.currentTarget.style.borderColor = '#E5DDD5')} />
+                    onBlur={e => (e.currentTarget.style.borderColor = inputBorder)} />
 
                   <label className="flex items-center gap-3 cursor-pointer group select-none">
                     <input type="checkbox" className="w-4 h-4 rounded cursor-pointer accent-[#2B80F0]" />
-                    <span className="text-xs transition-colors" style={{ color: '#ADA09A' }}>Send me a copy of NDA</span>
+                    <span className="text-xs transition-colors" style={{ color: 'rgba(255,255,255,0.5)' }}>Send me a copy of NDA</span>
                   </label>
 
                   {error && (
