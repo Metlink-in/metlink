@@ -837,7 +837,7 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
               WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)',
             }}
           >
-            <div className="animate-scroll-fwd gap-16" style={{ width: 'max-content' }}>
+            <div className="animate-scroll-fwd gap-6 sm:gap-8" style={{ width: 'max-content' }}>
               {[...clientsList, ...clientsList].map((c, i) => (
                 <ClientCard key={`loop-${i}`} c={c} />
               ))}
