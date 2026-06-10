@@ -516,7 +516,7 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
     <div className="w-full overflow-x-hidden" style={{ background: BG }}>
 
       {/* ══ HERO ══════════════════════════════════════════════ */}
-      <section className="relative overflow-hidden flex flex-col md:min-h-screen md:justify-center" style={{ background: '#050B14', paddingTop: '120px' }}>
+      <section className="relative overflow-hidden flex flex-col lg:min-h-screen lg:justify-center" style={{ background: '#050B14', paddingTop: '120px' }}>
 
         {/* ── Background ── */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
@@ -540,7 +540,7 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
         </div>
 
         {/* ── Main content ── */}
-        <div className="relative z-10 flex-1 flex flex-col items-center justify-center max-w-6xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 text-center">
+        <div className="relative z-10 lg:flex-1 flex flex-col items-center justify-center max-w-6xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 text-center">
 
           <FadeIn delay={0.07}>
             <h1 className="mb-5"
