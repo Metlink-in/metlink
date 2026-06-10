@@ -141,54 +141,54 @@ export function Header() {
                 {mobileOpen ? <X size={20} /> : <Menu size={20} />}
               </button>
             </div>
-
-            {/* Mobile menu */}
-            {mobileOpen && (
-              <>
-                <div className="md:hidden fixed inset-0 z-[-1]"
-                  style={{ top: 116, background: 'rgba(4,9,15,0.97)', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)' }}
-                  onClick={() => setMobileOpen(false)} />
-                <div data-lenis-prevent className="md:hidden fixed left-0 right-0 z-40 overflow-y-auto animate-slideInDown"
-                  style={{ top: 117, bottom: 0, background: '#04090F', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
-                  <div className="px-5 py-4 space-y-0.5 pb-10">
-                    <MobileNavLink href="/" onClose={() => setMobileOpen(false)}>Home</MobileNavLink>
-
-                    <MobileMegaSection title="Services" basePath="/services" groups={servicesMenu.groups}
-                      openGroup={mobileGroup} setOpenGroup={setMobileGroup} onClose={() => setMobileOpen(false)} />
-                    <MobileMegaSection title="Industries" basePath="/industries" groups={industriesMenu.groups}
-                      openGroup={mobileGroup} setOpenGroup={setMobileGroup} onClose={() => setMobileOpen(false)} />
-
-                    <div className="pt-2">
-                      {[['Company', '/company'], ['Portfolio', '/portfolio'], ['Blog', '/blog'], ['Product', '/product']].map(([label, href]) => (
-                        <MobileNavLink key={label} href={href} onClose={() => setMobileOpen(false)}>
-                          {label}
-                          {label === 'Product' && (
-                            <span className="ml-1.5 px-1.5 py-0.5 rounded text-[9px] font-black uppercase tracking-wider"
-                              style={{ background: 'rgba(43,128,240,0.2)', color: '#5FA8FF' }}>Soon</span>
-                          )}
-                        </MobileNavLink>
-                      ))}
-                    </div>
-
-                    <div className="pt-4 space-y-2.5 border-t mt-3" style={{ borderColor: 'rgba(255,255,255,0.07)' }}>
-                      <Link href="https://calendly.com/jitesh-bawaskar-metlinkai/30min"
-                        className="block text-center py-3.5 rounded-full text-sm font-semibold text-white"
-                        style={{ background: '#2B80F0', boxShadow: '0 4px 16px rgba(43,128,240,0.3)' }}
-                        onClick={() => setMobileOpen(false)}>
-                        Contact Us
-                      </Link>
-                      <button onClick={() => { setShowPopup(true); setMobileOpen(false); }}
-                        className="w-full text-center py-3.5 rounded-full text-sm font-semibold"
-                        style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.7)' }}>
-                        Get a Free Proposal
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </>
-            )}
           </div>
         </nav>
+
+        {/* Mobile menu — sibling of <nav> so nav's backdrop-filter doesn't trap the fixed panel */}
+        {mobileOpen && (
+          <div className="md:hidden">
+            <div className="fixed inset-0 z-[55]"
+              style={{ top: 116, background: 'rgba(4,9,15,0.97)', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)' }}
+              onClick={() => setMobileOpen(false)} />
+            <div data-lenis-prevent className="fixed left-0 right-0 z-[56] overflow-y-auto animate-slideInDown"
+              style={{ top: 116, bottom: 0, background: '#04090F', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
+              <div className="px-5 py-4 space-y-0.5 pb-10">
+                <MobileNavLink href="/" onClose={() => setMobileOpen(false)}>Home</MobileNavLink>
+
+                <MobileMegaSection title="Services" basePath="/services" groups={servicesMenu.groups}
+                  openGroup={mobileGroup} setOpenGroup={setMobileGroup} onClose={() => setMobileOpen(false)} />
+                <MobileMegaSection title="Industries" basePath="/industries" groups={industriesMenu.groups}
+                  openGroup={mobileGroup} setOpenGroup={setMobileGroup} onClose={() => setMobileOpen(false)} />
+
+                <div className="pt-2">
+                  {[['Company', '/company'], ['Portfolio', '/portfolio'], ['Blog', '/blog'], ['Product', '/product']].map(([label, href]) => (
+                    <MobileNavLink key={label} href={href} onClose={() => setMobileOpen(false)}>
+                      {label}
+                      {label === 'Product' && (
+                        <span className="ml-1.5 px-1.5 py-0.5 rounded text-[9px] font-black uppercase tracking-wider"
+                          style={{ background: 'rgba(43,128,240,0.2)', color: '#5FA8FF' }}>Soon</span>
+                      )}
+                    </MobileNavLink>
+                  ))}
+                </div>
+
+                <div className="pt-4 space-y-2.5 border-t mt-3" style={{ borderColor: 'rgba(255,255,255,0.07)' }}>
+                  <Link href="https://calendly.com/jitesh-bawaskar-metlinkai/30min"
+                    className="block text-center py-3.5 rounded-full text-sm font-semibold text-white"
+                    style={{ background: '#2B80F0', boxShadow: '0 4px 16px rgba(43,128,240,0.3)' }}
+                    onClick={() => setMobileOpen(false)}>
+                    Contact Us
+                  </Link>
+                  <button onClick={() => { setShowPopup(true); setMobileOpen(false); }}
+                    className="w-full text-center py-3.5 rounded-full text-sm font-semibold"
+                    style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.7)' }}>
+                    Get a Free Proposal
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Desktop two-pane mega-menu */}
         {menu && currentGroup && (

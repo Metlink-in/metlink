@@ -486,12 +486,13 @@ function HeroVideoBg({ active }: { active: number }) {
   }, [active]);
 
   return (
-    <div className="absolute inset-0 overflow-hidden">
+    <div className="absolute inset-0 overflow-hidden" style={{ background: 'radial-gradient(ellipse at 50% 30%, #0E2A4A 0%, #071018 55%, #050B14 100%)' }}>
       {heroVideos.map((src, i) => (
         <video
           key={src}
           ref={el => { refs.current[i] = el; }}
           src={src}
+          autoPlay
           muted
           loop
           playsInline
@@ -549,7 +550,7 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
     <div className="w-full overflow-x-hidden" style={{ background: BG }}>
 
       {/* ══ HERO ══════════════════════════════════════════════ */}
-      <section className="relative overflow-hidden flex flex-col" style={{ background: '#050B14', minHeight: '100vh', paddingTop: '80px' }}>
+      <section className="relative overflow-hidden flex flex-col min-h-[82svh] sm:min-h-screen" style={{ background: '#050B14', paddingTop: '96px' }}>
 
         {/* ── Background ── */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">

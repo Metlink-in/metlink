@@ -64,7 +64,7 @@ export function PopupForm() {
         style={{ maxHeight: '92vh', background: '#0B1628', border: '1px solid rgba(255,255,255,0.10)', boxShadow: '0 32px 80px rgba(0,0,0,0.5)' }}>
 
         {/* ── LEFT PANEL ── */}
-        <div className="relative md:w-[42%] flex-shrink-0 p-8 flex flex-col justify-between overflow-hidden"
+        <div className="relative md:w-[42%] flex-shrink-0 p-8 hidden md:flex flex-col justify-between overflow-hidden"
           style={{ background: 'linear-gradient(160deg, #0A1322 0%, #0E2138 60%, #07111F 100%)', borderRight: '1px solid rgba(255,255,255,0.08)' }}>
 
           {/* BG glow */}
