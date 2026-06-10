@@ -27,7 +27,7 @@ const s = (
   features: string[],
 ): ServiceItem => ({ name, slug, icon, tagline, description, features });
 
-export const serviceCategories: ServiceCategory[] = [
+const _serviceCategories: ServiceCategory[] = [
   {
     name: 'Digital Marketing',
     slug: 'digital-marketing',
@@ -198,6 +198,12 @@ export const serviceCategories: ServiceCategory[] = [
         ['Email & SMS drip campaigns', 'Behavior-based journeys', 'Lead scoring & segmentation', 'Re-engagement flows', 'Multi-channel orchestration', 'Analytics & A/B testing']),
     ],
   },
+];
+
+// Surface "Automation First" at the top of the Services list.
+export const serviceCategories: ServiceCategory[] = [
+  ..._serviceCategories.filter((c) => c.slug === 'automation-first'),
+  ..._serviceCategories.filter((c) => c.slug !== 'automation-first'),
 ];
 
 export function getCategoryBySlug(slug: string): ServiceCategory | undefined {
