@@ -14,6 +14,7 @@ export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading]     = useState(false);
   const [error, setError] = useState('');
+  const [errors, setErrors] = useState<Record<string, string>>({});
   const [info, setInfo] = useState({
     email: 'hello@metlink.in', emailNote: 'Reply within 2 hours',
     phone: '+91 8602333400',   phoneNote: '9AM to 6PM IST',
@@ -25,11 +26,28 @@ export default function ContactPage() {
     fetch('/api/public/content/contact').then(r => r.json()).then(res => { if (res.data) setInfo(res.data); }).catch(() => {});
   }, []);
 
-  const set = (e: React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement|HTMLSelectElement>) =>
-    setForm(p => ({ ...p, [e.target.name]: e.target.value }));
+  const set = (e: React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement|HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setForm(p => ({ ...p, [name]: value }));
+    setErrors(p => { if (!p[name]) return p; const n = { ...p }; delete n[name]; return n; });
+  };
+
+  const validate = () => {
+    const e: Record<string, string> = {};
+    if (!form.name.trim()) e.name = 'Please enter your name.';
+    else if (form.name.trim().length < 2) e.name = 'Please enter your full name.';
+    const email = form.email.trim();
+    if (!email) e.email = 'Please enter your email.';
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) e.email = 'Enter a valid email address.';
+    if (!form.message.trim()) e.message = 'Please tell us about your project.';
+    else if (form.message.trim().length < 10) e.message = 'Please add a little more detail (at least 10 characters).';
+    setErrors(e);
+    return Object.keys(e).length === 0;
+  };
 
   const submit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
+    if (!validate()) return;
     setLoading(true);
     setError('');
     try {
@@ -202,11 +220,13 @@ export default function ContactPage() {
                         <div className="grid sm:grid-cols-2 gap-5">
                           <div className="space-y-2">
                             <label className="block text-[10px] uppercase tracking-[0.22em] font-medium" style={{ color: 'rgba(255,255,255,0.4)' }}>Full Name *</label>
-                            <input type="text" name="name" value={form.name} onChange={set} placeholder="John Smith" required
-                              className="w-full px-4 py-3.5 text-sm focus:outline-none placeholder:text-white/20 transition-all"
-                              style={inp.base}
-                              onFocus={e => (e.currentTarget.style.borderColor = inp.focus)}
-                              onBlur={e => (e.currentTarget.style.borderColor = inp.blur)} />
+                            <input type="text" name="name" value={form.name} onChange={set} placeholder="John Smith"
+                              aria-invalid={!!errors.name}
+                              className="w-full px-4 py-3.5 text-sm focus:outline-none placeholder:text-white/30 transition-all"
+                              style={{ ...inp.base, borderColor: errors.name ? 'rgba(239,68,68,0.6)' : inp.blur }}
+                              onFocus={e => (e.currentTarget.style.borderColor = errors.name ? 'rgba(239,68,68,0.6)' : inp.focus)}
+                              onBlur={e => (e.currentTarget.style.borderColor = errors.name ? 'rgba(239,68,68,0.6)' : inp.blur)} />
+                            {errors.name && <p className="text-xs" style={{ color: '#FCA5A5' }}>{errors.name}</p>}
                           </div>
                           <div className="space-y-2">
                             <label className="block text-[10px] uppercase tracking-[0.22em] font-medium" style={{ color: 'rgba(255,255,255,0.4)' }}>Company</label>
@@ -221,11 +241,13 @@ export default function ContactPage() {
                         {/* Row 2 */}
                         <div className="space-y-2">
                           <label className="block text-[10px] uppercase tracking-[0.22em] font-medium" style={{ color: 'rgba(255,255,255,0.4)' }}>Work Email *</label>
-                          <input type="email" name="email" value={form.email} onChange={set} placeholder="you@company.com" required
-                            className="w-full px-4 py-3.5 text-sm focus:outline-none placeholder:text-white/20 transition-all"
-                            style={inp.base}
-                            onFocus={e => (e.currentTarget.style.borderColor = inp.focus)}
-                            onBlur={e => (e.currentTarget.style.borderColor = inp.blur)} />
+                          <input type="email" name="email" value={form.email} onChange={set} placeholder="you@company.com"
+                            aria-invalid={!!errors.email}
+                            className="w-full px-4 py-3.5 text-sm focus:outline-none placeholder:text-white/30 transition-all"
+                            style={{ ...inp.base, borderColor: errors.email ? 'rgba(239,68,68,0.6)' : inp.blur }}
+                            onFocus={e => (e.currentTarget.style.borderColor = errors.email ? 'rgba(239,68,68,0.6)' : inp.focus)}
+                            onBlur={e => (e.currentTarget.style.borderColor = errors.email ? 'rgba(239,68,68,0.6)' : inp.blur)} />
+                          {errors.email && <p className="text-xs" style={{ color: '#FCA5A5' }}>{errors.email}</p>}
                         </div>
 
                         {/* Row 3 */}
@@ -257,12 +279,14 @@ export default function ContactPage() {
                         {/* Row 4 */}
                         <div className="space-y-2">
                           <label className="block text-[10px] uppercase tracking-[0.22em] font-medium" style={{ color: 'rgba(255,255,255,0.4)' }}>Project Details *</label>
-                          <textarea name="message" value={form.message} onChange={set} rows={5} required
+                          <textarea name="message" value={form.message} onChange={set} rows={5}
+                            aria-invalid={!!errors.message}
                             placeholder="Describe your goals, current challenges, and what success looks like for you..."
-                            className="w-full px-4 py-4 text-sm focus:outline-none placeholder:text-white/20 resize-none transition-all"
-                            style={inp.base}
-                            onFocus={e => (e.currentTarget.style.borderColor = inp.focus)}
-                            onBlur={e => (e.currentTarget.style.borderColor = inp.blur)} />
+                            className="w-full px-4 py-4 text-sm focus:outline-none placeholder:text-white/30 resize-none transition-all"
+                            style={{ ...inp.base, borderColor: errors.message ? 'rgba(239,68,68,0.6)' : inp.blur }}
+                            onFocus={e => (e.currentTarget.style.borderColor = errors.message ? 'rgba(239,68,68,0.6)' : inp.focus)}
+                            onBlur={e => (e.currentTarget.style.borderColor = errors.message ? 'rgba(239,68,68,0.6)' : inp.blur)} />
+                          {errors.message && <p className="text-xs" style={{ color: '#FCA5A5' }}>{errors.message}</p>}
                         </div>
 
                         {/* Error */}

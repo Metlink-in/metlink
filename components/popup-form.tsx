@@ -9,6 +9,7 @@ export function PopupForm() {
   const [form, setForm]           = useState({ name: '', email: '', phone: '', budget: '', message: '' });
   const [loading, setLoading]     = useState(false);
   const [error, setError]         = useState('');
+  const [errors, setErrors]       = useState<Record<string, string>>({});
 
   useEffect(() => {
     if (sessionStorage.getItem('ml_popup')) return;
@@ -18,8 +19,21 @@ export function PopupForm() {
 
   const close = () => { sessionStorage.setItem('ml_popup', '1'); setOpen(false); };
 
+  const validate = () => {
+    const er: Record<string, string> = {};
+    if (!form.name.trim()) er.name = 'Please enter your name.';
+    const email = form.email.trim();
+    if (!email) er.email = 'Please enter your email.';
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) er.email = 'Enter a valid email address.';
+    if (form.phone.trim() && !/^[+\d][\d\s().-]{6,}$/.test(form.phone.trim())) er.phone = 'Enter a valid phone number.';
+    if (!form.message.trim()) er.message = 'Please share a few details.';
+    setErrors(er);
+    return Object.keys(er).length === 0;
+  };
+
   const handleSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
+    if (!validate()) return;
     setLoading(true);
     setError('');
     try {
@@ -153,29 +167,38 @@ export function PopupForm() {
                   <p className="text-sm" style={{ color: 'rgba(255,255,255,0.55)' }}>Complete the form and we&apos;ll validate your idea now.</p>
                 </div>
 
-                <form onSubmit={handleSubmit} className="space-y-3.5">
-                  <input type="text" placeholder="Full Name *" required value={form.name}
-                    onChange={e => setForm(p => ({ ...p, name: e.target.value }))}
-                    className={inputCls} style={inputStyle}
-                    onFocus={e => (e.currentTarget.style.borderColor = 'rgba(43,128,240,0.45)')}
-                    onBlur={e => (e.currentTarget.style.borderColor = inputBorder)} />
+                <form onSubmit={handleSubmit} className="space-y-3.5" noValidate>
+                  <div>
+                    <input type="text" placeholder="Full Name *" value={form.name} aria-invalid={!!errors.name}
+                      onChange={e => { setForm(p => ({ ...p, name: e.target.value })); setErrors(p => ({ ...p, name: '' })); }}
+                      className={inputCls} style={{ ...inputStyle, borderColor: errors.name ? 'rgba(239,68,68,0.6)' : inputBorder }}
+                      onFocus={e => (e.currentTarget.style.borderColor = errors.name ? 'rgba(239,68,68,0.6)' : 'rgba(43,128,240,0.45)')}
+                      onBlur={e => (e.currentTarget.style.borderColor = errors.name ? 'rgba(239,68,68,0.6)' : inputBorder)} />
+                    {errors.name && <p className="text-xs mt-1.5" style={{ color: '#FCA5A5' }}>{errors.name}</p>}
+                  </div>
 
-                  <input type="email" placeholder="Email Address *" required value={form.email}
-                    onChange={e => setForm(p => ({ ...p, email: e.target.value }))}
-                    className={inputCls} style={inputStyle}
-                    onFocus={e => (e.currentTarget.style.borderColor = 'rgba(43,128,240,0.45)')}
-                    onBlur={e => (e.currentTarget.style.borderColor = inputBorder)} />
+                  <div>
+                    <input type="email" placeholder="Email Address *" value={form.email} aria-invalid={!!errors.email}
+                      onChange={e => { setForm(p => ({ ...p, email: e.target.value })); setErrors(p => ({ ...p, email: '' })); }}
+                      className={inputCls} style={{ ...inputStyle, borderColor: errors.email ? 'rgba(239,68,68,0.6)' : inputBorder }}
+                      onFocus={e => (e.currentTarget.style.borderColor = errors.email ? 'rgba(239,68,68,0.6)' : 'rgba(43,128,240,0.45)')}
+                      onBlur={e => (e.currentTarget.style.borderColor = errors.email ? 'rgba(239,68,68,0.6)' : inputBorder)} />
+                    {errors.email && <p className="text-xs mt-1.5" style={{ color: '#FCA5A5' }}>{errors.email}</p>}
+                  </div>
 
-                  <div className="flex gap-2">
-                    <div className="flex items-center gap-2 px-3 py-3 rounded-xl text-sm flex-shrink-0 whitespace-nowrap"
-                      style={{ ...inputStyle, color: 'rgba(255,255,255,0.7)' }}>
-                      🇮🇳 +91
+                  <div>
+                    <div className="flex gap-2">
+                      <div className="flex items-center gap-2 px-3 py-3 rounded-xl text-sm flex-shrink-0 whitespace-nowrap"
+                        style={{ ...inputStyle, color: 'rgba(255,255,255,0.7)' }}>
+                        🇮🇳 +91
+                      </div>
+                      <input type="tel" placeholder="Phone number" value={form.phone} aria-invalid={!!errors.phone}
+                        onChange={e => { setForm(p => ({ ...p, phone: e.target.value })); setErrors(p => ({ ...p, phone: '' })); }}
+                        className={`${inputCls} flex-1`} style={{ ...inputStyle, borderColor: errors.phone ? 'rgba(239,68,68,0.6)' : inputBorder }}
+                        onFocus={e => (e.currentTarget.style.borderColor = errors.phone ? 'rgba(239,68,68,0.6)' : 'rgba(43,128,240,0.45)')}
+                        onBlur={e => (e.currentTarget.style.borderColor = errors.phone ? 'rgba(239,68,68,0.6)' : inputBorder)} />
                     </div>
-                    <input type="tel" placeholder="Phone number" value={form.phone}
-                      onChange={e => setForm(p => ({ ...p, phone: e.target.value }))}
-                      className={`${inputCls} flex-1`} style={inputStyle}
-                      onFocus={e => (e.currentTarget.style.borderColor = 'rgba(43,128,240,0.45)')}
-                      onBlur={e => (e.currentTarget.style.borderColor = inputBorder)} />
+                    {errors.phone && <p className="text-xs mt-1.5" style={{ color: '#FCA5A5' }}>{errors.phone}</p>}
                   </div>
 
                   <select value={form.budget}
@@ -190,13 +213,16 @@ export function PopupForm() {
                     ))}
                   </select>
 
-                  <textarea rows={3}
-                    placeholder="Please share any information that will help us provide an accurate estimate. *"
-                    required value={form.message}
-                    onChange={e => setForm(p => ({ ...p, message: e.target.value }))}
-                    className={`${inputCls} resize-none`} style={inputStyle}
-                    onFocus={e => (e.currentTarget.style.borderColor = 'rgba(43,128,240,0.45)')}
-                    onBlur={e => (e.currentTarget.style.borderColor = inputBorder)} />
+                  <div>
+                    <textarea rows={3}
+                      placeholder="Please share any information that will help us provide an accurate estimate. *"
+                      value={form.message} aria-invalid={!!errors.message}
+                      onChange={e => { setForm(p => ({ ...p, message: e.target.value })); setErrors(p => ({ ...p, message: '' })); }}
+                      className={`${inputCls} resize-none`} style={{ ...inputStyle, borderColor: errors.message ? 'rgba(239,68,68,0.6)' : inputBorder }}
+                      onFocus={e => (e.currentTarget.style.borderColor = errors.message ? 'rgba(239,68,68,0.6)' : 'rgba(43,128,240,0.45)')}
+                      onBlur={e => (e.currentTarget.style.borderColor = errors.message ? 'rgba(239,68,68,0.6)' : inputBorder)} />
+                    {errors.message && <p className="text-xs mt-1.5" style={{ color: '#FCA5A5' }}>{errors.message}</p>}
+                  </div>
 
                   <label className="flex items-center gap-3 cursor-pointer group select-none">
                     <input type="checkbox" className="w-4 h-4 rounded cursor-pointer accent-[#2B80F0]" />
