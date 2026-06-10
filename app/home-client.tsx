@@ -352,8 +352,8 @@ const techStack = [
 
 
 const BG   = '#07111F';
-const BG2  = '#0B1628';
-const BDR  = '1px solid rgba(255,255,255,0.05)';
+const BG2  = '#091421';
+const BDR  = '1px solid rgba(255,255,255,0.022)';
 const AC   = '#2B80F0';
 
 /* ─── CMS types ─────────────────────────────────────────────── */
