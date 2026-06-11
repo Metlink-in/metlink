@@ -39,9 +39,18 @@ export function Header() {
   });
   const [mobileGroup, setMobileGroup] = useState<string | null>(null);
   const [showPopup, setShowPopup] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => () => { if (timeoutRef.current) clearTimeout(timeoutRef.current); }, []);
+
+  // Give the navbar a solid blurred background once the page is scrolled.
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   const open = (key: Exclude<MenuKey, null>) => { if (window.innerWidth >= 768) { if (timeoutRef.current) clearTimeout(timeoutRef.current); setActiveMenu(key); } };
   const close = () => { if (window.innerWidth >= 768) { timeoutRef.current = setTimeout(() => setActiveMenu(null), 180); } };
@@ -57,10 +66,11 @@ export function Header() {
         <nav
           className="transition-all duration-500"
           style={{
-            background: mobileOpen ? '#04090F' : 'transparent',
-            borderBottom: mobileOpen ? '1px solid rgba(255,255,255,0.08)' : '1px solid transparent',
-            backdropFilter: mobileOpen ? 'blur(20px)' : 'none',
-            WebkitBackdropFilter: mobileOpen ? 'blur(20px)' : 'none',
+            background: mobileOpen ? '#04090F' : scrolled ? 'rgba(4,9,15,0.82)' : 'transparent',
+            borderBottom: (mobileOpen || scrolled) ? '1px solid rgba(255,255,255,0.08)' : '1px solid transparent',
+            backdropFilter: (mobileOpen || scrolled) ? 'blur(20px)' : 'none',
+            WebkitBackdropFilter: (mobileOpen || scrolled) ? 'blur(20px)' : 'none',
+            boxShadow: scrolled && !mobileOpen ? '0 8px 30px rgba(0,0,0,0.35)' : 'none',
           }}
         >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
