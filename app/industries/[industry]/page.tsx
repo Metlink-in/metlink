@@ -50,10 +50,9 @@ export default async function IndustryPage({ params }: { params: Promise<{ indus
             <div
               className="group flex flex-col md:flex-row gap-8 lg:gap-12 p-8 lg:p-10 rounded-3xl transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
               style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.07)' }}>
-              <div className="md:w-1/3 flex-shrink-0">
+              <div className="md:w-3/5 flex-shrink-0">
                 <TileIcon slug={tp.slug} className="w-9 h-9 mb-4 text-white/90" strokeWidth={1.3} />
-                <h2 className="text-2xl mb-2" style={{ color: '#FFFFFF' }}>{tp.name}</h2>
-                <p className="text-sm font-medium mb-4" style={{ color: accent }}>{tp.tagline}</p>
+                <h2 className="text-2xl mb-3" style={{ color: '#FFFFFF' }}>{tp.name}</h2>
                 <p className="text-sm leading-relaxed mb-6" style={{ color: 'rgba(255,255,255,0.6)' }}>{tp.description}</p>
                 <Link href={`/industries/${data.slug}/${tp.slug}`}
                   className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-bold transition-all hover:brightness-95"
@@ -62,13 +61,12 @@ export default async function IndustryPage({ params }: { params: Promise<{ indus
                 </Link>
               </div>
               <div className="hidden md:block w-px" style={{ background: 'rgba(255,255,255,0.12)' }} />
-              <div className="md:w-2/3 grid sm:grid-cols-2 gap-x-8 gap-y-4 content-start">
-                {tp.features.map((feat) => (
-                  <div key={feat} className="flex items-start gap-3">
-                    <CheckCircle className="w-4 h-4 mt-0.5 flex-shrink-0" style={{ color: accent }} />
-                    <span className="text-sm" style={{ color: '#FFFFFF' }}>{feat}</span>
-                  </div>
-                ))}
+              <div className="md:w-2/5 flex flex-col justify-center">
+                <p className="text-[10px] font-bold uppercase tracking-[0.2em] mb-3" style={{ color: accent }}>Business Impact</p>
+                <div className="flex items-start gap-3">
+                  <CheckCircle className="w-6 h-6 mt-0.5 flex-shrink-0" style={{ color: accent }} />
+                  <span className="text-lg font-bold leading-snug" style={{ color: '#FFFFFF' }}>{tp.impact}</span>
+                </div>
               </div>
             </div>
             </StaggerItem>

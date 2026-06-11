@@ -71,15 +71,21 @@ const ICONS: Record<string, LucideIcon> = {
   'crm-sales-automation': BarChart3,
   'marketing-automation': Megaphone,
 
-  // ── Industry categories ──
+  // ── Industry categories (operations-led catalogue) ──
+  'restaurant-cafe': Hotel,
+  'real-estate': Building2,
+  'healthcare-clinics': HeartPulse,
+  'education': Users,
+  'ecommerce-d2c': ShoppingCart,
+  'hr-recruitment': Users,
+  'finance-accounting': Landmark,
+  'logistics-supply-chain': Truck,
+  // legacy industry slugs (kept as harmless fallbacks)
   'finance': Landmark,
-  'insurance': Shield,
   'manufacturing': Factory,
   'logistics': Truck,
-  'hospitality': Hotel,
   'retail': ShoppingCart,
   'healthcare': HeartPulse,
-  'consumer-electronics': Smartphone,
   'startup': Rocket,
 
   // ── Finance topics ──

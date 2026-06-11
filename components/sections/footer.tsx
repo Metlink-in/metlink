@@ -21,11 +21,11 @@ const defaultColumns: FooterColumn[] = [
   {
     heading: 'Industries',
     links: [
-      { label: 'Finance',     href: '/industries/finance' },
-      { label: 'Healthcare',  href: '/industries/healthcare' },
-      { label: 'Retail',      href: '/industries/retail' },
-      { label: 'Logistics',   href: '/industries/logistics' },
-      { label: 'Startup',     href: '/industries/startup' },
+      { label: 'Restaurant & Cafe', href: '/industries/restaurant-cafe' },
+      { label: 'Real Estate',       href: '/industries/real-estate' },
+      { label: 'Healthcare',        href: '/industries/healthcare-clinics' },
+      { label: 'E-Commerce & D2C',  href: '/industries/ecommerce-d2c' },
+      { label: 'Finance',           href: '/industries/finance-accounting' },
     ],
   },
   {
