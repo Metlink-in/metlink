@@ -5,6 +5,7 @@ export interface IndustryTopic {
   description: string;   // what it does & how it helps
   impact: string;        // business impact / outcome
   icon: string;
+  image?: string;        // optional card image (path under /public)
 }
 
 export interface Industry {

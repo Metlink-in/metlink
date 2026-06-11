@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import { ChevronsUpDown, ArrowRight } from 'lucide-react';
 import { SectionBackdrop } from '@/components/section-backdrop';
-import { FadeIn, StaggerChildren, StaggerItem } from '@/components/fade-in';
+import { FadeIn } from '@/components/fade-in';
 import { TileIcon } from '@/components/tile-icon';
 import { industries } from '@/lib/industries-data';
 
@@ -54,6 +54,7 @@ function VideoLoop({ videos }: { videos: string[] }) {
 
 export default function AutomationFirstPage() {
   const [c, setC] = useState<Content>(FALLBACK);
+  const [expanded, setExpanded] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
     fetch('/api/public/content/automation-first')
@@ -98,7 +99,10 @@ export default function AutomationFirstPage() {
       </div>
 
       {/* Industry sections — each industry + its automation services as tiles */}
-      {industries.map((ind, i) => (
+      {industries.map((ind, i) => {
+        const isOpen = !!expanded[ind.slug];
+        const shown = isOpen ? ind.topics : ind.topics.slice(0, 5);
+        return (
         <section key={ind.slug} className="w-full py-14 relative overflow-hidden isolate"
           style={{ background: i % 2 === 0 ? '#0B1628' : '#07111F', borderTop: '1px solid rgba(255,255,255,0.04)' }}>
           <SectionBackdrop behind />
@@ -114,27 +118,45 @@ export default function AutomationFirstPage() {
               </Link>
             </FadeIn>
 
-            {/* Service tiles: icon with name below */}
-            <StaggerChildren className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-              {ind.topics.map((tp) => (
-                <StaggerItem key={tp.slug}>
-                  <Link href={`/industries/${ind.slug}/${tp.slug}`}
-                    className="group block rounded-2xl overflow-hidden h-full transition-all duration-300 hover:-translate-y-1"
-                    style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}>
-                    <div className="w-full flex items-center justify-center overflow-hidden relative"
-                      style={{ aspectRatio: '16 / 10', background: '#0B1628' }}>
-                      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                        style={{ background: 'radial-gradient(circle at 50% 40%, rgba(43,128,240,0.18), transparent 70%)' }} />
+            {/* Service tiles: image (or icon) with name below */}
+            <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
+              {shown.map((tp) => (
+                <Link key={tp.slug} href={`/industries/${ind.slug}/${tp.slug}`}
+                  className="group block rounded-2xl overflow-hidden h-full transition-all duration-300 hover:-translate-y-1"
+                  style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}>
+                  <div className="w-full flex items-center justify-center overflow-hidden relative"
+                    style={{ aspectRatio: '16 / 10', background: 'linear-gradient(150deg, #10243f 0%, #0B1628 60%, #091421 100%)' }}>
+                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                      style={{ background: 'radial-gradient(circle at 50% 40%, rgba(43,128,240,0.22), transparent 70%)' }} />
+                    {tp.image ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img src={tp.image} alt={tp.name}
+                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
+                    ) : (
                       <TileIcon slug={tp.slug} className="w-9 h-9 text-white/90 relative transition-transform duration-300 group-hover:scale-110" strokeWidth={1.3} />
-                    </div>
-                    <p className="text-sm font-semibold text-center px-3 py-4 group-hover:text-[#5FA8FF] transition-colors" style={{ color: '#FFFFFF' }}>{tp.name}</p>
-                  </Link>
-                </StaggerItem>
+                    )}
+                  </div>
+                  <p className="text-[13px] font-semibold text-center px-2.5 py-3.5 leading-snug group-hover:text-[#5FA8FF] transition-colors" style={{ color: '#FFFFFF' }}>{tp.name}</p>
+                </Link>
               ))}
-            </StaggerChildren>
+            </div>
+
+            {/* Show all / less */}
+            {ind.topics.length > 5 && (
+              <div className="flex justify-center mt-8">
+                <button
+                  onClick={() => setExpanded(p => ({ ...p, [ind.slug]: !isOpen }))}
+                  className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-sm font-semibold transition-all hover:brightness-110 active:scale-95"
+                  style={{ background: 'rgba(43,128,240,0.14)', border: '1px solid rgba(43,128,240,0.35)', color: '#5FA8FF' }}>
+                  {isOpen ? 'Show less' : `Show all ${ind.topics.length} services`}
+                  <ChevronsUpDown className="w-4 h-4" />
+                </button>
+              </div>
+            )}
           </div>
         </section>
-      ))}
+        );
+      })}
 
       {/* CTA */}
       <section className="py-16 sm:py-24 relative overflow-hidden isolate" style={{ background: '#07111F', borderTop: '1px solid rgba(255,255,255,0.04)' }}>
