@@ -82,10 +82,13 @@ const ICONS: Record<string, LucideIcon> = {
   'logistics-supply-chain': Truck,
   // legacy industry slugs (kept as harmless fallbacks)
   'finance': Landmark,
+  'insurance': Shield,
   'manufacturing': Factory,
   'logistics': Truck,
+  'hospitality': Hotel,
   'retail': ShoppingCart,
   'healthcare': HeartPulse,
+  'consumer-electronics': Smartphone,
   'startup': Rocket,
 
   // ── Finance topics ──

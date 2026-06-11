@@ -57,25 +57,26 @@ export default async function IndustryTopicPage({ params }: { params: Promise<{ 
         </div>
       </section>
 
-      {/* What it does + Business impact */}
+      {/* Capabilities */}
       <section className="py-16 sm:py-24 relative overflow-hidden isolate" style={{ background: '#0B1628', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
         <SectionBackdrop behind />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-start">
             <div>
-              <p className="text-xs font-bold uppercase tracking-[0.2em] mb-3" style={{ color: accent }}>What It Does</p>
-              <h2 className=" mb-6" style={{ color: '#FFFFFF' }}>How it helps your {indData.name.toLowerCase()} business</h2>
-              <p className="leading-relaxed" style={{ color: 'rgba(255,255,255,0.6)' }}>{tpData.description}</p>
+              <p className="text-xs font-bold uppercase tracking-[0.2em] mb-3" style={{ color: accent }}>Capabilities</p>
+              <h2 className=" mb-6" style={{ color: '#FFFFFF' }}>What We Will Deliver</h2>
+              <p className="leading-relaxed" style={{ color: 'rgba(255,255,255,0.6)' }}>
+                Our {tpData.name.toLowerCase()} solutions are tailored to the {indData.name.toLowerCase()} industry and designed to generate measurable impact.
+              </p>
             </div>
-            <div className="relative p-8 rounded-3xl overflow-hidden"
-              style={{ background: `linear-gradient(160deg, ${accent}1A, rgba(255,255,255,0.04))`, border: `1px solid ${accent}30` }}>
-              <div className="absolute -top-10 -right-10 w-40 h-40 rounded-full pointer-events-none"
-                style={{ background: `radial-gradient(circle, ${accent}33, transparent 70%)`, filter: 'blur(30px)' }} />
-              <p className="text-xs font-bold uppercase tracking-[0.2em] mb-4 relative" style={{ color: accent }}>Business Impact</p>
-              <div className="flex items-start gap-3 relative">
-                <CheckCircle className="w-7 h-7 shrink-0 mt-0.5" style={{ color: accent }} />
-                <p className="text-2xl font-bold leading-snug" style={{ color: '#FFFFFF', letterSpacing: '-0.02em' }}>{tpData.impact}</p>
-              </div>
+            <div className="grid sm:grid-cols-2 gap-4">
+              {tpData.features.map((feat) => (
+                <div key={feat} className="flex items-start gap-3 p-5 rounded-2xl"
+                  style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.07)' }}>
+                  <CheckCircle className="w-5 h-5 shrink-0 mt-0.5" style={{ color: accent }} />
+                  <span className="font-medium text-sm" style={{ color: '#FFFFFF' }}>{feat}</span>
+                </div>
+              ))}
             </div>
           </div>
         </div>

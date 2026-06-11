@@ -6,7 +6,7 @@ import { ChevronsUpDown, ArrowRight } from 'lucide-react';
 import { SectionBackdrop } from '@/components/section-backdrop';
 import { FadeIn } from '@/components/fade-in';
 import { TileIcon, genCover } from '@/components/tile-icon';
-import { industries } from '@/lib/industries-data';
+import { automationIndustries as industries } from '@/lib/automation-data';
 
 interface Item { name: string; image: string }
 interface Section { name: string; items: Item[] }
@@ -111,7 +111,7 @@ export default function AutomationFirstPage() {
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             {/* Industry name bar */}
             <FadeIn>
-              <Link href={`/industries/${ind.slug}`}
+              <Link href={`/automation/${ind.slug}`}
                 className="group flex items-center justify-center gap-3 rounded-2xl px-6 py-4 mb-8 text-center transition-all hover:brightness-110"
                 style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}>
                 <span className="text-2xl">{ind.icon}</span>
@@ -123,7 +123,7 @@ export default function AutomationFirstPage() {
             {/* Service tiles: image (or icon) with name below */}
             <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
               {shown.map((tp) => (
-                <Link key={tp.slug} href={`/industries/${ind.slug}/${tp.slug}`}
+                <Link key={tp.slug} href={`/automation/${ind.slug}/${tp.slug}`}
                   className="group block rounded-2xl overflow-hidden h-full transition-all duration-300 hover:-translate-y-1"
                   style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}>
                   <div className="w-full flex items-center justify-center overflow-hidden relative"

@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
-import { industries } from '@/lib/industries-data';
+import { automationIndustries as industries } from '@/lib/automation-data';
 
 type ImageMap = Record<string, string>; // key: `${industrySlug}/${topicSlug}` -> data URL
 
