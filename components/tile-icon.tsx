@@ -192,3 +192,66 @@ export function genCover(slug: string): string {
   const angle = 120 + (h % 80);
   return `linear-gradient(${angle}deg, hsl(${base} 72% 24%) 0%, hsl(${second} 60% 14%) 55%, #091421 100%)`;
 }
+
+function hashStr(s: string): number {
+  let h = 1779033703 ^ s.length;
+  for (let i = 0; i < s.length; i++) { h = Math.imul(h ^ s.charCodeAt(i), 3432918353); h = (h << 13) | (h >>> 19); }
+  return h >>> 0;
+}
+function mulberry32(a: number) {
+  return function () {
+    a |= 0; a = (a + 0x6D2B79F5) | 0;
+    let t = Math.imul(a ^ (a >>> 15), 1 | a);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+/**
+ * Procedurally generated illustration (a unique abstract "AI network" scene per
+ * slug) returned as an SVG data-URI — a real generated image, not a flat gradient.
+ * Use as a backgroundImage with background-size: cover.
+ */
+export function genCoverSvg(slug: string): string {
+  const rng = mulberry32(hashStr(slug));
+  const W = 400, H = 250;
+  const h1 = 200 + Math.floor(rng() * 60);
+  const h2 = 170 + Math.floor(rng() * 90);
+  const accent = `hsl(${190 + Math.floor(rng() * 70)} 90% 68%)`;
+
+  const n = 7 + Math.floor(rng() * 5);
+  const pts: { x: number; y: number; r: number }[] = [];
+  for (let i = 0; i < n; i++) pts.push({ x: 30 + rng() * (W - 60), y: 25 + rng() * (H - 50), r: 2 + rng() * 4 });
+
+  // connect each point to its 1–2 nearest neighbours
+  let lines = '';
+  for (let i = 0; i < pts.length; i++) {
+    const dists = pts.map((p, j) => ({ j, d: (p.x - pts[i].x) ** 2 + (p.y - pts[i].y) ** 2 })).filter(o => o.j !== i).sort((a, b) => a.d - b.d);
+    const links = 1 + Math.floor(rng() * 2);
+    for (let k = 0; k < links && k < dists.length; k++) {
+      const p = pts[dists[k].j];
+      lines += `<line x1="${pts[i].x.toFixed(0)}" y1="${pts[i].y.toFixed(0)}" x2="${p.x.toFixed(0)}" y2="${p.y.toFixed(0)}" stroke="${accent}" stroke-width="0.8" stroke-opacity="0.28"/>`;
+    }
+  }
+  const dots = pts.map(p => `<circle cx="${p.x.toFixed(0)}" cy="${p.y.toFixed(0)}" r="${p.r.toFixed(1)}" fill="${accent}" fill-opacity="0.85"/><circle cx="${p.x.toFixed(0)}" cy="${p.y.toFixed(0)}" r="${(p.r * 2.4).toFixed(1)}" fill="${accent}" fill-opacity="0.10"/>`).join('');
+  const bx = rng() * W, by = rng() * H;
+
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid slice">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0" stop-color="hsl(${h1} 70% 22%)"/>
+<stop offset="0.55" stop-color="hsl(${h2} 58% 13%)"/>
+<stop offset="1" stop-color="#091421"/>
+</linearGradient>
+<radialGradient id="blob" cx="50%" cy="50%" r="50%">
+<stop offset="0" stop-color="${accent}" stop-opacity="0.30"/>
+<stop offset="1" stop-color="${accent}" stop-opacity="0"/>
+</radialGradient>
+</defs>
+<rect width="${W}" height="${H}" fill="url(#bg)"/>
+<circle cx="${bx.toFixed(0)}" cy="${by.toFixed(0)}" r="120" fill="url(#blob)"/>
+${lines}${dots}
+</svg>`;
+
+  return `url("data:image/svg+xml,${encodeURIComponent(svg)}")`;
+}

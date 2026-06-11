@@ -5,7 +5,7 @@ import { SectionBackdrop } from '@/components/section-backdrop';
 import { ArrowRight, ChevronRight } from 'lucide-react';
 import { serviceCategories } from '@/lib/services-data';
 import { FadeIn, StaggerChildren, StaggerItem } from '@/components/fade-in';
-import { TileIcon, genCover } from '@/components/tile-icon';
+import { TileIcon, genCoverSvg } from '@/components/tile-icon';
 
 const catColors: Record<string, string> = {
   'digital-marketing':    '#2B80F0',
@@ -96,9 +96,7 @@ export default function ServicesPage() {
                       }}>
                       {/* Generated cover image */}
                       <div className="relative w-full flex items-center justify-center overflow-hidden"
-                        style={{ aspectRatio: '16 / 10', background: genCover(svc.slug) }}>
-                        <div className="absolute inset-0 opacity-40"
-                          style={{ backgroundImage: 'radial-gradient(rgba(255,255,255,0.10) 1px, transparent 1px)', backgroundSize: '14px 14px' }} />
+                        style={{ aspectRatio: '16 / 10', backgroundImage: genCoverSvg(svc.slug), backgroundSize: 'cover', backgroundPosition: 'center' }}>
                         <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                           style={{ background: 'radial-gradient(circle at 50% 40%, rgba(95,168,255,0.28), transparent 70%)' }} />
                         <TileIcon slug={svc.slug} className="relative w-9 h-9 text-white/90 transition-transform duration-300 group-hover:scale-110" strokeWidth={1.3} />
