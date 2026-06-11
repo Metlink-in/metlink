@@ -95,6 +95,16 @@ export function Header() {
                   </button>
                 </div>
 
+                {/* Industries trigger */}
+                <div className="relative" onMouseEnter={() => open('industries')} onMouseLeave={close}>
+                  <button
+                    className="px-4 py-1.5 rounded-full text-sm font-normal transition-all flex items-center gap-1.5"
+                    style={{ color: activeMenu === 'industries' ? '#FFFFFF' : 'rgba(255,255,255,0.75)', background: activeMenu === 'industries' ? 'rgba(255,255,255,0.09)' : 'transparent' }}>
+                    Industries
+                    <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${activeMenu === 'industries' ? 'rotate-180' : ''}`} />
+                  </button>
+                </div>
+
                 {[['Company', '/company'], ['Portfolio', '/portfolio'], ['Blog', '/blog'], ['Product', '/product']].map(([label, href]) => (
                   <NavLink key={label} href={href}>
                     {label}
@@ -146,6 +156,8 @@ export function Header() {
                 <MobileNavLink href="/" onClose={() => setMobileOpen(false)}>Home</MobileNavLink>
 
                 <MobileMegaSection title="Services" basePath="/services" groups={servicesMenu.groups}
+                  openGroup={mobileGroup} setOpenGroup={setMobileGroup} onClose={() => setMobileOpen(false)} />
+                <MobileMegaSection title="Industries" basePath="/industries" groups={industriesMenu.groups}
                   openGroup={mobileGroup} setOpenGroup={setMobileGroup} onClose={() => setMobileOpen(false)} />
 
                 <div className="pt-2">
