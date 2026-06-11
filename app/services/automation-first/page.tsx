@@ -99,10 +99,6 @@ export default function AutomationFirstPage() {
         </div>
       </section>
 
-      {/* Divider */}
-      <div className="flex justify-center py-6" style={{ background: '#07111F' }}>
-        <ChevronsUpDown className="w-7 h-7" style={{ color: 'rgba(95,168,255,0.7)' }} />
-      </div>
 
       {/* Industry sections — each industry + its automation services as tiles */}
       {industries.map((ind, i) => {
