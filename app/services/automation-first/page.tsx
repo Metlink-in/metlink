@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 import { ChevronsUpDown, ArrowRight } from 'lucide-react';
 import { SectionBackdrop } from '@/components/section-backdrop';
 import { FadeIn } from '@/components/fade-in';
-import { TileIcon, genCoverSvg } from '@/components/tile-icon';
+import { genCoverSvg } from '@/components/tile-icon';
 import { automationIndustries as industries } from '@/lib/automation-data';
 
 interface Item { name: string; image: string }
@@ -130,12 +130,10 @@ export default function AutomationFirstPage() {
                     style={{ aspectRatio: '16 / 10', backgroundImage: genCoverSvg(tp.slug), backgroundSize: 'cover', backgroundPosition: 'center' }}>
                     <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                       style={{ background: 'radial-gradient(circle at 50% 40%, rgba(95,168,255,0.28), transparent 70%)' }} />
-                    {(imageMap[`${ind.slug}/${tp.slug}`] || tp.image) ? (
+                    {(imageMap[`${ind.slug}/${tp.slug}`] || tp.image) && (
                       // eslint-disable-next-line @next/next/no-img-element
                       <img src={imageMap[`${ind.slug}/${tp.slug}`] || tp.image} alt={tp.name}
                         className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
-                    ) : (
-                      <TileIcon slug={tp.slug} className="w-9 h-9 text-white/90 relative transition-transform duration-300 group-hover:scale-110" strokeWidth={1.3} />
                     )}
                   </div>
                   <p className="text-[13px] font-semibold text-center px-2.5 py-3.5 leading-snug group-hover:text-[#5FA8FF] transition-colors" style={{ color: '#FFFFFF' }}>{tp.name}</p>
