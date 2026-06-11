@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState, useEffect, useRef } from 'react';
-import { Menu, X, ChevronDown, ChevronRight, ArrowRight } from 'lucide-react';
+import { Menu, X, ChevronDown, ChevronRight, ArrowRight, Sparkles } from 'lucide-react';
 import { serviceCategories } from '@/lib/services-data';
 import { industries } from '@/lib/industries-data';
 import { TileIcon } from '@/components/tile-icon';
@@ -244,6 +244,22 @@ export function Header() {
                   {/* Right grid */}
                   <div className="flex-1 min-w-0">
                     <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4 max-h-[58vh] overflow-y-auto px-1 pt-1.5 pb-2" data-lenis-prevent>
+                      {/* Overview tile for Automation First → landing page */}
+                      {menu.basePath === '/services' && currentGroup.slug === 'automation-first' && (
+                        <Link
+                          href="/services/automation-first"
+                          onClick={() => setActiveMenu(null)}
+                          className="group/tile rounded-xl p-4 flex flex-col transition-all duration-200 hover:-translate-y-0.5"
+                          style={{ background: 'linear-gradient(150deg, rgba(43,128,240,0.18), rgba(43,128,240,0.06))', border: '1px solid rgba(43,128,240,0.4)' }}
+                          onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(95,168,255,0.7)'; }}
+                          onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(43,128,240,0.4)'; }}>
+                          <Sparkles className="w-7 h-7 mb-3" style={{ color: '#5FA8FF' }} strokeWidth={1.5} />
+                          <span className="text-[13.5px] font-semibold leading-snug" style={{ color: '#FFFFFF' }}>
+                            Automation Services
+                          </span>
+                          <span className="text-[11px] mt-0.5" style={{ color: '#5FA8FF' }}>View all →</span>
+                        </Link>
+                      )}
                       {currentGroup.items.map(item => (
                         <Link
                           key={item.slug}
