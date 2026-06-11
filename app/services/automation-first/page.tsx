@@ -56,10 +56,16 @@ export default function AutomationFirstPage() {
   const [c, setC] = useState<Content>(FALLBACK);
   const [expanded, setExpanded] = useState<Record<string, boolean>>({});
 
+  const [imageMap, setImageMap] = useState<Record<string, string>>({});
+
   useEffect(() => {
     fetch('/api/public/content/automation-first')
       .then(r => r.json())
       .then(res => { if (res.data) setC({ ...FALLBACK, ...res.data }); })
+      .catch(() => {});
+    fetch('/api/public/content/automation-service-images')
+      .then(r => r.json())
+      .then(res => { if (res.data && typeof res.data === 'object') setImageMap(res.data); })
       .catch(() => {});
   }, []);
 
@@ -128,9 +134,9 @@ export default function AutomationFirstPage() {
                     style={{ aspectRatio: '16 / 10', background: 'linear-gradient(150deg, #10243f 0%, #0B1628 60%, #091421 100%)' }}>
                     <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                       style={{ background: 'radial-gradient(circle at 50% 40%, rgba(43,128,240,0.22), transparent 70%)' }} />
-                    {tp.image ? (
+                    {(imageMap[`${ind.slug}/${tp.slug}`] || tp.image) ? (
                       // eslint-disable-next-line @next/next/no-img-element
-                      <img src={tp.image} alt={tp.name}
+                      <img src={imageMap[`${ind.slug}/${tp.slug}`] || tp.image} alt={tp.name}
                         className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
                     ) : (
                       <TileIcon slug={tp.slug} className="w-9 h-9 text-white/90 relative transition-transform duration-300 group-hover:scale-110" strokeWidth={1.3} />
