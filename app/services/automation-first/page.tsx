@@ -5,6 +5,8 @@ import { useEffect, useRef, useState } from 'react';
 import { ChevronsUpDown, ArrowRight } from 'lucide-react';
 import { SectionBackdrop } from '@/components/section-backdrop';
 import { FadeIn, StaggerChildren, StaggerItem } from '@/components/fade-in';
+import { TileIcon } from '@/components/tile-icon';
+import { industries } from '@/lib/industries-data';
 
 interface Item { name: string; image: string }
 interface Section { name: string; items: Item[] }
@@ -95,38 +97,38 @@ export default function AutomationFirstPage() {
         <ChevronsUpDown className="w-7 h-7" style={{ color: 'rgba(95,168,255,0.7)' }} />
       </div>
 
-      {/* Sections */}
-      {c.sections.map((sec, i) => (
-        <section key={`${sec.name}-${i}`} className="w-full py-14 relative overflow-hidden isolate"
+      {/* Industry sections — each industry + its automation services as tiles */}
+      {industries.map((ind, i) => (
+        <section key={ind.slug} className="w-full py-14 relative overflow-hidden isolate"
           style={{ background: i % 2 === 0 ? '#0B1628' : '#07111F', borderTop: '1px solid rgba(255,255,255,0.04)' }}>
           <SectionBackdrop behind />
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            {/* Section name bar */}
+            {/* Industry name bar */}
             <FadeIn>
-              <div className="rounded-2xl px-6 py-4 mb-8 text-center"
+              <Link href={`/industries/${ind.slug}`}
+                className="group flex items-center justify-center gap-3 rounded-2xl px-6 py-4 mb-8 text-center transition-all hover:brightness-110"
                 style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}>
-                <h2 className="text-xl sm:text-2xl font-semibold" style={{ color: '#FFFFFF' }}>{sec.name}</h2>
-              </div>
+                <span className="text-2xl">{ind.icon}</span>
+                <h2 className="text-xl sm:text-2xl font-semibold" style={{ color: '#FFFFFF' }}>{ind.name}</h2>
+                <ChevronsUpDown className="w-4 h-4 rotate-90 opacity-50 group-hover:opacity-100 transition-opacity" style={{ color: '#5FA8FF' }} />
+              </Link>
             </FadeIn>
 
-            {/* Tiles: image with name below */}
+            {/* Service tiles: icon with name below */}
             <StaggerChildren className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-              {sec.items.map((item, j) => (
-                <StaggerItem key={`${item.name}-${j}`}>
-                  <div className="group rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1"
+              {ind.topics.map((tp) => (
+                <StaggerItem key={tp.slug}>
+                  <Link href={`/industries/${ind.slug}/${tp.slug}`}
+                    className="group block rounded-2xl overflow-hidden h-full transition-all duration-300 hover:-translate-y-1"
                     style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}>
-                    <div className="w-full flex items-center justify-center overflow-hidden"
-                      style={{ aspectRatio: '1 / 1', background: '#0B1628' }}>
-                      {item.image ? (
-                        // eslint-disable-next-line @next/next/no-img-element
-                        <img src={item.image} alt={item.name}
-                          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
-                      ) : (
-                        <span className="text-xs uppercase tracking-widest" style={{ color: 'rgba(255,255,255,0.25)' }}>Image</span>
-                      )}
+                    <div className="w-full flex items-center justify-center overflow-hidden relative"
+                      style={{ aspectRatio: '16 / 10', background: '#0B1628' }}>
+                      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                        style={{ background: 'radial-gradient(circle at 50% 40%, rgba(43,128,240,0.18), transparent 70%)' }} />
+                      <TileIcon slug={tp.slug} className="w-9 h-9 text-white/90 relative transition-transform duration-300 group-hover:scale-110" strokeWidth={1.3} />
                     </div>
-                    <p className="text-sm font-semibold text-center px-3 py-4" style={{ color: '#FFFFFF' }}>{item.name}</p>
-                  </div>
+                    <p className="text-sm font-semibold text-center px-3 py-4 group-hover:text-[#5FA8FF] transition-colors" style={{ color: '#FFFFFF' }}>{tp.name}</p>
+                  </Link>
                 </StaggerItem>
               ))}
             </StaggerChildren>
