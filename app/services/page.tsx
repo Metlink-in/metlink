@@ -5,7 +5,7 @@ import { SectionBackdrop } from '@/components/section-backdrop';
 import { ArrowRight, ChevronRight } from 'lucide-react';
 import { serviceCategories } from '@/lib/services-data';
 import { FadeIn, StaggerChildren, StaggerItem } from '@/components/fade-in';
-import { TileIcon } from '@/components/tile-icon';
+import { TileIcon, genCover } from '@/components/tile-icon';
 
 const catColors: Record<string, string> = {
   'digital-marketing':    '#2B80F0',
@@ -84,7 +84,7 @@ export default function ServicesPage() {
                 {cat.services.map(svc => (
                   <StaggerItem key={svc.slug}>
                     <Link href={`/services/${cat.slug}/${svc.slug}`}
-                      className="group relative overflow-hidden p-6 rounded-2xl transition-all duration-300 hover:-translate-y-1.5 flex flex-col h-full"
+                      className="group relative overflow-hidden rounded-2xl transition-all duration-300 hover:-translate-y-1.5 flex flex-col h-full"
                       style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.07)' }}
                       onMouseEnter={e => {
                         (e.currentTarget as HTMLElement).style.borderColor = `${accent}40`;
@@ -94,16 +94,21 @@ export default function ServicesPage() {
                         (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.12)';
                         (e.currentTarget as HTMLElement).style.boxShadow = 'none';
                       }}>
-                      {/* Hover image-reveal panel */}
-                      <div className="absolute inset-0 pointer-events-none translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out"
-                        style={{ background: `linear-gradient(160deg, ${accent}26 0%, ${accent}0D 45%, transparent 72%)` }} />
-                      <TileIcon slug={svc.slug} className="relative w-8 h-8 mb-4 text-white/90" strokeWidth={1.3} />
-                      <h3 className="text-base font-bold mb-2 group-hover:text-[#2B80F0] transition-colors" style={{ color: '#FFFFFF' }}>{svc.name}</h3>
-                      <p className="text-xs leading-relaxed mb-4 line-clamp-2 flex-1" style={{ color: 'rgba(255,255,255,0.6)' }}>{svc.tagline}</p>
-                      <div className="flex items-center gap-1 text-xs font-bold transition-colors" style={{ color: 'rgba(255,255,255,0.4)' }}
-                        onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = accent}
-                        onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.4)'}>
-                        Learn more <ChevronRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+                      {/* Generated cover image */}
+                      <div className="relative w-full flex items-center justify-center overflow-hidden"
+                        style={{ aspectRatio: '16 / 10', background: genCover(svc.slug) }}>
+                        <div className="absolute inset-0 opacity-40"
+                          style={{ backgroundImage: 'radial-gradient(rgba(255,255,255,0.10) 1px, transparent 1px)', backgroundSize: '14px 14px' }} />
+                        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                          style={{ background: 'radial-gradient(circle at 50% 40%, rgba(95,168,255,0.28), transparent 70%)' }} />
+                        <TileIcon slug={svc.slug} className="relative w-9 h-9 text-white/90 transition-transform duration-300 group-hover:scale-110" strokeWidth={1.3} />
+                      </div>
+                      <div className="p-5 flex flex-col flex-1">
+                        <h3 className="text-base font-bold mb-2 group-hover:text-[#2B80F0] transition-colors" style={{ color: '#FFFFFF' }}>{svc.name}</h3>
+                        <p className="text-xs leading-relaxed mb-4 line-clamp-2 flex-1" style={{ color: 'rgba(255,255,255,0.6)' }}>{svc.tagline}</p>
+                        <div className="flex items-center gap-1 text-xs font-bold" style={{ color: accent }}>
+                          Learn more <ChevronRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+                        </div>
                       </div>
                     </Link>
                   </StaggerItem>

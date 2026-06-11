@@ -175,3 +175,17 @@ export function TileIcon({ slug, className, strokeWidth = 1.4 }: { slug: string;
 export function hasIcon(slug: string): boolean {
   return slug in ICONS;
 }
+
+/**
+ * Deterministic "generated image" cover for a card — a unique on-brand gradient
+ * derived from the slug, so every service tile gets a distinct visual without
+ * needing an uploaded image.
+ */
+export function genCover(slug: string): string {
+  let h = 0;
+  for (let i = 0; i < slug.length; i++) h = (h * 31 + slug.charCodeAt(i)) >>> 0;
+  const base = 200 + (h % 60);          // 200–260: blue → indigo → violet
+  const second = 180 + ((h >> 3) % 80); // 180–260: teal → blue → violet
+  const angle = 120 + (h % 80);
+  return `linear-gradient(${angle}deg, hsl(${base} 72% 24%) 0%, hsl(${second} 60% 14%) 55%, #091421 100%)`;
+}

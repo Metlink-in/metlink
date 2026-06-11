@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 import { ChevronsUpDown, ArrowRight } from 'lucide-react';
 import { SectionBackdrop } from '@/components/section-backdrop';
 import { FadeIn } from '@/components/fade-in';
-import { TileIcon } from '@/components/tile-icon';
+import { TileIcon, genCover } from '@/components/tile-icon';
 import { industries } from '@/lib/industries-data';
 
 interface Item { name: string; image: string }
@@ -131,9 +131,12 @@ export default function AutomationFirstPage() {
                   className="group block rounded-2xl overflow-hidden h-full transition-all duration-300 hover:-translate-y-1"
                   style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}>
                   <div className="w-full flex items-center justify-center overflow-hidden relative"
-                    style={{ aspectRatio: '16 / 10', background: 'linear-gradient(150deg, #10243f 0%, #0B1628 60%, #091421 100%)' }}>
+                    style={{ aspectRatio: '16 / 10', background: genCover(tp.slug) }}>
+                    {/* generated cover texture */}
+                    <div className="absolute inset-0 opacity-40"
+                      style={{ backgroundImage: 'radial-gradient(rgba(255,255,255,0.10) 1px, transparent 1px)', backgroundSize: '14px 14px' }} />
                     <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                      style={{ background: 'radial-gradient(circle at 50% 40%, rgba(43,128,240,0.22), transparent 70%)' }} />
+                      style={{ background: 'radial-gradient(circle at 50% 40%, rgba(95,168,255,0.28), transparent 70%)' }} />
                     {(imageMap[`${ind.slug}/${tp.slug}`] || tp.image) ? (
                       // eslint-disable-next-line @next/next/no-img-element
                       <img src={imageMap[`${ind.slug}/${tp.slug}`] || tp.image} alt={tp.name}
