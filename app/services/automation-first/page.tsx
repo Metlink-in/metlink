@@ -135,13 +135,25 @@ export default function AutomationFirstPage() {
                   style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}>
                   <div className="w-full flex items-center justify-center overflow-hidden relative"
                     style={{ aspectRatio: '16 / 10', backgroundImage: genThemedCover(ind.slug, tp.slug), backgroundSize: 'cover', backgroundPosition: 'center' }}>
-                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"
                       style={{ background: 'radial-gradient(circle at 50% 40%, rgba(95,168,255,0.28), transparent 70%)' }} />
-                    {(imageMap[`${ind.slug}/${tp.slug}`] || tp.image) && (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img src={imageMap[`${ind.slug}/${tp.slug}`] || tp.image} alt={tp.name}
-                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
-                    )}
+                    {/* Photo (uploaded → per-service file → per-industry file). Hidden until it loads,
+                        so missing files gracefully fall back to the themed illustration. */}
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={imageMap[`${ind.slug}/${tp.slug}`] || tp.image || `/cards/${ind.slug}/${tp.slug}.jpg`}
+                      alt={tp.name}
+                      loading="lazy"
+                      className="absolute inset-0 w-full h-full object-cover transition-all duration-300 group-hover:scale-105"
+                      style={{ opacity: 0 }}
+                      onLoad={e => { (e.currentTarget as HTMLImageElement).style.opacity = '1'; }}
+                      onError={e => {
+                        const img = e.currentTarget as HTMLImageElement;
+                        const fallback = `/cards/${ind.slug}/_default.jpg`;
+                        if (!img.src.endsWith('/_default.jpg')) { img.src = fallback; }
+                        else { img.style.display = 'none'; }
+                      }}
+                    />
                   </div>
                   <p className="text-[13px] font-semibold text-center px-2.5 py-3.5 leading-snug group-hover:text-[#5FA8FF] transition-colors" style={{ color: '#FFFFFF' }}>{tp.name}</p>
                 </Link>
