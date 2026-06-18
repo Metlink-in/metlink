@@ -255,3 +255,62 @@ ${lines}${dots}
 
   return `url("data:image/svg+xml,${encodeURIComponent(svg)}")`;
 }
+
+// Original, per-industry themed line motifs (drawn around centre of a 400×250 frame).
+function industryMotif(industry: string, color: string): string {
+  const s = `stroke="${color}" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"`;
+  switch (industry) {
+    case 'restaurant-cafe':
+      return `<g ${s}><circle cx="200" cy="125" r="40"/><circle cx="200" cy="125" r="26" opacity="0.45"/><path d="M150 92 v66 M150 92 q-9 16 0 24 M150 92 q9 16 0 24"/><path d="M250 92 q11 5 11 25 q0 13 -11 13 v33"/></g>`;
+    case 'real-estate':
+      return `<g ${s}><path d="M158 162 v-42 l32 -26 l32 26 v42 z"/><path d="M178 162 v-24 h24 v24"/><rect x="228" y="120" width="34" height="42"/><path d="M228 120 h34 M236 132 h6 M250 132 h6 M236 144 h6 M250 144 h6"/></g>`;
+    case 'healthcare-clinics':
+      return `<g ${s}><path d="M146 130 h24 l8 -20 l13 40 l10 -30 l8 10 h33"/><g opacity="0.85"><path d="M252 106 v34 M235 123 h34"/></g></g>`;
+    case 'education':
+      return `<g ${s}><path d="M200 100 l54 23 l-54 23 l-54 -23 z"/><path d="M174 134 v24 q26 15 52 0 v-24"/><path d="M254 123 v28 M254 151 a3.5 3.5 0 1 0 0.1 0"/></g>`;
+    case 'ecommerce-d2c':
+      return `<g ${s}><path d="M166 114 h68 l9 52 a6 6 0 0 1 -6 6 h-74 a6 6 0 0 1 -6 -6 z"/><path d="M184 114 a16 16 0 0 1 32 0"/></g>`;
+    case 'hr-recruitment':
+      return `<g ${s}><circle cx="182" cy="112" r="13"/><path d="M160 160 q22 -28 44 0"/><circle cx="224" cy="118" r="10"/><path d="M208 160 q16 -22 34 0"/></g>`;
+    case 'finance-accounting':
+      return `<g ${s}><path d="M158 162 v-22 M180 162 v-36 M202 162 v-28 M224 162 v-50"/><path d="M150 150 l26 -24 l16 14 l32 -36"/><path d="M214 104 h14 v14"/></g>`;
+    default:
+      return `<g ${s}><circle cx="200" cy="125" r="38"/><path d="M200 87 v76 M162 125 h76"/></g>`;
+  }
+}
+
+/** Original industry-themed illustration cover (SVG data-URI) — varies per service. */
+export function genThemedCover(industry: string, slug: string): string {
+  const rng = mulberry32(hashStr(slug));
+  const W = 400, H = 250;
+  const h1 = 200 + Math.floor(rng() * 55);
+  const h2 = 170 + Math.floor(rng() * 90);
+  const accent = `hsl(${190 + Math.floor(rng() * 70)} 90% 70%)`;
+  const bx = (60 + rng() * 280).toFixed(0);
+  const by = (40 + rng() * 170).toFixed(0);
+  const rot = (rng() * 8 - 4).toFixed(1);
+
+  // faint scattered nodes for depth
+  let dots = '';
+  for (let i = 0; i < 5; i++) dots += `<circle cx="${(rng() * W).toFixed(0)}" cy="${(rng() * H).toFixed(0)}" r="${(1 + rng() * 1.6).toFixed(1)}" fill="${accent}" fill-opacity="0.5"/>`;
+
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid slice">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0" stop-color="hsl(${h1} 68% 20%)"/>
+<stop offset="0.55" stop-color="hsl(${h2} 56% 12%)"/>
+<stop offset="1" stop-color="#091421"/>
+</linearGradient>
+<radialGradient id="blob" cx="50%" cy="50%" r="50%">
+<stop offset="0" stop-color="${accent}" stop-opacity="0.30"/>
+<stop offset="1" stop-color="${accent}" stop-opacity="0"/>
+</radialGradient>
+</defs>
+<rect width="${W}" height="${H}" fill="url(#bg)"/>
+<circle cx="${bx}" cy="${by}" r="130" fill="url(#blob)"/>
+${dots}
+<g transform="rotate(${rot} 200 125)" opacity="0.92">${industryMotif(industry, accent)}</g>
+</svg>`;
+
+  return `url("data:image/svg+xml,${encodeURIComponent(svg)}")`;
+}
