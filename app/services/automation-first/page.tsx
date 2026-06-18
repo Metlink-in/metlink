@@ -124,21 +124,14 @@ export default function AutomationFirstPage() {
             {/* Industry name bar */}
             <FadeIn>
               <Link href={`/automation/${ind.slug}`}
-                className="group relative flex items-center justify-center gap-4 rounded-2xl px-6 py-5 mb-8 overflow-hidden transition-all duration-300 hover:-translate-y-0.5"
-                style={{ background: 'linear-gradient(120deg, rgba(43,128,240,0.16), rgba(255,255,255,0.03) 55%, rgba(139,92,246,0.12))', border: '1px solid rgba(95,168,255,0.22)' }}>
-                {/* top accent line */}
-                <span className="absolute top-0 left-0 right-0 h-px"
-                  style={{ background: 'linear-gradient(90deg, transparent, rgba(95,168,255,0.8), transparent)' }} />
-                {/* hover glow */}
-                <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                  style={{ background: 'radial-gradient(ellipse at 50% 0%, rgba(43,128,240,0.20), transparent 60%)' }} />
-                {/* icon chip */}
-                <span className="relative w-11 h-11 rounded-xl flex items-center justify-center text-2xl shrink-0 transition-transform duration-300 group-hover:scale-110"
-                  style={{ background: 'rgba(43,128,240,0.14)', border: '1px solid rgba(95,168,255,0.3)' }}>
+                className="group relative flex items-center gap-3 rounded-xl px-4 py-2.5 mb-6 overflow-hidden transition-all duration-200 hover:bg-white/[0.04]"
+                style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+                <span className="w-8 h-8 rounded-lg flex items-center justify-center text-base shrink-0"
+                  style={{ background: 'rgba(43,128,240,0.12)', border: '1px solid rgba(95,168,255,0.22)' }}>
                   {ind.icon}
                 </span>
-                <h2 className="relative text-xl sm:text-2xl font-bold tracking-tight" style={{ color: '#FFFFFF' }}>{ind.name}</h2>
-                <span className="relative hidden sm:inline-flex items-center gap-1 text-xs font-semibold ml-2 opacity-70 group-hover:opacity-100 transition-opacity" style={{ color: '#5FA8FF' }}>
+                <h2 className="text-base sm:text-lg font-semibold tracking-tight" style={{ color: '#FFFFFF' }}>{ind.name}</h2>
+                <span className="inline-flex items-center gap-1 text-[11px] font-semibold ml-auto opacity-60 group-hover:opacity-100 transition-opacity" style={{ color: '#5FA8FF' }}>
                   View all <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
                 </span>
               </Link>
