@@ -33,8 +33,8 @@ function VideoLoop({ videos }: { videos: string[] }) {
   if (!videos.length) return null;
 
   return (
-    <div className="relative w-full rounded-3xl overflow-hidden"
-      style={{ aspectRatio: '16 / 8', background: '#050B14', border: '1px solid rgba(255,255,255,0.08)' }}>
+    <div className="relative w-full rounded-3xl overflow-hidden flex items-center justify-center"
+      style={{ background: '#050B14', border: '1px solid rgba(255,255,255,0.08)' }}>
       <video
         ref={ref}
         key={videos[idx]}
@@ -44,10 +44,9 @@ function VideoLoop({ videos }: { videos: string[] }) {
         playsInline
         preload="auto"
         onEnded={() => setIdx(i => (i + 1) % videos.length)}
-        className="absolute inset-0 w-full h-full object-cover"
+        className="w-auto max-w-full object-contain"
+        style={{ maxHeight: '78vh' }}
       />
-      <div className="absolute inset-0 pointer-events-none"
-        style={{ background: 'linear-gradient(180deg, rgba(5,11,20,0.15) 0%, transparent 35%, rgba(5,11,20,0.45) 100%)' }} />
     </div>
   );
 }
