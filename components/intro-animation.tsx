@@ -66,43 +66,45 @@ export function IntroAnimation() {
         opacity: 0.7,
       }} />
 
-      {/* Deep portal glow */}
+      {/* Deep portal glow — multi-hue */}
       <div style={{
         position: 'absolute',
-        width: 480, height: 480,
+        width: 520, height: 520,
         borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(43,128,240,0.28) 0%, rgba(43,128,240,0.08) 45%, transparent 70%)',
-        filter: 'blur(48px)',
+        background: 'radial-gradient(circle, rgba(56,189,248,0.30) 0%, rgba(43,128,240,0.16) 38%, rgba(139,92,246,0.10) 60%, transparent 75%)',
+        filter: 'blur(54px)',
         opacity: showRings ? 1 : 0,
-        transform: isExpanded ? 'scale(3.2)' : 'scale(0.6)',
+        transform: isExpanded ? 'scale(3.4)' : 'scale(0.6)',
         transition: 'opacity 0.7s ease, transform 1.1s cubic-bezier(0.16,1,0.3,1)',
       }} />
 
-      {/* Portal rings, expand outward */}
-      {[120, 200, 290, 390, 500].map((size, i) => (
-        <div key={size} style={{
-          position: 'absolute',
-          width: size, height: size,
-          borderRadius: '50%',
-          border: `1px solid rgba(43,128,240,${(0.7 - i * 0.12).toFixed(2)})`,
-          boxShadow: `0 0 ${12 + i * 10}px rgba(43,128,240,${(0.3 - i * 0.05).toFixed(2)}), inset 0 0 ${8 + i * 4}px rgba(43,128,240,${(0.12 - i * 0.02).toFixed(2)})`,
-          opacity: showRings ? 1 : 0,
-          transform: isExpanded
-            ? `scale(${1 + i * 0.55})`
-            : 'scale(0.35)',
-          transition: `opacity 0.5s ease ${i * 0.055}s, transform 1s cubic-bezier(0.16,1,0.3,1) ${i * 0.045}s`,
-        }} />
-      ))}
+      {/* Portal rings, expand outward — cycle blue → cyan → violet */}
+      {[120, 200, 290, 390, 500].map((size, i) => {
+        const c = ['56,189,248', '43,128,240', '139,92,246', '56,189,248', '43,128,240'][i];
+        return (
+          <div key={size} style={{
+            position: 'absolute',
+            width: size, height: size,
+            borderRadius: '50%',
+            border: `1px solid rgba(${c},${(0.75 - i * 0.12).toFixed(2)})`,
+            boxShadow: `0 0 ${14 + i * 11}px rgba(${c},${(0.34 - i * 0.05).toFixed(2)}), inset 0 0 ${8 + i * 4}px rgba(${c},${(0.14 - i * 0.02).toFixed(2)})`,
+            opacity: showRings ? 1 : 0,
+            transform: isExpanded ? `scale(${1 + i * 0.55})` : 'scale(0.35)',
+            transition: `opacity 0.5s ease ${i * 0.055}s, transform 1s cubic-bezier(0.16,1,0.3,1) ${i * 0.045}s`,
+          }} />
+        );
+      })}
 
-      {/* Inner bright ring */}
+      {/* Inner bright ring — cyan core with pulse */}
       <div style={{
         position: 'absolute',
         width: 90, height: 90,
         borderRadius: '50%',
-        border: '1.5px solid rgba(95,168,255,0.9)',
-        boxShadow: '0 0 24px rgba(95,168,255,0.5), inset 0 0 16px rgba(95,168,255,0.2)',
+        border: '1.5px solid rgba(125,211,252,0.95)',
+        boxShadow: '0 0 30px rgba(56,189,248,0.6), inset 0 0 18px rgba(125,211,252,0.28)',
         opacity: showRings ? 1 : 0,
         transform: isExpanded ? 'scale(1.3)' : 'scale(0.4)',
+        animation: showRings && !isClosing ? 'introPulse 1.4s ease-in-out infinite' : 'none',
         transition: 'opacity 0.4s ease, transform 0.8s cubic-bezier(0.16,1,0.3,1)',
       }} />
 
@@ -113,7 +115,7 @@ export function IntroAnimation() {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        gap: 18,
+        gap: 0,
         opacity: showLogo ? 1 : 0,
         transform: showLogo
           ? (isExpanded ? 'scale(1.08)' : 'scale(1)')
@@ -128,18 +130,25 @@ export function IntroAnimation() {
             width: 'clamp(180px, 28vw, 280px)',
             height: 'auto',
             objectFit: 'contain',
+            marginBottom: -22,
             filter: showRings
-              ? 'drop-shadow(0 0 28px rgba(43,128,240,0.7)) drop-shadow(0 0 60px rgba(43,128,240,0.3)) brightness(1.15)'
+              ? 'drop-shadow(0 0 28px rgba(56,189,248,0.7)) drop-shadow(0 0 60px rgba(139,92,246,0.3)) brightness(1.15)'
               : 'brightness(1)',
           }}
         />
         <p style={{
-          color: 'rgba(255,255,255,0.45)',
           fontSize: 'clamp(11px, 1.6vw, 14px)',
-          fontWeight: 500,
-          letterSpacing: '0.28em',
+          fontWeight: 600,
+          letterSpacing: '0.3em',
           textTransform: 'uppercase',
           margin: 0,
+          background: 'linear-gradient(90deg, #5FA8FF, #7DD3FC 50%, #A78BFA)',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+          backgroundClip: 'text',
+          opacity: showRings ? 1 : 0,
+          transform: showRings ? 'translateY(0)' : 'translateY(6px)',
+          transition: 'opacity 0.6s ease 0.15s, transform 0.6s ease 0.15s',
         }}>
           Grow with AI
         </p>
