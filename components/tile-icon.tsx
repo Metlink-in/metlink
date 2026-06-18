@@ -279,37 +279,13 @@ function industryMotif(industry: string, color: string): string {
   }
 }
 
-/** Original industry-themed illustration cover (SVG data-URI) — varies per service. */
-export function genThemedCover(industry: string, slug: string): string {
-  const rng = mulberry32(hashStr(slug));
+/** Industry-themed illustration cover (SVG data-URI): clean black bg, white line motif. */
+export function genThemedCover(industry: string, _slug: string): string {
+  void _slug;
   const W = 400, H = 250;
-  const h1 = 200 + Math.floor(rng() * 55);
-  const h2 = 170 + Math.floor(rng() * 90);
-  const accent = `hsl(${190 + Math.floor(rng() * 70)} 90% 70%)`;
-  const bx = (60 + rng() * 280).toFixed(0);
-  const by = (40 + rng() * 170).toFixed(0);
-  const rot = (rng() * 8 - 4).toFixed(1);
-
-  // faint scattered nodes for depth
-  let dots = '';
-  for (let i = 0; i < 5; i++) dots += `<circle cx="${(rng() * W).toFixed(0)}" cy="${(rng() * H).toFixed(0)}" r="${(1 + rng() * 1.6).toFixed(1)}" fill="${accent}" fill-opacity="0.5"/>`;
-
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid slice">
-<defs>
-<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-<stop offset="0" stop-color="hsl(${h1} 68% 20%)"/>
-<stop offset="0.55" stop-color="hsl(${h2} 56% 12%)"/>
-<stop offset="1" stop-color="#091421"/>
-</linearGradient>
-<radialGradient id="blob" cx="50%" cy="50%" r="50%">
-<stop offset="0" stop-color="${accent}" stop-opacity="0.30"/>
-<stop offset="1" stop-color="${accent}" stop-opacity="0"/>
-</radialGradient>
-</defs>
-<rect width="${W}" height="${H}" fill="url(#bg)"/>
-<circle cx="${bx}" cy="${by}" r="130" fill="url(#blob)"/>
-${dots}
-<g transform="rotate(${rot} 200 125)" opacity="0.92">${industryMotif(industry, accent)}</g>
+<rect width="${W}" height="${H}" fill="#0A0E14"/>
+<g opacity="0.95">${industryMotif(industry, '#FFFFFF')}</g>
 </svg>`;
 
   return `url("data:image/svg+xml,${encodeURIComponent(svg)}")`;
