@@ -155,7 +155,7 @@ export const defaults: Record<string, unknown> = {
   'automation-first': {
     title: 'Automation Services',
     subtitle: 'Connect your tools, remove manual busywork, and let intelligent workflows and AI agents run your operations around the clock.',
-    videos: ['/hero/hero.mp4', '/hero/1.mp4'],
+    videos: ['/automation/automation-sample.mp4'],
     sections: [
       {
         name: 'Workflow & Process Automation',
