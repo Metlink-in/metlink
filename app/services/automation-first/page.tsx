@@ -125,11 +125,7 @@ export default function AutomationFirstPage() {
             <FadeIn>
               <div className="mb-8 flex items-center gap-4">
                 <span className="h-px flex-1" style={{ background: 'linear-gradient(to right, transparent, rgba(95,168,255,0.35))' }} />
-                <Link href={`/automation/${ind.slug}`} className="group inline-flex items-center gap-2.5 shrink-0">
-                  <span className="w-9 h-9 rounded-xl flex items-center justify-center text-lg shrink-0 transition-transform duration-300 group-hover:scale-110"
-                    style={{ background: 'rgba(43,128,240,0.12)', border: '1px solid rgba(95,168,255,0.25)' }}>
-                    {ind.icon}
-                  </span>
+                <Link href={`/automation/${ind.slug}`} className="group inline-flex items-center gap-2 shrink-0">
                   <h2 className="text-lg sm:text-xl font-bold tracking-tight whitespace-nowrap" style={{ color: '#FFFFFF' }}>{ind.name}</h2>
                   <ArrowRight className="w-4 h-4 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all" style={{ color: '#5FA8FF' }} />
                 </Link>
