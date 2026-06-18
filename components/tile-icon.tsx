@@ -10,7 +10,57 @@ import {
   ClipboardList, Bell, Siren, Wifi, Map, PackageOpen, LineChart, Flag,
   BedDouble, CalendarCheck, BadgePercent, Users, ShoppingBag, Stethoscope,
   ScanLine, Brain, Mic, FlaskConical, Headset,
+  Phone, Mail, MessageCircle, Calendar, Gauge, Receipt, Calculator,
+  QrCode, Gift, Star, UserCheck, ShieldAlert, ListOrdered, GraduationCap, Tag,
 } from 'lucide-react';
+
+// Pick a relevant white line icon per service from keywords in its name.
+const KW: [RegExp, LucideIcon][] = [
+  [/whatsapp/, MessageCircle],
+  [/voice|calling|\bcall\b/, Phone],
+  [/chatbot|assistant|support|conversation/, MessagesSquare],
+  [/\bemail\b|nurtur|drip/, Mail],
+  [/reminder|alert|notification/, Bell],
+  [/booking|appointment|reservation|schedul/, Calendar],
+  [/qr\b|menu/, QrCode],
+  [/ocr|document|contract|prescription/, FileText],
+  [/invoice|payment|billing|refund|expense|bookkeep|tax|gst|collection/, Receipt],
+  [/roi|calculator|modeling|forecast|budget|revenue/, Calculator],
+  [/mortgage|loan|credit|underwrit/, Landmark],
+  [/market|trend|upsell|\bsales\b/, TrendingUp],
+  [/social/, Share2],
+  [/scoring|qualif|\bscore\b/, Gauge],
+  [/\blead\b/, Target],
+  [/crm|segmentation|audience|onboard|attendance|staff|shift|employee|referral|engagement/, Users],
+  [/candidate|resume|hiring|recruit/, UserCheck],
+  [/recommendation|recommend|matching|personaliz/, Wand2],
+  [/fraud|risk|compliance|security|kyc/, ShieldAlert],
+  [/inventory|stock|vendor|reorder|supply|warehouse/, Package],
+  [/delivery|shipping|route|fleet|logistic/, Truck],
+  [/order|cart|commerce/, ShoppingCart],
+  [/loyalty|coupon|offer|birthday|reward|gift/, Gift],
+  [/feedback|review|rating/, Star],
+  [/queue|routing/, ListOrdered],
+  [/dynamic|pricing|price/, Tag],
+  [/medical|patient|health|clinic|lab|diagnos|symptom|telemed|insurance|care/, Stethoscope],
+  [/student|admission|exam|course|scholarship|placement|career|learning|faculty|alumni|certificate|timetable|study|doubt/, GraduationCap],
+  [/workflow|automation|process|rpa/, Workflow],
+  [/agent|copilot|\bai\b|gpt|llm|smart|intelligen/, Bot],
+  [/dashboard|analytics|report|insight|performance/, BarChart3],
+  [/imaging|inspection|scan/, ScanLine],
+];
+
+export function resolveServiceIcon(name: string): LucideIcon {
+  const n = name.toLowerCase();
+  for (const [re, icon] of KW) if (re.test(n)) return icon;
+  return Sparkles;
+}
+
+/** White line icon chosen to match a service's label. */
+export function AutoServiceIcon({ name, className, strokeWidth = 1.4 }: { name: string; className?: string; strokeWidth?: number }) {
+  const Icon = resolveServiceIcon(name);
+  return <Icon className={className} strokeWidth={strokeWidth} />;
+}
 
 // One white line-icon per service/industry slug, matching the reference style.
 const ICONS: Record<string, LucideIcon> = {

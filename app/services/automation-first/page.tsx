@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 import { ChevronsUpDown, ArrowRight } from 'lucide-react';
 import { SectionBackdrop } from '@/components/section-backdrop';
 import { FadeIn } from '@/components/fade-in';
-import { genThemedCover } from '@/components/tile-icon';
+import { AutoServiceIcon } from '@/components/tile-icon';
 import { automationIndustries as industries } from '@/lib/automation-data';
 
 interface Item { name: string; image: string }
@@ -139,19 +139,21 @@ export default function AutomationFirstPage() {
                   className="group block rounded-2xl overflow-hidden h-full transition-all duration-300 hover:-translate-y-1"
                   style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}>
                   <div className="w-full flex items-center justify-center overflow-hidden relative"
-                    style={{ aspectRatio: '16 / 10', backgroundImage: genThemedCover(ind.slug, tp.slug), backgroundSize: 'cover', backgroundPosition: 'center' }}>
+                    style={{ aspectRatio: '16 / 10', background: '#0A0E14' }}>
                     <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"
-                      style={{ background: 'radial-gradient(circle at 50% 40%, rgba(95,168,255,0.28), transparent 70%)' }} />
+                      style={{ background: 'radial-gradient(circle at 50% 40%, rgba(95,168,255,0.20), transparent 70%)' }} />
                     {(() => {
-                      // Use a real photo only if one actually exists (uploaded, in data, a per-service
-                      // file, or a per-industry _default). Otherwise the themed illustration shows.
+                      // Real photo if one exists (uploaded, in data, a per-service file, or a
+                      // per-industry _default). Otherwise a white icon matched to the service label.
                       const photo = imageMap[`${ind.slug}/${tp.slug}`] || tp.image
                         || fileMap[`${ind.slug}/${tp.slug}`] || fileMap[`${ind.slug}/_default`];
                       return photo ? (
                         // eslint-disable-next-line @next/next/no-img-element
                         <img src={photo} alt={tp.name} loading="lazy"
                           className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
-                      ) : null;
+                      ) : (
+                        <AutoServiceIcon name={tp.name} className="w-10 h-10 text-white relative transition-transform duration-300 group-hover:scale-110" strokeWidth={1.3} />
+                      );
                     })()}
                   </div>
                   <p className="text-[13px] font-semibold text-center px-2.5 py-3.5 leading-snug group-hover:text-[#5FA8FF] transition-colors" style={{ color: '#FFFFFF' }}>{tp.name}</p>
