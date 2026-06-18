@@ -33,20 +33,28 @@ function VideoLoop({ videos }: { videos: string[] }) {
   if (!videos.length) return null;
 
   return (
-    <div className="relative w-full rounded-3xl overflow-hidden flex items-center justify-center"
-      style={{ background: '#050B14', border: '1px solid rgba(255,255,255,0.08)' }}>
-      <video
-        ref={ref}
-        key={videos[idx]}
-        src={videos[idx]}
-        autoPlay
-        muted
-        playsInline
-        preload="auto"
-        onEnded={() => setIdx(i => (i + 1) % videos.length)}
-        className="w-auto max-w-full object-contain"
-        style={{ maxHeight: '78vh' }}
-      />
+    <div className="relative flex items-center justify-center py-2">
+      {/* ambient glow */}
+      <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
+        <div className="w-[60%] h-[70%] rounded-full"
+          style={{ background: 'radial-gradient(ellipse, rgba(43,128,240,0.28), transparent 70%)', filter: 'blur(70px)' }} />
+      </div>
+      {/* framed video */}
+      <div className="relative rounded-[28px] p-[2px]"
+        style={{ background: 'linear-gradient(150deg, rgba(95,168,255,0.55), rgba(43,128,240,0.15) 45%, rgba(255,255,255,0.06))', boxShadow: '0 30px 80px rgba(0,0,0,0.55)' }}>
+        <video
+          ref={ref}
+          key={videos[idx]}
+          src={videos[idx]}
+          autoPlay
+          muted
+          playsInline
+          preload="auto"
+          onEnded={() => setIdx(i => (i + 1) % videos.length)}
+          className="block rounded-[26px] object-contain bg-[#050B14]"
+          style={{ maxHeight: '74vh', width: 'auto', maxWidth: '100%' }}
+        />
+      </div>
     </div>
   );
 }
