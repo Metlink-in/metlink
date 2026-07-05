@@ -16,7 +16,7 @@ const CONTACT = {
   email: 'hello@metlink.in',
   phone: '+91 8602333400',
   location: 'Indore, MP, India',
-  calendly: 'https://www.metlinkai.com/contact',
+  contactUrl: 'https://www.metlinkai.com/contact',
 };
 
 const SYSTEM_PROMPT = `You are the official MetLink AI assistant. MetLink is an AI-first marketing and software development agency based in ${CONTACT.location}.
@@ -32,12 +32,13 @@ Style:
 - Keep it short: 2–4 sentences. No markdown headings, no bullet dumps unless asked to list.
 - Never invent prices. Budgets range from ₹50K to ₹50L+; for an exact quote, invite them to share project details or get in touch.
 - We deliver a first working deliverable within ~7 days of kickoff.
-- Mention the right service/industry naturally (e.g. "our Generative AI services"), and offer the booking link when it helps.
-- If you don't know something, say so briefly and point them to ${CONTACT.email} or a call.
-- Booking link: ${CONTACT.calendly}.`;
+- Mention the right service/industry naturally (e.g. "our Generative AI services").
+- To take things forward, point people to the contact page or email — never mention phone calls, Calendly, or "booking a call".
+- If you don't know something, say so briefly and point them to ${CONTACT.email} or the contact page.
+- Contact page: ${CONTACT.contactUrl}.`;
 
 const ALL_SERVICES = serviceCategories.flatMap(c => c.services.map(s => ({ ...s, cat: c })));
-const book = `You can reach us through our contact page here: ${CONTACT.calendly}`;
+const contact = `Reach us via our contact page: ${CONTACT.contactUrl}`;
 
 // ── Local fallback so the bot still answers cleanly without the AI API ──
 function localReply(raw: string): string {
@@ -48,10 +49,10 @@ function localReply(raw: string): string {
     return `Hi there! 👋 I'm the MetLink assistant. I can help with our marketing, AI & automation, and software services — or the industries we work in. What are you looking to build?`;
 
   if (/\b(thanks|thank you|thx|appreciate|great|awesome|cool|nice)\b/.test(m))
-    return `Happy to help! If you'd like, I can point you to the right service or set up a quick call: ${CONTACT.calendly}`;
+    return `Happy to help! If you'd like, I can point you to the right service or share your details on our contact page: ${CONTACT.contactUrl}`;
 
   if (/\b(bye|goodbye|see you|that'?s all|nothing)\b/.test(m))
-    return `Thanks for stopping by! Whenever you're ready, reach us at ${CONTACT.email} or get in touch: ${CONTACT.calendly}`;
+    return `Thanks for stopping by! Whenever you're ready, reach us at ${CONTACT.email} or reach us via our contact page: ${CONTACT.contactUrl}`;
 
   // Who / about / why
   if (/\b(who are you|what is metlink|about you|about metlink|tell me about)\b/.test(m))
@@ -62,15 +63,15 @@ function localReply(raw: string): string {
 
   // Process / how it works
   if (/\b(process|how (do you|does it|it work)|steps|approach|methodology|get started|begin)\b/.test(m))
-    return `Our process is simple: 1) Discovery & strategy, 2) Design & build in tight iterations, 3) Test & launch (first deliverable in ~7 days), 4) Optimize & scale. Want to start? ${book}`;
+    return `Our process is simple: 1) Discovery & strategy, 2) Design & build in tight iterations, 3) Test & launch (first deliverable in ~7 days), 4) Optimize & scale. Want to start? ${contact}`;
 
   // Support / retainer
   if (/\b(support|maintenance|ongoing|retainer|after launch|long term)\b/.test(m))
-    return `Yes — we offer ongoing support, optimization, and monitoring after launch. Many clients start with a project and move to a retainer once they see results. ${book}`;
+    return `Yes — we offer ongoing support, optimization, and monitoring after launch. Many clients start with a project and move to a retainer once they see results. ${contact}`;
 
   // Hiring / dedicated devs
   if (/\b(hire|dedicated|developer|engineer|team|staff|outsourc|remote)\b/.test(m))
-    return `We can provide dedicated, vetted developers and AI engineers who plug into your team with flexible engagement models. Tell me what skills you need, or get in touch: ${CONTACT.calendly}`;
+    return `We can provide dedicated, vetted developers and AI engineers who plug into your team with flexible engagement models. Tell me what skills you need, or reach us via our contact page: ${CONTACT.contactUrl}`;
 
   // Tech stack
   if (/\b(tech|stack|technolog|tools|framework|language|react|next|python|node|aws|cloud)\b/.test(m))
@@ -82,19 +83,19 @@ function localReply(raw: string): string {
 
   // Pricing
   if (/\b(price|pricing|cost|budget|charge|fee|quote|expensive|afford)\b/.test(m))
-    return `Pricing depends on scope, so it varies — we work with budgets from ₹50K to ₹50L+. Share a few details about your project and we'll send an accurate estimate. ${book}`;
+    return `Pricing depends on scope, so it varies — we work with budgets from ₹50K to ₹50L+. Share a few details about your project and we'll send an accurate estimate. ${contact}`;
 
   // Timeline
   if (/\b(fast|deliver|timeline|how long|time|deadline|quick|when|duration)\b/.test(m))
-    return `We move fast — most projects see a first working deliverable within about 7 days of kickoff, with the full timeline agreed upfront. Want to map yours? ${book}`;
+    return `We move fast — most projects see a first working deliverable within about 7 days of kickoff, with the full timeline agreed upfront. Want to map yours? ${contact}`;
 
   // Booking
   if (/\b(call|book|meeting|consult|talk to|schedule|demo|appointment)\b/.test(m))
-    return `Sounds good — ${book}`;
+    return `Sounds good — ${contact}`;
 
   // Contact / location
   if (/\b(contact|email|phone|reach|number|address|located|location|where|office)\b/.test(m))
-    return `You can reach us at ${CONTACT.email} or ${CONTACT.phone}. We're based in ${CONTACT.location} and reply quickly — or get in touch: ${CONTACT.calendly}`;
+    return `You can reach us at ${CONTACT.email} or ${CONTACT.phone}. We're based in ${CONTACT.location} and reply quickly — or reach us via our contact page: ${CONTACT.contactUrl}`;
 
   // Specific service match (by name keyword across all services)
   const svc = ALL_SERVICES.find(s => {
@@ -102,19 +103,19 @@ function localReply(raw: string): string {
     return m.includes(key) || key.split(' ').filter(w => w.length > 4).some(w => m.includes(w));
   });
   if (svc)
-    return `Yes — ${svc.name} is part of our ${svc.cat.name} services. ${svc.description} Want to explore it further or get a quote? ${book}`;
+    return `Yes — ${svc.name} is part of our ${svc.cat.name} services. ${svc.description} Want to explore it further or get a quote? ${contact}`;
 
   // Industry match
   const ind = industries.find(i => m.includes(i.name.toLowerCase().split(' ')[0]));
   if (ind)
-    return `We do a lot in ${ind.name} — including ${ind.topics.slice(0, 4).map(t => t.name).join(', ')} and more. Tell me your use case, or get in touch: ${CONTACT.calendly}`;
+    return `We do a lot in ${ind.name} — including ${ind.topics.slice(0, 4).map(t => t.name).join(', ')} and more. Tell me your use case, or reach us via our contact page: ${CONTACT.contactUrl}`;
 
   if (/\b(industr|sector|vertical)\b/.test(m))
     return `We serve ${industries.map(i => i.name).join(', ')}. Which industry are you in? I can share exactly how we help.`;
 
   // Category buckets
   if (/\b(automat|workflow|rpa|agent\b|bots?)\b/.test(m))
-    return `Automation is core to what we do — workflow automation, AI agents & assistants, RPA bots, and CRM/marketing automation that run your operations 24/7. Want to automate something specific? ${book}`;
+    return `Automation is core to what we do — workflow automation, AI agents & assistants, RPA bots, and CRM/marketing automation that run your operations 24/7. Want to automate something specific? ${contact}`;
 
   if (/\b(ai|ml|machine learning|gpt|llm|generative|chatbot|model)\b/.test(m))
     return `We build practical AI — generative AI apps, AI agents and chatbots, custom LLMs, and full ML/MLOps. What problem are you trying to solve with AI?`;
@@ -132,7 +133,7 @@ function localReply(raw: string): string {
     return `We've delivered projects across marketing, AI, and software for clients in many industries. You can see our work on the Portfolio page — or tell me your space and I'll share what's relevant.`;
 
   // Default — helpful, not a dead end
-  return `Good question! MetLink helps businesses with ${serviceCategories.map(c => c.name).join(', ')} across industries like ${industries.slice(0, 4).map(i => i.name).join(', ')} and more. Tell me a bit about your goal and I'll point you the right way — or reach us at ${CONTACT.email} / ${CONTACT.calendly}`;
+  return `Good question! MetLink helps businesses with ${serviceCategories.map(c => c.name).join(', ')} across industries like ${industries.slice(0, 4).map(i => i.name).join(', ')} and more. Tell me a bit about your goal and I'll point you the right way — or reach us at ${CONTACT.email} / ${CONTACT.contactUrl}`;
 }
 
 export async function POST(req: Request) {

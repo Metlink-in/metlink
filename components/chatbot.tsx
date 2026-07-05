@@ -7,7 +7,7 @@ const QUICK_REPLIES = [
   'What AI services do you offer?',
   'How fast can you deliver?',
   'What is your pricing?',
-  'Book a strategy call',
+  'Contact the team',
 ];
 
 interface Message { role: 'user' | 'bot'; text: string; }
@@ -139,7 +139,7 @@ export function ChatBot() {
                 <div className="flex flex-col gap-1.5">
                   {QUICK_REPLIES.map(qr => (
                     <button key={qr} onClick={() => {
-                        if (qr === 'Book a strategy call') { window.location.href = 'https://www.metlinkai.com/contact'; return; }
+                        if (qr === 'Contact the team') { window.location.href = 'https://www.metlinkai.com/contact'; return; }
                         send(qr);
                       }}
                       className="text-left text-[11px] px-4 py-2.5 rounded-xl transition-all border"
