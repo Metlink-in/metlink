@@ -16,7 +16,7 @@ export function GlobalMagnetic() {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     if (window.matchMedia('(hover: none)').matches) return; // skip touch devices
 
-    const SELECTOR = '.btn-primary, .btn-outline, .btn-primary-glass, a[href*="calendly.com"], button[type="submit"], [data-magnetic]';
+    const SELECTOR = '.btn-primary, .btn-outline, .btn-primary-glass, a[href*="/contact"], button[type="submit"], [data-magnetic]';
     const STRENGTH = 0.3;
     const cleanups: Array<() => void> = [];
 

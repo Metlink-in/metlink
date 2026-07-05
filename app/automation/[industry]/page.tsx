@@ -78,7 +78,7 @@ export default async function AutomationIndustryPage({ params }: { params: Promi
           <p className="text-xs font-bold uppercase tracking-[0.2em] mb-4" style={{ color: accent }}>Let&apos;s Get Started</p>
           <h2 className=" mb-6" style={{ color: '#FFFFFF' }}>Ready to automate your {data.name.toLowerCase()} operations?</h2>
           <p className="mb-10 text-lg" style={{ color: 'rgba(255,255,255,0.6)' }}>We&apos;ll map your workflows and build the automations that move the needle.</p>
-          <Link href="https://calendly.com/jitesh-bawaskar-metlinkai/30min"
+          <Link href="https://www.metlinkai.com/contact"
             className="inline-flex items-center gap-2 px-9 py-4 rounded-full font-bold text-sm text-white transition-all hover:brightness-95 active:scale-95"
             style={{ background: '#2B80F0', boxShadow: '0 4px 20px rgba(43,128,240,0.3)' }}>
             Book a Free Call <ArrowRight className="w-5 h-5" />

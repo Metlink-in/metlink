@@ -224,10 +224,6 @@ export function PopupForm() {
                     {errors.message && <p className="text-xs mt-1.5" style={{ color: '#FCA5A5' }}>{errors.message}</p>}
                   </div>
 
-                  <label className="flex items-center gap-3 cursor-pointer group select-none">
-                    <input type="checkbox" className="w-4 h-4 rounded cursor-pointer accent-[#2B80F0]" />
-                    <span className="text-xs transition-colors" style={{ color: 'rgba(255,255,255,0.5)' }}>Send me a copy of NDA</span>
-                  </label>
 
                   {error && (
                     <p className="text-xs px-3 py-2.5 rounded-xl" style={{ background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.2)', color: '#EF4444' }}>

@@ -401,7 +401,7 @@ function FAQSection() {
         </div>
 
         <FadeIn className="flex flex-wrap gap-3 justify-center">
-          <Link href="https://calendly.com/jitesh-bawaskar-metlinkai/30min"
+          <Link href="https://www.metlinkai.com/contact"
             className="group inline-flex items-center gap-2.5 font-medium btn-primary">
             Start building with AI
             <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
@@ -673,7 +673,7 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
                   </button>
                 );
               })}
-              <Link href="https://calendly.com/jitesh-bawaskar-metlinkai/30min"
+              <Link href="https://www.metlinkai.com/contact"
                 className="mt-2 text-center btn-outline hidden lg:block"
                 style={{ border: '1px solid rgba(255,255,255,0.1)' }}>
                 Get Started

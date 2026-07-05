@@ -16,7 +16,7 @@ const CONTACT = {
   email: 'hello@metlink.in',
   phone: '+91 8602333400',
   location: 'Indore, MP, India',
-  calendly: 'https://calendly.com/jitesh-bawaskar-metlinkai/30min',
+  calendly: 'https://www.metlinkai.com/contact',
 };
 
 const SYSTEM_PROMPT = `You are the official MetLink AI assistant. MetLink is an AI-first marketing and software development agency based in ${CONTACT.location}.
@@ -30,14 +30,14 @@ ${INDUSTRIES_KB}
 Style:
 - Sound warm, human, and confident — like a helpful team member, not a brochure.
 - Keep it short: 2–4 sentences. No markdown headings, no bullet dumps unless asked to list.
-- Never invent prices. Budgets range from ₹50K to ₹50L+; for an exact quote, invite them to share project details or book a call.
+- Never invent prices. Budgets range from ₹50K to ₹50L+; for an exact quote, invite them to share project details or get in touch.
 - We deliver a first working deliverable within ~7 days of kickoff.
 - Mention the right service/industry naturally (e.g. "our Generative AI services"), and offer the booking link when it helps.
 - If you don't know something, say so briefly and point them to ${CONTACT.email} or a call.
 - Booking link: ${CONTACT.calendly}.`;
 
 const ALL_SERVICES = serviceCategories.flatMap(c => c.services.map(s => ({ ...s, cat: c })));
-const book = `You can book a free 30-minute strategy call here: ${CONTACT.calendly}`;
+const book = `You can reach us through our contact page here: ${CONTACT.calendly}`;
 
 // ── Local fallback so the bot still answers cleanly without the AI API ──
 function localReply(raw: string): string {
@@ -51,7 +51,7 @@ function localReply(raw: string): string {
     return `Happy to help! If you'd like, I can point you to the right service or set up a quick call: ${CONTACT.calendly}`;
 
   if (/\b(bye|goodbye|see you|that'?s all|nothing)\b/.test(m))
-    return `Thanks for stopping by! Whenever you're ready, reach us at ${CONTACT.email} or book a call: ${CONTACT.calendly}`;
+    return `Thanks for stopping by! Whenever you're ready, reach us at ${CONTACT.email} or get in touch: ${CONTACT.calendly}`;
 
   // Who / about / why
   if (/\b(who are you|what is metlink|about you|about metlink|tell me about)\b/.test(m))
@@ -70,7 +70,7 @@ function localReply(raw: string): string {
 
   // Hiring / dedicated devs
   if (/\b(hire|dedicated|developer|engineer|team|staff|outsourc|remote)\b/.test(m))
-    return `We can provide dedicated, vetted developers and AI engineers who plug into your team with flexible engagement models. Tell me what skills you need, or book a call: ${CONTACT.calendly}`;
+    return `We can provide dedicated, vetted developers and AI engineers who plug into your team with flexible engagement models. Tell me what skills you need, or get in touch: ${CONTACT.calendly}`;
 
   // Tech stack
   if (/\b(tech|stack|technolog|tools|framework|language|react|next|python|node|aws|cloud)\b/.test(m))
@@ -94,7 +94,7 @@ function localReply(raw: string): string {
 
   // Contact / location
   if (/\b(contact|email|phone|reach|number|address|located|location|where|office)\b/.test(m))
-    return `You can reach us at ${CONTACT.email} or ${CONTACT.phone}. We're based in ${CONTACT.location} and reply quickly — or book a call: ${CONTACT.calendly}`;
+    return `You can reach us at ${CONTACT.email} or ${CONTACT.phone}. We're based in ${CONTACT.location} and reply quickly — or get in touch: ${CONTACT.calendly}`;
 
   // Specific service match (by name keyword across all services)
   const svc = ALL_SERVICES.find(s => {
@@ -107,7 +107,7 @@ function localReply(raw: string): string {
   // Industry match
   const ind = industries.find(i => m.includes(i.name.toLowerCase().split(' ')[0]));
   if (ind)
-    return `We do a lot in ${ind.name} — including ${ind.topics.slice(0, 4).map(t => t.name).join(', ')} and more. Tell me your use case, or book a call: ${CONTACT.calendly}`;
+    return `We do a lot in ${ind.name} — including ${ind.topics.slice(0, 4).map(t => t.name).join(', ')} and more. Tell me your use case, or get in touch: ${CONTACT.calendly}`;
 
   if (/\b(industr|sector|vertical)\b/.test(m))
     return `We serve ${industries.map(i => i.name).join(', ')}. Which industry are you in? I can share exactly how we help.`;

@@ -139,7 +139,7 @@ export function ChatBot() {
                 <div className="flex flex-col gap-1.5">
                   {QUICK_REPLIES.map(qr => (
                     <button key={qr} onClick={() => {
-                        if (qr === 'Book a strategy call') { window.location.href = 'https://calendly.com/jitesh-bawaskar-metlinkai/30min'; return; }
+                        if (qr === 'Book a strategy call') { window.location.href = 'https://www.metlinkai.com/contact'; return; }
                         send(qr);
                       }}
                       className="text-left text-[11px] px-4 py-2.5 rounded-xl transition-all border"

@@ -43,7 +43,7 @@ export default function NotFound() {
             <Home className="w-4 h-4" />
             Back to Home
           </Link>
-          <Link href="https://calendly.com/jitesh-bawaskar-metlinkai/30min"
+          <Link href="https://www.metlinkai.com/contact"
             className="inline-flex items-center justify-center gap-2 px-5 py-2 rounded-xl font-semibold text-xs transition-all"
             style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', color: 'rgba(255,255,255,0.7)' }}>
             <ArrowLeft className="w-4 h-4" />

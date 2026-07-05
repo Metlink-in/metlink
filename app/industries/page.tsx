@@ -104,7 +104,7 @@ export default function IndustriesPage() {
           <p className="mb-10 text-lg" style={{ color: 'rgba(255,255,255,0.6)' }}>
             We adapt our AI and software expertise to any domain. Let&apos;s talk about yours.
           </p>
-          <Link href="https://calendly.com/jitesh-bawaskar-metlinkai/30min"
+          <Link href="https://www.metlinkai.com/contact"
             className="inline-flex items-center gap-2 px-5 py-2 rounded-xl font-semibold text-xs text-white transition-all active:scale-95"
             style={{ background: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.18)' }}>
             Get a Free Consultation <ArrowRight className="w-5 h-5" />

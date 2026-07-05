@@ -105,7 +105,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
             Need expert help with {data.name.toLowerCase()}?
           </h2>
           <p className="mb-10 text-lg" style={{ color: 'rgba(255,255,255,0.6)' }}>Our team of specialists is ready to help you achieve your goals.</p>
-          <Link href="https://calendly.com/jitesh-bawaskar-metlinkai/30min"
+          <Link href="https://www.metlinkai.com/contact"
             className="inline-flex items-center gap-2 px-9 py-4 rounded-full font-bold text-sm text-white transition-all hover:brightness-95 active:scale-95"
             style={{ background: '#2B80F0', boxShadow: '0 4px 20px rgba(43,128,240,0.3)' }}>
             Discuss Your Project <ArrowRight className="w-5 h-5" />

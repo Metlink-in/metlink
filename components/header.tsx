@@ -125,7 +125,7 @@ export function Header() {
                   onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.color = 'rgba(255,255,255,0.72)'; el.style.background = 'transparent'; }}>
                   Get Proposal
                 </button>
-                <Link href="https://calendly.com/jitesh-bawaskar-metlinkai/30min"
+                <Link href="https://www.metlinkai.com/contact"
                   className="px-5 py-2 rounded-xl text-xs font-semibold transition-all active:scale-95"
                   style={{ background: 'rgba(255,255,255,0.10)', color: '#FFFFFF', border: '1px solid rgba(255,255,255,0.18)' }}
                   onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.16)'; }}
@@ -173,7 +173,7 @@ export function Header() {
                 </div>
 
                 <div className="pt-4 space-y-2.5 border-t mt-3" style={{ borderColor: 'rgba(255,255,255,0.07)' }}>
-                  <Link href="https://calendly.com/jitesh-bawaskar-metlinkai/30min"
+                  <Link href="https://www.metlinkai.com/contact"
                     className="block text-center py-3.5 rounded-full text-sm font-semibold text-white"
                     style={{ background: '#2B80F0', boxShadow: '0 4px 16px rgba(43,128,240,0.3)' }}
                     onClick={() => setMobileOpen(false)}>
@@ -510,10 +510,6 @@ function ProposalPopup({ onClose }: { onClose: () => void }) {
                   onFocus={onFocus as React.FocusEventHandler<HTMLTextAreaElement>}
                   onBlur={onBlur as React.FocusEventHandler<HTMLTextAreaElement>} />
 
-                <label className="flex items-center gap-3 cursor-pointer mt-1">
-                  <input type="checkbox" className="w-4 h-4 rounded accent-blue-500" />
-                  <span className="text-xs" style={{ color: 'rgba(255,255,255,0.5)' }}>Send me a copy of NDA</span>
-                </label>
 
                 {error && (
                   <p className="text-xs px-3 py-2.5 rounded-xl" style={{ background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.25)', color: '#FCA5A5' }}>
