@@ -445,16 +445,6 @@ function ProposalPopup({ onClose }: { onClose: () => void }) {
               ))}
             </ul>
           </div>
-          <div className="relative z-10 mt-8 pt-6" style={{ borderTop: '1px solid rgba(255,255,255,0.08)' }}>
-            <div className="flex gap-0.5 mb-2">
-              {[...Array(5)].map((_, i) => (
-                <svg key={i} viewBox="0 0 24 24" className="w-4 h-4" fill="#F59E0B"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-              ))}
-            </div>
-            <p className="text-xs italic leading-relaxed" style={{ color: 'rgba(255,255,255,0.45)' }}>
-              &ldquo;MetLink delivered in half the time and doubled our ROI.&rdquo;
-            </p>
-          </div>
         </div>
 
         <div className="flex-1 flex flex-col overflow-y-auto p-7 sm:p-8 relative" style={{ background: '#0B1628' }}>

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { X, CheckCircle, TrendingUp, Shield, Clock, Star, Zap } from 'lucide-react';
+import { X, CheckCircle, TrendingUp, Shield, Clock, Zap } from 'lucide-react';
 
 export function PopupForm() {
   const [open, setOpen]           = useState(false);
@@ -127,16 +127,6 @@ export function PopupForm() {
             </div>
           </div>
 
-          {/* Social proof */}
-          <div className="relative z-10 mt-8 pt-6" style={{ borderTop: '1px solid rgba(255,255,255,0.08)' }}>
-            <div className="flex gap-0.5 mb-2">
-              {[0,1,2,3,4].map(i => <Star key={i} className="w-3.5 h-3.5 fill-current" style={{ color: '#FBBF24' }} />)}
-            </div>
-            <p className="text-xs italic leading-relaxed" style={{ color: 'rgba(255,255,255,0.5)' }}>
-              &quot;MetLink delivered in half the time and doubled our ROI.&quot;
-            </p>
-            <p className="text-[10px] font-bold mt-1.5" style={{ color: 'rgba(255,255,255,0.3)' }}>  Rohan M., CEO at FinEdge</p>
-          </div>
         </div>
 
         {/* ── RIGHT PANEL, form ── */}
