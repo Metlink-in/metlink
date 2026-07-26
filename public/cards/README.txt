@@ -27,3 +27,5 @@ PER-SERVICE: name the file exactly like the service slug, e.g.
 (The dev-server 404 lines show the exact filename each card is looking for.)
 
 After adding files, just refresh the page — no code changes needed.
+
+# Repo is public — see README/docs for setup.
