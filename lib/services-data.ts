@@ -25,7 +25,8 @@ const s = (
   tagline: string,
   description: string,
   features: string[],
-): ServiceItem => ({ name, slug, icon, tagline, description, features });
+  subFeatures?: { title: string; items: string[] }[],
+): ServiceItem => ({ name, slug, icon, tagline, description, features, subFeatures });
 
 const _serviceCategories: ServiceCategory[] = [
   {
@@ -51,6 +52,13 @@ const _serviceCategories: ServiceCategory[] = [
       s('Social Media Optimization', 'social-media-optimization', '⚡', 'Optimize Every Profile.',
         'Profile, content, and engagement optimization that maximizes reach and conversions on every platform.',
         ['Profile & bio optimization', 'Hashtag & discoverability strategy', 'Posting cadence optimization', 'Engagement & growth tactics', 'Cross-platform repurposing', 'Analytics-driven iteration']),
+      s('Video Editing and Graphic Designing', 'video-editing-graphic-designing', '🎬', 'Scroll-Stopping Visuals, Every Time.',
+        'End-to-end video editing and graphic design that turns raw footage and ideas into polished, on-brand content built to perform across every channel.',
+        ['Short-form video editing (Reels, Shorts, TikTok)', 'Long-form & YouTube editing', 'Motion graphics & animation', 'Brand identity & logo design', 'Social media creatives & ad graphics', 'Thumbnails, banners & marketing collateral', 'Color grading, subtitles & sound design', 'Presentation & pitch deck design'],
+        [
+          { title: 'Video Editing', items: ['Reels & Shorts', 'YouTube long-form', 'Motion graphics', 'Explainer & product videos', 'Ad & promo edits', 'Podcast & webinar editing', 'Color grading', 'Subtitles & captions', 'Sound design & mixing'] },
+          { title: 'Graphic Designing', items: ['Logo & brand identity', 'Social media creatives', 'Ad & display graphics', 'Brochures & flyers', 'Pitch & sales decks', 'Infographics', 'Website & UI graphics', 'Packaging & print', 'Thumbnails & banners'] },
+        ]),
     ],
   },
   {

@@ -12,6 +12,7 @@ import {
   ScanLine, Brain, Mic, FlaskConical, Headset,
   Phone, Mail, MessageCircle, Calendar, Gauge, Receipt, Calculator,
   QrCode, Gift, Star, UserCheck, ShieldAlert, ListOrdered, GraduationCap, Tag,
+  Clapperboard,
 } from 'lucide-react';
 
 // Pick a relevant white line icon per service from keywords in its name.
@@ -28,6 +29,7 @@ const KW: [RegExp, LucideIcon][] = [
   [/roi|calculator|modeling|forecast|budget|revenue/, Calculator],
   [/mortgage|loan|credit|underwrit/, Landmark],
   [/market|trend|upsell|\bsales\b/, TrendingUp],
+  [/video|graphic design|motion graphics/, Clapperboard],
   [/social/, Share2],
   [/scoring|qualif|\bscore\b/, Gauge],
   [/\blead\b/, Target],
@@ -77,6 +79,7 @@ const ICONS: Record<string, LucideIcon> = {
   'social-media-marketing': Share2,
   'content-marketing': PenLine,
   'social-media-optimization': Zap,
+  'video-editing-graphic-designing': Clapperboard,
 
   // ── Generative AI ──
   'generative-ai-development': Sparkles,
