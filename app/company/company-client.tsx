@@ -8,8 +8,6 @@ import { FadeIn, StaggerChildren, StaggerItem } from '@/components/fade-in';
 import { Breadcrumbs } from '@/components/breadcrumbs';
 
 const valueIcons = [Target, Eye, Heart, Globe, Award, Clock];
-// A small rotating palette so cards read as distinct, not one monochrome wall of blue.
-const PALETTE = ['#2B80F0', '#8B5CF6', '#06B6D4', '#F59E0B', '#EC4899', '#10B981'];
 const crumbs = [
   { name: 'Home', path: '/' },
   { name: 'Company', path: '/company' },
@@ -100,19 +98,19 @@ export default function CompanyClient({ company, valuesList, teamList, milestone
             </FadeIn>
             <StaggerChildren className="grid grid-cols-2 gap-4">
               {[
-                { Icon: Target,    title: 'Our Mission',  desc: company.mission  || 'To empower businesses with AI-powered marketing and technology that creates lasting competitive advantages.', color: '#2B80F0' },
-                { Icon: Eye,       title: 'Our Vision',   desc: company.vision   || 'To become the most trusted AI marketing and development partner for ambitious businesses worldwide.', color: '#8B5CF6' },
-                { Icon: BarChart2, title: 'Our Approach', desc: company.approach || 'Data-first strategy, creative excellence, and ruthless focus on metrics that actually move the needle.', color: '#06B6D4' },
-                { Icon: Shield,    title: 'Our Promise',  desc: company.promise  || 'Transparent pricing, honest communication, and zero-compromise quality on every single project.', color: '#F59E0B' },
+                { Icon: Target,    title: 'Our Mission',  desc: company.mission  || 'To empower businesses with AI-powered marketing and technology that creates lasting competitive advantages.' },
+                { Icon: Eye,       title: 'Our Vision',   desc: company.vision   || 'To become the most trusted AI marketing and development partner for ambitious businesses worldwide.' },
+                { Icon: BarChart2, title: 'Our Approach', desc: company.approach || 'Data-first strategy, creative excellence, and ruthless focus on metrics that actually move the needle.' },
+                { Icon: Shield,    title: 'Our Promise',  desc: company.promise  || 'Transparent pricing, honest communication, and zero-compromise quality on every single project.' },
               ].map(item => (
                 <StaggerItem key={item.title}>
                   <div className="p-6 rounded-2xl transition-all hover:-translate-y-1 cursor-default h-full"
                     style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.07)', boxShadow: '0 2px 8px rgba(0,0,0,0.2)' }}
-                    onMouseEnter={e => (e.currentTarget as HTMLElement).style.borderColor = `${item.color}4D`}
+                    onMouseEnter={e => (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.3)'}
                     onMouseLeave={e => (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.12)'}>
                     <div className="w-9 h-9 rounded-xl flex items-center justify-center mb-3"
-                      style={{ background: `${item.color}1F`, border: `1px solid ${item.color}33` }}>
-                      <item.Icon className="w-4.5 h-4.5" style={{ color: item.color }} />
+                      style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.18)' }}>
+                      <item.Icon className="w-4.5 h-4.5" style={{ color: '#FFFFFF' }} strokeWidth={1.75} />
                     </div>
                     <h3 className="font-bold mb-2 text-sm" style={{ color: '#FFFFFF' }}>{item.title}</h3>
                     <p className="text-xs leading-relaxed" style={{ color: 'rgba(255,255,255,0.6)' }}>{item.desc}</p>
@@ -138,15 +136,14 @@ export default function CompanyClient({ company, valuesList, teamList, milestone
           <StaggerChildren className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {valuesList.map((v, vIdx) => {
               const Icon = valueIcons[vIdx % valueIcons.length];
-              const color = '#2B80F0';
               return (
                 <StaggerItem key={v.title}>
                   <div className="group p-7 rounded-2xl transition-all duration-300 hover:-translate-y-1.5 h-full"
                     style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.07)' }}
                     onMouseEnter={e => {
-                      (e.currentTarget as HTMLElement).style.borderColor = `${color}4D`;
+                      (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.3)';
                       (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.1)';
-                      (e.currentTarget as HTMLElement).style.boxShadow = `0 8px 32px rgba(0,0,0,0.3), 0 0 0 1px ${color}1A`;
+                      (e.currentTarget as HTMLElement).style.boxShadow = '0 8px 32px rgba(0,0,0,0.3)';
                     }}
                     onMouseLeave={e => {
                       (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.12)';
@@ -154,12 +151,10 @@ export default function CompanyClient({ company, valuesList, teamList, milestone
                       (e.currentTarget as HTMLElement).style.boxShadow = 'none';
                     }}>
                     <div className="w-11 h-11 rounded-xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform"
-                      style={{ background: `${color}26`, border: `1px solid ${color}4D` }}>
-                      <Icon className="w-5 h-5" style={{ color }} strokeWidth={1.75} />
+                      style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)' }}>
+                      <Icon className="w-5 h-5" style={{ color: '#FFFFFF' }} strokeWidth={1.75} />
                     </div>
-                    <h3 className="font-bold mb-2 transition-colors" style={{ color: '#FFFFFF' }}
-                      onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = color; }}
-                      onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = '#FFFFFF'; }}>{v.title}</h3>
+                    <h3 className="font-bold mb-2" style={{ color: '#FFFFFF' }}>{v.title}</h3>
                     <p className="text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.6)' }}>{v.desc}</p>
                   </div>
                 </StaggerItem>
@@ -192,7 +187,7 @@ export default function CompanyClient({ company, valuesList, teamList, milestone
 
               <StaggerChildren className="space-y-8 md:space-y-4">
                 {milestonesList.map((m, i) => {
-                  const color = PALETTE[i % PALETTE.length];
+                  const color = '#FFFFFF';
                   const onRight = i % 2 === 1;
                   const card = (
                     <div className="p-6 rounded-2xl transition-all duration-300 hover:-translate-y-1"

@@ -83,12 +83,11 @@ export const defaults: Record<string, unknown> = {
   ],
 
   timeline: [
-    { year: '2020', event: 'MetLink Founded',       desc: 'Started as a 3-person digital marketing consultancy in Mumbai.' },
-    { year: '2021', event: 'AI Division Launch',    desc: 'Expanded into AI development, delivering first custom ML models.' },
-    { year: '2022', event: '50 Clients Milestone',  desc: 'Crossed 50 active clients across 10+ industries globally.' },
-    { year: '2023', event: 'Software Studio',        desc: 'Launched full-service software development, web, mobile, cloud.' },
-    { year: '2024', event: 'Global Expansion',       desc: 'Serving clients in 15+ countries with a 40+ person remote team.' },
-    { year: '2025', event: 'AI-First Agency',        desc: "Positioned as India's leading AI marketing & development agency." },
+    { year: '2022', event: 'MetLink Founded',       desc: 'Started as a 3-person digital marketing consultancy in Indore.' },
+    { year: '2023', event: 'AI Division Launch',    desc: 'Expanded into AI development, delivering first custom ML models.' },
+    { year: '2024', event: '50 Clients Milestone',  desc: 'Crossed 50 active clients across 10+ industries globally.' },
+    { year: '2025', event: 'Software Studio',        desc: 'Launched full-service software development, web, mobile, cloud.' },
+    { year: '2026', event: 'Global Expansion',       desc: "Serving clients across multiple countries as India's leading AI-first marketing & development agency." },
   ],
 
   team: [
@@ -98,7 +97,7 @@ export const defaults: Record<string, unknown> = {
   contact: {
     email: 'hello@metlink.in',
     phone: '+91 123 456 7890',
-    location: 'Mumbai, India',
+    location: 'Indore, India',
     responseTime: '< 2 Hours',
     emailNote: 'Reply within 2 hours',
     phoneNote: '9AM – 6PM IST',
