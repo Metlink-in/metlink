@@ -5,7 +5,8 @@ import { buildMetadata } from '@/lib/seo';
 import { breadcrumbSchema } from '@/lib/schema';
 import { JsonLd } from '@/components/json-ld';
 
-export const dynamic = 'force-dynamic';
+// See app/page.tsx for why this is ISR instead of force-dynamic.
+export const revalidate = 60;
 
 export function generateMetadata(): Metadata {
   return buildMetadata({

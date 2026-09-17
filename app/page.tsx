@@ -38,7 +38,11 @@ const defaultSteps = [
   { num: '03', title: 'Scale & Optimize',   desc: 'We monitor, retrain, and evolve continuously — performance compounds over time.' },
 ];
 
-export const dynamic = 'force-dynamic';
+// Regenerated in the background at most once per minute instead of on every
+// single request — CMS edits still show up within ~60s, but most visitors
+// get an instantly-served cached page instead of waiting on a live DB round
+// trip for every navigation (this was the direct cause of "Home feels slow").
+export const revalidate = 60;
 
 export async function generateMetadata(): Promise<Metadata> {
   const hero = (await getSection<HeroCMS>('hero')) ?? defaultHero;
