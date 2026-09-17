@@ -724,13 +724,13 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
                     </div>
 
                     {/* Bottom metrics */}
-                    <div className="grid grid-cols-3 gap-2 pt-5" style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+                    <div className="grid grid-cols-3 gap-1.5 pt-5" style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
                       {s.vizMetrics.map(m => (
-                        <div key={m.label} className="text-center flex flex-col">
-                          <div className="flex items-end justify-center" style={{ minHeight: '2.5rem' }}>
-                            <p className="font-medium leading-tight" style={{ color: s.color, fontSize: '1rem', letterSpacing: '-0.03em' }}>{m.val}</p>
+                        <div key={m.label} className="text-center flex flex-col min-w-0">
+                          <div className="flex items-end justify-center" style={{ minHeight: '2rem' }}>
+                            <p className="font-medium leading-tight break-words" style={{ color: s.color, fontSize: '0.8rem', letterSpacing: '-0.01em' }}>{m.val}</p>
                           </div>
-                          <p className="text-[9px] leading-tight mt-1.5" style={{ color: 'rgba(255,255,255,0.28)' }}>{m.label}</p>
+                          <p className="text-[9px] leading-tight mt-1.5 truncate" style={{ color: 'rgba(255,255,255,0.28)' }}>{m.label}</p>
                         </div>
                       ))}
                     </div>
