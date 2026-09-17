@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { jwtVerify } from 'jose';
 
-const SECRET = new TextEncoder().encode('ml-admin-secret-2025-jb-metlink');
+const SECRET = new TextEncoder().encode(process.env.ADMIN_JWT_SECRET ?? '');
 const COOKIE = 'ml_admin_token';
 
 export async function proxy(req: NextRequest) {

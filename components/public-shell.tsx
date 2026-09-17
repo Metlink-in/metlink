@@ -6,7 +6,6 @@ import { Header } from '@/components/header';
 import { Footer } from '@/components/sections/footer';
 import { ChatBot } from '@/components/chatbot';
 import { PopupForm } from '@/components/popup-form';
-import { IntroAnimation } from '@/components/intro-animation';
 import { GlobalMagnetic } from '@/components/global-magnetic';
 
 export function PublicShell({ children }: { children: React.ReactNode }) {
@@ -25,7 +24,6 @@ export function PublicShell({ children }: { children: React.ReactNode }) {
       <GlobalMagnetic />
       {/* Page-transition curtain — replays on each route change */}
       <div key={pathname} className="page-curtain" aria-hidden />
-      <IntroAnimation />
       <Header />
       <AnimatePresence mode="wait">
         <motion.main

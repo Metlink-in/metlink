@@ -1,11 +1,17 @@
 import { SignJWT, jwtVerify } from 'jose';
 import { cookies } from 'next/headers';
 
-const SECRET = new TextEncoder().encode('ml-admin-secret-2025-jb-metlink');
+function requireEnv(name: string): string {
+  const v = process.env[name];
+  if (!v) throw new Error(`${name} env var is not set`);
+  return v;
+}
+
+const SECRET = new TextEncoder().encode(requireEnv('ADMIN_JWT_SECRET'));
 const COOKIE = 'ml_admin_token';
 
-export const ADMIN_EMAIL    = 'jiteshbawaskar05@gmail.com';
-export const ADMIN_PASSWORD = 'Jitesh001@';
+export const ADMIN_EMAIL    = requireEnv('ADMIN_EMAIL');
+export const ADMIN_PASSWORD = requireEnv('ADMIN_PASSWORD');
 
 export async function signToken(payload: Record<string, unknown>) {
   return new SignJWT(payload)
