@@ -1,5 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSmtpTransport } from '@/lib/smtp';
+import { connectDB } from '@/lib/mongodb';
+import { SubscriberModel } from '@/lib/models/Subscriber';
+import { SITE_URL } from '@/lib/site-config';
 
 const SOURCE_LABELS: Record<string, string> = {
   contact:    'Contact Page',
@@ -108,6 +111,7 @@ function subscribeConfirmHtml(email: string) {
     <p style="margin:0;font-size:12px;color:#6B7280">
       MetLink · Indore, Madhya Pradesh, India · 452001<br>
       <a href="mailto:hello@metlinkai.com" style="color:#2B80F0;text-decoration:none">hello@metlinkai.com</a> · +91 8602333400
+      · <a href="${SITE_URL}/api/unsubscribe?email=${encodeURIComponent(email)}" style="color:#9CA3AF;text-decoration:underline">Unsubscribe</a>
     </p>
   </div>
 </div></body></html>`;
@@ -131,6 +135,19 @@ export async function POST(req: NextRequest) {
     const isNewsletter = source === 'newsletter' || source === 'footer';
     const sourceLabel = SOURCE_LABELS[source] || 'Website Form';
     const subject     = `🔔 New Lead — ${name} (${sourceLabel})${service ? ` · ${service}` : ''}`;
+
+    if (isNewsletter) {
+      try {
+        await connectDB();
+        await SubscriberModel.updateOne(
+          { email: email.trim().toLowerCase() },
+          { unsubscribed: false },
+          { upsert: true }
+        );
+      } catch (err) {
+        console.error('[contact] failed to save subscriber:', err);
+      }
+    }
 
     // 1) Owner notification — CRITICAL. If this fails, the whole request fails so the
     //    visitor is told to retry and the lead is never silently lost.
