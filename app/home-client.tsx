@@ -126,7 +126,7 @@ const services = [
     ],
     vizMetrics: [
       { val: 'ROI-led', label: 'Approach' },
-      { val: 'Multi-channel', label: 'Campaigns' },
+      { val: 'Omnichannel', label: 'Campaigns' },
       { val: 'Transparent', label: 'Reporting' },
     ],
   },
