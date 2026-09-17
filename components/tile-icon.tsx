@@ -268,8 +268,6 @@ function mulberry32(a: number) {
 export function genCoverSvg(slug: string): string {
   const rng = mulberry32(hashStr(slug));
   const W = 400, H = 250;
-  const h1 = 200 + Math.floor(rng() * 60);
-  const h2 = 170 + Math.floor(rng() * 90);
   const accent = `hsl(${190 + Math.floor(rng() * 70)} 90% 68%)`;
 
   const n = 7 + Math.floor(rng() * 5);
@@ -292,9 +290,9 @@ export function genCoverSvg(slug: string): string {
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid slice">
 <defs>
 <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-<stop offset="0" stop-color="hsl(${h1} 70% 22%)"/>
-<stop offset="0.55" stop-color="hsl(${h2} 58% 13%)"/>
-<stop offset="1" stop-color="#091421"/>
+<stop offset="0" stop-color="#0A0F1A"/>
+<stop offset="0.55" stop-color="#070A11"/>
+<stop offset="1" stop-color="#030507"/>
 </linearGradient>
 <radialGradient id="blob" cx="50%" cy="50%" r="50%">
 <stop offset="0" stop-color="${accent}" stop-opacity="0.30"/>
