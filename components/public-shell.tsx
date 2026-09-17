@@ -25,13 +25,19 @@ export function PublicShell({ children }: { children: React.ReactNode }) {
       {/* Page-transition curtain — replays on each route change */}
       <div key={pathname} className="page-curtain" aria-hidden />
       <Header />
-      <AnimatePresence mode="wait">
+      {/* mode="wait" would force the new page to sit idle until the old page's
+          exit animation fully finished (up to ~560ms of pure animation-imposed
+          delay on every navigation, on top of the curtain wipe below) — that
+          was the actual cause of "Home feels slow to click into". Default
+          (sync) mode lets the incoming page mount and start rendering
+          immediately while the outgoing one fades out behind the curtain. */}
+      <AnimatePresence>
         <motion.main
           key={pathname}
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -6 }}
-          transition={{ duration: 0.28, ease: [0.4, 0, 0.2, 1] }}
+          transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
         >
           {children}
         </motion.main>
