@@ -723,14 +723,15 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
                       ))}
                     </div>
 
-                    {/* Bottom metrics */}
-                    <div className="grid grid-cols-3 gap-1.5 pt-5" style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+                    {/* Bottom metrics — flex-wrap, not a 3-col grid: each item sizes to
+                        its own text and wraps to a new row if it doesn't fit, instead
+                        of a fixed-width column forcing long words to overflow into
+                        their neighbor. */}
+                    <div className="flex flex-wrap justify-center gap-x-3 gap-y-2.5 pt-5" style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
                       {s.vizMetrics.map(m => (
-                        <div key={m.label} className="text-center flex flex-col min-w-0">
-                          <div className="flex items-end justify-center" style={{ minHeight: '2rem' }}>
-                            <p className="font-medium leading-tight break-words" style={{ color: s.color, fontSize: '0.8rem', letterSpacing: '-0.01em' }}>{m.val}</p>
-                          </div>
-                          <p className="text-[9px] leading-tight mt-1.5 truncate" style={{ color: 'rgba(255,255,255,0.28)' }}>{m.label}</p>
+                        <div key={m.label} className="text-center" style={{ minWidth: 56 }}>
+                          <p className="font-medium leading-tight whitespace-nowrap" style={{ color: s.color, fontSize: '0.75rem', letterSpacing: '-0.01em' }}>{m.val}</p>
+                          <p className="text-[9px] leading-tight mt-1" style={{ color: 'rgba(255,255,255,0.28)' }}>{m.label}</p>
                         </div>
                       ))}
                     </div>
