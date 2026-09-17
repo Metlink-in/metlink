@@ -127,7 +127,6 @@ const services = [
     vizMetrics: [
       { val: 'ROI-led', label: 'Approach' },
       { val: 'Omnichannel', label: 'Campaigns' },
-      { val: 'Transparent', label: 'Reporting' },
     ],
   },
   {
@@ -148,7 +147,6 @@ const services = [
       { label: 'Web & UI/UX', value: 'Conversion', pct: 74 },
     ],
     vizMetrics: [
-      { val: 'Full', label: 'Production' },
       { val: 'On-brand', label: 'Assets' },
       { val: 'Fast', label: 'Turnaround' },
     ],
@@ -173,7 +171,6 @@ const services = [
     vizMetrics: [
       { val: 'Custom', label: 'AI Agents' },
       { val: 'Always-on', label: 'Automation' },
-      { val: 'Reliable', label: 'Delivery' },
     ],
   },
   {
@@ -196,7 +193,6 @@ const services = [
     vizMetrics: [
       { val: 'Scalable', label: 'Architecture' },
       { val: 'Modern', label: 'Stack' },
-      { val: 'Reliable', label: 'Delivery' },
     ],
   },
 ];
@@ -727,10 +723,10 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
                         its own text and wraps to a new row if it doesn't fit, instead
                         of a fixed-width column forcing long words to overflow into
                         their neighbor. */}
-                    <div className="flex flex-wrap justify-center gap-x-3 gap-y-2.5 pt-5" style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+                    <div className="flex flex-wrap justify-center gap-x-8 gap-y-2.5 pt-5" style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
                       {s.vizMetrics.map(m => (
-                        <div key={m.label} className="text-center" style={{ minWidth: 56 }}>
-                          <p className="font-medium leading-tight whitespace-nowrap" style={{ color: s.color, fontSize: '0.75rem', letterSpacing: '-0.01em' }}>{m.val}</p>
+                        <div key={m.label} className="text-center">
+                          <p className="font-medium leading-tight whitespace-nowrap" style={{ color: s.color, fontSize: '0.9rem', letterSpacing: '-0.02em' }}>{m.val}</p>
                           <p className="text-[9px] leading-tight mt-1" style={{ color: 'rgba(255,255,255,0.28)' }}>{m.label}</p>
                         </div>
                       ))}
