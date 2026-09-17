@@ -18,7 +18,7 @@ export const defaults: Record<string, unknown> = {
   },
 
   stats: [
-    { value: '5+',   label: 'Years' },
+    { value: '4+',   label: 'Years' },
     { value: '80+',  label: 'Clients' },
     { value: '150+', label: 'Projects' },
     { value: '40+',  label: 'Team' },

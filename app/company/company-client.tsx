@@ -138,7 +138,7 @@ export default function CompanyClient({ company, valuesList, teamList, milestone
           <StaggerChildren className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {valuesList.map((v, vIdx) => {
               const Icon = valueIcons[vIdx % valueIcons.length];
-              const color = PALETTE[vIdx % PALETTE.length];
+              const color = '#2B80F0';
               return (
                 <StaggerItem key={v.title}>
                   <div className="group p-7 rounded-2xl transition-all duration-300 hover:-translate-y-1.5 h-full"
@@ -155,7 +155,7 @@ export default function CompanyClient({ company, valuesList, teamList, milestone
                     }}>
                     <div className="w-11 h-11 rounded-xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform"
                       style={{ background: `${color}26`, border: `1px solid ${color}4D` }}>
-                      <Icon className="w-5 h-5" style={{ color }} />
+                      <Icon className="w-5 h-5" style={{ color }} strokeWidth={1.75} />
                     </div>
                     <h3 className="font-bold mb-2 transition-colors" style={{ color: '#FFFFFF' }}
                       onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = color; }}
