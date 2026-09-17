@@ -491,10 +491,12 @@ function ProposalPopup({ onClose }: { onClose: () => void }) {
                   style={{ ...inputStyle, color: 'rgba(255,255,255,0.4)' }}
                   onFocus={onFocus} onBlur={onBlur}>
                   <option value="" style={{ background: '#0B1628' }}>Select a Budget Range</option>
-                  <option value="$1k – $5k" style={{ background: '#0B1628', color: '#fff' }}>$1k – $5k</option>
-                  <option value="$5k – $10k" style={{ background: '#0B1628', color: '#fff' }}>$5k – $10k</option>
-                  <option value="$10k – $25k" style={{ background: '#0B1628', color: '#fff' }}>$10k – $25k</option>
-                  <option value="$25k+" style={{ background: '#0B1628', color: '#fff' }}>$25k+</option>
+                  <option value="₹30K – ₹50K" style={{ background: '#0B1628', color: '#fff' }}>₹30K – ₹50K</option>
+                  <option value="₹50K – ₹1L" style={{ background: '#0B1628', color: '#fff' }}>₹50K – ₹1L</option>
+                  <option value="₹1L – ₹5L" style={{ background: '#0B1628', color: '#fff' }}>₹1L – ₹5L</option>
+                  <option value="₹5L – ₹20L" style={{ background: '#0B1628', color: '#fff' }}>₹5L – ₹20L</option>
+                  <option value="₹20L – ₹50L" style={{ background: '#0B1628', color: '#fff' }}>₹20L – ₹50L</option>
+                  <option value="₹50L+" style={{ background: '#0B1628', color: '#fff' }}>₹50L+</option>
                 </select>
                 <textarea name="message" placeholder="Please share any information that will help us provide an accurate estimate. *"
                   rows={3} required

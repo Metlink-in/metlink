@@ -15,7 +15,7 @@ const crumbs = [
 ];
 
 const services = ['Digital Marketing','Performance Marketing','SEO & Content','Social Media','Brand Identity','Video Production','Web Development','Mobile App','AI Development','Business Automation','Data Science','Other'];
-const budgets  = ['Under ₹1 Lakh','₹1L – ₹5L','₹5L – ₹20L','₹20L – ₹50L','₹50L+','Let\'s Discuss'];
+const budgets  = ['₹30K – ₹50K','₹50K – ₹1L','₹1L – ₹5L','₹5L – ₹20L','₹20L – ₹50L','₹50L+','Let\'s Discuss'];
 
 export default function ContactPage() {
   const [form, setForm]           = useState({ name:'', email:'', company:'', service:'', budget:'', message:'' });

@@ -199,7 +199,7 @@ export function PopupForm() {
                     onFocus={e => (e.currentTarget.style.borderColor = 'rgba(43,128,240,0.45)')}
                     onBlur={e => (e.currentTarget.style.borderColor = inputBorder)}>
                     <option value="" style={{ background: '#0B1628', color: 'rgba(255,255,255,0.45)' }}>Select a Budget Range</option>
-                    {['< ₹1 Lakh','₹1L – ₹5L','₹5L – ₹20L','₹20L – ₹50L','₹50L+'].map(b => (
+                    {['₹30K – ₹50K','₹50K – ₹1L','₹1L – ₹5L','₹5L – ₹20L','₹20L – ₹50L','₹50L+'].map(b => (
                       <option key={b} value={b} style={{ background: '#0B1628', color: '#FFFFFF' }}>{b}</option>
                     ))}
                   </select>
