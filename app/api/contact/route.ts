@@ -1,36 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import nodemailer from 'nodemailer';
-import { connectDB } from '@/lib/mongodb';
-import { SiteContent } from '@/lib/models/SiteContent';
-
-async function getSmtpConfig() {
-  try {
-    await connectDB();
-    const doc = await SiteContent.findOne({ section: 'smtp' }).lean() as { data?: Record<string, string> } | null;
-    const d = doc?.data ?? {};
-    return {
-      host:    d.host    || process.env.SMTP_HOST   || '',
-      port:    Number(d.port || process.env.SMTP_PORT || 587),
-      secure:  (d.secure || process.env.SMTP_SECURE) === 'true',
-      user:    d.user    || process.env.SMTP_USER   || '',
-      pass:    d.pass    || process.env.SMTP_PASS   || '',
-      to:      d.to      || process.env.CONTACT_TO  || 'hello@metlinkai.com',
-      fromName: d.fromName || process.env.SMTP_FROM_NAME || 'Metlink-AI',
-      replyTo: d.replyTo || process.env.SMTP_REPLY_TO || '',
-    };
-  } catch {
-    return {
-      host:    process.env.SMTP_HOST   || '',
-      port:    Number(process.env.SMTP_PORT || 587),
-      secure:  process.env.SMTP_SECURE === 'true',
-      user:    process.env.SMTP_USER   || '',
-      pass:    process.env.SMTP_PASS   || '',
-      to:      process.env.CONTACT_TO  || 'hello@metlinkai.com',
-      fromName: process.env.SMTP_FROM_NAME || 'Metlink-AI',
-      replyTo: process.env.SMTP_REPLY_TO || '',
-    };
-  }
-}
+import { getSmtpTransport } from '@/lib/smtp';
 
 const SOURCE_LABELS: Record<string, string> = {
   contact:    'Contact Page',
@@ -119,6 +88,31 @@ function confirmHtml(name: string) {
 </div></body></html>`;
 }
 
+function subscribeConfirmHtml(email: string) {
+  return `<!DOCTYPE html><html><body style="margin:0;padding:0;background:#F3F4F6;font-family:system-ui,sans-serif">
+<div style="max-width:560px;margin:32px auto;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.08)">
+  <div style="background:linear-gradient(135deg,#0C111D,#1A2540);padding:32px;text-align:center">
+    <p style="margin:0 0 4px;font-size:22px;font-weight:800;color:#fff">MetLink</p>
+    <p style="margin:0;font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:.15em;text-transform:uppercase">Grow with AI</p>
+  </div>
+  <div style="padding:36px 40px">
+    <h2 style="margin:0 0 12px;font-size:22px;color:#0B1628;font-weight:700">You&#39;re subscribed! 🎉</h2>
+    <p style="margin:0 0 20px;font-size:14px;color:#4B5563;line-height:1.6">
+      Thanks for subscribing with <strong>${esc(email)}</strong>. We&#39;ll send you our best articles on AI, marketing, and software, roughly once a month, straight to this inbox.
+    </p>
+    <a href="https://metlinkai.com/blog" style="display:inline-block;padding:12px 28px;background:#2B80F0;color:#fff;border-radius:10px;font-size:14px;font-weight:700;text-decoration:none">
+      Read the Blog →
+    </a>
+  </div>
+  <div style="padding:20px 40px;background:#F9FAFB;border-top:1px solid #E5E7EB">
+    <p style="margin:0;font-size:12px;color:#6B7280">
+      MetLink · Indore, Madhya Pradesh, India · 452001<br>
+      <a href="mailto:hello@metlinkai.com" style="color:#2B80F0;text-decoration:none">hello@metlinkai.com</a> · +91 8602333400
+    </p>
+  </div>
+</div></body></html>`;
+}
+
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
@@ -128,16 +122,13 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Name, email, and message are required.' }, { status: 400 });
     }
 
-    const cfg = await getSmtpConfig();
-    if (!cfg.host || !cfg.user || !cfg.pass) {
+    const smtp = await getSmtpTransport();
+    if (!smtp) {
       console.warn('[contact] SMTP not configured');
       return NextResponse.json({ error: 'Email service not configured. Please contact us at hello@metlinkai.com' }, { status: 503 });
     }
-
-    const transport = nodemailer.createTransport({
-      host: cfg.host, port: cfg.port, secure: cfg.secure,
-      auth: { user: cfg.user, pass: cfg.pass },
-    });
+    const { transport, cfg } = smtp;
+    const isNewsletter = source === 'newsletter' || source === 'footer';
     const sourceLabel = SOURCE_LABELS[source] || 'Website Form';
     const subject     = `🔔 New Lead — ${name} (${sourceLabel})${service ? ` · ${service}` : ''}`;
 
@@ -158,8 +149,8 @@ export async function POST(req: NextRequest) {
         from:    `"${cfg.fromName}" <${cfg.user}>`,
         to:      `"${name}" <${email}>`,
         replyTo: cfg.replyTo || cfg.to,
-        subject: `We received your inquiry — MetLink`,
-        html:    confirmHtml(name),
+        subject: isNewsletter ? "You're subscribed to the MetLink blog!" : 'We received your inquiry — MetLink',
+        html:    isNewsletter ? subscribeConfirmHtml(email) : confirmHtml(name),
       });
     } catch (confErr) {
       console.warn('[contact] confirmation email to submitter failed:', confErr);
