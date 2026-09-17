@@ -7,18 +7,14 @@ import { Footer } from '@/components/sections/footer';
 import { ChatBot } from '@/components/chatbot';
 import { PopupForm } from '@/components/popup-form';
 import { IntroAnimation } from '@/components/intro-animation';
-import { SmoothScroll } from '@/components/smooth-scroll';
 import { GlobalMagnetic } from '@/components/global-magnetic';
 
 export function PublicShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const isAdmin = pathname?.startsWith('/admin');
+  const isAdmin = pathname?.startsWith('/metlink-portal');
 
-  // Reset scroll to top on every route change (Lenis keeps the old offset otherwise,
-  // which makes a new page look "stuck" mid-scroll).
+  // Reset scroll to top on every route change.
   useEffect(() => {
-    const lenis = (window as unknown as { lenis?: { scrollTo: (v: number, o?: object) => void } }).lenis;
-    if (lenis) lenis.scrollTo(0, { immediate: true });
     window.scrollTo(0, 0);
   }, [pathname]);
 
@@ -26,7 +22,6 @@ export function PublicShell({ children }: { children: React.ReactNode }) {
 
   return (
     <>
-      <SmoothScroll />
       <GlobalMagnetic />
       {/* Page-transition curtain — replays on each route change */}
       <div key={pathname} className="page-curtain" aria-hidden />

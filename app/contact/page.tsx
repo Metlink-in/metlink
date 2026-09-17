@@ -5,6 +5,14 @@ import { SectionBackdrop } from '@/components/section-backdrop';
 import { useState, useEffect } from 'react';
 import { Mail, Phone, MapPin, Clock, ArrowRight, CheckCircle } from 'lucide-react';
 import { FadeIn, StaggerChildren, StaggerItem } from '@/components/fade-in';
+import { breadcrumbSchema } from '@/lib/schema';
+import { JsonLd } from '@/components/json-ld';
+import { Breadcrumbs } from '@/components/breadcrumbs';
+
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Contact', path: '/contact' },
+];
 
 const services = ['Digital Marketing','Performance Marketing','SEO & Content','Social Media','Brand Identity','Video Production','Web Development','Mobile App','AI Development','Business Automation','Data Science','Other'];
 const budgets  = ['Under ₹1 Lakh','₹1L – ₹5L','₹5L – ₹20L','₹20L – ₹50L','₹50L+','Let\'s Discuss'];
@@ -79,6 +87,7 @@ export default function ContactPage() {
 
   return (
     <div className="w-full overflow-x-hidden" style={{ background: '#060D1A' }}>
+      <JsonLd data={breadcrumbSchema(crumbs)} />
 
       {/* ── Hero ── */}
       <section className="relative pt-32 pb-20 overflow-hidden">
@@ -89,6 +98,7 @@ export default function ContactPage() {
             style={{ background: 'radial-gradient(ellipse, rgba(95,168,255,0.07) 0%, transparent 70%)', filter: 'blur(80px)' }} />
         </div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center flex flex-col items-center">
+          <Breadcrumbs items={crumbs} center />
           <FadeIn>
             <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-[10px] uppercase tracking-[0.25em] mb-8"
               style={{ background: 'rgba(43,128,240,0.1)', border: '1px solid rgba(43,128,240,0.2)', color: '#5FA8FF' }}>

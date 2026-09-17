@@ -132,7 +132,7 @@ export default function BlogList() {
           <h1 style={{ color: '#fff', fontSize: 22, fontWeight: 700, margin: 0 }}>Blog Posts</h1>
           <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: 13, marginTop: 4 }}>Manage blog posts and articles.</p>
         </div>
-        <Link href="/admin/dashboard/blog/new">
+        <Link href="/metlink-portal/dashboard/blog/new">
           <button style={{ background: '#2B80F0', color: '#fff', border: 'none', borderRadius: 10, padding: '10px 20px', fontSize: 14, fontWeight: 600, cursor: 'pointer' }}>
             + New Post
           </button>
@@ -155,7 +155,7 @@ export default function BlogList() {
                 <span style={{ fontSize: 11, padding: '3px 8px', borderRadius: 6, background: p.published ? 'rgba(16,185,129,0.15)' : 'rgba(255,255,255,0.06)', color: p.published ? '#10B981' : 'rgba(255,255,255,0.4)', border: `1px solid ${p.published ? 'rgba(16,185,129,0.3)' : 'rgba(255,255,255,0.1)'}` }}>
                   {p.published ? 'Published' : 'Draft'}
                 </span>
-                <Link href={`/admin/dashboard/blog/${p._id}`}>
+                <Link href={`/metlink-portal/dashboard/blog/${p._id}`}>
                   <button style={{ background: 'rgba(43,128,240,0.12)', border: '1px solid rgba(43,128,240,0.25)', color: '#2B80F0', borderRadius: 8, padding: '6px 14px', fontSize: 12, cursor: 'pointer' }}>Edit</button>
                 </Link>
                 <button onClick={() => del(p._id)} style={{ background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.25)', color: '#EF4444', borderRadius: 8, padding: '6px 14px', fontSize: 12, cursor: 'pointer' }}>Delete</button>

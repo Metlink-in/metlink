@@ -3,11 +3,19 @@
 import { useState, useEffect } from 'react';
 import { SectionBackdrop } from '@/components/section-backdrop';
 import Link from 'next/link';
+import Image from 'next/image';
 import { ArrowRight, Clock } from 'lucide-react';
 import { blogPosts as staticPosts } from '@/lib/blog-data';
 import { FadeIn, StaggerChildren, StaggerItem } from '@/components/fade-in';
+import { breadcrumbSchema } from '@/lib/schema';
+import { JsonLd } from '@/components/json-ld';
+import { Breadcrumbs } from '@/components/breadcrumbs';
 
 const defaultCategories = ['All', 'AI & Automation', 'Digital Marketing', 'Creative Media', 'Software Development'];
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Blog', path: '/blog' },
+];
 
 export default function BlogPage() {
   const [posts, setPosts]             = useState(staticPosts);
@@ -55,12 +63,14 @@ export default function BlogPage() {
 
   return (
     <div className="w-full overflow-x-hidden" style={{ background: '#07111F' }}>
+      <JsonLd data={breadcrumbSchema(crumbs)} />
 
       {/* Hero */}
       <section className="relative py-20 sm:py-28 overflow-hidden" style={{ background: '#07111F' }}>
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px] rounded-full pointer-events-none"
           style={{ background: 'radial-gradient(ellipse, rgba(43,128,240,0.18) 0%, transparent 70%)', filter: 'blur(80px)' }} />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+          <Breadcrumbs items={crumbs} center />
           <FadeIn>
             <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-[10px] font-normal uppercase tracking-[0.25em] mb-8"
               style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.07)', color: '#2B80F0' }}>
@@ -122,6 +132,10 @@ export default function BlogPage() {
                 onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(43,128,240,0.25)'; (e.currentTarget as HTMLElement).style.boxShadow = '0 12px 40px rgba(0,0,0,0.35)'; }}
                 onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.12)'; (e.currentTarget as HTMLElement).style.boxShadow = 'none'; }}>
                 <div className={`lg:col-span-2 h-56 lg:h-auto rounded-2xl bg-gradient-to-br ${featured.gradientFrom} ${featured.gradientTo} relative overflow-hidden flex-shrink-0`}>
+                  {featured.coverImage && (
+                    <Image src={featured.coverImage} alt={`Cover image for the article "${featured.title}"`}
+                      fill sizes="(min-width: 1024px) 40vw, 100vw" style={{ objectFit: 'cover' }} />
+                  )}
                   <div className="absolute inset-0 bg-black/15" />
                   <div className="relative h-full flex flex-col justify-between p-6">
                     <span className="self-start px-3 py-1 rounded-full text-xs font-semibold bg-black/25 text-white backdrop-blur-sm">{featured.category}</span>
@@ -177,6 +191,10 @@ export default function BlogPage() {
                     onMouseEnter={e => (e.currentTarget as HTMLElement).style.boxShadow = '0 12px 36px rgba(0,0,0,0.4)'}
                     onMouseLeave={e => (e.currentTarget as HTMLElement).style.boxShadow = '0 2px 8px rgba(0,0,0,0.2)'}>
                     <div className={`h-40 bg-gradient-to-br ${post.gradientFrom} ${post.gradientTo} relative overflow-hidden`}>
+                      {post.coverImage && (
+                        <Image src={post.coverImage} alt={`Cover image for the article "${post.title}"`}
+                          fill sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw" style={{ objectFit: 'cover' }} />
+                      )}
                       <div className="absolute inset-0 bg-black/15" />
                       <div className="absolute bottom-3 left-4">
                         <span className="px-3 py-1 rounded-full text-xs font-semibold bg-black/25 text-white backdrop-blur-sm">{post.category}</span>

@@ -1,11 +1,16 @@
 import Link from 'next/link';
+import type { Metadata } from 'next';
 import { SectionBackdrop } from '@/components/section-backdrop';
 import { notFound } from 'next/navigation';
-import { ChevronRight, ArrowRight, CheckCircle, Zap } from 'lucide-react';
+import { ArrowRight, CheckCircle, Zap, TrendingUp } from 'lucide-react';
 import { getAllServiceSlugs, getServiceBySlug, getCategoryBySlug } from '@/lib/services-data';
 import { TileIcon } from '@/components/tile-icon';
 import { FadeIn, StaggerChildren, StaggerItem } from '@/components/fade-in';
 import { FaqAccordion } from '@/components/faq-accordion';
+import { buildMetadata } from '@/lib/seo';
+import { breadcrumbSchema, serviceSchema, faqSchema } from '@/lib/schema';
+import { JsonLd } from '@/components/json-ld';
+import { Breadcrumbs } from '@/components/breadcrumbs';
 
 const PROCESS = [
   { step: '01', title: 'Discovery & Strategy', desc: 'We learn your goals, audit what exists, and define clear success metrics before any build begins.' },
@@ -25,6 +30,19 @@ export async function generateStaticParams() {
   return getAllServiceSlugs();
 }
 
+export async function generateMetadata({ params }: { params: Promise<{ category: string; service: string }> }): Promise<Metadata> {
+  const { category, service } = await params;
+  const svcData = getServiceBySlug(category, service);
+  const catData = getCategoryBySlug(category);
+  if (!svcData || !catData) return {};
+
+  return buildMetadata({
+    path: `/services/${category}/${service}`,
+    title: [svcData.name, `${catData.name} Services`, svcData.tagline],
+    description: [svcData.tagline, `Part of MetLink's ${catData.name} services.`, svcData.description],
+  });
+}
+
 export default async function ServiceDetailPage({ params }: { params: Promise<{ category: string; service: string }> }) {
   const { category, service } = await params;
   const svcData = getServiceBySlug(category, service);
@@ -34,8 +52,30 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
 
   const accent = catColors[catData.slug] || '#2B80F0';
 
+  const faqItems = [
+    { q: `How long does a typical ${svcData.name} project take?`, a: 'Timelines depend on scope, but most engagements deliver a first working milestone within about a week of kickoff, with a clear plan agreed upfront.' },
+    { q: `How much does ${svcData.name} cost?`, a: 'Every project is scoped to your needs. We work with budgets from ₹50K to ₹50L+ — share your goals and we’ll send a tailored estimate.' },
+    { q: 'Do you provide ongoing support after launch?', a: 'Yes. We offer continued optimization, monitoring, and support so your solution keeps improving and scaling over time.' },
+    { q: 'How do we get started?', a: 'Book a free strategy call or send us a message — we’ll align on goals and map out the fastest path to results.' },
+  ];
+
+  const crumbs = [
+    { name: 'Home', path: '/' },
+    { name: 'Services', path: '/services' },
+    { name: catData.name, path: `/services/${catData.slug}` },
+    { name: svcData.name, path: `/services/${catData.slug}/${svcData.slug}` },
+  ];
+
   return (
     <div className="w-full overflow-x-hidden" style={{ background: '#07111F' }}>
+      <JsonLd data={breadcrumbSchema(crumbs)} />
+      <JsonLd data={serviceSchema({
+        name: svcData.name,
+        description: svcData.description,
+        path: `/services/${catData.slug}/${svcData.slug}`,
+        categoryName: catData.name,
+      })} />
+      <JsonLd data={faqSchema(faqItems)} />
 
       {/* Hero */}
       <section className="relative py-20 sm:py-28 overflow-hidden"
@@ -44,15 +84,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
           style={{ background: `radial-gradient(circle, ${accent}08 0%, transparent 70%)`, filter: 'blur(80px)' }} />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="flex flex-wrap items-center gap-2 text-xs mb-8" style={{ color: 'rgba(255,255,255,0.4)' }}>
-            <Link href="/" className="hover:text-[#2B80F0] transition-colors">Home</Link>
-            <ChevronRight className="w-3 h-3" />
-            <Link href="/services" className="hover:text-[#2B80F0] transition-colors">Services</Link>
-            <ChevronRight className="w-3 h-3" />
-            <Link href={`/services/${catData.slug}`} className="hover:text-[#2B80F0] transition-colors">{catData.name}</Link>
-            <ChevronRight className="w-3 h-3" />
-            <span style={{ color: accent }}>{svcData.name}</span>
-          </div>
+          <Breadcrumbs items={crumbs} accent={accent} />
 
           <div className="max-w-4xl">
             <TileIcon slug={svcData.slug} className="w-11 h-11 mb-6 text-white/90" strokeWidth={1.3} />
@@ -75,7 +107,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
           <div className="grid lg:grid-cols-2 gap-16 items-start">
             <div>
               <p className="text-xs font-bold uppercase tracking-[0.2em] mb-3" style={{ color: accent }}>Capabilities</p>
-              <h2 className=" mb-6" style={{ color: '#FFFFFF' }}>What We Will Deliver</h2>
+              <h2 className=" mb-6" style={{ color: '#FFFFFF' }}>What We Will Deliver With {svcData.name}</h2>
               <p className="leading-relaxed" style={{ color: 'rgba(255,255,255,0.6)' }}>
                 Our {svcData.name.toLowerCase()} services are comprehensive, tailored to your specific business goals, and designed to generate measurable ROI.
               </p>
@@ -88,6 +120,24 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
                   <span className="font-medium text-sm" style={{ color: '#FFFFFF' }}>{feat}</span>
                 </div>
               ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Revenue Impact */}
+      <section className="py-16 sm:py-20 relative overflow-hidden isolate" style={{ background: '#07111F', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+        <SectionBackdrop behind />
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="p-8 sm:p-10 rounded-3xl flex flex-col sm:flex-row gap-6 items-start"
+            style={{ background: `${accent}0A`, border: `1px solid ${accent}25` }}>
+            <div className="w-12 h-12 rounded-2xl flex items-center justify-center shrink-0"
+              style={{ background: `${accent}18`, border: `1px solid ${accent}35` }}>
+              <TrendingUp className="w-6 h-6" style={{ color: accent }} />
+            </div>
+            <div>
+              <p className="text-xs font-bold uppercase tracking-[0.2em] mb-3" style={{ color: accent }}>How This Grows Your Revenue</p>
+              <p className="text-lg leading-relaxed" style={{ color: 'rgba(255,255,255,0.85)' }}>{svcData.impact}</p>
             </div>
           </div>
         </div>
@@ -130,7 +180,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeIn className="text-center mb-14">
             <p className="text-xs font-bold uppercase tracking-[0.2em] mb-3" style={{ color: accent }}>How We Work</p>
-            <h2 style={{ color: '#FFFFFF' }}>A clear path from idea to impact</h2>
+            <h2 style={{ color: '#FFFFFF' }}>A clear path from idea to {svcData.name}</h2>
           </FadeIn>
           <StaggerChildren className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {PROCESS.map((p) => (
@@ -153,14 +203,9 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeIn className="text-center mb-12">
             <p className="text-xs font-bold uppercase tracking-[0.2em] mb-3" style={{ color: accent }}>FAQ</p>
-            <h2 style={{ color: '#FFFFFF' }}>Common questions</h2>
+            <h2 style={{ color: '#FFFFFF' }}>Common questions about {svcData.name}</h2>
           </FadeIn>
-          <FaqAccordion accent={accent} items={[
-            { q: `How long does a typical ${svcData.name} project take?`, a: 'Timelines depend on scope, but most engagements deliver a first working milestone within about a week of kickoff, with a clear plan agreed upfront.' },
-            { q: `How much does ${svcData.name} cost?`, a: 'Every project is scoped to your needs. We work with budgets from ₹50K to ₹50L+ — share your goals and we’ll send a tailored estimate.' },
-            { q: 'Do you provide ongoing support after launch?', a: 'Yes. We offer continued optimization, monitoring, and support so your solution keeps improving and scaling over time.' },
-            { q: 'How do we get started?', a: 'Book a free strategy call or send us a message — we’ll align on goals and map out the fastest path to results.' },
-          ]} />
+          <FaqAccordion accent={accent} items={faqItems} />
         </div>
       </section>
 

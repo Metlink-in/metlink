@@ -7,6 +7,8 @@ interface Field {
   label: string;
   multiline?: boolean;
   half?: boolean;
+  /** Renders the upload-with-preview control instead of a plain text input. */
+  image?: boolean;
 }
 
 interface Props {
@@ -112,7 +114,7 @@ export default function ArrayEditor({ items = [], onChange, fields, addLabel = '
             {fields.map(f => (
               <div key={f.key} style={{ flex: f.half ? '0 0 calc(50% - 6px)' : '1 1 100%', minWidth: 0 }}>
                 <label style={label}>{f.label}</label>
-                {f.key === 'logo' ? (
+                {f.key === 'logo' || f.image ? (
                   <LogoField value={item[f.key] ?? ''} onChange={v => update(i, f.key, v)} />
                 ) : f.multiline ? (
                   <textarea style={{ ...inp, resize: 'vertical', minHeight: 72, fontFamily: 'inherit' }} value={item[f.key] ?? ''} onChange={e => update(i, f.key, e.target.value)} />

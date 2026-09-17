@@ -1,7 +1,20 @@
+import type { Metadata } from 'next';
 import { getSection } from '@/lib/get-section';
 import CompanyClient from './company-client';
+import { buildMetadata } from '@/lib/seo';
+import { breadcrumbSchema } from '@/lib/schema';
+import { JsonLd } from '@/components/json-ld';
 
 export const dynamic = 'force-dynamic';
+
+export function generateMetadata(): Metadata {
+  return buildMetadata({
+    path: '/company',
+    title: 'About MetLink — AI Marketing & Development Agency',
+    description:
+      'An AI-first marketing and development agency, founded on the belief that every business deserves access to world-class technology, creativity, and strategic thinking.',
+  });
+}
 
 const defaultValues = [
   { title: 'Mission-Driven',      desc: 'Every decision we make is anchored to one goal — measurable results for our clients.' },
@@ -44,12 +57,18 @@ export default async function CompanyPage() {
     : defaultStats;
 
   return (
-    <CompanyClient
-      company={companyData ?? {}}
-      valuesList={valuesMerged}
-      teamList={Array.isArray(teamData) && teamData.length ? teamData : defaultTeam}
-      milestonesList={Array.isArray(timelineData) && timelineData.length ? timelineData : defaultMilestones}
-      statsList={statsMerged}
-    />
+    <>
+      <JsonLd data={breadcrumbSchema([
+        { name: 'Home', path: '/' },
+        { name: 'Company', path: '/company' },
+      ])} />
+      <CompanyClient
+        company={companyData ?? {}}
+        valuesList={valuesMerged}
+        teamList={Array.isArray(teamData) && teamData.length ? teamData : defaultTeam}
+        milestonesList={Array.isArray(timelineData) && timelineData.length ? timelineData : defaultMilestones}
+        statsList={statsMerged}
+      />
+    </>
   );
 }

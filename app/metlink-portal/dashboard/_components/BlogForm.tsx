@@ -7,6 +7,7 @@ interface PostData {
   slug: string; title: string; excerpt: string; content: string;
   author: string; authorRole: string; date: string; readTime: string;
   category: string; tags: string; gradientFrom: string; gradientTo: string;
+  coverImage: string;
   published: boolean;
 }
 
@@ -14,6 +15,7 @@ const empty: PostData = {
   slug: '', title: '', excerpt: '', content: '',
   author: 'Jitesh Bawaskar', authorRole: 'Founder', date: '', readTime: '5 min read',
   category: '', tags: '', gradientFrom: '#2B80F0', gradientTo: '#0EA5E9',
+  coverImage: '',
   published: true,
 };
 
@@ -40,7 +42,7 @@ export default function BlogForm({ initial, isNew }: Props) {
     setSaving(false);
     if (res.ok) {
       setToast('Saved!');
-      setTimeout(() => router.push('/admin/dashboard/blog'), 800);
+      setTimeout(() => router.push('/metlink-portal/dashboard/blog'), 800);
     } else {
       const err = await res.json();
       setToast(err.message ?? 'Save failed.');
@@ -84,6 +86,7 @@ export default function BlogForm({ initial, isNew }: Props) {
           <div><label style={label}>Gradient From (hex)</label><input style={inp} value={d.gradientFrom} onChange={e => set('gradientFrom', e.target.value)} /></div>
           <div><label style={label}>Gradient To (hex)</label><input style={inp} value={d.gradientTo} onChange={e => set('gradientTo', e.target.value)} /></div>
         </div>
+        <div style={field}><label style={label}>Cover Image URL (optional — leave blank to use the gradient banner)</label><input style={inp} value={d.coverImage} onChange={e => set('coverImage', e.target.value)} placeholder="/uploads/my-cover.jpg" /></div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginTop: 8 }}>
           <input type="checkbox" id="pub" checked={d.published} onChange={e => set('published', e.target.checked)} style={{ width: 16, height: 16, cursor: 'pointer' }} />
           <label htmlFor="pub" style={{ color: 'rgba(255,255,255,0.6)', fontSize: 13, cursor: 'pointer' }}>Published (visible on public site)</label>

@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { ArrowRight, Star, Megaphone, Palette, Bot, Code, ChevronLeft, ChevronRight, Target, Users, DollarSign, Repeat, CalendarDays, Video, FileText, Rocket } from 'lucide-react';
 import { FadeIn, StaggerChildren, StaggerItem } from '@/components/fade-in';
 import { CountUp } from '@/components/count-up';
-import { Parallax } from '@/components/parallax';
 import { SectionBackdrop } from '@/components/section-backdrop';
 import { FaqAccordion } from '@/components/faq-accordion';
 
@@ -225,11 +224,11 @@ function ClientCard({ c }: { c: { name: string; industry: string; color: string;
           <img
             src={c.logo}
             alt={c.name}
+            loading="lazy"
             style={{
-              maxHeight: '100%',
-              maxWidth: '100%',
+              height: '100%',
               width: 'auto',
-              height: 'auto',
+              maxWidth: '100%',
               objectFit: 'contain',
               opacity: 0.92,
               filter: 'brightness(1.15) contrast(1.05)',
@@ -369,6 +368,8 @@ interface Props {
   cmsTestimonials: { quote: string; name: string; title: string; metric: string; metricLabel: string; stars?: number }[];
   cmsWhyUs: { title: string; desc: string }[];
   cmsSteps: { num: string; title: string; desc: string }[];
+  /** Admin-controlled show/hide for the "Client Success Stories" section — defaults to visible. */
+  testimonialsVisible?: boolean;
 }
 
 /* ─── FAQ Section ───────────────────────────────────────────── */
@@ -473,7 +474,7 @@ function HeroVideoBg({ active }: { active: number }) {
 
 /* ─── Component ─────────────────────────────────────────────── */
 
-export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWhyUs }: Props) {
+export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWhyUs, testimonialsVisible = true }: Props) {
   const [activeService, setActiveService]       = useState('01');
   const [activeStack, setActiveStack]           = useState(0);
   const [stackVisible, setStackVisible]         = useState(true);
@@ -725,9 +726,11 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
                     {/* Bottom metrics */}
                     <div className="grid grid-cols-3 gap-2 pt-5" style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
                       {s.vizMetrics.map(m => (
-                        <div key={m.label} className="text-center">
-                          <p className="font-medium leading-none mb-1.5" style={{ color: s.color, fontSize: '1rem', letterSpacing: '-0.03em' }}>{m.val}</p>
-                          <p className="text-[9px] leading-tight" style={{ color: 'rgba(255,255,255,0.28)' }}>{m.label}</p>
+                        <div key={m.label} className="text-center flex flex-col">
+                          <div className="flex items-end justify-center" style={{ minHeight: '2.5rem' }}>
+                            <p className="font-medium leading-tight" style={{ color: s.color, fontSize: '1rem', letterSpacing: '-0.03em' }}>{m.val}</p>
+                          </div>
+                          <p className="text-[9px] leading-tight mt-1.5" style={{ color: 'rgba(255,255,255,0.28)' }}>{m.label}</p>
                         </div>
                       ))}
                     </div>
@@ -817,7 +820,7 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
       </section>
 
       {/* ══ CLIENT SUCCESS STORIES ══════════════════════════════ */}
-      {testimonialsList.length > 0 && (
+      {testimonialsVisible && testimonialsList.length > 0 && (
       <section className="relative isolate overflow-hidden py-20 sm:py-28" style={{ background: BG }}>
         <SectionBackdrop behind />
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -961,20 +964,24 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
                       const img = el.querySelector('img') as HTMLImageElement;
                       if (img) img.style.transform = 'scale(1)';
                     }}>
-                    <img
-                      src={tool.logo}
-                      alt={tool.name}
-                      style={{
-                        height: 54,
-                        width: 'auto',
-                        maxWidth: 108,
-                        objectFit: 'contain',
-                        filter: (tool as { invert?: boolean }).invert
-                          ? 'brightness(0) invert(1) drop-shadow(0 0 6px rgba(255,255,255,0.3))'
-                          : 'brightness(1.15) saturate(1.3) drop-shadow(0 2px 8px rgba(0,0,0,0.4))',
-                        transition: 'filter 0.2s ease, transform 0.2s ease',
-                      }}
-                    />
+                    <div style={{ height: 54, width: 108, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      <img
+                        src={tool.logo}
+                        alt={tool.name}
+                        loading="lazy"
+                        style={{
+                          maxHeight: '100%',
+                          maxWidth: '100%',
+                          width: 'auto',
+                          height: 'auto',
+                          objectFit: 'contain',
+                          filter: (tool as { invert?: boolean }).invert
+                            ? 'brightness(0) invert(1) drop-shadow(0 0 6px rgba(255,255,255,0.3))'
+                            : 'brightness(1.15) saturate(1.3) drop-shadow(0 2px 8px rgba(0,0,0,0.4))',
+                          transition: 'filter 0.2s ease, transform 0.2s ease',
+                        }}
+                      />
+                    </div>
                     <span className="text-[12px] text-center leading-tight font-medium"
                       style={{ color: 'rgba(255,255,255,0.75)' }}>
                       {tool.name}
@@ -1021,11 +1028,9 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
       <section className="relative py-24 sm:py-32 overflow-hidden" style={{ background: BG2, borderTop: BDR }}>
 
         <SectionBackdrop />
-        {/* Ambient background glow (parallax) */}
-        <Parallax speed={70}>
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[400px]"
-            style={{ background: 'radial-gradient(ellipse, rgba(43,128,240,0.08) 0%, transparent 70%)', filter: 'blur(80px)' }} />
-        </Parallax>
+        {/* Ambient background glow */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[400px]"
+          style={{ background: 'radial-gradient(ellipse, rgba(43,128,240,0.08) 0%, transparent 70%)', filter: 'blur(80px)', transform: 'translate3d(-50%,0,0)', willChange: 'transform' }} />
 
         <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
@@ -1067,7 +1072,7 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
                       <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-105"
                         style={{ background: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.16)' }}>
                         {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img src={icon} alt={item.title} width={30} height={30} style={{ objectFit: 'contain', filter: 'brightness(1.45) saturate(1.2) drop-shadow(0 0 6px rgba(255,255,255,0.18))' }} />
+                        <img src={icon} alt={item.title} width={30} height={30} loading="lazy" style={{ objectFit: 'contain', filter: 'brightness(1.45) saturate(1.2) drop-shadow(0 0 6px rgba(255,255,255,0.18))' }} />
                       </div>
 
                       {/* Title */}

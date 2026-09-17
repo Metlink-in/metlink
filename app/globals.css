@@ -347,3 +347,9 @@ p, li, span, a, button, input, textarea, select {
 }
 
 .overflow-x-hidden { overflow-x: hidden !important; }
+
+/* ── Section backdrop photo — WebP with a JPG fallback for browsers without image-set() support ── */
+.section-backdrop-photo {
+  background-image: url(/bg/site-bg.jpg);
+  background-image: image-set(url(/bg/site-bg.webp) type("image/webp"), url(/bg/site-bg.jpg) type("image/jpeg"));
+}

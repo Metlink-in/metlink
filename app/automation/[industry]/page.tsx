@@ -1,10 +1,15 @@
 import Link from 'next/link';
+import type { Metadata } from 'next';
 import { SectionBackdrop } from '@/components/section-backdrop';
 import { notFound } from 'next/navigation';
-import { ChevronRight, ArrowRight, CheckCircle } from 'lucide-react';
+import { ArrowRight, CheckCircle } from 'lucide-react';
 import { getAutomationIndustry, automationIndustries } from '@/lib/automation-data';
 import { TileIcon } from '@/components/tile-icon';
 import { FadeIn, StaggerChildren, StaggerItem } from '@/components/fade-in';
+import { buildMetadata } from '@/lib/seo';
+import { breadcrumbSchema } from '@/lib/schema';
+import { JsonLd } from '@/components/json-ld';
+import { Breadcrumbs } from '@/components/breadcrumbs';
 
 const accent = '#2B80F0';
 
@@ -12,24 +17,37 @@ export async function generateStaticParams() {
   return automationIndustries.map((i) => ({ industry: i.slug }));
 }
 
+export async function generateMetadata({ params }: { params: Promise<{ industry: string }> }): Promise<Metadata> {
+  const { industry } = await params;
+  const data = getAutomationIndustry(industry);
+  if (!data) return {};
+
+  return buildMetadata({
+    path: `/automation/${industry}`,
+    title: [`${data.name} Automation`, data.tagline],
+    description: [data.tagline, data.description],
+  });
+}
+
 export default async function AutomationIndustryPage({ params }: { params: Promise<{ industry: string }> }) {
   const { industry } = await params;
   const data = getAutomationIndustry(industry);
   if (!data) notFound();
 
+  const crumbs = [
+    { name: 'Home', path: '/' },
+    { name: 'Automation First', path: '/services/automation-first' },
+    { name: data.name, path: `/automation/${data.slug}` },
+  ];
+
   return (
     <div className="w-full overflow-x-hidden" style={{ background: '#07111F' }}>
+      <JsonLd data={breadcrumbSchema(crumbs)} />
       <section className="relative py-20 sm:py-28 overflow-hidden" style={{ background: '#07111F' }}>
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px] rounded-full pointer-events-none"
           style={{ background: `radial-gradient(ellipse, ${accent}12 0%, transparent 70%)`, filter: 'blur(80px)' }} />
         <FadeIn className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-          <div className="flex items-center justify-center gap-2 text-xs mb-8" style={{ color: 'rgba(255,255,255,0.4)' }}>
-            <Link href="/" className="hover:text-[#2B80F0] transition-colors">Home</Link>
-            <ChevronRight className="w-3 h-3" />
-            <Link href="/services/automation-first" className="hover:text-[#2B80F0] transition-colors">Automation First</Link>
-            <ChevronRight className="w-3 h-3" />
-            <span style={{ color: accent }}>{data.name}</span>
-          </div>
+          <Breadcrumbs items={crumbs} accent={accent} center />
           <div className="w-20 h-20 mx-auto rounded-2xl flex items-center justify-center mb-6 shadow-lg text-4xl"
             style={{ background: `${accent}12`, border: `1px solid ${accent}30` }}>
             {data.icon}

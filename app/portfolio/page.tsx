@@ -6,8 +6,15 @@ import Link from 'next/link';
 import { ArrowRight, ExternalLink } from 'lucide-react';
 import { projects as staticProjects } from '@/lib/portfolio-data';
 import { FadeIn, StaggerChildren, StaggerItem } from '@/components/fade-in';
+import { breadcrumbSchema } from '@/lib/schema';
+import { JsonLd } from '@/components/json-ld';
+import { Breadcrumbs } from '@/components/breadcrumbs';
 
 const filters = ['All', 'Software + AI', 'Digital Marketing', 'Creative Media', 'Business Automation'];
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Portfolio', path: '/portfolio' },
+];
 
 export default function PortfolioPage() {
   const [projects, setProjects] = useState(staticProjects);
@@ -20,6 +27,7 @@ export default function PortfolioPage() {
 
   return (
     <div className="w-full overflow-x-hidden" style={{ background: '#07111F' }}>
+      <JsonLd data={breadcrumbSchema(crumbs)} />
 
       {/* Hero */}
       <section className="relative py-20 sm:py-28 overflow-hidden"
@@ -27,6 +35,7 @@ export default function PortfolioPage() {
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px] rounded-full pointer-events-none"
           style={{ background: 'radial-gradient(ellipse, rgba(43,128,240,0.18) 0%, transparent 70%)', filter: 'blur(80px)' }} />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+          <Breadcrumbs items={crumbs} center />
           <FadeIn>
             <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-[10px] font-normal uppercase tracking-[0.25em] mb-8"
               style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.07)', color: '#2B80F0',  }}>
@@ -60,7 +69,16 @@ export default function PortfolioPage() {
         </div>
       </section>
 
+      {/* No results */}
+      {projects.length === 0 && (
+        <section className="py-24 text-center relative overflow-hidden isolate" style={{ background: '#0B1628' }}>
+          <SectionBackdrop behind />
+          <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: 16 }}>No case studies published yet — check back soon.</p>
+        </section>
+      )}
+
       {/* Projects grid */}
+      {projects.length > 0 && (
       <section className="py-12 pb-24" style={{ background: '#07111F' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <StaggerChildren className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -132,6 +150,7 @@ export default function PortfolioPage() {
           </StaggerChildren>
         </div>
       </section>
+      )}
 
       {/* Stats strip */}
       <section className="relative overflow-hidden isolate" style={{ background: '#0B1628', borderTop: '1px solid rgba(255,255,255,0.06)', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>

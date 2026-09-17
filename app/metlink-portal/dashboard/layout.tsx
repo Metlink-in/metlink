@@ -3,26 +3,26 @@ import { useRouter, usePathname } from 'next/navigation';
 import Link from 'next/link';
 
 const NAV = [
-  { label: 'Overview',     href: '/admin/dashboard' },
-  { label: 'Hero',         href: '/admin/dashboard/hero' },
-  { label: 'Stats',        href: '/admin/dashboard/stats' },
-  { label: 'Services',     href: '/admin/dashboard/services' },
-  { label: 'Automation First', href: '/admin/dashboard/automation' },
-  { label: 'Service Images',   href: '/admin/dashboard/service-images' },
-  { label: 'Clients',      href: '/admin/dashboard/clients' },
-  { label: 'Testimonials', href: '/admin/dashboard/testimonials' },
-  { label: 'Why Us',       href: '/admin/dashboard/why-us' },
-  { label: 'Process',      href: '/admin/dashboard/process' },
-  { label: 'Company',      href: '/admin/dashboard/company' },
-  { label: 'Values',       href: '/admin/dashboard/values' },
-  { label: 'Timeline',     href: '/admin/dashboard/timeline' },
-  { label: 'Team',         href: '/admin/dashboard/team' },
-  { label: 'Contact',      href: '/admin/dashboard/contact' },
-  { label: 'Social Links', href: '/admin/dashboard/social' },
-  { label: 'Footer',       href: '/admin/dashboard/footer' },
-  { label: 'Portfolio',    href: '/admin/dashboard/portfolio' },
-  { label: 'Blog',         href: '/admin/dashboard/blog' },
-  { label: 'SMTP / Email', href: '/admin/dashboard/smtp' },
+  { label: 'Overview',     href: '/metlink-portal/dashboard' },
+  { label: 'Hero',         href: '/metlink-portal/dashboard/hero' },
+  { label: 'Stats',        href: '/metlink-portal/dashboard/stats' },
+  { label: 'Services',     href: '/metlink-portal/dashboard/services' },
+  { label: 'Automation First', href: '/metlink-portal/dashboard/automation' },
+  { label: 'Service Images',   href: '/metlink-portal/dashboard/service-images' },
+  { label: 'Clients',      href: '/metlink-portal/dashboard/clients' },
+  { label: 'Testimonials', href: '/metlink-portal/dashboard/testimonials' },
+  { label: 'Why Us',       href: '/metlink-portal/dashboard/why-us' },
+  { label: 'Process',      href: '/metlink-portal/dashboard/process' },
+  { label: 'Company',      href: '/metlink-portal/dashboard/company' },
+  { label: 'Values',       href: '/metlink-portal/dashboard/values' },
+  { label: 'Timeline',     href: '/metlink-portal/dashboard/timeline' },
+  { label: 'Team',         href: '/metlink-portal/dashboard/team' },
+  { label: 'Contact',      href: '/metlink-portal/dashboard/contact' },
+  { label: 'Social Links', href: '/metlink-portal/dashboard/social' },
+  { label: 'Footer',       href: '/metlink-portal/dashboard/footer' },
+  { label: 'Portfolio',    href: '/metlink-portal/dashboard/portfolio' },
+  { label: 'Blog',         href: '/metlink-portal/dashboard/blog' },
+  { label: 'SMTP / Email', href: '/metlink-portal/dashboard/smtp' },
 ];
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
@@ -31,7 +31,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
   async function logout() {
     await fetch('/api/admin/auth/logout', { method: 'POST' });
-    router.push('/admin');
+    router.push('/metlink-portal');
   }
 
   return (
@@ -44,7 +44,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         </div>
         <nav style={{ flex: 1, overflowY: 'auto', padding: '12px 0' }}>
           {NAV.map(item => {
-            const active = pathname === item.href || (item.href !== '/admin/dashboard' && pathname.startsWith(item.href));
+            const active = pathname === item.href || (item.href !== '/metlink-portal/dashboard' && pathname.startsWith(item.href));
             return (
               <Link key={item.href} href={item.href} style={{
                 display: 'block', padding: '9px 20px', fontSize: 13, fontWeight: active ? 600 : 400,

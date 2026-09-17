@@ -6,6 +6,14 @@ import { ArrowRight, ChevronRight } from 'lucide-react';
 import { serviceCategories } from '@/lib/services-data';
 import { FadeIn, StaggerChildren, StaggerItem } from '@/components/fade-in';
 import { TileIcon, genCoverSvg } from '@/components/tile-icon';
+import { breadcrumbSchema } from '@/lib/schema';
+import { JsonLd } from '@/components/json-ld';
+import { Breadcrumbs } from '@/components/breadcrumbs';
+
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Services', path: '/services' },
+];
 
 const catColors: Record<string, string> = {
   'digital-marketing':    '#2B80F0',
@@ -17,6 +25,7 @@ const catColors: Record<string, string> = {
 export default function ServicesPage() {
   return (
     <div className="w-full overflow-x-hidden" style={{ background: '#07111F' }}>
+      <JsonLd data={breadcrumbSchema(crumbs)} />
 
       {/* Hero */}
       <section className="relative py-20 sm:py-28 overflow-hidden"
@@ -24,6 +33,7 @@ export default function ServicesPage() {
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px] rounded-full pointer-events-none"
           style={{ background: 'radial-gradient(ellipse, rgba(43,128,240,0.18) 0%, transparent 70%)', filter: 'blur(80px)' }} />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+          <Breadcrumbs items={crumbs} center />
           <FadeIn>
             <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-[10px] font-normal uppercase tracking-[0.25em] mb-8"
               style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.07)', color: '#2B80F0',  }}>

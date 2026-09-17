@@ -1,5 +1,7 @@
+import type { Metadata } from 'next';
 import { getSection } from '@/lib/get-section';
 import HomeClient, { HeroCMS } from './home-client';
+import { buildMetadata } from '@/lib/seo';
 
 // Static fallbacks (same as in home-client)
 const defaultHero: HeroCMS = { badge:'AI-First Digital Agency', headline1:'We build', headline2:'AI systems', headline3:'that scale', subheadline:'Strategy, design, and engineering, one team shipping production AI for ambitious brands. From idea to live product in days.', cta1Text:'Start building with AI', cta1Href:'https://www.metlinkai.com/contact', cta2Text:'View our work', cta2Href:'/portfolio', stat1Value:'150+', stat1Label:'Projects', stat2Value:'80+', stat2Label:'Clients', stat3Value:'$10M+', stat3Label:'Revenue', stat4Value:'94%', stat4Label:'Retention' };
@@ -38,13 +40,24 @@ const defaultSteps = [
 
 export const dynamic = 'force-dynamic';
 
+export async function generateMetadata(): Promise<Metadata> {
+  const hero = (await getSection<HeroCMS>('hero')) ?? defaultHero;
+
+  return buildMetadata({
+    path: '/',
+    title: `${hero.headline1} ${hero.headline2} ${hero.headline3} — ${hero.badge}`,
+    description: `${hero.subheadline} ${hero.badge}.`,
+  });
+}
+
 export default async function Page() {
-  const [hero, clientsData, testimonialsData, whyusData, processData] = await Promise.all([
+  const [hero, clientsData, testimonialsData, whyusData, processData, sectionVisibility] = await Promise.all([
     getSection<HeroCMS>('hero'),
     getSection<typeof defaultClients>('clients'),
     getSection<typeof defaultTestimonials>('testimonials'),
     getSection<typeof defaultWhyUs>('whyus'),
     getSection<typeof defaultSteps>('process'),
+    getSection<Record<string, boolean>>('sectionVisibility'),
   ]);
 
   // Merge CMS text into whyUs while preserving Icon references from static data
@@ -58,6 +71,7 @@ export default async function Page() {
       cmsTestimonials={Array.isArray(testimonialsData) ? testimonialsData : defaultTestimonials}
       cmsWhyUs={whyUsMerged}
       cmsSteps={Array.isArray(processData) && processData.length ? processData : defaultSteps}
+      testimonialsVisible={sectionVisibility?.testimonials !== false}
     />
   );
 }

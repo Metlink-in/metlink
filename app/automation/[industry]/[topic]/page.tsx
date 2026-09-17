@@ -1,11 +1,16 @@
 import Link from 'next/link';
+import type { Metadata } from 'next';
 import { SectionBackdrop } from '@/components/section-backdrop';
 import { notFound } from 'next/navigation';
-import { ChevronRight, ArrowRight, CheckCircle } from 'lucide-react';
+import { ArrowRight, CheckCircle } from 'lucide-react';
 import { getAllAutomationTopicSlugs, getAutomationTopic, getAutomationIndustry } from '@/lib/automation-data';
 import { TileIcon } from '@/components/tile-icon';
 import { FadeIn, StaggerChildren, StaggerItem } from '@/components/fade-in';
 import { FaqAccordion } from '@/components/faq-accordion';
+import { buildMetadata } from '@/lib/seo';
+import { breadcrumbSchema, faqSchema } from '@/lib/schema';
+import { JsonLd } from '@/components/json-ld';
+import { Breadcrumbs } from '@/components/breadcrumbs';
 
 const PROCESS = [
   { step: '01', title: 'Discovery & Strategy', desc: 'We learn your goals and constraints, then define clear success metrics before any build begins.' },
@@ -20,27 +25,48 @@ export async function generateStaticParams() {
   return getAllAutomationTopicSlugs();
 }
 
+export async function generateMetadata({ params }: { params: Promise<{ industry: string; topic: string }> }): Promise<Metadata> {
+  const { industry, topic } = await params;
+  const tpData = getAutomationTopic(industry, topic);
+  const indData = getAutomationIndustry(industry);
+  if (!tpData || !indData) return {};
+
+  return buildMetadata({
+    path: `/automation/${industry}/${topic}`,
+    title: [tpData.name, `${indData.name} Automation`, tpData.tagline],
+    description: [tpData.description, tpData.impact, `Part of MetLink's ${indData.name} automation.`, indData.description],
+  });
+}
+
 export default async function AutomationTopicPage({ params }: { params: Promise<{ industry: string; topic: string }> }) {
   const { industry, topic } = await params;
   const tpData = getAutomationTopic(industry, topic);
   const indData = getAutomationIndustry(industry);
   if (!tpData || !indData) notFound();
 
+  const faqItems = [
+    { q: `How does ${tpData.name} apply to ${indData.name.toLowerCase()}?`, a: `We tailor every solution to ${indData.name.toLowerCase()}-specific workflows and data so it fits how your business actually operates.` },
+    { q: 'How long does implementation take?', a: 'Timelines depend on scope, but most engagements deliver a first working milestone within about a week of kickoff.' },
+    { q: 'What does it cost?', a: 'Every project is scoped to your needs. We work with budgets from ₹50K to ₹50L+ — share your goals and we’ll send a tailored estimate.' },
+    { q: 'How do we get started?', a: 'Book a free strategy call or message us — we’ll align on goals and map the fastest path to results.' },
+  ];
+
+  const crumbs = [
+    { name: 'Home', path: '/' },
+    { name: 'Automation First', path: '/services/automation-first' },
+    { name: indData.name, path: `/automation/${indData.slug}` },
+    { name: tpData.name, path: `/automation/${indData.slug}/${tpData.slug}` },
+  ];
+
   return (
     <div className="w-full overflow-x-hidden" style={{ background: '#07111F' }}>
+      <JsonLd data={breadcrumbSchema(crumbs)} />
+      <JsonLd data={faqSchema(faqItems)} />
       <section className="relative py-20 sm:py-28 overflow-hidden" style={{ background: '#07111F' }}>
         <div className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full pointer-events-none"
           style={{ background: `radial-gradient(circle, ${accent}08 0%, transparent 70%)`, filter: 'blur(80px)' }} />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="flex flex-wrap items-center gap-2 text-xs mb-8" style={{ color: 'rgba(255,255,255,0.4)' }}>
-            <Link href="/" className="hover:text-[#2B80F0] transition-colors">Home</Link>
-            <ChevronRight className="w-3 h-3" />
-            <Link href="/services/automation-first" className="hover:text-[#2B80F0] transition-colors">Automation First</Link>
-            <ChevronRight className="w-3 h-3" />
-            <Link href={`/automation/${indData.slug}`} className="hover:text-[#2B80F0] transition-colors">{indData.name}</Link>
-            <ChevronRight className="w-3 h-3" />
-            <span style={{ color: accent }}>{tpData.name}</span>
-          </div>
+          <Breadcrumbs items={crumbs} accent={accent} />
           <div className="max-w-4xl">
             <TileIcon slug={tpData.slug} className="w-11 h-11 mb-6 text-white/90" strokeWidth={1.3} />
             <p className="text-sm font-bold uppercase tracking-[0.2em] mb-3" style={{ color: accent }}>{tpData.tagline}</p>
@@ -62,7 +88,7 @@ export default async function AutomationTopicPage({ params }: { params: Promise<
           <div className="grid lg:grid-cols-2 gap-16 items-start">
             <div>
               <p className="text-xs font-bold uppercase tracking-[0.2em] mb-3" style={{ color: accent }}>What It Does</p>
-              <h2 className=" mb-6" style={{ color: '#FFFFFF' }}>How it helps your {indData.name.toLowerCase()} business</h2>
+              <h2 className=" mb-6" style={{ color: '#FFFFFF' }}>How {tpData.name} helps your {indData.name.toLowerCase()} business</h2>
               <p className="leading-relaxed" style={{ color: 'rgba(255,255,255,0.6)' }}>{tpData.description}</p>
             </div>
             <div className="relative p-8 rounded-3xl overflow-hidden"
@@ -85,7 +111,7 @@ export default async function AutomationTopicPage({ params }: { params: Promise<
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeIn className="text-center mb-14">
             <p className="text-xs font-bold uppercase tracking-[0.2em] mb-3" style={{ color: accent }}>How We Work</p>
-            <h2 style={{ color: '#FFFFFF' }}>A clear path from idea to impact</h2>
+            <h2 style={{ color: '#FFFFFF' }}>A clear path from idea to {tpData.name}</h2>
           </FadeIn>
           <StaggerChildren className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {PROCESS.map((p) => (
@@ -108,14 +134,9 @@ export default async function AutomationTopicPage({ params }: { params: Promise<
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeIn className="text-center mb-12">
             <p className="text-xs font-bold uppercase tracking-[0.2em] mb-3" style={{ color: accent }}>FAQ</p>
-            <h2 style={{ color: '#FFFFFF' }}>Common questions</h2>
+            <h2 style={{ color: '#FFFFFF' }}>Common questions about {tpData.name}</h2>
           </FadeIn>
-          <FaqAccordion accent={accent} items={[
-            { q: `How does ${tpData.name} apply to ${indData.name.toLowerCase()}?`, a: `We tailor every solution to ${indData.name.toLowerCase()}-specific workflows and data so it fits how your business actually operates.` },
-            { q: 'How long does implementation take?', a: 'Timelines depend on scope, but most engagements deliver a first working milestone within about a week of kickoff.' },
-            { q: 'What does it cost?', a: 'Every project is scoped to your needs. We work with budgets from ₹50K to ₹50L+ — share your goals and we’ll send a tailored estimate.' },
-            { q: 'How do we get started?', a: 'Book a free strategy call or message us — we’ll align on goals and map the fastest path to results.' },
-          ]} />
+          <FaqAccordion accent={accent} items={faqItems} />
         </div>
       </section>
 

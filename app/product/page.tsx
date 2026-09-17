@@ -1,22 +1,28 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { ArrowRight, Sparkles, Zap, Shield, BarChart3 } from 'lucide-react';
+import { ArrowRight, Sparkles } from 'lucide-react';
+import { buildMetadata } from '@/lib/seo';
+import { breadcrumbSchema } from '@/lib/schema';
+import { JsonLd } from '@/components/json-ld';
+import { Breadcrumbs } from '@/components/breadcrumbs';
 
-export const metadata: Metadata = {
-  title: 'Product, MetLink AI Agency',
-  description: 'Something powerful is on the way. MetLink is building a next-generation AI product, stay tuned.',
-};
-
-const features = [
-  { icon: Zap,       title: 'AI-Powered Automation', desc: 'Automate complex workflows with intelligent decision-making built in.' },
-  { icon: BarChart3, title: 'Real-Time Analytics',   desc: 'Live dashboards that surface insights the moment they matter.' },
-  { icon: Shield,    title: 'Enterprise-Grade',       desc: 'Built with security, scalability, and compliance from day one.' },
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Product', path: '/product' },
 ];
+
+export const metadata: Metadata = buildMetadata({
+  path: '/product',
+  title: ['MetLink Product', 'Coming Soon'],
+  description:
+    'Something powerful is on the way. MetLink is building a next-generation product for ambitious businesses.',
+});
 
 export default function ProductPage() {
   return (
     <main className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden"
       style={{ background: '#07111F', paddingTop: '6rem', paddingBottom: '5rem' }}>
+      <JsonLd data={breadcrumbSchema(crumbs)} />
 
       {/* Subtle radish glow */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
@@ -25,6 +31,7 @@ export default function ProductPage() {
       </div>
 
       <div className="relative z-10 flex flex-col items-center text-center px-6 max-w-3xl mx-auto w-full">
+        <Breadcrumbs items={crumbs} center />
 
         {/* Badge */}
         <div className="mb-8 inline-flex items-center gap-2 rounded-full px-5 py-2 text-[10px] font-normal uppercase tracking-[0.28em]"
@@ -45,7 +52,7 @@ export default function ProductPage() {
 
         {/* Subtext */}
         <p className="text-lg md:text-xl leading-relaxed mb-10 max-w-xl" style={{ color: 'rgba(255,255,255,0.6)' }}>
-          We are crafting something extraordinary, a next-generation AI product built to transform the way businesses grow. The reveal is close.
+          We are crafting something extraordinary, a next-generation product built to transform the way businesses grow. The reveal is close.
         </p>
 
         {/* Animated dots */}
@@ -53,22 +60,6 @@ export default function ProductPage() {
           {[0, 160, 320].map(delay => (
             <span key={delay} className="inline-block w-2 h-2 rounded-full animate-bounce"
               style={{ background: '#2B80F0', opacity: 0.6 + delay / 1000, animationDelay: `${delay}ms` }} />
-          ))}
-        </div>
-
-        {/* Feature preview cards */}
-        <div className="grid sm:grid-cols-3 gap-px mb-12 w-full"
-          style={{ border: '1px solid rgba(255,255,255,0.07)', borderRadius: 16, overflow: 'hidden' }}>
-          {features.map(({ icon: Icon, title, desc }) => (
-            <div key={title} className="flex flex-col items-start p-6 text-left"
-              style={{ background: '#0B1628' }}>
-              <div className="w-9 h-9 rounded-xl flex items-center justify-center mb-4"
-                style={{ background: 'rgba(43,128,240,0.15)', color: '#2B80F0' }}>
-                <Icon className="w-4.5 h-4.5 w-[18px] h-[18px]" />
-              </div>
-              <h3 className="text-sm font-black mb-1.5" style={{ color: '#FFFFFF' }}>{title}</h3>
-              <p className="text-xs leading-relaxed" style={{ color: 'rgba(255,255,255,0.4)' }}>{desc}</p>
-            </div>
           ))}
         </div>
 

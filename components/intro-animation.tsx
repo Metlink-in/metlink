@@ -126,6 +126,7 @@ export function IntroAnimation() {
         <img
           src="/WhatsApp_Image_2026-04-30_at_7.30.41_PM-removebg-preview.png"
           alt="MetLink"
+          width={559} height={447}
           style={{
             width: 'clamp(180px, 28vw, 280px)',
             height: 'auto',

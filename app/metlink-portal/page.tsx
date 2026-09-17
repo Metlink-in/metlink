@@ -19,7 +19,7 @@ export default function AdminLogin() {
       body: JSON.stringify({ email, password }),
     });
     if (res.ok) {
-      router.push('/admin/dashboard');
+      router.push('/metlink-portal/dashboard');
     } else {
       setError('Invalid credentials. Try again.');
       setLoading(false);

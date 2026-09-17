@@ -1,10 +1,26 @@
 import Link from 'next/link';
+import type { Metadata } from 'next';
+import { buildMetadata } from '@/lib/seo';
+import { breadcrumbSchema } from '@/lib/schema';
+import { JsonLd } from '@/components/json-ld';
+import { Breadcrumbs } from '@/components/breadcrumbs';
 
-export const metadata = { title: 'Terms of Service | MetLink' };
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Terms of Service', path: '/terms' },
+];
+
+export const metadata: Metadata = buildMetadata({
+  path: '/terms',
+  title: 'Terms of Service — Using MetLink & Our AI Systems',
+  description:
+    'By accessing metlinkai.com or engaging Metlink’s AI systems and services, you agree to be bound by these Terms of Service. Read the full terms before you engage us.',
+});
 
 export default function TermsPage() {
   return (
     <div className="w-full overflow-x-hidden" style={{ background: '#060D1A' }}>
+      <JsonLd data={breadcrumbSchema(crumbs)} />
 
       {/* Hero */}
       <section className="pt-40 pb-14 relative overflow-hidden">
@@ -13,6 +29,7 @@ export default function TermsPage() {
             style={{ background: 'radial-gradient(ellipse, rgba(43,128,240,0.12) 0%, transparent 70%)', filter: 'blur(80px)' }} />
         </div>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <Breadcrumbs items={crumbs} />
           <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-[10px] uppercase tracking-[0.25em] mb-6"
             style={{ background: 'rgba(43,128,240,0.1)', border: '1px solid rgba(43,128,240,0.2)', color: '#5FA8FF' }}>
             Legal

@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { X, Send, MessageSquare, Sparkles, Minimize2 } from 'lucide-react';
+import { WhatsAppButton } from '@/components/whatsapp-button';
 
 const QUICK_REPLIES = [
   'What AI services do you offer?',
@@ -48,11 +49,18 @@ export function ChatBot() {
 
   return (
     <>
+      <WhatsAppButton visible={!open} />
+
       {/* Toggle button */}
       <button
         onClick={() => setOpen(v => !v)}
-        className="fixed bottom-6 right-6 z-50 rounded-full flex items-center justify-center shadow-lg transition-all duration-300 hover:scale-110 active:scale-95"
-        style={{ width: 56, height: 56, background: '#2B80F0', boxShadow: '0 6px 24px rgba(43,128,240,0.35)' }}
+        className="group fixed bottom-6 right-6 z-50 rounded-full flex items-center justify-center hover:scale-110 active:scale-95"
+        style={{
+          width: 56, height: 56,
+          background: 'linear-gradient(145deg, #4A9BFF, #2166C9)',
+          boxShadow: '0 6px 22px rgba(43,128,240,0.45), inset 0 1px 1px rgba(255,255,255,0.35), inset 0 -2px 4px rgba(0,0,0,0.15)',
+          transition: 'transform 0.5s cubic-bezier(0.16,1,0.3,1), box-shadow 0.5s cubic-bezier(0.16,1,0.3,1)',
+        }}
         aria-label="Chat with MetLink AI"
       >
         {open
@@ -63,19 +71,29 @@ export function ChatBot() {
           <span className="absolute rounded-full"
             style={{ top: 1, right: 1, width: 14, height: 14, background: '#22C55E', border: '2.5px solid #FFFFFF' }} />
         )}
+        {!open && (
+          <span className="absolute bottom-full right-0 mb-3 px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap opacity-0 translate-y-1 pointer-events-none transition-all duration-200 group-hover:opacity-100 group-hover:translate-y-0"
+            style={{ background: '#0B1628', border: '1px solid rgba(255,255,255,0.1)', color: '#FFFFFF', boxShadow: '0 8px 24px rgba(0,0,0,0.4)' }}>
+            Chat with us
+          </span>
+        )}
       </button>
 
-      {/* Chat window */}
-      {open && (
-        <div
-          className="fixed bottom-24 right-6 z-50 w-[360px] rounded-2xl overflow-hidden flex flex-col animate-slideInUp chatbot-window"
-          style={{
-            background: '#FFFFFF',
-            border: '1px solid #E5DDD5',
-            maxHeight: '80vh',
-            boxShadow: '0 24px 64px rgba(0,0,0,0.12), 0 0 0 1px rgba(0,0,0,0.04)',
-          }}
-        >
+      {/* Chat window — stays mounted so open/close both animate smoothly instead of popping */}
+      <div
+        className="fixed bottom-24 right-6 z-50 w-[360px] rounded-2xl overflow-hidden flex flex-col chatbot-window"
+        style={{
+          background: '#FFFFFF',
+          border: '1px solid #E5DDD5',
+          maxHeight: '80vh',
+          boxShadow: '0 24px 64px rgba(0,0,0,0.12), 0 0 0 1px rgba(0,0,0,0.04)',
+          opacity: open ? 1 : 0,
+          transform: open ? 'translateY(0) scale(1)' : 'translateY(14px) scale(0.97)',
+          transition: 'opacity 0.5s cubic-bezier(0.16,1,0.3,1), transform 0.5s cubic-bezier(0.16,1,0.3,1)',
+          pointerEvents: open ? 'auto' : 'none',
+        }}
+        aria-hidden={!open}
+      >
           {/* Header */}
           <div className="relative px-5 py-4 flex items-center gap-3 overflow-hidden"
             style={{ background: '#FAF9F6', borderBottom: '1px solid #E5DDD5' }}>
@@ -198,8 +216,7 @@ export function ChatBot() {
               Powered by Google Gemini
             </p>
           </div>
-        </div>
-      )}
+      </div>
     </>
   );
 }

@@ -1,23 +1,43 @@
-'use client';
-
 import Link from 'next/link';
+import type { Metadata } from 'next';
 import { SectionBackdrop } from '@/components/section-backdrop';
 import { ArrowRight, ChevronRight } from 'lucide-react';
 import { industries } from '@/lib/industries-data';
 import { FadeIn, StaggerChildren, StaggerItem } from '@/components/fade-in';
 import { TileIcon } from '@/components/tile-icon';
+import { buildMetadata } from '@/lib/seo';
+import { breadcrumbSchema } from '@/lib/schema';
+import { JsonLd } from '@/components/json-ld';
+import { Breadcrumbs } from '@/components/breadcrumbs';
 
 const accent = '#2B80F0';
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Industries', path: '/industries' },
+];
+
+export function generateMetadata(): Metadata {
+  return buildMetadata({
+    path: '/industries',
+    title: ['Industries We Serve', 'AI & Software Solutions'],
+    description: [
+      "We bring AI, automation, and software expertise to the industries that move the world, tailored to each domain's realities.",
+      `Serving ${industries.map((i) => i.name).join(', ')}.`,
+    ],
+  });
+}
 
 export default function IndustriesPage() {
   return (
     <div className="w-full overflow-x-hidden" style={{ background: '#07111F' }}>
+      <JsonLd data={breadcrumbSchema(crumbs)} />
 
       {/* Hero */}
       <section className="relative py-20 sm:py-28 overflow-hidden" style={{ background: '#07111F' }}>
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px] rounded-full pointer-events-none"
           style={{ background: 'radial-gradient(ellipse, rgba(43,128,240,0.18) 0%, transparent 70%)', filter: 'blur(80px)' }} />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+          <Breadcrumbs items={crumbs} accent={accent} center />
           <FadeIn>
             <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-[10px] font-normal uppercase tracking-[0.25em] mb-8"
               style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.07)', color: accent }}>

@@ -92,6 +92,7 @@ export function PopupForm() {
             <img
               src="/WhatsApp_Image_2026-04-30_at_7.30.41_PM-removebg-preview.png"
               alt="MetLink"
+              width={559} height={447} loading="lazy"
               style={{ height: 90, width: 'auto', objectFit: 'contain', marginBottom: 20 }}
             />
 

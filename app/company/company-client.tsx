@@ -5,8 +5,15 @@ import { SectionBackdrop } from '@/components/section-backdrop';
 import Link from 'next/link';
 import { ArrowRight, Target, Eye, Heart, Globe, Award, Clock, BarChart2, Shield } from 'lucide-react';
 import { FadeIn, StaggerChildren, StaggerItem } from '@/components/fade-in';
+import { Breadcrumbs } from '@/components/breadcrumbs';
 
 const valueIcons = [Target, Eye, Heart, Globe, Award, Clock];
+// A small rotating palette so cards read as distinct, not one monochrome wall of blue.
+const PALETTE = ['#2B80F0', '#8B5CF6', '#06B6D4', '#F59E0B', '#EC4899', '#10B981'];
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Company', path: '/company' },
+];
 
 interface Props {
   company: Record<string, string>;
@@ -26,6 +33,7 @@ export default function CompanyClient({ company, valuesList, teamList, milestone
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[500px] rounded-full pointer-events-none"
           style={{ background: 'radial-gradient(ellipse, rgba(43,128,240,0.18) 0%, transparent 70%)', filter: 'blur(80px)' }} />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+          <Breadcrumbs items={crumbs} center />
           <FadeIn>
             <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-[10px] font-normal uppercase tracking-[0.25em] mb-8"
               style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.07)', color: '#2B80F0',  }}>
@@ -92,19 +100,19 @@ export default function CompanyClient({ company, valuesList, teamList, milestone
             </FadeIn>
             <StaggerChildren className="grid grid-cols-2 gap-4">
               {[
-                { Icon: Target,    title: 'Our Mission',  desc: company.mission  || 'To empower businesses with AI-powered marketing and technology that creates lasting competitive advantages.' },
-                { Icon: Eye,       title: 'Our Vision',   desc: company.vision   || 'To become the most trusted AI marketing and development partner for ambitious businesses worldwide.' },
-                { Icon: BarChart2, title: 'Our Approach', desc: company.approach || 'Data-first strategy, creative excellence, and ruthless focus on metrics that actually move the needle.' },
-                { Icon: Shield,    title: 'Our Promise',  desc: company.promise  || 'Transparent pricing, honest communication, and zero-compromise quality on every single project.' },
+                { Icon: Target,    title: 'Our Mission',  desc: company.mission  || 'To empower businesses with AI-powered marketing and technology that creates lasting competitive advantages.', color: '#2B80F0' },
+                { Icon: Eye,       title: 'Our Vision',   desc: company.vision   || 'To become the most trusted AI marketing and development partner for ambitious businesses worldwide.', color: '#8B5CF6' },
+                { Icon: BarChart2, title: 'Our Approach', desc: company.approach || 'Data-first strategy, creative excellence, and ruthless focus on metrics that actually move the needle.', color: '#06B6D4' },
+                { Icon: Shield,    title: 'Our Promise',  desc: company.promise  || 'Transparent pricing, honest communication, and zero-compromise quality on every single project.', color: '#F59E0B' },
               ].map(item => (
                 <StaggerItem key={item.title}>
                   <div className="p-6 rounded-2xl transition-all hover:-translate-y-1 cursor-default h-full"
                     style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.07)', boxShadow: '0 2px 8px rgba(0,0,0,0.2)' }}
-                    onMouseEnter={e => (e.currentTarget as HTMLElement).style.borderColor = 'rgba(43,128,240,0.3)'}
+                    onMouseEnter={e => (e.currentTarget as HTMLElement).style.borderColor = `${item.color}4D`}
                     onMouseLeave={e => (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.12)'}>
                     <div className="w-9 h-9 rounded-xl flex items-center justify-center mb-3"
-                      style={{ background: 'rgba(43,128,240,0.12)', border: '1px solid rgba(43,128,240,0.2)' }}>
-                      <item.Icon className="w-4.5 h-4.5" style={{ color: '#2B80F0' }} />
+                      style={{ background: `${item.color}1F`, border: `1px solid ${item.color}33` }}>
+                      <item.Icon className="w-4.5 h-4.5" style={{ color: item.color }} />
                     </div>
                     <h3 className="font-bold mb-2 text-sm" style={{ color: '#FFFFFF' }}>{item.title}</h3>
                     <p className="text-xs leading-relaxed" style={{ color: 'rgba(255,255,255,0.6)' }}>{item.desc}</p>
@@ -130,14 +138,15 @@ export default function CompanyClient({ company, valuesList, teamList, milestone
           <StaggerChildren className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {valuesList.map((v, vIdx) => {
               const Icon = valueIcons[vIdx % valueIcons.length];
+              const color = PALETTE[vIdx % PALETTE.length];
               return (
                 <StaggerItem key={v.title}>
                   <div className="group p-7 rounded-2xl transition-all duration-300 hover:-translate-y-1.5 h-full"
                     style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.07)' }}
                     onMouseEnter={e => {
-                      (e.currentTarget as HTMLElement).style.borderColor = 'rgba(43,128,240,0.3)';
+                      (e.currentTarget as HTMLElement).style.borderColor = `${color}4D`;
                       (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.1)';
-                      (e.currentTarget as HTMLElement).style.boxShadow = '0 8px 32px rgba(0,0,0,0.3)';
+                      (e.currentTarget as HTMLElement).style.boxShadow = `0 8px 32px rgba(0,0,0,0.3), 0 0 0 1px ${color}1A`;
                     }}
                     onMouseLeave={e => {
                       (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.12)';
@@ -145,10 +154,12 @@ export default function CompanyClient({ company, valuesList, teamList, milestone
                       (e.currentTarget as HTMLElement).style.boxShadow = 'none';
                     }}>
                     <div className="w-11 h-11 rounded-xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform"
-                      style={{ background: 'rgba(43,128,240,0.15)', border: '1px solid rgba(43,128,240,0.3)' }}>
-                      <Icon className="w-5 h-5" style={{ color: '#2B80F0' }} />
+                      style={{ background: `${color}26`, border: `1px solid ${color}4D` }}>
+                      <Icon className="w-5 h-5" style={{ color }} />
                     </div>
-                    <h3 className="font-bold mb-2 group-hover:text-[#2B80F0] transition-colors" style={{ color: '#FFFFFF' }}>{v.title}</h3>
+                    <h3 className="font-bold mb-2 transition-colors" style={{ color: '#FFFFFF' }}
+                      onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = color; }}
+                      onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = '#FFFFFF'; }}>{v.title}</h3>
                     <p className="text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.6)' }}>{v.desc}</p>
                   </div>
                 </StaggerItem>
@@ -157,6 +168,65 @@ export default function CompanyClient({ company, valuesList, teamList, milestone
           </StaggerChildren>
         </div>
       </section>
+
+      {/* Journey / Milestones */}
+      {milestonesList.length > 0 && (
+        <section className="py-16 sm:py-24 relative overflow-hidden isolate" style={{ background: '#07111F' }}>
+          <SectionBackdrop behind />
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <FadeIn className="text-center mb-16">
+              <p className="text-xs font-normal uppercase tracking-[0.25em] mb-3" style={{ color: '#2B80F0' }}>Our Journey</p>
+              <h2 style={{ color: '#FFFFFF' }}>
+                Milestones Along the{' '}
+                <span style={{ color: '#2B80F0' }}>Way</span>
+              </h2>
+            </FadeIn>
+
+            <div className="relative">
+              {/* Center line (desktop) */}
+              <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-px -translate-x-1/2"
+                style={{ background: 'linear-gradient(to bottom, transparent, rgba(255,255,255,0.14) 8%, rgba(255,255,255,0.14) 92%, transparent)' }} />
+              {/* Left line (mobile) */}
+              <div className="md:hidden absolute left-[15px] top-0 bottom-0 w-px"
+                style={{ background: 'linear-gradient(to bottom, transparent, rgba(255,255,255,0.14) 8%, rgba(255,255,255,0.14) 92%, transparent)' }} />
+
+              <StaggerChildren className="space-y-8 md:space-y-4">
+                {milestonesList.map((m, i) => {
+                  const color = PALETTE[i % PALETTE.length];
+                  const onRight = i % 2 === 1;
+                  const card = (
+                    <div className="p-6 rounded-2xl transition-all duration-300 hover:-translate-y-1"
+                      style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)' }}>
+                      <p className="text-xs font-black uppercase tracking-[0.2em] mb-2" style={{ color }}>{m.year}</p>
+                      <h3 className="font-bold mb-1.5" style={{ color: '#FFFFFF' }}>{m.event}</h3>
+                      <p className="text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.55)' }}>{m.desc}</p>
+                    </div>
+                  );
+                  return (
+                    <StaggerItem key={m.year + m.event}>
+                      {/* Mobile: single-column list with a left rail */}
+                      <div className="md:hidden relative flex items-start gap-5 pl-10">
+                        <div className="absolute left-[7px] top-1.5 w-4 h-4 rounded-full shrink-0 z-10"
+                          style={{ background: color, boxShadow: `0 0 0 4px ${color}26, 0 0 20px ${color}80` }} />
+                        <div className="flex-1">{card}</div>
+                      </div>
+                      {/* Desktop: 3-column grid, alternating sides, dot always centered */}
+                      <div className="hidden md:grid grid-cols-[1fr_2rem_1fr] items-start gap-0">
+                        <div>{!onRight && card}</div>
+                        <div className="flex justify-center pt-1.5">
+                          <div className="w-4 h-4 rounded-full shrink-0 z-10"
+                            style={{ background: color, boxShadow: `0 0 0 4px ${color}26, 0 0 20px ${color}80` }} />
+                        </div>
+                        <div>{onRight && card}</div>
+                      </div>
+                    </StaggerItem>
+                  );
+                })}
+              </StaggerChildren>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Team */}
       <section className="py-16 sm:py-24 relative overflow-hidden isolate" style={{ background: '#0B1628', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
@@ -200,6 +270,7 @@ export default function CompanyClient({ company, valuesList, teamList, milestone
                       {member.image && (
                         /* eslint-disable-next-line @next/next/no-img-element */
                         <img src={member.image} alt={member.name}
+                          loading="lazy"
                           className="absolute inset-0 w-full h-full object-cover"
                           style={{ objectPosition: 'center top' }}
                           onError={e => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }} />

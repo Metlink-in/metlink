@@ -13,6 +13,7 @@ const schema = new mongoose.Schema({
   tags:        [String],
   gradientFrom:String,
   gradientTo:  String,
+  coverImage:  String,
   published:   { type: Boolean, default: true },
 }, { timestamps: true });
 

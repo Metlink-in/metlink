@@ -40,7 +40,7 @@ export default function ProjectForm({ initial, isNew }: Props) {
     setSaving(false);
     if (res.ok) {
       setToast('Saved!');
-      setTimeout(() => router.push('/admin/dashboard/portfolio'), 800);
+      setTimeout(() => router.push('/metlink-portal/dashboard/portfolio'), 800);
     } else {
       const err = await res.json();
       setToast(err.message ?? 'Save failed.');

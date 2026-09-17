@@ -1,0 +1,46 @@
+# MetLink
+
+> MetLink is a full-service AI marketing & development agency — digital marketing, creative media, AI automation, and custom software that drives measurable revenue growth.
+
+MetLink builds AI systems, marketing programs, and software products for ambitious businesses, from strategy through to production launch.
+
+## Services
+
+- [Digital Marketing](https://www.metlinkai.com/services/digital-marketing): SEO, performance marketing, social media marketing, content marketing, social media optimization, video editing and graphic designing.
+- [Generative AI](https://www.metlinkai.com/services/generative-ai): custom GenAI development, GenAI integration, GenAI consulting, AI agent development, AI copilots, LLM development, and related hiring services.
+- [Artificial Intelligence & ML](https://www.metlinkai.com/services/ai-ml): AI development, AI consulting, AI deployment, enterprise AI, AI chatbots, transformer models, MLOps.
+- [Software Development](https://www.metlinkai.com/services/software-development): custom software, SaaS development, software consulting, UI/UX design, enterprise software, web application development, digital transformation.
+- [Automation First](https://www.metlinkai.com/services/automation-first): workflow automation, AI agents & assistants, RPA & process bots, CRM & sales automation, marketing automation.
+
+Full services index: https://www.metlinkai.com/services
+
+## Industries
+
+MetLink builds industry-specific AI and software solutions for: Finance, Insurance, Manufacturing, Logistics, Hospitality, Retail, Healthcare, Consumer Electronics, and Startups.
+
+Full industries index: https://www.metlinkai.com/industries
+
+## Automation by industry
+
+Automation-first solutions tailored to: Restaurant & Cafe, Real Estate, Healthcare & Clinics, Education, E-Commerce & D2C, HR & Recruitment, and Finance & Accounting.
+
+## Portfolio
+
+Case studies of shipped AI and software work: https://www.metlinkai.com/portfolio
+
+## Blog
+
+Articles on AI, marketing, and engineering: https://www.metlinkai.com/blog
+
+- [How AI Automation Is Reshaping Business Operations in 2025](https://www.metlinkai.com/blog/ai-automation-business-2025)
+- [The 2025 Guide to Performance Marketing: Maximizing ROAS Across Every Channel](https://www.metlinkai.com/blog/performance-marketing-roas-guide)
+- [Building Production-Ready RAG Systems: What Nobody Tells You](https://www.metlinkai.com/blog/llm-rag-enterprise-guide)
+- [Why Your Startup's Brand Identity Is Your Most Important Product](https://www.metlinkai.com/blog/brand-identity-startup-guide)
+- [The Architecture Behind Scalable SaaS Products: A 2025 Blueprint](https://www.metlinkai.com/blog/nextjs-saas-architecture)
+- [SEO in the Age of AI: What Changes, What Doesn't, and What Wins in 2025](https://www.metlinkai.com/blog/seo-ai-content-2025)
+
+## Company
+
+- [About / Company](https://www.metlinkai.com/company)
+- [Contact](https://www.metlinkai.com/contact)
+- [Product](https://www.metlinkai.com/product)

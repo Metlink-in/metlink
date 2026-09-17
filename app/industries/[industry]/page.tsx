@@ -1,10 +1,15 @@
 import Link from 'next/link';
+import type { Metadata } from 'next';
 import { SectionBackdrop } from '@/components/section-backdrop';
 import { notFound } from 'next/navigation';
-import { ChevronRight, ArrowRight, CheckCircle } from 'lucide-react';
+import { ArrowRight, CheckCircle } from 'lucide-react';
 import { getIndustryBySlug, industries } from '@/lib/industries-data';
 import { TileIcon } from '@/components/tile-icon';
 import { FadeIn, StaggerChildren, StaggerItem } from '@/components/fade-in';
+import { buildMetadata } from '@/lib/seo';
+import { breadcrumbSchema } from '@/lib/schema';
+import { JsonLd } from '@/components/json-ld';
+import { Breadcrumbs } from '@/components/breadcrumbs';
 
 const accent = '#2B80F0';
 
@@ -12,26 +17,39 @@ export async function generateStaticParams() {
   return industries.map((i) => ({ industry: i.slug }));
 }
 
+export async function generateMetadata({ params }: { params: Promise<{ industry: string }> }): Promise<Metadata> {
+  const { industry } = await params;
+  const data = getIndustryBySlug(industry);
+  if (!data) return {};
+
+  return buildMetadata({
+    path: `/industries/${industry}`,
+    title: [`${data.name} — AI Solutions`, data.tagline],
+    description: [data.tagline, `Explore MetLink's ${data.name} industry solutions.`, data.description],
+  });
+}
+
 export default async function IndustryPage({ params }: { params: Promise<{ industry: string }> }) {
   const { industry } = await params;
   const data = getIndustryBySlug(industry);
   if (!data) notFound();
 
+  const crumbs = [
+    { name: 'Home', path: '/' },
+    { name: 'Industries', path: '/industries' },
+    { name: data.name, path: `/industries/${data.slug}` },
+  ];
+
   return (
     <div className="w-full overflow-x-hidden" style={{ background: '#07111F' }}>
+      <JsonLd data={breadcrumbSchema(crumbs)} />
 
       {/* Hero */}
       <section className="relative py-20 sm:py-28 overflow-hidden" style={{ background: '#07111F' }}>
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px] rounded-full pointer-events-none"
           style={{ background: `radial-gradient(ellipse, ${accent}12 0%, transparent 70%)`, filter: 'blur(80px)' }} />
         <FadeIn className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-          <div className="flex items-center justify-center gap-2 text-xs mb-8" style={{ color: 'rgba(255,255,255,0.4)' }}>
-            <Link href="/" className="hover:text-[#2B80F0] transition-colors">Home</Link>
-            <ChevronRight className="w-3 h-3" />
-            <Link href="/industries" className="hover:text-[#2B80F0] transition-colors">Industries</Link>
-            <ChevronRight className="w-3 h-3" />
-            <span style={{ color: accent }}>{data.name}</span>
-          </div>
+          <Breadcrumbs items={crumbs} accent={accent} center />
           <div className="w-20 h-20 mx-auto rounded-2xl flex items-center justify-center mb-6 shadow-lg"
             style={{ background: `${accent}12`, border: `1px solid ${accent}30` }}>
             <TileIcon slug={data.slug} className="w-9 h-9 text-white/90" strokeWidth={1.3} />

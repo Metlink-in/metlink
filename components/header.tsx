@@ -416,6 +416,7 @@ function ProposalPopup({ onClose }: { onClose: () => void }) {
           <div className="relative z-10">
             <div className="mb-7">
               <img src="/WhatsApp_Image_2026-04-30_at_7.30.41_PM-removebg-preview.png" alt="MetLink"
+                width={559} height={447} loading="lazy"
                 style={{ width: 160, height: 'auto', objectFit: 'contain' }} />
             </div>
             <p className="text-[10px] font-bold uppercase tracking-[0.28em] mb-4" style={{ color: '#2B80F0' }}>

@@ -1,17 +1,22 @@
 import Link from 'next/link';
+import Image from 'next/image';
+import type { Metadata } from 'next';
 import { SectionBackdrop } from '@/components/section-backdrop';
 import { notFound } from 'next/navigation';
-import { ChevronRight, Clock, ArrowRight } from 'lucide-react';
+import { Clock, ArrowRight } from 'lucide-react';
 import { getPostBySlug, blogPosts } from '@/lib/blog-data';
+import { buildMetadata } from '@/lib/seo';
+import { breadcrumbSchema, articleSchema } from '@/lib/schema';
+import { parseLooseDate } from '@/lib/sitemap-utils';
+import { JsonLd } from '@/components/json-ld';
+import { Breadcrumbs } from '@/components/breadcrumbs';
+import { TableOfContents, type TocHeading } from '@/components/table-of-contents';
 
-export async function generateStaticParams() {
-  return blogPosts.map((p) => ({ slug: p.slug }));
+function slugifyHeading(text: string): string {
+  return text.toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
 }
 
-export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params;
-
-  // Try CMS first, then fall back to static data
+async function resolvePost(slug: string) {
   let post: ReturnType<typeof getPostBySlug> = undefined;
   try {
     const base = process.env.NEXT_PUBLIC_BASE_URL ?? 'http://localhost:3000';
@@ -19,6 +24,31 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     if (res.ok) post = await res.json();
   } catch { /* ignore */ }
   if (!post) post = getPostBySlug(slug);
+  return post;
+}
+
+export async function generateStaticParams() {
+  return blogPosts.map((p) => ({ slug: p.slug }));
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const post = await resolvePost(slug);
+  if (!post) return {};
+
+  return buildMetadata({
+    path: `/blog/${slug}`,
+    title: post.title,
+    description: post.excerpt,
+    ogType: 'article',
+  });
+}
+
+export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+
+  // Try CMS first, then fall back to static data
+  const post = await resolvePost(slug);
   if (!post) notFound();
 
   const related = blogPosts.filter((p) => p.slug !== slug && p.category === post.category).slice(0, 2);
@@ -26,9 +56,41 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   const relatedPosts = related.length >= 2 ? related : fallback;
 
   const paragraphs = post.content.split('\n\n');
+  const publishedDate = parseLooseDate(post.date);
+
+  // Build heading IDs once so the TOC links and the rendered <h2>/<h3> anchors always match.
+  const headingIds = new Map<number, string>();
+  const seenSlugs = new Map<string, number>();
+  const tocHeadings: TocHeading[] = [];
+  paragraphs.forEach((block, i) => {
+    const level = block.startsWith('## ') ? 2 : block.startsWith('### ') ? 3 : null;
+    if (!level) return;
+    const text = block.replace(/^#{2,3} /, '');
+    let id = slugifyHeading(text);
+    const count = seenSlugs.get(id) ?? 0;
+    seenSlugs.set(id, count + 1);
+    if (count > 0) id = `${id}-${count + 1}`;
+    headingIds.set(i, id);
+    tocHeadings.push({ id, text, level: level as 2 | 3 });
+  });
+
+  const crumbs = [
+    { name: 'Home', path: '/' },
+    { name: 'Blog', path: '/blog' },
+    { name: post.title, path: `/blog/${slug}` },
+  ];
 
   return (
     <div className="w-full overflow-x-hidden" style={{ background: '#07111F' }}>
+      <JsonLd data={breadcrumbSchema(crumbs)} />
+      <JsonLd data={articleSchema({
+        title: post.title,
+        description: post.excerpt,
+        path: `/blog/${slug}`,
+        datePublished: publishedDate?.toISOString(),
+        authorName: post.author,
+        image: post.coverImage,
+      })} />
 
       {/* Hero */}
       <section className="relative py-20 sm:py-28 overflow-hidden"
@@ -38,13 +100,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         </div>
 
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="flex flex-wrap items-center gap-2 text-xs mb-8" style={{ color: 'rgba(255,255,255,0.4)' }}>
-            <Link href="/" className="hover:text-[#2B80F0] transition-colors">Home</Link>
-            <ChevronRight className="w-3 h-3" />
-            <Link href="/blog" className="hover:text-[#2B80F0] transition-colors">Blog</Link>
-            <ChevronRight className="w-3 h-3" />
-            <span style={{ color: '#2B80F0' }}>{post.category}</span>
-          </div>
+          <Breadcrumbs items={crumbs} />
 
           <div className="flex flex-wrap items-center gap-4 mb-6">
             <span className="px-4 py-1.5 rounded-full text-xs font-bold"
@@ -71,24 +127,38 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               <p className="text-xs uppercase tracking-wider" style={{ color: 'rgba(255,255,255,0.4)' }}>{post.authorRole} · MetLink</p>
             </div>
           </div>
+
+          {post.coverImage && (
+            <div className="relative mt-10 rounded-3xl overflow-hidden" style={{ aspectRatio: '16 / 9', border: '1px solid rgba(255,255,255,0.07)' }}>
+              <Image
+                src={post.coverImage}
+                alt={`Cover image for the article "${post.title}"`}
+                fill
+                priority
+                sizes="(min-width: 1024px) 896px, 100vw"
+                style={{ objectFit: 'cover' }}
+              />
+            </div>
+          )}
         </div>
       </section>
 
       {/* Article */}
       <article className="py-16" style={{ background: '#0B1628', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <TableOfContents headings={tocHeadings} />
           <div className="prose prose-lg max-w-none">
             {paragraphs.map((block, i) => {
               if (block.startsWith('## ')) {
                 return (
-                  <h2 key={i} className="text-3xl  mt-12 mb-5 leading-tight" style={{ color: '#FFFFFF' }}>
+                  <h2 key={i} id={headingIds.get(i)} className="text-3xl  mt-12 mb-5 leading-tight scroll-mt-24" style={{ color: '#FFFFFF' }}>
                     {block.replace('## ', '')}
                   </h2>
                 );
               }
               if (block.startsWith('### ')) {
                 return (
-                  <h3 key={i} className="text-xl font-bold mt-8 mb-4" style={{ color: '#FFFFFF' }}>
+                  <h3 key={i} id={headingIds.get(i)} className="text-xl font-bold mt-8 mb-4 scroll-mt-24" style={{ color: '#FFFFFF' }}>
                     {block.replace('### ', '')}
                   </h3>
                 );
@@ -152,7 +222,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         <section className="py-16 sm:py-24 relative overflow-hidden isolate" style={{ background: '#07111F', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
         <SectionBackdrop behind />
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className=" mb-10 text-center" style={{ color: '#FFFFFF' }}>Continue Reading</h2>
+            <h2 className=" mb-10 text-center" style={{ color: '#FFFFFF' }}>Continue Reading: More {post.category}</h2>
             <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
               {relatedPosts.map((p) => (
                 <Link key={p.slug} href={`/blog/${p.slug}`}

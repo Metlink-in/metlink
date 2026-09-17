@@ -35,6 +35,12 @@ export const defaults: Record<string, unknown> = {
     { name: 'CloudBase',  industry: 'Infrastructure',  color: '#3ECF8E' },
   ],
 
+  // Per-section show/hide toggles for the homepage. Toggle back on any time from
+  // Admin → Testimonials — the content itself is untouched either way.
+  sectionVisibility: {
+    testimonials: false,
+  },
+
   testimonials: [
     { quote: "MetLink shipped our AI customer support agent in 6 days. Support load dropped 65% in the first month.", name: 'Sarah K.', title: 'VP Product · Series B SaaS', metric: '65%', metricLabel: 'fewer support tickets', stars: 5 },
     { quote: "Their performance marketing team 4x'd our ROAS in 90 days. I've never seen results move this fast.", name: 'Marcus T.', title: 'CMO · DTC Brand', metric: '4×', metricLabel: 'return on ad spend', stars: 5 },

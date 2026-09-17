@@ -13,14 +13,15 @@ export default function TeamEditor() {
           items={(data as Record<string, string>[]) ?? []}
           onChange={setData}
           fields={[
+            { key: 'image',     label: 'Photo',            image: true },
             { key: 'name',      label: 'Full Name',        half: true },
             { key: 'role',      label: 'Role / Title',     half: true },
             { key: 'specialty', label: 'Specialty',        half: true },
-            { key: 'initials',  label: 'Initials (e.g. JB)', half: true },
+            { key: 'initials',  label: 'Initials (e.g. JB) — shown until a photo is uploaded', half: true },
             { key: 'color',     label: 'Accent Color (hex)', half: true },
           ]}
           addLabel="Add Team Member"
-          defaultItem={{ name: '', role: '', specialty: '', initials: '', color: '#2B80F0' }}
+          defaultItem={{ name: '', role: '', specialty: '', initials: '', color: '#2B80F0', image: '' }}
         />
       )}
     />

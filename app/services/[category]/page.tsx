@@ -1,10 +1,15 @@
 import Link from 'next/link';
+import type { Metadata } from 'next';
 import { SectionBackdrop } from '@/components/section-backdrop';
 import { notFound } from 'next/navigation';
-import { ChevronRight, ArrowRight, CheckCircle } from 'lucide-react';
+import { ArrowRight, CheckCircle } from 'lucide-react';
 import { getCategoryBySlug, serviceCategories } from '@/lib/services-data';
 import { TileIcon } from '@/components/tile-icon';
 import { FadeIn, StaggerChildren, StaggerItem } from '@/components/fade-in';
+import { buildMetadata } from '@/lib/seo';
+import { breadcrumbSchema } from '@/lib/schema';
+import { JsonLd } from '@/components/json-ld';
+import { Breadcrumbs } from '@/components/breadcrumbs';
 
 const catColors: Record<string, string> = {
   'digital-marketing':    '#2B80F0',
@@ -17,6 +22,18 @@ export async function generateStaticParams() {
   return serviceCategories.map((c) => ({ category: c.slug }));
 }
 
+export async function generateMetadata({ params }: { params: Promise<{ category: string }> }): Promise<Metadata> {
+  const { category } = await params;
+  const data = getCategoryBySlug(category);
+  if (!data) return {};
+
+  return buildMetadata({
+    path: `/services/${category}`,
+    title: [`${data.name} Services`, data.tagline],
+    description: [data.tagline, data.description],
+  });
+}
+
 export default async function CategoryPage({ params }: { params: Promise<{ category: string }> }) {
   const { category } = await params;
   const data = getCategoryBySlug(category);
@@ -24,8 +41,15 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
 
   const accent = catColors[data.slug] || '#2B80F0';
 
+  const crumbs = [
+    { name: 'Home', path: '/' },
+    { name: 'Services', path: '/services' },
+    { name: data.name, path: `/services/${data.slug}` },
+  ];
+
   return (
     <div className="w-full overflow-x-hidden" style={{ background: '#07111F' }}>
+      <JsonLd data={breadcrumbSchema(crumbs)} />
 
       {/* Hero */}
       <section className="relative py-20 sm:py-28 overflow-hidden"
@@ -34,13 +58,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
           style={{ background: `radial-gradient(ellipse, ${accent}12 0%, transparent 70%)`, filter: 'blur(80px)' }} />
 
         <FadeIn className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-          <div className="flex items-center justify-center gap-2 text-xs mb-8" style={{ color: 'rgba(255,255,255,0.4)' }}>
-            <Link href="/" className="hover:text-[#2B80F0] transition-colors">Home</Link>
-            <ChevronRight className="w-3 h-3" />
-            <Link href="/services" className="hover:text-[#2B80F0] transition-colors">Services</Link>
-            <ChevronRight className="w-3 h-3" />
-            <span style={{ color: accent }}>{data.name}</span>
-          </div>
+          <Breadcrumbs items={crumbs} accent={accent} center />
 
           <div className="w-20 h-20 mx-auto rounded-2xl flex items-center justify-center mb-6 shadow-lg"
             style={{ background: `${accent}12`, border: `1px solid ${accent}30` }}>

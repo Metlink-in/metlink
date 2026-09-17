@@ -15,7 +15,7 @@ export async function proxy(req: NextRequest) {
     if (pathname.startsWith('/api/')) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
-    return NextResponse.redirect(new URL('/admin', req.url));
+    return NextResponse.redirect(new URL('/metlink-portal', req.url));
   }
 
   try {
@@ -25,10 +25,10 @@ export async function proxy(req: NextRequest) {
     if (pathname.startsWith('/api/')) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
-    return NextResponse.redirect(new URL('/admin', req.url));
+    return NextResponse.redirect(new URL('/metlink-portal', req.url));
   }
 }
 
 export const config = {
-  matcher: ['/admin/dashboard/:path*', '/api/admin/:path*'],
+  matcher: ['/metlink-portal/dashboard/:path*', '/api/admin/:path*'],
 };

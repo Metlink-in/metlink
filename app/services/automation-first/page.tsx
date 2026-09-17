@@ -7,6 +7,15 @@ import { SectionBackdrop } from '@/components/section-backdrop';
 import { FadeIn } from '@/components/fade-in';
 import { AutoServiceIcon } from '@/components/tile-icon';
 import { automationIndustries as industries } from '@/lib/automation-data';
+import { breadcrumbSchema } from '@/lib/schema';
+import { JsonLd } from '@/components/json-ld';
+import { Breadcrumbs } from '@/components/breadcrumbs';
+
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Services', path: '/services' },
+  { name: 'Automation First', path: '/services/automation-first' },
+];
 
 interface Item { name: string; image: string }
 interface Section { name: string; items: Item[] }
@@ -83,12 +92,14 @@ export default function AutomationFirstPage() {
 
   return (
     <div className="w-full overflow-x-hidden" style={{ background: '#07111F' }}>
+      <JsonLd data={breadcrumbSchema(crumbs)} />
 
       {/* Title */}
       <section className="relative pt-32 pb-10 overflow-hidden" style={{ background: '#07111F' }}>
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px] rounded-full pointer-events-none"
           style={{ background: 'radial-gradient(ellipse, rgba(43,128,240,0.18) 0%, transparent 70%)', filter: 'blur(80px)' }} />
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+          <Breadcrumbs items={crumbs} center />
           <FadeIn>
             <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-[10px] font-normal uppercase tracking-[0.25em] mb-6"
               style={{ background: 'rgba(43,128,240,0.12)', border: '1px solid rgba(43,128,240,0.3)', color: '#5FA8FF' }}>
