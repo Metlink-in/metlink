@@ -134,10 +134,12 @@ export function Header() {
                 </Link>
               </div>
 
-              {/* Mobile hamburger */}
+              {/* Mobile hamburger — 44×44 minimum touch target (see globals.css), with
+                  immediate active-state feedback since :hover never fires on touch */}
               <button onClick={() => setMobileOpen(v => !v)}
-                className="md:hidden p-2 rounded-xl transition-all hover:bg-white/10" aria-label="Toggle menu"
-                style={{ color: 'rgba(255,255,255,0.8)' }}>
+                className="md:hidden flex items-center justify-center rounded-xl transition-all hover:bg-white/10 active:bg-white/15 active:scale-90"
+                aria-label="Toggle menu"
+                style={{ color: 'rgba(255,255,255,0.8)', width: 44, height: 44 }}>
                 {mobileOpen ? <X size={20} /> : <Menu size={20} />}
               </button>
             </div>
@@ -304,7 +306,7 @@ function NavLink({ href, children }: { href: string; children: React.ReactNode }
 function MobileNavLink({ href, children, onClose }: { href: string; children: React.ReactNode; onClose: () => void }) {
   return (
     <Link href={href}
-      className="flex items-center gap-2 px-3 py-2.5 text-sm rounded-xl font-semibold transition-all hover:bg-white/7"
+      className="flex items-center gap-2 px-3 py-2.5 text-sm rounded-xl font-semibold transition-all hover:bg-white/7 active:bg-white/12 active:scale-[0.98]"
       style={{ color: 'rgba(255,255,255,0.7)' }}
       onClick={onClose}>
       {children}
@@ -328,7 +330,7 @@ function MobileMegaSection({ title, basePath, groups, openGroup, setOpenGroup, o
           <div key={g.slug}>
             <button
               onClick={() => setOpenGroup(open ? null : key)}
-              className="w-full flex items-center justify-between px-3 py-2 text-sm font-bold rounded-xl"
+              className="w-full flex items-center justify-between px-3 py-2.5 text-sm font-bold rounded-xl transition-all active:bg-white/10 active:scale-[0.98]"
               style={{ color: '#5FA8FF' }}>
               <span className="flex items-center gap-2"><TileIcon slug={g.slug} className="w-4 h-4" strokeWidth={1.6} />{g.name}</span>
               <ChevronDown className={`w-4 h-4 transition-transform ${open ? 'rotate-180' : ''}`} />
@@ -336,12 +338,12 @@ function MobileMegaSection({ title, basePath, groups, openGroup, setOpenGroup, o
             {open && (
               <div className="pb-1">
                 <Link href={`${basePath}/${g.slug}`} onClick={onClose}
-                  className="block pl-9 py-1.5 text-xs font-semibold" style={{ color: 'rgba(255,255,255,0.6)' }}>
+                  className="block pl-9 py-2 text-xs font-semibold rounded-lg transition-all active:bg-white/8" style={{ color: 'rgba(255,255,255,0.6)' }}>
                   View all {g.name} →
                 </Link>
                 {g.items.map(item => (
                   <Link key={item.slug} href={`${basePath}/${g.slug}/${item.slug}`} onClick={onClose}
-                    className="block pl-9 py-1.5 text-sm" style={{ color: 'rgba(255,255,255,0.45)' }}>
+                    className="block pl-9 py-2 text-sm rounded-lg transition-all active:bg-white/8" style={{ color: 'rgba(255,255,255,0.45)' }}>
                     {item.name}
                   </Link>
                 ))}
