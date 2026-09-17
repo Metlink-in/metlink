@@ -1,9 +1,11 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { X, CheckCircle, TrendingUp, Shield, Clock, Zap } from 'lucide-react';
+import { X, CheckCircle, TrendingUp, Shield, Clock, Zap, ChevronDown } from 'lucide-react';
+import { useBudgetOptions } from '@/lib/use-budget-options';
 
 export function PopupForm() {
+  const budgetOptions = useBudgetOptions();
   const [open, setOpen]           = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [form, setForm]           = useState({ name: '', email: '', phone: '', budget: '', message: '' });
@@ -192,17 +194,20 @@ export function PopupForm() {
                     {errors.phone && <p className="text-xs mt-1.5" style={{ color: '#FCA5A5' }}>{errors.phone}</p>}
                   </div>
 
-                  <select value={form.budget}
-                    onChange={e => setForm(p => ({ ...p, budget: e.target.value }))}
-                    className={`${inputCls} appearance-none cursor-pointer`}
-                    style={{ ...inputStyle, color: form.budget ? '#FFFFFF' : 'rgba(255,255,255,0.45)' }}
-                    onFocus={e => (e.currentTarget.style.borderColor = 'rgba(43,128,240,0.45)')}
-                    onBlur={e => (e.currentTarget.style.borderColor = inputBorder)}>
-                    <option value="" style={{ background: '#0B1628', color: 'rgba(255,255,255,0.45)' }}>Select a Budget Range</option>
-                    {['₹30K – ₹50K','₹50K – ₹1L','₹1L – ₹5L','₹5L – ₹20L','₹20L – ₹50L','₹50L+'].map(b => (
-                      <option key={b} value={b} style={{ background: '#0B1628', color: '#FFFFFF' }}>{b}</option>
-                    ))}
-                  </select>
+                  <div className="relative">
+                    <select value={form.budget}
+                      onChange={e => setForm(p => ({ ...p, budget: e.target.value }))}
+                      className={`${inputCls} appearance-none cursor-pointer pr-10`}
+                      style={{ ...inputStyle, color: form.budget ? '#FFFFFF' : 'rgba(255,255,255,0.45)' }}
+                      onFocus={e => (e.currentTarget.style.borderColor = 'rgba(43,128,240,0.45)')}
+                      onBlur={e => (e.currentTarget.style.borderColor = inputBorder)}>
+                      <option value="" style={{ background: '#0B1628', color: 'rgba(255,255,255,0.45)' }}>Select a Budget Range</option>
+                      {budgetOptions.map(b => (
+                        <option key={b} value={b} style={{ background: '#0B1628', color: '#FFFFFF' }}>{b}</option>
+                      ))}
+                    </select>
+                    <ChevronDown className="w-4 h-4 absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none" style={{ color: 'rgba(255,255,255,0.4)' }} />
+                  </div>
 
                   <div>
                     <textarea rows={3}

@@ -7,6 +7,7 @@ import { Menu, X, ChevronDown, ChevronRight, ArrowRight, Sparkles } from 'lucide
 import { serviceCategories } from '@/lib/services-data';
 import { industries } from '@/lib/industries-data';
 import { TileIcon } from '@/components/tile-icon';
+import { useBudgetOptions } from '@/lib/use-budget-options';
 
 // Normalized shape both mega-menus share.
 interface MenuItem { name: string; slug: string; icon: string; tagline: string }
@@ -357,6 +358,7 @@ function MobileMegaSection({ title, basePath, groups, openGroup, setOpenGroup, o
 }
 
 function ProposalPopup({ onClose }: { onClose: () => void }) {
+  const budgetOptions = useBudgetOptions();
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -487,17 +489,17 @@ function ProposalPopup({ onClose }: { onClose: () => void }) {
                 <input type="tel" name="phone" placeholder="Phone Number"
                   className="w-full px-4 py-3 text-sm focus:outline-none placeholder:text-white/25"
                   style={inputStyle} onFocus={onFocus} onBlur={onBlur} />
-                <select name="budget" className="w-full px-4 py-3 text-sm focus:outline-none appearance-none cursor-pointer"
-                  style={{ ...inputStyle, color: 'rgba(255,255,255,0.4)' }}
-                  onFocus={onFocus} onBlur={onBlur}>
-                  <option value="" style={{ background: '#0B1628' }}>Select a Budget Range</option>
-                  <option value="₹30K – ₹50K" style={{ background: '#0B1628', color: '#fff' }}>₹30K – ₹50K</option>
-                  <option value="₹50K – ₹1L" style={{ background: '#0B1628', color: '#fff' }}>₹50K – ₹1L</option>
-                  <option value="₹1L – ₹5L" style={{ background: '#0B1628', color: '#fff' }}>₹1L – ₹5L</option>
-                  <option value="₹5L – ₹20L" style={{ background: '#0B1628', color: '#fff' }}>₹5L – ₹20L</option>
-                  <option value="₹20L – ₹50L" style={{ background: '#0B1628', color: '#fff' }}>₹20L – ₹50L</option>
-                  <option value="₹50L+" style={{ background: '#0B1628', color: '#fff' }}>₹50L+</option>
-                </select>
+                <div className="relative">
+                  <select name="budget" className="w-full px-4 py-3 pr-10 text-sm focus:outline-none appearance-none cursor-pointer"
+                    style={{ ...inputStyle, color: 'rgba(255,255,255,0.4)' }}
+                    onFocus={onFocus} onBlur={onBlur}>
+                    <option value="" style={{ background: '#0B1628' }}>Select a Budget Range</option>
+                    {budgetOptions.map(b => (
+                      <option key={b} value={b} style={{ background: '#0B1628', color: '#fff' }}>{b}</option>
+                    ))}
+                  </select>
+                  <ChevronDown className="w-4 h-4 absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none" style={{ color: 'rgba(255,255,255,0.4)' }} />
+                </div>
                 <textarea name="message" placeholder="Please share any information that will help us provide an accurate estimate. *"
                   rows={3} required
                   className="w-full px-4 py-3 text-sm focus:outline-none resize-none placeholder:text-white/25"

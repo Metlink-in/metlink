@@ -3,11 +3,12 @@
 import Link from 'next/link';
 import { SectionBackdrop } from '@/components/section-backdrop';
 import { useState, useEffect } from 'react';
-import { Mail, Phone, MapPin, Clock, ArrowRight, CheckCircle } from 'lucide-react';
+import { Mail, Phone, MapPin, Clock, ArrowRight, CheckCircle, ChevronDown } from 'lucide-react';
 import { FadeIn, StaggerChildren, StaggerItem } from '@/components/fade-in';
 import { breadcrumbSchema } from '@/lib/schema';
 import { JsonLd } from '@/components/json-ld';
 import { Breadcrumbs } from '@/components/breadcrumbs';
+import { useBudgetOptions } from '@/lib/use-budget-options';
 
 const crumbs = [
   { name: 'Home', path: '/' },
@@ -15,9 +16,9 @@ const crumbs = [
 ];
 
 const services = ['Digital Marketing','Performance Marketing','SEO & Content','Social Media','Brand Identity','Video Production','Web Development','Mobile App','AI Development','Business Automation','Data Science','Other'];
-const budgets  = ['₹30K – ₹50K','₹50K – ₹1L','₹1L – ₹5L','₹5L – ₹20L','₹20L – ₹50L','₹50L+','Let\'s Discuss'];
 
 export default function ContactPage() {
+  const budgetOptions = [...useBudgetOptions(), "Let's Discuss"];
   const [form, setForm]           = useState({ name:'', email:'', company:'', service:'', budget:'', message:'' });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading]     = useState(false);
@@ -264,25 +265,31 @@ export default function ContactPage() {
                         <div className="grid sm:grid-cols-2 gap-5">
                           <div className="space-y-2">
                             <label className="block text-[10px] uppercase tracking-[0.22em] font-medium" style={{ color: 'rgba(255,255,255,0.4)' }}>Service Needed</label>
-                            <select name="service" value={form.service} onChange={set}
-                              className="w-full px-4 py-3.5 text-sm focus:outline-none appearance-none cursor-pointer transition-all"
-                              style={{ ...inp.base, color: form.service ? '#FFFFFF' : 'rgba(255,255,255,0.3)' }}
-                              onFocus={e => (e.currentTarget.style.borderColor = inp.focus)}
-                              onBlur={e => (e.currentTarget.style.borderColor = inp.blur)}>
-                              <option value="" style={{ background: '#0D1B2E' }}>Select a service</option>
-                              {services.map(s => <option key={s} value={s} style={{ background: '#0D1B2E', color: '#FFF' }}>{s}</option>)}
-                            </select>
+                            <div className="relative">
+                              <select name="service" value={form.service} onChange={set}
+                                className="w-full px-4 py-3.5 pr-10 text-sm focus:outline-none appearance-none cursor-pointer transition-all"
+                                style={{ ...inp.base, color: form.service ? '#FFFFFF' : 'rgba(255,255,255,0.3)' }}
+                                onFocus={e => (e.currentTarget.style.borderColor = inp.focus)}
+                                onBlur={e => (e.currentTarget.style.borderColor = inp.blur)}>
+                                <option value="" style={{ background: '#0D1B2E' }}>Select a service</option>
+                                {services.map(s => <option key={s} value={s} style={{ background: '#0D1B2E', color: '#FFF' }}>{s}</option>)}
+                              </select>
+                              <ChevronDown className="w-4 h-4 absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none" style={{ color: 'rgba(255,255,255,0.4)' }} />
+                            </div>
                           </div>
                           <div className="space-y-2">
                             <label className="block text-[10px] uppercase tracking-[0.22em] font-medium" style={{ color: 'rgba(255,255,255,0.4)' }}>Budget Range</label>
-                            <select name="budget" value={form.budget} onChange={set}
-                              className="w-full px-4 py-3.5 text-sm focus:outline-none appearance-none cursor-pointer transition-all"
-                              style={{ ...inp.base, color: form.budget ? '#FFFFFF' : 'rgba(255,255,255,0.3)' }}
-                              onFocus={e => (e.currentTarget.style.borderColor = inp.focus)}
-                              onBlur={e => (e.currentTarget.style.borderColor = inp.blur)}>
-                              <option value="" style={{ background: '#0D1B2E' }}>Select budget</option>
-                              {budgets.map(b => <option key={b} value={b} style={{ background: '#0D1B2E', color: '#FFF' }}>{b}</option>)}
-                            </select>
+                            <div className="relative">
+                              <select name="budget" value={form.budget} onChange={set}
+                                className="w-full px-4 py-3.5 pr-10 text-sm focus:outline-none appearance-none cursor-pointer transition-all"
+                                style={{ ...inp.base, color: form.budget ? '#FFFFFF' : 'rgba(255,255,255,0.3)' }}
+                                onFocus={e => (e.currentTarget.style.borderColor = inp.focus)}
+                                onBlur={e => (e.currentTarget.style.borderColor = inp.blur)}>
+                                <option value="" style={{ background: '#0D1B2E' }}>Select budget</option>
+                                {budgetOptions.map(b => <option key={b} value={b} style={{ background: '#0D1B2E', color: '#FFF' }}>{b}</option>)}
+                              </select>
+                              <ChevronDown className="w-4 h-4 absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none" style={{ color: 'rgba(255,255,255,0.4)' }} />
+                            </div>
                           </div>
                         </div>
 
