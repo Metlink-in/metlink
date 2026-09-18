@@ -3,6 +3,9 @@ import { NextResponse } from 'next/server';
 import { serviceCategories } from '@/lib/services-data';
 import { industries } from '@/lib/industries-data';
 import { automationIndustries } from '@/lib/automation-data';
+import { getSection } from '@/lib/get-section';
+
+interface TeamMember { name: string; role: string; specialty: string }
 
 // ── Knowledge base built from the live site data ─────────────────
 const SERVICES_KB = serviceCategories
@@ -24,8 +27,9 @@ const CONTACT = {
   contactUrl: 'https://www.metlinkai.com/contact',
 };
 
-const SYSTEM_PROMPT = `You are the official MetLink AI assistant. MetLink is an AI-first marketing and software development agency based in ${CONTACT.location}.
-
+function buildSystemPrompt(teamKb: string): string {
+  return `You are the official MetLink AI assistant. MetLink is an AI-first marketing and software development agency based in ${CONTACT.location}.
+${teamKb}
 We help businesses with these service pillars:
 ${SERVICES_KB}
 
@@ -44,17 +48,31 @@ Style:
 - To take things forward, point people to the contact page or email — never mention phone calls, Calendly, or "booking a call".
 - If you don't know something, say so briefly and point them to ${CONTACT.email} or the contact page.
 - Contact page: ${CONTACT.contactUrl}.`;
+}
+
+function buildTeamKb(team: TeamMember[] | null): string {
+  if (!team || team.length === 0) return '';
+  const lines = team.map(m => `- ${m.name} — ${m.role}${m.specialty ? ` (${m.specialty})` : ''}`).join('\n');
+  return `\nOur team:\n${lines}\n`;
+}
 
 const ALL_SERVICES = serviceCategories.flatMap(c => c.services.map(s => ({ ...s, cat: c })));
 const contact = `Reach us via our contact page: ${CONTACT.contactUrl}`;
 
 // ── Local fallback so the bot still answers cleanly without the AI API ──
-function localReply(raw: string): string {
+function localReply(raw: string, team: TeamMember[] | null = null): string {
   const m = raw.toLowerCase().trim();
 
   // Greetings / smalltalk
   if (/^(hi|hello|hey|yo|hiya|namaste|good (morning|afternoon|evening))\b/.test(m) || m === '')
     return `Hi there! 👋 I'm the MetLink assistant. I can help with our marketing, AI & automation, and software services — or the industries we work in. What are you looking to build?`;
+
+  // Founder / team
+  if (/\b(founder|who (owns|runs|started|leads|is behind)|ceo|co-?founder|leadership)\b/.test(m)) {
+    if (team && team.length > 0)
+      return `${team.map(t => `${t.name} (${t.role})`).join(', ')} — that's who's behind MetLink AI. Want to get in touch with the team? ${contact}`;
+    return `MetLink AI is driven by a passionate, experienced team dedicated to helping businesses grow with AI and automation. Reach out at ${CONTACT.email} or our contact page if you'd like to know more about the team: ${CONTACT.contactUrl}`;
+  }
 
   if (/\b(thanks|thank you|thx|appreciate|great|awesome|cool|nice)\b/.test(m))
     return `Happy to help! If you'd like, I can point you to the right service or share your details on our contact page: ${CONTACT.contactUrl}`;
@@ -158,15 +176,17 @@ export async function POST(req: Request) {
     return NextResponse.json({ reply: localReply('') });
   }
 
+  const team = await getSection<TeamMember[]>('team').catch(() => null);
+
   // No API key configured → answer locally instead of going "offline".
   if (!process.env.GEMINI_API_KEY) {
-    return NextResponse.json({ reply: localReply(message) });
+    return NextResponse.json({ reply: localReply(message, team) });
   }
 
   try {
     const payload = {
       contents: [{ parts: [{ text: message }] }],
-      systemInstruction: { parts: [{ text: SYSTEM_PROMPT }] },
+      systemInstruction: { parts: [{ text: buildSystemPrompt(buildTeamKb(team)) }] },
       generationConfig: { temperature: 0.6, maxOutputTokens: 600 },
     };
 
@@ -179,13 +199,13 @@ export async function POST(req: Request) {
     if (!res.ok) {
       console.error('Gemini API Error:', data);
       // Graceful fallback to local knowledge instead of an error.
-      return NextResponse.json({ reply: localReply(message) });
+      return NextResponse.json({ reply: localReply(message, team) });
     }
 
-    const replyText = data.candidates?.[0]?.content?.parts?.[0]?.text || localReply(message);
+    const replyText = data.candidates?.[0]?.content?.parts?.[0]?.text || localReply(message, team);
     return NextResponse.json({ reply: replyText });
   } catch (error) {
     console.error('Chat API error:', error);
-    return NextResponse.json({ reply: localReply(message) });
+    return NextResponse.json({ reply: localReply(message, team) });
   }
 }
