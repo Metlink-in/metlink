@@ -2,6 +2,7 @@
 import { NextResponse } from 'next/server';
 import { serviceCategories } from '@/lib/services-data';
 import { industries } from '@/lib/industries-data';
+import { automationIndustries } from '@/lib/automation-data';
 
 // ── Knowledge base built from the live site data ─────────────────
 const SERVICES_KB = serviceCategories
@@ -10,6 +11,10 @@ const SERVICES_KB = serviceCategories
 
 const INDUSTRIES_KB = industries
   .map(i => `- ${i.name} (/industries/${i.slug}): ${i.topics.map(t => t.name).join(', ')}.`)
+  .join('\n');
+
+const AUTOMATION_KB = automationIndustries
+  .map(i => `- ${i.name} (/automation/${i.slug}): ${i.tagline}. Use cases include: ${i.topics.slice(0, 8).map(t => t.name).join(', ')}, and more.`)
   .join('\n');
 
 const CONTACT = {
@@ -26,6 +31,9 @@ ${SERVICES_KB}
 
 We serve these industries:
 ${INDUSTRIES_KB}
+
+We also offer deep, industry-specific automation playbooks with dozens of ready-to-build use cases per industry:
+${AUTOMATION_KB}
 
 Style:
 - Sound warm, human, and confident — like a helpful team member, not a brochure.
@@ -113,9 +121,14 @@ function localReply(raw: string): string {
   if (/\b(industr|sector|vertical)\b/.test(m))
     return `We serve ${industries.map(i => i.name).join(', ')}. Which industry are you in? I can share exactly how we help.`;
 
+  // Industry-specific automation playbook match
+  const autoInd = automationIndustries.find(i => m.includes(i.name.toLowerCase().split(' ')[0].split('&')[0].trim()));
+  if (autoInd)
+    return `For ${autoInd.name}, we have a ready automation playbook: ${autoInd.topics.slice(0, 5).map(t => t.name).join(', ')}, and more. See it at metlinkai.com/automation/${autoInd.slug} — or ${contact}`;
+
   // Category buckets
   if (/\b(automat|workflow|rpa|agent\b|bots?)\b/.test(m))
-    return `Automation is core to what we do — workflow automation, AI agents & assistants, RPA bots, and CRM/marketing automation that run your operations 24/7. Want to automate something specific? ${contact}`;
+    return `Automation is core to what we do — we have ready-to-build playbooks for ${automationIndustries.map(i => i.name).join(', ')}, plus custom workflow automation, AI agents, RPA, and CRM/marketing automation. Want to automate something specific? ${contact}`;
 
   if (/\b(ai|ml|machine learning|gpt|llm|generative|chatbot|model)\b/.test(m))
     return `We build practical AI — generative AI apps, AI agents and chatbots, custom LLMs, and full ML/MLOps. What problem are you trying to solve with AI?`;
