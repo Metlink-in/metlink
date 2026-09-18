@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
 import { Home, MessageCircle, ArrowRight } from 'lucide-react';
 
 export default function NotFound() {
@@ -17,33 +16,15 @@ export default function NotFound() {
 
       <div className="relative z-10 max-w-lg w-full text-center animate-slideInUp">
 
-        {/* Logo */}
-        <Link href="/" className="inline-flex items-center justify-center mb-8 group">
-          <Image
-            src="/WhatsApp_Image_2026-04-30_at_7.30.41_PM-removebg-preview.png"
-            alt="MetLink"
-            width={559}
-            height={447}
-            priority
-            className="transition-opacity duration-200 group-hover:opacity-80"
-            style={{ height: 56, width: 'auto', objectFit: 'contain' }}
-          />
-        </Link>
-
         {/* 404 */}
-        <div className="mb-6 relative inline-block">
-          <p className="text-[10px] font-normal uppercase tracking-[0.4em] mb-4" style={{ color: 'rgba(255,255,255,0.4)' }}>
-            404, Page Not Found
-          </p>
-          <h1 className="text-[9rem] md:text-[11rem]  leading-none select-none gradient-text-cyan">
+        <div className="mb-8 relative inline-flex items-center justify-center">
+          <div className="absolute w-48 h-48 rounded-full border animate-ripple" style={{ borderColor: 'rgba(43,128,240,0.12)' }} />
+          <h1 className="relative text-[9rem] md:text-[11rem] leading-none select-none gradient-text-cyan">
             404
           </h1>
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <div className="w-40 h-40 rounded-full border animate-ripple" style={{ borderColor: 'rgba(43,128,240,0.12)' }} />
-          </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl  mb-4 leading-tight" style={{ color: '#FFFFFF' }}>
+        <h2 className="text-2xl md:text-3xl mb-4 leading-tight" style={{ color: '#FFFFFF' }}>
           Lost in the Digital Void
         </h2>
         <p className="text-base mb-10 max-w-sm mx-auto leading-relaxed" style={{ color: 'rgba(255,255,255,0.5)' }}>
