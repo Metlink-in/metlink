@@ -78,13 +78,10 @@ body {
   line-height: 1.75;
   font-size: 18px;
   font-weight: 400;
-  /* iOS Safari rubber-band / overscroll bounce shows a gap at top and
-     bottom if the body background doesn't extend behind the browser chrome.
-     Setting overscroll-behavior with the matching bg on <html> fixes it. */
-  overscroll-behavior-y: none;
 }
 
-/* Ensure iOS Safari overscroll area matches the site background */
+/* Ensure iOS Safari overscroll (rubber-band) area matches the site background
+   so there's no black/white gap when bouncing past the page edges. */
 html {
   background-color: #07111F;
 }
@@ -135,7 +132,8 @@ nav button[aria-label="Toggle menu"] { min-height: 44px; min-width: 44px; }
 html.lenis, html.lenis body { height: auto; }
 .lenis.lenis-smooth { scroll-behavior: auto !important; }
 .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
-.lenis.lenis-stopped { overflow: hidden; }
+/* NOTE: lenis-stopped { overflow:hidden } removed — it was locking scroll
+   when Lenis initialized in a stopped state (e.g. on first paint). */
 
 /* ── Scrollbar ── */
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
