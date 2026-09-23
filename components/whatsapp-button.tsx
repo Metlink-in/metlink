@@ -23,13 +23,16 @@ export function WhatsAppButton({ visible = true }: { visible?: boolean }) {
         transform: visible ? 'scale(1)' : 'scale(0.6)',
         pointerEvents: visible ? 'auto' : 'none',
         transition: 'opacity 0.35s cubic-bezier(0.16,1,0.3,1), transform 0.35s cubic-bezier(0.16,1,0.3,1)',
+        isolation: 'isolate',
       }}
       aria-hidden={!visible}
       tabIndex={visible ? 0 : -1}
       aria-label="Chat with MetLink on WhatsApp"
     >
-      {/* Soft pulsing ring to draw the eye, matches the chat button's "online" liveliness */}
-      <span className="absolute inset-0 rounded-full animate-ping" style={{ background: '#25D366', opacity: 0.35 }} />
+      {/* Soft pulsing ring — rgba + mix-blend-mode prevents the black
+          compositing artifact seen on mobile during scroll */}
+      <span className="absolute inset-0 rounded-full animate-ping"
+        style={{ background: 'rgba(37,211,102,0.5)', mixBlendMode: 'screen' }} />
 
       {/* Button body — subtle gradient + inner highlight instead of a flat fill */}
       <span className="relative w-full h-full rounded-full flex items-center justify-center"
