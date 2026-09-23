@@ -78,6 +78,15 @@ body {
   line-height: 1.75;
   font-size: 18px;
   font-weight: 400;
+  /* iOS Safari rubber-band / overscroll bounce shows a gap at top and
+     bottom if the body background doesn't extend behind the browser chrome.
+     Setting overscroll-behavior with the matching bg on <html> fixes it. */
+  overscroll-behavior-y: none;
+}
+
+/* Ensure iOS Safari overscroll area matches the site background */
+html {
+  background-color: #07111F;
 }
 
 a { color: inherit; text-decoration: none; transition: color 0.18s ease, opacity 0.18s ease; }
@@ -166,13 +175,18 @@ html.lenis, html.lenis body { height: auto; }
 .animate-border-glow { animation: borderGlow 4s ease-in-out infinite; }
 .animate-blob        { animation: blob 9s ease-in-out infinite; }
 .animate-ping        { animation: ping 1s cubic-bezier(0,0,.2,1) infinite; }
-.animate-marquee     { display:flex; animation: marquee 36s linear infinite; will-change:transform; }
-.animate-scroll-fwd  { display:flex; animation: scroll 28s linear infinite; will-change:transform; }
-.animate-scroll-rev  { display:flex; animation: scroll 28s linear infinite reverse; will-change:transform; }
+.animate-marquee     { display:flex; animation: marquee 36s linear infinite; }
+.animate-scroll-fwd  { display:flex; animation: scroll 28s linear infinite; }
+.animate-scroll-rev  { display:flex; animation: scroll 28s linear infinite reverse; }
 /* marquee-track must clip so the wide inner div never creates page overflow */
 .marquee-track       { overflow: hidden; touch-action: pan-y; }
 .marquee-track:hover .animate-scroll-fwd,
 .marquee-track:hover .animate-scroll-rev { animation-play-state: paused; }
+
+/* On mobile, only apply will-change on elements that are actually animating */
+@media (min-width: 768px) {
+  .animate-marquee, .animate-scroll-fwd, .animate-scroll-rev { will-change: transform; }
+}
 
 /* ── Gradient text ── */
 .gradient-text-cyan {

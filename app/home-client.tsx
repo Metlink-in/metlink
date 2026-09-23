@@ -455,13 +455,13 @@ function HeroVideoBg({ active }: { active: number }) {
           key={src}
           ref={el => { refs.current[i] = el; }}
           src={src}
-          autoPlay
+          autoPlay={i === 0}
           muted
           loop
           playsInline
-          preload="auto"
+          preload={i === 0 ? 'auto' : 'none'}
           className="absolute inset-0 w-full h-full object-cover transition-opacity duration-[2000ms] ease-in-out"
-          style={{ opacity: i === active ? 1 : 0 }}
+          style={{ opacity: i === active ? 1 : 0, background: '#050B14' }}
         />
       ))}
     </div>

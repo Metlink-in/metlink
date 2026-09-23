@@ -8,6 +8,12 @@ export function SmoothScroll() {
     // Respect users who prefer reduced motion.
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
+    // Disable on finger-touch screens (phones/tablets) only — NOT laptops with
+    // trackpads. `pointer: coarse` is true only on touchscreen-primary devices.
+    // Using maxTouchPoints or ontouchstart would incorrectly match Windows
+    // precision trackpads and MacBooks (which also report touch support).
+    if (window.matchMedia('(pointer: coarse)').matches) return;
+
     const lenis = new Lenis({
       duration: 1.1,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),

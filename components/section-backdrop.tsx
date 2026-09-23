@@ -32,11 +32,11 @@ export function SectionBackdrop({ tint = '#2B80F0', tint2 = '#8B5CF6', behind = 
           here was a measurable source of scroll jank. */}
       <div
         className="absolute -top-24 left-[18%] w-[420px] h-[280px]"
-        style={{ background: `radial-gradient(ellipse, ${tint}1A 0%, transparent 70%)`, filter: 'blur(48px)', transform: 'translateZ(0)', willChange: 'transform' }}
+        style={{ background: `radial-gradient(ellipse, ${tint}1A 0%, transparent 70%)`, filter: 'blur(48px)' }}
       />
       <div
         className="absolute bottom-[-10%] right-[14%] w-[360px] h-[260px]"
-        style={{ background: `radial-gradient(ellipse, ${tint2}12 0%, transparent 70%)`, filter: 'blur(56px)', transform: 'translateZ(0)', willChange: 'transform' }}
+        style={{ background: `radial-gradient(ellipse, ${tint2}12 0%, transparent 70%)`, filter: 'blur(56px)' }}
       />
     </div>
   );

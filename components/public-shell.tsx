@@ -31,13 +31,13 @@ export function PublicShell({ children }: { children: React.ReactNode }) {
           was the actual cause of "Home feels slow to click into". Default
           (sync) mode lets the incoming page mount and start rendering
           immediately while the outgoing one fades out behind the curtain. */}
-      <AnimatePresence>
+      <AnimatePresence mode="wait">
         <motion.main
           key={pathname}
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -6 }}
-          transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.15, ease: 'easeOut' }}
         >
           {children}
         </motion.main>
