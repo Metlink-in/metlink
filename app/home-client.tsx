@@ -449,7 +449,7 @@ function HeroVideoBg({ active }: { active: number }) {
   }, [active]);
 
   return (
-    <div className="absolute inset-0 overflow-hidden" style={{ background: 'radial-gradient(ellipse at 50% 30%, #0E2A4A 0%, #071018 55%, #050B14 100%)' }}>
+    <div className="absolute inset-0" style={{ overflow: 'clip', background: 'radial-gradient(ellipse at 50% 30%, #0E2A4A 0%, #071018 55%, #050B14 100%)' }}>
       {heroVideos.map((src, i) => (
         <video
           key={src}
@@ -461,7 +461,7 @@ function HeroVideoBg({ active }: { active: number }) {
           playsInline
           preload={i === 0 ? 'auto' : 'none'}
           className="absolute inset-0 w-full h-full object-cover transition-opacity duration-[2000ms] ease-in-out"
-          style={{ opacity: i === active ? 1 : 0, background: '#050B14' }}
+          style={{ opacity: i === active ? 1 : 0, background: '#050B14', willChange: 'opacity', transform: 'translateZ(0)' }}
         />
       ))}
     </div>
@@ -513,7 +513,7 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
     <div className="w-full overflow-x-hidden" style={{ background: BG }}>
 
       {/* ══ HERO ══════════════════════════════════════════════ */}
-      <section className="relative overflow-hidden flex flex-col" style={{ background: '#050B14', paddingTop: '120px', minHeight: '100svh' }}>
+      <section className="relative overflow-hidden flex flex-col" style={{ background: '#050B14', paddingTop: '120px', minHeight: '100svh', transform: 'translateZ(0)', willChange: 'transform' }}>
 
         {/* ── Background ── */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden" style={{ willChange: 'transform', isolation: 'isolate' }}>
