@@ -513,10 +513,10 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
     <div className="w-full overflow-x-hidden" style={{ background: BG }}>
 
       {/* ══ HERO ══════════════════════════════════════════════ */}
-      <section className="relative overflow-hidden flex flex-col" style={{ background: '#050B14', paddingTop: '120px' }}>
+      <section className="relative overflow-hidden flex flex-col" style={{ background: '#050B14', paddingTop: '120px', minHeight: '100svh' }}>
 
         {/* ── Background ── */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none overflow-hidden" style={{ willChange: 'transform', isolation: 'isolate' }}>
           {/* Cycling video background */}
           <HeroVideoBg active={heroSlide} />
           {/* Dark scrim for text legibility */}
@@ -533,7 +533,7 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
             style={{ background: 'radial-gradient(ellipse at center, transparent 45%, rgba(2,2,2,0.62) 100%)' }} />
           {/* Bottom fade */}
           <div className="absolute bottom-0 inset-x-0 h-48"
-            style={{ background: 'linear-gradient(to top, #020202 0%, transparent 100%)' }} />
+            style={{ background: 'linear-gradient(to top, #050B14 0%, transparent 100%)' }} />
         </div>
 
         {/* ── Main content ── */}
