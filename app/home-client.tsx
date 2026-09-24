@@ -513,10 +513,10 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
     <div className="w-full overflow-x-hidden" style={{ background: BG }}>
 
       {/* ══ HERO ══════════════════════════════════════════════ */}
-      <section className="relative flex flex-col" style={{ background: '#050B14', paddingTop: '120px', overflow: 'clip' }}>
+      <section className="relative flex flex-col" style={{ background: '#050B14', paddingTop: '120px' }}>
 
         {/* ── Background ── */}
-        <div className="absolute inset-0 pointer-events-none z-0" style={{ overflow: 'clip' }}>
+        <div className="absolute inset-0 pointer-events-none z-0" style={{ overflow: 'clip', transform: 'translateZ(0)' }}>
           {/* Cycling video background */}
           <HeroVideoBg active={heroSlide} />
           {/* Dark scrim for text legibility */}
