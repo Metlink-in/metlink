@@ -516,7 +516,7 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
       <section className="relative flex flex-col" style={{ background: '#050B14', paddingTop: '120px', minHeight: '100svh', overflow: 'clip' }}>
 
         {/* ── Background ── */}
-        <div className="absolute inset-0 pointer-events-none" style={{ overflow: 'clip', willChange: 'transform' }}>
+        <div className="absolute inset-0 pointer-events-none z-0" style={{ overflow: 'clip' }}>
           {/* Cycling video background */}
           <HeroVideoBg active={heroSlide} />
           {/* Dark scrim for text legibility */}
@@ -537,7 +537,7 @@ export default function HomeClient({ cmsHero, cmsClients, cmsTestimonials, cmsWh
         </div>
 
         {/* ── Main content ── */}
-        <div className="relative z-10 lg:flex-1 flex flex-col items-center justify-center max-w-6xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 text-center">
+        <div className="relative z-10 flex-1 flex flex-col items-center justify-center max-w-6xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 text-center">
 
           <FadeIn delay={0.07}>
             <h1 className="mb-5"
