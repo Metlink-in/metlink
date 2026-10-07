@@ -403,9 +403,9 @@ function FAQSection() {
             Start building with AI
             <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
           </Link>
-          <Link href="/portfolio"
+          <Link href="/blog"
             className="inline-flex items-center gap-2 btn-outline">
-            View our work
+            Read our blog
           </Link>
         </FadeIn>
 

@@ -74,7 +74,7 @@ function confirmHtml(name: string) {
     <div style="background:#EFF6FF;border-radius:10px;padding:20px 24px;margin-bottom:28px">
       <p style="margin:0 0 10px;font-size:12px;font-weight:700;color:#1D4ED8;text-transform:uppercase;letter-spacing:.06em">While you wait</p>
       <ul style="margin:0;padding-left:18px;font-size:13px;color:#374151;line-height:1.8">
-        <li>Browse our <a href="https://metlinkai.com/portfolio" style="color:#2B80F0;text-decoration:none">portfolio</a> to see recent work</li>
+        <li>Read our <a href="https://metlinkai.com/blog" style="color:#2B80F0;text-decoration:none">blog</a> for AI & automation insights</li>
         <li>Learn about our <a href="https://metlinkai.com/services" style="color:#2B80F0;text-decoration:none">AI services</a></li>
       </ul>
     </div>

@@ -56,10 +56,10 @@ export default function CompanyClient({ company, valuesList, teamList, milestone
                 style={{ background: '#2B80F0', boxShadow: '0 4px 20px rgba(43,128,240,0.3)' }}>
                 Work With Us <ArrowRight className="w-4 h-4" />
               </Link>
-              <Link href="/portfolio"
+              <Link href="/blog"
                 className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-bold text-sm transition-all hover:bg-black/5"
                 style={{ border: '1px solid rgba(255,255,255,0.07)', color: 'rgba(255,255,255,0.6)', background: 'rgba(255,255,255,0.08)' }}>
-                View Our Work
+                Read Our Blog
               </Link>
             </div>
           </FadeIn>

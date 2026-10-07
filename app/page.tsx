@@ -4,7 +4,7 @@ import HomeClient, { HeroCMS } from './home-client';
 import { buildMetadata } from '@/lib/seo';
 
 // Static fallbacks (same as in home-client)
-const defaultHero: HeroCMS = { badge:'AI-First Digital Agency', headline1:'We build', headline2:'AI systems', headline3:'that scale', subheadline:'Strategy, design, and engineering, one team shipping production AI for ambitious brands. From idea to live product in days.', cta1Text:'Start building with AI', cta1Href:'https://www.metlinkai.com/contact', cta2Text:'View our work', cta2Href:'/portfolio', stat1Value:'150+', stat1Label:'Projects', stat2Value:'80+', stat2Label:'Clients', stat3Value:'$10M+', stat3Label:'Revenue', stat4Value:'94%', stat4Label:'Retention' };
+const defaultHero: HeroCMS = { badge:'AI-First Digital Agency', headline1:'We build', headline2:'AI systems', headline3:'that scale', subheadline:'Strategy, design, and engineering, one team shipping production AI for ambitious brands. From idea to live product in days.', cta1Text:'Start building with AI', cta1Href:'https://www.metlinkai.com/contact', cta2Text:'Read our blog', cta2Href:'/blog', stat1Value:'150+', stat1Label:'Projects', stat2Value:'80+', stat2Label:'Clients', stat3Value:'$10M+', stat3Label:'Revenue', stat4Value:'94%', stat4Label:'Retention' };
 
 const defaultClients = [
   { name: 'TechFlow',   industry: 'SaaS',           color: '#2B80F0' },

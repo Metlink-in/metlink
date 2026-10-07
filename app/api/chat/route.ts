@@ -161,7 +161,7 @@ function localReply(raw: string, team: TeamMember[] | null = null): string {
     return `We help across five areas: ${serviceCategories.map(c => c.name).join(', ')}. Which one fits what you need? I can go deeper on any of them.`;
 
   if (/\b(portfolio|work|case stud|example|project|client)\b/.test(m))
-    return `We've delivered projects across marketing, AI, and software for clients in many industries. You can see our work on the Portfolio page — or tell me your space and I'll share what's relevant.`;
+    return `We've delivered projects across marketing, AI, and software for clients in many industries. Check out our Blog for in-depth write-ups — or tell me your space and I'll share what's relevant.`;
 
   // Default — helpful, not a dead end
   return `Good question! MetLink helps businesses with ${serviceCategories.map(c => c.name).join(', ')} across industries like ${industries.slice(0, 4).map(i => i.name).join(', ')} and more. Tell me a bit about your goal and I'll point you the right way — or reach us at ${CONTACT.email} / ${CONTACT.contactUrl}`;

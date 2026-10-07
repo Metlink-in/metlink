@@ -208,10 +208,10 @@ export default function ContactPage() {
                       <p className="mb-8 text-base font-light" style={{ color: 'rgba(255,255,255,0.5)' }}>
                         We will be in touch within 2 business hours.
                       </p>
-                      <Link href="/portfolio"
+                      <Link href="/blog"
                         className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold text-white transition-all hover:brightness-110"
                         style={{ background: 'rgba(43,128,240,0.2)', border: '1px solid rgba(43,128,240,0.3)' }}>
-                        Explore Our Work <ArrowRight className="w-4 h-4" />
+                        Explore Our Blog <ArrowRight className="w-4 h-4" />
                       </Link>
                     </div>
                   ) : (

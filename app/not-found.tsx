@@ -48,7 +48,7 @@ export default function NotFound() {
         </div>
 
         <div className="flex flex-wrap justify-center gap-3">
-          {['Services', 'Portfolio', 'Blog', 'Company'].map(page => (
+          {['Services', 'Industries', 'Blog', 'Company'].map(page => (
             <Link key={page} href={`/${page.toLowerCase()}`}
               className="px-4 py-2 rounded-xl text-xs font-semibold transition-all"
               style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.07)', color: 'rgba(255,255,255,0.5)' }}

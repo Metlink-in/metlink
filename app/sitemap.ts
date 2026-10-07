@@ -6,7 +6,6 @@ import { industries, getAllIndustryTopicSlugs } from '@/lib/industries-data';
 import { automationIndustries, getAllAutomationTopicSlugs } from '@/lib/automation-data';
 import { connectDB } from '@/lib/mongodb';
 import { BlogPostModel } from '@/lib/models/BlogPost';
-import { ProjectModel } from '@/lib/models/Project';
 
 type Entry = MetadataRoute.Sitemap[number];
 
@@ -24,7 +23,6 @@ async function routeEntries(): Promise<Entry[]> {
     { path: '/', file: 'app/page.tsx', priority: 1.0 },
     { path: '/services', file: 'app/services/page.tsx', priority: 0.9 },
     { path: '/industries', file: 'app/industries/page.tsx', priority: 0.9 },
-    { path: '/portfolio', file: 'app/portfolio/page.tsx', priority: 0.8 },
     { path: '/blog', file: 'app/blog/page.tsx', priority: 0.8 },
     { path: '/company', file: 'app/company/page.tsx', priority: 0.6 },
     { path: '/contact', file: 'app/contact/page.tsx', priority: 0.7 },
@@ -94,14 +92,11 @@ async function routeEntries(): Promise<Entry[]> {
     });
   }
 
-  // ── Blog posts & portfolio projects: real, admin-published content from MongoDB
+  // ── Blog posts: real, admin-published content from MongoDB
   // (there is no static fallback catalogue for these — everything here is real). ──
   try {
     await connectDB();
-    const [posts, projects] = await Promise.all([
-      BlogPostModel.find({ published: true }).select('slug date updatedAt').lean(),
-      ProjectModel.find({ published: true }).select('slug date updatedAt').lean(),
-    ]);
+    const posts = await BlogPostModel.find({ published: true }).select('slug date updatedAt').lean();
 
     for (const post of posts as { slug: string; date?: string; updatedAt?: Date }[]) {
       entries.push({
@@ -111,17 +106,8 @@ async function routeEntries(): Promise<Entry[]> {
         priority: 0.6,
       });
     }
-
-    for (const project of projects as { slug: string; date?: string; updatedAt?: Date }[]) {
-      entries.push({
-        url: abs(`/portfolio/${project.slug}`),
-        lastModified: (project.date && parseLooseDate(project.date)) ?? project.updatedAt ?? new Date(),
-        changeFrequency: 'yearly',
-        priority: 0.6,
-      });
-    }
   } catch {
-    // DB unreachable at sitemap build time — omit blog/portfolio URLs rather than fail the whole sitemap.
+    // DB unreachable at sitemap build time — omit blog URLs rather than fail the whole sitemap.
   }
 
   return entries;

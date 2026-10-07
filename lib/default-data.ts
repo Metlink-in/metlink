@@ -9,8 +9,8 @@ export const defaults: Record<string, unknown> = {
     subheadline: 'Strategy, design, and engineering, one team shipping production AI for ambitious brands. From idea to live product in days.',
     cta1Text: 'Start building with AI',
     cta1Href: '/contact',
-    cta2Text: 'View our work',
-    cta2Href: '/portfolio',
+    cta2Text: 'Read our blog',
+    cta2Href: '/blog',
     stat1Value: '150+', stat1Label: 'Projects',
     stat2Value: '80+',  stat2Label: 'Clients',
     stat3Value: '$10M+', stat3Label: 'Revenue',
@@ -137,9 +137,8 @@ export const defaults: Record<string, unknown> = {
       {
         heading: 'Resources',
         links: [
-          { label: 'Blog',      href: '/blog' },
-          { label: 'Portfolio', href: '/portfolio' },
-          { label: 'Product',   href: '/product' },
+          { label: 'Blog',    href: '/blog' },
+          { label: 'Product', href: '/product' },
         ],
       },
       {

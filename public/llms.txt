@@ -24,20 +24,18 @@ Full industries index: https://www.metlinkai.com/industries
 
 Automation-first solutions tailored to: Restaurant & Cafe, Real Estate, Healthcare & Clinics, Education, E-Commerce & D2C, HR & Recruitment, and Finance & Accounting.
 
-## Portfolio
-
-Case studies of shipped AI and software work: https://www.metlinkai.com/portfolio
-
 ## Blog
 
-Articles on AI, marketing, and engineering: https://www.metlinkai.com/blog
+Articles on AI, automation, and marketing: https://www.metlinkai.com/blog
 
+- [The Real ROI of AI Automation: Data From Restaurants, Clinics & Real Estate Teams](https://www.metlinkai.com/blog/roi-of-ai-automation-case-studies-2026)
+- [How AI Agents Are Automating Lead Qualification and Follow-Up Across Industries](https://www.metlinkai.com/blog/ai-lead-qualification-follow-up-automation)
+- [RPA vs AI Agents: Which Automation Strategy Is Right for Your Business?](https://www.metlinkai.com/blog/rpa-vs-ai-agents-automation-2026)
+- [WhatsApp AI Chatbots: How Businesses Are Automating Customer Support in 2026](https://www.metlinkai.com/blog/whatsapp-ai-chatbot-customer-support)
+- [AI Workflow Automation in 2026: The Complete Guide for Growing Businesses](https://www.metlinkai.com/blog/ai-workflow-automation-guide-2026)
 - [How AI Automation Is Reshaping Business Operations in 2025](https://www.metlinkai.com/blog/ai-automation-business-2025)
 - [The 2025 Guide to Performance Marketing: Maximizing ROAS Across Every Channel](https://www.metlinkai.com/blog/performance-marketing-roas-guide)
 - [Building Production-Ready RAG Systems: What Nobody Tells You](https://www.metlinkai.com/blog/llm-rag-enterprise-guide)
-- [Why Your Startup's Brand Identity Is Your Most Important Product](https://www.metlinkai.com/blog/brand-identity-startup-guide)
-- [The Architecture Behind Scalable SaaS Products: A 2025 Blueprint](https://www.metlinkai.com/blog/nextjs-saas-architecture)
-- [SEO in the Age of AI: What Changes, What Doesn't, and What Wins in 2025](https://www.metlinkai.com/blog/seo-ai-content-2025)
 
 ## Company
 

@@ -106,7 +106,7 @@ export function Header() {
                   </button>
                 </div>
 
-                {[['Company', '/company'], ['Portfolio', '/portfolio'], ['Blog', '/blog'], ['Product', '/product']].map(([label, href]) => (
+                {[['Company', '/company'], ['Blog', '/blog'], ['Product', '/product']].map(([label, href]) => (
                   <NavLink key={label} href={href}>
                     {label}
                     {label === 'Product' && (
@@ -164,7 +164,7 @@ export function Header() {
                   openGroup={mobileGroup} setOpenGroup={setMobileGroup} onClose={() => setMobileOpen(false)} />
 
                 <div className="pt-2">
-                  {[['Company', '/company'], ['Portfolio', '/portfolio'], ['Blog', '/blog'], ['Product', '/product']].map(([label, href]) => (
+                  {[['Company', '/company'], ['Blog', '/blog'], ['Product', '/product']].map(([label, href]) => (
                     <MobileNavLink key={label} href={href} onClose={() => setMobileOpen(false)}>
                       {label}
                       {label === 'Product' && (
