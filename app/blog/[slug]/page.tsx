@@ -11,6 +11,8 @@ import { parseLooseDate } from '@/lib/sitemap-utils';
 import { JsonLd } from '@/components/json-ld';
 import { Breadcrumbs } from '@/components/breadcrumbs';
 import { TableOfContents, type TocHeading } from '@/components/table-of-contents';
+import { connectDB } from '@/lib/mongodb';
+import { BlogPostModel } from '@/lib/models/BlogPost';
 
 // Posts are published live from the admin panel (MongoDB), and
 // generateStaticParams() below has no static catalogue to pre-render from —
@@ -25,10 +27,10 @@ function slugifyHeading(text: string): string {
 async function resolvePost(slug: string) {
   let post: ReturnType<typeof getPostBySlug> = undefined;
   try {
-    const base = process.env.NEXT_PUBLIC_BASE_URL ?? 'http://localhost:3000';
-    const res = await fetch(`${base}/api/public/blog/${slug}`, { cache: 'no-store' });
-    if (res.ok) post = await res.json();
-  } catch { /* ignore */ }
+    await connectDB();
+    const doc = await BlogPostModel.findOne({ slug, published: true }).lean();
+    if (doc) post = JSON.parse(JSON.stringify(doc));
+  } catch { /* ignore — fall through to the static fallback below */ }
   if (!post) post = getPostBySlug(slug);
   return post;
 }
