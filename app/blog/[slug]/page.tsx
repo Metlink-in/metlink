@@ -12,6 +12,12 @@ import { JsonLd } from '@/components/json-ld';
 import { Breadcrumbs } from '@/components/breadcrumbs';
 import { TableOfContents, type TocHeading } from '@/components/table-of-contents';
 
+// Posts are published live from the admin panel (MongoDB), and
+// generateStaticParams() below has no static catalogue to pre-render from —
+// forcing dynamic rendering avoids Next trying (and failing) to statically
+// optimize a route whose data always comes from a no-store fetch at request time.
+export const dynamic = 'force-dynamic';
+
 function slugifyHeading(text: string): string {
   return text.toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
 }
